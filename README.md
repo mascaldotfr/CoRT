@@ -12,14 +12,13 @@ It just requires a webserver to run.
 **This is beta software, bugs may exist**
 
 ## Known issues
-
-    * the power database is a bit outdated, once bugs will be squashed i'll work on this. Or send PRs
-      please.
-    * display on mobile devices is weird due to flex. it's not easy to fix, as
-      even regnumsentinel had the issue. Use your device in portrait mode if it
-      really bothers you
-    * shared urls are long, this could be fixed by using an url shortener api,
-      but free plans are limit rated and i don't want to have a database server.
+* the power database is a bit outdated, once bugs will be squashed i'll work on this. Or send PRs
+  please.
+* display on mobile devices is weird due to flex. it's not easy to fix, as
+  even regnumsentinel had the issue. Use your device in portrait mode if it
+  really bothers you
+* shared urls are long, this could be fixed by using an url shortener api,
+  but free plans are limit rated and i don't want to have a database server.
 
 ## License
 
@@ -29,8 +28,8 @@ It just requires a webserver to run.
 
 ## Credits
 
-    * Xia and Edward Rudd, who wrote the first Inquisition trainer. Anpu did a
-      thing or two about it as well iirc.
-    * Joshua2504 and Shaiko from https://cor-forum.de/ for keeping the spell database
-      updated
-    * Slartibartfast, the regnumsentinel.com creator
+* Xia and Edward Rudd, who wrote the first Inquisition trainer. Anpu did a
+  thing or two about it as well iirc.
+* Joshua2504 and Shaiko from https://cor-forum.de/ for keeping the spell database
+  updated
+* Slartibartfast, the regnumsentinel.com creator
