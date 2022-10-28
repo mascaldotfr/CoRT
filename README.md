@@ -15,7 +15,7 @@ It just requires a webserver to run.
 * the power database is a bit outdated, once bugs will be squashed i'll work on this. Or send PRs
   please.
 * display on mobile devices is weird due to flex. it's not easy to fix, as
-  even regnumsentinel had the issue. Use your device in portrait mode if it
+  even regnumsentinel had the issue. Use your device in landscape mode if it
   really bothers you
 * shared urls are long, this could be fixed by using an url shortener api,
   but free plans are limit rated and i don't want to have a database server.
