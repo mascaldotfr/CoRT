@@ -23,24 +23,49 @@ class_type_masks = {
 	'warrior':0x40, 'barbarian':0x41, 'knight':0x42
 };
 
+trainerdata = null;
+trainerdatasets = ["latest", "1.33.2"];
+trainerdataversion = null;
+
 currlevel = 0;
 currclass = null;
-trainerdata = null;
 mindlevel = 1;
 maxdlevel = 19;
 minplevel = 0;
 maxplevel = 5;
 wmrow = 0;
 powerpoints = 0;
-setupurl = null;
+skillset = null;
 
 $(document).ready(function() {
+	// generate characters levels options
 	for (i = maxlevel - 1; i >= minlevel; i--) {
 		$("#t-level").append('<option value="' + i + '">' + i + '</option>');
 	}
+	// look for a given trainer data set, and skills set then
+	// set the version accordingly
 	urlsearch = new URLSearchParams(window.location.search);
-	setupurl = urlsearch.get("s");
-	if (setupurl) {
+	skillset = urlsearch.get("s");
+	dataset = urlsearch.get("d");
+	if (!dataset && skillset) {
+		// legacy url, assume old version
+		trainerdataversion = "1.33.2";
+	}
+	else if (!trainerdatasets.includes(dataset)) {
+		// invalid dataset supplied
+		trainerdataversion = "latest";
+	}
+	else {
+		trainerdataversion = dataset;
+	}
+	console.log(dataset,trainerdataversion);
+	if (trainerdataversion != "latest") {
+		$("#t-points").append(`	<p class="red"><b>This setup has been made with an older version
+					(${trainerdataversion}) of CoR, and may be out of date.</p>
+					<p class="red">You can go back to the current CoR version by
+					<a href="${window.location.origin + window.location.pathname}">clicking here</a>.</b></p>`);
+	}
+	if (skillset) {
 		load_setup_from_url();
 	}
 });
@@ -86,12 +111,14 @@ $("#t-save").on("click", function() {
 		}
 	}
 	window.prompt("Here is the link to your setup:",
-		window.location.origin + window.location.pathname +"?s=" + LZString.compressToEncodedURIComponent(setup));
+		window.location.origin + window.location.pathname +
+			"?d=" + trainerdataversion +
+			"&s=" + LZString.compressToEncodedURIComponent(setup));
 
 });
 
 function load_setup_from_url() {
-	setup = LZString.decompressFromEncodedURIComponent(setupurl).split("+");
+	setup = LZString.decompressFromEncodedURIComponent(skillset).split("+");
 	$("#t-class").val(setup.shift());
 	$("#t-level").val(setup.shift());
 	$("#t-load").click();
@@ -161,7 +188,7 @@ function load_tree() {
 		$.ajax({
 			'async': false,
 			'global': false,
-			'url': "data/latest/trainerdata.json",
+			'url': "data/" + trainerdataversion + "/trainerdata.json",
 			'dataType': "json",
 			'success': function (data) {
 				json = data;
@@ -176,7 +203,7 @@ function load_tree() {
 	alltrees.forEach( (tree) => {
 		treepos++;
 		spellpos = 0;
-		iconsrc = "data/latest/icons/" + tree.replace(/ /g, "") + ".jpg";
+		iconsrc = "data/" + trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".jpg";
 		trainerhtml = trainerhtml.concat(`<div treepos="${treepos}" class="t${treepos}">`);
 		trainerhtml = trainerhtml.concat(icon_factory(spellpos, iconsrc, treepos, tree, ""));
 		trainerdata.disciplines[tree].spells.forEach( (spell) => {

@@ -1,0 +1,4482 @@
+{
+  "version":"1.29.1.01",
+    "min_power_level":0,
+    "points":{
+      "discipline":{
+        "comment":"0x50=80 0x20=32",
+        "80":[0,1,3,6,10,15,21,28,36,45,
+        56,68,81,96,112,129,148,168,189,211,
+        234,258,283,309,336,364,393,423,454,486,
+        519,553,588,624,661,700,740,781,823,866,
+        910,955,1001,1048,1096,1145,1195,1246,1298,1351,1386,1421,1456,1491,1526,1561,1596,1631,1666,1703],
+        "32":[0,1,3,6,10,15,21,35,45,56,
+        68,81,96,112,129,147,166,187,210,234,
+        259,286,314,343,374,406,439,474,511,549,
+        588,629,671,714,758,803,849,896,944,993,
+        1043,1094,1147,1201,1256,1312,1369,1427,1486,1546,1596,1648,1700,1752,1807,1863,1919,1975,2031,2087]
+      },
+      "power":{
+        "80":[4,4,4,4,5,6,7,8,9,9,
+        13,14,15,16,17,18,19,20,21,22,
+        23,24,25,26,27,28,29,30,31,32,
+        33,34,35,36,37,38,39,40,41,43,
+        45,47,49,51,53,55,57,59,61,65,67,69,71,73,75,77,79,81,83,85],
+        "32":[4,4,4,4,5,6,7,8,9,13,
+        14,15,16,17,18,19,20,21,22,23,
+        24,25,26,27,28,29,30,31,32,33,
+        34,35,36,37,38,39,40,41,42,44,
+        46,48,50,53,55,58,61,64,67,73,75,77,79,81,83,85,87,89,91,93]
+      }
+    },
+    "required":{
+      "level":[1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37],
+      "points":[0,1,4,7,13,19,29,39,54,69,90,111,139,167,203,239,284,329,384],
+      "available":[1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10],
+      "power":[1,2,2,2,2,2,2,2,2,2,3,3,3,3,4,4,4,4,5]
+    },
+    "class_disciplines":{
+      "comment":"0x10 = 16 0x20 = 32 0x40 = 64",
+      "16":["Short Bows","Long Bows","Tricks","Evasion"],
+      "17":["Scouting","Pets","Hunter WM"],
+      "18":["Arrow Mastery","Aiming Mastery","Marksman WM"],
+      "32":["Mental","Mana Control","Staff Mastery","Enchantments"],
+      "33":["Life","Summon","Sorcery","Conjurer WM"],
+      "34":["Arcania","Necromancy","Elements","Warlock WM"],
+      "64":["Slashing Weapons","Blunt Weapons","Piercing Weapons","Tactics"],
+      "65":["Warcries","Two Handed Mastery","Barbarian WM"],
+      "66":["Vanguard","Shields","Knight WM"]
+    },
+    "disciplines":{
+      "Short Bows":{
+        "class":"Archer",
+        "spells":[
+        {
+          "id":127,
+          "name":"Dual shot",
+          "description":"The archer fires two arrows at the same time.",
+          "mana":[40,60,80,95,110],
+          "type":"Direct",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":7.0,
+          "range":0.0,
+          "buffs":{
+            "Attack damage":["+100%","+105%","+110%","+115%","+120%"]
+          },
+          "damage":{
+            "Slashing":[50,75,100,125,150]
+          }
+        },
+        {
+          "id":126,
+          "name":"Rapid shot",
+          "description":"The shooting frequency increases, at expenses of the accuracy.",
+          "mana":[60,85,110,135,160],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Very Short",
+          "cooldown":60.0,
+          "duration":[10,15,20,25,30],
+          "debuffs":{
+            "Critical Chance":"-50%"
+          },
+          "buffs":{
+            "Attack speed":"+25%"
+          }
+        },
+        {
+          "id":147,
+          "name":"Grounding arrow",
+          "description":"The arrow is shot to the opponent's feet, hindering movement.",
+          "mana":[95,120,145,170,195],
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":40.0,
+          "duration":[1,2,3,4,5],
+          "debuffs":{
+            "Immobilize":true
+          },
+          "buffs":{
+            "Attack damage": ["+80%","+90%","+100%","+110%","+120%"]
+          }
+        },
+        {
+          "id":150,
+          "name":"Lightness",
+          "description":"The archer is naturally fast and light.",
+          "type":"Passive",
+          "buffs":{
+            "Dexterity":["+5","+7","+9","+12","+15"]
+          }
+        },
+        {
+          "id":148,
+          "name":"Meditation",
+          "description":"A meditation period makes the archer be more aware of her surroundings.",
+          "mana":[50,75,100,125,150],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Very Short",
+          "cooldown":120.00,
+          "duration":[50,60,70,80,90],
+          "buffs":{
+            "Concentration":["+10","+15","+20","+25","+30"]
+          }
+        },
+        {
+          "id":149,
+          "name":"Adaptability",
+          "description":"The archer can rapidly adapt to combat conditions and get the best advantage.",
+          "mana":[180,220,260,290,330],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Very Short",
+          "cooldown":80.0,
+          "duration":[4,6,8,10,12],
+          "buffs":{
+            "Critical Hit Chance":"+200%"
+          }
+        },
+        {
+          "id":151,
+          "name":"Tear apart",
+          "description":"The arrow tears apart the opponent's flesh, which bleeds over time.",
+          "mana":[130,160,190,220,250],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":30.0,
+          "duration":[8,9,10,11,12],
+          "damage":{
+             "Raw damage": [20,30,40,50,60]
+          }
+        },
+        {
+          "id":152,
+          "name":"Duelist",
+          "description":"The archer is adept at firing rapidly and with precision.",
+          "type":"Passive",
+          "buffs":{
+            "Critical Chance":["+10%","+13%","+16%","+20%","+25%"]
+          }
+        },
+        {
+          "id":153,
+          "name":"Hinder",
+          "description":"The enemy movement and attack is hampered.",
+          "mana":[75,125,175,225,275],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":60.0,
+          "area":6.0,
+          "range":0.0,
+          "duration":30.0,
+          "debuffs":{
+            "Opponent damage":["-2%","-4%","-6%","-8%","-10%"],
+            "Movement speed":["-5%","-7%","-9%","-12%","-15%"]
+          }
+        },
+        {
+          "id":154,
+          "name":"Repetition shot",
+          "description":"Multiple shots in arc. Those in the area receive piercing damage.",
+          "mana":[340,380,420,460,500],
+          "type":"Direct",
+          "cast":1.5,
+          "gcd":"Normal",
+          "cooldown":180.0,
+          "damage":{
+            "Attack damage":"+100%",
+            "Piercing":[300,400,500,600,700]
+          }
+        }
+        ]
+      },
+      "Long Bows":{
+        "class":"Archer",
+        "spells":[
+        {
+          "id":176,
+          "name":"Shield piercing",
+          "description":"An arrow is fired with such a strength it cuts through all defenses.",
+          "mana":[45,70,90,110,130],
+          "type":"Direct",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":10.0,
+          "range":0.0,
+          "damage":{
+            "Attack damage":["100%","105%","110%","120%","135%"]
+          },
+          "buffs":{
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "id":175,
+          "name":"Parabolic shot",
+          "description":"The shot range increases, but the efficiency decreases.",
+          "mana":[60,75,90,105,120],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Very Short",
+          "cooldown":40.0,
+          "duration":[15,18,21,25,30],
+          "buffs":{
+            "Attack range":["+20%","+21%","+22%","+23%","+25%"]
+          }
+        },
+        {
+          "id":178,
+          "name":"Maneuver",
+          "description":"A quick analysis of the battle allows the archer to find the best evasive technique.",
+          "mana":[100,130,160,190,220],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":120.0,
+          "duration":40.0,
+          "buffs":{
+            "Dexterity":["+10","+15","+20","+25","+30"]
+          }
+        },
+        {
+          "id":177,
+          "name":"Eagle's eye",
+          "description":"The impact chances are increased.",
+          "mana":[90,110,130,150,170],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":120.0,
+          "duration":120.0,
+          "debuffs":{
+            "Opponent evade chance":["-10%","-15%","-20%","-25%","-35%"]
+          }
+        },
+        {
+          "id":179,
+          "name":"Point shot",
+          "description":"The archer observes air spots in armor, increasing critical hit chance.",
+          "mana":[115,140,165,190,215],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":45.0,
+          "duration":20.0,
+          "buffs":{
+            "Critical Hit Chance":["+130%","+140%","+150%","+160%","+180%"],
+            "Attack range":["-30%","-25%","-20%","-10%", "0%"]
+          }
+        },
+        {
+          "id":180,
+          "name":"Omnipresent",
+          "description":"The archer rapidly finds the best way to penetrate defenses.",
+          "type":"Passive",
+          "buffs":{
+            "Concentration":["+5","+7","+9","+12","+15"]
+          }
+        },
+        {
+          "id":181,
+          "name":"Break apart",
+          "description":"The arrow tears away the opponent's flesh.",
+          "mana":[150,175,200,225,250],
+          "type":"Constant",
+          "cast":1.5,
+          "gcd":"Short",
+          "cooldown":40.0,
+          "duration":15.0,
+          "range":0.0,
+          "damage":{
+            "Damage (per second)":["8-12","12-18","13-20","31-40","40-50"]
+          },
+          "debuffs":{
+            "Constitution":-20
+          }
+        },
+        {
+          "id":182,
+          "name":"Specialist",
+          "description":"The archer is adept to finding the maximum weakness spots.",
+          "type":"Passive",
+          "buffs":{
+            "Weapon damage bonus":["+2%","+4%","+6%","+8%","+10%"]
+          }
+        },
+        {
+          "id":183,
+          "name":"Obfuscate",
+          "description":"The opponent loses hit visual focus, her critical hit chances decreases.",
+          "mana":[150,175,200,225,250],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":45.0,
+          "duration":30.0,
+          "range":0.0,
+          "buffs":{
+            "Concentration":["-15%","-20%","-25%","-30%","-35%"],
+            "Cast Speed":["-10%","-15%","-20%","-25%","-30%"],
+            "Resist immobilize":["10%","10%","15%","15%","20%"],
+            "Resist dizzy":["10%","10%","15%","15%","20%"]
+          }
+        },
+        {
+          "id":184,
+          "name":"Projectile rain",
+          "description":"Multiple parabolic shots to an area damage those who are in it.",
+          "mana":[320,340,360,380,400],
+          "type":"Direct",
+          "cast":3.0,
+          "gcd":"Short",
+          "cooldown":180.0,
+          "area":10.0,
+          "range":0.0,
+          "damage":{
+            "Attack damage":"100%",
+            "Piercing":[100,225,350,475,600]
+          }
+        }
+        ]
+      },
+      "Tricks":{
+        "class":"Archer",
+        "spells":[
+        {
+          "id":186,
+          "name":"Ambush",
+          "description":"The enemy gets surprised. While disoriented, It won't be able to attack.",
+          "mana":[50,75,95,115,130],
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Normal",
+          "cooldown":30.0,
+          "duration":[2,3,4,5,6],
+          "range":12.0,
+          "debuffs":{
+            "Knock down":true,
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "id":188,
+          "name":"Sudden strike",
+          "description":"The archer attacks while the opponent is off guard. The target defenses are lowered down.",
+          "mana":[80,90,100,110,120],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":40.0,
+          "duration":[20,25,30,35,40],
+          "range":25.0,
+          "debuffs":{
+            "Protection":"-50%"
+          }
+        },
+        {
+          "id":193,
+          "name":"Stunning fist",
+          "description":"Rapid punch to the nose with the hand that holds the bow.",
+          "mana":[120,140,160,180,200],
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":45.0,
+          "duration":[2,3,4,5,6],
+          "damage":{
+            "Blunt":["150-200","225-300","300-400","375-500","400-600"]
+          },
+          "debuffs":{
+            "Stun":true
+          }
+        },
+        {
+          "id":187,
+          "name":"Retaliation",
+          "description":"Part of the damage received in the next enemy impact is returned to the attacker. This skill wears off by duration or when first attack is received.",
+          "mana":[120,140,160,180,200],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":30.0,
+          "duration":15.0,
+          "damage":{
+            "Return Damage":["+20%","+35%","+50%","+75%","+90%"]
+          }
+        },
+        {
+          "id":189,
+          "name":"Sticky touch",
+          "description":"The archer throws a sticky substance to the opponent, hindering her movement.",
+          "mana":[70,90,110,130,150],
+          "type":"Constant",
+          "cast":1.5,
+          "gcd":"Short",
+          "cooldown":45.0,
+          "duration":45.0,
+          "range":25.0,
+          "debuffs":{
+            "Attack Speed":["-10%","-15%","-20%","-25%","-30%"]
+          }
+        },
+        {
+          "id":190,
+          "name":"Dirty fighting",
+          "description":"Archer improves short ranged damage.",
+          "mana":[120,140,160,180,200],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":30.0,
+          "duration":[10,15,20,25,30],
+          "buffs":{
+            "Weapon damage bonus":"+30%"
+          },
+          "debuffs":{
+            "Attack range":"-50%"
+          }
+        },
+        {
+          "id":192,
+          "name":"Finesse",
+          "description":"The archer is adept to maneuver and feint while fighting.",
+          "mana":[70,100,130,160,190],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":40.0,
+          "duration":[10,15,20,25,40],
+          "debuffs":{
+            "Opponent critical chance":["-10%","-25%","-40%","-60%","-90%"]
+          }
+        },
+        {
+          "id":212,
+          "name":"Sentinel",
+          "description":"The hunter enhances her senses.",
+          "type":"Passive",
+          "buffs":{
+            "Concentration":["+5","+7","+9","+12","+15"],
+            "Dexterity":["+1","+2","+3","+4","+5"]
+          }
+        },
+        {
+          "id":185,
+          "name":"Distracting shot",
+          "description":"A random shot distracts the opponent, who fails to react.",
+          "mana":[75,100,125,150,175],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":50.0,
+          "duration":[5,6,7,8,10],
+          "range":25.0,
+          "debuffs":{
+            "Stun":true
+          }
+        },
+        {
+          "id":194,
+          "name":"Caltrop's arrow",
+          "description":"An arrow that scatters caltrops damaging the opponent's feet. Reduces enemy movement speed on the impact area.",
+          "mana":[330,360,390,420,450],
+          "type":"Constant",
+          "cast":1.5,
+          "gcd":"Short",
+          "cooldown":180.0,
+          "duration":20.0,
+          "area":10.0,
+          "range":25.0,
+          "debuffs":{
+            "Movement speed":["-10%","-20%","-30%","-40%","-50%"]
+          }
+        }
+        ]
+      },
+      "Evasion":{
+        "class":"Archer",
+        "spells":[
+        {
+          "id":198,
+          "name":"Dodge",
+          "description":"Resists next crowd control effect",
+          "mana":[120,140,160,180,200],
+          "type":"Constant",
+          "cast":1,
+          "gcd":"Short",
+          "cooldown":120.0,
+          "duration":[2,4,6,8,10],
+          "buffs":{
+            "Evade chance":"+30%"
+          }
+        },
+        {
+          "id":200,
+          "name":"Mobility",
+          "description":"The archer runs faster.",
+          "mana":[130,155,180,205,230],
+          "type":"Constant",
+          "cast":0,
+          "gcd":"Short",
+          "cooldown":60.0,
+          "duration":20.0,
+          "buffs":{
+            "Movement speed":["+2%","+4%","+6%","+8%","+10%"]
+          }
+        },
+        {
+          "id":196,
+          "name":"Evasive tactics",
+          "description":"The archer fires while dodging. Her defenses increase, but her attack effectiveness decreases.",
+          "mana":[70,100,130,160,190],
+          "type":"Constant",
+          "cast":0,
+          "gcd":"Short",
+          "cooldown":60.0,
+          "duration":40.0,
+          "buffs":{
+            "Protection":["+20%","+28%","+36%","+42%","+50%"]
+          },
+          "debuffs":{
+            "Casting speed":["-8%","-7%","-7%","-6%","-5%"]
+          }
+        },
+        {
+          "id":195,
+          "name":"Cat reflexes",
+          "description":"The archer enhances their reflexes for a mayor capacity to elude attacks.",
+          "type":"Passive",
+          "buffs":{
+            "Evade chance":["+5%","+10%","+15%","+20%","+25%"]
+          }
+        },
+        {
+          "id":199,
+          "name":"Acrobatic",
+          "description":"Using acrobatics, the archer reduces the lethality of the received physical attacks.",
+          "mana":[50,65,80,95,110],
+          "type":"Constant",
+          "cast":0,
+          "gcd":"Short",
+          "cooldown":80.0,
+          "duration":[40,45,50,55,60],
+          "buffs":{
+            "Resist physical damage":["+5%","+10%","+15%","+20%","+25%"]
+          }
+        },
+        {
+          "id":201,
+          "name":"Spell elude",
+          "description":"The archer moves constantly to reduce enemy spell impact chances.",
+          "mana":[150,175,200,225,250],
+          "type":"Constant",
+          "cast":0,
+          "gcd":"Short",
+          "cooldown":80.0,
+          "duration":[20,25,30,35,40],
+          "buffs":{
+            "Resist magical damage":["+5%","+9%","+14%","+20%","+30%"]
+          }
+        },
+        {
+          "id":197,
+          "name":"Escapist",
+          "description":"The archer becomes agile and evades almost every enemy attack.",
+          "mana":[120,150,185,215,250],
+          "type":"Constant",
+          "duration":[3,4,5,6,8],
+          "cast":0,
+          "gcd":"Short",
+          "cooldown":75.0,
+          "buffs":{
+            "Evade":true
+          }
+        },
+        {
+          "id":202,
+          "name":"Wits",
+          "description":"The archer knows how to take advantage of the situation and power using.",
+          "type":"Passive",
+          "buffs":{
+            "Intelligence":[5,7,9,12,15]
+          }
+        },
+        {
+          "id":203,
+          "name":"Low profile",
+          "description":"The archer cannot attack or be attacked.",
+          "mana":[180,200,220,240,260],
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":60,
+          "duration":[4,5,6,8,10],
+          "debuffs":{
+            "Removes any positive effect that is active on the archer":true
+          }
+        },
+        {
+          "id":204,
+          "name":"Son of the wind",
+          "description":"The archer moves and evades easy as the wind. She evades almost any attack and spell.",
+          "mana":[150,185,225,260,300],
+          "type":"Constant",
+          "cast":0,
+          "gcd":"Short",
+          "cooldown":50,
+          "duration":[3,4,5,6,8],
+          "buffs":{
+            "Spell resistance":true
+          }
+        }
+        ]
+      },
+      "Scouting":{
+        "class":"Hunter",
+        "spells":[
+        {
+          "id":206,
+          "name":"Ensnaring arrow",
+          "description":"A fast arrow shot at the opponent's legs. Inflicts damage and reduces movement.",
+          "mana":[100,125,150,175,200],
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":8.0,
+          "duration":7.0,
+          "range":0.0,
+          "damage":{
+            "Attack damage":["60%","70%","80%","90%","100%"],
+            "Piercing":[50,90,120,160,200]
+          },
+          "debuffs":{
+            "Movement speed":["-5%","-7%","-9%","-12%","-15%"]
+          }
+        },
+        {
+          "id":205,
+          "name":"Death sentence",
+          "description":"The hunter marks the target. While the power is active, every attack from within 3 meters to the target cause extra damage.",
+          "mana":[50,80,110,140,170],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "duration":30,
+          "cooldown":30,
+          "range":25,
+          "buffs":{
+            "Melee received damage":["+5%", "+8%", "+12%", "+16%", "+20%"]
+          }
+        },
+        {
+          "id":208,
+          "name":"Enemy surveillance",
+          "description":"Gathers tactical information about realm enemies. (Can be used under the effects of Camouflage).",
+          "mana":[100,120,140,160,180],
+          "type":"Direct",
+          "cast":1.5,
+          "gcd":"Short",
+          "cooldown":20.0,
+          "range":[150,200,250,300,400]
+        },
+        {
+          "id":211,
+          "name":"Wild spirit",
+          "description":"The hunter is adept at moving through hostile enviroments.",
+          "type":"Passive",
+          "buffs":{
+            "Movement speed":["+2%","+3%","+4%","+5%","+7%"]
+          }
+        },
+        {
+          "id":209,
+          "name":"Camouflage",
+          "description":"The hunter merges with the surroundings. While the effect is active, the hunter causes an extra damage in his first attack.\n\nThe hunter loses control of his pet when launching this power.",
+          "mana":[300,325,350,375,400],
+          "type":"Constant",
+          "cast":4.5,
+          "gcd":"Short",
+          "cooldown":120.0,
+          "duration":[30,45,60,75,90],
+          "buffs":{
+            "Invisibility":true,
+            "Piercing damage":[30,60,90,120,150]
+          }
+        },
+        {
+          "id":210,
+          "name":"Inherited Lightness",
+          "description":"The hunter has an aura that benefits allies in dexterity, which will help other archers, and basic mana regeneration.",
+          "mana":[150,200,250,300,350],
+          "type":"Aura",
+          "cast":1.0,
+          "gcd":"Very Short",
+          "cooldown":90.0,
+          "duration":60,
+          "range":6,
+          "buffs":{
+            "Mana regeneration":[ "+5%", "+10%", "+20%", "+25%", "+40%" ],
+            "Dexterity":[ "+3", "+6", "+9", "+12", "+15" ]
+          }
+        },
+        {
+          "id":214,
+          "name":"Cold blood",
+          "description":"The hunter attacks his victim in cold blood, inflicting large amounts of damage.",
+          "mana":[180,210,240,270,300],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Very Short",
+          "cooldown":60,
+          "duration":6,
+          "buffs":{
+            "Damage bonus":["+50%", "+70%", "+90%", "+110%", "+130%"]
+          }
+        },
+        {
+          "name":"Reveal",
+          "description": "Guided by her instinct and by hints from the environment, the hunter throws a flaming arrow, revealing the position of hidden enemies. It cancels the effects of Camouflage, Camouflage Corpse and Stalker Surroundings active on enemies.",
+          "mana":[200, 225, 250, 275, 300],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":20,
+          "duration":[15, 20, 25, 35, 50],
+          "buffs":{
+            "Reveal": true
+          }
+        },
+        {
+          "id":191,
+          "name":"Confuse",
+          "description":"The enemy is constantly distracted. He cannot use non-offensive powers (Any spell that do not inflict direct damage).",
+          "mana":[120,140,160,180,200],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":60.0,
+          "duration":[10,13,16,19,22],
+          "range":25.0,
+          "debuffs":{
+            "Cannot cast non-damaging powers":true,
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "id":213,
+          "name":"Stalker surroundings",
+          "description":"Allies near the hunter become invisible when the power is cast. They also have their movement speed reduced. Getting away from the hunter, attacking a target or interacting with objects removes the effect.",
+          "mana":[440,480,520,560,600],
+          "type":"Constant",
+          "cast":5.0,
+          "gcd":"Short",
+          "cooldown":360.0,
+          "duration":[60,120,180,240,300],
+          "area":10.0,
+          "buffs":{
+            "Invisibility":["1 ally","2 allies","3 allies","4 allies","5 allies"]
+          },
+          "debuffs": {
+            "Movement speed": "-40%"
+          }
+        }
+        ]
+      },
+      "Pets":{
+        "class":"Hunter",
+        "spells":[
+        {
+          "id":220,
+          "name":"Natural Dominance",
+          "description":"Through a bond with the environment, the hunter has chances to tame a creature.",
+          "mana":[150,225,300,350,400],
+          "type":"Direct",
+          "cast":8.0,
+          "gcd":"Short",
+          "cooldown":25.0,
+          "range":20.0,
+          "buffs":{
+            "Tame creatures up to level":["12","24","36","48","60"]
+          }
+        },
+        {
+          "id":215,
+          "name":"Heal Pet",
+          "description":"The hunter heals her pet.",
+          "mana":[50,75,110,150,200],
+          "type":"Direct",
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":60.0,
+          "buffs":{
+            "Health":["+250","+350","+600","+1000","+1400"],
+            "Only resistible at 100%":true
+          }
+        },
+        {
+          "id":217,
+          "name":"Wild Defence",
+          "description":"Part of the damage received by the hunter is redirected to the pet.",
+          "mana":["75","100","125","150","175"],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "duration":30,
+          "buffs":{
+            "Redirected Damage":["5%","10%","15%","20%","30%"]
+          }
+        },
+        {
+          "id":219,
+          "name":"Prominent Sight",
+          "description":"The hunter uses the bond with the pet to enhance the sight scope. The pet loses part of its attack power due to being distracted with the environment.",
+          "mana":["60","75","90","105","120"],
+          "type":"Activable",
+          "cast":0.0,
+          "gcd":"Very Short",
+          "cooldown":20.0,
+          "buffs":{
+            "Pet Attack Damage":"-25%",
+            "Attack range":["+2%", "+4%", "+6%", "+10%", "+15%"]
+          }
+        },
+        {
+          "id":218,
+          "name":"Training",
+          "description":"Training keeps the pet strong and agile.",
+          "type":"Passive",
+          "buffs":{
+            "Health":["+30%","+45%","+60%","+75%","+100%"]
+          }
+        },
+        {
+          "id":223,
+          "name":"Revive Pet",
+          "description":"The hunter makes a pact with nature to return his pet to life.\n\nWhen pet dies or the character has connected recently, the hunter will have to wait the specified time to use this skill.\n\nThe cast of this skill is lost if the is attacked.\n\nIt is required an appropriate level of Taming to use this skill.",
+          "type":"Direct",
+          "mana":[320,340,360,380,400],
+          "cooldown":120.0,
+          "cast":5.0,
+          "gcd":"Short",
+          "buffs":{
+            "Health":["+20%","+40%","+60%","+80%","+100%"]
+          }
+        },
+        {
+          "id":222,
+          "name":"Bestial wrath",
+          "description":"The pet is overcome by a rage it cannot control. It gains strength at expenses of its dexterity.",
+          "mana":[200,225,250,275,300],
+          "type":"Direct",
+          "cast":1.5,
+          "gcd":"Short",
+          "cooldown":60.0,
+          "duration":60.0,
+          "buffs":{
+            "Damage Bonus":["+10%", "+20%", "+30%", "+40%", "+50%"]
+          },
+          "debuffs":{
+            "Evade Chance":"-100%"
+          }
+        },
+        {
+          "id":372,
+          "name":"Natural armor",
+          "description":"The creature gains more resistance to damage.",
+          "type":"Passive",
+          "buffs":{
+            "Protection":["+10%","+15%","+20%","+25%","+30%"]
+          }
+        },
+        {
+          "name":"Natures Fury",
+          "description":"The pet makes a pact with nature and converts surrounding matter into a dangerous explosion.",
+          "type":"Direct",
+          "mana":[120,210,300,390,480],
+          "cooldown":180.0,
+          "cast":2.0,
+          "area":10,
+          "gcd":"Short",
+          "buffs":{
+            "Piercing Damage":[125,200,290,395,500],
+            "Fire Damage":[125,200,290,395,500],
+            "Knock down":3
+          }
+        },
+        {
+          "id":224,
+          "name":"Skin of the Beast",
+          "description":"The pet's thick contecture protects it from damage",
+          "type":"Constant",
+          "mana":[225,250,275,300,325],
+          "cooldown":60.0,
+          "cast":0.0,
+          "gcd":"Very Short",
+          "duration":15.0,
+          "buffs":{
+            "Resist Damage":["+40%","+50%","+60%","+70%","+80%"]
+          }
+        }
+        ]
+      },
+      "Hunter WM":{
+        "class":"Hunter",
+        "spells":[
+        {
+          "name":"undefined",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"War Council",
+          "description":"The Warmaster learns a war language that allows her to communicate with her status in secret.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "War chat":true
+          }
+        },
+        {
+          "name":"undefined2",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Horn of the Wind",
+          "description":"The Warmaster inspires his allies, whom earn movement speed. This power can only be casted if the player is near at least 4 allies.",
+          "mana":100,
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Very Short",
+          "cooldown":60.0,
+          "duration":30,
+          "area":10.0,
+          "buffs":{
+            "Movement speed":"+20%"
+          }
+        },
+        {
+          "name":"undefined3",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster's Might",
+          "description":"The Warmaster enhaces his class main attribute.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "Class Attribute":"+15%"
+          }
+        },
+        {
+          "name":"undefined4",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Head of the Pack",
+          "description":"The Warmaster improves her damage for a short period of time. This power can only be casted if the player is near at least 1 ally.",
+          "mana":250,
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Very Short",
+          "cooldown":120.0,
+          "duration":30,
+          "area":10.0,
+          "buffs":{
+            "Weapon damage bonus":"+10%"
+           }
+        },
+        {
+          "name":"undefined5",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster Blood",
+          "description":"The Warmaster athletic capabilities increase due to long years of training.",
+          "type":"Passive",
+          "gcd":"Normal",
+          "buffs":{
+            "Health":"+500"
+          }
+        }
+        ]
+      },
+      "Arrow Mastery":{
+        "class":"Marksman",
+        "spells":[
+        {
+          "id":234,
+          "name":"Recharged arrows",
+          "description":"The marksman channels her vital energy into arrows to improve damage. Only the basic attack is affected by this power.",
+          "mana":[40,55,70,85,100],
+          "type":"Activable",
+          "cast":0,
+          "gcd":"Short",
+          "cooldown":15.0,
+          "debuffs":{
+            "Health per arrow":[10,15,20,25,30],
+            "Mana per arrow":[20,25,30,35,40]
+          },
+          "buffs":{
+            "Weapon damage bonus":["+20%","+25%","+30%","+35%","+40%"]
+          }
+        },
+        {
+          "id":235,
+          "name":"Winter stroke",
+          "description":"The marksman throws an ice burst to her opponent, receiving cold damage and remaining frozen.",
+          "mana":[80,110,140,170,200],
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":40.0,
+          "duration":[3,4,5,6,7],
+          "range":30.0,
+          "debuffs":{
+            "Freeze":true
+          },
+          "damage":{
+              "Ice damage":["60", "170", "280", "390", "500"]
+          }
+      },
+        {
+          "id":338,
+          "name":"Burst of wind",
+          "description":"A burst of wind leaves the opponent dizzy.",
+          "mana":[130,160,190,220,250],
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":40.0,
+          "duration":[2,3,4,5,6],
+          "range":0.0,
+          "debuffs":{
+            "Dizzy":true
+          }
+        },
+        {
+          "id":237,
+          "name":"Serpent bite",
+          "description":"Special arrow that inflicts poison damage.",
+          "mana":[70,90,110,130,150],
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":45.0,
+          "duration":10.0,
+          "range":0.0,
+          "damage":{
+            "Piercing (per second)":[100,200,300,400,500]
+          }
+        },
+        {
+          "id":238,
+          "name":"Ignus scorch",
+          "description":"A flaming arrow burns whoever crosses its path.",
+          "mana":[70,100,130,160,190],
+          "type":"Direct",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":20.0,
+          "damage":{
+            "Fire":["80-120","190-240","300-360","410-480","520-600"]
+          }
+        },
+        {
+          "id":239,
+          "name":"Ethereal arrow",
+          "description":"An incorporeal arrow ignores the target's protections.",
+          "mana":[75,110,145,180,215],
+          "type":"Direct",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":40.0,
+          "range":0.0,
+          "damage":{
+            "Health":[-100,-225,-350,-475,-600]
+          }
+        },
+        {
+          "id":240,
+          "name":"Needle blast",
+          "description":"The marksman fires an arrow that blasts into tiny pieces, causing slash damage in the area.",
+          "mana":[250,275,300,325,350],
+          "type":"Direct",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":25.0,
+          "damage":{
+            "Attack damage":"+100%",
+            "Slashing":["90-120","180-230","270-340","360-450","450-560"]
+          }
+        },
+        {
+          "id":241,
+          "name":"Arcana strike",
+          "description":"An arrow that makes elemental damage.",
+          "mana":[200,235,270,305,340],
+          "type":"Direct",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":25.0,
+          "range":0.0,
+          "damage":{
+            "Fire":["45","95","150","195","250"],
+            "Ice":["45","95","150","195","250"],
+            "Lightning":["45","95","150","195","250"]
+          }
+        },
+        {
+          "id":242,
+          "name":"Fire rain",
+          "description":"The marksman fires an arrow that blows up in the sky and falls as a rain of fire.",
+          "mana":[280,310,340,370,400],
+          "type":"Direct",
+          "cast":2.0,
+          "gcd":"Short",
+          "cooldown":30.0,
+          "area":6.0,
+          "range":0.0,
+          "damage":{
+           "Attack damage":"+100%",
+            "Fire":["250-300","300-350","350-400","400-450","500-600"]
+          }
+        },
+        {
+          "id":243,
+          "name":"Lightning arrow",
+          "description":"An arrow that carries electrical damage strikes an objective and all of those that surround it.",
+          "mana":[260,290,320,350,380],
+          "type":"Constant",
+          "cast":2.0,
+          "gcd":"Short",
+          "cooldown":180.0,
+          "duration":[5,7,9,11,15],
+          "area":10.0,
+          "range":0.0,
+          "damage":{
+            "Lightning":["150-250","250-350","350-450","450-550","550-650"]
+          },
+          "debuffs":{
+            "Movement speed":"-15%"
+          }
+        }
+        ]
+      },
+      "Aiming Mastery":{
+        "class":"Marksman",
+        "spells":[
+        {
+          "id":36,
+          "name":"Dead eye",
+          "description":"The marksman takes her time to choose the right spot, maximizing the damage of her shots.",
+          "mana":[50,80,110,140,170],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":45.0,
+          "duration":20.0,
+          "buffs":{
+            "Weapon damage bonus":[ "+10%", "+14%", "+18%", "+24%", "+30%" ]
+          },
+          "debuffs":{
+            "Attack speed":["-4%","-5%","-6%","-7%","-8%"]
+          }
+        },
+        {
+          "id":225,
+          "name":"Focus",
+          "description":"The marksman enhances the possibilities of descrying the enemy by moving slower..",
+          "mana":[40,80,120,160,200],
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":70.0,
+          "duration":30.0,
+          "buffs":{
+            "Attack Range":["+2%","+4%","+6%","+8%","+10%"]
+          },
+          "debuffs":{
+            "Movement speed":"-10%"
+          },
+          "note":"Power has no duration limits. (It may be deactivated)"
+        },
+        {
+          "id":227,
+          "name":"Finger crush",
+          "description":"Attack centered in the opponents hands, it stops her from wielding her weapon.",
+          "mana":[150,175,200,225,250],
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":40.0,
+          "duration":30.0,
+          "range":0.0,
+          "debuffs":{
+            "Opponent critical hit chance":["-12%","-16%","-20%","-24%","-28%"],
+            "Opponent attack speed":["-6%","-8%","-10%","-12%","-15%"],
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "id":226,
+          "name":"Foresight",
+          "description":"Increases attack range.",
+          "type":"Passive",
+          "buffs":{
+            "Attack range":["10%","12%","14%","17%","20%"]
+          }
+        },
+        {
+          "id":228,
+          "alt_id":406,
+          "name":"Cyclops curse",
+          "description":"Strike oriented to the opponent's eyes.",
+          "mana":[180,205,230,255,280],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":52.0,
+          "duration":30.0,
+          "range":0.0,
+          "damage":{
+            "Attack damage +125%":true
+          },
+          "debuffs":{
+            "Critical chance reduction":["-20%","-30%","-40%","-50%","-75%"],
+            "Attack range reduction":["-2%","-4%","-7%","-10%","-15%"]
+          }
+        },
+        {
+          "id":229,
+          "name":"Lethal strike",
+          "description":"It looks for critical areas in the blank.",
+          "mana":[185,209,233,257,281],
+          "type":"Direct",
+          "cast":1.5,
+          "gcd":"Short",
+          "cooldown":50.0,
+          "range":0.0,
+          "damage":{
+            "Attack damage +100%":true,
+            "Attack damage +60%":["(Chance 20%)","(Chance 24%)","(Chance 28%)","(Chance 32%)","(Chance 36%)"],
+            "Attack damage":["20/50%","36/66%","50/82%","65/99%","80/115%"]
+          }
+        },
+        {
+          "id":230,
+          "name":"Strategic position",
+          "description":"The marskman knows how to locate herself in advantagous positions in battle.",
+          "mana":[120,140,160,180,200],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":50.0,
+          "duration":25,
+          "buffs":{
+            "Ranged received damage":["-5%","-7%","-9%","-12%","15%"]
+          }
+        },
+        {
+          "id":232,
+          "name":"Trained eye",
+          "description":"The marksman improves her impact chances.",
+          "type":"Passive",
+          "buffs":{
+            "Critical hit chance":["+10%","+30%","+50%","+70%","+100%"]
+          }
+        },
+        {
+          "id":231,
+          "name":"Seeking strike",
+          "description":"The arrow fired automatically seeks a weakening spot in the target.",
+          "mana":[255,277,299,321,343],
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":50.0,
+          "duration":[30,33,37,42,50],
+          "range":0.0,
+          "debuffs":{
+            "Constitution":[-15,-19,-23,-27,-31]
+          }
+        },
+        {
+          "id":233,
+          "name":"Hawk's gaze",
+          "description":"The marksman can find her opponent and target her easily.",
+          "mana":[260,290,320,350,380],
+          "type":"Constant",
+          "cast":2.0,
+          "gcd":"Short",
+          "cooldown":160.0,
+          "duration":[40,45,50,55,60],
+          "buffs":{
+            "Attack speed":["+5%","+10%","+15%","+20%","+25%"],
+            "Opponent evade chance":["-10%","-20%","-30%","-40%","-50%"]
+          }
+        }
+        ]
+      },
+      "Marksman WM":{
+        "class":"Marksman",
+        "spells":[
+        {
+          "name":"undefined",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"War Council",
+          "description":"The Warmaster learns a war language that allows her to communicate with her status in secret.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "War chat":true
+          }
+        },
+        {
+          "name":"undefined2",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Fire Arrow",
+          "description":"Launches a fire arrow over the ally, melting the ice that prevents movement.",
+          "mana":150,
+          "type":"Direct",
+          "cast":0.5,
+          "gcd":"Very Short",
+          "cooldown":30.0,
+          "range":20.0,
+          "buffs":{
+            "Dispel freeze":true,
+            "Only resistible at 100%":true,
+            "Only blockable at 100%":true
+            }
+          },
+        {
+          "name":"undefined3",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster's Might",
+          "description":"The Warmaster enhances his class main attribute.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "Class Attribute":"+15%"
+          }
+        },
+        {
+          "name":"undefined4",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Killer Instinct",
+          "description":"The Warmaster ascends upon a state of absolute confidence, successfully hitting almost every shot.",
+          "mana":150,
+          "type":"Activable",
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":15.0,
+          "duration":120,
+          "buffs":{
+            "Attack range":"+15%",
+            "Opponent evade chance":"-100%"
+          },
+          "debuffs": {
+              "Movement speed": "-15%"
+          }
+        },
+        {
+          "name":"undefined5",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster Blood",
+          "description":"The Warmaster athletic capabilities increase due to long years of training.",
+          "type":"Passive",
+          "gcd":"Normal",
+          "buffs":{
+            "Health":"+500"
+          }
+        }
+        ]
+      },
+      "Mental":{
+        "class":"Mage",
+        "spells":[
+        {
+          "name":"Arcane missile",
+          "description":"A small glowing ball hits the target, inflicting fire damage.",
+          "mana":[ 50, 70, 90, 110, 130 ],
+          "type":"Direct",
+          "cast":1.0,
+          "gcd":"Very Short",
+          "cooldown":5,
+          "range":25.0,
+          "damage":{
+            "Fire":[ "80-90", "175-190", "270-300", "370-400", "460-550" ]
+          }
+        },
+        {
+          "name":"Beetle swarm",
+          "description":"A beetle swarm surrounds the target.",
+          "mana":[ 80, 100, 120, 140, 160 ],
+          "type":"Constant",
+          "duration":[ 5, 6, 7, 8, 9 ],
+          "cooldown":40,
+          "cast":2.0,
+          "gcd":"Normal",
+          "range":25.0,
+          "debuffs":{
+            "Cannot attack":true
+          },
+          "damage":{
+            "Piercing (per second)":[ "20-30", "30-55", "40-80", "50-105", "60-130" ]
+          }
+        },
+        {
+          "name":"Blaze",
+          "description":"A burst of fire flows through the conjurer's hands, burning those in range.",
+          "mana":[ 75, 90, 105, 120, 135 ],
+          "type":"Direct",
+          "cooldown":10,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "damage":{
+            "Fire":[ "120-160", "240-290", "360-420", "480-550", "600-680" ]
+          }
+        },
+        {
+          "name":"Mind push",
+          "description":"A mental expansive wave hits the objectives in the area.",
+          "mana":[ 90, 105, 120, 135, 150 ],
+          "type":"Constant",
+          "duration":[ 4, 5, 6, 7, 8 ],
+          "cooldown":15,
+          "cast":0.5,
+          "gcd":"Short",
+          "debuffs":{
+            "Movement speed":[ "-25%", "-30%", "-35%", "-40%", "-50%" ]
+          }
+        },
+        {
+          "name":"Pricking ivy",
+          "description":"A pricking ivy grows below the opponent's feet, surrounding and catching her.",
+          "mana":[ 150, 175, 200, 225, 250 ],
+          "type":"Constant",
+          "duration":[ 3, 4, 5, 6, 7 ],
+          "cooldown":30,
+          "cast":1.0,
+          "gcd":"Short",
+          "range":25.0,
+          "debuffs":{
+            "Immobilize":true
+          },
+          "damage":{
+            "Piercing (instant)":[ "100-200", "225-325", "350-450", "475-575", "600-700" ]
+          }
+        },
+        {
+          "name":"Will domain",
+          "description":"The wizard bends the opponent's will.",
+          "mana":[ 200, 225, 250, 275, 300 ],
+          "type":"Constant",
+          "duration":[ 2, 3, 4, 5, 6 ],
+          "cooldown":30,
+          "cast":0.5,
+          "gcd":"Normal",
+          "range":12.0,
+          "debuffs":{
+            "Knock down":true,
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "name":"Silence",
+          "description":"The target cannot speak, so she cannot use powers.",
+          "mana":[ 150, 175, 200, 225, 250],
+          "type":"Constant",
+          "duration":[ 3, 4, 5, 6, 7 ],
+          "cooldown":40,
+          "cast":1.0,
+          "gcd":"Short",
+          "range":25.0,
+          "debuffs":{
+            "Dizzy":true,
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "name":"Splinter wall",
+          "description":"The spell caster renders a surrounding pikes wall that damages any melee attacker.",
+          "mana":[ 125, 140, 155, 170, 185],
+          "type":"Constant",
+          "duration":10,
+          "cooldown":90,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "area":10.0,
+          "damage":{
+            "Piercing (per second)":[ "50-70", "65-90", "85-110", "100-120", "120-150" ]
+          }
+        },
+        {
+          "name":"Time master",
+          "description":"The mage can manipulate temporal instances. Any opponent nearby remains static in time.",
+          "mana":[ 230, 260, 290, 320, 350 ],
+          "type":"Constant",
+          "duration":10,
+          "cooldown":120,
+          "cast":2.0,
+          "gcd":"Very Short",
+          "area":10.0,
+          "debuffs":{
+            "Movement speed":[ "-10%", "-20%", "-30%", "-40%", "-50%" ],
+            "Attack speed":[ "-10%", "-20%", "-30%", "-40%", "-50%" ],
+            "Cast speed":[ "-10%", "-20%", "-30%", "-40%", "-50%" ]
+          }
+        },
+        {
+          "name":"Sultar's devouring mass",
+          "description":"A fog illusion devours the target, making her believe she is cut and torn.",
+          "mana":[ 340, 380, 420, 460, 500 ],
+          "type":"Constant",
+          "duration":12,
+          "cooldown":120,
+          "cast":2.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "damage":{
+            "Piercing (per second)":[ 33, 42, 50, 58, 70],
+            "Slashing (per second)":[ 33, 42, 50, 58, 70],
+            "Blunt (per second)":[ 33, 42, 50, 58, 70]
+          },
+          "debuffs":{
+            "Regenerate health":[ "-15%", "-30%", "-45%", "-60%", "-100%" ]
+          }
+        }
+        ]
+      },
+      "Mana Control":{
+        "class":"Mage",
+        "spells":[
+        {
+          "name":"Energy barrier",
+          "description":"Creates a magical barrier that absorbs part of the damage received by the wizard.",
+          "mana":[ 100, 140, 180, 220, 260 ],
+          "type":"Constant",
+          "duration":120,
+          "cooldown":40,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Magic barrier":[ "+100", "+250", "+700", "+1000", "+1400" ]
+          }
+        },
+        {
+          "name":"Mana burn",
+          "description":"Burns the opponent's mana, causing damage impossible to resist or soak.",
+          "mana":[ 70, 100, 130, 160, 190 ],
+          "type":"Constant",
+          "duration":15,
+          "cooldown":50,
+          "cast":1.0,
+          "gcd":"Short",
+          "range":25.0,
+          "buffs":{
+            "Convert mana to damage":[ "+5/10", "+10/15", "+15/25", "+25/35", "+35/50"]
+          }
+        },
+        {
+          "name":"Synergy bond",
+          "description":"The wizard passes some of his own mana to an ally.",
+          "mana":[ 150, 250, 400, 550, 750 ],
+          "type":"Direct",
+          "cooldown":3,
+          "cast":0.5,
+          "gcd":"Very Short",
+          "range":25.0,
+          "buffs":{
+            "Mana":[ "+150", "+250", "+400", "+550", "+750" ]
+          }
+        },
+        {
+          "name":"Dragon's blood",
+          "description":"The wizard is naturally intelligent and gifted.",
+          "type":"Passive",
+          "buffs":{
+            "Intelligence":[ "+5", "+7", "+9", "+12", "+15" ]
+          }
+        },
+        {
+          "name":"Energy borrow",
+          "description":"The wizard steals mana points from the opponent and adds them to his own reserve.",
+          "type":"Direct",
+          "cooldown":60,
+          "cast":1.0,
+          "gcd":"Short",
+          "range":25.0,
+          "buffs":{
+            "Drain mana":[ "+10%", "+15%", "+20%", "+25%", "+35%" ]
+          }
+        },
+        {
+          "name":"Ambitious sacrifice",
+          "description":"The wizard sacrifices his health to recover magical power.",
+          "type":"Direct",
+          "cooldown":25,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Mana":[ "+300", "+450", "+600", "+750", "+900" ]
+          },
+          "debuffs":{
+            "Health":[ "-150", "-225", "-300", "-375", "-450" ]
+          }
+        },
+        {
+          "name":"Arcane devotion",
+          "description":"Magic flows naturally inside the wizard. The casting speed is increased.",
+          "mana":[ 115, 130, 145, 160, 175 ],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":60,
+          "cast":0.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Cast speed":[ "+15%", "+30%", "+45%", "+65%", "+100%" ]
+          }
+        },
+        {
+          "name":"Mana pool",
+          "description":"Increases the maximum mana reserve",
+          "type":"Passive",
+          "buffs":{
+            "Mana":[ "+100", "+200", "+300", "+400", "+500" ]
+          }
+        },
+        {
+          "name":"Mana communion",
+          "description":"The wizard creates a mana regenerating zone in which the allies can recover.",
+          "mana":[ 440, 480, 520, 560, 600 ],
+          "type":"Aura",
+          "duration":60,
+          "cooldown":120,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "area":6,
+          "buffs":{
+            "Mana":[ "+5", "+7", "+9", "+12", "+15" ]
+          }
+        },
+        {
+          "name":"Mana pylon",
+          "description":"The wizard creates an aura of protective energy to cover its nearby allies.\n\nAny ally close to the caster increments its protective barrier up to 2500 energy points limit.\n\nAny ally that exits the aura's influence area loses immediately all stored barrier points.",
+          "mana":[ 460, 480, 520, 560, 600 ],
+          "type":"Aura",
+          "duration":60,
+          "cooldown":180,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "area":10,
+          "buffs":{
+            "Magic barrier":[ "+25", "+30", "+35", "+40", "+50" ]
+          }
+        }
+        ]
+      },
+      "Staff Mastery":{
+        "class":"Mage",
+        "spells":[
+        {
+          "name":"Fire magnification",
+          "description":"The wizard channels fire damage into her staff.",
+          "mana":[ 100, 130, 160, 190, 210 ],
+          "type":"Constant",
+          "duration":120,
+          "cooldown":120,
+          "cast":1.0,
+          "gcd":"Short",
+          "buffs":{
+            "Fire damage bonus":[ "+5", "+15", "+25", "+35", "+45" ]
+          }
+        },
+        {
+          "name":"Arcane acceleration",
+          "description":"The wizard gets faster in all the attacks with her staff.",
+          "mana":[ 70, 85, 100, 115, 130 ],
+          "type":"Constant",
+          "duration":[ 20, 30, 40, 50, 60 ],
+          "cooldown":60,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Attack speed":"+25%"
+          }
+        },
+        {
+          "name":"Arcane projection",
+          "description":"The wizard projects his magic range beyond her limits.",
+          "mana":[ 60, 75, 90, 105, 120],
+          "type":"Constant",
+          "duration":[ 20, 30, 40, 50, 60 ],
+          "cooldown":80,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Attack range":"+15%"
+          }
+        },
+        {
+          "name":"Combat magic",
+          "description":"The wizard can manipulate and focus magic through her staff, increasing damage.",
+          "type":"Passive",
+          "buffs":{
+            "Damage bonus":[ "+5%", "+7%", "+9%", "+12%", "+15%" ]
+          }
+        },
+        {
+          "name":"Static field",
+          "description":"The wizard creates an energy field that reduces the movement of any foe that enters its area of influence.",
+          "mana":[ 40, 60, 80, 100, 120 ],
+          "type":"Aura",
+          "duration":40,
+          "cooldown":60,
+          "cast":0.5,
+          "gcd":"Very Short",
+          "area":6,
+          "debuffs":{
+            "Movement speed":[ "-10%", "-15%", "-20%", "-25%", "-30%" ]
+          }
+        },
+        {
+          "name":"Ice magnification",
+          "description":"The wizard channels ice damage into her staff.",
+          "mana":[ 100, 130, 160, 190, 210 ],
+          "type":"Constant",
+          "duration":120,
+          "cooldown":120,
+          "cast":1.0,
+          "gcd":"Short",
+          "buffs":{
+            "Ice damage bonus":[ "+5", "+15", "+25", "+35", "+45" ]
+          }
+        },
+        {
+          "name":"Protection dome",
+          "description":"Allies under the cover of the dome improve their resistance to physical damage.",
+          "mana":[ 160, 200, 240, 280, 320 ],
+          "type":"Constant",
+          "duration":20,
+          "cooldown":90,
+          "cast":3.0,
+          "gcd":"Very Short",
+          "area":10,
+          "buffs":{
+            "Resist physical damage":[ "+4%", "+8%", "+12%", "+16%", "+20%" ]
+          },
+          "debuffs":{
+            "Caster is not affected":true
+          }
+        },
+        {
+          "name":"Metabolic control",
+          "description":"The wizard is capable of manipulating her body's energies, arriving at optimal mind state.",
+          "mana":[ 170, 190, 210, 230, 250 ],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":60,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Concentration":[ "+10", "+15", "+20", "+25", "+30" ]
+          }
+        },
+        {
+          "name":"Lightning magnification",
+          "description":"The wizard channels lightning damage into her staff.",
+          "mana":[ 100, 130, 160, 190, 210 ],
+          "type":"Constant",
+          "duration":120,
+          "cooldown":120,
+          "cast":1.0,
+          "gcd":"Short",
+          "buffs":{
+            "Lighting damage bonus":[ "+5", "+15", "+25", "+35", "+45" ]
+          }
+        },
+        {
+          "name":"Evendim's fury",
+          "description":"An explosion creates a magical interference transforming enemy mana into damage.",
+          "mana":[ 340, 380, 420, 460, 500 ],
+          "type":"Direct",
+          "cooldown":180,
+          "cast":2.0,
+          "gcd":"Very Short",
+          "area":10,
+          "buffs":{
+            "Convert mana to damage":[ "+125", "+250", "+375", "+500", "+650" ]
+          }
+        }
+        ]
+      },
+      "Enchantments":{
+        "class":"Mage",
+        "spells":[
+        {
+          "name":"Curse",
+          "description":"The target reduces her attack chance, and damage while the curse is active.",
+          "mana":[ 40, 60, 80, 100, 120 ],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":20,
+          "cast":0.5,
+          "gcd":"Very Short",
+          "range":25.0,
+          "debuffs":{
+            "Opponent damage":[ "-2%", "-4%", "-6%", "-8%", "-10%" ],
+            "Opponent critical hit chance":[ "-10%", "-15%", "-20%", "-25%", "-30%" ],
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "name":"Feline dexterity",
+          "description":"The wizard increases an ally's dexterity.",
+          "mana":[ 65, 80, 95, 110, 125 ],
+          "type":"Constant",
+          "duration":180,
+          "cooldown":5.0,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "range":20.0,
+          "buffs":{
+            "Dexterity":[ "+5", "+7", "+9", "+12", "+15" ]
+          }
+        },
+        {
+          "name":"Blindness",
+          "description":"A flash of light blinds the objective that gets miss chance until recovery.",
+          "mana":[ 120, 140, 160, 180, 200 ],
+          "type":"Constant",
+          "duration":[10, 15, 20, 25, 30],
+          "cooldown":60,
+          "cast":0.5,
+          "gcd":"Very Short",
+          "range":25.0,
+          "debuffs":{
+            "Opponent evasion chance":[ "+50%", "+50%", "+50%", "+50%", "+50%" ],
+            "Resist dizzy":["-10%", "-15%", "-20%", "-25%", "-30%"]
+          }
+        },
+        {
+          "name":"Bless",
+          "description":"The target increases her attack, damage and critical chance while the blessing is active.",
+          "mana":[ 40, 60, 80, 100, 120 ],
+          "type":"Constant",
+          "duration":[30, 60, 90, 120, 150],
+          "cooldown":15,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":20.0,
+          "buffs":{
+            "Cast speed":[ "+5%", "+5%", "+7%", "+7%", "+10%" ],
+            "Attack speed":[ "+5%", "+5%", "+7%", "+7%", "+10%" ]
+          }
+        },
+        {
+          "name":"Bear strength",
+          "description":"The wizard increases an ally's strength.",
+          "mana":[ 65, 80, 95, 110, 125 ],
+          "type":"Constant",
+          "duration":180,
+          "cooldown":5,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "range":20.0,
+          "buffs":{
+            "Strength":[ "+5", "+7", "+9", "+12", "+15" ]
+          }
+        },
+        {
+          "name":"Bless weapon",
+          "description":"Increments weapon damage on any ally.",
+          "mana":[ 100, 125, 150, 175, 200 ],
+          "type":"Constant",
+          "duration":180,
+          "cooldown":5,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":20.0,
+          "buffs":{
+            "Damage bonus":[ "+5%", "+7%", "+9%", "+12%", "+15%" ]
+          }
+        },
+        {
+          "name":"Dispel magic",
+          "description":"Dispels enemy active effects on the caster or an ally.",
+          "mana":[ 130, 150, 170, 190, 210 ],
+          "type":"Direct",
+          "cooldown":15,
+          "cast":0.5,
+          "gcd":"Very Short",
+          "range":25.0,
+          "buffs":{
+            "Dispel negative powers (chance)":[ "40%", "55%", "70%", "85%", "100%" ]
+          }
+        },
+        {
+          "name":"Fox wits",
+          "description":"The wizard increases an ally's intelligence.",
+          "mana":[ 65, 80, 95, 110, 125 ],
+          "type":"Constant",
+          "duration":180,
+          "cooldown":5,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "range":20.0,
+          "buffs":{
+            "Intelligence":[ "+5", "+7", "+9", "+12", "+15" ]
+          }
+        },
+        {
+          "name":"Clumsiness",
+          "description":"The objective becomes clumsy, gawky and slow.",
+          "mana":[ 230, 260, 290, 320, 350 ],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":30,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "debuffs":{
+            "Class attribute":[ "-10%", "-15%", "-20%", "-25%", "-30%"],
+            "Movement speed":[ "-2%", "-4%", "-6%", "-8%", "-10%"]
+          }
+        },
+        {
+          "name":"Mass dispel magic",
+          "description":"Dispels active effects on all allies in the effect area.",
+          "mana":[ 300, 340, 380, 420, 460 ],
+          "type":"Direct",
+          "cooldown":120,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "area":10,
+          "buffs":{
+            "Dispel negative powers (chance)":[ "20%", "40%", "60%", "80%", "100%" ]
+          }
+        }
+        ]
+      },
+      "Life":{
+        "class":"Conjurer",
+        "spells":[
+        {
+          "name":"Heal ally",
+          "description":"Heals an ally.",
+          "mana":[ 50, 70, 95, 120, 145 ],
+          "type":"Direct",
+          "cooldown":5,
+          "cast":0.5,
+          "gcd":"Very Short",
+          "range":25,
+          "buffs":{
+            "Health":[ "+100", "+250", "+400", "+550", "+700" ]
+          }
+        },
+        {
+          "name":"Heal self",
+          "description":"Heals the caster.",
+          "mana":[ 70, 90, 110, 130, 150 ],
+          "type":"Direct",
+          "cooldown":15,
+          "cast":1.0,
+          "gcd":"Short",
+          "buffs":{
+            "Health":[ "+200", "+300", "+400", "+500", "+600" ]
+          }
+        },
+        {
+          "name":"Resurrect",
+          "description":"Brings an ally back to life.",
+          "mana":[ 400, 430, 460, 490, 520 ],
+          "type":"Constant",
+          "cooldown":120,
+          "cast":6.0,
+          "gcd":"Very Short",
+          "range":8.0,
+          "buffs":{
+            "Health":[ "+200", "+800", "+1400", "+1400", "+2000" ],
+            "Mana":"+30% starting level 2",
+            "Armour bonus":"+40% starting level 3",
+            "Sanctuary":"starting level 4 - 8s",
+            "Revive":true
+          }
+        },
+        {
+          "name":"Regenerate ally",
+          "description":"Heals an ally over time.",
+          "mana":[ 70, 90, 110, 130, 150 ],
+          "type":"Constant",
+          "duration":30,
+          "cooldown":20,
+          "cast":0.5,
+          "gcd":"Very Short",
+          "range":25.0,
+          "buffs":{
+            "Health":[ "+10", "+21", "+32", "+43", "+55" ]
+          }
+        },
+        {
+          "name":"Regenerate self",
+          "description":"Heals the caster over time.",
+          "mana":[ 70, 90, 110, 130, 150 ],
+          "type":"Constant",
+          "duration":30,
+          "cooldown":30,
+          "cast":1.0,
+          "gcd":"Short",
+          "buffs":{
+            "Health":[ "+20", "+25", "+30", "+35", "+40" ]
+          }
+        },
+        {
+          "name":"Divine intervention",
+          "description":"The ally becomes invulnerable to curses, sorcery and enchantments that diminish her efficiency. She remains vulnerable to damaging spells, even those that have negative side effects.",
+          "mana":[ 75, 100, 125, 150, 175 ],
+          "type":"Constant",
+          "duration":[ 10, 20, 35, 50, 70 ],
+          "cooldown":110,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "buffs":{
+            "Immunity to non-damaging powers":true
+          }
+        },
+        {
+          "name":"Life savior",
+          "description":"Heals an ally.",
+          "mana":[ 240, 280, 320, 360, 400 ],
+          "type":"Direct",
+          "cooldown":60,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "range":20.0,
+          "buffs":{
+            "Health":[ "+20%", "+30%", "+40%", "+50%", "+60%" ]
+          }
+        },
+        {
+          "name":"Greater regeneration",
+          "description":"Heals all allies nearby the caster.",
+          "mana":[ 320, 360, 400, 440, 480 ],
+          "type":"Constant",
+          "duration":30,
+          "cooldown":180,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "area":10,
+          "buffs":{
+            "Health (instant)":[ "+50", "+75", "+100", "+125", "+150" ],
+            "Health (per tick)":[ "+10", "+15", "+20", "+25", "+30" ]
+          }
+        },
+        {
+          "name":"Greater healing",
+          "description":"Heals all allies nearby the target.",
+          "mana":[ 340, 380, 420, 460, 500 ],
+          "type":"Direct",
+          "cooldown":120,
+          "cast":1.5,
+          "gcd":"Short",
+          "area":6,
+          "range":20,
+          "buffs":{
+            "Health":[ "+150/200", "+250/300", "+350/400", "+450/500", "+550/600" ]
+          }
+        },
+        {
+          "name":"Mass resurrection",
+          "description":"Revive the allies near the conjurer.",
+          "mana":[ 500, 600, 700, 800, 900 ],
+          "type":"Constant",
+          "cooldown":300,
+          "cast":5.0,
+          "gcd":"Very Long",
+          "area":6,
+          "buffs":{
+            "Resurrection Dizziness":true,
+            "Revive":true,
+            "Health":["+500", "+600", "+700", "+800", "+1000"],
+            "Sanctuary":"starting level 5 - 8s"
+          }
+        }
+        ]
+      },
+      "Summon":{
+        "class":"Conjurer",
+        "spells":[
+        {
+          "name":"Summon imps",
+          "description":"Summons imps that attack the selected target.",
+          "mana":[ 50, 75, 100, 120, 140 ],
+          "type":"Constant",
+          "duration":13,
+          "cooldown":60,
+          "cast":1.5,
+          "gcd":"Normal",
+          "buffs":{
+            "Summon imps": [2, 4, 6, 8, 10]
+          }
+        },
+        {
+          "name":"Extraplanar bond",
+          "description":"The conjurer magically bonds to its summoning. Part of the received damage is redirected to it. (5% each spell level)",
+          "mana":[ 40, 55, 70, 85, 100 ],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":60,
+          "cast":0.5,
+          "gcd":"Very Short"
+        },
+        {
+          "name":"Summon demon",
+          "description":"Summons a demon that fights for the conjurer.",
+          "mana":[ 90, 110, 130, 150, 200 ],
+          "type":"Constant",
+          "duration":30,
+          "cooldown":50,
+          "cast":3.0,
+          "gcd":"Normal"
+        },
+        {
+          "name":"Material bond",
+          "description":"Improves the bond between the summoned creature and the material plane.",
+          "type":"Passive",
+          "buffs":{
+            "Health":[ "+5%", "+10%", "+15%", "+20%", "+25%" ]
+          }
+        },
+        {
+          "name":"Summon zombies",
+          "description":"Summons zombies that attack the selected target.",
+          "mana":[ 140, 160, 180, 200, 220 ],
+          "type":"Constant",
+          "duration":18,
+          "cooldown":60,
+          "cast":2.0,
+          "gcd":"Long",
+          "buffs":{
+            "Summon zombies": [1, 2, 3, 4, 5]
+          }
+        },
+        {
+          "name":"Demonic rage",
+          "description":"Summoned creatures become aggressive, causing additional damage but losing all their armor.",
+          "mana":[ 200, 225, 250, 275, 300 ],
+          "type":"Constant",
+          "duration":15,
+          "cooldown":60,
+          "cast":1.5,
+          "gcd":"Short",
+          "buffs":{
+            "Weapon damage bonus": [ "+10%", "+20%", "+30%", "+40%", "+50%" ]
+          },
+          "debuffs":{
+            "Protection": "-100%"
+          }
+        },
+        {
+          "name":"Summon golem",
+          "description":"Summons a stone golem that fights for the conjurer.",
+          "mana":[ 300, 350, 400, 450, 500 ],
+          "type":"Constant",
+          "duration":240,
+          "cooldown":120,
+          "cast":10.0,
+          "gcd":"Normal",
+          "buffs":{
+            "Summon":[ "Tiny Stone Golem", "Small Magma Golem", "Crystal Golem", "Large Fire Golem", "Enormous Metal Golem"]
+          }
+
+        },
+        {
+          "name":"Magical armor",
+          "description":"The creature gains more resistance to magical damage.",
+          "type":"Passive",
+          "buffs":{
+            "Protection":[ "+5%", "+10%", "+15%", "+20%", "+25%" ]
+          }
+        },
+        {
+          "name":"Blood drinker",
+          "description":"Summoning earns life draining attacks. Part of the inflicted damage is taken as health for the current creature.",
+          "mana":[ 400, 450, 500, 550, 600 ],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":180,
+          "cast":4.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Vitality absorption":[ "+20%", "+40%", "+60%", "+80%", "+100%" ]
+          }
+        },
+        {
+          "name":"Summon lich",
+          "description":"Summons a lich that fights for the conjurer.",
+          "mana":[ 300, 350, 400, 450, 500 ],
+          "type":"Constant",
+          "duration":40,
+          "cooldown":60,
+          "cast":3.0,
+          "gcd":"Normal",
+          "buffs":{
+            "Summon":[ "Old Lich", "Lich Apprentice", "Lich Necromancer", "Lord Lich", "Lich Shaman" ]
+          }
+
+        }
+        ]
+      },
+      "Sorcery":{
+        "class":"Conjurer",
+        "spells":[
+        {
+          "name":"Force armor",
+          "description":"A force field is created that grants the conjurer extra protection.",
+          "mana":[ 60, 75, 90, 105, 120 ],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":70,
+          "cast":2.0,
+          "gcd":"Short",
+          "buffs":{
+            "Protection":[ "+10%", "+15%", "+20%", "+25%", "+30%" ]
+          }
+        },
+        {
+          "name":"Shifting silhouette",
+          "description":"The objective ally silhouette gets blurry and confusing.",
+          "mana":[ 220, 260, 300, 340, 380 ],
+          "type":"Constant",
+          "duration":40,
+          "cooldown":80,
+          "cast":3.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Ranged received damage":"starting level 5  -10%"
+          },
+          "debuffs":{
+            "Opponent attack speed":["-3%", "-6%", "-9%", "-12%", "-15%"]
+          }
+        },
+        {
+          "name":"Friendly shielding",
+          "description":"A force field is created surrounding an ally, it provides extra armor.",
+          "mana":[ 50, 65, 80, 95, 110 ],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":25,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "range":25.0,
+          "buffs":{
+            "Protection":[ "+10%", "+15%", "+20%", "+25%", "+30%" ]
+          }
+        },
+        {
+          "name":"Mind blank",
+          "description":"The conjurer gets resistance to crowd control effects.",
+          "mana":[ 100, 130, 160, 190, 220 ],
+          "type":"Activable",
+          "cooldown":60,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Resist dizzy":[ "+20%", "+25%", "+30%", "+35%", "+40%" ],
+            "Resist freeze":[ "+20%", "+25%", "+30%", "+35%", "+40%" ],
+            "Resist stun":[ "+20%", "+25%", "+30%", "+35%", "+40%" ],
+            "Resist knock":[ "+20%", "+25%", "+30%", "+35%", "+40%" ],
+            "Cannot cast damaging powers":true
+          }
+        },
+        {
+          "name":"Karma mirror",
+          "description":"Reflects part of the damage received while the spell is active.",
+          "mana":[ 75, 90, 105, 120, 135 ],
+          "type":"Constant",
+          "duration":30,
+          "cooldown":60,
+          "cast":1.0,
+          "gcd":"Short",
+          "buffs":{
+            "Return damage":[ "+10%", "+15%", "+20%", "+25%", "+30%" ]
+          }
+        },
+        {
+          "name":"Magic barrier",
+          "description":"Gives magic resistance to the target.",
+          "mana":[ 250, 275, 300, 325, 350 ],
+          "type":"Constant",
+          "duration":120,
+          "cooldown":120,
+          "cast":2.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "buffs":{
+            "Resist magical damage":[ "+10%", "+15%", "+20%", "+25%", "+30%" ]
+          }
+        },
+        {
+          "name":"Material wall",
+          "description":"Gives physical resistance to the target.",
+          "mana":[ 250, 275, 300, 325, 350 ],
+          "type":"Constant",
+          "duration":120,
+          "cooldown":120,
+          "cast":2.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "buffs":{
+            "Resist physical damage":[ "+10%", "+15%", "+20%", "+25%", "+30%" ]
+          }
+        },
+        {
+          "name":"Sanctuary",
+          "description":"The conjurer creates an invulnerability zone. He will not be able to attack or be attacked, but he will be able to move.\n\n(Removes any positive effect that is active on the caster)",
+          "mana":[ 230, 260, 290, 320, 350 ],
+          "type":"Constant",
+          "duration":[ 10, 12, 14, 17, 20 ],
+          "cooldown":70,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "buffs":{
+            "Sanctuary":true
+          }
+        },
+        {
+          "name":"Insightful",
+          "description":"The caster gains a duration bonus to all powers received from allies or herself.",
+          "type":"Passive",
+          "buffs":{
+            "Spell duration":[ "+5%", "+7%", "+9%", "+12%", "+20%" ]
+          }
+        },
+        {
+          "name":"Steel skin",
+          "description":"The conjurer creates a magic mantle that significantly reduces slashing, piercing and blunt damage.",
+          "mana":[ 340, 380, 420, 460, 500 ],
+          "type":"Constant",
+          "duration":[ 20, 25, 30, 35, 40 ],
+          "cooldown":180,
+          "cast":1.0,
+          "gcd":"Short",
+          "buffs":{
+            "Resist physical damage":[ "+50%", "+55%", "+60%", "+65%", "+70%" ]
+          }
+        }
+        ]
+      },
+      "Conjurer WM":{
+        "class":"Conjurer",
+        "spells":[
+        {
+          "name":"undefined",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"War Council",
+          "description":"The Warmaster learns a war language that allows her to communicate with her status in secret.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "War chat":true
+          }
+        },
+        {
+          "name":"undefined2",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Defensive Portal",
+          "description":"Creates a portal that allows teleporting up to 25 allies to one of the available realm's locations.",
+          "mana":100,
+          "type":"Direct",
+          "cast":10.0,
+          "gcd":"Very Short",
+          "cooldown":1200.0,
+          "duration":15
+          },
+        {
+          "name":"undefined3",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster's Might",
+          "description":"Thanks to his/her years of experience the Warmaster can cast any spell faster than others.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "Cast speed":"+15%",
+            "Intelligence":"+5%"
+          }
+        },
+        {
+          "name":"undefined4",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Divine Protection",
+          "description":"The Warmaster learns a protection spell that can be casted upon allies.",
+          "mana":200,
+          "type":"Constant",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":45.0,
+          "duration":60,
+          "range":20.0,
+          "buffs":{
+            "Healing Bonus":"+25%"
+            }
+          },
+        {
+          "name":"undefined5",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster Blood",
+          "description":"The Warmaster athletic capabilities increase due to long years of training.",
+          "type":"Passive",
+          "gcd":"Normal",
+          "buffs":{
+            "Health":"+700"
+          }
+        }
+        ]
+      },
+      "Arcania":{
+        "class":"Warlock",
+        "spells":[
+        {
+          "name":"Stalagamite",
+          "description":"A sharp rock comes out the earth, below the objective, who receives piercing damage.",
+          "mana":[90,120,150,180,210],
+          "type":"Direct",
+          "cooldown":25.0,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "damage":{
+            "Piercing":["100","150","200","250","400"],
+            "Ice":["100","150","200","250","400"]
+          }
+        },
+        {
+          "name":"Slow",
+          "description":"Decreases an opponent's movement speed.",
+          "mana":[60,100,140,180,250],
+          "type":"Constant",
+          "duration":30.0,
+          "cooldown":60.0,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "debuffs":{
+            "Movement speed":["-10%","-12%","-15%","-17%","-20%"]
+          }
+        },
+        {
+          "name":"Petrify hands",
+          "description":"The hands of the opponent become stiff, hindering the attacks.",
+          "mana":[130,160,190,220,250],
+          "type":"Constant",
+          "duration":[15,20,25,30,35],
+          "cooldown":60.0,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "range":25.0,
+          "debuffs":{
+            "Critical hit chance":["-15%","-20%","-25%","-30%","-35%"],
+            "Attack speed":["-5%","-10%","-15%","-20%","-25%"]
+          }
+        },
+        {
+          "name":"Laziness",
+          "description":"The opponent feels tired and unwilling to fight.",
+          "mana":[170,190,210,230,250],
+          "type":"Constant",
+          "duration":[12,14,16,18,20],
+          "cooldown":45.0,
+          "cast":2.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "debuffs":{
+            "Weapon damage bonus":["-30%","-40%","-50%","-60%","-70%"],
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "name":"Meteor",
+          "description":"A huge flaming rock strikes the opponent.",
+          "mana":[140,160,180,200,220],
+          "type":"Constant",
+          "duration":[3,4,5,6,7],
+          "cooldown":15.0,
+          "cast":2.0,
+          "gcd":"Normal",
+          "range":30.0,
+          "debuffs":{
+            "Dizzy":true
+          },
+          "damage":{
+            "Blunt":["150-200","200-250","250-300","300-350","350-400"],
+            "Fire":["150-200","200-250","250-300","300-350","350-400"]
+          }
+        },
+        {
+          "name":"Wind wall",
+          "description":"A wind wall that surrounds the caster improves normal attacks and powers defense.",
+          "mana":[160,185,210,235,260],
+          "type":"Constant",
+          "duration":[20,22,24,26,30],
+          "cooldown":60.0,
+          "cast":0.5,
+          "gcd":"Very Short",
+          "buffs":{
+            "Range received damage":["-5%","-10%","-15%","-20%","-25%"]
+          }
+        },
+        {
+          "name":"Crystal blast",
+          "description":"A blast of sharp crystals damages all the opponents in the area.",
+          "mana":[100,125,150,175,200],
+          "type":"Direct",
+          "cooldown":20.0,
+          "cast":1.0,
+          "gcd":"Short",
+          "damage":{
+            "Piercing":["220-255","350-470","475-635","600-800","850-1150"]
+          }
+        },
+
+        {
+          "name":"Fragility",
+          "description":"The objective becomes weak, fragile and vulnerable to physical damage.",
+          "mana":[80,110,140,170,200],
+          "type":"Constant",
+          "duration":60.0,
+          "cooldown":60.0,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":30.0,
+          "debuffs":{
+            "Resist physical damage":["5%","-10%","-15%","-20%","-25%"],
+            "Only blockable at 100%":true
+          }
+        },
+
+        {
+          "name":"Golem fist",
+          "description":"An illusory golem falls from the sky inflicting blunt damage over the target.",
+          "mana":[130,180,225,280,320],
+          "type":"Direct",
+          "cooldown":60.0,
+          "cast":2.0,
+          "gcd":"Short",
+          "range":25.0,
+          "damage":{
+            "Health":["-200","-250","-300","-350","-650"]
+          }
+        },
+
+        {
+          "name":"Sultar's Terror",
+          "description":"An illusory giant skull provokes fear over its enemies, pertifying and inflicting slashing and piercing damage to them.",
+          "damage":{
+            "Blunt":["70-100","115-160","160-225","205-285","250-350"],
+            "Piercing":["70-100","115-160","160-225","205-285","250-350"],
+            "Slashing":["70-100","115-160","160-225","205-285","250-350"]
+          },
+          "mana":[400,425,450,475,500],
+          "type":"Constant",
+          "duration":["2","3","4","5","6"],
+          "cooldown":180.0,
+          "cast":3.0,
+          "gcd":"Long",
+          "range":30.0,
+          "area":10.0,
+          "debuffs":{
+            "Knock down":true
+          }
+        }
+        ]
+      },
+      "Necromancy":{
+        "class":"Warlock",
+        "spells":[
+        {
+          "name":"Vampirism",
+          "description":"The warlock drains health from a target, and adds it to her own reserve. She cannot drain more health than what is required to fully heal or more health than the objective's current points.",
+          "mana":[ 80, 110, 140, 170, 200 ],
+          "type":"Direct",
+          "cooldown":30,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":20.0,
+          "buffs":{
+            "Drain health":[ "+90/120", "+180/240", "+270/360", "+360/480", "+450/600" ]
+          }
+        },
+        {
+          "name":"Darkness",
+          "description":"The objective cannot be target of positive spells.",
+          "mana":[ 160, 180, 200, 220, 240 ],
+          "type":"Constant",
+          "duration":[ 7, 9, 11, 15, 20 ],
+          "cooldown":50,
+          "cast":2.0,
+          "gcd":"Very Short",
+          "range":20,
+          "debuffs":{
+            "Block positive powers":true
+          }
+        },
+        {
+          "name":"Infuriate",
+          "description":"The warlock makes the target get enraged involuntarily and without noticing.",
+          "mana":[ 80, 100, 120, 140, 160 ],
+          "type":"Constant",
+          "duration":30,
+          "cooldown":30,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "range":25.0,
+          "buffs":{
+            "Protection":[ "-30%", "-35%", "-40%", "-45%", "-50%" ]
+          },
+          "debuffs":{
+            "Concentration":[ "-10", "-15", "-20", "-25", "-30" ],
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "name":"Vitality absorption",
+          "description":"The caster transforms a share of the damage dealt to the opponents, while the spell lasts, into health.",
+          "type":"Passive",
+          "buffs":{
+            "Vitality absorption":[ "+2%", "+4%", "+6%", "+8%", "+10%" ]
+          }
+        },
+        {
+          "name":"Sadistic guards",
+          "description":"The wandering souls controlled by the warlock surround a victim, weakening her defenses.",
+          "mana":[ 140, 155, 160, 175, 190],
+          "type":"Constant",
+          "duration":[4, 8, 12, 16, 20],
+          "cooldown":90,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "debuffs":{
+            "Resistance to knock down and stun":[ "-100%", "-100%", "-100%", "-100%", "-100%" ],
+            "Only blockable at 100%":true,
+            "Only resistible at 100%":true
+          }
+        },
+        {
+          "name":"Sadictic servants",
+          "description":"It calls the earth wandering souls. They attack a realm enemy from whom they drain mana.",
+          "type":"Constant",
+          "duration":30,
+          "cooldown":45,
+          "cast":1.0,
+          "gcd":"Short",
+          "range":25.0,
+          "buffs":{
+            "Drain mana":[ "+5", "+10", "+15", "+20", "+25" ]
+          }
+        },
+        {
+          "name":"Soulkeeper",
+          "description":"The warlock weakens the target and drains its health, adding it to her own reserve. She cannot drain more health than what is required to fully heal or more health than the objective's current points. Cannot be casted on mobs.",
+          "mana":[ 240, 280, 320, 360, 400 ],
+          "type":"Constant",
+          "duration":30,
+          "cooldown":60,
+          "cast":2.0,
+          "gcd":"Short",
+          "range":25.0,
+          "buffs":{
+            "Drain health (per second)":[ "+40", "+55", "+70", "+85", "+100" ]
+          },
+          "debuffs":{
+            "Strength":[ "-5", "-7", "-9", "-12", "-15" ]
+          }
+        },
+        {
+          "name":"Cremation",
+          "description":"The warlock invokes a powerful spell that incinerates the corpse of an enemy. If the spell is successful, the enemy is sent to the Resurrection Altar",
+          "mana":[ 200, 225, 250, 275, 300 ],
+          "type":"Constant",
+          "duration":5,
+          "cooldown":80,
+          "cast":4.0,
+          "gcd":"Very Short",
+          "range":2.0,
+          "buffs":{
+            "Cremate corpse (chance)":[ "15%", "40%", "65%", "85%", "100%" ],
+            "Only resistible at 100%":true,
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "name":"Possess summoning",
+          "description":"If the spell is not resisted, the warlock has chances of controlling a summoned creature. The creature remains until killed (no duration).",
+          "mana":[ 300, 325, 350, 375, 400 ],
+          "type":"Direct",
+          "cooldown":60,
+          "cast":4.0,
+          "gcd":"Normal",
+          "range":20.0,
+          "buffs":{
+            "Posess summon (chance)":[ "40%", "55%", "70%", "85%", "100%" ]
+          }
+        },
+        {
+          "name":"Master of doom",
+          "description":"A darkness aura surrounds the warlock breaking opponent's will in its area. The enemy has reduced constitution and cannot cast spells.",
+          "mana":[ 520, 540, 560, 580, 600 ],
+          "type":"Aura",
+          "duration":30,
+          "cooldown":180,
+          "cast":2.5,
+          "gcd":"Very Short",
+          "area":10,
+          "debuffs":{
+            "Dizzy (chance)":[ "20%", "40%", "60%", "80%", "100%" ],
+            "Constitution":[ "-10", "-15", "-20", "-25", "-30" ]
+          }
+        }
+        ]
+      },
+      "Elements":{
+        "class":"Warlock",
+        "spells":[
+        {
+          "name":"Fire ball",
+          "description":"The caster launches a flame sphere that produces damage to all enemies in the impact area.",
+          "mana":[ 125, 140, 155, 170, 185 ],
+          "type":"Direct",
+          "cooldown":15,
+          "cast":1.5,
+          "gcd":"Short",
+          "range":25.0,
+          "area":6,
+          "damage":{
+            "Fire":[ "110-160", "245-320", "380-480", "515-640", "650-800" ]
+          }
+        },
+        {
+          "name":"Ice blast",
+          "description":"The target is struck by an ice blast.",
+          "mana":[ 125, 140, 155, 170, 185 ],
+          "type":"Constant",
+          "duration":10,
+          "cooldown":20,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "damage":{
+            "Ice":[ "70-100", "90-120", "100-140", "130-160", "170-200" ]
+          },
+          "debuffs":{
+            "Movement speed":["-5%", "-10%", "-15%", "-20%", "-30%"]
+          }
+        },
+        {
+          "name":"Lightning",
+          "description":"An electrical burst hits the target.",
+          "mana":[ 125, 140, 155, 170, 185 ],
+          "type":"Constant",
+          "duration":5,
+          "cooldown":20,
+          "cast":2.0,
+          "gcd":"Very Short",
+          "range":25,
+          "damage":{
+            "Lightning":[ 80, 120, 160, 200, 240 ]
+          }
+        },
+        {
+          "name":"Elemental conjunction",
+          "description":"The warlock develops natural resistance to elements damage.",
+          "type":"Passive",
+          "buffs":{
+            "Resist fire":[ "+5%", "+7%", "+9%", "+12%", "+15%" ],
+            "Resist electrical damage":[ "+5%", "+7%", "+9%", "+12%", "+15%" ],
+            "Resist cold":[ "+5%", "+7%", "+9%", "+12%", "+15%" ]
+          }
+        },
+        {
+          "name":"Freeze",
+          "description":"The target becomes frozen. She cannot attack nor be attacked.",
+          "mana":[ 100, 130, 160, 190, 220],
+          "type":"Constant",
+          "duration":[ 3, 4, 5, 6, 7 ],
+          "cooldown":30,
+          "cast":1.5,
+          "gcd":"Short",
+          "range":25,
+          "debuffs":{
+            "Freeze":true
+          }
+        },
+        {
+          "name":"Frozen storm",
+          "description":"Opponents in the storm area will be damaged and get stunned.",
+          "mana":[ 180, 210, 240, 270, 300 ],
+          "type":"Constant",
+          "duration":[ 6, 7, 8, 9, 10 ],
+          "cooldown":120,
+          "cast":2.0,
+          "gcd":"Normal",
+          "range":25.0,
+          "area":6,
+          "damage":{
+            "Ice":[ 40, 50, 60, 70, 80 ]
+          },
+          "debuffs":{
+            "Stun":true
+          }
+        },
+        {
+          "name":"Element exposure",
+          "description":"The target becomes vulnerable to the elements.",
+          "mana":[ 120, 140, 160, 180, 200 ],
+          "type":"Constant",
+          "duration":30,
+          "cooldown":30,
+          "cast":1.0,
+          "gcd":"Very Short",
+          "range":25.0,
+          "debuffs":{
+            "Resist magical damage":[ "-10%", "-12%", "-14%", "-17%", "-21%" ],
+            "Only blockable at 100%":true
+          },
+          "damage":{
+            "Fire protection":[ "-20%", "-25%", "-30%", "-35%", "-40%" ],
+            "Ice protection":[ "-20%", "-25%", "-30%", "-35%", "-40%" ],
+            "Lightning protection":[ "-20%", "-25%", "-30%", "-35%", "-40%" ]
+          }
+        },
+        {
+          "name":"Magma blast",
+          "description":"A magma ball strikes the target.",
+          "mana":[ 250, 280, 310, 340, 370 ],
+          "type":"Constant",
+          "duration":15,
+          "cooldown":45,
+          "cast":2.0,
+          "gcd":"Short",
+          "range":30.0,
+          "damage":{
+            "Fire (instant)":[ "200-240", "260-330", "350-430", "450-540", "580-680" ],
+            "Damage (per second)":[ 25, 30, 35, 45, 60]
+          }
+        },
+        {
+          "name":"Twister",
+          "description":"An air eddy devours the opponents in the area.",
+          "mana":[ 290, 320, 350, 380, 410 ],
+          "type":"Constant",
+          "duration":[ 5, 6, 7, 8, 9 ],
+          "cooldown":60,
+          "cast":3.0,
+          "gcd":"Normal",
+          "range":25.0,
+          "debuffs":{
+            "Immobilize":true
+          },
+          "damage":{
+            "Blunt":[ "20-30", "40-57", "60-85", "80-110", "110-140" ]
+          }
+        },
+        {
+          "name":"Summon lightning",
+          "description":"The warlock creates lightning bolts that strike all the opponents in an area.",
+          "mana":[ 440, 480, 520, 560, 600 ],
+          "type":"Constant",
+          "duration":10,
+          "cooldown":180,
+          "cast":2.0,
+          "gcd":"Short",
+          "range":0,
+          "area":10,
+          "debuffs":{
+            "Strength":"-10%"
+          },
+          "damage":{
+            "Lightning":[ "40-80", "70-120", "100-160", "130-200", "160-240" ]
+          }
+        }
+        ]
+      },
+      "Warlock WM":{
+        "class":"Warlock",
+        "spells":[
+        {
+          "name":"undefined",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"War Council",
+          "description":"The Warmaster learns a war language that allows her to communicate with her status in secret.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "War chat":true
+          }
+        },
+        {
+          "name":"undefined2",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Offensive Portal",
+          "description":"Creates a portal that allows teleporting up to 25 allies to one of the available location.",
+          "mana":100,
+          "type":"Direct",
+          "cast":10.0,
+          "gcd":"Very Short",
+          "cooldown":1200.0,
+          "duration":15.0
+        },
+        {
+          "name":"undefined3",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster's Might",
+          "description":"Thanks to his/her years of experience the Warmaster can cast any spell faster than others.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "Cast speed":"+15%",
+            "Intelligence":"+5%"
+          }
+        },
+        {
+          "name":"undefined4",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Mass Pricking Ivy",
+          "description":"A Pricking ivy grows surrounding the Warlock to damage and immobolise near enemies.",
+          "mana":500,
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":90.0,
+          "duration":5.0,
+          "damage":{
+            "Piercing":"+750",
+            "Immobilise":true
+          }
+        },
+        {
+          "name":"undefined5",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster Blood",
+          "description":"The Warmaster athletic capabilities increase due to long years of training.",
+          "type":"Passive",
+          "gcd":"Normal",
+          "buffs":{
+            "Health":"+700"
+          }
+        }
+        ]
+      },
+      "Slashing Weapons":{
+        "class":"Warrior",
+        "spells":[
+        {
+          "name":"Charge",
+          "cast":0,
+          "gcd":"Normal",
+          "cooldown":6,
+          "type":"Direct",
+          "description":"Increases the effectiveness of attack and damage.",
+          "mana":[40,65,90,110,130],
+          "damage":{
+            "Attack Damage":"100%",
+            "Slashing":["30-50","50-80","90-130","120-150","150-200"]
+          }
+        },
+        {
+          "name":"Accurate swings",
+          "cast":0,
+          "gcd":"Short",
+          "cooldown":120,
+          "type":"Constant",
+          "description":"Improves slashing damage while active.",
+          "mana":[60,80,100,120,140],
+          "duration":90,
+          "damage":{
+            "Slashing":["+15","+30","+45","+60","+75"]
+          }
+        },
+        {
+          "name":"Disable limb",
+          "cast":0,
+          "gcd":"Very Short",
+          "cooldown":30,
+          "type":"Constant",
+          "description":"A strike to the limbs hinders mobility.",
+          "duration":30,
+          "mana":[84, 111, 138, 165, 192],
+          "debuffs":{
+            "Movement Speed":["-10%","-15%","-20%","-26%","-33%"],
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "name":"Athletic",
+          "type":"Passive",
+          "description":"The fighter is naturally agile.",
+          "buffs":{
+            "Slashing damage":["+2%","+4%","+6%","+8%","+10%"],
+            "Mana recover per hit":["+4","+4","+6","+6","+10%"]
+          }
+        },
+        {
+          "name":"South cross",
+          "cast":0,
+          "gcd":"Normal",
+          "cooldown":10,
+          "type":"Direct",
+          "description":"A double cross cut is executed.",
+          "mana":[120,140,160,180,200],
+          "damage":{
+            "Attack Damage":"100%",
+            "Attack Damage (Bonus)":["+20/25%","+30/35%","+40/45%","+50/55%","+60/65%"]
+          }
+        },
+        {
+          "name":"Crash",
+          "cast":0.0,
+          "gcd":"Normal",
+          "cooldown":50,
+          "type":"Constant",
+          "description":"A mighty attack shocks the opponent, who receives damage and loses evasive abilities.",
+          "mana":[60,90,120,150,180],
+          "duration":[15,20,25,30,35],
+          "damage":{
+            "Attack Damage":["100%"]
+          },
+          "debuffs":{
+            "Evade Chance":["-50%","-60%","-70%","-80%","-100%"],
+            "Resist stun":["-10%","-15%","-20%","-25%","-30%"],
+            "Only resistible at 100%":true
+          }
+        },
+        {
+          "name":"Devastate",
+          "cast":1.5,
+          "gcd":"Normal",
+          "cooldown":70,
+          "type":"direct",
+          "description":"Executes an arc sweeping blow. All of the enemies in the area receive the weapon damage.",
+          "mana":[140,170,200,230,260],
+          "damage":{
+            "Attack Damage":["60%","75%","90%","105%","120%"],
+            "Slashing":["120","140","160","180","200"]
+          }
+        },
+        {
+          "name":"Iron skin",
+          "type":"Passive",
+          "description":"The fighter has resistance against blunt damage.",
+          "buffs":{
+            "Blunt Resistance":["+5%","+6%","+7%","+8%","+10%"]
+          }
+        },
+        {
+          "name":"Fatal strike",
+          "cast":0,
+          "gcd":"Normal",
+          "cooldown":80,
+          "type":"Constant",
+          "duration":40,
+          "description":"A cut to the forehead fills with blood the opponent's vision.",
+          "mana":[198,219,240,261,282],
+          "damage":{
+            "Attack Damage":"100%"
+          },
+          "debuffs":{
+            "Protection":["-10%","-20%","-30%","-40%","-50%"]
+          }
+        },
+        {
+          "name":"Typhoon",
+          "cast":1.5,
+          "area":6.0,
+          "gcd":"Normal",
+          "cooldown":180,
+          "type":"Constant",
+          "description":"A 360 degree atack, destabilizes and damages the enemies that are next to the warrior.",
+          "mana":[380,410,440,470,500],
+          "duration":[1,2,3,4,5],
+          "damage":{
+            "Attack Damage":["80%","90%","100%","120%","150%"],
+            "Slashing":[50,100,150,200,250]
+          },
+          "debuffs": {
+            "Knock down":true
+          }
+        }
+       ]
+      },
+      "Blunt Weapons":{
+        "class":"Warrior",
+        "spells":[
+        {
+          "name":"Forceful blow",
+          "description":"A strong blow causes additional damage.",
+          "mana":[40,65,90,110,130],
+          "type":"Direct",
+          "cooldown":6,
+          "cast":0,
+          "gcd":"Normal",
+          "damage":{
+            "Attack damage":"100%",
+            "Blunt":["40-60", "60-100", "100-140", "140-180", "180-240"]
+          }
+        },
+        {
+          "name":"Brutal impacts",
+          "description":"Improves blunt damage while active.",
+          "mana":[60,80,100,120,140],
+          "type":"Constant",
+          "duration":90,
+          "cooldown":120,
+          "cast":0.0,
+          "gcd":"Short",
+          "buffs":{
+            "Blunt damage bonus":[ "+15", "+30", "+45", "+60", "+75" ]
+          }
+        },
+        {
+          "name":"Ribs breaker",
+          "description":"A blow to the ribs takes the air of the opponent lungs, he can't move.",
+          "mana":[90,100,110,120,130],
+          "type":"Constant",
+          "duration":[4,5,6,7,8],
+          "cooldown":40,
+          "cast":0.0,
+          "gcd":"Normal",
+          "debuffs":{
+            "Immobilize":true
+          },
+          "damage":{
+            "Blunt":[ "100-120", "150-170", "210-230", "275-295", "350-370" ]
+          }
+        },
+        {
+          "name":"Lethal anatomy",
+          "description":"The warrior is naturally strong and powerful.",
+          "type":"Passive",
+          "buffs":{
+            "Blunt damage bonus":[ "+3%", "+6%", "+9%", "+12%", "+15%" ]
+          }
+        },
+        {
+          "name":"Crushing",
+          "description":"Strong blow that breaks bones.",
+          "mana":[102,128,154,180,206],
+          "type":"Constant",
+          "duration":[10,14,18,23,30],
+          "cooldown":60,
+          "cast":0.0,
+          "gcd":"Normal",
+          "debuffs":{
+            "Constitution":["-5", "-10", "-15", "-20", "-25"]
+          },
+          "damage":{
+            "Attack damage":"+100%"
+          }
+        },
+        {
+          "name":"Execution",
+          "description":"The warrior fights seeking the way to counter the attacks more effectively.",
+          "mana":[180,220,260,290,330],
+          "type":"Constant",
+          "duration":[10,12,14,16,20],
+          "cooldown":200,
+          "cast":0,
+          "gcd":"Normal",
+          "buffs":{
+            "Critical hit chance":["+100%", "+175%", "+250%", "+375%", "+500%"]
+          }
+        },
+        {
+          "name":"Mind squasher",
+          "description":"Strong blow that removes positive effects that remain active on the target.",
+          "mana":[100,125,150,175,200],
+          "type":"Direct",
+          "cooldown":80,
+          "cast":0.0,
+          "gcd":"Normal",
+          "debuffs":{
+            "Dispel positive powers":[ "1", "1", "1", "2", "2" ],
+            "Dispel chance":[ "15%", "30%", "45%", "70%", "100%" ]
+          },
+          "damage":{
+            "Attack damage":"+100%"
+          }
+        },
+        {
+          "name":"Steel temper",
+          "description":"The warrior is resistant to piercing damage.",
+          "type":"Passive",
+          "buffs":{
+            "Resist piercing damage":[ "+5%", "+6%", "+7%", "8%", "10%" ]
+          }
+        },
+        {
+          "name":"Jaw breaker",
+          "description":"A blow to the jaw makes the opponent dizzy.",
+          "mana":[120,150,180,210,240],
+          "type":"Constant",
+          "duration":[2, 3, 4, 5, 6],
+          "cooldown":40,
+          "cast":0.0,
+          "gcd":"Normal",
+          "debuffs":{
+            "Dizzy":true
+          },
+          "damage":{
+            "Attack damage":"+100%"
+          }
+        },
+        {
+          "name":"Thunder strike",
+          "description":"The warrior strikes the floor with his weapon, making it tremble and affecting the surrounding area.",
+          "mana":[380,410,440,470,500],
+          "type":"Constant",
+          "duration":[1, 2, 3, 4, 5],
+          "cooldown":180,
+          "cast":1.5,
+          "gcd":"Normal",
+          "area":6,
+          "debuffs":{
+            "Stun":true
+          },
+          "damage":{
+            "Attack damage":[ "80%", "90%", "100%", "120%", "150%" ],
+            "Blunt":[ "50%", "100%", "150%", "200%", "250%" ]
+          }
+        }
+        ]
+      },
+      "Piercing Weapons":{
+        "class":"Warrior",
+        "spells":[
+        {
+          "name":"Gutting",
+          "description":"The weapon nails the opponent and reaps her appart, causing additional slashing damage.",
+          "mana":[40,65,90,110,130],
+          "type":"Direct",
+          "cooldown":6,
+          "cast":0.0,
+          "gcd":"Normal",
+          "range":0,
+          "buffs":{
+            "Attack damage":"100%"
+          },
+          "damage":{
+            "Piercing":["40", "70", "110", "140", "175"]
+          }
+        },
+        {
+          "name":"Agile maneuvers",
+          "description":"Improves piercing damage when active.",
+          "mana":[60,80,100,120,140],
+          "type":"Constant",
+          "duration":[90],
+          "cooldown":120,
+          "cast":0.0,
+          "gcd":"Short",
+          "buffs":{
+            "Piercing damage bonus":["+15", "+30", "+45", "+60", "+75"]
+          }
+        },
+        {
+          "name":"Balestra",
+          "description":"The warrior attacks swiftly and rapidly, getting ahead of her opponent actions.",
+          "mana":[100,120,140,160,180],
+          "type":"Constant",
+          "duration":[2,3,4,5,6],
+          "cooldown":40,
+          "cast":0.0,
+          "gcd":"Normal",
+          "range":0,
+          "buffs":{
+            "Immobilize":true
+          },
+          "damage":{
+            "Piercing damage":["90-110", "140-160", "200-220", "265-285", "340-360"]
+          }
+        },
+        {
+          "name":"Versatility",
+          "description":"The warrior combines agility with potency",
+          "type":"Passive",
+          "buffs":{
+            "Piercing damage bonus":["+2%", "+4%", "+6%", "+8%", "+10%"],
+            "Health recover per hit":["+4", "+4", "+6", "+6", "+10"]
+          }
+        },
+        {
+          "name":"Ripost",
+          "description":"The warrior takes advantage of an opponent's bad move, and strikes with lethal accuracy",
+          "mana":[80,95,110,125,140],
+          "type":"Direct",
+          "cooldown":30,
+          "cast":0.5,
+          "gcd":"Normal",
+          "range":0,
+          "buffs":{
+            "Attack damage":["+120%", "+130%", "+140%", "+150%", "+170%"]
+          }
+        },
+        {
+          "name":"Impale",
+          "description":"The spear crosses the opponent from side to side",
+          "mana":[125,150,175,200,225],
+          "type":"Constant",
+          "duration":[12,15,17,19,21],
+          "cooldown":60,
+          "cast":0.5,
+          "gcd":"Normal",
+          "range":8,
+          "buffs":{
+            "Attack damage":"+100%"
+          },
+          "debuffs":{
+            "Dexterity":["-15", "-19", "-23", "-27", "-35"]
+          },
+          "damage":{
+            "Piercing damage (5 ticks)":"80-125",
+            "Piercing damage":["80-100", "100-120", "120-150", "150-190", "190-220"]
+          }
+        },
+        {
+          "name":"Brain piercing",
+          "description":"Distracting attack that allows the interruption of power casting",
+          "mana":[120,150,180,210,250],
+          "type":"Constant",
+          "duration":[10,12,12,15,15],
+          "cooldown":10,
+          "cast":0.0,
+          "gcd":"Normal",
+          "range":0,
+          "damage":{
+            "Attack damage":"+100%"
+          },
+          "debuffs":{
+            "Cast speed":["-5%", "-9%", "-13%", "-17%", "-25%"],
+            "Concentration":["-0%", "-0%", "-0%", "-0%", "-50%"]
+         }
+        },
+        {
+          "name":"Bendable",
+          "description":"The warrior has resistance against slashing damage",
+          "type":"Passive",
+          "buffs":{
+            "Resist slashing damage":["+5%", "6%", "7%", "8%", "10%"]
+          }
+        },
+        {
+          "name":"Multiple thrust",
+          "description":"Multiple attacks strike in an arc area. Opponents in the area receive weapon damage",
+          "mana":[200,230,255,280,300],
+          "type":"Direct",
+          "cooldown":70,
+          "cast":1.5,
+          "gcd":"Normal",
+          "damage":{
+            "Piercing damage":[120, 140, 160, 180, 200]
+          },
+          "buffs":{
+            "Attack damage":["+60%", "+75%", "+90%", "+105%", "+120%"]
+          }
+        },
+        {
+          "name":"Lightning strike",
+          "description":"360-degree strike. Opponents in area receive damage.",
+          "mana":[380,410,440,470,500],
+          "type":"Direct",
+          "duration":[1,2,3,4,5],
+          "cooldown":180,
+          "cast":1.5,
+          "gcd":"Normal",
+          "area":6,
+          "buffs":{
+            "Attack damage":["+80%", "+90%", "+100%", "+120%", "+150%"],
+            "Piercing":["50", "100", "150", "200", "250"]
+          }
+        }
+        ]
+      },
+      "Tactics":{
+        "class":"Warrior",
+        "spells":[
+        {
+          "name":"Kick",
+          "description":"With a powerful kick, the enemy is thrown to the ground.",
+          "mana":[70,100,130,160,200],
+          "type":"Constant",
+          "duration":[2, 3, 4, 5, 6],
+          "cooldown":35,
+          "cast":0.0,
+          "gcd":"Normal",
+          "debuffs":{
+            "Knock down":true
+          },
+          "damage":{
+            "Blunt damage":["40-60", "80-120", "120-180", "160-240", "200-300"]
+          }
+        },
+        {
+          "name":"Caution",
+          "description":"The warrior watches his defenses.",
+          "mana":[100,120,140,160,180],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":80,
+          "cast":0.0,
+          "gcd":"Short",
+          "buffs":{
+            "Protection":["10%", "15%", "20%", "25%", "30%"]
+          }
+        },
+        {
+          "name":"Throat cutter",
+          "description":"Inflicts a lethal attack. The objective dies instantly.\n\nThe victim should not have health over:\nLevel 1:150\nLevel 2:275\nLevel 3:400\nLevel 4:525\nLevel 5:650",
+          "mana":[100,140,180,220,260],
+          "type":"Constant",
+          "cooldown":40,
+          "cast":0.0,
+          "gcd":"Normal"
+        },
+        {
+          "name":"Martial defense",
+          "description":"The warrior is trained in evasive techniques.\nReduce chances of receiving critical attacks.",
+          "type":"Passive",
+          "debuffs":{
+            "Target critical hit chance":[ "-10%", "-20%", "-30%", "-50%", "-70%" ]
+          }
+        },
+        {
+          "name":"Rigorous Preparation",
+          "description":"Resists next crowd control effect",
+          "mana":[100,120,140,160,180],
+          "type":"Constant",
+          "duration":[3, 6, 9, 12, 15],
+          "cooldown":90,
+          "cast":0.0,
+          "gcd":"Short",
+          "buffs":{
+            "Resists next crowd control effect":" "
+          }
+        },
+        {
+          "name":"Back slam",
+          "description":"A rapid fist slam to the face leaves the enemy dizzy.",
+          "mana":[120,145,170,195,220],
+          "type":"Constant",
+          "duration":15,
+          "cooldown":30,
+          "cast":0.0,
+          "gcd":"Short",
+          "debuffs":{
+            "Resist dizzy":["-10%", "-20%", "-30%", "-40%", "-50%"]
+          },
+          "damage":{
+            "Blunt":[ "160-200", "190-230", "220-260", "250-290", "280-320" ]
+          }
+        },
+        {
+          "name":"Onslaught",
+          "description":"The allies that hear the call win movement speed until their first attack. This attack receives a damage bonus by charge.",
+          "mana":[150, 190, 230, 270, 310],
+          "type":"Constant",
+          "duration":14,
+          "cooldown":60,
+          "cast":0.0,
+          "gcd":"Very Short",
+          "area":6,
+          "buffs":{
+            "Movement Speed":[ "+10%", "+15%", "+20%", "+25%", "+30%" ],
+            "Blunt damage bonus":[ "+50", "+75", "+100", "+125", "+150" ]
+          }
+        },
+        {
+          "name":"Intimidate",
+          "description":"The knight shouts a howl that slows his enemy.",
+          "mana":[80, 90, 110, 130, 150],
+          "type":"Constant",
+          "duration":[6, 7, 8, 9, 10],
+          "cooldown":6,
+          "cast":0.0,
+          "gcd":"Short",
+          "range":12,
+          "debuffs":{
+            "Movement speed": ["-6%", "-7%", "-8%", "-9%", "-10%"]
+          }
+        },
+        {
+          "name":"Disabling",
+          "description":"Strike to the opponent's leg that hinders her mobility.",
+          "mana":[200,220,240,260,280],
+          "type":"Constant",
+          "duration":40,
+          "cooldown":60,
+          "cast":0.0,
+          "gcd":"Normal",
+          "debuffs":{
+            "Protection":[ "-40%", "-47%", "-54%", "-61%", "-68%" ],
+            "Block chance":[ "-40%", "-45%", "-50%", "-55%", "-60%" ]
+          }
+        },
+        {
+          "name":"Martial reflexes",
+          "description":"The warrior increases twice the normal rate, her critical chance.",
+          "mana":[340,380,420,460,500],
+          "type":"Constant",
+          "duration":[30, 35, 40, 50, 70],
+          "cooldown":180,
+          "cast":1.5,
+          "gcd":"Short",
+          "buffs":{
+            "Critical hit chance":["+100%", "+200%", "+300%", "+400%", "+500%"],
+            "Resist stun":["5%", "10%", "15%", "20%", "25%"]
+          }
+        }
+        ]
+      },
+      "Warcries":{
+        "class":"Barbarian",
+        "spells":[
+        {
+          "name":"Colossus",
+          "description":"The barbarian is possessed by a rage she cannot control. She wins strength at the expense of health",
+          "mana":[50,80,110,130,150],
+          "type":"Constant",
+          "duration":40,
+          "cooldown":60,
+          "cast":0.0,
+          "gcd":"Short",
+          "buffs":{
+            "Strength":[ "+10%", "+20%", "+30%", "+40%", "+50%" ]
+          },
+          "debuffs":{
+            "Health":"-10%"
+          }
+        },
+        {
+          "name":"Frenzy",
+          "description":"The barbarian becomes frenzied, ignoring the real amount of damage she receives.",
+          "mana":[65,80,95,110,125],
+          "type":"Constant",
+          "duration":80,
+          "cooldown":90,
+          "cast":0.0,
+          "gcd":"Short",
+          "buffs":{
+            "Resist physical damage":[ "+5%", "+8", "+12%", "+16%", "+20%" ]
+          }
+        },
+        {
+          "name":"Off with their heads!!",
+          "description":"Gives damage bonus to any ally.",
+          "mana":[100,115,130,145,160],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":60,
+          "cast":0.0,
+          "gcd":"Very Short",
+          "area":10,
+          "buffs":{
+            "Damage Bonus":[ "+5%", "+7%", "+9%", "+12%", "+15%" ]
+          }
+        },
+        {
+          "name":"Threat",
+          "description":"The barbarian intimidates the opponent, that fights with increased miss chance.",
+          "mana":[60,70,80,90,100],
+          "type":"Constant",
+          "duration":30,
+          "cooldown":30,
+          "cast":0.0,
+          "gcd":"Normal",
+          "range":8,
+          "debuffs":{
+            "Opponent evade chance":["+20%", "+30%", "+40%", "+60%", "+80%"],
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "name":"Challenging Roar",
+          "description":"The barbarian gains confidence in frightening the opponent and improves her attacks.",
+          "mana":[65,80,95,110,125],
+          "type":"Constant",
+          "duration":40,
+          "cooldown":120,
+          "cast":0.0,
+          "gcd":"Short",
+          "buffs":{
+            "Casting speed":[ "+10%", "+15%", "+20%", "+25%", "+30%" ],
+            "Resist next crowd control effect":["0", "0" ,"0" ,"0" ,"+100%"]
+          }
+        },
+        {
+          "name":"Howl",
+          "description":"The barbarian screams, insults and howls. His opponents can't concentrate enough to use their powers.",
+          "mana":[150,180,210,240,270],
+          "type":"Constant",
+          "duration":[3,4,5,6,7],
+          "cooldown":60,
+          "cast":0.5,
+          "gcd":"Normal",
+          "area":6,
+          "debuffs":{
+            "Dizzy":true
+          }
+        },
+        {
+          "name":"Berserk",
+          "description":"Raging state in which the barbarian is not aware of anything but what she destroys.",
+          "mana":[100,130,160,180,200],
+          "type":"Constant",
+          "duration":90,
+          "cooldown":50,
+          "cast":0.0,
+          "gcd":"Short",
+          "buffs":{
+            "Damage Bonus":[ "+20%", "+28%", "+36%", "+42%", "+50%" ]
+          },
+          "debuffs":{
+            "Evade chance":"-100%"
+          }
+        },
+        {
+          "name":"Overwhelming strength",
+          "description":"The barbarian gets a damage bonus on all attacks.",
+          "type":"Passive",
+          "buffs":{
+            "Damage Bonus":[ "+5%", "+7%", "+9%", "+12%", "+15%" ]
+          }
+        },
+        {
+          "name":"Spring",
+          "description":"The warrior attacks and moves fast, staying away from damage.",
+          "mana":[100,120,140,160,180],
+          "type":"Constant",
+          "duration":10,
+          "cooldown":30,
+          "cast":0.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Movement speed":[ "+10%", "+15%", "+20%", "+25%", "+30%" ],
+            "Range received damage":["-15%", "-15%","-15%","-30%","-30%"]
+          }
+        },
+        {
+          "name":"Unstoppable Madness",
+          "description":"The barbarian enters a madness state in which he is almost immune to crowd control attempts.",
+          "mana":[220, 240, 260, 300, 340],
+          "type":"Constant",
+          "duration":[5, 6, 7, 8, 10],
+          "cooldown":40,
+          "cast":0.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Resist immobilize":[ "+75%", "+80%", "+85%", "+90%", "+100%" ],
+            "Resist knock":[ "+75%", "+80%", "+85%", "+90%", "+100%" ],
+            "Resist freeze":[ "+75%", "+80%", "+85%", "+90%", "+100%" ],
+            "Resist stun":[ "+75%", "+80%", "+85%", "+90%", "+100%"],
+            "Resist dizzy":[ "+75%", "+80%", "+85%", "+90%", "+100%" ],
+            "Resist cannot attack":[ "+75%", "+80%", "+85%", "+90%", "+100%" ]
+        }
+       }
+      ]
+      },
+      "Two Handed Mastery":{
+        "class":"Barbarian",
+        "spells":[
+        {
+          "name":"Thirst for blood",
+          "description":"The barbarian channels all her fury. Normal attacks receive a damage bonus that increments on every successful impact. Power wears off by duration and also when inflicting 5 Successful blows. Evaded and blocked attacks are not counted toward power expiration",
+          "mana":[80,120,160,200,240],
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":60.0,
+          "duration":45.0,
+          "buffs":{
+            "Attack Speed":["+5%","+7%","+9%","+12%","+15%"],
+            "Damage per impact":["+10","+20","+30","+40","+50"]
+          }
+        },
+        {
+          "name":"Spiritual blow",
+          "description":"The Barbarian extends an attack beyond her normal distance",
+          "mana":[80,110,140,170,200],
+          "type":"Constant",
+          "cast":0,
+          "gcd":"Normal",
+          "cooldown":30.0,
+          "range":8.0,
+          "duration":30.0,
+          "buffs":{
+            "Attack damage":["+40%","+55%","+70%","+85%","+100%"]
+          },
+          "debuffs":{
+            "Concentration":["-15%","-20%","-25%","-30%","-35%"]
+          }
+        },
+        {
+          "name":"Rend",
+          "description":"Tears away the target's flesh. The opponent keeps on bleeding.",
+          "mana":[120,150,180,210,240],
+          "type":"Direct",
+          "cooldown":30.0,
+          "cast":0.5,
+          "gcd":"Normal",
+          "range":0.0,
+          "debuffs":{
+            "Mana":["-20%","-25%","-30%","-35%","-40%"]
+          },
+          "damage":{
+            "Attack Damage":"+100%"
+          }
+        },
+        {
+          "name":"Beast attack",
+          "description":"A strike made with might deals a great amount of damage and shocks the opponent",
+          "mana":[160,190,220,250,280],
+          "type":"Constant",
+          "duration":[3, 4, 5, 6, 7],
+          "cooldown":45,
+          "cast":0.0,
+          "gcd":"Normal",
+          "range":0,
+          "debuffs":{
+            "Dizzy (chance 50%)":true
+          },
+          "damage":{
+            "Attack damage":["+40/50%","+65/75%","+90/100%","+115/125%","140/150%"]
+          }
+        },
+        {
+          "name":"Deafening roar",
+          "description":"A powerful roar affects everyone who crosses its path",
+          "mana":[100,130,160,190,220],
+          "type":"Constant",
+          "duration":[4, 5, 6, 7, 8],
+          "cooldown":40,
+          "cast":0.5,
+          "gcd":"Normal",
+          "debuffs":{
+            "Stun":true
+          }
+        },
+        {
+          "name":"Expansive wave",
+          "description":"An energy wave is created with the weapon. It makes blunt damage to all opponents in an arc area.",
+          "mana":[200,240,280,320,360],
+          "type":"Direct",
+          "cooldown":45,
+          "cast":1.5,
+          "gcd":"Normal",
+          "damage":{
+            "Blunt damage":["80-100","130-160","180-210","230-260","280-310"],
+            "Attack damage":["+20%","+40%","+60%","+80%","+100%"]
+          }
+        },
+        {
+          "name":"Destabilize",
+          "description":"The barbarian reduces opponent evade chances by destabilizing her",
+          "mana":[65,80,95,110,125],
+          "type":"Constant",
+          "duration":60,
+          "cooldown":15,
+          "cast":0.0,
+          "gcd":"Normal",
+          "range":0,
+          "debuffs":{
+            "Evade Chance":["-10%","-20%","-30%","-40%","-50%"]
+          },
+          "damage":{
+            "Attack damage":"+100%"
+          }
+        },
+        {
+          "name":"Fulminating",
+          "description":"The barbarian raises his damage significantly for a very short period of time.",
+          "mana":[160,180,200,220,240],
+          "type":"Constant",
+          "duration":5,
+          "cooldown":20,
+          "cast":0.5,
+          "gcd":"Very Long",
+          "buffs":{
+            "Damage bonus":["+10%", "+20%", "+30%", "+40%", "+50%"],
+            "Cannot cast area spells":true
+          }
+        },
+        {
+          "name":"Rage of the earth",
+          "description":"A mighty blow on the earth provokes a tremor. Opponents in its path are damaged and knocked down",
+          "mana":[190,230,270,310,350],
+          "type":"Constant",
+          "duration":[2,3,4,5,6],
+          "cooldown":90,
+          "cast":0.5,
+          "gcd":"Normal",
+          "debuffs":{
+            "Knock down":true
+          },
+          "damage":{
+            "Blunt":["120-200","170-275","220-350","270-425","320-500"]
+          }
+        },
+        {
+          "name":"Whirlwind",
+          "description":"Continuous 360 degree strike. The Barbarian can move while using this power",
+          "mana":[290,310,330,350,370],
+          "type":"Aura",
+          "duration":10,
+          "cooldown":180,
+          "cast":1.5,
+          "gcd":"Normal",
+          "area":6,
+          "damage":{
+            "Slash":[50,75,100,125,150],
+            "Health":[-25,-40,-55,-70,-100]
+          }
+        }
+        ]
+      },
+      "Barbarian WM":{
+        "class":"Barbarian",
+        "spells":[
+        {
+          "name":"undefined",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"War Council",
+          "description":"The Warmaster learns a war language that allows her to communicate with her status in secret.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "War chat":true
+          }
+        },
+        {
+          "name":"undefined2",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster Beacon",
+          "description":"Places a beacon on the ground. Allies interacting with it will receive Warmaster's Defensive Blessing, which raises the maximum health.",
+          "mana":150,
+          "type":"Direct",
+          "cast":0.3,
+          "gcd":"Very Short",
+          "cooldown":600.0,
+          "duration":60,
+          "buffs":{
+            "Health for allies":"+2000"
+          }
+        },
+        {
+          "name":"undefined3",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster's Might",
+          "description":"The Warmaster enhances his class main attribute.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "Class Attribute":"+15%"
+          }
+        },
+        {
+          "name":"undefined4",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Heroic Shout",
+          "description":"A powerful shout intimidates all near-by opponents, reducing their movement speed.",
+          "mana":150,
+          "type":"Constant",
+          "cast":0.5,
+          "gcd":"Normal",
+          "cooldown":30.0,
+          "duration":5.0,
+          "area":6.0,
+          "buffs":{
+            "Movement speed":"-25%"
+          }
+        },
+        {
+          "name":"undefined5",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster Blood",
+          "description":"The Warmaster athletic capabilities increase due to long years of training.",
+          "type":"Passive",
+          "gcd":"Normal",
+          "buffs":{
+            "Health":"+700"
+          }
+        }
+        ]
+      },
+      "Vanguard":{
+        "class":"Knight",
+        "spells":[
+        {
+          "name":"Challenge",
+          "description":"The taunted enemy loses focus and makes mistakes.",
+          "mana":[50, 75, 100, 125, 150],
+          "type":"Constant",
+          "duration":[5, 5, 10, 10, 15],
+          "cooldown":15.0,
+          "cast":1.0,
+          "gcd":"Short",
+          "range":25,
+          "debuffs":{
+            "Opponent resistance to knock down":["-20%", "-40%", "-60%", "-80%", "-100%"],
+            "Opponent concentration":["-10%", "-15%", "-20%", "-25%", "-30%"],
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "name":"Taunt",
+          "description":"Makes the monster angry, increasing her aggressiveness towards the knight and reducing its protection drastically. A pet or summoning under the effect of this spell will stop obeying its master. The creature will become wild until the effect wears off. Dispel magic may return control to its owner.",
+          "mana":[50, 65, 80, 95, 110],
+          "type":"Constant",
+          "duration":[20, 25, 30, 35, 40],
+          "cooldown":20.0,
+          "cast":0.5,
+          "gcd":"Short",
+          "range":25.0,
+          "debuffs":{
+            "Increase aggressiveness":[150, 300, 500, 1000, 1500],
+            "Protection":["-40%", "-50%", "-60%", "-70%", "-80%"]
+          }
+        },
+        {
+          "name":"Feint",
+          "description":"Misleading maneuver.",
+          "mana":[70,90,110,130,150],
+          "type":"Constant",
+          "duration":[2, 3, 4, 5, 6],
+          "cooldown":35,
+          "cast":0.0,
+          "gcd":"Normal",
+          "range":0,
+          "debuffs":{
+            "Knock down":["2s", "3s", "4s", "5s", "6s,"],
+            "Only blockable at 100%":true
+          }
+        },
+        {
+          "name":"Protector Temple",
+          "description":"The knight is used to endure damage.",
+          "type":"Passive",
+          "buffs":{
+            "Constitution":["+5", "+7", "+9", "+12", "+15"],
+            "Resist magical damage":["+2%", "+4%", "+6%", "+8%", "+10%"],
+            "Resist physical damage":["+2%", "+4%", "+6%", "+8%", "+10%"]
+          }
+        },
+        {
+          "name":"Offensive stance",
+          "description":"The knight focuses his mind in maximizing the damage caused to his enemies. The power can be deactivated.",
+          "type":"Activable",
+          "cooldown":10,
+          "cast":0.5,
+          "gcd":"Very short",
+          "buffs":{
+            "Damage bonus": [ "+5%", "+10%", "+15%", "+20%", "+25%" ]
+          },
+          "debuffs":{
+            "Protection": "-95%",
+            "Evade chance": "-100%"
+          }
+        },
+        {
+          "name":"Defensive Support",
+          "description":"The warrior adopts a tactic defense against crowd control effects, but moves more slowly.",
+          "mana":[105, 120, 135, 150, 165],
+          "type":"Constant",
+          "duration":40,
+          "cooldown":30.0,
+          "cast":1.5,
+          "gcd":"Short",
+          "buffs":{
+            "Resist dizzy":["+25%", "+35%", "+45%", "+55%", "+65%"],
+            "Resist stun":["+25%", "+35%", "+45%", "+55%", "+65%"],
+            "Resist knock":["+25%", "+35%", "+45%", "+55%", "+65%"],
+            "Resist freeze":["+25%", "+35%", "+45%", "+55%", "+65%"]
+          },
+          "debuffs":{
+            "Movement speed":"-10%"
+          }
+        },
+        {
+          "name":"Troll's skin",
+          "description":"The knight's built constitution allows him to receive more strikes without being beaten.",
+          "mana":[100, 130, 160, 190, 210],
+          "type":"Constant",
+          "duration":240,
+          "cooldown":270,
+          "cast":1.0,
+          "gcd":"Normal",
+          "range":0,
+          "buffs":{
+            "Health":[150, 225, 300, 375, 450]
+          }
+        },
+        {
+          "name":"Knight's Haste",
+          "description":"The knight moves extremely fast for a very short duration, providing higher chances of helping an ally in need or to hunt down a foe.",
+          "mana":[50, 80, 110, 140, 170],
+          "type":"Constant",
+          "cast":0.0,
+          "cooldown":100,
+          "gcd":"Very Short",
+          "buffs":{
+            "Movement speed":["+5%", "+10%", "+15%", "+20%", "+50%"],
+            "Duration":["4s", "4s", "4s", "4s", "4s"]
+          }
+        },
+        {
+          "name":"Heroic presence",
+          "description":"The knight confers protective tactical abilities to any ally that is within his area of influence.",
+          "mana":[320, 340, 360, 380, 400],
+          "type":"Aura",
+          "duration":60,
+          "cooldown":90,
+          "cast":1.5,
+          "gcd":"Very Short",
+          "area":6,
+          "buffs":{
+            "Protection":["+40%", "+50%", "+60%", "+70%", "+80%"]
+          }
+        },
+        {
+          "name":"Army of one",
+          "description":"The knight is almost immune to damage.",
+          "mana":[220, 240, 260, 280, 300],
+          "type":"Constant",
+          "duration":20,
+          "cooldown":50,
+          "cast":0.5,
+          "gcd":"Long",
+          "buffs":{
+            "Resist magical damage":["+40%", "+50%", "+60%", "+70%", "+80%"],
+            "Resist physical damage":["+40%", "+50%", "+60%", "+70%", "+80%"]
+          }
+        }
+        ]
+      },
+      "Shields":{
+        "class":"Knight",
+        "spells":[
+        {
+          "name":"Block",
+          "description":"The knight earns 100% of blocking chances.",
+          "mana":[60, 80, 100, 120, 140],
+          "type":"Constant",
+          "duration":[12, 15, 18, 21, 25],
+          "cooldown":50.0,
+          "cast":0.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Block Chance":"+150%"
+          }
+        },
+        {
+          "name":"Shield bash",
+          "description":"A rapid shield strike damages the opponent, making her dizzy.",
+          "mana":[110, 135, 160, 175, 190],
+          "type":"Constant",
+          "duration":[3, 4, 5, 6, 7],
+          "cooldown":45.0,
+          "cast":0.0,
+          "gcd":"Normal",
+          "range":2,
+          "debuffs":{
+            "Dizzy":true
+          },
+          "damage":{
+            "Blunt":["80-120", "160-210", "260-320", "380-460", "540-640"]
+          }
+        },
+        {
+          "name":"Protect ally",
+          "description":"Dispels crowd control active effects on the an ally.",
+          "mana":[130, 150, 170, 190, 210],
+          "type":"Direct",
+          "cooldown":30.0,
+          "cast":0.0,
+          "gcd":"Short",
+          "range":2.0,
+          "buffs":{
+            "Health (chance)": [ "+100 - 30%chance", "+110 - 45%chance", "+120 - 60%chance", "+130 - 80%chance", "+150 - 100%chance"],
+            "Dispel": ["freeze", "freeze / stun", "freeze / immobilize / stun", "freeze / immobilize / stun / knock down", "negative powers"]
+          }
+        },
+        {
+          "name":"Precise block",
+          "description":"The knight blocks all attacks and spells.",
+          "mana":[80, 100, 120, 140, 160],
+          "type":"Constant",
+          "duration":[4, 5, 6, 7, 9],
+          "cooldown":30,
+          "cast":0.0,
+          "gcd":"Very Short",
+          "buffs":{
+            "Absolute block chance":"100%"
+          },
+          "debuffs": {
+            "Stop on move":true,
+            "Cannot attack": true
+          }
+        },
+        {
+          "name":"Defensive stance",
+          "description":"The knight focuses his mind in minimizing the damage from enemies. The power can be deactivated.",
+          "type":"Activable",
+          "cooldown":10,
+          "cast":0.5,
+          "gcd":"Very short",
+          "buffs":{
+            "Resist damage":[ "+20%", "+25%", "+30%", "+35%", "+40%" ]
+          },
+          "debuffs":{
+            "Cannot cast damaging powers":true,
+            "Damage bonus":"-90%"
+          }
+        },
+        {
+          "name":"Ethereal mantle",
+          "description":"The knight can shield one ally against magic damage.",
+          "mana":[200, 230, 260, 290, 320],
+          "type":"Constant",
+          "duration":60.0,
+          "cooldown":120.0,
+          "cast":0.5,
+          "gcd":"Very Short",
+          "range":2.0,
+          "buffs":{
+            "Resist magical damage":["+10%", "+15%", "+20%", "+25%", "+30%"],
+            "Resist physical damage":["+10%", "+15%", "+20%", "+25%", "+30%"]
+          }
+        },
+        {
+          "name":"Shield wall",
+          "description":"The knight shields the allies against physical damage.",
+          "mana":[200,225,250,275,300],
+          "type":"Constant",
+          "duration":10.0,
+          "cooldown":40.0,
+          "cast":0.0,
+          "gcd":"Short",
+          "area":10.0,
+          "buffs":{
+            "Resist physical damage":["+10%", "+20%", "+30%", "+40%", "+50%"]
+          }
+        },
+        {
+          "name":"Steadiness",
+          "description":"The knight walks straight and grips to the floor. Reducing falling chances.",
+          "type":"Passive",
+          "buffs":{
+            "Resist knock":["+5%", "+10%", "+15%", "+20%", "+25%"]
+          }
+        },
+        {
+          "name":"Stars shield",
+          "description":"The knight grants a protection aura against magical damage to the allies in the area.",
+          "mana":[200,225,250,275,300],
+          "type":"Constant",
+          "duration":10,
+          "cooldown":40,
+          "cast":0.0,
+          "gcd":"Short",
+          "area":10.0,
+          "buffs":{
+            "Resist magical damage":["+10%", "+20%", "+30%", "+40%", "+50%"]
+          }
+        },
+        {
+          "name":"Deflecting barrier",
+          "description":"The knight shields the allies in the rear against received ranged attacks. Reduces damage substantially.",
+          "mana":[250, 300, 350, 400, 450],
+          "type":"Aura",
+          "duration":120,
+          "cooldown":180,
+          "cast":1.0,
+          "gcd":"Short",
+          "area":6,
+          "buffs":{
+            "Damage received":["-10%", "-15%", "-20%", "-30%", "-40%"]
+          }
+        }
+        ]
+      },
+      "Knight WM":{
+        "class":"Knight",
+        "spells":[
+        {
+          "name":"undefined",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"War Council",
+          "description":"The Warmaster learns a war language that allows her to communicate with her status in secret.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "War chat":true
+          }
+        },
+        {
+          "name":"undefined2",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Paladin's Aid",
+          "description":"Thanks to the warring devotion, the Warmasters receives all of the attacks directed to the ally.",
+          "mana":200,
+          "type":"Constant",
+          "cast":0.0,
+          "gcd":"Very Short",
+          "cooldown":40.0,
+          "duration":8.0,
+          "buffs":{
+            "Absorb all attacks received on targeted ally":true
+          }
+          },
+        {
+          "name":"undefined3",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster's Might",
+          "description":"The Warmaster enhances his class main attribute.",
+          "type":"Passive",
+          "gcd":"Short",
+          "buffs":{
+            "Class Attribute":"+15%"
+          }
+        },
+        {
+          "name":"undefined4",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Blessed",
+          "description":"Thanks to his/her devotion the Warmaster receives a blessing to health.",
+          "mana":250,
+          "type":"Direct",
+          "cast":1.0,
+          "gcd":"Short",
+          "cooldown":90.0,
+          "duration":1.0,
+          "buffs":{
+            "Health":"+200"
+            }
+          },
+        {
+          "name":"undefined5",
+          "description":"undefined",
+          "mana":0,
+          "cast":0.0,
+          "gcd":"Short",
+          "cooldown":0.0,
+          "range":0.0
+        },
+        {
+          "name":"Warmaster Blood",
+          "description":"The Warmaster athletic capabilities increase due to long years of training.",
+          "type":"Passive",
+          "gcd":"Normal",
+          "buffs":{
+            "Health":"+350"
+          }
+        }
+        ]
+      }
+    }
+}
