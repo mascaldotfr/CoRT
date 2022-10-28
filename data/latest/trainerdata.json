@@ -148,7 +148,9 @@
           "gcd":"Short",
           "cooldown":30.0,
           "duration":[8,9,10,11,12],
-          "damage":[20,30,40,50,60]
+          "damage":{
+             "Raw damage": [20,30,40,50,60]
+          }
         },
         {
           "id":152,
@@ -156,7 +158,7 @@
           "description":"The archer is adept at firing rapidly and with precision.",
           "type":"Passive",
           "buffs":{
-            "Crit Chance":["+10%","+13%","+16%","+20%","+25%"]
+            "Critical Chance":["+10%","+13%","+16%","+20%","+25%"]
           }
         },
         {
@@ -175,7 +177,6 @@
             "Opponent damage":["-2%","-4%","-6%","-8%","-10%"],
             "Movement speed":["-5%","-7%","-9%","-12%","-15%"]
           }
-
         },
         {
           "id":154,
@@ -209,7 +210,7 @@
           "damage":{
             "Attack damage":["100%","105%","110%","120%","135%"]
           },
-	 "buffs":{
+          "buffs":{
             "Only blockable at 100%":true
           }
         },
@@ -358,7 +359,7 @@
           "range":12.0,
           "debuffs":{
             "Knock down":true,
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -547,7 +548,7 @@
         {
           "id":195,
           "name":"Cat reflexes",
-          "description":"The archer enhaces its reflexes for a mayor capacity to elude attacks.",
+          "description":"The archer enhances their reflexes for a mayor capacity to elude attacks.",
           "type":"Passive",
           "buffs":{
             "Evade chance":["+5%","+10%","+15%","+20%","+25%"]
@@ -646,7 +647,7 @@
           "cast":0.5,
           "gcd":"Short",
           "cooldown":8.0,
-	  "duration":7.0,
+          "duration":7.0,
           "range":0.0,
           "damage":{
             "Attack damage":["60%","70%","80%","90%","100%"],
@@ -694,7 +695,7 @@
         {
           "id":209,
           "name":"Camouflage",
-          "description":"The hunter merges with the surroundings.While the effect is active, the hunter causes an extra damage in his first attack.\n\nThe hunter loses control of his pet when launching this power.",
+          "description":"The hunter merges with the surroundings. While the effect is active, the hunter causes an extra damage in his first attack.\n\nThe hunter loses control of his pet when launching this power.",
           "mana":[300,325,350,375,400],
           "type":"Constant",
           "cast":4.5,
@@ -719,7 +720,7 @@
           "range":6,
           "buffs":{
             "Mana regeneration":[ "+5%", "+10%", "+20%", "+25%", "+40%" ],
-	"Dexterity":[ "+3", "+6", "+9", "+12", "+15" ]
+            "Dexterity":[ "+3", "+6", "+9", "+12", "+15" ]
           }
         },
         {
@@ -762,7 +763,7 @@
           "range":25.0,
           "debuffs":{
             "Cannot cast non-damaging powers":true,
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -813,14 +814,14 @@
           "cooldown":60.0,
           "buffs":{
             "Health":["+250","+350","+600","+1000","+1400"],
-	"Only resistible at 100%":true
+            "Only resistible at 100%":true
           }
         },
         {
           "id":217,
           "name":"Wild Defence",
           "description":"Part of the damage received by the hunter is redirected to the pet.",
-	"mana":["75","100","125","150","175"],
+          "mana":["75","100","125","150","175"],
           "type":"Constant",
           "cast":1.0,
           "gcd":"Short",
@@ -840,7 +841,7 @@
           "cooldown":20.0,
           "buffs":{
             "Pet Attack Damage":"-25%",
-	"Attack range":["+2%", "+4%", "+6%", "+10%", "+15%"]
+            "Attack range":["+2%", "+4%", "+6%", "+10%", "+15%"]
           }
         },
         {
@@ -898,11 +899,11 @@
           "mana":[120,210,300,390,480],
           "cooldown":180.0,
           "cast":2.0,
-	"area":10,
+          "area":10,
           "gcd":"Short",
           "buffs":{
             "Piercing Damage":[125,200,290,395,500],
-	"Fire Damage":[125,200,290,395,500],
+            "Fire Damage":[125,200,290,395,500],
             "Knock down":3
           }
         },
@@ -1005,7 +1006,7 @@
           "area":10.0,
           "buffs":{
             "Weapon damage bonus":"+10%"
-            }
+           }
         },
         {
           "name":"undefined5",
@@ -1024,7 +1025,7 @@
           "buffs":{
             "Health":"+500"
           }
-        }        
+        }
         ]
       },
       "Arrow Mastery":{
@@ -1041,7 +1042,7 @@
           "cooldown":15.0,
           "debuffs":{
             "Health per arrow":[10,15,20,25,30],
-	          "Mana per arrow":[20,25,30,35,40]
+            "Mana per arrow":[20,25,30,35,40]
           },
           "buffs":{
             "Weapon damage bonus":["+20%","+25%","+30%","+35%","+40%"]
@@ -1061,9 +1062,9 @@
           "debuffs":{
             "Freeze":true
           },
-	          "damage":{
+          "damage":{
               "Ice damage":["60", "170", "280", "390", "500"]
-        }
+          }
       },
         {
           "id":338,
@@ -1132,7 +1133,7 @@
           "gcd":"Short",
           "cooldown":25.0,
           "damage":{
-	"Attack damage":"+100%",
+            "Attack damage":"+100%",
             "Slashing":["90-120","180-230","270-340","360-450","450-560"]
           }
         },
@@ -1164,7 +1165,7 @@
           "area":6.0,
           "range":0.0,
           "damage":{
-	          "Attack damage":"+100%",
+           "Attack damage":"+100%",
             "Fire":["250-300","300-350","350-400","400-450","500-600"]
           }
         },
@@ -1218,7 +1219,7 @@
           "cast":0.0,
           "gcd":"Short",
           "cooldown":70.0,
-	"Duration":"30s",
+          "duration":30.0,
           "buffs":{
             "Attack Range":["+2%","+4%","+6%","+8%","+10%"]
           },
@@ -1241,7 +1242,7 @@
           "debuffs":{
             "Opponent critical hit chance":["-12%","-16%","-20%","-24%","-28%"],
             "Opponent attack speed":["-6%","-8%","-10%","-12%","-15%"],
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -1270,7 +1271,7 @@
           },
           "debuffs":{
             "Critical chance reduction":["-20%","-30%","-40%","-50%","-75%"],
-	"Attack range reduction":["-2%","-4%","-7%","-10%","-15%"]
+            "Attack range reduction":["-2%","-4%","-7%","-10%","-15%"]
           }
         },
         {
@@ -1384,7 +1385,7 @@
           "cooldown":30.0,
           "range":20.0,
           "buffs":{
-            "Dispel freez":true,
+            "Dispel freeze":true,
             "Only resistible at 100%":true,
             "Only blockable at 100%":true
             }
@@ -1400,7 +1401,7 @@
         },
         {
           "name":"Warmaster's Might",
-          "description":"The Warmaster enhaces his class main attribute.",
+          "description":"The Warmaster enhances his class main attribute.",
           "type":"Passive",
           "gcd":"Short",
           "buffs":{
@@ -1428,11 +1429,11 @@
           "buffs":{
             "Attack range":"+15%",
             "Opponent evade chance":"-100%"
-            },
-            "debuffs": {
-              "Movement speed": "-15%"
-            }
           },
+          "debuffs": {
+              "Movement speed": "-15%"
+          }
+        },
         {
           "name":"undefined5",
           "description":"undefined",
@@ -1450,7 +1451,7 @@
           "buffs":{
             "Health":"+500"
           }
-        }        
+        }
         ]
       },
       "Mental":{
@@ -1540,7 +1541,7 @@
           "range":12.0,
           "debuffs":{
             "Knock down":true,
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -1555,7 +1556,7 @@
           "range":25.0,
           "debuffs":{
             "Dizzy":true,
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -1584,8 +1585,8 @@
           "area":10.0,
           "debuffs":{
             "Movement speed":[ "-10%", "-20%", "-30%", "-40%", "-50%" ],
-	"Attack speed":[ "-10%", "-20%", "-30%", "-40%", "-50%" ],
-	"Cast speed":[ "-10%", "-20%", "-30%", "-40%", "-50%" ]
+            "Attack speed":[ "-10%", "-20%", "-30%", "-40%", "-50%" ],
+            "Cast speed":[ "-10%", "-20%", "-30%", "-40%", "-50%" ]
           }
         },
         {
@@ -1603,7 +1604,9 @@
             "Slashing (per second)":[ 33, 42, 50, 58, 70],
             "Blunt (per second)":[ 33, 42, 50, 58, 70]
           },
-	"Regenerate health":"-100%"
+          "debuffs":{
+            "Regenerate health":[ "-15%", "-30%", "-45%", "-60%", "-100%" ]
+          }
         }
         ]
       },
@@ -1886,7 +1889,7 @@
           "debuffs":{
             "Opponent damage":[ "-2%", "-4%", "-6%", "-8%", "-10%" ],
             "Opponent critical hit chance":[ "-10%", "-15%", "-20%", "-25%", "-30%" ],
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -1915,7 +1918,7 @@
           "range":25.0,
           "debuffs":{
             "Opponent evasion chance":[ "+50%", "+50%", "+50%", "+50%", "+50%" ],
-	"Resist dizzy":["-10%", "-15%", "-20%", "-25%", "-30%"]
+            "Resist dizzy":["-10%", "-15%", "-20%", "-25%", "-30%"]
           }
         },
         {
@@ -1923,7 +1926,7 @@
           "description":"The target increases her attack, damage and critical chance while the blessing is active.",
           "mana":[ 40, 60, 80, 100, 120 ],
           "type":"Constant",
-          "duration":[30, 60, 90, 120, 150],  
+          "duration":[30, 60, 90, 120, 150],
           "cooldown":15,
           "cast":1.0,
           "gcd":"Very Short",
@@ -2000,7 +2003,7 @@
           "range":25.0,
           "debuffs":{
             "Class attribute":[ "-10%", "-15%", "-20%", "-25%", "-30%"],
-	"Movement speed":[ "-2%", "-4%", "-6%", "-8%", "-10%"]
+            "Movement speed":[ "-2%", "-4%", "-6%", "-8%", "-10%"]
           }
         },
         {
@@ -2157,10 +2160,10 @@
           "gcd":"Very Long",
           "area":6,
           "buffs":{
-	"Resurrection Dizziness":true,
+            "Resurrection Dizziness":true,
             "Revive":true,
             "Health":["+500", "+600", "+700", "+800", "+1000"],
-"Sanctuary":"starting level 5 - 8s"
+            "Sanctuary":"starting level 5 - 8s"
           }
         }
         ]
@@ -2247,7 +2250,7 @@
           "cooldown":120,
           "cast":10.0,
           "gcd":"Normal",
-	"buffs":{
+          "buffs":{
             "Summon":[ "Tiny Stone Golem", "Small Magma Golem", "Crystal Golem", "Large Fire Golem", "Enormous Metal Golem"]
           }
 
@@ -2282,7 +2285,7 @@
           "cooldown":60,
           "cast":3.0,
           "gcd":"Normal",
- "buffs":{
+          "buffs":{
             "Summon":[ "Old Lich", "Lich Apprentice", "Lich Necromancer", "Lord Lich", "Lich Shaman" ]
           }
 
@@ -2317,7 +2320,7 @@
           "buffs":{
             "Ranged received damage":"starting level 5  -10%"
           },
-	"debuffs":{
+          "debuffs":{
             "Opponent attack speed":["-3%", "-6%", "-9%", "-12%", "-15%"]
           }
         },
@@ -2348,7 +2351,7 @@
             "Resist freeze":[ "+20%", "+25%", "+30%", "+35%", "+40%" ],
             "Resist stun":[ "+20%", "+25%", "+30%", "+35%", "+40%" ],
             "Resist knock":[ "+20%", "+25%", "+30%", "+35%", "+40%" ],
-	"Cannot cast damaging powers":true
+            "Cannot cast damaging powers":true
           }
         },
         {
@@ -2527,7 +2530,7 @@
           "buffs":{
             "Health":"+700"
           }
-        }      
+        }
         ]
       },
       "Arcania":{
@@ -2543,8 +2546,8 @@
           "gcd":"Very Short",
           "range":25.0,
           "damage":{
-            "Pierce":["100","150","200","250","400"],
-	"Ice":["100","150","200","250","400"]
+            "Piercing":["100","150","200","250","400"],
+            "Ice":["100","150","200","250","400"]
           }
         },
         {
@@ -2588,7 +2591,7 @@
           "range":25.0,
           "debuffs":{
             "Weapon damage bonus":["-30%","-40%","-50%","-60%","-70%"],
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -2647,7 +2650,7 @@
           "range":30.0,
           "debuffs":{
             "Resist physical damage":["5%","-10%","-15%","-20%","-25%"],
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
 
@@ -2732,7 +2735,7 @@
           },
           "debuffs":{
             "Concentration":[ "-10", "-15", "-20", "-25", "-30" ],
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -2755,8 +2758,8 @@
           "range":25.0,
           "debuffs":{
             "Resistance to knock down and stun":[ "-100%", "-100%", "-100%", "-100%", "-100%" ],
-	"Only blockable at 100%":true,
-	"Only resistible at 100%":true
+            "Only blockable at 100%":true,
+            "Only resistible at 100%":true
           }
         },
         {
@@ -2801,8 +2804,8 @@
           "range":2.0,
           "buffs":{
             "Cremate corpse (chance)":[ "15%", "40%", "65%", "85%", "100%" ],
-	"Only resistible at 100%":true,
-	"Only blockable at 100%":true
+            "Only resistible at 100%":true,
+            "Only blockable at 100%":true
           }
         },
         {
@@ -2865,7 +2868,7 @@
           "damage":{
             "Ice":[ "70-100", "90-120", "100-140", "130-160", "170-200" ]
           },
-	"debuffs":{
+          "debuffs":{
             "Movement speed":["-5%", "-10%", "-15%", "-20%", "-30%"]
           }
         },
@@ -2937,7 +2940,7 @@
           "range":25.0,
           "debuffs":{
             "Resist magical damage":[ "-10%", "-12%", "-14%", "-17%", "-21%" ],
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           },
           "damage":{
             "Fire protection":[ "-20%", "-25%", "-30%", "-35%", "-40%" ],
@@ -3036,7 +3039,7 @@
           "gcd":"Very Short",
           "cooldown":1200.0,
           "duration":15.0
-          },
+        },
         {
           "name":"undefined3",
           "description":"undefined",
@@ -3077,8 +3080,8 @@
           "damage":{
             "Piercing":"+750",
             "Immobilise":true
-            }
-          },
+          }
+        },
         {
           "name":"undefined5",
           "description":"undefined",
@@ -3096,7 +3099,7 @@
           "buffs":{
             "Health":"+700"
           }
-        }      
+        }
         ]
       },
       "Slashing Weapons":{
@@ -3139,7 +3142,7 @@
           "mana":[84, 111, 138, 165, 192],
           "debuffs":{
             "Movement Speed":["-10%","-15%","-20%","-26%","-33%"],
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -3148,7 +3151,7 @@
           "description":"The fighter is naturally agile.",
           "buffs":{
             "Slashing damage":["+2%","+4%","+6%","+8%","+10%"],
-	"Mana recover per hit":["+4","+4","+6","+6","+10%"]
+            "Mana recover per hit":["+4","+4","+6","+6","+10%"]
           }
         },
         {
@@ -3178,8 +3181,8 @@
           },
           "debuffs":{
             "Evade Chance":["-50%","-60%","-70%","-80%","-100%"],
-	"Resist stun":["-10%","-15%","-20%","-25%","-30%"],
-	"Only resistible at 100%":true
+            "Resist stun":["-10%","-15%","-20%","-25%","-30%"],
+            "Only resistible at 100%":true
           }
         },
         {
@@ -3200,7 +3203,7 @@
           "type":"Passive",
           "description":"The fighter has resistance against blunt damage.",
           "buffs":{
-            "Blunt Resist":["+5%","+6%","+7%","+8%","+10%"]
+            "Blunt Resistance":["+5%","+6%","+7%","+8%","+10%"]
           }
         },
         {
@@ -3222,7 +3225,7 @@
         {
           "name":"Typhoon",
           "cast":1.5,
-	"area":6.0,
+          "area":6.0,
           "gcd":"Normal",
           "cooldown":180,
           "type":"Constant",
@@ -3237,7 +3240,7 @@
             "Knock down":true
           }
         }
-	]
+       ]
       },
       "Blunt Weapons":{
         "class":"Warrior",
@@ -3376,7 +3379,7 @@
           },
           "damage":{
             "Attack damage":[ "80%", "90%", "100%", "120%", "150%" ],
-	"Blunt":[ "50", "100%", "150%", "200%", "250%" ]
+            "Blunt":[ "50%", "100%", "150%", "200%", "250%" ]
           }
         }
         ]
@@ -3397,7 +3400,7 @@
             "Attack damage":"100%"
           },
           "damage":{
-            "Pirceing":["40", "70", "110", "140", "175"]
+            "Piercing":["40", "70", "110", "140", "175"]
           }
         },
         {
@@ -3427,7 +3430,7 @@
             "Immobilize":true
           },
           "damage":{
-            "Pierceing damage":["90-110", "140-160", "200-220", "265-285", "340-360"]
+            "Piercing damage":["90-110", "140-160", "200-220", "265-285", "340-360"]
           }
         },
         {
@@ -3469,7 +3472,7 @@
             "Dexterity":["-15", "-19", "-23", "-27", "-35"]
           },
           "damage":{
-            "DOT Damage":"80-125",
+            "Piercing damage (5 ticks)":"80-125",
             "Piercing damage":["80-100", "100-120", "120-150", "150-190", "190-220"]
           }
         },
@@ -3478,7 +3481,7 @@
           "description":"Distracting attack that allows the interruption of power casting",
           "mana":[120,150,180,210,250],
           "type":"Constant",
-	"duration":[10,12,12,15,15],
+          "duration":[10,12,12,15,15],
           "cooldown":10,
           "cast":0.0,
           "gcd":"Normal",
@@ -3486,10 +3489,10 @@
           "damage":{
             "Attack damage":"+100%"
           },
-	"debuffs":{
-	"Cast speed":["-5%", "-9%", "-13%", "-17%", "-25%"],
-	"Concentration":["-0%", "-0%", "-0%", "-0%", "-50%"]
-	}
+          "debuffs":{
+            "Cast speed":["-5%", "-9%", "-13%", "-17%", "-25%"],
+            "Concentration":["-0%", "-0%", "-0%", "-0%", "-50%"]
+         }
         },
         {
           "name":"Bendable",
@@ -3507,8 +3510,8 @@
           "cooldown":70,
           "cast":1.5,
           "gcd":"Normal",
-	  "damage":{
-            "Pierce damage":[120, 140, 160, 180, 200]
+          "damage":{
+            "Piercing damage":[120, 140, 160, 180, 200]
           },
           "buffs":{
             "Attack damage":["+60%", "+75%", "+90%", "+105%", "+120%"]
@@ -3519,14 +3522,14 @@
           "description":"360-degree strike. Opponents in area receive damage.",
           "mana":[380,410,440,470,500],
           "type":"Direct",
-	"duration":[1,2,3,4,5],
+          "duration":[1,2,3,4,5],
           "cooldown":180,
           "cast":1.5,
           "gcd":"Normal",
           "area":6,
           "buffs":{
             "Attack damage":["+80%", "+90%", "+100%", "+120%", "+150%"],
-	"Piercing":["50", "100", "150", "200", "250"]
+            "Piercing":["50", "100", "150", "200", "250"]
           }
         }
         ]
@@ -3663,7 +3666,7 @@
           "gcd":"Short",
           "buffs":{
             "Critical hit chance":["+100%", "+200%", "+300%", "+400%", "+500%"],
-	"Resist stun":["5%", "10%", "15%", "20%", "25%"]
+            "Resist stun":["5%", "10%", "15%", "20%", "25%"]
           }
         }
         ]
@@ -3726,7 +3729,7 @@
           "range":8,
           "debuffs":{
             "Opponent evade chance":["+20%", "+30%", "+40%", "+60%", "+80%"],
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -3740,7 +3743,7 @@
           "gcd":"Short",
           "buffs":{
             "Casting speed":[ "+10%", "+15%", "+20%", "+25%", "+30%" ],
-	"Resist next crowd control effect":["0", "0" ,"0" ,"0" ,"+100%"]
+            "Resist next crowd control effect":["0", "0" ,"0" ,"0" ,"+100%"]
           }
         },
         {
@@ -3792,7 +3795,7 @@
           "gcd":"Very Short",
           "buffs":{
             "Movement speed":[ "+10%", "+15%", "+20%", "+25%", "+30%" ],
-	"Range received damage":["-15%", "-15%","-15%","-30%","-30%"]
+            "Range received damage":["-15%", "-15%","-15%","-30%","-30%"]
           }
         },
         {
@@ -3809,11 +3812,11 @@
             "Resist knock":[ "+75%", "+80%", "+85%", "+90%", "+100%" ],
             "Resist freeze":[ "+75%", "+80%", "+85%", "+90%", "+100%" ],
             "Resist stun":[ "+75%", "+80%", "+85%", "+90%", "+100%"],
-"Resist dizzy":[ "+75%", "+80%", "+85%", "+90%", "+100%" ],
-"Resist cannot attack":[ "+75%", "+80%", "+85%", "+90%", "+100%" ]
+            "Resist dizzy":[ "+75%", "+80%", "+85%", "+90%", "+100%" ],
+            "Resist cannot attack":[ "+75%", "+80%", "+85%", "+90%", "+100%" ]
         }
        }
-	]
+      ]
       },
       "Two Handed Mastery":{
         "class":"Barbarian",
@@ -3904,7 +3907,7 @@
           "cast":1.5,
           "gcd":"Normal",
           "damage":{
-	    "Blunt damage":["80-100","130-160","180-210","230-260","280-310"],
+            "Blunt damage":["80-100","130-160","180-210","230-260","280-310"],
             "Attack damage":["+20%","+40%","+60%","+80%","+100%"]
           }
         },
@@ -3936,7 +3939,7 @@
           "gcd":"Very Long",
           "buffs":{
             "Damage bonus":["+10%", "+20%", "+30%", "+40%", "+50%"],
-	"Cannot cast area spells":true
+            "Cannot cast area spells":true
           }
         },
         {
@@ -4014,7 +4017,7 @@
           "buffs":{
             "Health for allies":"+2000"
           }
-          },
+        },
         {
           "name":"undefined3",
           "description":"undefined",
@@ -4026,7 +4029,7 @@
         },
         {
           "name":"Warmaster's Might",
-          "description":"The Warmaster enhaces his class main attribute.",
+          "description":"The Warmaster enhances his class main attribute.",
           "type":"Passive",
           "gcd":"Short",
           "buffs":{
@@ -4044,7 +4047,7 @@
         },
         {
           "name":"Heroic Shout",
-          "description":"A powerfil shout intimidates all near-by opponents, reducing their movement speed.",
+          "description":"A powerful shout intimidates all near-by opponents, reducing their movement speed.",
           "mana":150,
           "type":"Constant",
           "cast":0.5,
@@ -4054,8 +4057,8 @@
           "area":6.0,
           "buffs":{
             "Movement speed":"-25%"
-            }
-          },
+          }
+        },
         {
           "name":"undefined5",
           "description":"undefined",
@@ -4073,7 +4076,7 @@
           "buffs":{
             "Health":"+700"
           }
-        }      
+        }
         ]
       },
       "Vanguard":{
@@ -4091,8 +4094,8 @@
           "range":25,
           "debuffs":{
             "Opponent resistance to knock down":["-20%", "-40%", "-60%", "-80%", "-100%"],
-"Opponent concentration":["-10%", "-15%", "-20%", "-25%", "-30%"],
-"Only blockable at 100%":true
+            "Opponent concentration":["-10%", "-15%", "-20%", "-25%", "-30%"],
+            "Only blockable at 100%":true
           }
         },
         {
@@ -4122,7 +4125,7 @@
           "range":0,
           "debuffs":{
             "Knock down":["2s", "3s", "4s", "5s", "6s,"],
-	"Only blockable at 100%":true
+            "Only blockable at 100%":true
           }
         },
         {
@@ -4131,8 +4134,8 @@
           "type":"Passive",
           "buffs":{
             "Constitution":["+5", "+7", "+9", "+12", "+15"],
-	"Resist magical damage":["+2%", "+4%", "+6%", "+8%", "+10%"],
-	"Resist physical damage":["+2%", "+4%", "+6%", "+8%", "+10%"]
+            "Resist magical damage":["+2%", "+4%", "+6%", "+8%", "+10%"],
+            "Resist physical damage":["+2%", "+4%", "+6%", "+8%", "+10%"]
           }
         },
         {
@@ -4161,12 +4164,11 @@
           "gcd":"Short",
           "buffs":{
             "Resist dizzy":["+25%", "+35%", "+45%", "+55%", "+65%"],
-	 "Resist stun":["+25%", "+35%", "+45%", "+55%", "+65%"],
-"Resist knock":["+25%", "+35%", "+45%", "+55%", "+65%"],
-"Resist freeze":["+25%", "+35%", "+45%", "+55%", "+65%"]
-	
+            "Resist stun":["+25%", "+35%", "+45%", "+55%", "+65%"],
+            "Resist knock":["+25%", "+35%", "+45%", "+55%", "+65%"],
+            "Resist freeze":["+25%", "+35%", "+45%", "+55%", "+65%"]
           },
-"debuffs":{
+          "debuffs":{
             "Movement speed":"-10%"
           }
         },
@@ -4187,14 +4189,14 @@
         {
           "name":"Knight's Haste",
           "description":"The knight moves extremely fast for a very short duration, providing higher chances of helping an ally in need or to hunt down a foe.",
-	"mana":[50, 80, 110, 140, 170],
+          "mana":[50, 80, 110, 140, 170],
           "type":"Constant",
-	"cast":0.0,
-	"cooldown":100,
-	"gcd":"Very Short",
+          "cast":0.0,
+          "cooldown":100,
+          "gcd":"Very Short",
           "buffs":{
             "Movement speed":["+5%", "+10%", "+15%", "+20%", "+50%"],
-	"Duration":["4s", "4s", "4s", "4s", "4s"]
+            "Duration":["4s", "4s", "4s", "4s", "4s"]
           }
         },
         {
@@ -4318,7 +4320,7 @@
           "range":2.0,
           "buffs":{
             "Resist magical damage":["+10%", "+15%", "+20%", "+25%", "+30%"],
-	"Resist physical damage":["+10%", "+15%", "+20%", "+25%", "+30%"]
+            "Resist physical damage":["+10%", "+15%", "+20%", "+25%", "+30%"]
           }
         },
         {
@@ -4427,7 +4429,7 @@
         },
         {
           "name":"Warmaster's Might",
-          "description":"The Warmaster enhaces his class main attribute.",
+          "description":"The Warmaster enhances his class main attribute.",
           "type":"Passive",
           "gcd":"Short",
           "buffs":{
@@ -4445,7 +4447,7 @@
         },
         {
           "name":"Blessed",
-          "description":"Thanks to his/her devotion the Warmaster recieves a bleesing to health.",
+          "description":"Thanks to his/her devotion the Warmaster receives a blessing to health.",
           "mana":250,
           "type":"Direct",
           "cast":1.0,
@@ -4471,16 +4473,10 @@
           "type":"Passive",
           "gcd":"Normal",
           "buffs":{
-            "Health":"+700"
+            "Health":"+350"
           }
-        }      
+        }
         ]
       }
     }
 }
-
-
-
-
-
-
