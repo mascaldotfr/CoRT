@@ -6,6 +6,9 @@ body {
 	background-color: #212121;
 	color: white;
 }
+a {
+	color: lightblue;
+}
 select, button {
 	background-color: #515151;
 	color: white;
@@ -13,6 +16,9 @@ select, button {
 	border: 0px;
 }
 h1 { text-align: center; }
+.bugnum {
+	text-align: center;
+}
 .setup {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
