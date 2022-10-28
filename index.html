@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/css/style.css">
+		<script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
+		<script type="text/javascript" src="js/lz-string.min.js" defer></script>
+		<script type="text/javascript" src="js/trainer.js" defer></script>
+	</head>
+	<body>
+		<h1>CoR Trainer</h1>
+		<div class="setup">
+			<div class="class">
+				<select id="t-class">
+					<option value="knight" default selected>Knight</option>
+					<option value="barbarian">Barbarian</option>
+					<option value="conjurer" default>Conjurer</option>
+					<option value="warlock">Warlock</option>
+					<option value="hunter" default>Hunter</option>
+					<option value="marksman">Marksman</option>
+				</select>
+			</div>
+			<div class="level">
+				<select id="t-level">
+					<option value="60" default selected>60</option>
+				</select>
+			</div>
+			<div class="load">
+				<button id="t-load">Load / Reset</button>
+			</div>
+			<div class="save">
+				<button id="t-save">Share</button>
+			</div>
+		</div>
+		<div class="points" id="t-points">
+			<p>
+				<b>Discipline points</b>: <span id="t-dpointsleft">x</span>/<span id="t-dpointstotal">x</span>
+				<b>Power points</b>: <span id="t-ppointsleft">x</span>/<span id="t-ppointstotal">x</span>
+			</p>
+		</div>
+		<div id="t-trainer" class="trainer">
+		</div>
+		<div id="skillinfo" class="skillinfo">
+		</div>
+	</body>
+</html>

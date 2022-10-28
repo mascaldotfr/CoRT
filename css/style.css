@@ -1,0 +1,66 @@
+body > div { 
+	margin: 0 auto;
+	max-width: 1000px;
+}
+body {
+	background-color: #212121;
+	color: white;
+}
+select, button {
+	background-color: #515151;
+	color: white;
+	box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+	border: 0px;
+}
+h1 { text-align: center; }
+.setup {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas: "class level load save";
+	gap: 0 4%;
+}
+.setup * { width: 100% !important; }
+.class { grid-area: class; }
+.level { grid-area: level; }
+.load { grid-area: load; }
+.save { grid-area: save; }
+.points { text-align:center; visibility: hidden; }
+.t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
+	display: inline-flex; 
+	flex-wrap: wrap;
+	margin-bottom: .5em;
+	width: 100%;
+}
+
+.p0, .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10 { flex: 1; padding-bottom: 6px; margin-left: 15px; }
+.p0 .icon { background-position: 0px 0px; margin-right: 24px;}
+.p1 .icon { background-position: -48px 0px; margin-right: 24px; }
+.p2 .icon { background-position: -96px 0px; margin-right: 24px; }
+.p3 .icon { background-position: -144px 0px; margin-right: 24px; }
+.p4 .icon { background-position: -192px 0px; margin-right: 24px; }
+.p5 .icon { background-position: -240px 0px; margin-right: 24px; }
+.p6 .icon { background-position: -288px 0px; margin-right: 24px; }
+.p7 .icon { background-position: -336px 0px; margin-right: 24px; }
+.p8 .icon { background-position: -384px 0px; margin-right: 24px; }
+.p9 .icon { background-position: -432px 0px; margin-right: 24px; }
+.p10 .icon { background-position: -480px 0px; }
+.icon {
+	background-repeat: no-repeat;
+	/*float: left;*/
+	width: 48px;
+	height: 48px;
+	margin: .25em;
+}
+.icon .skilllvl { background-color: white; color: black; border-radius: 4px;}
+.skillspinner { margin-left: 6px; }
+.minus, .plus { width: 20px; }
+.red { color: #FF0011; }
+.blue { color: #0088FF; }
+.skillinfo, .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
+	background-color: #313131 !important;
+}
+.skillinfo p, h3 {
+	margin: .1em;
+	margin-left: 1em;
+}
