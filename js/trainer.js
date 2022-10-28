@@ -86,7 +86,7 @@ $("#t-save").on("click", function() {
 		}
 	}
 	window.prompt("Here is the link to your setup:",
-		window.location.origin + "/?s=" + LZString.compressToEncodedURIComponent(setup));
+		window.location.origin + window.location.pathname +"?s=" + LZString.compressToEncodedURIComponent(setup));
 
 });
 
