@@ -1,6 +1,5 @@
 /*
  * Copyright (c) 2022 mascal
- * This file is part of INQ Calculators.
  *
  * CoRT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -177,7 +176,7 @@ function load_tree() {
 	alltrees.forEach( (tree) => {
 		treepos++;
 		spellpos = 0;
-		iconsrc = "/data/latest/icons/" + tree.replace(/ /g, "") + ".jpg";
+		iconsrc = "data/latest/icons/" + tree.replace(/ /g, "") + ".jpg";
 		trainerhtml = trainerhtml.concat(`<div treepos="${treepos}" class="t${treepos}">`);
 		trainerhtml = trainerhtml.concat(icon_factory(spellpos, iconsrc, treepos, tree, ""));
 		trainerdata.disciplines[tree].spells.forEach( (spell) => {
