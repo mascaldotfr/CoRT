@@ -1,4 +1,4 @@
-# Champion of Regnum trainer
+# Champions of Regnum trainer
 
 Since the famous regnumsentinel trainer is dead, all is left is operating
 systems locked trainers, or the updated Inquisition trainer from the german
