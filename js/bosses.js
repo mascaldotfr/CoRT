@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) 2022 mascal
+ *
+ * CoRT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * CoRT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 respawn_time = 109 * 3600;   // 109 hours
 // As of 2022-10-29 here are the last respawn timestamp in UTC time.
 // You can update it by looking at your browser console and getting the last
@@ -27,9 +44,9 @@ function get_next_respawns(boss) {
 function display_next_respawn(boss) {
 	for (respawn in next_respawns[boss]) {
 		respawn_dt = new Date(next_respawns[boss][respawn] * 1000);
-		dayname = respawn_dt.toLocaleDateString("en", { 
+		dayname = respawn_dt.toLocaleDateString("en", {
 			hour12: false, weekday: 'long', month: 'long', day: 'numeric',
-			hour: 'numeric', minute: 'numeric'}); 
+			hour: 'numeric', minute: 'numeric'});
 		if (respawn == 0) {
 			$(`#${boss}_respawn`).append(`<p class="green"><b>${dayname}</b></p>`);
 		}
@@ -52,7 +69,7 @@ function display_next_respawn(boss) {
 
 function refresh_display() {
     for (boss in first_respawn) {
-    	    $(`#${boss}_respawn`).empty();
+	    $(`#${boss}_respawn`).empty();
 	    next_respawns[boss] = [];
 	    get_next_respawns(boss);
 	    display_next_respawn(boss);
