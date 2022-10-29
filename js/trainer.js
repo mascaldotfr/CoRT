@@ -249,7 +249,7 @@ function load_tree() {
 
 	// need to add this trigger **once** the trainer UI is generated
 	$(".plus, .minus").on("click", function() {
-		if (this.parentNode.parentNode.className == "p0") { 
+		if (this.parentNode.parentNode.className == "p0") {
 			discipline_change(this);
 		}
 		else {
@@ -280,10 +280,11 @@ function display_spell(spellinfo) {
 	spellhtml = `
 		<h3>${spellinfo.name}</h3>
 		<p><i>${spellinfo.description}</i></p>
-		<p><b>Type:</b> ${spellinfo.type || "none"}</p>
-		<p><b>Cast:</b> ${spellinfo.cast || "none"}</p>
-		<p><b>Global Cooldown:</b> ${spellinfo.gcd || "none"}</p>
-		`;
+		<p><b>Type:</b> ${spellinfo.type}</p>`;
+	if (spellinfo.cast)
+		spellhtml = spellhtml.concat(`<p><b>Cast:</b> ${spellinfo.cast}s</p>`);
+	if (spellinfo.gcd)
+		spellhtml = spellhtml.concat(`<p><b>Global Cooldown:</b> ${spellinfo.gcd}</p>`);
 	if (spellinfo.range)
 		spellhtml = spellhtml.concat(`<p><b>Range:</b> ${spellinfo.cooldown}</p>`);
 	if (spellinfo.cooldown)
@@ -311,7 +312,7 @@ function display_spell(spellinfo) {
 
 function power_change(power) {
 	change_direction = power.className;
-	skill_level_html = $(power).parent().parent().children(".icon").children(".skilllvl"); 
+	skill_level_html = $(power).parent().parent().children(".icon").children(".skilllvl");
 	skill_level = parseInt(skill_level_html.text());
 	discipline_level = parseInt($(power).parent().parent().parent().children(".p0").find(".skilllvl").text());
 	wanted_level = change_direction == "plus" ? skill_level + 1 : skill_level - 1;
@@ -348,12 +349,12 @@ function discipline_change(discipline) {
 		console.log("player level is too low");
 		return;
 	}
-	// check if we have enough discipline points left 
-	discipline_points_balance = change_direction == "plus" ? 
+	// check if we have enough discipline points left
+	discipline_points_balance = change_direction == "plus" ?
 		0 - ( trainerdata.required.points[wanted_level - 1] -  trainerdata.required.points[current_level - 1] ) :
 		trainerdata.required.points[current_level - 1] - trainerdata.required.points[wanted_level - 1];
 	current_discipline_points = parseInt($("#t-dpointsleft").text());
-	if (	change_direction == "plus" && 
+	if (	change_direction == "plus" &&
 		current_discipline_points + discipline_points_balance < 0 ) {
 		return;
 	}
@@ -387,7 +388,7 @@ function update_tree(treepos) {
 			// update available power points
 			$("#t-ppointsleft").text(ppointsleft + skilllvl - maxslvl);
 		}
-		if ( 	(currlevel > trainerdata.required.level[dlvl - 1] && i != 1) || 
+		if ( 	(currlevel > trainerdata.required.level[dlvl - 1] && i != 1) ||
 			(currlevel != maxlevel && treepos == wmrow) ) {
 			// reduce strongly brightness and disable buttons on unavailable
 			// skills due to player or skill tree level. also forbid WM tree for non level 60.
@@ -406,7 +407,7 @@ function update_tree(treepos) {
 			$(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`).show();
 			$(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`).show();
 		}
-		// ensure brightness is kept when a tree level is decreasing 
+		// ensure brightness is kept when a tree level is decreasing
 		if ($(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text() > 0) {
 			$(`div[treepos="${treepos}"] .p${i} .icon`).css('filter','brightness(1)');
 		}
