@@ -19,16 +19,16 @@ respawn_time = 109 * 3600;   // 109 hours
 // As of 2022-10-29 here are the last respawn timestamp in UTC time.
 // You can update it by looking at your browser console and getting the last
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
-// will run 80 times/boss after all that time.
-first_respawn = { "thorkul": 1666745040, "evendim": 1666803900, "daen": 1666890420 };
-next_respawns = { "thorkul": [], "evendim": [], "daen": [] };
+// will run ~ 80 times/boss after all that time.
+first_respawns = { "thorkul": 1666745040, "evendim": 1666803900, "daen": 1666890420 };
+next_respawns = { "evendim": [], "daen": [], "thorkul": [] };
 
 function time_now() {
 	return Math.floor(new Date().getTime() / 1000);
 }
 
 function get_next_respawns(boss) {
-	tried_respawn = first_respawn[boss];
+	tried_respawn = first_respawns[boss];
 	now = time_now();
 	while (true) {
 		tried_respawn += respawn_time;
@@ -61,20 +61,35 @@ function display_next_respawn(boss) {
 	next_respawn_in.hours = Math.floor(time_before_respawn / 3600);
 	time_before_respawn -= next_respawn_in.hours * 3600;
 	next_respawn_in.minutes = Math.floor(time_before_respawn / 60);
-	for (date_elem in next_respawn_in) {
-		next_respawn_in[date_elem] = String(next_respawn_in[date_elem]).padStart(2, "0");
+	for (dt_elem in next_respawn_in) {
+		next_respawn_in[dt_elem] = String(next_respawn_in[dt_elem]).padStart(2, "0");
 	}
-	$(`#${boss}_countdown`).text(`Next respawn in ${next_respawn_in.days}d ${next_respawn_in.hours}h ${next_respawn_in.minutes}m`);
+	// hide days and hours left if there is none of it
+	next_respawn_in.days = next_respawn_in.days == "00" ? "" : next_respawn_in.days + "d";
+	next_respawn_in.hours = next_respawn_in.hours == "00" ? "" : next_respawn_in.hours + "h";
+	$(`#${boss}_countdown`).text(`Next respawn in ${next_respawn_in.days} ${next_respawn_in.hours} ${next_respawn_in.minutes}m`);
 }
 
 function refresh_display() {
-    for (boss in first_respawn) {
-	    $(`#${boss}_respawn`).empty();
-	    next_respawns[boss] = [];
-	    get_next_respawns(boss);
-	    display_next_respawn(boss);
-    }
+	bosses_unordered = new Map()
+	for (boss in first_respawns) {
+		$(`#${boss}_respawn`).empty();
+		next_respawns[boss] = [];
+		get_next_respawns(boss);
+		display_next_respawn(boss);
+		// fetch all next respawns
+		bosses_unordered.set(boss, next_respawns[boss][0]);
+	}
+	// sort by respawn time
+	bosses_ordered = new Map([...bosses_unordered.entries()].sort((a, b) => a[1] - b[1]));
+	// need only the bosses names
+	bosses_ordered = [...bosses_ordered.keys()];
+	// reorder the boss divs
+	for (boss in bosses_ordered) {
+		$(`#${bosses_ordered[boss]}`).appendTo("#bosses_list");
+	}
 }
+
 
 $(document).ready(function() {
 	refresh_display();

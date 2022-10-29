@@ -15,9 +15,10 @@
 			#daen, #evendim, #thorkul {
 				display: flex;
 				flex-wrap: wrap;
-				align-items: center;
 				background-color: #313131;
 				margin-bottom: 1em;
+				align-items: center;
+				justify-content: center;
 			}
 			.respawn {
 				flex: 1;
@@ -26,9 +27,6 @@
 			}
 			.center {
 				text-align:center;
-			}
-			img {
-				margin: 0 auto;
 			}
 			.faded {
 				color: #aaaaaa;
@@ -40,25 +38,27 @@
 			<h1>CoR Boss Countdown</h1>
 			<p class="center"><a href="index.html">Come back to the trainer</a></p>
 			<p class="center">The page refreshes itself every minute. Dates and times are in your timezone.</p>
-			<div id="daen">
-				<img src="data/bosses/daen.jpg" title="Daen Rha (Ignis)"/>
-				<div class="respawn">
-					<p><b><span id="daen_countdown" class="red"></span></b></p>
-					<div id="daen_respawn"></div>
+			<div id="bosses_list">
+				<div id="daen">
+					<img src="data/bosses/daen.jpg" title="Daen Rha (Ignis)"/>
+					<div class="respawn">
+						<p><b><span id="daen_countdown" class="red"></span></b></p>
+						<div id="daen_respawn"></div>
+					</div>
 				</div>
-			</div>
-			<div id="evendim">
-				<img src="data/bosses/evendim.jpg" title="Evendim (Syrtis)"/>
-				<div class="respawn">
-					<p><b><span id="evendim_countdown" class="red"></span></b></p>
-					<div id="evendim_respawn"></div>
+				<div id="evendim">
+					<img src="data/bosses/evendim.jpg" title="Evendim (Syrtis)"/>
+					<div class="respawn">
+						<p><b><span id="evendim_countdown" class="red"></span></b></p>
+						<div id="evendim_respawn"></div>
+					</div>
 				</div>
-			</div>
-			<div id="thorkul">
-				<img src="data/bosses/thorkul.jpg" title="Thorkul (Alsius)"/>
-				<div class="respawn">
-					<p><b><span id="thorkul_countdown" class="red"></span></b></p>
-					<div id="thorkul_respawn"></div>
+				<div id="thorkul">
+					<img src="data/bosses/thorkul.jpg" title="Thorkul (Alsius)"/>
+					<div class="respawn">
+						<p><b><span id="thorkul_countdown" class="red"></span></b></p>
+						<div id="thorkul_respawn"></div>
+					</div>
 				</div>
 			</div>
 		</div>
