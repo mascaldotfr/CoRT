@@ -25,7 +25,7 @@ class_type_masks = {
 
 trainerdata = null;
 /* Hello future me !
- * You need to add a newer dataset ? 
+ * You need to add a newer dataset ?
  * Add it in first position !
  * And modify index.html
  */
@@ -75,7 +75,6 @@ function manage_dataset_versions() {
 		// invalid dataset supplied
 		trainerdataversion = trainerdatasets[0];
 	}
-	console.log("manage_dataset_versions",trainerdataversion);
 	// display a warning if an old version of the datasets are used, and
 	// remove it if the latest dataset is loaded alter.
 	$("#oldversion").remove();
@@ -240,7 +239,6 @@ function load_tree() {
 	});
 	$("#t-trainer").append(trainerhtml);
 
-	console.log(trainerdata.points.discipline[powerpoints][currlevel - 1]);
 	$("#t-dpointsleft").text(trainerdata.points.discipline[powerpoints][currlevel - 1]);
 	$("#t-dpointstotal").text(trainerdata.points.discipline[powerpoints][currlevel - 1]);
 	$("#t-ppointsleft").text(trainerdata.points.power[powerpoints][currlevel - 1]);
@@ -269,7 +267,6 @@ function display_spell(spellinfo) {
 	spellname = $(spellinfo).attr("title");
 	treename = $(spellinfo).attr("treename");
 	spellinfo = trainerdata.disciplines[treename].spells.filter(element => element.name == spellname)[0];
-	console.log(spellinfo);
 	spellhtml = `
 		<h3>${spellinfo.name}</h3>
 		<p><i>${spellinfo.description}</i></p>
@@ -381,7 +378,7 @@ function update_tree(treepos) {
 			$("#t-ppointsleft").text(ppointsleft + skilllvl - maxslvl);
 		}
 		if ( 	(currlevel > trainerdata.required.level[dlvl - 1] && i != 1) || 
-			(currlevel != 60 && treepos == wmrow) ) {
+			(currlevel != maxlevel && treepos == wmrow) ) {
 			// reduce strongly brightness and disable buttons on unavailable
 			// skills due to player or skill tree level. also forbid WM tree for non level 60.
 			$(`div[treepos="${treepos}"] .p${i} .icon`).css('filter','grayscale(1) brightness(.5)');
