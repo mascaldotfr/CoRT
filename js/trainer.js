@@ -263,6 +263,16 @@ function load_tree() {
 	});
 }
 
+function format_buffs(buff) {
+	// pretty print buffs and debuffs values
+	if (typeof buff == "boolean") {
+		return "";
+	}
+	else {
+		return ": " + buff.toString();
+	}
+}
+
 function display_spell(spellinfo) {
 	spellname = $(spellinfo).attr("title");
 	treename = $(spellinfo).attr("treename");
@@ -282,17 +292,17 @@ function display_spell(spellinfo) {
 		spellhtml = spellhtml.concat(`<p><b>Duration:</b> ${spellinfo.duration.toString()}s</p>`);
 	if (spellinfo.damage) {
 		for (type in spellinfo.damage) {
-			spellhtml = spellhtml.concat(`<p class="red"><b>${type}: ${spellinfo.damage[type].toString()}</b></p>`);
+			spellhtml = spellhtml.concat(`<p class="red"><b>${type}:  ${spellinfo.damage[type].toString()}</b></p>`);
 		}
 	}
 	if (spellinfo.buffs) {
 		for (type in spellinfo.buffs) {
-			spellhtml = spellhtml.concat(`<p class="blue"><b>${type}: ${spellinfo.buffs[type].toString()}</b></p>`);
+			spellhtml = spellhtml.concat(`<p class="blue"><b>${type}${format_buffs(spellinfo.buffs[type])}</b></p>`);
 		}
 	}
 	if (spellinfo.debuffs) {
 		for (type in spellinfo.debuffs) {
-			spellhtml = spellhtml.concat(`<p class="red"><b>${type}: ${spellinfo.debuffs[type].toString()}</b></p>`);
+			spellhtml = spellhtml.concat(`<p class="red"><b>${type}${format_buffs(spellinfo.debuffs[type])}</b></p>`);
 		}
 	}
 	$("#skillinfo").html(spellhtml);
