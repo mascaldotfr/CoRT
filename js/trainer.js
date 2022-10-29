@@ -24,7 +24,12 @@ class_type_masks = {
 };
 
 trainerdata = null;
-trainerdatasets = ["latest", "1.33.2"];
+/* Hello future me !
+ * You need to add a newer dataset ? 
+ * Add it in first position !
+ * And modify index.html
+ */
+trainerdatasets = ["1.33.3", "1.33.2"];
 trainerdataversion = null;
 
 currlevel = 0;
@@ -42,8 +47,12 @@ $(document).ready(function() {
 	for (i = maxlevel - 1; i >= minlevel; i--) {
 		$("#t-level").append('<option value="' + i + '">' + i + '</option>');
 	}
-	// look for a given trainer data set, and skills set then
-	// set the version accordingly
+	// generate datasets version
+	for (i = 1; i < trainerdatasets.length; i++) {
+		$("#t-version").append('<option value="' + trainerdatasets[i] + '">' + trainerdatasets[i] + '</option>');
+	}
+	// search for a given trainer dataset in url, and skillset then
+	// set the version accordingly. See also manage_dataset_versions.
 	urlsearch = new URLSearchParams(window.location.search);
 	skillset = urlsearch.get("s");
 	dataset = urlsearch.get("d");
@@ -51,24 +60,30 @@ $(document).ready(function() {
 		// legacy url, assume old version
 		trainerdataversion = "1.33.2";
 	}
-	else if (!trainerdatasets.includes(dataset)) {
-		// invalid dataset supplied
-		trainerdataversion = "latest";
-	}
 	else {
 		trainerdataversion = dataset;
-	}
-	console.log(dataset,trainerdataversion);
-	if (trainerdataversion != "latest") {
-		$("#t-points").append(`	<p class="red"><b>This setup has been made with an older version
-					(${trainerdataversion}) of CoR, and may be out of date.</p>
-					<p class="red">You can go back to the current CoR version by
-					<a href="${window.location.origin + window.location.pathname}">clicking here</a>.</b></p>`);
 	}
 	if (skillset) {
 		load_setup_from_url();
 	}
 });
+
+
+function manage_dataset_versions() {
+	// valid dataset ?
+	if (!trainerdatasets.includes(trainerdataversion)) {
+		// invalid dataset supplied
+		trainerdataversion = trainerdatasets[0];
+	}
+	console.log("manage_dataset_versions",trainerdataversion);
+	// display a warning if an old version of the datasets are used, and
+	// remove it if the latest dataset is loaded alter.
+	$("#oldversion").remove();
+	if (trainerdataversion != trainerdatasets[0]) {
+		$("#t-points").append(`	<p class="red" id="oldversion"><b>This setup is being made with an older version
+					(${trainerdataversion}) of CoR, and may be out of date.</p>`);
+	}
+}
 
 $("#t-load").on("click", function() {
 	level = $("#t-level").val();
@@ -87,6 +102,8 @@ $("#t-load").on("click", function() {
 		alert("Please select a class");
 		return;
 	}
+	trainerdataversion = $("#t-version").val();
+	manage_dataset_versions();
 	load_tree();
 });
 
@@ -121,6 +138,8 @@ function load_setup_from_url() {
 	setup = LZString.decompressFromEncodedURIComponent(skillset).split("+");
 	$("#t-class").val(setup.shift());
 	$("#t-level").val(setup.shift());
+	manage_dataset_versions();
+	$("#t-version").val(trainerdataversion);
 	$("#t-load").click();
 	row = 0;
 	for (let item = 0; item < setup.length; item++) {

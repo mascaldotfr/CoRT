@@ -1,4 +1,4 @@
-body > div { 
+body > div {
 	margin: 0 auto;
 	max-width: 1000px;
 }
@@ -20,20 +20,20 @@ h1 { text-align: center; }
 	text-align: center;
 }
 .setup {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-template-rows: 1fr;
-	grid-template-areas: "class level load save";
-	gap: 0 4%;
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
 }
-.setup * { width: 100% !important; }
-.class { grid-area: class; }
-.level { grid-area: level; }
-.load { grid-area: load; }
-.save { grid-area: save; }
+.version, .class, .level, .load, .save {
+	display: flex;
+	flex: 1;
+}
+#t-version, #t-class, #t-level, #t-load, #t-save {
+	flex-grow: 1;
+}
 .points { text-align:center; visibility: hidden; }
 .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
-	display: inline-flex; 
+	display: inline-flex;
 	flex-wrap: wrap;
 	margin-bottom: .5em;
 	width: 100%;
