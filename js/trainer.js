@@ -287,6 +287,8 @@ function display_spell(spellinfo) {
 		spellhtml = spellhtml.concat(`<p><b>Global Cooldown:</b> ${spellinfo.gcd.toString()}</p>`);
 	if (spellinfo.range >= 0)
 		spellhtml = spellhtml.concat(`<p><b>Range:</b> ${spellinfo.range.toString()}</p>`);
+	if (spellinfo.area >= 0)
+		spellhtml = spellhtml.concat(`<p><b>Area:</b> ${spellinfo.area.toString()}</p>`);
 	if (spellinfo.cooldown >= 0)
 		spellhtml = spellhtml.concat(`<p><b>Cooldown:</b> ${spellinfo.cooldown.toString()}s</p>`);
 	if (spellinfo.duration >= 0)
