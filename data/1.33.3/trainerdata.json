@@ -3413,7 +3413,7 @@
           "cooldown":40,
           "cast":0.0,
           "gcd":"Normal",
-          "range":0,
+          "range":0.0,
           "buffs":{
             "Immobilize":true
           },
@@ -4107,7 +4107,7 @@
           "cooldown":35,
           "cast":0.0,
           "gcd":"Normal",
-          "range":0,
+          "range":0.0,
           "debuffs":{
             "Knock down":["2s", "3s", "4s", "5s", "6s,"],
             "Only blockable at 100%":true

@@ -281,17 +281,17 @@ function display_spell(spellinfo) {
 		<h3>${spellinfo.name}</h3>
 		<p><i>${spellinfo.description}</i></p>
 		<p><b>Type:</b> ${spellinfo.type}</p>`;
-	if (spellinfo.cast)
-		spellhtml = spellhtml.concat(`<p><b>Cast:</b> ${spellinfo.cast}s</p>`);
-	if (spellinfo.gcd)
-		spellhtml = spellhtml.concat(`<p><b>Global Cooldown:</b> ${spellinfo.gcd}</p>`);
-	if (spellinfo.range)
-		spellhtml = spellhtml.concat(`<p><b>Range:</b> ${spellinfo.cooldown}</p>`);
-	if (spellinfo.cooldown)
-		spellhtml = spellhtml.concat(`<p><b>Cooldown:</b> ${spellinfo.cooldown}s</p>`);
-	if (spellinfo.duration)
+	if (spellinfo.cast >= 0)
+		spellhtml = spellhtml.concat(`<p><b>Cast:</b> ${spellinfo.cast.toString()}s</p>`);
+	if (spellinfo.gcd >= 0)
+		spellhtml = spellhtml.concat(`<p><b>Global Cooldown:</b> ${spellinfo.gcd.toString()}</p>`);
+	if (spellinfo.range >= 0)
+		spellhtml = spellhtml.concat(`<p><b>Range:</b> ${spellinfo.range.toString()}</p>`);
+	if (spellinfo.cooldown >= 0)
+		spellhtml = spellhtml.concat(`<p><b>Cooldown:</b> ${spellinfo.cooldown.toString()}s</p>`);
+	if (spellinfo.duration >= 0)
 		spellhtml = spellhtml.concat(`<p><b>Duration:</b> ${spellinfo.duration.toString()}s</p>`);
-	if (spellinfo.damage) {
+	if (spellinfo.damage >= 0) {
 		for (type in spellinfo.damage) {
 			spellhtml = spellhtml.concat(`<p class="red"><b>${type}:  ${spellinfo.damage[type].toString()}</b></p>`);
 		}
