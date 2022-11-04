@@ -24,7 +24,6 @@ class_type_masks = {
 };
 
 trainerdata = null;
-trainerdatasets = ["1.33.3", "1.33.2"];
 trainerdataversion = null;
 
 currlevel = 0;
