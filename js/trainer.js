@@ -24,11 +24,6 @@ class_type_masks = {
 };
 
 trainerdata = null;
-/* Hello future me !
- * You need to add a newer dataset ?
- * Add it in first position !
- * And modify index.html
- */
 trainerdatasets = ["1.33.3", "1.33.2"];
 trainerdataversion = null;
 
@@ -45,11 +40,13 @@ skillset = null;
 $(document).ready(function() {
 	// generate characters levels options
 	for (i = maxlevel - 1; i >= minlevel; i--) {
-		$("#t-level").append('<option value="' + i + '">' + i + '</option>');
+		$("#t-level").append(`<option value="${i}">${i}</option>`);
 	}
 	// generate datasets version
+	$("#t-version").append(`<option value="${trainerdatasets[0]}" default selected>
+		Current game version (${trainerdatasets[0]})</option>`);
 	for (i = 1; i < trainerdatasets.length; i++) {
-		$("#t-version").append('<option value="' + trainerdatasets[i] + '">' + trainerdatasets[i] + '</option>');
+		$("#t-version").append(`<option value="${trainerdatasets[i]}">${trainerdatasets[i]}</option>`);
 	}
 	// search for a given trainer dataset in url, and skillset then
 	// set the version accordingly. See also manage_dataset_versions.
