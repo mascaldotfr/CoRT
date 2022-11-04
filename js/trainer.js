@@ -320,7 +320,7 @@ function power_change(power) {
 	skill_level = parseInt(skill_level_html.text());
 	discipline_level = parseInt($(power).parent().parent().parent().children(".p0").find(".skilllvl").text());
 	wanted_level = change_direction == "plus" ? skill_level + 1 : skill_level - 1;
-	maxslvl = trainerdata.required.power[discipline_level - 1];
+	maxslvl = trainerdata.required.power[discipline_level];
 	if (wanted_level > maxplevel || wanted_level < minplevel) {
 		console.log("bad power level", wanted_level);
 		return;
@@ -349,7 +349,7 @@ function discipline_change(discipline) {
 		console.log("bad discipline level", wanted_level);
 		return;
 	}
-	if (trainerdata.required.level[wanted_level - 1] > currlevel) {
+	if (trainerdata.required.level[wanted_level- 1] > currlevel) {
 		console.log("player level is too low");
 		return;
 	}
@@ -360,6 +360,7 @@ function discipline_change(discipline) {
 	current_discipline_points = parseInt($("#t-dpointsleft").text());
 	if (	change_direction == "plus" &&
 		current_discipline_points + discipline_points_balance < 0 ) {
+		console.log("not enough discipline points");
 		return;
 	}
 	// valid, do the change
@@ -376,7 +377,7 @@ function update_tree(treepos) {
 	ppointsleft = parseInt($("#t-ppointsleft").text());
 	ppointstotal = parseInt($("#t-ppointstotal").text());
 	dlvl = parseInt($("div[treepos=" + treepos +"] .p0 .icon .skilllvl").text());
-	maxslvl = trainerdata.required.power[dlvl - 1];
+	maxslvl = trainerdata.required.power[dlvl];
 
 	// XXX maybe there are better selector options to get all values for a tree but ...
 	for (i = 1; i <= 10; i++) {
