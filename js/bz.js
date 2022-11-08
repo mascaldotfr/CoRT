@@ -77,7 +77,7 @@ function feed_bz() {
 	// is bz on ?
 	for (let hour in bz_begin[current_day]) {
 		if (current_hour >= bz_begin[current_day][hour] &&
-		    current_hour <= bz_end[current_day][hour] ) {
+		    current_hour < bz_end[current_day][hour] ) {
 			bz_on = true;
 			bz_ends_at = date_difference_from_now(future_date(0, bz_end[current_day][hour]));
 			break;
