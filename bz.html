@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Champions of Regnum Battle Zone Status</title>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
+		<script type="text/javascript" src="js/menu.js" defer></script>
+		<script type="text/javascript" src="js/bz.js" defer></script>
+		<style>
+			body > div {
+				max-width: 600px !important;
+			}
+			.faded {
+				color: #aaaaaa;
+			}
+			.bz_container {
+				text-align: center;
+			}
+			ul {
+				display: inline-block;
+				text-align:left;
+			}
+			h3 {
+				color: #88FF88;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bz_container">
+			<h1> CoR Battle Zone Status</h1>
+			<h2><span id="bz_status"></span>
+				<i><span id="next_bz"></span></i></h2>
+			<h3>Next Battle Zones (in your timezone) :</h3>
+			<ul id="future_bzs"></ul>
+		</div>
+	</body>
+</html>
+
