@@ -108,8 +108,8 @@ function feed_bz() {
 		bz_begin_date = new Date(next_bzs_begin[next_bz]);
 		bz_end_date = new Date(next_bzs_end[next_bz]);
 		date_options = {
-			hour12: false, weekday: 'short', month: 'short', day: 'numeric',
-			hour: 'numeric', minute: 'numeric'};
+			hour12: false, weekday: 'long', month: 'long', day: 'numeric',
+			hour: '2-digit', minute: '2-digit'};
 		interval = `<li>${bz_begin_date.toLocaleDateString("en", date_options)} - 
 			    ${String(bz_end_date.getHours()).padStart(2, "0")}:${String(bz_end_date.getMinutes()).padStart(2, "0")}</li>`
 		$("#future_bzs").append(interval);
