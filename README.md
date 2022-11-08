@@ -1,21 +1,20 @@
-# Champions of Regnum trainer
+# Champions of Regnum trainer (and more)
 
 Since the famous regnumsentinel trainer is dead, all is left are operating
 systems locked trainers, or the updated Inquisition trainer from the german
 Regnum forum but it has some outdated mechanics.
 
 This is a (simpler) knockoff of the regnumsentinel website trainer, this one will
-be alive as long as GitHub exists and is free software.
+be alive as long as GitHub exists and is free software. On top of that, there are countdown
+pages for bosses and battle zones (BZ).
 
-It just requires a webserver to run.
+It just requires a webserver to run, everything is run client side.
 
 **This is beta software, bugs may exist**
 
 ## Known issues
 
-* the power database is a bit outdated, once bugs will be squashed i'll work on this. Or send PRs
-  please.
-* display on mobile devices is weird due to flex. it's not easy to fix, as
+* display on mobile devices is weird due to flex in the WM skill row. it's not easy to fix, as
   even regnumsentinel had the issue. Use your device in landscape mode if it
   really bothers you
 * shared urls are long, this could be fixed by using an url shortener api,
