@@ -44,7 +44,7 @@ function get_next_respawns(boss) {
 function display_next_respawn(boss) {
 	for (respawn in next_respawns[boss]) {
 		respawn_dt = new Date(next_respawns[boss][respawn] * 1000);
-		dayname = respawn_dt.toLocaleDateString("en", {
+		dayname = respawn_dt.toLocaleDateString("en-GB", {
 			hour12: false, weekday: 'long', month: 'long', day: 'numeric',
 			hour: 'numeric', minute: 'numeric'});
 		if (respawn == 0) {
