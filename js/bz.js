@@ -84,14 +84,15 @@ function feed_bz() {
 		}
 	}
 	// compute future bzs
-	for (let day in [current_day, tomorrow]) {
+	future_bz_days = [current_day, tomorrow];
+	for (const day of future_bz_days) {
 		for (let hour in bz_begin[day]) {
-			if (day == 0 && parseInt(bz_begin[day][hour]) <= current_hour) {
+			if (day == current_day && parseInt(bz_begin[day][hour]) <= current_hour) {
 				// skip passed or current bz of the day
 				continue;
 			}
-			next_bzs_begin.push(future_date(day, bz_begin[day][hour]));
-			next_bzs_end.push(future_date(day, bz_end[day][hour]));
+			next_bzs_begin.push(future_date(future_bz_days.indexOf(day), bz_begin[day][hour]));
+			next_bzs_end.push(future_date(future_bz_days.indexOf(day), bz_end[day][hour]));
 		}
 	}
 	
