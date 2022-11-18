@@ -3714,18 +3714,18 @@
           }
         },
         {
-          "name":"Threat",
-          "description":"The barbarian intimidates the opponent, that fights with increased miss chance.",
-          "mana":[60,70,80,90,100],
+          "name":"Thirst for blood",
+          "description":"The barbarian channels all her fury. Normal attacks receive a damage bonus that increments on every successful impact. Power wears off by duration and also when inflicting 5 Successful blows. Evaded and blocked attacks are not counted toward power expiration",
+          "mana":[80,120,160,200,240],
           "type":"Constant",
-          "duration":30,
-          "cooldown":30,
-          "cast":0.0,
-          "gcd":"Normal",
-          "range":8,
-          "debuffs":{
-            "Opponent evade chance":["+20%", "+30%", "+40%", "+60%", "+80%"],
-            "Only blockable at 100%":true
+          "cast":0.5,
+          "gcd":"Short",
+          "cooldown":60.0,
+          "duration":45.0,
+          "buffs":{
+            "Attack Speed":["+5%","+6%","+7%","+8%","+10%"],
+            "Damage per impact (two handed weapon only)":["+10","+20","+30","+40","+50"],
+            "Attack speed bonus (dual handed weapons only)":["+5%","+7%","+9%","+11%","+15%"]
           }
         },
         {
@@ -3733,7 +3733,7 @@
           "description":"The barbarian gains confidence in frightening the opponent and improves her attacks.",
           "mana":[65,80,95,110,125],
           "type":"Constant",
-          "duration":40,
+          "duration":20,
           "cooldown":120,
           "cast":0.0,
           "gcd":"Short",
@@ -3743,17 +3743,16 @@
           }
         },
         {
-          "name":"Howl",
-          "description":"The barbarian screams, insults and howls. His opponents can't concentrate enough to use their powers.",
-          "mana":[150,180,210,240,270],
+          "name":"Deafening roar",
+          "description":"A powerful roar affects everyone who crosses its path",
+          "mana":[100,130,160,190,220],
           "type":"Constant",
-          "duration":[3,4,5,6,7],
-          "cooldown":60,
+          "duration":[4, 5, 6, 7, 8],
+          "cooldown":40,
           "cast":0.5,
           "gcd":"Normal",
-          "area":6,
           "debuffs":{
-            "Dizzy":true
+            "Stun":true
           }
         },
         {
@@ -3818,17 +3817,17 @@
         "class":"Barbarian",
         "spells":[
         {
-          "name":"Thirst for blood",
-          "description":"The barbarian channels all her fury. Normal attacks receive a damage bonus that increments on every successful impact. Power wears off by duration and also when inflicting 5 Successful blows. Evaded and blocked attacks are not counted toward power expiration",
-          "mana":[80,120,160,200,240],
+          "name":"Threat",
+          "description":"The barbarian intimidates the opponent, that fights with increased miss chance.",
+          "mana":[100,120,140,160,180],
           "type":"Constant",
-          "cast":0.5,
-          "gcd":"Short",
-          "cooldown":60.0,
-          "duration":45.0,
+          "duration":[10,14,16,18,25],
+          "cooldown":60,
+          "cast":0.0,
+          "gcd":"Normal",
+          "range":8,
           "buffs":{
-            "Attack Speed":["+5%","+7%","+9%","+12%","+15%"],
-            "Damage per impact":["+10","+20","+30","+40","+50"]
+            "Critical damage":["+10%","+13%","+16%","+20%","+30%"]
           }
         },
         {
@@ -3882,16 +3881,17 @@
           }
         },
         {
-          "name":"Deafening roar",
-          "description":"A powerful roar affects everyone who crosses its path",
-          "mana":[100,130,160,190,220],
+          "name":"Howl",
+          "description":"The barbarian screams, insults and howls. His opponents can't concentrate enough to use their powers.",
+          "mana":[150,180,210,240,270],
           "type":"Constant",
-          "duration":[4, 5, 6, 7, 8],
-          "cooldown":40,
+          "duration":[3,4,5,6,7],
+          "cooldown":60,
           "cast":0.5,
           "gcd":"Normal",
+          "area":6,
           "debuffs":{
-            "Stun":true
+            "Dizzy":true
           }
         },
         {
@@ -3939,6 +3939,15 @@
           }
         },
         {
+          "name":"Hands of Steel",
+          "description":"Increase range and damage",
+          "type":"Passive",
+          "buffs":{
+            "Attack Range":["+5%","+10%","+15%","+20%","+25%"],
+            "Damage Bonus":[ "+10%", "+13%", "+16%", "+20%", "+30%" ]
+          }
+        },
+        {
           "name":"Rage of the earth",
           "description":"A mighty blow on the earth provokes a tremor. Opponents in its path are damaged and knocked down",
           "mana":[190,230,270,310,350],
@@ -3951,25 +3960,10 @@
             "Knock down":true
           },
           "damage":{
-            "Blunt":["120-200","170-275","220-350","270-425","320-500"]
-          }
-        },
-        {
-          "name":"Whirlwind",
-          "description":"Continuous 360 degree strike. The Barbarian can move while using this power",
-          "mana":[290,310,330,350,370],
-          "type":"Aura",
-          "duration":10,
-          "cooldown":180,
-          "cast":1.5,
-          "gcd":"Normal",
-          "area":6,
-          "damage":{
-            "Slash":[50,75,100,125,150],
-            "Health":[-25,-40,-55,-70,-100]
+            "Weapon Damage (60° arc)":["100%","105%","110%","115%","125%"]
           }
         }
-        ]
+       ]
       },
       "Barbarian WM":{
         "class":"Barbarian",
