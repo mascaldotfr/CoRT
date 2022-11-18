@@ -701,10 +701,13 @@
           "cast":4.5,
           "gcd":"Short",
           "cooldown":120.0,
-          "duration":[30,45,60,75,90],
+          "duration":[20,30,45,60,80],
           "buffs":{
             "Invisibility":true,
-            "Piercing damage":[30,60,90,120,150]
+            "Piercing damage":[50, 80, 120, 170, 250]
+          },
+          "debuffs":{
+            "Cannot cast Confuse for 5 seconds after it ends":true
           }
         },
         {
@@ -719,7 +722,7 @@
           "duration":60,
           "range":6,
           "buffs":{
-            "Mana regeneration":[ "+5%", "+10%", "+20%", "+25%", "+40%" ],
+            "Mana regeneration":[ "+5%", "+10%", "+20%", "+30%", "+50%" ],
             "Dexterity":[ "+3", "+6", "+9", "+12", "+15" ]
           }
         },
@@ -758,8 +761,8 @@
           "type":"Constant",
           "cast":1.0,
           "gcd":"Short",
-          "cooldown":60.0,
-          "duration":[10,13,16,19,22],
+          "cooldown":70.0,
+          "duration":[8,10,12,15,20],
           "range":25.0,
           "debuffs":{
             "Cannot cast non-damaging powers":true,
