@@ -488,7 +488,7 @@
           "cast":1.5,
           "gcd":"Short",
           "cooldown":180.0,
-          "duration":20.0,
+          "duration":15.0,
           "area":10.0,
           "range":25.0,
           "debuffs":{
