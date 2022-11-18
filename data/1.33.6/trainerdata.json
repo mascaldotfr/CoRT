@@ -508,7 +508,7 @@
           "type":"Constant",
           "cast":1,
           "gcd":"Short",
-          "cooldown":120.0,
+          "cooldown":80,
           "duration":[2,4,6,8,10],
           "buffs":{
             "Evade chance":"+30%"
@@ -1102,13 +1102,17 @@
           "description":"A flaming arrow burns whoever crosses its path.",
           "mana":[70,100,130,160,190],
           "type":"Direct",
-          "cast":1.0,
+          "cast":0.0,
           "gcd":"Short",
           "cooldown":20.0,
+          "duration":[3,3,4,4,5],
           "damage":{
-            "Fire":["80-120","190-240","300-360","410-480","520-600"]
+            "Fire (instant)":["80-120","190-240","300-360","410-480","520-600"]
+          },
+          "debuffs":{
+            "Movement speed":["-10%", "-20%", "-30%", "-40%", "-50%"]
           }
-        },
+	},
         {
           "id":239,
           "name":"Ethereal arrow",
@@ -1230,20 +1234,21 @@
         },
         {
           "id":227,
-          "name":"Finger crush",
+          "name":"Skin Piercer",
           "description":"Attack centered in the opponents hands, it stops her from wielding her weapon.",
           "mana":[150,175,200,225,250],
           "type":"Constant",
           "cast":0.5,
           "gcd":"Short",
-          "cooldown":40.0,
-          "duration":30.0,
+          "cooldown":60.0,
+          "duration":[3,3,4,4,5],
           "range":0.0,
           "debuffs":{
-            "Opponent critical hit chance":["-12%","-16%","-20%","-24%","-28%"],
-            "Opponent attack speed":["-6%","-8%","-10%","-12%","-15%"],
-            "Only blockable at 100%":true
-          }
+            "Resistance to Physical and Magical Damage":["-10%","-20%","-30%","-40%","-50%"]
+          },
+          "damage": {
+            "Piercing (instant)":[30,60,100,180,300]
+	  }
         },
         {
           "id":226,
