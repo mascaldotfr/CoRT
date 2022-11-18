@@ -202,6 +202,7 @@ function load_tree() {
 		$.ajax({
 			'async': false,
 			'global': false,
+			'cache': false,
 			'url': "data/" + trainerdataversion + "/trainerdata.json",
 			'dataType': "json",
 			'success': function (data) {
