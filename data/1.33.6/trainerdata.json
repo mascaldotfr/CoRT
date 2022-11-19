@@ -1235,7 +1235,7 @@
         {
           "id":227,
           "name":"Skin Piercer",
-          "description":"Attack centered in the opponents hands, considerably reducing their resistances. Works only if the enemy has these resistance raised.",
+          "description":"Attack centered in the opponent's skin, considerably reducing their resistances. Works only if the enemy has these resistance raised.",
           "mana":[150,175,200,225,250],
           "type":"Constant",
           "cast":0.5,
