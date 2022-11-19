@@ -1235,7 +1235,7 @@
         {
           "id":227,
           "name":"Skin Piercer",
-          "description":"Attack centered in the opponents hands, it stops her from wielding her weapon.",
+          "description":"Attack centered in the opponents hands, considerably reducing their resistances. Works only if the enemy has these resistance raised.",
           "mana":[150,175,200,225,250],
           "type":"Constant",
           "cast":0.5,
@@ -1248,7 +1248,7 @@
           },
           "damage": {
             "Piercing (instant)":[30,60,100,180,300]
-	  }
+          }
         },
         {
           "id":226,
