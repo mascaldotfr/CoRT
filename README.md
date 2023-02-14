@@ -14,9 +14,9 @@ client side.
 
 ## Known issues
 
-* display on mobile devices is weird due to flex in the WM skill row. it's not
+* ~display on mobile devices is weird due to flex in the WM skill row. it's not
   easy to fix, as even regnumsentinel had the issue. Use your device in
-  landscape mode if it really bothers you.
+  landscape mode if it really bothers you.~ *This is fixed on most devices.*
 * shared urls are long, this could be fixed by using an url shortener api, but
   free plans may be quickly limit rated and they're not permanent. I don't want
   to have a database server, since it then would require a separate server and

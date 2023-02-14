@@ -23,7 +23,7 @@ select, button {
 	padding-bottom: 1em;
 }
 h1 {
-	text-align: center; 
+	text-align: center;
 }
 .bugnum {
 	text-align: center;
@@ -42,13 +42,13 @@ h1 {
 }
 .points { text-align:center; visibility: hidden; }
 .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
-	display: inline-flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
 	margin-bottom: .5em;
 	width: 100%;
 }
 
-.p0, .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10 { flex: 1; padding-bottom: 6px; margin-left: 15px; }
+.p0, .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10 { padding-bottom: .5em; margin-left: 1em; }
 .p0 .icon { background-position: 0px 0px; margin-right: 24px;}
 .p1 .icon { background-position: -48px 0px; margin-right: 24px; }
 .p2 .icon { background-position: -96px 0px; margin-right: 24px; }
