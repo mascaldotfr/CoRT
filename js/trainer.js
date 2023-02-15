@@ -182,7 +182,8 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 	// discipline points are always > 1, but skill points must be 0 to simplify code later.
 	skilllvl = spellpos == 0 ? 1 : 0;
 	icon = ` 	<div class="p${spellpos}">
-				<div class="icon" style="background-image:url(${iconsrc});" title="${spellname}" treename="${treename}">
+				<div class="icon" style="background-image:url(${iconsrc});"
+				title="${spellname}" treename="${treename}" iconurl="${iconsrc}" spellpos="${spellpos}">
 		`;
 	// WM tree; don't show skill points
 	if (treepos != wmrow || (treepos == wmrow && spellpos == 0)) {
@@ -289,7 +290,6 @@ function format_buffs(buff) {
 }
 
 function tablify(rowname, columns, color = "") {
-	console.log(typeof columns);
 	if (typeof columns == "string" || typeof columns == "boolean" || typeof columns == "number") {
 		if (columns.length == 0 || columns == true) {
 			columns = "yes"
@@ -307,10 +307,19 @@ function tablify(rowname, columns, color = "") {
 function display_spell(spellinfo) {
 	spellname = $(spellinfo).attr("title");
 	treename = $(spellinfo).attr("treename");
+	iconclass = $(spellinfo).attr("class");
+	iconurl = $(spellinfo).attr("iconurl");
+	// icon position in spelltree
+	iconposition = $(spellinfo).attr("spellpos");
+	console.log(iconurl);
 	spellinfo = trainerdata.disciplines[treename].spells.filter(element => element.name == spellname)[0];
+	// don't duplicate css, redraw an icon
 	spellhtml = `
-		<h3>${spellinfo.name}</h3>
-		<p><i>${spellinfo.description}</i></p>
+		<div class="p${iconposition}">
+		<div class="${iconclass}" style="background-image:url(${iconurl});"></div>
+		<h2>${spellinfo.name}</h2>
+		<p class="description"><i>${spellinfo.description}</i></p>
+		</div>
 		<p><b>Type:</b> ${spellinfo.type}</p>`;
 	tabularhtml = ""
 	if ("cast" in spellinfo)
