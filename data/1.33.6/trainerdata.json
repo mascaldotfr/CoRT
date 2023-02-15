@@ -749,6 +749,7 @@
           "gcd":"Short",
           "cooldown":20,
           "duration":[15, 20, 25, 35, 50],
+          "weapon_interval": true,
           "buffs":{
             "Reveal": true
           }
@@ -822,13 +823,14 @@
         },
         {
           "id":217,
-          "name":"Wild Defence",
+          "name":"Wild Defense",
           "description":"Part of the damage received by the hunter is redirected to the pet.",
           "mana":["75","100","125","150","175"],
           "type":"Constant",
           "cast":1.0,
           "gcd":"Short",
           "duration":30,
+          "weapon_interval": true,
           "buffs":{
             "Redirected Damage":["5%","10%","15%","20%","30%"]
           }
@@ -896,7 +898,7 @@
           }
         },
         {
-          "name":"Natures Fury",
+          "name":"Nature's Fury",
           "description":"The pet makes a pact with nature and converts surrounding matter into a dangerous explosion.",
           "type":"Direct",
           "mana":[120,210,300,390,480],
@@ -904,6 +906,7 @@
           "cast":2.0,
           "area":10,
           "gcd":"Short",
+          "weapon_interval": true,
           "buffs":{
             "Piercing Damage":[125,200,290,395,500],
             "Fire Damage":[125,200,290,395,500],
@@ -965,6 +968,7 @@
           "cooldown":60.0,
           "duration":30,
           "area":10.0,
+          "weapon_interval": true,
           "buffs":{
             "Movement speed":"+20%"
           }
