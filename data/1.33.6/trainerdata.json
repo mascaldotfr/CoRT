@@ -2236,6 +2236,7 @@
           "cooldown":60,
           "cast":1.5,
           "gcd":"Short",
+	  "weapon_interval": true,
           "buffs":{
             "Weapon damage bonus": [ "+10%", "+20%", "+30%", "+40%", "+50%" ]
           },
