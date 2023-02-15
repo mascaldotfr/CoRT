@@ -64,7 +64,6 @@ $(document).ready(function() {
 	}
 });
 
-
 function manage_dataset_versions() {
 	// valid dataset ?
 	if (!trainerdatasets.includes(trainerdataversion)) {
@@ -72,11 +71,17 @@ function manage_dataset_versions() {
 		trainerdataversion = trainerdatasets[0];
 	}
 	// display a warning if an old version of the datasets are used, and
-	// remove it if the latest dataset is loaded alter.
+	// remove it if the latest dataset is loaded after.
 	$("#oldversion").remove();
 	if (trainerdataversion != trainerdatasets[0]) {
-		$("#t-points").append(`	<p class="red" id="oldversion"><b>This setup is being made with an older version
-					(${trainerdataversion}) of CoR, and may be out of date.</p>`);
+		$("#t-points").append(`	<div id="oldversion">
+					<p class="red"><b>This setup is being made with an older version
+					(${trainerdataversion}) of CoR, and may be out of date.<p>
+					<p><a href="javascript:upgrade_setup_to_new_version()">Click here</a>
+					to upgrade this setup's discipline and power points to the latest
+					version (${trainerdatasets[0]}).</p>
+					</div>
+					`);
 	}
 }
 
@@ -102,8 +107,18 @@ $("#t-load").on("click", function() {
 	load_tree();
 });
 
+function upgrade_setup_to_new_version() {
+	trainerdataversion = trainerdatasets[0];
+	console.log(save_setup_to_url());
+	window.location.assign(save_setup_to_url());
+}
 
 $("#t-save").on("click", function() {
+	window.prompt("Here is the link to your setup:", save_setup_to_url());
+
+});
+
+function save_setup_to_url() {
 	if ($("#t-trainer").children().length == 0) {
 		console.log("share clicked but nothing loaded");
 		return;
@@ -122,12 +137,11 @@ $("#t-save").on("click", function() {
 			setup = setup.concat("+");
 		}
 	}
-	window.prompt("Here is the link to your setup:",
-		window.location.origin + window.location.pathname +
-			"?d=" + trainerdataversion +
-			"&s=" + LZString.compressToEncodedURIComponent(setup));
+	return window.location.origin + window.location.pathname +
+	       "?d=" + trainerdataversion + "&s=" +
+		LZString.compressToEncodedURIComponent(setup);
+}
 
-});
 
 function load_setup_from_url() {
 	decompressed_setup = LZString.decompressFromEncodedURIComponent(skillset);
