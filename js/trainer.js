@@ -130,7 +130,12 @@ $("#t-save").on("click", function() {
 });
 
 function load_setup_from_url() {
-	setup = LZString.decompressFromEncodedURIComponent(skillset).split("+");
+	decompressed_setup = LZString.decompressFromEncodedURIComponent(skillset);
+	if (decompressed_setup == null) {
+		window.alert("Your shared link is bad. Bailing out, sorry!");
+		return;
+	}
+	setup = decompressed_setup.split("+");
 	$("#t-class").val(setup.shift());
 	$("#t-level").val(setup.shift());
 	manage_dataset_versions();
@@ -309,7 +314,7 @@ function display_spell(spellinfo) {
 	}
 	$("#skillinfo").html(spellhtml);
 }
-	
+
 
 function power_change(power) {
 	change_direction = power.className;
