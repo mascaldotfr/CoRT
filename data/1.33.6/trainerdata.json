@@ -3036,6 +3036,7 @@
           "type":"Direct",
           "cast":10.0,
           "gcd":"Very Short",
+          "weapon_interval": true,
           "cooldown":1200.0,
           "duration":15.0
         },
