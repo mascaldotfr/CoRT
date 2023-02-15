@@ -316,6 +316,9 @@ function display_spell(spellinfo) {
 			spellhtml = spellhtml.concat(`<p class="red"><b>${type}:  ${spellinfo.damage[type].toString()}</b></p>`);
 		}
 	}
+	if ("weapon_interval" in spellinfo) {
+		spellhtml = spellhtml.concat(`<p class="purple"><b>Affected by weapon interval</b></p>`);
+	}
 	if ("buffs" in spellinfo) {
 		for (type in spellinfo.buffs) {
 			spellhtml = spellhtml.concat(`<p class="blue"><b>${type}${format_buffs(spellinfo.buffs[type])}</b></p>`);

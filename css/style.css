@@ -73,6 +73,7 @@ h1 {
 .red { color: #FF0011; }
 .blue { color: #0088FF; }
 .green { color: #00FF11; }
+.purple { color: #a46aff; }
 .skillinfo, .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
 	background-color: #313131 !important;
 }
