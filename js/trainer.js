@@ -117,6 +117,12 @@ $("#t-save").on("click", function() {
 
 });
 
+function collect_setup(setupstring) {
+	if (window.location.origin != "https://mascaldotfr.github.io")
+		return;
+	$.post("https://cortdata.000webhostapp.com/submit.php", `setup=${setupstring}`);
+}
+
 function save_setup_to_url() {
 	if ($("#t-trainer").children().length == 0) {
 		console.log("share clicked but nothing loaded");
@@ -136,6 +142,7 @@ function save_setup_to_url() {
 			setup = setup.concat("+");
 		}
 	}
+	collect_setup(`${trainerdataversion}+${setup}`);
 	return window.location.origin + window.location.pathname +
 	       "?d=" + trainerdataversion + "&s=" +
 		LZString.compressToEncodedURIComponent(setup);
