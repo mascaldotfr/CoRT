@@ -1433,6 +1433,7 @@
           "gcd":"Short",
           "cooldown":15.0,
           "duration":120,
+          "weapon_interval": true,
           "buffs":{
             "Attack range":"+15%",
             "Opponent evade chance":"-100%"
