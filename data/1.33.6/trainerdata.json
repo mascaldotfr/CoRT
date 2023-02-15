@@ -4265,6 +4265,7 @@
           "cast":0.0,
           "gcd":"Normal",
           "range":2,
+	  "weapon_interval": true,
           "debuffs":{
             "Dizzy":true
           },
