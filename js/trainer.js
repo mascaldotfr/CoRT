@@ -313,6 +313,12 @@ function display_spell(spellinfo) {
 	if ("weapon_interval" in spellinfo) {
 		spellhtml = spellhtml.concat(`<p class="purple"><b>Affected by weapon interval</b></p>`);
 	}
+	if ("blockable_100" in spellinfo) {
+		spellhtml = spellhtml.concat(`<p class="purple"><b>Only blockable at 100%</b></p>`);
+	}
+	if ("resistible_100" in spellinfo) {
+		spellhtml = spellhtml.concat(`<p class="purple"><b>Only resistible at 100%</b></p>`);
+	}
 	if ("damage" in spellinfo) {
 		for (type in spellinfo.damage) {
 			spellhtml = spellhtml.concat(`<p class="red"><b>${type}:  ${spellinfo.damage[type].toString()}</b></p>`);
