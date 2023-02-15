@@ -109,7 +109,6 @@ $("#t-load").on("click", function() {
 
 function upgrade_setup_to_new_version() {
 	trainerdataversion = trainerdatasets[0];
-	console.log(save_setup_to_url());
 	window.location.assign(save_setup_to_url());
 }
 
