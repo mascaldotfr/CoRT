@@ -2943,9 +2943,6 @@
           "range":25.0,
           "blockable_100":true,
           "debuffs":{
-            "Resist magical damage":[ "-10%", "-12%", "-14%", "-17%", "-21%" ]
-          },
-          "damage":{
             "Fire protection":[ "-20%", "-25%", "-30%", "-35%", "-40%" ],
             "Ice protection":[ "-20%", "-25%", "-30%", "-35%", "-40%" ],
             "Lightning protection":[ "-20%", "-25%", "-30%", "-35%", "-40%" ]
