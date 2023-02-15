@@ -3109,6 +3109,7 @@
           "type":"Direct",
           "description":"Increases the effectiveness of attack and damage.",
           "mana":[40,65,90,110,130],
+	  "weapon_interval": true,
           "damage":{
             "Attack Damage":"100%",
             "Slashing":["30-50","50-80","90-130","120-150","150-200"]
@@ -3136,6 +3137,7 @@
           "description":"A strike to the limbs hinders mobility.",
           "duration":30,
           "mana":[84, 111, 138, 165, 192],
+	  "weapon_interval": true,
           "debuffs":{
             "Movement Speed":["-10%","-15%","-20%","-26%","-33%"],
             "Only blockable at 100%":true
@@ -3158,6 +3160,7 @@
           "type":"Direct",
           "description":"A double cross cut is executed.",
           "mana":[120,140,160,180,200],
+	  "weapon_interval": true,
           "damage":{
             "Attack Damage":"100%",
             "Attack Damage (Bonus)":["+20/25%","+30/35%","+40/45%","+50/55%","+60/65%"]
@@ -3172,6 +3175,7 @@
           "description":"A mighty attack shocks the opponent, who receives damage and loses evasive abilities.",
           "mana":[60,90,120,150,180],
           "duration":[15,20,25,30,35],
+	  "weapon_interval": true,
           "damage":{
             "Attack Damage":["100%"]
           },
@@ -3189,6 +3193,7 @@
           "type":"direct",
           "description":"Executes an arc sweeping blow. All of the enemies in the area receive the weapon damage.",
           "mana":[140,170,200,230,260],
+	  "weapon_interval": true,
           "damage":{
             "Attack Damage":["60%","75%","90%","105%","120%"],
             "Slashing":["120","140","160","180","200"]
@@ -3211,6 +3216,7 @@
           "duration":40,
           "description":"A cut to the forehead fills with blood the opponent's vision.",
           "mana":[198,219,240,261,282],
+	  "weapon_interval": true,
           "damage":{
             "Attack Damage":"100%"
           },
@@ -3228,6 +3234,7 @@
           "description":"A 360 degree atack, destabilizes and damages the enemies that are next to the warrior.",
           "mana":[380,410,440,470,500],
           "duration":[1,2,3,4,5],
+	  "weapon_interval": true,
           "damage":{
             "Attack Damage":["80%","90%","100%","120%","150%"],
             "Slashing":[50,100,150,200,250]
@@ -3249,6 +3256,7 @@
           "cooldown":6,
           "cast":0,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "damage":{
             "Attack damage":"100%",
             "Blunt":["40-60", "60-100", "100-140", "140-180", "180-240"]
@@ -3275,6 +3283,7 @@
           "duration":[4,5,6,7,8],
           "cooldown":40,
           "cast":0.0,
+	  "weapon_interval": true,
           "gcd":"Normal",
           "debuffs":{
             "Immobilize":true
@@ -3299,6 +3308,7 @@
           "duration":[10,14,18,23,30],
           "cooldown":60,
           "cast":0.0,
+	  "weapon_interval": true,
           "gcd":"Normal",
           "debuffs":{
             "Constitution":["-5", "-10", "-15", "-20", "-25"]
@@ -3328,6 +3338,7 @@
           "cooldown":80,
           "cast":0.0,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "debuffs":{
             "Dispel positive powers":[ "1", "1", "1", "2", "2" ],
             "Dispel chance":[ "15%", "30%", "45%", "70%", "100%" ]
@@ -3353,6 +3364,7 @@
           "cooldown":40,
           "cast":0.0,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "debuffs":{
             "Dizzy":true
           },
@@ -3369,6 +3381,7 @@
           "cooldown":180,
           "cast":1.5,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "area":6,
           "debuffs":{
             "Stun":true
@@ -3391,6 +3404,7 @@
           "cooldown":6,
           "cast":0.0,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "range":0,
           "buffs":{
             "Attack damage":"100%"
@@ -3421,6 +3435,7 @@
           "cooldown":40,
           "cast":0.0,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "range":0.0,
           "buffs":{
             "Immobilize":true
@@ -3446,6 +3461,7 @@
           "cooldown":30,
           "cast":0.5,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "range":0,
           "buffs":{
             "Attack damage":["+120%", "+130%", "+140%", "+150%", "+170%"]
@@ -3460,6 +3476,7 @@
           "cooldown":60,
           "cast":0.5,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "range":8,
           "buffs":{
             "Attack damage":"+100%"
@@ -3481,6 +3498,7 @@
           "cooldown":10,
           "cast":0.0,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "range":0,
           "damage":{
             "Attack damage":"+100%"
@@ -3506,6 +3524,7 @@
           "cooldown":70,
           "cast":1.5,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "damage":{
             "Piercing damage":[120, 140, 160, 180, 200]
           },
@@ -3522,6 +3541,7 @@
           "cooldown":180,
           "cast":1.5,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "area":6,
           "buffs":{
             "Attack damage":["+80%", "+90%", "+100%", "+120%", "+150%"],
@@ -3569,7 +3589,8 @@
           "type":"Constant",
           "cooldown":40,
           "cast":0.0,
-          "gcd":"Normal"
+          "gcd":"Normal",
+	  "weapon_interval": true
         },
         {
           "name":"Martial defense",
@@ -3601,6 +3622,7 @@
           "cooldown":30,
           "cast":0.0,
           "gcd":"Short",
+	  "weapon_interval": true,
           "debuffs":{
             "Resist dizzy":["-10%", "-20%", "-30%", "-40%", "-50%"]
           },
@@ -3646,6 +3668,7 @@
           "cooldown":60,
           "cast":0.0,
           "gcd":"Normal",
+	  "weapon_interval": true,
           "debuffs":{
             "Protection":[ "-40%", "-47%", "-54%", "-61%", "-68%" ],
             "Block chance":[ "-40%", "-45%", "-50%", "-55%", "-60%" ]
