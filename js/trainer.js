@@ -311,13 +311,13 @@ function display_spell(spellinfo) {
 		spellhtml = spellhtml.concat(`<p><b>Cooldown:</b> ${spellinfo.cooldown.toString()}s</p>`);
 	if ("duration" in spellinfo)
 		spellhtml = spellhtml.concat(`<p><b>Duration:</b> ${spellinfo.duration.toString()}s</p>`);
+	if ("weapon_interval" in spellinfo) {
+		spellhtml = spellhtml.concat(`<p class="purple"><b>Affected by weapon interval</b></p>`);
+	}
 	if ("damage" in spellinfo) {
 		for (type in spellinfo.damage) {
 			spellhtml = spellhtml.concat(`<p class="red"><b>${type}:  ${spellinfo.damage[type].toString()}</b></p>`);
 		}
-	}
-	if ("weapon_interval" in spellinfo) {
-		spellhtml = spellhtml.concat(`<p class="purple"><b>Affected by weapon interval</b></p>`);
 	}
 	if ("buffs" in spellinfo) {
 		for (type in spellinfo.buffs) {
