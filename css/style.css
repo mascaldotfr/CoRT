@@ -70,14 +70,45 @@ h1 {
 .icon .skilllvl { background-color: white; color: black; border-radius: 4px;}
 .skillspinner { margin-left: 6px; }
 .minus, .plus { width: 20px; }
-.red { color: #FF0011; }
-.blue { color: #0088FF; }
+.red { color: #ffa1a7; }
+.blue { color: #9ccdf9; }
 .green { color: #00FF11; }
 .purple { color: #a46aff; }
-.skillinfo, .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
+#skillinfo, .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
 	background-color: #313131 !important;
 }
-.skillinfo p, h3 {
+
+#skillinfo {
+	padding-bottom: 2em;
+}
+#skillinfo h3 {
+	padding: 1em;
+	margin: 0;
+}
+#skillinfo p {
 	margin: .1em;
 	margin-left: 1em;
+}
+#skillinfo table {
+	margin-left: 1em;
+	margin-right: 1em;
+	margin-top: 1em;
+	border-collapse: collapse;
+}
+#skillinfo th {
+	text-align: left;
+	border: 1px solid white;
+	padding:.25em 1em .25em 1em;
+}
+#skillinfo thead {
+	background-color: #212121;
+}
+#skillinfo thead > tr > th {
+	text-align: center;
+	padding:.25em 1em .25em 1em;
+}
+#skillinfo td {
+	text-align: center;
+	padding:.25em 1em .25em 1em;
+	border: 1px solid white;
 }

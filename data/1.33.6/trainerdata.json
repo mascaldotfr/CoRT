@@ -1274,7 +1274,7 @@
           "duration":30.0,
           "range":0.0,
           "damage":{
-            "Attack damage +125%":true
+            "+125% Attack":true
           },
           "debuffs":{
             "Critical chance reduction":["-20%","-30%","-40%","-50%","-75%"],
@@ -2065,10 +2065,10 @@
           "gcd":"Very Short",
           "range":8.0,
           "buffs":{
-            "Health":[ "+200", "+800", "+1400", "+1400", "+2000" ],
-            "Mana":"+30% starting level 2",
-            "Armour bonus":"+40% starting level 3",
-            "Sanctuary":"starting level 4 - 8s",
+            "Health":["+200", "+800", "+1400", "+1400", "+2000"],
+            "Mana":["-", "+30%", "+30%", "+30%", "+30%"],
+            "Armour bonus":["-", "-", "+40%", "+40%", "+40%"],
+            "Sanctuary (seconds)":["-", "-", "-", "-", "8"],
             "Revive":true
           }
         },
@@ -2168,7 +2168,7 @@
             "Resurrection Dizziness":true,
             "Revive":true,
             "Health":["+500", "+600", "+700", "+800", "+1000"],
-            "Sanctuary":"starting level 5 - 8s"
+            "Sanctuary (s)":["-", "-", "-", "-", "8"]
           }
         }
       ]
@@ -2324,7 +2324,7 @@
           "cast":3.0,
           "gcd":"Very Short",
           "buffs":{
-            "Ranged received damage":"starting level 5  -10%"
+            "Ranged received damage":["-", "-", "-", "-", "-10%"]
           },
           "debuffs":{
             "Opponent attack speed":["-3%", "-6%", "-9%", "-12%", "-15%"]
@@ -2963,7 +2963,7 @@
           "range":30.0,
           "damage":{
             "Fire (instant)":[ "200-240", "260-330", "350-430", "450-540", "580-680" ],
-            "Damage (per second)":[ 25, 30, 35, 45, 60]
+            "Fire (per second)":[ 25, 30, 35, 45, 60]
           }
         },
         {
@@ -3080,7 +3080,9 @@
           "cooldown":90.0,
           "duration":5.0,
           "damage":{
-            "Piercing":"+750",
+            "Piercing":"+750"
+          },
+          "debuffs":{
             "Immobilise":true
           }
         },
@@ -3183,7 +3185,7 @@
           "weapon_interval": true,
           "resistible_100":true,
           "damage":{
-            "Attack Damage":["100%"]
+            "Attack":["100%", "100%", "100%", "100%", "100%"]
           },
           "debuffs":{
             "Evade Chance":["-50%","-60%","-70%","-80%","-100%"],
@@ -3423,7 +3425,7 @@
           "description":"Improves piercing damage when active.",
           "mana":[60,80,100,120,140],
           "type":"Constant",
-          "duration":[90],
+          "duration":90.0,
           "cooldown":120,
           "cast":0.0,
           "gcd":"Short",
@@ -4288,7 +4290,7 @@
           "gcd":"Short",
           "range":2.0,
           "buffs":{
-            "Health (chance)": [ "+100 - 30%chance", "+110 - 45%chance", "+120 - 60%chance", "+130 - 80%chance", "+150 - 100%chance"],
+            "Health (chance)": [ "+100 (30%)", "+110 (45%)", "+120 (60%)", "+130 (80%)", "+150 (100%)"],
             "Dispel": ["freeze", "freeze / stun", "freeze / immobilize / stun", "freeze / immobilize / stun / knock down", "negative powers"]
           }
         },

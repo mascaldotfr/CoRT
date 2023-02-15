@@ -288,6 +288,22 @@ function format_buffs(buff) {
 	}
 }
 
+function tablify(rowname, columns, color = "") {
+	console.log(typeof columns);
+	if (typeof columns == "string" || typeof columns == "boolean" || typeof columns == "number") {
+		if (columns.length == 0 || columns == true) {
+			columns = "yes"
+		}
+		return `<tr><th class="${color}">${rowname}</th><td colspan=5>${columns}</td></tr>`;
+	}
+	else {
+		htmlcolumns = "";
+		columns.forEach( (column) => htmlcolumns = htmlcolumns.concat(`<td>${column}</td>`) );
+		return `<tr><th class="${color}">${rowname}</th>${htmlcolumns}</tr>`;
+	}
+
+}
+
 function display_spell(spellinfo) {
 	spellname = $(spellinfo).attr("title");
 	treename = $(spellinfo).attr("treename");
@@ -296,10 +312,9 @@ function display_spell(spellinfo) {
 		<h3>${spellinfo.name}</h3>
 		<p><i>${spellinfo.description}</i></p>
 		<p><b>Type:</b> ${spellinfo.type}</p>`;
+	tabularhtml = ""
 	if ("cast" in spellinfo)
 		spellhtml = spellhtml.concat(`<p><b>Cast:</b> ${spellinfo.cast.toString()}s</p>`);
-	if ("mana" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Mana:</b> ${spellinfo.mana.toString()}</p>`);
 	if ("gcd" in spellinfo)
 		spellhtml = spellhtml.concat(`<p><b>Global Cooldown:</b> ${spellinfo.gcd.toString()}</p>`);
 	if ("range" in spellinfo)
@@ -308,31 +323,37 @@ function display_spell(spellinfo) {
 		spellhtml = spellhtml.concat(`<p><b>Area:</b> ${spellinfo.area.toString()}</p>`);
 	if ("cooldown" in spellinfo)
 		spellhtml = spellhtml.concat(`<p><b>Cooldown:</b> ${spellinfo.cooldown.toString()}s</p>`);
-	if ("duration" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Duration:</b> ${spellinfo.duration.toString()}s</p>`);
-	if ("weapon_interval" in spellinfo) {
+	if ("weapon_interval" in spellinfo)
 		spellhtml = spellhtml.concat(`<p class="purple"><b>Affected by weapon interval</b></p>`);
-	}
-	if ("blockable_100" in spellinfo) {
+	if ("blockable_100" in spellinfo)
 		spellhtml = spellhtml.concat(`<p class="purple"><b>Only blockable at 100%</b></p>`);
-	}
-	if ("resistible_100" in spellinfo) {
+	if ("resistible_100" in spellinfo)
 		spellhtml = spellhtml.concat(`<p class="purple"><b>Only resistible at 100%</b></p>`);
-	}
+	if ("mana" in spellinfo)
+		tabularhtml = tabularhtml.concat(tablify("Mana", spellinfo.mana));
+	if ("duration" in spellinfo)
+		tabularhtml = tabularhtml.concat(tablify("Duration (s)", spellinfo.duration));
 	if ("damage" in spellinfo) {
 		for (type in spellinfo.damage) {
-			spellhtml = spellhtml.concat(`<p class="red"><b>${type}:  ${spellinfo.damage[type].toString()}</b></p>`);
-		}
-	}
-	if ("buffs" in spellinfo) {
-		for (type in spellinfo.buffs) {
-			spellhtml = spellhtml.concat(`<p class="blue"><b>${type}${format_buffs(spellinfo.buffs[type])}</b></p>`);
+			tabularhtml = tabularhtml.concat(tablify(`${type} damage`, spellinfo.damage[type], "red"));
 		}
 	}
 	if ("debuffs" in spellinfo) {
 		for (type in spellinfo.debuffs) {
-			spellhtml = spellhtml.concat(`<p class="red"><b>${type}${format_buffs(spellinfo.debuffs[type])}</b></p>`);
+			tabularhtml = tabularhtml.concat(tablify(`${type}`, spellinfo.debuffs[type], "red"));
 		}
+	}
+	if ("buffs" in spellinfo) {
+		for (type in spellinfo.buffs) {
+			tabularhtml = tabularhtml.concat(tablify(`${type}`, spellinfo.buffs[type], "blue"));
+		}
+	}
+	if (tabularhtml.length != 0) {
+		theader = `<div style="overflow-x:auto;"><table><thead><tr>
+			   <th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+			  </tr></thead>`;
+		tfooter = "</table></div>";
+		spellhtml = theader + spellhtml + tabularhtml + tfooter;
 	}
 	$("#skillinfo").html(spellhtml);
 }
