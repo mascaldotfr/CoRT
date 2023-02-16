@@ -1641,7 +1641,7 @@
           "cast":1.0,
           "gcd":"Short",
           "range":25.0,
-          "buffs":{
+          "debuffs":{
             "Convert mana to damage":[ "+5/10", "+10/15", "+15/25", "+25/35", "+35/50"]
           }
         },
@@ -1872,7 +1872,7 @@
           "cast":2.0,
           "gcd":"Very Short",
           "area":10,
-          "buffs":{
+          "debuffs":{
             "Convert mana to damage":[ "+125", "+250", "+375", "+500", "+650" ]
           }
         }
@@ -3336,10 +3336,10 @@
         },
         {
           "name":"Mind squasher",
-          "description":"Strong blow that removes positive effects that remain active on the target.",
+          "description":"Strong blow that removes positive effects that remain active on the target. Can only be used when the main weapon is of blunt damage.",
           "mana":[100,125,150,175,200],
           "type":"Direct",
-          "cooldown":80,
+          "cooldown":100,
           "cast":0.0,
           "gcd":"Normal",
           "weapon_interval": true,
@@ -3469,6 +3469,9 @@
           "range":0,
           "buffs":{
             "Attack damage":["+120%", "+130%", "+140%", "+150%", "+170%"]
+          },
+          "debuffs":{
+            "Convert mana to damage":[ "100", "150", "200", "250", "350" ]
           }
         },
         {
@@ -3508,8 +3511,8 @@
             "Attack":"+100%"
           },
           "debuffs":{
-            "Cast speed":["-5%", "-9%", "-13%", "-17%", "-25%"],
-            "Concentration":["-0%", "-0%", "-0%", "-0%", "-50%"]
+            "Cast speed":["-10%", "-15%", "-20%", "-25%", "-40%"],
+            "Healing Bonus":["-10%", "-20%", "-30%", "-40%", "-60%"]
           }
         },
         {
@@ -3660,7 +3663,7 @@
           "gcd":"Short",
           "range":12,
           "debuffs":{
-            "Movement speed": ["-6%", "-7%", "-8%", "-9%", "-10%"]
+            "Movement speed": ["-6%", "-7%", "-9%", "-11%", "-15%"]
           }
         },
         {
