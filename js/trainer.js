@@ -107,10 +107,15 @@ $("#t-load").on("click", function() {
 	load_tree();
 });
 
-function upgrade_setup_to_new_version() {
-	trainerdataversion = trainerdatasets[0];
-	window.location.assign(save_setup_to_url());
-}
+$("#t-level").change(function() {
+	selectedllevel = $("#t-level").val();
+	// Upgrade does not work if no trees are loaded, you are level 60
+	// or if the requested level is lower than your current level
+	if (currlevel == 0 || currlevel == maxlevel || currlevel > selectedllevel)
+		return;
+	currlevel = selectedllevel;
+	window.location.assign(save_setup_to_url(false));
+});
 
 $("#t-save").on("click", function() {
 	if ($("#t-trainer").children().length == 0) {
@@ -127,7 +132,12 @@ function collect_setup(setupstring) {
 	$.post("https://cortdata.000webhostapp.com/submit.php", `setup=${setupstring}`);
 }
 
-function save_setup_to_url() {
+function upgrade_setup_to_new_version() {
+	trainerdataversion = trainerdatasets[0];
+	window.location.assign(save_setup_to_url());
+}
+
+function save_setup_to_url(shared = true) {
 	setup = "";
 	setup = setup.concat($("#t-class option:selected").val()) + "+";
 	setup = setup.concat($("#t-level option:selected").text()) + "+";
@@ -142,12 +152,12 @@ function save_setup_to_url() {
 			setup = setup.concat("+");
 		}
 	}
-	collect_setup(`${trainerdataversion}+${setup}`);
+	if (shared == true)
+		collect_setup(`${trainerdataversion}+${setup}`);
 	return window.location.origin + window.location.pathname +
 	       "?d=" + trainerdataversion + "&s=" +
 		LZString.compressToEncodedURIComponent(setup);
 }
-
 
 function load_setup_from_url() {
 	decompressed_setup = LZString.decompressFromEncodedURIComponent(skillset);
@@ -207,7 +217,6 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 	icon = icon.concat(`</div>`);
 	return icon;
 }
-
 
 function load_tree() {
 	base_skills = class_type_masks[currclass] & 0xF0;
