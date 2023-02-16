@@ -3614,7 +3614,7 @@
           "cast":0.0,
           "gcd":"Short",
           "buffs":{
-            "Resists next crowd control effect":" "
+            "Resists next crowd control effect":true
           }
         },
         {
