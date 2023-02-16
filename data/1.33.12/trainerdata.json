@@ -4127,7 +4127,8 @@
           "range":25.0,
           "debuffs":{
             "Increase aggressiveness":[150, 300, 500, 1000, 1500],
-            "Protection":["-40%", "-50%", "-60%", "-70%", "-80%"]
+            "Protection":["-20%", "-30%", "-40%", "-50%", "-60%"],
+            "Damage malus":["-3%", "-5%", "-7%", "-10%", "-15%"]
           }
         },
         {
@@ -4200,7 +4201,7 @@
           "gcd":"Normal",
           "range":0,
           "buffs":{
-            "Health":[150, 225, 300, 375, 450]
+            "Health":["+200", "+250" , "+450", "+600", "+1000"]
           }
         },
         {
@@ -4375,6 +4376,9 @@
           "area":10.0,
           "buffs":{
             "Resist magical damage":["+10%", "+20%", "+30%", "+40%", "+50%"]
+          },
+          "debuffs":{
+            "Cannot cast Deflecting barrier":true
           }
         },
         {
@@ -4389,6 +4393,9 @@
           "area":6,
           "buffs":{
             "Damage received":["-10%", "-15%", "-20%", "-30%", "-40%"]
+          },
+          "debuffs":{
+            "Cannot cast Stars shield":true
           }
         }
       ]
@@ -4471,7 +4478,7 @@
           "cooldown":90.0,
           "duration":1.0,
           "buffs":{
-            "Health":"+200"
+            "Health":"+400"
           }
         },
         {
