@@ -2055,7 +2055,8 @@
           "gcd":"Very Short",
           "range":25,
           "buffs":{
-            "Health":[ "+100", "+250", "+400", "+550", "+700" ]
+            "Health":[ "+100", "+250", "+400", "+550", "+700" ],
+            "Health Bonus":["+1%", "+2%", "+3%", "+4%", "+5%"]
           }
         },
         {
@@ -2206,30 +2207,36 @@
         },
         {
           "name":"Extraplanar bond",
-          "description":"The conjurer magically bonds to its summoning. Part of the received damage is redirected to it. (5% each spell level)",
+          "description":"The conjurer magically bonds to its summoning. Part of the received damage is redirected to it. (10% each spell level)",
           "mana":[ 40, 55, 70, 85, 100 ],
           "type":"Constant",
-          "duration":60,
+          "duration":45,
           "cooldown":60,
           "cast":0.5,
-          "gcd":"Very Short"
+          "gcd":"Very Short",
+          "debuffs": {
+            "Cannot be used with Karma mirror":true
+          }
         },
         {
           "name":"Summon demon",
           "description":"Summons a demon that fights for the conjurer.",
           "mana":[ 90, 110, 130, 150, 200 ],
           "type":"Constant",
-          "duration":30,
+          "duration":[30,35,40,45,60],
           "cooldown":50,
           "cast":3.0,
-          "gcd":"Normal"
+          "gcd":"Normal",
+          "buffs":{
+            "Controllable":["-","-","-","-","yes"]
+          }
         },
         {
           "name":"Material bond",
           "description":"Improves the bond between the summoned creature and the material plane.",
           "type":"Passive",
           "buffs":{
-            "Health":[ "+5%", "+10%", "+15%", "+20%", "+25%" ]
+            "Health":[ "+10%", "+15%", "+22%", "+30%", "+50%" ]
           }
         },
         {
@@ -2250,7 +2257,7 @@
           "description":"Summoned creatures become aggressive, causing additional damage but losing all their armor.",
           "mana":[ 200, 225, 250, 275, 300 ],
           "type":"Constant",
-          "duration":15,
+          "duration":25,
           "cooldown":60,
           "cast":1.5,
           "gcd":"Short",
@@ -2259,7 +2266,7 @@
             "Weapon damage bonus": [ "+10%", "+20%", "+30%", "+40%", "+50%" ]
           },
           "debuffs":{
-            "Protection": "-100%"
+            "Protection": "-75%"
           }
         },
         {
@@ -2302,12 +2309,13 @@
           "description":"Summons a lich that fights for the conjurer.",
           "mana":[ 300, 350, 400, 450, 500 ],
           "type":"Constant",
-          "duration":40,
+          "duration":[40,45,50,55,70],
           "cooldown":60,
           "cast":3.0,
           "gcd":"Normal",
           "buffs":{
-            "Summon":[ "Old Lich", "Lich Apprentice", "Lich Necromancer", "Lord Lich", "Lich Shaman" ]
+            "Summon":[ "Old Lich", "Lich Apprentice", "Lich Necromancer", "Lord Lich", "Lich Shaman" ],
+            "Controllable":["-", "-", "-", "yes", "yes"]
           }
 
         }
@@ -2336,13 +2344,14 @@
           "type":"Constant",
           "duration":40,
           "cooldown":80,
-          "cast":3.0,
+          "cast":2.0,
           "gcd":"Very Short",
           "buffs":{
             "Ranged received damage":["-", "-", "-", "-", "-10%"]
           },
           "debuffs":{
-            "Opponent attack speed":["-3%", "-6%", "-9%", "-12%", "-15%"]
+            "Opponent attack speed":["-3%", "-6%", "-9%", "-12%", "-15%"],
+            "Opponent casting speed":["-3%", "-6%", "-9%", "-12%", "-15%"]
           }
         },
         {
@@ -2386,6 +2395,9 @@
           "gcd":"Short",
           "buffs":{
             "Return damage":[ "+10%", "+15%", "+20%", "+25%", "+30%" ]
+          },
+          "debuffs":{
+            "Cannot be used with Extraplanar bond":true
           }
         },
         {
