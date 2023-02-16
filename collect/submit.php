@@ -15,8 +15,8 @@ $setup_array = explode(" ", $setup);
 $setup_array_length = count($setup_array);
 
 // check basic validity of the request (HTTP method and length) in the same
-// move
-if ($setup_array_length < 17 && $setup_array_length > 19)
+// move. Length is 19 fields for mages, 17 for other classes.
+if ($setup_array_length != 17 && $setup_array_length != 19)
 	wontsavethis("bad length");
 // version
 if (!preg_match("/^\d+\.\d+\.\d+$/", $setup_array[0]))
@@ -35,5 +35,3 @@ for ($i = 2; $i < $setup_array_length; $i++) {
 
 file_put_contents("data/data.txt", $setup . "\n", FILE_APPEND | LOCK_EX);
 ?>
-
-
