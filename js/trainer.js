@@ -478,6 +478,5 @@ function update_tree(treepos) {
 			$(`div[treepos="${treepos}"] .p${i} .icon`).css('filter','brightness(1)');
 		}
 	}
-	$("#skillinfo").html("");
 	return;
 }
