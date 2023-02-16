@@ -844,7 +844,7 @@
           "cooldown":20.0,
           "buffs":{
             "Pet Attack Damage":"-25%",
-            "Attack range":["+2%", "+4%", "+6%", "+10%", "+15%"]
+            "Attack range":["+5%", "+8%", "+12%", "+17%", "+30%"]
           }
         },
         {
@@ -862,7 +862,7 @@
           "description":"The hunter makes a pact with nature to return his pet to life.\n\nWhen pet dies or the character has connected recently, the hunter will have to wait the specified time to use this skill.\n\nThe cast of this skill is lost if the is attacked.\n\nIt is required an appropriate level of Taming to use this skill.",
           "type":"Direct",
           "mana":[320,340,360,380,400],
-          "cooldown":120.0,
+          "cooldown":60.0,
           "cast":5.0,
           "gcd":"Short",
           "buffs":{
@@ -905,10 +905,12 @@
           "area":10,
           "gcd":"Short",
           "weapon_interval": true,
-          "buffs":{
-            "Piercing Damage":[125,200,290,395,500],
-            "Fire Damage":[125,200,290,395,500],
-            "Knock down":3
+          "damage":{
+            "Piercing":[175,280,410,555,750],
+            "Fire":[125,200,290,395,500]
+          },
+          "debuffs":{
+            "Knock down":"3s"
           }
         },
         {
