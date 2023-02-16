@@ -113,6 +113,10 @@ function upgrade_setup_to_new_version() {
 }
 
 $("#t-save").on("click", function() {
+	if ($("#t-trainer").children().length == 0) {
+		window.alert("You need to load trees by clicking on 'Load/Reset' first!");
+		return;
+	}
 	window.prompt("Here is the link to your setup:", save_setup_to_url());
 
 });
@@ -124,10 +128,6 @@ function collect_setup(setupstring) {
 }
 
 function save_setup_to_url() {
-	if ($("#t-trainer").children().length == 0) {
-		console.log("share clicked but nothing loaded");
-		return;
-	}
 	setup = "";
 	setup = setup.concat($("#t-class option:selected").val()) + "+";
 	setup = setup.concat($("#t-level option:selected").text()) + "+";
