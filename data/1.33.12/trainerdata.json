@@ -1612,7 +1612,8 @@
             "Blunt (per second)":[ 33, 42, 50, 58, 70]
           },
           "debuffs":{
-            "Regenerate health":[ "-15%", "-30%", "-45%", "-60%", "-100%" ]
+            "Regenerate health":[ "-15%", "-30%", "-45%", "-60%", "-100%" ],
+            "Healing bonus":[ "-25%", "-35%", "-50%", "-70%", "-100%" ]
           }
         }
       ]
@@ -1751,14 +1752,18 @@
         {
           "name":"Fire magnification",
           "description":"The wizard channels fire damage into her staff.",
-          "mana":[ 100, 130, 160, 190, 210 ],
-          "type":"Constant",
-          "duration":120,
-          "cooldown":120,
+          "mana":[ 150, 180, 210, 240, 270 ],
+          "type":"Activable",
+          "cooldown":60,
           "cast":1.0,
           "gcd":"Short",
           "buffs":{
-            "Fire damage bonus":[ "+5", "+15", "+25", "+35", "+45" ]
+            "Fire damage bonus":[ "+5", "+15", "+25", "+40", "+60" ],
+            "1 extra damage point per Intelligence point after":[80, 80, 80, 80, 70]
+          },
+          "debuffs": {
+            "Protection":["-50%", "-50%", "-40%", "-40%", "-25%"],
+            "Cannot be used with another magnification":true
           }
         },
         {
@@ -1812,14 +1817,18 @@
         {
           "name":"Ice magnification",
           "description":"The wizard channels ice damage into her staff.",
-          "mana":[ 100, 130, 160, 190, 210 ],
-          "type":"Constant",
-          "duration":120,
-          "cooldown":120,
+          "mana":[ 150, 180, 210, 240, 270 ],
+          "type":"Activable",
+          "cooldown":60,
           "cast":1.0,
           "gcd":"Short",
           "buffs":{
-            "Ice damage bonus":[ "+5", "+15", "+25", "+35", "+45" ]
+            "Ice damage bonus":[ "+5", "+15", "+25", "+40", "+60" ],
+            "1 extra damage point per Intelligence point after":[80, 80, 80, 80, 70]
+          },
+          "debuffs": {
+            "Protection":["-50%", "-50%", "-40%", "-40%", "-25%"],
+            "Cannot be used with another magnification":true
           }
         },
         {
@@ -1855,14 +1864,18 @@
         {
           "name":"Lightning magnification",
           "description":"The wizard channels lightning damage into her staff.",
-          "mana":[ 100, 130, 160, 190, 210 ],
-          "type":"Constant",
-          "duration":120,
-          "cooldown":120,
+          "mana":[ 150, 180, 210, 240, 270 ],
+          "type":"Activable",
+          "cooldown":60,
           "cast":1.0,
           "gcd":"Short",
           "buffs":{
-            "Lighting damage bonus":[ "+5", "+15", "+25", "+35", "+45" ]
+            "Lightning damage bonus":[ "+5", "+15", "+25", "+40", "+60" ],
+            "1 extra damage point per Intelligence point after":[80, 80, 80, 80, 70]
+          },
+          "debuffs": {
+            "Protection":["-50%", "-50%", "-40%", "-40%", "-25%"],
+            "Cannot be used with another magnification":true
           }
         },
         {
@@ -2003,14 +2016,14 @@
           "description":"The objective becomes clumsy, gawky and slow.",
           "mana":[ 230, 260, 290, 320, 350 ],
           "type":"Constant",
-          "duration":60,
-          "cooldown":30,
+          "duration":40,
+          "cooldown":60,
           "cast":1.0,
           "gcd":"Very Short",
-          "range":25.0,
+          "range":20.0,
           "debuffs":{
             "Class attribute":[ "-10%", "-15%", "-20%", "-25%", "-30%"],
-            "Movement speed":[ "-2%", "-4%", "-6%", "-8%", "-10%"]
+            "Movement speed":[ "-5%", "-8%", "-11%", "-15%", "-20%"]
           }
         },
         {
