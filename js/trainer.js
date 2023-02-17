@@ -139,8 +139,8 @@ function upgrade_setup_to_new_version() {
 
 function save_setup_to_url(shared = true) {
 	setup = "";
-	setup = setup.concat($("#t-class option:selected").val()) + "+";
-	setup = setup.concat($("#t-level option:selected").text()) + "+";
+	setup = setup.concat(currclass + "+");
+	setup = setup.concat(currlevel + "+");
 	// WM row is always the latest one
 	for (row = 1; row <= wmrow; row++) {
 		// separate discipline skills from power skills
@@ -293,16 +293,6 @@ function load_tree() {
 			display_spell(this);
 		}
 	});
-}
-
-function format_buffs(buff) {
-	// pretty print buffs and debuffs values
-	if (typeof buff == "boolean") {
-		return "";
-	}
-	else {
-		return ": " + buff.toString();
-	}
 }
 
 function tablify(rowname, columns, color = "") {
