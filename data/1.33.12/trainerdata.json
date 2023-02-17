@@ -2621,7 +2621,8 @@
           "range":25.0,
           "blockable_100":true,
           "debuffs":{
-            "Weapon damage bonus":["-30%","-40%","-50%","-60%","-70%"]
+            "Weapon damage bonus":["-30%","-40%","-50%","-60%","-70%"],
+            "Attack speed":"-10%"
           }
         },
         {
@@ -2667,7 +2668,6 @@
             "Piercing":["220-255","350-470","475-635","600-800","850-1150"]
           }
         },
-
         {
           "name":"Fragility",
           "description":"The objective becomes weak, fragile and vulnerable to physical damage.",
@@ -2680,7 +2680,7 @@
           "range":30.0,
           "blockable_100":true,
           "debuffs":{
-            "Resist physical damage":["5%","-10%","-15%","-20%","-25%"]
+            "Resist physical damage":["-5%","-15%","-25%","-35%","-50%"]
           }
         },
 
@@ -2899,7 +2899,8 @@
             "Ice":[ "70-100", "90-120", "100-140", "130-160", "170-200" ]
           },
           "debuffs":{
-            "Movement speed":["-5%", "-10%", "-15%", "-20%", "-30%"]
+            "Movement speed":["-5%", "-10%", "-15%", "-25%", "-40%"],
+            "Movement speed duration":"2s"
           }
         },
         {
@@ -2970,9 +2971,7 @@
           "range":25.0,
           "blockable_100":true,
           "debuffs":{
-            "Fire protection":[ "-20%", "-25%", "-30%", "-35%", "-40%" ],
-            "Ice protection":[ "-20%", "-25%", "-30%", "-35%", "-40%" ],
-            "Lightning protection":[ "-20%", "-25%", "-30%", "-35%", "-40%" ]
+            "Magical damage resistance":["-10%","-15%","-23%","-34%","-50%"]
           }
         },
         {
