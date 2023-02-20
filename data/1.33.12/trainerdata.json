@@ -3810,6 +3810,7 @@
           "cooldown":40,
           "cast":0.5,
           "gcd":"Normal",
+          "weapon_interval":true,
           "debuffs":{
             "Stun":true
           }
@@ -3899,6 +3900,7 @@
           "cooldown":30.0,
           "range":8.0,
           "duration":30.0,
+          "weapon_interval":true,
           "buffs":{
             "Attack damage":["+40%","+55%","+70%","+85%","+100%"]
           },
@@ -3915,6 +3917,7 @@
           "cast":0.5,
           "gcd":"Normal",
           "range":0.0,
+          "weapon_interval":true,
           "debuffs":{
             "Mana":["-20%","-25%","-30%","-35%","-40%"]
           },
@@ -3932,6 +3935,7 @@
           "cast":0.0,
           "gcd":"Normal",
           "range":0,
+          "weapon_interval":true,
           "debuffs":{
             "Dizzy (chance 50%)":true
           },
@@ -3961,6 +3965,7 @@
           "cooldown":45,
           "cast":1.5,
           "gcd":"Normal",
+          "weapon_interval":true,
           "damage":{
             "Blunt":["80-100","130-160","180-210","230-260","280-310"],
             "Attack":["+20%","+40%","+60%","+80%","+100%"]
@@ -3976,6 +3981,7 @@
           "cast":0.0,
           "gcd":"Normal",
           "range":0,
+          "weapon_interval":true,
           "debuffs":{
             "Evade Chance":["-10%","-20%","-30%","-40%","-50%"]
           },
@@ -4015,6 +4021,7 @@
           "cooldown":90,
           "cast":0.5,
           "gcd":"Normal",
+          "weapon_interval":true,
           "debuffs":{
             "Knock down":true
           },
