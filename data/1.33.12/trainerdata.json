@@ -1,5 +1,5 @@
 {
-  "version":"1.33.6",
+  "version":"1.33.12",
   "min_power_level":0,
   "points":{
     "discipline":{
@@ -679,7 +679,9 @@
           "cast":1.5,
           "gcd":"Short",
           "cooldown":20.0,
-          "range":[150,200,250,300,400]
+          "buffs":{
+            "Detection range (m)":[150,200,250,300,400]
+          }
         },
         {
           "id":211,
@@ -735,7 +737,7 @@
           "cooldown":60,
           "duration":6,
           "buffs":{
-            "Bonus":["+50%", "+70%", "+90%", "+110%", "+130%"]
+            "Damage bonus":["+50%", "+70%", "+90%", "+110%", "+130%"]
           }
         },
         {
