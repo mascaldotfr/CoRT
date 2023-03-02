@@ -22,9 +22,17 @@ respawn_time = 109 * 3600;   // 109 hours
 // will run ~ 80 times/boss after all that time.
 first_respawns = { "thorkul": 1666745040, "evendim": 1666803900, "daen": 1666890420 };
 next_respawns = { "evendim": [], "daen": [], "thorkul": [] };
+previous_respawns = first_respawns;
 
 function time_now() {
 	return Math.floor(new Date().getTime() / 1000);
+}
+
+function unixstamp2human(unixstamp) {
+	dt = new Date(unixstamp * 1000);
+	return dt.toLocaleDateString("en-GB", {
+		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
+		hour: 'numeric', minute: 'numeric'});
 }
 
 function get_next_respawns(boss) {
@@ -37,22 +45,18 @@ function get_next_respawns(boss) {
 		if (next_respawns[boss].length == 3)
 			break;
 	}
+	previous_respawns[boss] = next_respawns[boss][0] - respawn_time;
 	console.log(boss, "previous respawn (to put in js file) is",
-		next_respawns[boss][0] - respawn_time);
+		previous_respawns[boss]);
 }
 
 function display_next_respawn(boss) {
+	$(`#${boss} .lastspawn`).prepend(`<span class="faded"><i>Last respawn:
+		${unixstamp2human(previous_respawns[boss])}</i></span>`);
 	for (respawn in next_respawns[boss]) {
-		respawn_dt = new Date(next_respawns[boss][respawn] * 1000);
-		dayname = respawn_dt.toLocaleDateString("en-GB", {
-			hour12: false, weekday: 'long', month: 'long', day: 'numeric',
-			hour: 'numeric', minute: 'numeric'});
-		if (respawn == 0) {
-			$(`#${boss}_respawn`).append(`<p class="green"><b>${dayname}</b></p>`);
-		}
-		else {
-			$(`#${boss}_respawn`).append(`<p class="faded">${dayname}</p>`);
-		}
+		color = respawn == 0 ? "green" : "faded";
+		$(`#${boss}_respawn`).append(`<p class="${color}"><b>
+			${unixstamp2human(next_respawns[boss][respawn])}</b></p>`);
 	}
 	next_respawn_in = {};
 	time_before_respawn = next_respawns[boss][0] - time_now();
@@ -67,13 +71,15 @@ function display_next_respawn(boss) {
 	// hide days and hours left if there is none of it
 	next_respawn_in.days = next_respawn_in.days == "00" ? "" : next_respawn_in.days + "d";
 	next_respawn_in.hours = next_respawn_in.hours == "00" ? "" : next_respawn_in.hours + "h";
-	$(`#${boss}_countdown`).text(`Next respawn in ${next_respawn_in.days} ${next_respawn_in.hours} ${next_respawn_in.minutes}m`);
+	$(`#${boss}_countdown`).text(`Next respawn in
+		${next_respawn_in.days} ${next_respawn_in.hours} ${next_respawn_in.minutes}m`);
 }
 
 function refresh_display() {
 	bosses_unordered = new Map()
 	for (boss in first_respawns) {
 		$(`#${boss}_respawn`).empty();
+		$(`#${boss} .lastspawn`).empty();
 		next_respawns[boss] = [];
 		get_next_respawns(boss);
 		display_next_respawn(boss);
