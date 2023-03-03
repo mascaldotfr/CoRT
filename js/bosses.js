@@ -16,7 +16,7 @@
  */
 
 respawn_time = 109 * 3600;   // 109 hours
-// As of 2022-10-29 here are the last respawn timestamp in UTC time.
+// As of 2023-03-03 here are the last respawn timestamp in UTC time.
 // You can update it by looking at your browser console and getting the last
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
 // will run ~ 80 times/boss after all that time.
