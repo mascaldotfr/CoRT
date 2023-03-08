@@ -8,7 +8,7 @@ The client code [can be found here](https://github.com/mascaldotfr/CoRT/commit/6
 It means that this collection does not enter in conflict with the ability to
 easily deploy CoRT it as promised.
 
-The dataset is available at: https://cortdata.000webhostapp.com/data/data.txt
+The dataset is available at: https://hail.thebus.top/cortdata/data.txt
 
 ## Data exploitation
 

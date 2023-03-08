@@ -129,7 +129,7 @@ $("#t-save").on("click", function() {
 function collect_setup(setupstring) {
 	if (window.location.origin != "https://mascaldotfr.github.io")
 		return;
-	$.post("https://cortdata.000webhostapp.com/submit.php", `setup=${setupstring}`);
+	$.post("https://hail.thebus.top/cortdata/submit.php", `setup=${setupstring}`);
 }
 
 function upgrade_setup_to_new_version() {
