@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 mascal
+ * Copyright (c) 2022-2023 mascal
  *
  * CoRT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -122,7 +122,9 @@ $("#t-save").on("click", function() {
 		window.alert("You need to load trees by clicking on 'Load/Reset' first!");
 		return;
 	}
-	window.prompt("Here is the link to your setup:", save_setup_to_url());
+	saved_url = save_setup_to_url();
+	window.prompt("Here is the link to your setup:", saved_url);
+	window.location.href = saved_url;
 
 });
 
