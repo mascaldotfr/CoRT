@@ -450,7 +450,7 @@ function update_tree(treepos) {
 		// reduce powerpoints when discipline level is lowered
 		skilllvl = parseInt($(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text());
 		if (skilllvl > maxslvl) {
-			$("#t-ppointsleft").text(maxslvl);
+			// change to the max power level available
 			$(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text(maxslvl);
 			// update available power points
 			ppointsleft = ppointsleft + skilllvl - maxslvl;
