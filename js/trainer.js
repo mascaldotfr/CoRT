@@ -453,7 +453,8 @@ function update_tree(treepos) {
 			$("#t-ppointsleft").text(maxslvl);
 			$(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text(maxslvl);
 			// update available power points
-			$("#t-ppointsleft").text(ppointsleft + skilllvl - maxslvl);
+			ppointsleft = ppointsleft + skilllvl - maxslvl;
+			$("#t-ppointsleft").text(ppointsleft);
 		}
 		if ( 	(currlevel > trainerdata.required.level[dlvl - 1] && i != 1) ||
 			(currlevel != maxlevel && treepos == wmrow) ) {
