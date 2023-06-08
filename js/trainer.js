@@ -234,6 +234,7 @@ function load_tree() {
 		powerpoints = 80;
 	}
 	$("#t-trainer").empty();
+	$("#skillinfo").empty();
 	trainerdata = (function () {
 		var json = null;
 		$.ajax({
