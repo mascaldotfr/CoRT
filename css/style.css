@@ -48,28 +48,32 @@ h1 {
 	width: 100%;
 }
 
-.p0, .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10 { padding-bottom: .5em; margin-left: 1em; }
-.p0 .icon { background-position: 0px 0px; margin-right: 24px;}
-.p1 .icon { background-position: -48px 0px; margin-right: 24px; }
-.p2 .icon { background-position: -96px 0px; margin-right: 24px; }
-.p3 .icon { background-position: -144px 0px; margin-right: 24px; }
-.p4 .icon { background-position: -192px 0px; margin-right: 24px; }
-.p5 .icon { background-position: -240px 0px; margin-right: 24px; }
-.p6 .icon { background-position: -288px 0px; margin-right: 24px; }
-.p7 .icon { background-position: -336px 0px; margin-right: 24px; }
-.p8 .icon { background-position: -384px 0px; margin-right: 24px; }
-.p9 .icon { background-position: -432px 0px; margin-right: 24px; }
+.p0, .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: space-around;
+	padding: .5em;
+}
+.p0 .icon { background-position: 0px 0px; }
+.p1 .icon { background-position: -48px 0px;  }
+.p2 .icon { background-position: -96px 0px;  }
+.p3 .icon { background-position: -144px 0px;  }
+.p4 .icon { background-position: -192px 0px;  }
+.p5 .icon { background-position: -240px 0px;  }
+.p6 .icon { background-position: -288px 0px;  }
+.p7 .icon { background-position: -336px 0px;  }
+.p8 .icon { background-position: -384px 0px;  }
+.p9 .icon { background-position: -432px 0px;  }
 .p10 .icon { background-position: -480px 0px; }
 .icon {
 	background-repeat: no-repeat;
-	/*float: left;*/
 	width: 48px;
 	height: 48px;
-	margin: .25em;
 }
+.skillspinner { height: 48px; margin-top: 1px; }
 .icon .skilllvl { background-color: white; color: black; border-radius: 4px;}
-.skillspinner { margin-left: 6px; }
-.minus, .plus { width: 20px; }
+.minus, .plus { margin-left: 6px; width: 20px; height: 20px}
+.plus { margin-bottom: 6px;}
 .red { color: #ffa1a7; }
 .blue { color: #9ccdf9; }
 .green { color: #00FF11; }
@@ -77,9 +81,13 @@ h1 {
 #skillinfo, .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
 	background-color: #313131 !important;
 }
-
 #skillinfo div[class^="p"] {
-	margin: 1em;
+	margin: .5em;
+}
+#skillinfo .descriptionheader {
+	grid-template-columns: 64px auto;
+	justify-content: left;
+	align-items: center;
 }
 #skillinfo h2 {
 	padding: 0;

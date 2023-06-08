@@ -213,7 +213,7 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 	if (treepos != wmrow || (treepos == wmrow && spellpos == 0 && currlevel == 60)) {
 		icon = icon.concat(`
 				<div class="skillspinner">
-					<button class="minus">-</button>&nbsp;<button class="plus">+</button>
+					<button class="plus">+</button><button class="minus">-</button>
 				</div>`);
 	}
 	icon = icon.concat(`</div>`);
@@ -323,10 +323,12 @@ function display_spell(spellinfo) {
 	spellinfo = trainerdata.disciplines[treename].spells.filter(element => element.name == spellname)[0];
 	// don't duplicate css, redraw an icon
 	spellhtml = `
-		<div class="p${iconposition}">
-		<div class="${iconclass}" style="background-image:url(${iconurl});"></div>
-		<h2>${spellinfo.name}</h2>
-		<p class="description"><i>${spellinfo.description}</i></p>
+		<div class="p${iconposition} descriptionheader">
+			<div class="${iconclass}" style="background-image:url(${iconurl});"></div>
+			<div>
+				<h2>${spellinfo.name}</h2>
+				<p class="description"><i>${spellinfo.description}</i></p>
+			</div>
 		</div>
 		<p><b>Type:</b> ${spellinfo.type}</p>`;
 	tabularhtml = ""
