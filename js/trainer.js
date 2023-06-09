@@ -129,7 +129,7 @@ function collect_setup(setupstring) {
 
 function upgrade_setup_to_new_version() {
 	trainerdataversion = trainerdatasets[0];
-	window.location.assign(save_setup_to_url());
+	window.location.assign(save_setup_to_url(false));
 }
 
 function save_setup_to_url(shared = true) {
