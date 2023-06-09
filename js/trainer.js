@@ -444,9 +444,14 @@ function update_tree(treepos) {
 	dlvl = parseInt($("div[treepos=" + treepos +"] .p0 .icon .skilllvl").text());
 	maxslvl = trainerdata.required.power[dlvl];
 
-	// XXX maybe there are better selector options to get all values for a tree but ...
+	// XXX maybe there are better selector options to get all values for a
+	// tree but ...
 	for (i = 1; i <= 10; i++) {
-		// if tree has been lowered and the skill is no more available, make it visually disabled
+		sel_icon = $(`div[treepos="${treepos}"] .p${i} .icon`);
+		sel_plus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`);
+		sel_minus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`);
+		// if tree has been lowered and the skill is no more available,
+		// make it visually disabled
 		if (i > trainerdata.required.available[dlvl - 1]) {
 			maxslvl = 0;
 		}
@@ -461,26 +466,31 @@ function update_tree(treepos) {
 		}
 		if ( 	(currlevel > trainerdata.required.level[dlvl - 1] && i != 1) ||
 			(currlevel != maxlevel && treepos == wmrow) ) {
-			// reduce strongly brightness and disable buttons on unavailable
-			// skills due to player or skill tree level. also forbid WM tree for non level 60.
-			$(`div[treepos="${treepos}"] .p${i} .icon`).css('filter','grayscale(1) brightness(.5)');
-			$(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`).hide();
-			$(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`).hide();
+			// reduce strongly brightness and disable buttons on
+			// unavailable skills due to player or discpline tree
+			// level. also forbid WM tree for non level 60.
+			sel_icon.css('filter','grayscale(1) brightness(.5)');
+			sel_plus.hide();
+			sel_minus.hide();
 		}
+		// if discipline tree level allows the skill to be interacted
+		// with, reenable the skill
 		if ( i <= trainerdata.required.available[dlvl - 1] ) {
 			if (treepos == wmrow) {
-				// WM tree requires no skills points, just make it fully visible
-				$(`div[treepos="${treepos}"] .p${i} .icon`).css('filter','brightness(1)');
+				// WM tree requires no skills points, just make
+				// it fully visible
+				sel_icon.css('filter','brightness(1)');
 			}
 			else {
-				$(`div[treepos="${treepos}"] .p${i} .icon`).css('filter','brightness(.25)');
+				sel_icon.css('filter','brightness(.25)');
 			}
-			$(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`).show();
-			$(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`).show();
+			sel_plus.show();
+			sel_minus.show();
 		}
-		// ensure brightness is kept when a tree level is decreasing
+		// ensure brightness is kept when a tree level is decreasing in
+		// the beginning of that loop
 		if ($(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text() > 0) {
-			$(`div[treepos="${treepos}"] .p${i} .icon`).css('filter','brightness(1)');
+			sel_icon.css('filter','brightness(1)');
 		}
 	}
 	return;
