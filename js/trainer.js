@@ -51,14 +51,7 @@ $(document).ready(function() {
 	// set the version accordingly. See also manage_dataset_versions.
 	urlsearch = new URLSearchParams(window.location.search);
 	skillset = urlsearch.get("s");
-	dataset = urlsearch.get("d");
-	if (!dataset && skillset) {
-		// legacy url, assume old version
-		trainerdataversion = "1.33.2";
-	}
-	else {
-		trainerdataversion = dataset;
-	}
+	trainerdataversion = urlsearch.get("d");
 	if (skillset) {
 		load_setup_from_url();
 	}
