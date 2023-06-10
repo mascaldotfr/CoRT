@@ -79,7 +79,7 @@ $("#t-load").on("click", function() {
 	load_tree();
 });
 
-$("#t-level").change(function() {
+$("#t-level").on('change', function() {
 	selectedllevel = $("#t-level").val();
 	// Upgrade does not work if no trees are loaded, you are level 60
 	// or if the requested level is lower than your current level
@@ -90,7 +90,7 @@ $("#t-level").change(function() {
 });
 
 $("#t-save").on("click", function() {
-	if ($("#t-trainer").children().length == 0) {
+	if (trainerdata === null) {
 		window.alert("You need to load trees by clicking on 'Load/Reset' first!");
 		return;
 	}
@@ -124,7 +124,7 @@ function manage_dataset_versions() {
 function collect_setup(setupstring) {
 	if (window.location.origin != "https://mascaldotfr.github.io")
 		return;
-	$.post("https://hail.thebus.top/cortdata/submit.php", `setup=${setupstring}`);
+	$().quickpost("https://hail.thebus.top/cortdata/submit.php", {"setup":setupstring});
 }
 
 function upgrade_setup_to_new_version() {
@@ -165,7 +165,7 @@ function load_setup_from_url() {
 	$("#t-level").val(setup.shift());
 	manage_dataset_versions();
 	$("#t-version").val(trainerdataversion);
-	$("#t-load").click();
+	$("#t-load").trigger("click");
 	row = 0;
 	for (let item = 0; item < setup.length; item++) {
 		if (item % 2 == 0) {
@@ -179,6 +179,8 @@ function load_setup_from_url() {
 		else {
 			// power points
 			powers = setup[item].split("");
+			if (row == wmrow)
+				continue; // no pp for the wm row
 			for (let power in powers) {
 				power = parseInt(power);
 				for (let i = 0; i < powers[power]; i++) {
@@ -228,20 +230,7 @@ function load_tree() {
 	}
 	$("#t-trainer").empty();
 	$("#skillinfo").empty();
-	trainerdata = (function () {
-		var json = null;
-		$.ajax({
-			'async': false,
-			'global': false,
-			'cache': false,
-			'url': "data/" + trainerdataversion + "/trainerdata.json",
-			'dataType': "json",
-			'success': function (data) {
-				json = data;
-			}
-		});
-		return json;
-	})();
+	trainerdata = $().getJSON("data/" + trainerdataversion + "/trainerdata.json");
 	alltrees = trainerdata.class_disciplines[base_skills];
 	alltrees = alltrees.concat(trainerdata.class_disciplines[class_skills]);
 	trainerhtml = "";
@@ -271,7 +260,7 @@ function load_tree() {
 	$("#t-dpointstotal").text(trainerdata.points.discipline[powerpoints][currlevel - 1]);
 	$("#t-ppointsleft").text(trainerdata.points.power[powerpoints][currlevel - 1]);
 	$("#t-ppointstotal").text(trainerdata.points.power[powerpoints][currlevel - 1]);
-	$(".points").css('visibility','visible');
+	$(".points").show();
 
 	for (let i = 1; i <= wmrow; i++) { update_tree(i); }
 
@@ -307,13 +296,12 @@ function tablify(rowname, columns, color = "") {
 }
 
 function display_spell(spellinfo) {
-	spellname = $(spellinfo).attr("title");
-	treename = $(spellinfo).attr("treename");
-	iconclass = $(spellinfo).attr("class");
-	iconurl = $(spellinfo).attr("iconurl");
+	spellname = spellinfo.getAttribute("title");
+	treename = spellinfo.getAttribute("treename");
+	iconclass = spellinfo.getAttribute("class");
+	iconurl = spellinfo.getAttribute("iconurl");
 	// icon position in spelltree
-	iconposition = $(spellinfo).attr("spellpos");
-	console.log(iconurl);
+	iconposition = spellinfo.getAttribute("spellpos");
 	spellinfo = trainerdata.disciplines[treename].spells.filter(element => element.name == spellname)[0];
 	// don't duplicate css, redraw an icon
 	spellhtml = `
@@ -374,9 +362,9 @@ function display_spell(spellinfo) {
 
 function power_change(power) {
 	change_direction = power.className;
-	skill_level_html = $(power).parent().parent().children(".icon").children(".skilllvl");
-	skill_level = parseInt(skill_level_html.text());
-	discipline_level = parseInt($(power).parent().parent().parent().children(".p0").find(".skilllvl").text());
+	skill_level_html = power.parentNode.parentNode.getElementsByClassName("skilllvl")[0];
+	skill_level = parseInt($(skill_level_html).text());
+	discipline_level = parseInt($(power.parentNode.parentNode.parentNode.getElementsByClassName("skilllvl")[0]).text());
 	wanted_level = change_direction == "plus" ? skill_level + 1 : skill_level - 1;
 	maxslvl = trainerdata.required.power[discipline_level];
 	if (wanted_level > maxplevel || wanted_level < minplevel) {
@@ -394,14 +382,14 @@ function power_change(power) {
 	}
 	// valid, change it
 	$("#t-ppointsleft").text(ppointsleft += change_direction == "plus" ? -1 : 1);
-	skill_level_html.text(wanted_level);
-	$(power).parent().parent().find(".icon").css('filter', wanted_level == 0 ? 'brightness(.25)' : 'brightness(1)');
+	$(skill_level_html).text(wanted_level);
+	$(power.parentNode.parentNode.childNodes[1]).css('filter', wanted_level == 0 ? 'brightness(.25)' : 'brightness(1)');
 }
 
 function discipline_change(discipline) {
 	change_direction = discipline.className;
-	discipline_level = $(discipline).parent().parent().children(".icon").children(".skilllvl");
-	current_level = parseInt(discipline_level.text());
+	discipline_level = discipline.parentNode.parentNode.getElementsByClassName("skilllvl")[0];
+	current_level = parseInt($(discipline_level).text());
 	wanted_level = change_direction == "plus" ? current_level + 2 : current_level - 2;
 	if (wanted_level > maxdlevel || wanted_level < mindlevel) {
 		console.log("bad discipline level", wanted_level);
@@ -423,8 +411,8 @@ function discipline_change(discipline) {
 	}
 	// valid, do the change
 	$("#t-dpointsleft").text(current_discipline_points + discipline_points_balance);
-	discipline_level.text(wanted_level);
-	treepos = $(discipline).parent().parent().parent().attr("treepos");
+	$(discipline_level).text(wanted_level);
+	treepos = discipline.parentNode.parentNode.parentNode.getAttribute("treepos");
 	// deal with the possible skills changes
 	update_tree(treepos);
 }
@@ -434,28 +422,32 @@ function update_tree(treepos) {
 	dpointstotal = parseInt($("#t-dpointstotal").text());
 	ppointsleft = parseInt($("#t-ppointsleft").text());
 	ppointstotal = parseInt($("#t-ppointstotal").text());
-	dlvl = parseInt($("div[treepos=" + treepos +"] .p0 .icon .skilllvl").text());
+	dlvl = parseInt($(`div[treepos="${treepos}"] .p0 .icon .skilllvl`).text());
 	maxslvl = trainerdata.required.power[dlvl];
 
 	// XXX maybe there are better selector options to get all values for a
 	// tree but ...
 	for (i = 1; i <= 10; i++) {
 		sel_icon = $(`div[treepos="${treepos}"] .p${i} .icon`);
-		sel_plus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`);
-		sel_minus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`);
+		if (treepos != wmrow) {
+			sel_plus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`);
+			sel_minus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`);
+		}
 		// if tree has been lowered and the skill is no more available,
 		// make it visually disabled
 		if (i > trainerdata.required.available[dlvl - 1]) {
 			maxslvl = 0;
 		}
 		// reduce powerpoints when discipline level is lowered
-		skilllvl = parseInt($(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text());
-		if (skilllvl > maxslvl) {
-			// change to the max power level available
-			$(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text(maxslvl);
-			// update available power points
-			ppointsleft = ppointsleft + skilllvl - maxslvl;
-			$("#t-ppointsleft").text(ppointsleft);
+		if (treepos != wmrow) {
+			skilllvl = parseInt($(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text());
+			if (skilllvl > maxslvl) {
+				// change to the max power level available
+				$(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text(maxslvl);
+				// update available power points
+				ppointsleft = ppointsleft + skilllvl - maxslvl;
+				$("#t-ppointsleft").text(ppointsleft);
+			}
 		}
 		if ( 	(currlevel > trainerdata.required.level[dlvl - 1] && i != 1) ||
 			(currlevel != maxlevel && treepos == wmrow) ) {
@@ -463,8 +455,10 @@ function update_tree(treepos) {
 			// unavailable skills due to player or discpline tree
 			// level. also forbid WM tree for non level 60.
 			sel_icon.css('filter','grayscale(1) brightness(.5)');
-			sel_plus.hide();
-			sel_minus.hide();
+			if (treepos != wmrow) {
+				sel_plus.hide();
+				sel_minus.hide();
+			}
 		}
 		// if discipline tree level allows the skill to be interacted
 		// with, reenable the skill
@@ -476,13 +470,13 @@ function update_tree(treepos) {
 			}
 			else {
 				sel_icon.css('filter','brightness(.25)');
+				sel_plus.show();
+				sel_minus.show();
 			}
-			sel_plus.show();
-			sel_minus.show();
 		}
 		// ensure brightness is kept when a tree level is decreasing in
 		// the beginning of that loop
-		if ($(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text() > 0) {
+		if (treepos != wmrow && $(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text() > 0) {
 			sel_icon.css('filter','brightness(1)');
 		}
 	}

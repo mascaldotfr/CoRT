@@ -96,9 +96,9 @@ function refresh_display() {
 	}
 }
 
-
 $(document).ready(function() {
 	refresh_display();
 });
+
 
 setInterval(refresh_display, 60 * 1000)
