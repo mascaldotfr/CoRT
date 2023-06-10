@@ -33,6 +33,6 @@ for ($i = 2; $i < $setup_array_length; $i++) {
 	}
 }
 
-file_put_contents("data.txt", $setup . "\n", FILE_APPEND | LOCK_EX);
+file_put_contents("data.txt", implode(" ", $setup_array) . "\n", FILE_APPEND | LOCK_EX);
 ?>
 
