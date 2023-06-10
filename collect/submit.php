@@ -11,7 +11,7 @@ if (!array_key_exists("setup", $_POST))
 	wontsavethis("invalid POST query parameters");
 
 $setup = $_POST["setup"];
-$setup_array = explode(" ", $setup);
+$setup_array = explode("+", $setup);
 $setup_array_length = count($setup_array);
 
 // check basic validity of the request (HTTP method and length) in the same
@@ -33,5 +33,6 @@ for ($i = 2; $i < $setup_array_length; $i++) {
 	}
 }
 
-file_put_contents("data/data.txt", $setup . "\n", FILE_APPEND | LOCK_EX);
+file_put_contents("data.txt", $setup . "\n", FILE_APPEND | LOCK_EX);
 ?>
+

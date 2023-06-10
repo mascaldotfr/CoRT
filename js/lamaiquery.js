@@ -8,8 +8,7 @@
  *
  * - $.getJSON({parameters}) => $().getJSON(url). XXX Note that it's
  *   synchronous as the UI drawing needs the trainer dataset for example.
- * - $().quickpost({key: value, [...]}) which uses the sendbeacon api instead of
- *   XMLHttpRequest for POSTing
+ * - $.post({all_parameters}) => $().post(url, params={key: value, [...]})
  *
  * */
 
@@ -57,12 +56,19 @@ const $ = (function (selector) {
 		prepend: function(html) {
 			document.querySelector(selector).insertAdjacentHTML("afterbegin", html);
 		},
-		quickpost: function(url, params) {
+		post: function(url, params) {
+			state = 0
 			urlparams = new FormData();
 			for (key in params) {
 				urlparams.append(key, params[key]);
 			}
-			navigator.sendBeacon(url, urlparams);
+			let post = new XMLHttpRequest();
+			post.open("POST", url);
+			post.onload = function () {
+				state = post.status;
+			};
+			post.send(urlparams);
+			return state;
 		},
 		ready: function(callable) {
 			selector.addEventListener("DOMContentLoaded", callable);
