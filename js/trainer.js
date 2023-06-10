@@ -182,7 +182,7 @@ function load_setup_from_url() {
 			for (let power in powers) {
 				power = parseInt(power);
 				for (let i = 0; i < powers[power]; i++) {
-					$(`div[treepos="${treepos}"] .p${power + 1} .skillspinner .plus`).trigger("click");
+					$(`div[treepos="${row}"] .p${power + 1} .skillspinner .plus`).trigger("click");
 				}
 			}
 		}
