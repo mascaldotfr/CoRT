@@ -1,0 +1,220 @@
+__i18n__ = {
+	"supported_lang": ["en", "fr", "es", "de"],
+	"Trainer": {
+		"fr": "Entraîneur",
+		"es": "Entrenador",
+		"de": "Skilltrainer"
+	},
+	"Bosses status": {
+		"fr": "Etat des boss",
+		"es": "Estado de los jefes",
+		"de": "Zustand der Bosse"
+	},
+	"BZ status": {
+		"fr": "Etat des BZ",
+		"es": "Estado de las BZ",
+		"de": "Zustand der BZ"
+	},
+	"Bosses Countdown":
+	{
+		"fr": "Compte à rebours des boss",
+		"es": "Cuenta atras de los jefes",
+		"de": "Boss-Countdown"
+	},
+	"The page refreshes itself every minute. Dates and times are in your timezone.":
+	{
+		"fr": "La page est rafraîchie toutes les minutes. Les dates et heures indiquées sont locales.",
+		"es": "La página se actualiza cada minuto. Las fechas y horas mostradas son locales.",
+		"de": "Die Seite wird jede Minute aktualisiert. Die angezeigten Daten und Zeiten sind lokal."
+	},
+	"Last respawn":
+	{
+		"fr": "Dernière apparition",
+		"es": "Última reaparición",
+		"de": "Letzter Auftritt"
+	},
+	"Next respawn in":
+	{
+		"fr": "Prochaine apparition dans",
+		"es": "Próxima aparición en",
+		"de": "Nächster Auftritt in"
+	},
+	"d":
+	{
+		"comment": "short for days",
+		"fr": "j",
+		"es": "d",
+		"de": "d"
+	},
+	"h":
+	{
+		"comment": "short for hours",
+		"fr": "h",
+		"es": "h",
+		"de": "h"
+	},
+	"m":
+	{
+		"comment": "short for minutes",
+		"fr": "m",
+		"es": "m",
+		"de": "m"
+	},
+	"Next BZ (in your timezone):":
+	{
+		"fr": "Prochaines BZ (heure locale) :",
+		"es": "Próximas BZ (hora local):",
+		"de": "Nächste BZ (Ortszeit):"
+	},
+	"Ends in":
+	{
+		"fr": "Se termine dans",
+		"es": "Acaba en",
+		"de": "Endet in"
+	},
+	"Next BZ in":
+	{
+		"fr": "Prochaine BZ dans",
+		"es": "Próxima BZ en",
+		"de": "Nächste BZ in"
+	},
+	"ON":
+	{
+		"fr": "Ouverte",
+		"es": "Abierta",
+		"de": "Offen"
+	},
+	"OFF":
+	{
+		"fr": "Fermé",
+		"es": "Cerrada",
+		"de": "Geschlossen"
+	},
+	"Clicking on a skill icon will show its description.":
+	{
+		"fr": "Cliquer sur l'îcone d'un sort montrera sa description.",
+		"es": "Al hacer clic en el icono de un hechizo, se mostrará su descripción.",
+		"de": "Wenn Sie auf das Symbol eines Zaubers klicken, wird dessen Beschreibung angezeigt."
+	},
+	"Selecting an higher character level will upgrade your current setup to that level.":
+	{
+		"fr": "Selectionner un niveau du personnage supérieur à l'actuel transférera votre configuration à ce niveau.",
+		"es": "Seleccionar un nivel de personaje superior al actual transferirá su configuración a ese nivel.",
+		"de": "Wenn Sie eine höhere Charakterstufe als die aktuelle auswählen, wird Ihre Konfiguration auf diese Stufe übertragen."
+	},
+	"Knight":
+	{
+		"fr": "Chevalier",
+		"es": "Caballero",
+		"de": "Ritter"
+	},
+	"Barbarian":
+	{
+		"fr": "Barbare",
+		"es": "Bàrbaro",
+		"de": "Barbar"
+	},
+	"Conjurer":
+	{
+		"fr": "Invocateur",
+		"es": "Conjurador",
+		"de": "Beschwörer"
+	},
+	"Warlock":
+	{
+		"fr": "Sorcier",
+		"es": "Brujo",
+		"de": "Hexenmeister"
+	},
+	"Hunter":
+	{
+		"fr": "Chasseur",
+		"es": "Cazador",
+		"de": "Jäger"
+	},
+	"Marksman":
+	{
+		"fr": "Tireur d'élite",
+		"es": "Tirador",
+		"de": "Schütze"
+	},
+	"Load / Reset":
+	{
+		"fr": "Charger / Réinitialiser",
+		"es": "Cargar / Reiniciar",
+		"de": "Laden/ Zurücksetzen"
+	},
+	"Share / Save":
+	{
+		"fr": "Partager / Sauvegarder",
+		"es": "Compartir / Guardar",
+		"de": "Teilen / Sichern"
+	},
+	"Discipline points":
+	{
+		"fr": "Points de discipline",
+		"es": "Puntos de disciplina",
+		"de": "Disziplinbrücken"
+	},
+	"Power points":
+	{
+		"fr": "Points de pouvoir",
+		"es": "Puntos de poder",
+		"de": "Kraftbrücken"
+	},
+	"Current game version":
+	{
+		"fr": "Version actuelle du jeu",
+		"es": "Versión actual del juego",
+		"de": "Aktuelle Version des Spiels"
+	},
+	"Please select a level":
+	{
+		"fr": "Veuillez sélectionner un niveau",
+		"es": "Por favor seleccione un nivel",
+		"de": "Bitte wählen Sie eine Level aus"
+	},
+	"Please select a class":
+	{
+		"fr": "Veuillez sélectionner une class",
+		"es": "Por favor seleccione una clase",
+		"de": "Bitte wählen Sie eine Klasse aus"
+	},
+  "You need first to load trees by clicking on \"%s\"!":
+	{
+		"fr": "Avant tout, il est de nécessaire charger les arbres en cliquant sur « %s » !",
+		"es": "¡En primer lugar, es necesario de cargar las ramas haciendo clic en \"%s\"!",
+		"de": "Zunächst müssen die Bäume geladen werden, indem auf „%s“ geklickt wird!"
+	},
+	"Here is the link to your setup:":
+	{
+		"fr": "Voici le lien vers votre configuration :",
+		"es": "Aquí está el enlace a su configuración:",
+		"de": "Hier ist der Link zu Ihrer Konfiguration:"
+	},
+	"This setup is being made with an older version (%s) of CoR, and may be out of date.":
+	{
+		"fr": "Cette configuration a été créée avec une vieille version de CoR (%s), et peut être dépassée.",
+		"es": "Esta configuración se creó con una versión anterior de CoR (%s) y puede estar desactualizada.",
+		"de": "Diese Konfiguration wurde mit einer alten Version von CoR (%s) erstellt und ist möglicherweise veraltet."
+	},
+	"Click here":
+	{
+		"fr": "Cliquez ici",
+		"es": "Haga clic aquí",
+		"de": "Klicken Sie hier"
+	},
+	"to upgrade this setup's discipline and power points to the latest version (%s).":
+	{
+		"comment": "Comes after 'Click here'",
+		"fr": "pour mettre à jour les points de discipline et de pouvoir vers la dernière version (%s).",
+		"es": "para actualizar la disciplina y los puntos de poder a la última versión (%s).",
+		"de": "um Disziplin und Power Points auf die neueste Version (%s) zu aktualisieren."
+	},
+	"Your shared link is bad. Bailing out, sorry!":
+	{
+		"fr": "Ce lien partagé est mauvais. J'abandonne, désolé !",
+		"es": "Este enlace compartido es malo. ¡Me doy por vencido, lo siento!",
+		"de": "Dieser geteilte Link ist schlecht. Ich gebe auf, sorry!" 
+	}
+}

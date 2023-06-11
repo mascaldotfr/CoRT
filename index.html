@@ -3,14 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Champions of Regnum trainer</title>
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="icon" type="image/png" href="favicon.png" />
 		<script type="text/javascript" src="js/lamaiquery.js"></script>
+		<script type="text/javascript" src="data/i18n.json"></script>
+		<script type="text/javascript" src="js/i18n.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/lz-string.min.js"></script>
 		<script type="text/javascript" src="js/trainerdatasets.js" defer></script>
 		<script type="text/javascript" src="js/trainer.js" defer></script>
+		<script type="text/javascript">document.title = "CoRT - " + _("Trainer")</script>
 	</head>
 	<body>
 		<div class="bugnum but on your side">
@@ -20,11 +22,11 @@
 					instructions how to enable JavaScript in your web browser</a>.
 			</noscript>
 		</div>
-		<h1>CoR Trainer</h1>
+		<h1><script>document.write(_("Trainer"))</script></h1>
 		<div class="bugnum">
-			<p>Clicking on a skill icon will show its description.
-			<br>Selecting an higher character level will upgrade
-			your current setup to that level.
+			<p><script>document.write(_("Clicking on a skill icon will show its description."))</script>
+			<br><script>document.write(
+				_("Selecting an higher character level will upgrade your current setup to that level."))</script>
 			</p>
 		</div>
 		<div class="setup">
@@ -34,12 +36,15 @@
 			</div>
 			<div class="class">
 				<select id="t-class">
-					<option value="knight" default selected>Knight</option>
-					<option value="barbarian">Barbarian</option>
-					<option value="conjurer">Conjurer</option>
-					<option value="warlock">Warlock</option>
-					<option value="hunter">Hunter</option>
-					<option value="marksman">Marksman</option>
+					<script>document.write(`
+						<option value="knight" default selected>${_("Knight")}</option>
+						<option value="barbarian">${_("Barbarian")}</option>
+						<option value="conjurer">${_("Conjurer")}</option>
+						<option value="warlock">${_("Warlock")}</option>
+						<option value="hunter">${_("Hunter")}</option>
+						<option value="marksman">${_("Marksman")}</option>
+					`)
+					</script>
 				</select>
 			</div>
 			<div class="level">
@@ -48,16 +53,18 @@
 				</select>
 			</div>
 			<div class="load">
-				<button id="t-load">Load / Reset</button>
+				<button id="t-load"><script>document.write(_("Load / Reset"))</script></button>
 			</div>
 			<div class="save">
-				<button id="t-save">Share / Save</button>
+				<button id="t-save"><script>document.write(_("Share / Save"))</script></button>
 			</div>
 		</div>
 		<div class="points" id="t-points">
 			<p>
-				<b>Discipline points</b>: <span id="t-dpointsleft">x</span>/<span id="t-dpointstotal">x</span>
-				<b>Power points</b>: <span id="t-ppointsleft">x</span>/<span id="t-ppointstotal">x</span>
+				<script>document.write(`
+					<b>${_("Discipline points")}</b>: <span id="t-dpointsleft">x</span>/<span id="t-dpointstotal">x</span>
+					<b>${_("Power points")}</b>: <span id="t-ppointsleft">x</span>/<span id="t-ppointstotal">x</span>
+				`)</script>
 			</p>
 		</div>
 		<div id="t-trainer" class="trainer">

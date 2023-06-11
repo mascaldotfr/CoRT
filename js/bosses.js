@@ -51,7 +51,7 @@ function get_next_respawns(boss) {
 }
 
 function display_next_respawn(boss) {
-	$(`#${boss} .lastspawn`).prepend(`<span class="faded"><i>Last respawn:
+	$(`#${boss} .lastspawn`).prepend(`<span class="faded"><i>${_("Last respawn")}:
 		${unixstamp2human(previous_respawns[boss])}</i></span>`);
 	for (respawn in next_respawns[boss]) {
 		color = respawn == 0 ? "green" : "faded";
@@ -69,10 +69,10 @@ function display_next_respawn(boss) {
 		next_respawn_in[dt_elem] = String(next_respawn_in[dt_elem]).padStart(2, "0");
 	}
 	// hide days and hours left if there is none of it
-	next_respawn_in.days = next_respawn_in.days == "00" ? "" : next_respawn_in.days + "d";
-	next_respawn_in.hours = next_respawn_in.hours == "00" ? "" : next_respawn_in.hours + "h";
-	$(`#${boss}_countdown`).text(`Next respawn in
-		${next_respawn_in.days} ${next_respawn_in.hours} ${next_respawn_in.minutes}m`);
+	next_respawn_in.days = next_respawn_in.days == "00" ? "" : next_respawn_in.days + _("d");
+	next_respawn_in.hours = next_respawn_in.hours == "00" ? "" : next_respawn_in.hours + _("h");
+	$(`#${boss}_countdown`).text(`${_("Next respawn in")}
+		${next_respawn_in.days} ${next_respawn_in.hours} ${next_respawn_in.minutes}${_("m")}`);
 }
 
 function refresh_display() {

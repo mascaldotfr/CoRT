@@ -95,15 +95,15 @@ function feed_bz() {
 			next_bzs_end.push(future_date(future_bz_days.indexOf(day), bz_end[day][hour]));
 		}
 	}
-	
+
 	if (bz_on) {
-		$("#bz_status").html(`<span class="green"><b>ON</b></span>`);
-		$("#next_bz").text(`Ends in ${bz_ends_at.hours}:${bz_ends_at.minutes}:${bz_ends_at.seconds}`);
+		$("#bz_status").html(`<span class="green"><b>${_("ON")}</b></span>`);
+		$("#next_bz").text(`$_("Ends in") ${bz_ends_at.hours}:${bz_ends_at.minutes}:${bz_ends_at.seconds}`);
 	}
 	else {
-		$("#bz_status").html(`<span class="red"><b>OFF</b></span>`);
+		$("#bz_status").html(`<span class="red"><b>${_("OFF")}</b></span>`);
 		next_bz_in = date_difference_from_now(next_bzs_begin[0]);
-		$("#next_bz").text(`Next BZ in ${next_bz_in.hours}:${next_bz_in.minutes}:${next_bz_in.seconds}`);
+		$("#next_bz").text(`${_("Next BZ in")} ${next_bz_in.hours}:${next_bz_in.minutes}:${next_bz_in.seconds}`);
 	}
 	for (next_bz in next_bzs_begin) {
 		bz_begin_date = new Date(next_bzs_begin[next_bz]);

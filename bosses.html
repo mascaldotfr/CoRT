@@ -3,15 +3,17 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Champions of Regnum Boss Countdown</title>
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="icon" type="image/png" href="favicon.png" />
 		<script type="text/javascript" src="js/lamaiquery.js"></script>
+		<script type="text/javascript" src="data/i18n.json"></script>
+		<script type="text/javascript" src="js/i18n.js"></script>
 		<script type="text/javascript" src="js/bosses.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
+		<script>document.title = "CoRT - " + _("Bosses Countdown")</script>
 		<style>
 			body > div {
-				max-width: 600px !important;
+				max-width: 900px !important;
 			}
 			#daen, #evendim, #thorkul {
 				display: flex;
@@ -43,8 +45,10 @@
 			</noscript>
 		</div>
 		<div class="boss_container">
-			<h1>CoR Boss Countdown</h1>
-			<p class="center">The page refreshes itself every minute. Dates and times are in your timezone.</p>
+			<h1><script>document.write(_("Bosses Countdown"))</script></h1>
+			<p class="center">
+				<script>document.write(_("The page refreshes itself every minute. Dates and times are in your timezone."))</script>
+			</p>
 			<div id="bosses_list">
 				<div id="daen">
 					<img src="data/bosses/daen.jpg" title="Daen Rha (Ignis)"/>

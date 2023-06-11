@@ -43,7 +43,7 @@ $(document).ready(function() {
 	}
 	// generate datasets version
 	$("#t-version").append(`<option value="${trainerdatasets[0]}" default selected>
-		Current game version (${trainerdatasets[0]})</option>`);
+		${_("Current game version")} (${trainerdatasets[0]})</option>`);
 	for (i = 1; i < trainerdatasets.length; i++) {
 		$("#t-version").append(`<option value="${trainerdatasets[i]}">${trainerdatasets[i]}</option>`);
 	}
@@ -64,14 +64,14 @@ $("#t-load").on("click", function() {
 		currlevel = level;
 	}
 	else {
-		alert("Please select a level");
+		alert(_("Please select a level"));
 		return;
 	}
 	if (clas != null) {
 		currclass = clas;
 	}
 	else {
-		alert("Please select a class");
+		alert(_("Please select a class"));
 		return;
 	}
 	trainerdataversion = $("#t-version").val();
@@ -91,11 +91,11 @@ $("#t-level").on('change', function() {
 
 $("#t-save").on("click", function() {
 	if (trainerdata === null) {
-		window.alert("You need to load trees by clicking on 'Load/Reset' first!");
+		window.alert(_(`You need first to load trees by clicking on "%s"!`, _("Load / Reset")));
 		return;
 	}
 	saved_url = save_setup_to_url();
-	window.prompt("Here is the link to your setup:", saved_url);
+	window.prompt(_("Here is the link to your setup:"), saved_url);
 	window.location.href = saved_url;
 
 });
@@ -111,11 +111,12 @@ function manage_dataset_versions() {
 	$("#oldversion").remove();
 	if (trainerdataversion != trainerdatasets[0]) {
 		$("#t-points").append(`	<div id="oldversion">
-					<p class="red"><b>This setup is being made with an older version
-					(${trainerdataversion}) of CoR, and may be out of date.<p>
-					<p><a href="javascript:upgrade_setup_to_new_version()">Click here</a>
-					to upgrade this setup's discipline and power points to the latest
-					version (${trainerdatasets[0]}).</p>
+					<p class="red"><b>
+					${_("This setup is being made with an older version (%s) of CoR, and may be out of date.",
+					trainerdataversion)}<p>
+					<p><a href="javascript:upgrade_setup_to_new_version()">${_("Click here")}</a>
+					${_("to upgrade this setup's discipline and power points to the latest version (%s).",
+					trainerdatasets[0])}</p>
 					</div>
 					`);
 	}
@@ -157,7 +158,7 @@ function save_setup_to_url(shared = true) {
 function load_setup_from_url() {
 	decompressed_setup = LZString.decompressFromEncodedURIComponent(skillset);
 	if (decompressed_setup == null) {
-		window.alert("Your shared link is bad. Bailing out, sorry!");
+		window.alert(_("Your shared link is bad. Bailing out, sorry!"));
 		return;
 	}
 	setup = decompressed_setup.split("+");
