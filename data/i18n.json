@@ -184,7 +184,7 @@ __i18n__ = {
 	{
 		"fr": "Avant tout, il est de nécessaire charger les arbres en cliquant sur « %s » !",
 		"es": "¡En primer lugar, es necesario de cargar las ramas haciendo clic en \"%s\"!",
-		"de": "Zunächst müss der Skillbaum geladen werden, indem auf „%s“ geklickt wird!"
+		"de": "Zunächst muss der Skillbaum geladen werden, indem auf „%s“ geklickt wird!"
 	},
 	"Here is the link to your setup:":
 	{
@@ -209,7 +209,7 @@ __i18n__ = {
 		"comment": "Comes after 'Click here'",
 		"fr": "pour mettre à jour les points de discipline et de pouvoir vers la dernière version (%s).",
 		"es": "para actualizar la disciplina y los puntos de poder a la última versión (%s).",
-		"de": "um Disziplin und Power Points auf die neueste Version (%s) zu aktualisieren."
+		"de": "um Disziplin- und Kraftpunkte auf die neueste Version (%s) zu aktualisieren."
 	},
 	"Your shared link is bad. Bailing out, sorry!":
 	{
