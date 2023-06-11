@@ -30,7 +30,7 @@ function time_now() {
 
 function unixstamp2human(unixstamp) {
 	dt = new Date(unixstamp * 1000);
-	return dt.toLocaleDateString("en-GB", {
+	return dt.toLocaleDateString(undefined, {
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
 		hour: 'numeric', minute: 'numeric'});
 }

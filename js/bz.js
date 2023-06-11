@@ -111,7 +111,7 @@ function feed_bz() {
 		date_options = {
 			hour12: false, weekday: 'long', month: 'long', day: 'numeric',
 			hour: '2-digit', minute: '2-digit'};
-		interval = `<li>${bz_begin_date.toLocaleDateString("en-GB", date_options)} - 
+		interval = `<li>${bz_begin_date.toLocaleDateString(undefined, date_options)} -
 			    ${String(bz_end_date.getHours()).padStart(2, "0")}:${String(bz_end_date.getMinutes()).padStart(2, "0")}</li>`
 		$("#future_bzs").append(interval);
 	}
