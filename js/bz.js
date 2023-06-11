@@ -98,7 +98,7 @@ function feed_bz() {
 
 	if (bz_on) {
 		$("#bz_status").html(`<span class="green"><b>${_("ON")}</b></span>`);
-		$("#next_bz").text(`$_("Ends in") ${bz_ends_at.hours}:${bz_ends_at.minutes}:${bz_ends_at.seconds}`);
+		$("#next_bz").text(`${_("Ends in")} ${bz_ends_at.hours}:${bz_ends_at.minutes}:${bz_ends_at.seconds}`);
 	}
 	else {
 		$("#bz_status").html(`<span class="red"><b>${_("OFF")}</b></span>`);
