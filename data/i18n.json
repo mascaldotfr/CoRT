@@ -180,7 +180,7 @@ __i18n__ = {
 		"es": "Por favor seleccione una clase",
 		"de": "Bitte wählen Sie eine Klasse aus"
 	},
-  "You need first to load trees by clicking on \"%s\"!":
+	"You need first to load trees by clicking on \"%s\"!":
 	{
 		"fr": "Avant tout, il est de nécessaire charger les arbres en cliquant sur « %s » !",
 		"es": "¡En primer lugar, es necesario de cargar las ramas haciendo clic en \"%s\"!",
