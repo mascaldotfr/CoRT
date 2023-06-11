@@ -44,21 +44,21 @@ __i18n__ = {
 		"comment": "short for days",
 		"fr": "j",
 		"es": "d",
-		"de": "d"
+		"de": "T"
 	},
 	"h":
 	{
 		"comment": "short for hours",
 		"fr": "h",
 		"es": "h",
-		"de": "h"
+		"de": "S"
 	},
 	"m":
 	{
 		"comment": "short for minutes",
 		"fr": "m",
 		"es": "m",
-		"de": "m"
+		"de": "min"
 	},
 	"Next BZ (in your timezone):":
 	{
@@ -154,13 +154,13 @@ __i18n__ = {
 	{
 		"fr": "Points de discipline",
 		"es": "Puntos de disciplina",
-		"de": "Disziplinbrücken"
+		"de": "Disziplinpunkte"
 	},
 	"Power points":
 	{
 		"fr": "Points de pouvoir",
 		"es": "Puntos de poder",
-		"de": "Kraftbrücken"
+		"de": "Kraftpunkte"
 	},
 	"Current game version":
 	{
@@ -172,7 +172,7 @@ __i18n__ = {
 	{
 		"fr": "Veuillez sélectionner un niveau",
 		"es": "Por favor seleccione un nivel",
-		"de": "Bitte wählen Sie eine Level aus"
+		"de": "Bitte wählen Sie ein Level aus"
 	},
 	"Please select a class":
 	{
@@ -184,7 +184,7 @@ __i18n__ = {
 	{
 		"fr": "Avant tout, il est de nécessaire charger les arbres en cliquant sur « %s » !",
 		"es": "¡En primer lugar, es necesario de cargar las ramas haciendo clic en \"%s\"!",
-		"de": "Zunächst müssen die Bäume geladen werden, indem auf „%s“ geklickt wird!"
+		"de": "Zunächst müss der Skillbaum geladen werden, indem auf „%s“ geklickt wird!"
 	},
 	"Here is the link to your setup:":
 	{
@@ -202,7 +202,7 @@ __i18n__ = {
 	{
 		"fr": "Cliquez ici",
 		"es": "Haga clic aquí",
-		"de": "Klicken Sie hier"
+		"de": "Klicke hier"
 	},
 	"to upgrade this setup's discipline and power points to the latest version (%s).":
 	{
