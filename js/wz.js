@@ -32,7 +32,11 @@ function translate_fort(fort) {
 }
 
 function display_wz() {
-	realm_infos = {"Alsius": "blue", "Ignis": "red", "Syrtis": "green"};
+	// Same order as the website
+	realm_colors = {"Alsius": "blue", "Ignis": "red", "Syrtis": "green"};
+	gems = []
+	forts = []
+
 	try {
 		data = $().getJSON("https://hail.thebus.top/cortdata/warstatus.txt");
 	}
@@ -40,25 +44,57 @@ function display_wz() {
 		$("#wz-map").html(`<b>Failed to get the warstatus: <code>${error}</code>`);
 		return;
 	}
-	for (realm of Object.keys(realm_infos)) {
-		gems = ""
-		forts = ""
-		for (gem of data[realm]["gems"]) {
-			// Don't display empty gem slots
-			if (gem.search("gem_0") == -1)
-				gems += `<img src="${gem}" class="wz-icon">`;
-		}
-		for (fort in data[realm]["forts_icons"]) {
-			icon = `<img src="${data[realm]["forts_icons"][fort]}" class="wz-icon">`;
-			name = translate_fort(data[realm]["forts_names"][fort]);
-			forts += `${icon}&nbsp;${name}<br>`;
-		}
+
+	for (gem of data["gems"]) {
+		gems.push(`<img src="${gem}" class="wz-icon">`);
+	}
+	for (fort of data["forts"]) {
+		icon = `<img src="${fort["icon"]}" class="wz-icon">`;
+		name = translate_fort(fort["name"]);
+		forts.push(`${icon}&nbsp;${name}<br>`);
+	}
+
+	for (realm of Object.keys(realm_colors)) {
 		$(`#wz-${realm.toLowerCase()}`).html(`
-			<h2><span class="${realm_infos[realm]}">${realm}</span>&nbsp;${gems}</h2>
-			<p>${forts}</p>
-			`)
+				<h2>
+				<span class="${realm_colors[realm]}">${realm}</span>&nbsp;
+				${gems.splice(0, 6).join("")}
+				</h2>
+				<p>${forts.splice(0, 4).join("")}</p>
+		`)
 	}
 	$("#wz-map").html(`<img src="${data["map_url"]}" alt="WZ map">`);
+
+	events_html = `<h2>
+		<span class="purple"> ${_("Last server events (in your timezone):")} </span>
+		</h2>
+		`;
+	for (anevent of data["events_log"]) {
+		dt = new Date(anevent["date"] * 1000);
+		date_options = {
+			hour12: false, month: 'numeric', day: 'numeric',
+			hour: '2-digit', minute: '2-digit' };
+		datetime = dt.toLocaleDateString(undefined, date_options);
+		owner = anevent["owner"];
+		owner_color = realm_colors[owner];
+		captured = anevent["name"];
+		if (anevent["type"] == "fort") {
+			captured = translate_fort(captured);
+			// remove fort number
+			captured = captured.substring(0, captured.lastIndexOf(" "));
+		}
+		else if (anevent["type"] == "gem") {
+			captured = _("Gem") + " #" + captured;
+		}
+		location_color = realm_colors[anevent["location"]];
+		events_html += `<p>
+			<b>${datetime}</b>
+			<span class="${owner_color}">${owner}</span>
+			${_("has captured")}
+			<span class="${location_color}">${captured}</span>.
+			</p>`;
+	}
+	$("#wz-events").html(events_html);
 }
 
 $(document).ready(function() {

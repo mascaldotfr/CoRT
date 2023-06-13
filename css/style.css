@@ -136,7 +136,8 @@ h1 {
 	grid-template-areas:
 		"map alsius"
 		"map ignis"
-		"map syrtis";
+		"map syrtis"
+		"events events";
 	align-items: center;
 	justify-items: center;
 	justify-content: center;
@@ -144,7 +145,7 @@ h1 {
 }
 @media (max-width: 800px) {
 	#wz-container {
-		grid-template-areas: "map" "alsius" "ignis" "syrtis";
+		grid-template-areas: "map" "alsius" "ignis" "syrtis" "events";
 	}
 	h2 {
 		text-align: center;
@@ -165,6 +166,7 @@ h1 {
 	padding: 0;
 	margin: 0;
 	height: 1em;
+	filter: brightness(125%);
 }
 #wz-alsius {
 	grid-area: alsius;
@@ -174,4 +176,10 @@ h1 {
 }
 #wz-syrtis {
 	grid-area: syrtis;
+}
+#wz-events {
+	grid-area: events;
+}
+#wz-events h2 {
+	text-align: center;
 }

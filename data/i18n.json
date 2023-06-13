@@ -241,5 +241,20 @@ __i18n__ = {
 		"fr": "La page sera rafraîchie toutes les minutes.",
 		"es": "La página se actualizará cada minuto.",
 		"de": "Die Seite wird jede Minute aktualisiert."
+	},
+	"Gem": {
+		"fr": "Gemme",
+		"es": "Gema",
+		"de": "Juwel"
+	},
+	"has captured": {
+		"fr": "a capturé",
+		"es": "ha capturado",
+		"de": "hat gefangen genommen"
+	},
+	"Last server events (in your timezone):": {
+		"fr": "Derniers événements du serveur (heure locale) :",
+		"es": "Últimos eventos del servidor (hora local):",
+		"de": "Neueste Serverereignisse (Ortszeit):"
 	}
 }
