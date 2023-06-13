@@ -7,10 +7,11 @@ some outdated mechanics.
 
 This is a (simpler) knockoff of the regnumsentinel website trainer, this one
 will be alive as long as GitHub exists and is free software. On top of that,
-there are countdown pages for bosses and battle zones (BZ).
+there are countdown pages for bosses, BZ and WZ statuses.
 
 It just requires a webserver serving static files to run, everything is run
-client side.
+client side, with the exception of the War Status (see the `warstatus`
+directory) but it can be replaced by a link to NGE's official page.
 
 ## Known issues
 
@@ -32,6 +33,9 @@ If you want to make changes to CoRT or run it locally, you can use python to
    This repo is released under the terms of the GNU Affero General Public
    License v3.0. The discipline/skill icons are the work of Nimble Giant
    Entertainement, and are used as fair use.
+
+   Some parts of the site are MIT licensed as exceptions, please see their
+   header files.
 
 ## Credits
 

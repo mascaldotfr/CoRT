@@ -2,6 +2,8 @@ let menu = `
 	<div id="menu">
 		<b><a href="index.html">${_("Trainer")}</a></b>
 		&nbsp;|&nbsp;
+		<b><a href="wz.html">${_("WZ status")}</a></b>
+		&nbsp;|&nbsp;
 		<b><a href="bosses.html">${_("Bosses status")}</a></b>
 		&nbsp;|&nbsp;
 		<b><a href="bz.html">${_("BZ status")}</a></b>

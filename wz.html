@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<script type="text/javascript" src="js/lamaiquery.js"></script>
+		<script type="text/javascript" src="data/i18n.json"></script>
+		<script type="text/javascript" src="js/i18n.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/wz.js"></script>
+		<script>document.title = "CoRT - " + _("WZ status")</script>
+	</head>
+	<body>
+		<div class="bugnum but on your side">
+			<noscript>
+				For full functionality of this site it is necessary to enable JavaScript.
+				Here are the <a href="https://www.enable-javascript.com/">
+					instructions how to enable JavaScript in your web browser</a>.
+			</noscript>
+		</div>
+		<h1><script>document.write(_("WZ status"))</script></h1>
+		<div id="wz-info">
+			<p>
+				<script>document.write(_("The page will update itself every minute."))</script>
+			</p>
+		</div>
+		<div id="wz-container">
+			<div id="wz-map"></div>
+			<div id="wz-alsius"></div>
+			<div id="wz-ignis"></div>
+			<div id="wz-syrtis"></div>
+		</div>
+	</body>
+</html>

@@ -32,6 +32,13 @@ h1 {
 .bugnum {
 	text-align: center;
 }
+.red { color: #ffa1a7; }
+.blue { color: #9ccdf9; }
+.green { color: #00ff11; }
+.purple { color: #bd93ff; }
+
+/* TRAINER */
+
 .setup {
 	display: flex;
 	gap: 1em;
@@ -78,10 +85,6 @@ h1 {
 .icon .skilllvl { background-color: white; color: black; border-radius: 4px;}
 .minus, .plus { margin-left: 6px; width: 20px; height: 20px}
 .plus { margin-bottom: 6px;}
-.red { color: #ffa1a7; }
-.blue { color: #9ccdf9; }
-.green { color: #00FF11; }
-.purple { color: #bd93ff; }
 #skillinfo, .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
 	background-color: #313131 !important;
 }
@@ -124,4 +127,51 @@ h1 {
 	text-align: center;
 	padding:.25em 1em .25em 1em;
 	border: 1px solid white;
+}
+
+/* WARZONE STATUS */
+
+#wz-container {
+	display: grid;
+	grid-template-areas:
+		"map alsius"
+		"map ignis"
+		"map syrtis";
+	align-items: center;
+	justify-items: center;
+	justify-content: center;
+	gap: 1em;
+}
+@media (max-width: 800px) {
+	#wz-container {
+		grid-template-areas: "map" "alsius" "ignis" "syrtis";
+	}
+	h2 {
+		text-align: center;
+	}
+}
+#wz-info {
+	text-align: center;
+	font-weight: bold;
+}
+#wz-map {
+	grid-area: map;
+}
+#wz-map img {
+	max-width: 100%;
+	width: 500px;
+}
+.wz-icon {
+	padding: 0;
+	margin: 0;
+	height: 1em;
+}
+#wz-alsius {
+	grid-area: alsius;
+}
+#wz-ignis {
+	grid-area: ignis;
+}
+#wz-syrtis {
+	grid-area: syrtis;
 }

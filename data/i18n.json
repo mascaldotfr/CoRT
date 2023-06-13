@@ -15,6 +15,11 @@ __i18n__ = {
 		"es": "Estado de las BZ",
 		"de": "Zustand der BZ"
 	},
+	"WZ status": {
+		"fr": "Etat de la WZ",
+		"es": "Estado de la WZ",
+		"de": "Zustand der WZ"
+	},
 	"Bosses Countdown":
 	{
 		"fr": "Compte à rebours des boss",
@@ -215,6 +220,26 @@ __i18n__ = {
 	{
 		"fr": "Ce lien partagé est mauvais. J'abandonne, désolé !",
 		"es": "Este enlace compartido es malo. ¡Me doy por vencido, lo siento!",
-		"de": "Dieser geteilte Link ist schlecht. Ich gebe auf, sorry!" 
+		"de": "Dieser geteilte Link ist schlecht. Ich gebe auf, sorry!"
+	},
+	"Fort %s": {
+		"fr": "Fort %s",
+		"es": "Fuerte %s",
+		"de": "Fort %s"
+	},
+	"%s Castle": {
+		"fr": "Château %s",
+		"es": "Castillo %s",
+		"de": "Schloss %s"
+	},
+	"Great Wall of %s": {
+		"fr": "Grande Muraille de %s",
+		"es": "Gran Muralla de %s",
+		"de": "%s Mauer"
+	},
+	"The page will update itself every minute.": {
+		"fr": "La page sera rafraîchie toutes les minutes.",
+		"es": "La página se actualizará cada minuto.",
+		"de": "Die Seite wird jede Minute aktualisiert."
 	}
 }
