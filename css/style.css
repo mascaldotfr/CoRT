@@ -160,7 +160,7 @@ h1 {
 }
 #wz-map img {
 	max-width: 100%;
-	height: 500px;
+	width: 100%;
 }
 .wz-icon {
 	padding: 0;
