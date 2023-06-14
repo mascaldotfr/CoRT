@@ -90,8 +90,7 @@ function display_wz() {
 		events_html += `<p>
 			<b>${datetime}</b>
 			<span class="${owner_color}">${owner}</span>
-			${_("has captured")}
-			<span class="${location_color}">${captured}</span>.
+			${_("has captured %s", `<span class="${location_color}">${captured}</span>`)}.
 			</p>`;
 	}
 	$("#wz-events").html(events_html);

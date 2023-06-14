@@ -247,10 +247,10 @@ __i18n__ = {
 		"es": "Gema",
 		"de": "Juwel"
 	},
-	"has captured": {
-		"fr": "a capturé",
-		"es": "ha capturado",
-		"de": "hat gefangen genommen"
+	"has captured %s": {
+		"fr": "a capturé %s",
+		"es": "ha capturado %s",
+		"de": "hat %s eingenommen"
 	},
 	"Last server events (in your timezone):": {
 		"fr": "Derniers événements du serveur (heure locale) :",
