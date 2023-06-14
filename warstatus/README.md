@@ -10,7 +10,7 @@ status and map URLs in a file as JSON (see `outfile` in `warstatus.py`).
 The output is meant to placed in a file reachable by a webserver.
 
 You can see it in action at https://hail.thebus.top/cortdata/warstatus.txt --
-informations are refreshed every multiple of 2 minutes.
+informations are refreshed every minute.
 
 ## Requirements
 
@@ -31,12 +31,14 @@ informations are refreshed every multiple of 2 minutes.
 	```
 4. Add the following line:
 	```
-	*/2 * * * * /where/is/warstatus.py
+	* * * * * /where/is/warstatus.py
 	```
 
 That's it.
 
 ## Response Format
+
+It's advised to read /js/wz.js as well for exploitation.
 
 ```
 {
@@ -54,7 +56,7 @@ That's it.
             [...17 other gems...]
     ],
     "map_url": "The current map URL with a parameter to bypass caching",
-    "generated": "Date and time when the response has been generated",
+    "generated": "Unix timestamp representing the date and time when the response has been generated",
     "events_log": [ // The last 10 server events (fort and gem captures)
         {
             "date": "Unix timestamp",
@@ -64,7 +66,9 @@ That's it.
             "type": "It's either 'fort' or 'gem' depending on what is captured"
         },
         [... 9 other events...]
-    ]
+    ],
+    map_changed: "boolean actually. Did the forts status changed since the last generation?",
+    gem_changed: "same as map_changed, but for gems"
 }
 ```
 

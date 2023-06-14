@@ -67,8 +67,9 @@ def main():
 
         # XXX EVENTS XXX
 
+        status["map_changed"] = False
+        status["gems_changed"] = False
         old_status = {}
-        map_changed = False
         events_log = []
         timestamp = int(datetime.now(timezone.utc).timestamp())
 
@@ -81,7 +82,7 @@ def main():
         i = 0
         for fort in status["forts"]:
             if "forts" not in old_status or fort["owner"] != old_status["forts"][i]["owner"]:
-                map_changed = True
+                status["map_changed"] = True
                 events_log.insert(0, { "date": timestamp, "name": fort["name"],
                                        "location": fort["location"], "owner": fort["owner"],
                                        "type": "fort" })
@@ -90,6 +91,7 @@ def main():
         i = 0
         for gem in status["gems"]:
             if ("gems" not in old_status or "gem_0" in old_status["gems"][i]) and not "gem_0" in gem:
+                status["gems_changed"] = True
                 gem_location = ''.join(os.path.normpath(gem).split("/")[-1:])
                 gem_location = gem_location.replace("gem_", "")
                 gem_location = gem_location.replace(".png", "")
@@ -108,8 +110,8 @@ def main():
         status["events_log"] = events_log[:10]
 
         # Define map url
-        if map_changed:
-            # The extra timestamp parameter is made to cache bust the map
+        if status["map_changed"]:
+            # The extra timestamp parameter is made to cache bust the old map
             status["map_url"] = "https://championsofregnum.com/" + \
                 warmap.contents[1].attrs["src"] + "?" + str(timestamp)
         else:
