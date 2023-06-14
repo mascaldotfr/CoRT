@@ -16,6 +16,14 @@
  */
 
 
+// Wait for an image to be loaded to be displayed
+function noflickerimg(url, id) {
+    target = document.getElementById(id);
+    img = new Image();
+    img.onload = function() { target.src = img.src };
+    img.src = url;
+}
+
 // Create translatable strings according to english order of words
 function translate_fort(fort) {
 	words = fort.split(" ");
@@ -63,7 +71,8 @@ function display_wz() {
 				<p>${forts.splice(0, 4).join("")}</p>
 		`)
 	}
-	$("#wz-map").html(`<img src="${data["map_url"]}" alt="WZ map">`);
+	$("#wz-map").html(`<img src="data/warstatus/base_map.jpg" id="wz-map-map">`);
+	noflickerimg(data["map_url"], "wz-map-map");
 
 	events_html = `<h2>
 		<span class="purple"> ${_("Last server events (in your timezone):")} </span>
