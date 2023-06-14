@@ -75,7 +75,8 @@ function display_wz(force_display) {
 				<p>${forts.splice(0, 4).join("")}</p>
 		`)
 	}
-	// Reload the map only if it changed
+	// Reload the map only if it changed, it needs to exist for the first
+	// run, and data["map_changed"] may be false then
 	if ($("#wz-map-map").attr("src") != data["map_url"]) {
 		$("#wz-map-map").attr("src", "data/warstatus/base_map.jpg");
 		noflickerimg(data["map_url"], "wz-map-map");
