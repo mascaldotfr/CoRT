@@ -71,7 +71,7 @@ function display_wz() {
 				<p>${forts.splice(0, 4).join("")}</p>
 		`)
 	}
-	$("#wz-map").html(`<img src="data/warstatus/base_map.jpg" id="wz-map-map">`);
+	$("#wz-map-map").attr("src", "data/warstatus/base_map.jpg");
 	noflickerimg(data["map_url"], "wz-map-map");
 
 	events_html = `<h2>
