@@ -67,6 +67,7 @@ def main():
         # XXX EVENTS XXX
 
         old_status = {}
+        map_changed = False
         events_log = []
         timestamp = int(datetime.now(timezone.utc).timestamp())
 
@@ -79,6 +80,7 @@ def main():
         i = 0
         for fort in status["forts"]:
             if "forts" not in old_status or fort["owner"] != old_status["forts"][i]["owner"]:
+                map_changed = True
                 events_log.insert(0, { "date": timestamp, "name": fort["name"],
                                        "location": fort["location"], "owner": fort["owner"],
                                        "type": "fort" })
@@ -105,13 +107,6 @@ def main():
         status["events_log"] = events_log[:10]
 
         # Define map url
-        map_changed = False
-        i = 0
-        for fort in status["forts"]:
-            if "forts" not in old_status or fort["owner"] != old_status["forts"][i]["owner"]:
-                map_changed = True
-                break
-            i += 1
         if map_changed:
             # The extra timestamp parameter is made to cache bust the map
             status["map_url"] = "https://championsofregnum.com/" + \
