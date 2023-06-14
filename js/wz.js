@@ -73,7 +73,7 @@ function display_wz() {
 	}
 	// Reload the map only if it changed
 	if ($("#wz-map-map").attr("src") != data["map_url"]) {
-		$("#wz-map-map").attr("src", "/data/warstatus/base_map.jpg");
+		$("#wz-map-map").attr("src", "data/warstatus/base_map.jpg");
 		noflickerimg(data["map_url"], "wz-map-map");
 	}
 
