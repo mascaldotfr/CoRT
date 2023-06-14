@@ -37,6 +37,7 @@ h1 {
 .green { color: #00ff11; }
 .purple { color: #bd93ff; }
 .faded { color: #aaaaaa; }
+.center { text-align:center; }
 
 /* TRAINER */
 
@@ -147,6 +148,26 @@ h1 {
 }
 #bz_container h2 {
 	margin-top: 3em;
+}
+
+/* BOSSES */
+
+#daen, #evendim, #thorkul {
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #313131;
+	margin-bottom: 1em;
+	align-items: center;
+	justify-content: center;
+}
+#bosses_list {
+	max-width: 600px;
+	margin: 0 auto;
+}
+#bosses_list .respawn {
+	flex: 1;
+	vertical-align: middle;
+	text-align: center;
 }
 
 /* WARZONE STATUS */
