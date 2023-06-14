@@ -49,7 +49,8 @@ def main():
             forts_names.append(name.text)
 
         if len(status["gems"]) == 0 or len(forts_names) == 0 or len(forts_icons) == 0 :
-            print("The output is wrong: " + str(status[realm]), file=sys.stderr)
+            print("The output is wrong: " + str(status["gems"]) + str(forts_names) + \
+                                            str(forts_icons), file=sys.stderr)
             sys.exit(1)
 
         i = 0
