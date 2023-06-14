@@ -11,24 +11,6 @@
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/bz.js"></script>
 		<script>document.title = "CoRT - " + _("BZ status")</script>
-		<style>
-			body > div {
-				max-width: 900px !important;
-			}
-			.faded {
-				color: #aaaaaa;
-			}
-			.bz_container {
-				text-align: center;
-			}
-			ul {
-				display: inline-block;
-				text-align:left;
-			}
-			h3 {
-				color: #88FF88;
-			}
-		</style>
 	</head>
 	<body>
 		<div class="bugnum but on your side">
@@ -38,11 +20,17 @@
 					instructions how to enable JavaScript in your web browser</a>.
 			</noscript>
 		</div>
-		<div class="bz_container">
+		<div id="bz_container">
 			<h1><script>document.write(_("BZ status"))</script></h1>
-			<h2><span id="bz_status"></span>
-				<i><span id="next_bz"></span></i></h2>
-			<h3><script>document.write(_("Next BZ (in your timezone):"))</script></h3>
+			<h2>
+				<span id="bz_status"></span>
+				<i><span id="next_bz"></span></i>
+			</h2>
+			<h3>
+				<span class="green">
+				<script>document.write(_("Next BZ (in your timezone):"))</script>
+				</span>
+			</h3>
 			<ul id="future_bzs"></ul>
 		</div>
 	</body>
