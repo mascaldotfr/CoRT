@@ -71,8 +71,11 @@ function display_wz() {
 				<p>${forts.splice(0, 4).join("")}</p>
 		`)
 	}
-	$("#wz-map-map").attr("src", "data/warstatus/base_map.jpg");
-	noflickerimg(data["map_url"], "wz-map-map");
+	// Reload the map only if it changed
+	if ($("#wz-map-map").attr("src") != data["map_url"]) {
+		$("#wz-map-map").attr("src", "/data/warstatus/base_map.jpg");
+		noflickerimg(data["map_url"], "wz-map-map");
+	}
 
 	events_html = `<h2>
 		<span class="purple"> ${_("Last server events (in your timezone):")} </span>

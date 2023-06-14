@@ -22,8 +22,10 @@ const $ = (function (selector) {
 			document.querySelector(selector).insertAdjacentHTML("beforeend", html);
 		},
 		attr: function(attribute, value) {
-			// only the setter is implemented
-			document.querySelector(selector).setAttribute(attribute, value);
+			if (value !== undefined)
+				document.querySelector(selector).setAttribute(attribute, value);
+			else
+				return document.querySelector(selector).getAttribute(attribute);
 		},
 		css: function(key, value) {
 			jscss = new Array();

@@ -62,25 +62,20 @@ def main():
                                      "owner":owner, "icon":forts_icons[i] })
             i += 1
 
-        now = datetime.now(timezone.utc)
         warmap = page.find("div", {"id" : "war_map-box-content"})
-        # The extra timestamp parameter is made to cache bust the map
-        status["map_url"] = "https://championsofregnum.com/" + \
-            warmap.contents[1].attrs["src"] + "?" + str(int(now.timestamp()))
-        status["generated"] = str(now)
 
         # XXX EVENTS XXX
 
         old_status = {}
         events_log = []
-        timestamp = int(now.timestamp())
+        timestamp = int(datetime.now(timezone.utc).timestamp())
 
         if os.path.exists(outfile):
             with open(outfile, "r") as jsonfile:
                 old_status = json.load(jsonfile)
                 if "events_log" in old_status:
                     events_log = old_status["events_log"]
-
+        # Forts events
         i = 0
         for fort in status["forts"]:
             if "forts" not in old_status or fort["owner"] != old_status["forts"][i]["owner"]:
@@ -88,7 +83,7 @@ def main():
                                        "location": fort["location"], "owner": fort["owner"],
                                        "type": "fort" })
             i += 1
-
+        # Gem events
         i = 0
         for gem in status["gems"]:
             if ("gems" not in old_status or "gem_0" in old_status["gems"][i]) and not "gem_0" in gem:
@@ -105,8 +100,26 @@ def main():
                                       "type": "gem" })
             i += 1
 
+        # Sort and store events
         events_log = sorted(events_log, key=lambda d: d["date"], reverse=True)
         status["events_log"] = events_log[:10]
+
+        # Define map url
+        map_changed = False
+        i = 0
+        for fort in status["forts"]:
+            if "forts" not in old_status or fort["owner"] != old_status["forts"][i]["owner"]:
+                map_changed = True
+                break
+            i += 1
+        if map_changed:
+            # The extra timestamp parameter is made to cache bust the map
+            status["map_url"] = "https://championsofregnum.com/" + \
+                warmap.contents[1].attrs["src"] + "?" + str(timestamp)
+        else:
+            status["map_url"] = old_status["map_url"]
+
+        status["generated"] = str(timestamp)
 
         with open(outfile, "w") as jsonfile:
             json.dump(status, jsonfile)
