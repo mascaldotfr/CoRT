@@ -38,7 +38,9 @@ That's it.
 
 ## Response Format
 
-It's advised to read /js/wz.js as well for exploitation.
+It's advised to read /js/wz.js as well for exploitation. Clearly the format has
+been optimized for display on the site and try to play well with NGE inconsistent
+website code, sacrificing a bit of the consistency.
 
 ```
 {
@@ -55,20 +57,29 @@ It's advised to read /js/wz.js as well for exploitation.
             "url to the gem icon",
             [...17 other gems...]
     ],
-    "map_url": "The current map URL with a parameter to bypass caching",
-    "generated": "Unix timestamp representing the date and time when the response has been generated",
-    "events_log": [ // The last 10 server events (fort and gem captures)
+    "events_log": [ // The last 25 server events (fort, gem and relics captures)
         {
             "date": "Unix timestamp",
-            "name": "1 or 2, depending if it's the realm's first or second gem",
-            "location": "Capitalised original realm of the gem (ex: Syrtis)",
-            "owner": "Capitalised current owner realm of the gem (ex: Alsius)",
-            "type": "It's either 'fort' or 'gem' depending on what is captured"
+            "name": "forts: fortification name | gem: gem number | relic: relic name",
+            "location": "Capitalised original realm of the fort/gem/relic (ex: Syrtis)",
+            "owner": "gem/fort: Capitalised current owner realm of the gem/fort (ex: Alsius)
+                      relic: either 'transit' or 'altar'",
+            "type": "It's either 'fort' or 'gem' or 'relic' depending on what is captured"
         },
-        [... 24 other events...]
+        [...24 other events...]
+    ],
+    "relics": [ // The current relic status
+        "Alsius": {
+            [...From 0 to 3 relics...],
+            "Imperia": null if in transit, else URL of the relic image,
+        },
+        [...The 2 other realms...]
     ],
     map_changed: "boolean actually. Did the forts status changed since the last generation?",
-    gem_changed: "same as map_changed, but for gems"
+    gems_changed: "same as map_changed, but for gems",
+    relics_changed: "same as map_changed, but for relics",
+    "map_url": "The current map URL with a parameter to bypass caching",
+    "generated": "Unix timestamp representing the date and time when the response has been generated",
 }
 ```
 

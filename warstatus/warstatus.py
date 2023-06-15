@@ -25,9 +25,16 @@ from bs4 import BeautifulSoup
 
 # File where to dump the status
 outfile = "warstatus.txt"
+base_url = "https://championsofregnum.com/"
+
 status = {"forts": [], "gems": []}
+status["relics"] = {
+        "Alsius": { "Imperia": None, "Aggersborg": None, "Trelleborg": None },
+        "Ignis": { "Shaanarid": None, "Samal": None, "Menirah": None },
+        "Syrtis": { "Eferias": None, "Herbred": None, "Algaros": None }
+}
 realms = ["Alsius", "Ignis", "Syrtis"] # in site order for forts
-realms_gem = ["Ignis", "Alsius", "Syrtis"] # in site order for gems
+realms_gem = ["Ignis", "Alsius", "Syrtis"] # in site order for gems images (gem_X.png)
 
 def main():
     with urlopen("https://championsofregnum.com/index.php?l=1&sec=3") as response:
@@ -36,9 +43,14 @@ def main():
         forts_icons = []
 
         headers = page.findAll("div", {"class" : "war-status-realm"})
+        i = 0
         for realm in headers:
             for gem in realm.findAll("img"):
                 status["gems"].append(gem.attrs["src"])
+            for relic in realm.next_sibling.next_sibling.findAll("img"):
+                relic_name = relic.attrs["title"].split(" relic")[0]
+                status["relics"][realms[i]][relic_name] = base_url + relic.attrs["src"]
+            i += 1
 
         icons = page.findAll("div", {"class" : "war-status-bulding-icons"})
         for icon_block in icons:
@@ -70,6 +82,7 @@ def main():
 
         status["map_changed"] = False
         status["gems_changed"] = False
+        status["relics_changed"] = False
         old_status = {}
         events_log = []
         timestamp = int(datetime.now(timezone.utc).timestamp())
@@ -105,6 +118,19 @@ def main():
                                       "location": gem_location, "owner": gem_owner,
                                       "type": "gem" })
             i += 1
+        # Relic events
+        for realm in status["relics"]:
+            for relic in status["relics"][realm]:
+                new_relic = status["relics"][realm][relic]
+                old_relic = None
+                if "relics" in old_status:
+                    old_relic = old_status["relics"][realm][relic]
+                if "relics" not in old_status or (old_relic != new_relic):
+                    status["relics_changed"] = True
+                    output = { "date": timestamp, "name": relic, "owner": realm,
+                              "location": None, "type": "relic" }
+                    output["location"] = "altar" if old_relic == None else "transit"
+                    events_log.insert(0, output)
 
         # Sort and store events
         events_log = sorted(events_log, key=lambda d: d["date"], reverse=True)
@@ -113,7 +139,7 @@ def main():
         # Define map url
         if status["map_changed"]:
             # The extra timestamp parameter is made to cache bust the old map
-            status["map_url"] = "https://championsofregnum.com/" + \
+            status["map_url"] = base_url + \
                 warmap.contents[1].attrs["src"] + "?" + str(timestamp)
         else:
             status["map_url"] = old_status["map_url"]

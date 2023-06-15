@@ -256,5 +256,20 @@ __i18n__ = {
 		"fr": "Derniers événements du serveur (heure locale) :",
 		"es": "Últimos eventos del servidor (hora local):",
 		"de": "Neueste Serverereignisse (Ortszeit):"
+	},
+	"is back to its altar.": {
+		"fr": "est de retour sur son autel.",
+		"es": "está de vuelta en su altar.",
+		"de": "ist zurück an seinem Altar."
+	},
+	"is in transit.": {
+		"fr": "est en transit.",
+		"es": "está en tránsito.",
+		"de": "ist unterwegs."
+	},
+	"%s's relic": {
+		"fr": "La relique de %s",
+		"es": "La reliquia de %s",
+		"de": "Das %s-Relikt"
 	}
 }

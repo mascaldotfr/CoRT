@@ -46,7 +46,8 @@ function display_wz(force_display) {
 	forts = []
 
 	if (navigator.onLine === false) {
-		$("#wz-info-error").html(`<b>You are offline, can't refresh the status. Will retry once you are online.</b>`);
+		$("#wz-info-error").html(`<b>You are offline, can't refresh the status.
+			                  Will retry once you are online.</b>`);
 		return;
 	}
 	try {
@@ -72,10 +73,17 @@ function display_wz(force_display) {
 	}
 
 	for (realm of Object.keys(realm_colors)) {
+		relics = ""
+		for (relic of Object.keys(data["relics"][realm])) {
+			url = data["relics"][realm][relic];
+			if (url !== null) {
+				relics += `<img src="${url}" class="wz-icon">`;
+			}
+		}
 		$(`#wz-${realm.toLowerCase()}`).html(`
 				<h2>
 				<span class="${realm_colors[realm]}">${realm}</span>&nbsp;
-				${gems.splice(0, 6).join("")}
+				${gems.splice(0, 6).join("")}&nbsp;${relics}
 				</h2>
 				<p>${forts.splice(0, 4).join("")}</p>
 		`)
@@ -109,11 +117,21 @@ function display_wz(force_display) {
 			captured = _("Gem") + " #" + captured;
 		}
 		location_color = realm_colors[anevent["location"]];
-		events_html += `<p>
-			<b>${datetime}</b>
-			<span class="${owner_color}">${owner}</span>
-			${_("has captured %s", `<span class="${location_color}">${captured}</span>`)}.
-			</p>`;
+		events_html += `<p><b>${datetime}</b>&nbsp;`
+		if (anevent["type"] != "relic") {
+			events_html += `<span class="${owner_color}">${owner}</span>
+				${_("has captured %s", `<span class="${location_color}">${captured}</span>`)}.`;
+		}
+		else if (anevent["type"] == "relic") {
+			relic = `<span class="${location_color}">${_("%s's relic", captured)}</span>`;
+			if (anevent["owner"] == "altar") {
+				events_html += `${relic} ${_("is back to its altar.")}`;
+			}
+			else {
+				events_html += `${relic} ${_("is in transit.")}`;
+			}
+		}
+		events_html += `</p>`;
 	}
 	$("#wz-events").html(events_html);
 }
