@@ -65,7 +65,7 @@ It's advised to read /js/wz.js as well for exploitation.
             "owner": "Capitalised current owner realm of the gem (ex: Alsius)",
             "type": "It's either 'fort' or 'gem' depending on what is captured"
         },
-        [... 9 other events...]
+        [... 24 other events...]
     ],
     map_changed: "boolean actually. Did the forts status changed since the last generation?",
     gem_changed: "same as map_changed, but for gems"

@@ -108,7 +108,7 @@ def main():
 
         # Sort and store events
         events_log = sorted(events_log, key=lambda d: d["date"], reverse=True)
-        status["events_log"] = events_log[:10]
+        status["events_log"] = events_log[:25]
 
         # Define map url
         if status["map_changed"]:
