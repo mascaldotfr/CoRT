@@ -45,15 +45,20 @@ function display_wz(force_display) {
 	gems = []
 	forts = []
 
+	if (navigator.onLine === false) {
+		$("#wz-info-error").html(`<b>You are offline, can't refresh the status. Will retry once you are online.</b>`);
+		return;
+	}
 	try {
 		data = $().getJSON("https://hail.thebus.top/cortdata/warstatus.txt");
+		$("#wz-info-error").empty();
 		// Do nothing if nothing changed compared to the last fetch
 		if (data["map_changed"] === false && data["gems_changed"] === false &&
 		    force_display !== true)
 			return;
 	}
 	catch (error) {
-		$("#wz-map").html(`<b>Failed to get the warstatus: <code>${error}</code>`);
+		$("#wz-info-error").html(`<b>Failed to get the warstatus:</b> <code>${error}</code>`);
 		return;
 	}
 
@@ -114,6 +119,19 @@ function display_wz(force_display) {
 }
 
 $(document).ready(function() {
+	display_wz(true);
+});
+
+// timer are stopped when phones and tablets are on sleep mode,
+// force reload when they're woken up
+if ("ontouchstart" in document.documentElement) {
+	window.addEventListener("visibilitychange", (e) => {
+		if (document.visibilityState == "visible")
+			display_wz(true);
+	});
+}
+// Same idea as above but when the connection is available again
+window.addEventListener("online", (e) => {
 	display_wz(true);
 });
 
