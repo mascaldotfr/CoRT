@@ -26,7 +26,8 @@ from bs4 import BeautifulSoup
 # File where to dump the status
 outfile = "warstatus.txt"
 status = {"forts": [], "gems": []}
-realms = ["Alsius", "Ignis", "Syrtis"] # in site order
+realms = ["Alsius", "Ignis", "Syrtis"] # in site order for forts
+realms_gem = ["Ignis", "Alsius", "Syrtis"] # in site order for gems
 
 def main():
     with urlopen("https://championsofregnum.com/index.php?l=1&sec=3") as response:
@@ -90,12 +91,12 @@ def main():
         # Gem events
         i = 0
         for gem in status["gems"]:
-            if ("gems" not in old_status or "gem_0" in old_status["gems"][i]) and not "gem_0" in gem:
+            if "gems" not in old_status or (gem != old_status["gems"][i] and not "gem_0" in gem):
                 status["gems_changed"] = True
                 gem_location = ''.join(os.path.normpath(gem).split("/")[-1:])
                 gem_location = gem_location.replace("gem_", "")
                 gem_location = gem_location.replace(".png", "")
-                gem_location = realms[int(gem_location) - 1]
+                gem_location = realms_gem[int(gem_location) - 1]
                 gem_owner = realms[int(i / 6)]
                 # Example with i=17 (Syrtis #2 gem owned by Syrtis)
                 # 17 (global) - 12 (realm offset) = 5
