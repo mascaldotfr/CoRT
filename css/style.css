@@ -118,6 +118,10 @@ h1 {
 	border: 1px solid white;
 	padding:.25em 1em .25em 1em;
 }
+#skillinfo thead > tr > th:first-child {
+  visibility: hidden;
+  border: none;
+}
 #skillinfo thead {
 	background-color: #212121;
 }
@@ -188,7 +192,7 @@ h1 {
 	#wz-container {
 		grid-template-areas: "map" "alsius" "ignis" "syrtis" "events";
 	}
-	h2 {
+	#wz-container h2 {
 		text-align: center;
 	}
 }
