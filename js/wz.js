@@ -18,16 +18,18 @@
 
 // Wait for an image to be loaded to be displayed
 function noflickerimg(url, id) {
-    target = document.getElementById(id);
-    img = new Image();
+    let target = document.getElementById(id);
+    let img = new Image();
     img.onload = function() { target.src = img.src };
     img.src = url;
 }
 
 // Create translatable strings according to english order of words
 function translate_fort(fort) {
-	words = fort.split(" ");
-	fort_id = words.pop();
+	let words = fort.split(" ");
+	let fort_id = words.pop();
+	let fort_name = "";
+	let fort_type = "";
 	if (words[1] == "Castle") {
 		fort_name = words.shift();
 		fort_type = "%s " + words.join(" ");
