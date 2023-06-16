@@ -36,44 +36,44 @@ bz_end = [	[16, 21],
 
 
 function future_date(in_day, at_hour) {
-	d = new Date();
+	let d = new Date();
 	return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), parseInt(d.getUTCDate()) + parseInt(in_day),
 		        at_hour, 0, 0);
 }
 
 function mstohhmmss(ms) {
-	hms = { "hours": 0, "minutes": 0, "seconds": 0 };
-	seconds = ms / 1000;
+	let hms = { "hours": 0, "minutes": 0, "seconds": 0 };
+	let seconds = ms / 1000;
 	hms.hours = Math.floor(seconds / 3600);
 	seconds -= hms.hours * 3600;
 	hms.minutes = Math.floor(seconds / 60);
 	seconds -= hms.minutes * 60;
 	hms.seconds = Math.floor(seconds);
-	for (hms_element in hms) {
+	for (let hms_element in hms) {
 		hms[hms_element] = String(hms[hms_element]).padStart(2, "0");
 	}
 	return hms;
 }
 
 function date_difference_from_now(future_date) {
+	let current_date = new Date();
 	future_date = new Date(future_date);
-	current_date = new Date();
 	return mstohhmmss((future_date.getTime() - current_date.getTime()));
 }
 
 function feed_bz() {
-	next_bzs_begin = [];
-	next_bzs_end = [];
-	bz_on = false;
-	bz_ends_at = 0;
+	let next_bzs_begin = [];
+	let next_bzs_end = [];
+	let bz_on = false;
+	let bz_ends_at = 0;
 	$("#bz_status").empty();
 	$("#next_bz").empty();
 	$("#future_bzs").empty();
 
-	current_date = new Date();
-	current_day = parseInt(current_date.getUTCDay());
-	current_hour = parseInt(current_date.getUTCHours());
-	tomorrow = current_day + 1 <= 6 ? current_day + 1 : 0;
+	let current_date = new Date();
+	let current_day = parseInt(current_date.getUTCDay());
+	let current_hour = parseInt(current_date.getUTCHours());
+	let tomorrow = current_day + 1 <= 6 ? current_day + 1 : 0;
 	// is bz on ?
 	for (let hour in bz_begin[current_day]) {
 		if (current_hour >= bz_begin[current_day][hour] &&
@@ -84,8 +84,8 @@ function feed_bz() {
 		}
 	}
 	// compute future bzs
-	future_bz_days = [current_day, tomorrow];
-	for (const day of future_bz_days) {
+	let future_bz_days = [current_day, tomorrow];
+	for (let day of future_bz_days) {
 		for (let hour in bz_begin[day]) {
 			if (day == current_day && parseInt(bz_begin[day][hour]) <= current_hour) {
 				// skip passed or current bz of the day
@@ -102,17 +102,19 @@ function feed_bz() {
 	}
 	else {
 		$("#bz_status").html(`<span class="red"><b>${_("OFF")}</b></span>`);
-		next_bz_in = date_difference_from_now(next_bzs_begin[0]);
+		var next_bz_in = date_difference_from_now(next_bzs_begin[0]);
 		$("#next_bz").text(`${_("Next BZ in")} ${next_bz_in.hours}:${next_bz_in.minutes}:${next_bz_in.seconds}`);
 	}
-	for (next_bz in next_bzs_begin) {
-		bz_begin_date = new Date(next_bzs_begin[next_bz]);
-		bz_end_date = new Date(next_bzs_end[next_bz]);
-		date_options = {
-			hour12: false, weekday: 'long', month: 'long', day: 'numeric',
+	for (let next_bz in next_bzs_begin) {
+		let bz_begin_date = new Date(next_bzs_begin[next_bz]);
+		let bz_end_date = new Date(next_bzs_end[next_bz]);
+		let date_options = {
+			weekday: 'long', month: '2-digit', day: 'numeric',
 			hour: '2-digit', minute: '2-digit'};
-		interval = `<li>${bz_begin_date.toLocaleDateString(undefined, date_options)} -
-			    ${String(bz_end_date.getHours()).padStart(2, "0")}:${String(bz_end_date.getMinutes()).padStart(2, "0")}</li>`
+		let time_options = {hour: '2-digit', minute: '2-digit'};
+		let bz_begin_datetime = bz_begin_date.toLocaleDateString(undefined, date_options);
+		let bz_end_time = bz_end_date.toLocaleTimeString(undefined, time_options);
+		let interval = `<li>${bz_begin_datetime} - ${bz_end_time}</li>`
 		$("#future_bzs").append(interval);
 	}
 
