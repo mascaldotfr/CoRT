@@ -55,6 +55,8 @@ $(document).ready(function() {
 	trainerdataversion = urlsearch.get("d");
 	if (skillset) {
 		load_setup_from_url(skillset);
+		// Hide setup options while loading
+		$(".setup").hide();
 	}
 });
 
@@ -231,6 +233,8 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 }
 
 async function load_tree() {
+	// Hide setup options while loading
+	$(".setup").hide();
 	let base_skills = class_type_masks[currclass] & 0xF0;
 	let class_skills = class_type_masks[currclass];
 	// adjust code to get base power and discipline points, as well as WM tree location.
@@ -251,6 +255,7 @@ async function load_tree() {
 	catch (error) {
 		// Should never happen as the data is local...
 		alert(`Unable to fetch trainer data: ${error}`);
+		$(".setup").show();
 		return;
 	}
 	let alltrees = trainerdata.class_disciplines[base_skills];
@@ -301,6 +306,7 @@ async function load_tree() {
 		}
 	});
 	input_setup_from_url();
+	$(".setup").show();
 }
 
 function tablify(rowname, columns, color = "") {

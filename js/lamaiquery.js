@@ -75,6 +75,9 @@ const $ = (function (selector) {
 			if (selector_node)
 				selector_node.remove();
 		},
+		removeAttr: function(attribute) {
+			document.querySelector(selector).removeAttribute(attribute);
+		},
 		show: function() {
 			document.querySelector(selector).style.visibility = "visible";
 		},
