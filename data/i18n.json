@@ -252,6 +252,11 @@ __i18n__ = {
 		"es": "ha capturado %s",
 		"de": "hat %s eingenommen"
 	},
+	"has recovered %s": {
+		"fr": "a récupéré %s",
+		"es": " ha recuperado %s",
+		"de": "hat %s wiederhergestellt"
+	},
 	"Last server events (in your timezone):": {
 		"fr": "Derniers événements du serveur (heure locale) :",
 		"es": "Últimos eventos del servidor (hora local):",

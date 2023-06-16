@@ -119,8 +119,14 @@ function display_wz(force_display) {
 		location_color = realm_colors[anevent["location"]];
 		events_html += `<p><b>${datetime}</b>&nbsp;`
 		if (anevent["type"] != "relic") {
-			events_html += `<span class="${owner_color}">${owner}</span>
-				${_("has captured %s", `<span class="${location_color}">${captured}</span>`)}.`;
+			target = `<span class="${location_color}">${captured}</span>`;
+			if (anevent["location"] == anevent["owner"]) {
+				action = _("has recovered %s", target);
+			}
+			else {
+				action = _("has captured %s", target);
+			}
+			events_html += `<span class="${owner_color}">${owner}</span> ${action}.`;
 		}
 		else if (anevent["type"] == "relic") {
 			relic = `<span class="${location_color}">${_("%s's relic", captured)}</span>`;
