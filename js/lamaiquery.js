@@ -7,7 +7,8 @@
  * Non jquery compatible:
  *
  * - $.getJSON({parameters}) => $().getJSON(url). XXX Note that it's
- *   synchronous as the UI drawing needs the trainer dataset for example.
+ *   synchronous as the UI drawing needs the trainer dataset for example
+ *   when loading a setup from an url.
  * - $.post({all_parameters}) => $().post(url, params={key: value, [...]})
  *
  * */
@@ -15,8 +16,8 @@
 const $ = (function (selector) {
 	return {
 		appendTo: function(target) {
-			selector = document.querySelector(selector);
-			document.querySelector(target).appendChild(selector);
+			let selector_node = document.querySelector(selector);
+			document.querySelector(target).appendChild(selector_node);
 		},
 		append: function(html) {
 			document.querySelector(selector).insertAdjacentHTML("beforeend", html);
@@ -28,7 +29,7 @@ const $ = (function (selector) {
 				return document.querySelector(selector).getAttribute(attribute);
 		},
 		css: function(key, value) {
-			jscss = new Array();
+			let jscss = new Array();
 			jscss[key] = value;
 			try {
 				selector = document.querySelector(selector);
@@ -40,7 +41,7 @@ const $ = (function (selector) {
 			document.querySelector(selector).replaceChildren();
 		},
 		getJSON: function(url) {
-			const http = new XMLHttpRequest();
+			let http = new XMLHttpRequest();
 			// the ? parameter trick allows to bypass the cache
 			http.open("GET", url + (/\?/.test(url) ? "&" : "?") + new Date().getTime(), false);
 			http.onerror = function (e) {
@@ -63,8 +64,8 @@ const $ = (function (selector) {
 			document.querySelector(selector).insertAdjacentHTML("afterbegin", html);
 		},
 		post: function(url, params) {
-			state = 0
-			urlparams = new FormData();
+			let state = 0;
+			let urlparams = new FormData();
 			for (key in params) {
 				urlparams.append(key, params[key]);
 			}
@@ -80,7 +81,7 @@ const $ = (function (selector) {
 			selector.addEventListener("DOMContentLoaded", callable);
 		},
 		remove: function() {
-			selector_node = document.querySelector(selector);
+			let selector_node = document.querySelector(selector);
 			if (selector_node)
 				selector_node.remove();
 		},
