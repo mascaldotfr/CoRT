@@ -29,15 +29,15 @@ function time_now() {
 }
 
 function unixstamp2human(unixstamp) {
-	dt = new Date(unixstamp * 1000);
+	let dt = new Date(unixstamp * 1000);
 	return dt.toLocaleDateString(undefined, {
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
 		hour: 'numeric', minute: 'numeric'});
 }
 
 function get_next_respawns(boss) {
-	tried_respawn = first_respawns[boss];
-	now = time_now();
+	let tried_respawn = first_respawns[boss];
+	let now = time_now();
 	while (true) {
 		tried_respawn += respawn_time;
 		if (tried_respawn >= now)
@@ -53,19 +53,19 @@ function get_next_respawns(boss) {
 function display_next_respawn(boss) {
 	$(`#${boss} .lastspawn`).prepend(`<span class="faded"><i>${_("Last respawn")}:
 		${unixstamp2human(previous_respawns[boss])}</i></span>`);
-	for (respawn in next_respawns[boss]) {
-		color = respawn == 0 ? "green" : "faded";
+	for (let respawn in next_respawns[boss]) {
+		let color = respawn == 0 ? "green" : "faded";
 		$(`#${boss}_respawn`).append(`<p class="${color}"><b>
 			${unixstamp2human(next_respawns[boss][respawn])}</b></p>`);
 	}
-	next_respawn_in = {};
-	time_before_respawn = next_respawns[boss][0] - time_now();
+	let next_respawn_in = {};
+	let time_before_respawn = next_respawns[boss][0] - time_now();
 	next_respawn_in.days = Math.floor(time_before_respawn / (24 * 3600));
 	time_before_respawn -= next_respawn_in.days * 24 * 3600;
 	next_respawn_in.hours = Math.floor(time_before_respawn / 3600);
 	time_before_respawn -= next_respawn_in.hours * 3600;
 	next_respawn_in.minutes = Math.floor(time_before_respawn / 60);
-	for (dt_elem in next_respawn_in) {
+	for (let dt_elem in next_respawn_in) {
 		next_respawn_in[dt_elem] = String(next_respawn_in[dt_elem]).padStart(2, "0");
 	}
 	// hide days and hours left if there is none of it
@@ -76,8 +76,8 @@ function display_next_respawn(boss) {
 }
 
 function refresh_display() {
-	bosses_unordered = new Map()
-	for (boss in first_respawns) {
+	let bosses_unordered = new Map()
+	for (let boss in first_respawns) {
 		$(`#${boss}_respawn`).empty();
 		$(`#${boss} .lastspawn`).empty();
 		next_respawns[boss] = [];
@@ -87,11 +87,11 @@ function refresh_display() {
 		bosses_unordered.set(boss, next_respawns[boss][0]);
 	}
 	// sort by respawn time
-	bosses_ordered = new Map([...bosses_unordered.entries()].sort((a, b) => a[1] - b[1]));
+	let bosses_ordered = new Map([...bosses_unordered.entries()].sort((a, b) => a[1] - b[1]));
 	// need only the bosses names
 	bosses_ordered = [...bosses_ordered.keys()];
 	// reorder the boss divs
-	for (boss in bosses_ordered) {
+	for (let boss in bosses_ordered) {
 		$(`#${bosses_ordered[boss]}`).appendTo("#bosses_list");
 	}
 }
