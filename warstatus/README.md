@@ -70,8 +70,8 @@ website code, sacrificing a bit of the consistency.
     ],
     "relics": [ // The current relic status
         "Alsius": {
-            [...From 0 to 3 relics...],
             "Imperia": null if in transit, else URL of the relic image,
+            [...The 2 other relics...]
         },
         [...The 2 other realms...]
     ],
