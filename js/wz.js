@@ -28,8 +28,8 @@ function noflickerimg(url, id) {
 function translate_fort(fort) {
 	let words = fort.split(" ");
 	let fort_id = words.pop();
-	let fort_name = "";
-	let fort_type = "";
+	let fort_name;
+	let fort_type;
 	if (words[1] == "Castle") {
 		fort_name = words.shift();
 		fort_type = "%s " + words.join(" ");
@@ -43,9 +43,9 @@ function translate_fort(fort) {
 
 function display_wz(force_display) {
 	// Same order as the website
-	realm_colors = {"Alsius": "blue", "Ignis": "red", "Syrtis": "green"};
-	gems = []
-	forts = []
+	let realm_colors = {"Alsius": "blue", "Ignis": "red", "Syrtis": "green"};
+	let gems = [];
+	let forts = [];
 
 	if (navigator.onLine === false) {
 		$("#wz-info-error").html(`<b>You are offline, can't refresh the status.
@@ -53,7 +53,7 @@ function display_wz(force_display) {
 		return;
 	}
 	try {
-		data = $().getJSON("https://hail.thebus.top/cortdata/warstatus.txt");
+		var data = $().getJSON("https://hail.thebus.top/cortdata/warstatus.txt");
 		$("#wz-info-error").empty();
 		// Do nothing if nothing changed compared to the last fetch
 		if (data["map_changed"] === false && data["gems_changed"] === false &&
@@ -65,19 +65,19 @@ function display_wz(force_display) {
 		return;
 	}
 
-	for (gem of data["gems"]) {
+	for (let gem of data["gems"]) {
 		gems.push(`<img src="${gem}" class="wz-icon">`);
 	}
-	for (fort of data["forts"]) {
-		icon = `<img src="${fort["icon"]}" class="wz-icon">`;
-		name = translate_fort(fort["name"]);
+	for (let fort of data["forts"]) {
+		let icon = `<img src="${fort["icon"]}" class="wz-icon">`;
+		let name = translate_fort(fort["name"]);
 		forts.push(`${icon}&nbsp;${name}<br>`);
 	}
 
-	for (realm of Object.keys(realm_colors)) {
-		relics = ""
-		for (relic of Object.keys(data["relics"][realm])) {
-			url = data["relics"][realm][relic];
+	for (let realm of Object.keys(realm_colors)) {
+		let relics = "";
+		for (let relic of Object.keys(data["relics"][realm])) {
+			let url = data["relics"][realm][relic];
 			if (url !== null) {
 				relics += `<img src="${url}" class="wz-icon">`;
 			}
@@ -97,31 +97,32 @@ function display_wz(force_display) {
 		noflickerimg(data["map_url"], "wz-map-map");
 	}
 
-	events_html = `<h2>
+	let events_html = `<h2>
 		<span class="purple"> ${_("Last server events (in your timezone):")} </span>
 		</h2>
 		`;
-	for (anevent of data["events_log"]) {
-		dt = new Date(anevent["date"] * 1000);
-		date_options = {
+	for (let anevent of data["events_log"]) {
+		let dt = new Date(anevent["date"] * 1000);
+		let date_options = {
 			hour12: false, month: 'numeric', day: 'numeric',
 			hour: '2-digit', minute: '2-digit' };
-		datetime = dt.toLocaleDateString(undefined, date_options);
-		owner = anevent["owner"];
-		owner_color = realm_colors[owner];
-		captured = anevent["name"];
-		if (anevent["type"] == "fort") {
-			captured = translate_fort(captured);
-			// remove fort number
-			captured = captured.substring(0, captured.lastIndexOf(" "));
-		}
-		else if (anevent["type"] == "gem") {
-			captured = _("Gem") + " #" + captured;
-		}
-		location_color = realm_colors[anevent["location"]];
+		let datetime = dt.toLocaleDateString(undefined, date_options);
+		let owner = anevent["owner"];
+		let owner_color = realm_colors[owner];
+		let captured = anevent["name"];
+		let location_color = realm_colors[anevent["location"]];
 		events_html += `<p><b>${datetime}</b>&nbsp;`
-		if (anevent["type"] != "relic") {
-			target = `<span class="${location_color}">${captured}</span>`;
+		if (anevent["type"] == "fort" || anevent["type"] == "gem") {
+			if (anevent["type"] == "fort") {
+				captured = translate_fort(captured);
+				// remove fort number
+				captured = captured.substring(0, captured.lastIndexOf(" "));
+			}
+			else if (anevent["type"] == "gem") {
+				captured = _("Gem") + " #" + captured;
+			}
+			let target = `<span class="${location_color}">${captured}</span>`;
+			let action;
 			if (anevent["location"] == anevent["owner"]) {
 				action = _("has recovered %s", target);
 			}
@@ -131,7 +132,7 @@ function display_wz(force_display) {
 			events_html += `<span class="${owner_color}">${owner}</span> ${action}.`;
 		}
 		else if (anevent["type"] == "relic") {
-			relic = `<span class="${location_color}">${_("%s's relic", captured)}</span>`;
+			let relic = `<span class="${location_color}">${_("%s's relic", captured)}</span>`;
 			if (anevent["owner"] == "altar") {
 				events_html += `${relic} ${_("is back to its altar.")}`;
 			}
