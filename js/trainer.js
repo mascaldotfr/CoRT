@@ -15,51 +15,50 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-minlevel = 10;
-maxlevel = 60;
-class_type_masks = {
+const minlevel = 10;
+const maxlevel = 60;
+const class_type_masks = {
 	'archer':0x10, 'hunter':0x11, 'marksman':0x12,
 	'mage':0x20, 'conjurer':0x21, 'warlock':0x22,
 	'warrior':0x40, 'barbarian':0x41, 'knight':0x42
 };
 
-trainerdata = null;
-trainerdataversion = null;
+var trainerdata = null;
+var trainerdataversion = null;
 
-currlevel = 0;
-currclass = null;
-mindlevel = 1;
-maxdlevel = 19;
-minplevel = 0;
-maxplevel = 5;
-wmrow = 0;
-powerpoints = 0;
-skillset = null;
+const mindlevel = 1;
+const maxdlevel = 19;
+const minplevel = 0;
+const maxplevel = 5;
+var currlevel = 0;
+var currclass = null;
+var wmrow = 0;
+var powerpoints = 0;
 
 $(document).ready(function() {
 	// generate characters levels options
-	for (i = maxlevel - 1; i >= minlevel; i--) {
+	for (let i = maxlevel - 1; i >= minlevel; i--) {
 		$("#t-level").append(`<option value="${i}">${i}</option>`);
 	}
 	// generate datasets version
 	$("#t-version").append(`<option value="${trainerdatasets[0]}" default selected>
 		${_("Current game version")} (${trainerdatasets[0]})</option>`);
-	for (i = 1; i < trainerdatasets.length; i++) {
+	for (let i = 1; i < trainerdatasets.length; i++) {
 		$("#t-version").append(`<option value="${trainerdatasets[i]}">${trainerdatasets[i]}</option>`);
 	}
 	// search for a given trainer dataset in url, and skillset then
 	// set the version accordingly. See also manage_dataset_versions.
-	urlsearch = new URLSearchParams(window.location.search);
-	skillset = urlsearch.get("s");
+	let urlsearch = new URLSearchParams(window.location.search);
+	let skillset = urlsearch.get("s");
 	trainerdataversion = urlsearch.get("d");
 	if (skillset) {
-		load_setup_from_url();
+		load_setup_from_url(skillset);
 	}
 });
 
 $("#t-load").on("click", function() {
-	level = $("#t-level").val();
-	clas = $("#t-class").val();
+	let level = $("#t-level").val();
+	let clas = $("#t-class").val();
 	if ( (level >= minlevel && level <= maxlevel) ) {
 		currlevel = level;
 	}
@@ -80,7 +79,7 @@ $("#t-load").on("click", function() {
 });
 
 $("#t-level").on('change', function() {
-	selectedllevel = $("#t-level").val();
+	let selectedllevel = $("#t-level").val();
 	// Upgrade does not work if no trees are loaded, you are level 60
 	// or if the requested level is lower than your current level
 	if (currlevel == 0 || currlevel == maxlevel || currlevel > selectedllevel)
@@ -94,7 +93,7 @@ $("#t-save").on("click", function() {
 		window.alert(_(`You need first to load trees by clicking on "%s"!`, _("Load / Reset")));
 		return;
 	}
-	saved_url = save_setup_to_url();
+	let saved_url = save_setup_to_url();
 	window.prompt(_("Here is the link to your setup:"), saved_url);
 	window.location.href = saved_url;
 
@@ -134,14 +133,14 @@ function upgrade_setup_to_new_version() {
 }
 
 function save_setup_to_url(shared = true) {
-	setup = "";
+	let setup = "";
 	setup = setup.concat(currclass + "+");
 	setup = setup.concat(currlevel + "+");
 	// WM row is always the latest one
-	for (row = 1; row <= wmrow; row++) {
+	for (let row = 1; row <= wmrow; row++) {
 		// separate discipline skills from power skills
 		setup = setup.concat(parseInt($(`#t-trainer .t${row} .p0 .icon .skilllvl`).text())) + "+";
-		for (col = 1; col < 11; col++) {
+		for (let col = 1; col < 11; col++) {
 			setup = setup.concat(parseInt($(`#t-trainer .t${row} .p${col} .icon .skilllvl`).text()) || 0);
 		}
 		if (row != wmrow) {
@@ -155,19 +154,19 @@ function save_setup_to_url(shared = true) {
 		LZString.compressToEncodedURIComponent(setup);
 }
 
-function load_setup_from_url() {
-	decompressed_setup = LZString.decompressFromEncodedURIComponent(skillset);
+function load_setup_from_url(skillset) {
+	let decompressed_setup = LZString.decompressFromEncodedURIComponent(skillset);
 	if (decompressed_setup == null) {
 		window.alert(_("Your shared link is bad. Bailing out, sorry!"));
 		return;
 	}
-	setup = decompressed_setup.split("+");
+	let setup = decompressed_setup.split("+");
 	$("#t-class").val(setup.shift());
 	$("#t-level").val(setup.shift());
 	manage_dataset_versions();
 	$("#t-version").val(trainerdataversion);
 	$("#t-load").trigger("click");
-	row = 0;
+	let row = 0;
 	for (let item = 0; item < setup.length; item++) {
 		if (item % 2 == 0) {
 			// discipline points
@@ -179,7 +178,7 @@ function load_setup_from_url() {
 		}
 		else {
 			// power points
-			powers = setup[item].split("");
+			let powers = setup[item].split("");
 			if (row == wmrow)
 				continue; // no pp for the wm row
 			for (let power in powers) {
@@ -195,8 +194,8 @@ function load_setup_from_url() {
 
 function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 	// discipline points are always > 1, but skill points must be 0 to simplify code later.
-	skilllvl = spellpos == 0 ? 1 : 0;
-	icon = ` 	<div class="p${spellpos}">
+	let skilllvl = spellpos == 0 ? 1 : 0;
+	let icon = ` 	<div class="p${spellpos}">
 				<div class="icon" style="background-image:url(${iconsrc});"
 				title="${spellname}" treename="${treename}" iconurl="${iconsrc}" spellpos="${spellpos}">
 		`;
@@ -217,8 +216,8 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 }
 
 function load_tree() {
-	base_skills = class_type_masks[currclass] & 0xF0;
-	class_skills = class_type_masks[currclass];
+	let base_skills = class_type_masks[currclass] & 0xF0;
+	let class_skills = class_type_masks[currclass];
 	// adjust code to get base power and discipline points, as well as WM tree location.
 	// needed because mages have 8 trees unlike 7 for warriors and archers
 	if ((class_type_masks[currclass] & 0xF0) == 32) {
@@ -232,14 +231,14 @@ function load_tree() {
 	$("#t-trainer").empty();
 	$("#skillinfo").empty();
 	trainerdata = $().getJSON("data/" + trainerdataversion + "/trainerdata.json");
-	alltrees = trainerdata.class_disciplines[base_skills];
+	let alltrees = trainerdata.class_disciplines[base_skills];
 	alltrees = alltrees.concat(trainerdata.class_disciplines[class_skills]);
-	trainerhtml = "";
-	treepos = 0;
+	let trainerhtml = "";
+	let treepos = 0;
 	alltrees.forEach( (tree) => {
 		treepos++;
-		spellpos = 0;
-		iconsrc = "data/" + trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".jpg";
+		let spellpos = 0;
+		let iconsrc = "data/" + trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".jpg";
 		trainerhtml = trainerhtml.concat(`<div treepos="${treepos}" class="t${treepos}">`);
 		trainerhtml = trainerhtml.concat(icon_factory(spellpos, iconsrc, treepos, tree, ""));
 		trainerdata.disciplines[tree].spells.forEach( (spell) => {
@@ -249,7 +248,7 @@ function load_tree() {
 				trainerhtml = trainerhtml.concat(`<div class="p${spellpos}"><div class="icon"></div></div>`);
 			}
 			else {
-				spellname = spell.name;
+				let spellname = spell.name;
 				trainerhtml = trainerhtml.concat(icon_factory(spellpos, iconsrc, treepos, spellname, tree));
 			}
 		});
@@ -289,7 +288,7 @@ function tablify(rowname, columns, color = "") {
 		return `<tr><th class="${color}">${rowname}</th><td colspan=5>${columns}</td></tr>`;
 	}
 	else {
-		htmlcolumns = "";
+		let htmlcolumns = "";
 		columns.forEach( (column) => htmlcolumns = htmlcolumns.concat(`<td>${column}</td>`) );
 		return `<tr><th class="${color}">${rowname}</th>${htmlcolumns}</tr>`;
 	}
@@ -297,15 +296,15 @@ function tablify(rowname, columns, color = "") {
 }
 
 function display_spell(spellinfo) {
-	spellname = spellinfo.getAttribute("title");
-	treename = spellinfo.getAttribute("treename");
-	iconclass = spellinfo.getAttribute("class");
-	iconurl = spellinfo.getAttribute("iconurl");
+	let spellname = spellinfo.getAttribute("title");
+	let treename = spellinfo.getAttribute("treename");
+	let iconclass = spellinfo.getAttribute("class");
+	let iconurl = spellinfo.getAttribute("iconurl");
 	// icon position in spelltree
-	iconposition = spellinfo.getAttribute("spellpos");
+	let iconposition = spellinfo.getAttribute("spellpos");
 	spellinfo = trainerdata.disciplines[treename].spells.filter(element => element.name == spellname)[0];
 	// don't duplicate css, redraw an icon
-	spellhtml = `
+	let spellhtml = `
 		<div class="p${iconposition} descriptionheader">
 			<div class="${iconclass}" style="background-image:url(${iconurl});"></div>
 			<div>
@@ -314,7 +313,7 @@ function display_spell(spellinfo) {
 			</div>
 		</div>
 		<p><b>Type:</b> ${spellinfo.type}</p>`;
-	tabularhtml = ""
+	let tabularhtml = ""
 	if ("cast" in spellinfo)
 		spellhtml = spellhtml.concat(`<p><b>Cast:</b> ${spellinfo.cast.toString()}s</p>`);
 	if ("gcd" in spellinfo)
@@ -336,25 +335,25 @@ function display_spell(spellinfo) {
 	if ("duration" in spellinfo)
 		tabularhtml = tabularhtml.concat(tablify("Duration (s)", spellinfo.duration));
 	if ("damage" in spellinfo) {
-		for (type in spellinfo.damage) {
+		for (let type in spellinfo.damage) {
 			tabularhtml = tabularhtml.concat(tablify(`${type} damage`, spellinfo.damage[type], "red"));
 		}
 	}
 	if ("debuffs" in spellinfo) {
-		for (type in spellinfo.debuffs) {
+		for (let type in spellinfo.debuffs) {
 			tabularhtml = tabularhtml.concat(tablify(`${type}`, spellinfo.debuffs[type], "red"));
 		}
 	}
 	if ("buffs" in spellinfo) {
-		for (type in spellinfo.buffs) {
+		for (let type in spellinfo.buffs) {
 			tabularhtml = tabularhtml.concat(tablify(`${type}`, spellinfo.buffs[type], "blue"));
 		}
 	}
 	if (tabularhtml.length != 0) {
-		theader = `<div style="overflow-x:auto;"><table><thead><tr>
+		let theader = `<div style="overflow-x:auto;"><table><thead><tr>
 			   <th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
 			  </tr></thead>`;
-		tfooter = "</table></div>";
+		let tfooter = "</table></div>";
 		spellhtml = theader + spellhtml + tabularhtml + tfooter;
 	}
 	$("#skillinfo").html(spellhtml);
@@ -362,17 +361,17 @@ function display_spell(spellinfo) {
 
 
 function power_change(power) {
-	change_direction = power.className;
-	skill_level_html = power.parentNode.parentNode.getElementsByClassName("skilllvl")[0];
-	skill_level = parseInt($(skill_level_html).text());
-	discipline_level = parseInt($(power.parentNode.parentNode.parentNode.getElementsByClassName("skilllvl")[0]).text());
-	wanted_level = change_direction == "plus" ? skill_level + 1 : skill_level - 1;
-	maxslvl = trainerdata.required.power[discipline_level];
+	let change_direction = power.className;
+	let skill_level_html = power.parentNode.parentNode.getElementsByClassName("skilllvl")[0];
+	let skill_level = parseInt($(skill_level_html).text());
+	let discipline_level = parseInt($(power.parentNode.parentNode.parentNode.getElementsByClassName("skilllvl")[0]).text());
+	let wanted_level = change_direction == "plus" ? skill_level + 1 : skill_level - 1;
+	let maxslvl = trainerdata.required.power[discipline_level];
 	if (wanted_level > maxplevel || wanted_level < minplevel) {
 		console.log("bad power level", wanted_level);
 		return;
 	}
-	ppointsleft = parseInt($("#t-ppointsleft").text());
+	let ppointsleft = parseInt($("#t-ppointsleft").text());
 	if (ppointsleft < wanted_level - skill_level) {
 		console.log("not enough power points");
 		return;
@@ -388,10 +387,10 @@ function power_change(power) {
 }
 
 function discipline_change(discipline) {
-	change_direction = discipline.className;
-	discipline_level = discipline.parentNode.parentNode.getElementsByClassName("skilllvl")[0];
-	current_level = parseInt($(discipline_level).text());
-	wanted_level = change_direction == "plus" ? current_level + 2 : current_level - 2;
+	let change_direction = discipline.className;
+	let discipline_level = discipline.parentNode.parentNode.getElementsByClassName("skilllvl")[0];
+	let current_level = parseInt($(discipline_level).text());
+	let wanted_level = change_direction == "plus" ? current_level + 2 : current_level - 2;
 	if (wanted_level > maxdlevel || wanted_level < mindlevel) {
 		console.log("bad discipline level", wanted_level);
 		return;
@@ -401,10 +400,10 @@ function discipline_change(discipline) {
 		return;
 	}
 	// check if we have enough discipline points left
-	discipline_points_balance = change_direction == "plus" ?
+	let discipline_points_balance = change_direction == "plus" ?
 		0 - ( trainerdata.required.points[wanted_level - 1] -  trainerdata.required.points[current_level - 1] ) :
 		trainerdata.required.points[current_level - 1] - trainerdata.required.points[wanted_level - 1];
-	current_discipline_points = parseInt($("#t-dpointsleft").text());
+	let current_discipline_points = parseInt($("#t-dpointsleft").text());
 	if (	change_direction == "plus" &&
 		current_discipline_points + discipline_points_balance < 0 ) {
 		console.log("not enough discipline points");
@@ -413,26 +412,26 @@ function discipline_change(discipline) {
 	// valid, do the change
 	$("#t-dpointsleft").text(current_discipline_points + discipline_points_balance);
 	$(discipline_level).text(wanted_level);
-	treepos = discipline.parentNode.parentNode.parentNode.getAttribute("treepos");
+	let treepos = discipline.parentNode.parentNode.parentNode.getAttribute("treepos");
 	// deal with the possible skills changes
 	update_tree(treepos);
 }
 
 function update_tree(treepos) {
-	dpointsleft = parseInt($("#t-dpointsleft").text());
-	dpointstotal = parseInt($("#t-dpointstotal").text());
-	ppointsleft = parseInt($("#t-ppointsleft").text());
-	ppointstotal = parseInt($("#t-ppointstotal").text());
-	dlvl = parseInt($(`div[treepos="${treepos}"] .p0 .icon .skilllvl`).text());
-	maxslvl = trainerdata.required.power[dlvl];
+	let dpointsleft = parseInt($("#t-dpointsleft").text());
+	let dpointstotal = parseInt($("#t-dpointstotal").text());
+	let ppointsleft = parseInt($("#t-ppointsleft").text());
+	let ppointstotal = parseInt($("#t-ppointstotal").text());
+	let dlvl = parseInt($(`div[treepos="${treepos}"] .p0 .icon .skilllvl`).text());
+	let maxslvl = trainerdata.required.power[dlvl];
 
 	// XXX maybe there are better selector options to get all values for a
 	// tree but ...
-	for (i = 1; i <= 10; i++) {
-		sel_icon = $(`div[treepos="${treepos}"] .p${i} .icon`);
+	for (let i = 1; i <= 10; i++) {
+		let sel_icon = $(`div[treepos="${treepos}"] .p${i} .icon`);
 		if (treepos != wmrow) {
-			sel_plus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`);
-			sel_minus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`);
+			var sel_plus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`);
+			var sel_minus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`);
 		}
 		// if tree has been lowered and the skill is no more available,
 		// make it visually disabled
@@ -441,7 +440,7 @@ function update_tree(treepos) {
 		}
 		// reduce powerpoints when discipline level is lowered
 		if (treepos != wmrow) {
-			skilllvl = parseInt($(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text());
+			let skilllvl = parseInt($(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text());
 			if (skilllvl > maxslvl) {
 				// change to the max power level available
 				$(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text(maxslvl);
