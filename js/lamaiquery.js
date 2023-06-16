@@ -40,15 +40,11 @@ const $ = (function (selector) {
 		empty: function() {
 			document.querySelector(selector).replaceChildren();
 		},
-		getJSON: function(url) {
-			let http = new XMLHttpRequest();
-			// the ? parameter trick allows to bypass the cache
-			http.open("GET", url + (/\?/.test(url) ? "&" : "?") + new Date().getTime(), false);
-			http.onerror = function (e) {
-				console.error(http.statusText);
-			};
-			http.send(null);
-			return JSON.parse(http.responseText);
+		getJSON: async function(url) {
+			const reply = await fetch(url)
+					    .then(reply => reply.json())
+					    .catch(error => { throw(error); });
+			return reply;
 		},
 		hide: function() {
 			document.querySelector(selector).style.visibility = "hidden";
@@ -63,19 +59,13 @@ const $ = (function (selector) {
 		prepend: function(html) {
 			document.querySelector(selector).insertAdjacentHTML("afterbegin", html);
 		},
-		post: function(url, params) {
-			let state = 0;
+		post: async function(url, params) {
 			let urlparams = new FormData();
-			for (key in params) {
+			for (let key in params) {
 				urlparams.append(key, params[key]);
 			}
-			let post = new XMLHttpRequest();
-			post.open("POST", url);
-			post.onload = function () {
-				state = post.status;
-			};
-			post.send(urlparams);
-			return state;
+			await fetch(url, { method: "POST", body: urlparams })
+				.catch(error => { throw(error); });
 		},
 		ready: function(callable) {
 			selector.addEventListener("DOMContentLoaded", callable);

@@ -41,7 +41,7 @@ function translate_fort(fort) {
 	return _(fort_type, fort_name) + ` ${fort_id}`
 }
 
-function display_wz(force_display) {
+async function display_wz(force_display) {
 	// Same order as the website
 	let realm_colors = {"Alsius": "blue", "Ignis": "red", "Syrtis": "green"};
 	let gems = [];
@@ -53,7 +53,7 @@ function display_wz(force_display) {
 		return;
 	}
 	try {
-		var data = $().getJSON("https://hail.thebus.top/cortdata/warstatus.txt");
+		var data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus.txt");
 		$("#wz-info-error").empty();
 		// Do nothing if nothing changed compared to the last fetch
 		if (data["map_changed"] === false && data["gems_changed"] === false &&

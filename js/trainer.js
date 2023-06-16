@@ -34,6 +34,8 @@ var currlevel = 0;
 var currclass = null;
 var wmrow = 0;
 var powerpoints = 0;
+// XXX beware it's just a buffer that is unexploitable once the setup is loaded
+var saved_setup;
 
 $(document).ready(function() {
 	// generate characters levels options
@@ -121,10 +123,15 @@ function manage_dataset_versions() {
 	}
 }
 
-function collect_setup(setupstring) {
+async function collect_setup(setupstring) {
 	if (window.location.origin != "https://mascaldotfr.github.io")
 		return;
-	$().post("https://hail.thebus.top/cortdata/submit.php", {"setup":setupstring});
+	try {
+		await $().post("https://hail.thebus.top/cortdata/submit.php", {"setup":setupstring});
+	}
+	catch (error) {
+		console.error(`Failed to send setup: ${error}`);
+	}
 }
 
 function upgrade_setup_to_new_version() {
@@ -154,31 +161,39 @@ function save_setup_to_url(shared = true) {
 		LZString.compressToEncodedURIComponent(setup);
 }
 
+// load_tree() being async, you need the tree to be loaded
+// in order to click stuff so this is before loading the tree ...
 function load_setup_from_url(skillset) {
-	let decompressed_setup = LZString.decompressFromEncodedURIComponent(skillset);
-	if (decompressed_setup == null) {
+	saved_setup = LZString.decompressFromEncodedURIComponent(skillset);
+	if (saved_setup == null) {
 		window.alert(_("Your shared link is bad. Bailing out, sorry!"));
 		return;
 	}
-	let setup = decompressed_setup.split("+");
-	$("#t-class").val(setup.shift());
-	$("#t-level").val(setup.shift());
+	saved_setup = saved_setup.split("+");
+	$("#t-class").val(saved_setup.shift());
+	$("#t-level").val(saved_setup.shift());
 	manage_dataset_versions();
 	$("#t-version").val(trainerdataversion);
 	$("#t-load").trigger("click");
+}
+
+// ... and this is after (called by load_tree())
+function input_setup_from_url() {
+	if (saved_setup === undefined)
+		return;
 	let row = 0;
-	for (let item = 0; item < setup.length; item++) {
+	for (let item = 0; item < saved_setup.length; item++) {
 		if (item % 2 == 0) {
 			// discipline points
 			row++;
-			do_clicks = (setup[item] - 1) / 2 ;
+			do_clicks = (saved_setup[item] - 1) / 2 ;
 			for (let i = 0; i < do_clicks; i++) {
 				$(`#t-trainer .t${row} .p0 .skillspinner .plus`).trigger("click");
 			}
 		}
 		else {
 			// power points
-			let powers = setup[item].split("");
+			let powers = saved_setup[item].split("");
 			if (row == wmrow)
 				continue; // no pp for the wm row
 			for (let power in powers) {
@@ -189,7 +204,7 @@ function load_setup_from_url(skillset) {
 			}
 		}
 	}
-
+	saved_setup = undefined;
 }
 
 function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
@@ -215,7 +230,7 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 	return icon;
 }
 
-function load_tree() {
+async function load_tree() {
 	let base_skills = class_type_masks[currclass] & 0xF0;
 	let class_skills = class_type_masks[currclass];
 	// adjust code to get base power and discipline points, as well as WM tree location.
@@ -230,7 +245,14 @@ function load_tree() {
 	}
 	$("#t-trainer").empty();
 	$("#skillinfo").empty();
-	trainerdata = $().getJSON("data/" + trainerdataversion + "/trainerdata.json");
+	try {
+		trainerdata = await $().getJSON("data/" + trainerdataversion + "/trainerdata.json");
+	}
+	catch (error) {
+		// Should never happen as the data is local...
+		alert(`Unable to fetch trainer data: ${error}`);
+		return;
+	}
 	let alltrees = trainerdata.class_disciplines[base_skills];
 	alltrees = alltrees.concat(trainerdata.class_disciplines[class_skills]);
 	let trainerhtml = "";
@@ -278,6 +300,7 @@ function load_tree() {
 			display_spell(this);
 		}
 	});
+	input_setup_from_url();
 }
 
 function tablify(rowname, columns, color = "") {
