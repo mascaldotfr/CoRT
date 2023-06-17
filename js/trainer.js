@@ -98,9 +98,39 @@ $("#t-save").on("click", function() {
 		return;
 	}
 	let saved_url = save_setup_to_url();
-	window.prompt(_("Here is the link to your setup:"), saved_url);
-	window.location.href = saved_url;
+	$("#t-dialog-url").val(saved_url);
+	$("#t-dialog").attr("inert", "true");
+	document.getElementById("t-dialog").showModal();
+	$("#t-dialog").removeAttr("inert");
+	$("body").css("filter", "blur(10px)");
 
+});
+
+document.addEventListener('keyup', function(e) {
+    if (e.keyCode == 27) {
+	    document.getElementById("t-dialog").close();
+	    window.location.href = $("#t-dialog-url").val();
+    }
+});
+
+$("#t-dialog-close").on("click", function() {
+	window.location.href = $("#t-dialog-url").val();
+});
+
+
+$("#t-dialog-copy").on("click", function() {
+	navigator.clipboard.writeText($("#t-dialog-url").val())
+		.then(() => {
+			$("#t-dialog-copy").text(_("Link copied!"));
+			let timer = setInterval(() => {
+				$("#t-dialog-copy").text(_("Copy link"));
+				clearInterval(timer);
+				}, 3000);
+		})
+		.catch((error) => {
+			console.error("Failed to copy text: ", error);
+			$("#t-dialog-copy").text("Copy failed!");
+		});
 });
 
 function manage_dataset_versions() {

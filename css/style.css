@@ -10,11 +10,12 @@ body {
 a {
 	color: lightblue;
 }
-select, button {
+select, button, textarea {
 	background-color: #515151;
 	color: white;
 	box-shadow: 0px 0px 2px 2px rgb(0,0,0);
 	border: 0px;
+	padding: .25em;
 }
 #menu {
 	text-align: center;
@@ -134,6 +135,33 @@ h1 {
 	padding:.25em 1em .25em 1em;
 	border: 1px solid white;
 }
+#t-dialog {
+	position: absolute;
+	top: 0px;
+	background: #3F3F3F;
+	box-shadow: 0px 0px 2px 2px #aaa;
+	border: 0px;
+}
+#t-dialog h3 {
+	margin-top: 0px;
+	margin-bottom: .5em;
+	text-align: center;
+	color: white;
+}
+#t-dialog-url {
+	width: 100%;
+}
+#t-dialog-buttons {
+	padding-top: .25em;
+	margin-top: .25em;
+	text-align: right;
+	font-weight: bold;
+}
+#t-dialog-copy {
+	margin-right: 1em;
+}
+
+
 
 /* BATTLEZONES */
 

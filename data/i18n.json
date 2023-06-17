@@ -222,6 +222,24 @@ __i18n__ = {
 		"es": "Este enlace compartido es malo. ¡Me doy por vencido, lo siento!",
 		"de": "Dieser geteilte Link ist schlecht. Ich gebe auf, sorry!"
 	},
+	"Copy link":
+	{
+		"fr": "Copier le lien",
+		"es": "Copiar el enlace",
+		"de": "Link kopieren"
+	},
+	"Close":
+	{
+		"fr": "Fermer",
+		"es": "Cerrar",
+		"de": "Schließen"
+	},
+	"Link copied!":
+	{
+		"fr": "Lien copié !",
+		"es": "¡Enlace copiado!",
+		"de": "Link kopiert!"
+	},
 	"Fort %s": {
 		"fr": "Fort %s",
 		"es": "Fuerte %s",
