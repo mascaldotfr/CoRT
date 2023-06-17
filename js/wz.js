@@ -84,10 +84,11 @@ async function display_wz(force_display) {
 		}
 		$(`#wz-${realm.toLowerCase()}`).html(`
 				<h2>
-				<span class="${realm_colors[realm]}">${realm}</span>&nbsp;
-				${gems.splice(0, 6).join("")}&nbsp;${relics}
+				<span class="realmname ${realm_colors[realm]}">${realm}</span>
+				<span class="gems">${gems.splice(0, 6).join("")}</span>
+				<span class="relics">${relics}</span>
 				</h2>
-				<p>${forts.splice(0, 4).join("")}</p>
+				<span class="forts">${forts.splice(0, 4).join("")}</span>
 		`)
 	}
 	// Reload the map only if it changed, it needs to exist for the first
@@ -97,21 +98,22 @@ async function display_wz(force_display) {
 		noflickerimg(data["map_url"], "wz-map-map");
 	}
 
-	let events_html = `<h2>
-		<span class="purple"> ${_("Last server events (in your timezone):")} </span>
+	let events_html = `<h2 id="wz-events-header">
+		<span class="purple">${_("Last server events (in your timezone):")} </span>
 		</h2>
+		<span>
 		`;
 	for (let anevent of data["events_log"]) {
 		let dt = new Date(anevent["date"] * 1000);
 		let date_options = {
-			hour12: false, month: 'numeric', day: 'numeric',
+			month: 'numeric', day: 'numeric',
 			hour: '2-digit', minute: '2-digit' };
 		let datetime = dt.toLocaleDateString(undefined, date_options);
 		let owner = anevent["owner"];
 		let owner_color = realm_colors[owner];
 		let captured = anevent["name"];
 		let location_color = realm_colors[anevent["location"]];
-		events_html += `<p><b>${datetime}</b>&nbsp;`
+		events_html += `<b>${datetime}</b>&nbsp;`
 		if (anevent["type"] == "fort" || anevent["type"] == "gem") {
 			if (anevent["type"] == "fort") {
 				captured = translate_fort(captured);
@@ -140,8 +142,9 @@ async function display_wz(force_display) {
 				events_html += `${relic} ${_("is in transit.")}`;
 			}
 		}
-		events_html += `</p>`;
+		events_html += `<br>`;
 	}
+	events_html += `</span>`;
 	$("#wz-events").html(events_html);
 }
 

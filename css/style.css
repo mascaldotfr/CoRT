@@ -185,16 +185,11 @@ h1 {
 		"events events";
 	align-items: center;
 	justify-items: center;
-	justify-content: center;
 	gap: 1em;
+	margin-top: 3em;
 }
-@media (max-width: 800px) {
-	#wz-container {
-		grid-template-areas: "map" "alsius" "ignis" "syrtis" "events";
-	}
-	#wz-container h2 {
-		text-align: center;
-	}
+#wz-container h2 {
+	margin: 0;
 }
 #wz-info {
 	text-align: center;
@@ -202,6 +197,7 @@ h1 {
 }
 #wz-map {
 	grid-area: map;
+	justify-self: left;
 }
 #wz-map img {
 	max-width: 100%;
@@ -226,6 +222,45 @@ h1 {
 #wz-events {
 	grid-area: events;
 }
-#wz-events h2 {
-	text-align: center;
+#wz-events-header {
+	padding-bottom: .5em;
 }
+#wz-alsius, #wz-ignis, #wz-syrtis {
+	display: grid;
+	grid-template-areas:
+		"realm forts"
+		"gems forts"
+		"relics forts";
+	gap: 0 2em;
+}
+#wz-alsius span, #wz-ignis span, #wz-syrtis span {
+	display: block;
+}
+.realmname {
+	grid-area: realm;
+	text-align: right;
+}
+.gems {
+	grid-area: gems;
+	text-align: right;
+	min-width: max-content;
+}
+.relics {
+	grid-area: relics;
+	text-align: right;
+}
+.forts {
+	grid-area: forts;
+	margin-top: auto;
+	width: 14em;
+}
+@media (max-width: 800px) {
+	#wz-container {
+		grid-template-areas: "map" "alsius" "ignis" "syrtis" "events";
+	}
+	#wz-map {
+		margin-bottom: 1em;
+		justify-self: center;
+	}
+}
+
