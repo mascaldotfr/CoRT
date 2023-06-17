@@ -165,4 +165,4 @@ window.addEventListener("online", (e) => {
 	display_wz(true);
 });
 
-setInterval(display_wz, 60 * 1000)
+setInterval(display_wz, 30 * 1000)
