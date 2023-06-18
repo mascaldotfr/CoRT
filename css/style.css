@@ -16,7 +16,6 @@ select, button, textarea {
 	color: white;
 	box-shadow: 0px 0px 2px 2px rgb(0,0,0);
 	border: 0px;
-	padding: .25em;
 }
 #menu, #footer {
 	text-align: center;
@@ -81,7 +80,7 @@ h1 {
 .points { text-align:center; visibility: hidden; }
 .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 	margin-bottom: .5em;
 	width: 100%;
 }
@@ -110,8 +109,8 @@ h1 {
 }
 .skillspinner { height: 48px; margin-top: 1px; }
 .icon .skilllvl { background-color: white; color: black; border-radius: 4px;}
-.minus, .plus { margin-left: 6px; width: 20px; height: 20px}
-.plus { margin-bottom: 6px;}
+.minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px}
+.minus { margin-top: 6px}
 #skillinfo, .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
 	background-color: #313131 !important;
 }
