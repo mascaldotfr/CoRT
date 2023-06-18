@@ -1,11 +1,9 @@
-body > div {
-	margin: 0 auto;
-	max-width: 1000px;
-}
 body {
 	background-color: #212121;
 	color: white;
 	font-family: sans-serif;
+	margin: 0 auto;
+	max-width: 1000px;
 }
 a {
 	color: lightblue;
@@ -17,11 +15,32 @@ select, button, textarea {
 	border: 0px;
 	padding: .25em;
 }
-#menu {
+#menu, #footer {
 	text-align: center;
 	background-color: #414141;
 	padding-top: 1em;
 	padding-bottom: 1em;
+}
+#menu a {
+	text-decoration: none;
+}
+#lang {
+	margin-left: 1em;
+}
+#hamburger {
+	display: none;
+	font-weight: bold;
+}
+.menuitem {
+	white-space: nowrap;
+}
+#footer {
+	height: 3em;
+	margin-top: 1em;
+}
+#main-container {
+	/* for the footer: 3em of height, 2 of padding, and 1 of margin-top */
+	min-height: calc(100vh - 6em);
 }
 #lang {
 	margin-top: .5em;
@@ -289,6 +308,43 @@ h1 {
 	#wz-map {
 		margin-bottom: 1em;
 		justify-self: center;
+	}
+	#menu {
+		line-height: 2em;
+		text-align: left;
+		box-shadow: 0px 0px 2px 2px #aaa;
+	}
+	#hamburger {
+		display:inline-block;
+		margin-left: 1em;
+		width: 100%;
+	}
+	#hamburger a {
+		display: inline-block;
+		width: 100%;
+	}
+	#lang, .menuitem {
+		display: block;
+		font-size: 120%;
+	}
+	#lang {
+		margin-left: 2em;
+	}
+	#menu-content span:nth-child(even) {
+		background: #313131;
+	}
+	#menu-content span:nth-child(odd) {
+		background: #212121;
+	}
+	#menu-content span {
+		margin-top: 0px;
+		margin-bottom: 0px;
+		padding-left: 2em;
+	}
+	.menuitem a {
+		display: inline-block;
+		width: 100%;
+		padding: 1em;
 	}
 }
 

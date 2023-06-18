@@ -7,7 +7,7 @@ __i18n__ = {
 	},
 	"Bosses status": {
 		"fr": "Etat des boss",
-		"es": "Estado de los jefes",
+		"es": "Jefes",
 		"de": "Zustand der Bosse"
 	},
 	"BZ status": {
@@ -25,6 +25,22 @@ __i18n__ = {
 		"fr": "Compte à rebours des boss",
 		"es": "Cuenta atras de los jefes",
 		"de": "Boss-Countdown"
+	},
+	"Armor Calculator":
+	{
+		"fr": "Calculateur d'armure",
+		"es": "Calculadora de armadura",
+		"de": "Rüstungsrechner"
+	},
+	"☰  Menu": {
+		"fr": "☰  Menu",
+		"es": "☰  Menú",
+		"de": "☰  Menü"
+	},
+	"╳ Hide Menu": {
+		"fr": "╳ Cacher le Menu",
+		"es": "╳ Ocultar el Menú",
+		"de": "╳ Menü ausblenden"
 	},
 	"The page refreshes itself every minute. Dates and times are in your timezone.":
 	{
