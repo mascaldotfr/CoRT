@@ -158,9 +158,9 @@ async function display_wz(force_display) {
 		let owner = anevent["owner"];
 		let owner_color = realm_colors[owner];
 		let captured = anevent["name"];
-		let location_color = realm_colors[anevent["location"]];
 		events_html += `<b>${datetime}</b>&nbsp;`
 		if (anevent["type"] == "fort" || anevent["type"] == "gem") {
+			let location_color = realm_colors[anevent["location"]];
 			if (anevent["type"] == "fort") {
 				captured = translate_fort(captured);
 				// remove fort number
@@ -180,8 +180,9 @@ async function display_wz(force_display) {
 			events_html += `<span class="${owner_color}">${owner}</span> ${action}.`;
 		}
 		else if (anevent["type"] == "relic") {
+			let location_color = realm_colors[anevent["owner"]];
 			let relic = `<span class="${location_color}">${_("%s's relic", captured)}</span>`;
-			if (anevent["owner"] == "altar") {
+			if (anevent["location"] == "altar") {
 				events_html += `${relic} ${_("is back to its altar.")}`;
 			}
 			else {
