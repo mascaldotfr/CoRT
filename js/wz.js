@@ -57,19 +57,25 @@ function draw_map(images) {
 		[285, 360, 255, 380],
 		[178, 290, 153, 310]
 	];
-	let canvas = document.createElement("canvas");
-	canvas.setAttribute('width', 500);
-	canvas.setAttribute('height', 500);
-	let ctx = canvas.getContext('2d');
-	ctx.font = "bold 14px sans-serif";
-	ctx.fillStyle = "#EED202";
-	for (let i = 0; i < images.length; i++) {
-		ctx.drawImage(images[i], forts_positions[i][0], forts_positions[i][1]);
-		if (i > 0)
-			ctx.fillText(`(${i})`, forts_positions[i][2],
-		                               forts_positions[i][3]);
+	try {
+		let canvas = document.createElement("canvas");
+		canvas.setAttribute('width', 500);
+		canvas.setAttribute('height', 500);
+		let ctx = canvas.getContext('2d');
+		ctx.font = "bold 14px sans-serif";
+		ctx.fillStyle = "#EED202";
+		for (let i = 0; i < images.length; i++) {
+			ctx.drawImage(images[i], forts_positions[i][0], forts_positions[i][1]);
+			if (i > 0)
+				ctx.fillText(`(${i})`, forts_positions[i][2],
+						       forts_positions[i][3]);
+		}
+		return canvas.toDataURL("image/png");
 	}
-	return canvas.toDataURL("image/png");
+	catch {
+		console.log("canvas failed, using NGE's map");
+		return "https://www.championsofregnum.com/ranking/data/ra/gen_map.jpg";
+	}
 }
 
 
