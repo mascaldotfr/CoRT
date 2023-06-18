@@ -49,12 +49,12 @@ website code, sacrificing a bit of the consistency.
                 "name": "Fortication name (id) (ex: Castle Imperia (1))",
                 "location": "Capitalised realm (ex: Alsius)",
                 "owner": "Capitalised current owner of that for (ex: Syrtis)",
-                "icon": "url to the fort icon"
+                "icon": "icon filename"
             },
             [...11 other forts...]
     ],
     "gems": [ //gems in official site order, including the blank ones
-            "url to the gem icon",
+            "icon filename",
             [...17 other gems...]
     ],
     "events_log": [ // The last 25 server events (fort, gem and relics captures)
@@ -70,7 +70,7 @@ website code, sacrificing a bit of the consistency.
     ],
     "relics": [ // The current relic status
         "Alsius": {
-            "Imperia": null if in transit, else URL of the relic image,
+            "Imperia": null if in transit, else filename of the relic image,
             [...The 2 other relics...]
         },
         [...The 2 other realms...]
@@ -78,7 +78,6 @@ website code, sacrificing a bit of the consistency.
     map_changed: "boolean actually. Did the forts status changed since the last generation?",
     gems_changed: "same as map_changed, but for gems",
     relics_changed: "same as map_changed, but for relics",
-    "map_url": "The current map URL with a parameter to bypass caching",
     "generated": "Unix timestamp representing the date and time when the response has been generated",
 }
 ```

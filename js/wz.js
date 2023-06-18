@@ -15,14 +15,64 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-// Wait for an image to be loaded to be displayed
-function noflickerimg(url, id) {
-    let target = document.getElementById(id);
-    let img = new Image();
-    img.onload = function() { target.src = img.src };
-    img.src = url;
+// Use local versions of images because NGE's site is slow
+function rebase_img(url) {
+	return "data/warstatus/" + url;
 }
+
+function display_map(forts) {
+	forts.unshift({icon: "base_map.jpg"});
+
+	// Preload images beforehand
+	let forts_Image = [];
+	let forts_Image_count = 0;
+	for (let i = 0; i < forts.length; i++) {
+		let imgbuffer = new Image();
+		imgbuffer.src = rebase_img(forts[i]["icon"]);
+		imgbuffer.onload = function () {
+			if (++forts_Image_count >= forts.length) {
+				let map = draw_map(forts_Image);
+				document.getElementById("wz-map-map").src = map;
+			}
+		};
+		forts_Image.push(imgbuffer);
+	}
+}
+
+function draw_map(images) {
+	// 0 = map, rest = site order In site order
+	// [x, y, text_x, text_y]
+	let forts_positions = [
+		[0, 0],
+		[215, 60, 221, 55],
+		[208, 165, 188, 185],
+		[120, 187, 100, 207],
+		[139, 140, 119, 165],
+		[260, 111, 240, 131],
+		[290, 180, 270, 200],
+		[365, 220, 345, 240],
+		[324, 140, 304, 160],
+		[135, 230, 115, 250],
+		[220, 250, 190, 270],
+		[285, 360, 255, 380],
+		[178, 290, 153, 310]
+	];
+	let canvas = document.createElement("canvas");
+	canvas.setAttribute('width', 500);
+	canvas.setAttribute('height', 500);
+	let ctx = canvas.getContext('2d');
+	ctx.font = "bold 14px sans-serif";
+	ctx.fillStyle = "#EED202";
+	for (let i = 0; i < images.length; i++) {
+		ctx.drawImage(images[i], forts_positions[i][0], forts_positions[i][1]);
+		if (i > 0)
+			ctx.fillText(`(${i})`, forts_positions[i][2],
+		                               forts_positions[i][3]);
+	}
+	return canvas.toDataURL("image/png");
+}
+
+
 
 // Create translatable strings according to english order of words
 function translate_fort(fort) {
@@ -66,20 +116,22 @@ async function display_wz(force_display) {
 	}
 
 	for (let gem of data["gems"]) {
-		gems.push(`<img src="${gem}" class="wz-icon">`);
+		gems.push(`<img src="${rebase_img(gem)}" class="wz-icon">`);
 	}
 	for (let fort of data["forts"]) {
-		let icon = `<img src="${fort["icon"]}" class="wz-icon">`;
+		let icon = `<img src="${rebase_img(fort["icon"])}" class="wz-icon">`;
 		let name = translate_fort(fort["name"]);
 		forts.push(`${icon}&nbsp;${name}<br>`);
 	}
+
+	display_map(data["forts"]);
 
 	for (let realm of Object.keys(realm_colors)) {
 		let relics = "";
 		for (let relic of Object.keys(data["relics"][realm])) {
 			let url = data["relics"][realm][relic];
 			if (url !== null) {
-				relics += `<img src="${url}" class="wz-icon">`;
+				relics += `<img src="${rebase_img(url)}" class="wz-icon">`;
 			}
 		}
 		$(`#wz-${realm.toLowerCase()}`).html(`
@@ -90,12 +142,6 @@ async function display_wz(force_display) {
 				</h2>
 				<span class="forts">${forts.splice(0, 4).join("")}</span>
 		`)
-	}
-	// Reload the map only if it changed, it needs to exist for the first
-	// run, and data["map_changed"] may be false then
-	if ($("#wz-map-map").attr("src") != data["map_url"]) {
-		$("#wz-map-map").attr("src", "data/warstatus/base_map.jpg");
-		noflickerimg(data["map_url"], "wz-map-map");
 	}
 
 	let events_html = `<h2 id="wz-events-header">

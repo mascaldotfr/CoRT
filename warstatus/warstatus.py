@@ -36,6 +36,10 @@ status["relics"] = {
 realms = ["Alsius", "Ignis", "Syrtis"] # in site order for forts
 realms_gem = ["Ignis", "Alsius", "Syrtis"] # in site order for gems images (gem_X.png)
 
+# return just the filename part of the url
+def filename(url):
+	return url.split('/').pop();
+
 def main():
     with urlopen("https://championsofregnum.com/index.php?l=1&sec=3") as response:
         page = BeautifulSoup(response.read(), "html.parser")
@@ -46,16 +50,16 @@ def main():
         i = 0
         for realm in headers:
             for gem in realm.findAll("img"):
-                status["gems"].append(gem.attrs["src"])
+                status["gems"].append(filename(gem.attrs["src"]))
             for relic in realm.next_sibling.next_sibling.findAll("img"):
                 relic_name = relic.attrs["title"].split(" relic")[0]
-                status["relics"][realms[i]][relic_name] = base_url + relic.attrs["src"]
+                status["relics"][realms[i]][relic_name] = filename(relic.attrs["src"])
             i += 1
 
         icons = page.findAll("div", {"class" : "war-status-bulding-icons"})
         for icon_block in icons:
             for icon in icon_block.findAll("img"):
-                forts_icons.append(icon.attrs["src"])
+                forts_icons.append(filename(icon.attrs["src"]))
 
         names = page.findAll("div", {"class" : "war-status-bulding-name"})
         for name in names:
@@ -76,7 +80,8 @@ def main():
                                      "owner":owner, "icon":forts_icons[i] })
             i += 1
 
-        warmap = page.find("div", {"id" : "war_map-box-content"})
+        # Keeping the official map just in case
+        # warmap = page.find("div", {"id" : "war_map-box-content"})
 
         # XXX EVENTS XXX
 
@@ -106,8 +111,7 @@ def main():
         for gem in status["gems"]:
             if "gems" not in old_status or (gem != old_status["gems"][i] and not "gem_0" in gem):
                 status["gems_changed"] = True
-                gem_location = ''.join(os.path.normpath(gem).split("/")[-1:])
-                gem_location = gem_location.replace("gem_", "")
+                gem_location = gem.replace("gem_", "")
                 gem_location = gem_location.replace(".png", "")
                 gem_location = realms_gem[int(gem_location) - 1]
                 gem_owner = realms[int(i / 6)]
@@ -135,14 +139,6 @@ def main():
         # Sort and store events
         events_log = sorted(events_log, key=lambda d: d["date"], reverse=True)
         status["events_log"] = events_log[:25]
-
-        # Define map url
-        if status["map_changed"]:
-            # The extra timestamp parameter is made to cache bust the old map
-            status["map_url"] = base_url + \
-                warmap.contents[1].attrs["src"] + "?" + str(timestamp)
-        else:
-            status["map_url"] = old_status["map_url"]
 
         status["generated"] = str(timestamp)
 
