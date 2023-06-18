@@ -4,6 +4,9 @@ body {
 	font-family: sans-serif;
 	margin: 0 auto;
 	max-width: 1000px;
+	min-height: 100vh;
+	display: grid;
+	/*grid-template-rows: 1fr auto;*/
 }
 a {
 	color: lightblue;
@@ -35,12 +38,14 @@ select, button, textarea {
 	white-space: nowrap;
 }
 #footer {
-	height: 3em;
-	margin-top: 1em;
+	margin-right: 1em;
+	margin-left: 1em;
 }
 #main-container {
-	/* for the footer: 3em of height, 2 of padding, and 1 of margin-top */
-	min-height: calc(100vh - 6em);
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-bottom: 0px;
+	margin-bottom: 2em;
 }
 #lang {
 	margin-top: .5em;
@@ -274,6 +279,7 @@ h1 {
 }
 #wz-alsius, #wz-ignis, #wz-syrtis {
 	display: grid;
+	grid-template-columns: 35% auto;
 	grid-template-areas:
 		"realm forts"
 		"gems forts"
@@ -299,7 +305,6 @@ h1 {
 .forts {
 	grid-area: forts;
 	margin-top: auto;
-	width: 14em;
 }
 @media (max-width: 800px) {
 	#wz-container {
@@ -312,12 +317,13 @@ h1 {
 	#menu {
 		line-height: 2em;
 		text-align: left;
+	}
+	#menu, #footer {
 		box-shadow: 0px 0px 2px 2px #aaa;
 	}
 	#hamburger {
 		display:inline-block;
-		margin-left: 1em;
-		width: 100%;
+		padding-left: 1em;
 	}
 	#hamburger a {
 		display: inline-block;
@@ -343,8 +349,8 @@ h1 {
 	}
 	.menuitem a {
 		display: inline-block;
-		width: 100%;
-		padding: 1em;
+		padding-top: 1em;
+		padding-bottom: 1em;
 	}
 }
 
