@@ -17,6 +17,10 @@ select, button, textarea {
 	box-shadow: 0px 0px 2px 2px rgb(0,0,0);
 	border: 0px;
 }
+select {
+	/* let us style <select> on webkit browsers */
+	-webkit-appearance: none;
+}
 #menu, #footer {
 	text-align: center;
 	background-color: #414141;
