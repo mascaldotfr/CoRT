@@ -66,6 +66,7 @@ h1 {
 .purple { color: #bd93ff; }
 .faded { color: #aaaaaa; }
 .center { text-align:center; }
+.bold { font-weight: bold; }
 
 /* TRAINER */
 

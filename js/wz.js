@@ -175,7 +175,7 @@ async function display_wz(force_display) {
 			else if (anevent["type"] == "gem") {
 				captured = _("Gem") + " #" + captured;
 			}
-			let target = `<span class="${location_color}">${captured}</span>`;
+			let target = `<span class="${location_color} bold">${captured}</span>`;
 			let action;
 			if (anevent["location"] == anevent["owner"]) {
 				action = _("has recovered %s", target);
@@ -183,11 +183,11 @@ async function display_wz(force_display) {
 			else {
 				action = _("has captured %s", target);
 			}
-			events_html += `<span class="${owner_color}">${owner}</span> ${action}.`;
+			events_html += `<span class="${owner_color} bold">${owner}</span> ${action}.`;
 		}
 		else if (anevent["type"] == "relic") {
 			let location_color = realm_colors[anevent["owner"]];
-			let relic = `<span class="${location_color}">${_("%s's relic", captured)}</span>`;
+			let relic = `<span class="${location_color} bold">${_("%s's relic", captured)}</span>`;
 			if (anevent["location"] == "altar") {
 				events_html += `${relic} ${_("is back to its altar.")}`;
 			}
