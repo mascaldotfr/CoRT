@@ -289,7 +289,7 @@ __i18n__ = {
 	"has recovered %s": {
 		"fr": "a récupéré %s",
 		"es": "ha recuperado %s",
-		"de": "hat %s wiederhergestellt"
+		"de": "hat %s zurückerobert"
 	},
 	"Last server events (in your timezone):": {
 		"fr": "Derniers événements du serveur (heure locale) :",
