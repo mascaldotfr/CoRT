@@ -119,18 +119,26 @@ $("#t-dialog-close").on("click", function() {
 
 
 $("#t-dialog-copy").on("click", function() {
-	navigator.clipboard.writeText($("#t-dialog-url").val())
-		.then(() => {
-			$("#t-dialog-copy").text(_("Link copied!"));
-			let timer = setInterval(() => {
-				$("#t-dialog-copy").text(_("Copy link"));
-				clearInterval(timer);
-				}, 3000);
-		})
-		.catch((error) => {
-			console.error("Failed to copy text: ", error);
-			$("#t-dialog-copy").text("Copy failed!");
-		});
+	function failure_message(error) {
+		console.error("Failed to copy text: ", error);
+		$("#t-dialog-copy").text("Copy failed!");
+	}
+	try {
+		navigator.clipboard.writeText($("#t-dialog-url").val())
+			.then(() => {
+				$("#t-dialog-copy").text(_("Link copied!"));
+				let timer = setInterval(() => {
+					$("#t-dialog-copy").text(_("Copy link"));
+					clearInterval(timer);
+					}, 3000);
+			})
+			.catch((error) => {
+				failure_message(error);
+			});
+	}
+	catch (error) {
+		failure_message(error);
+	}
 });
 
 function manage_dataset_versions() {
