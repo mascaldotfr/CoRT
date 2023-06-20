@@ -14,24 +14,36 @@ a {
 select, button, textarea {
 	background-color: #515151;
 	color: white;
-	box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
+	border-radius: 3px;
 	border: 0px;
 }
 select {
 	/* let us style <select> on webkit browsers */
 	-webkit-appearance: none;
 }
+.card {
+	box-shadow: 0 .1em .2em rgba(140, 140, 140, .4);
+	background: #313131;
+	border-radius: 5px;
+}
 #menu, #footer {
 	text-align: center;
 	background-color: #414141;
-	padding-top: 1em;
-	padding-bottom: 1em;
+}
+#menu {
+	padding: .75em;
+	margin-top: .3em;
+}
+#menu-content {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
 }
 #menu a {
 	text-decoration: none;
-}
-#lang {
-	margin-left: 1em;
+	border-radius: 5px;
 }
 #hamburger {
 	display: none;
@@ -39,10 +51,14 @@ select {
 }
 .menuitem {
 	white-space: nowrap;
+	border-radius: 5px;
 }
 #footer {
 	margin-right: 1em;
 	margin-left: 1em;
+	margin-bottom: .3em;
+	/* override default from .card, as this one needs an upward shadow */
+	box-shadow: 0 -.1em .3em rgba(140, 140, 140, .4);
 }
 #main-container {
 	padding-left: 1em;
@@ -53,6 +69,7 @@ select {
 #lang {
 	margin-top: .5em;
 	margin-bottom: .5em;
+	padding: .5em;
 }
 h1 {
 	text-align: center;
@@ -64,12 +81,17 @@ h1 {
 .blue { color: #9ccdf9; }
 .green { color: #00ff11; }
 .purple { color: #bd93ff; }
-.faded { color: #aaaaaa; }
+.faded { color: #ccc; }
 .center { text-align:center; }
 .bold { font-weight: bold; }
 
 /* TRAINER */
 
+#trainer-container {
+    display: grid;
+    align-items: center;
+    grid-template-rows: 1fr 1fr 1fr 1fr auto;
+}
 .setup {
 	display: flex;
 	gap: 1em;
@@ -111,14 +133,12 @@ h1 {
 	background-repeat: no-repeat;
 	width: 48px;
 	height: 48px;
+	border-radius: 3px;
 }
 .skillspinner { height: 48px; margin-top: 1px; }
 .icon .skilllvl { background-color: white; color: black; border-radius: 4px;}
 .minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px}
 .minus { margin-top: 6px}
-#skillinfo, .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
-	background-color: #313131 !important;
-}
 #skillinfo div[class^="p"] {
 	margin: .5em;
 }
@@ -194,19 +214,19 @@ h1 {
 /* BATTLEZONES */
 
 #bz_container {
-	text-align:center;
+	text-align: center;
+	max-width: 600px;
+	margin: 0 auto;
 }
 #bz_container ul {
 	display: inline-block;
-	text-align:left;
-	list-style: square;
+	text-align: left;
+	padding-left: 0px;
+	list-style: none;
 	margin-top: 0px;
 }
-#bz_container h3 {
-	margin-bottom: 1em;
-	margin-top: 3em;
-}
-#bz_container h2 {
+#bz_countdown, #next_bzs {
+	padding: 1em;
 	margin-top: 3em;
 }
 
@@ -215,14 +235,16 @@ h1 {
 #daen, #evendim, #thorkul {
 	display: flex;
 	flex-wrap: wrap;
-	background-color: #313131;
 	margin-bottom: 1em;
 	align-items: center;
 	justify-content: center;
+	padding: .5em;
+	gap: .5em;
 }
 #bosses_list {
 	max-width: 600px;
 	margin: 0 auto;
+	margin-top: 2em;
 }
 #bosses_list .respawn {
 	flex: 1;
@@ -240,7 +262,7 @@ h1 {
 		"map syrtis"
 		"events events";
 	align-items: center;
-	justify-items: center;
+	justify-items: stretch;
 	gap: 1em;
 	margin-top: 3em;
 }
@@ -254,17 +276,20 @@ h1 {
 #wz-map {
 	grid-area: map;
 	justify-self: left;
+	/* avoid an optical illusion or whatever it is */
+	margin-top: 4px;
 }
-#wz-map img {
+#wz-map-map {
 	max-width: 100%;
 	width: 100%;
+	border-radius: 8px;
+	box-shadow: 0 .1em .2em rgba(140, 140, 140, .4);
 }
 .wz-icon {
 	padding: 0;
 	margin: 0;
 	height: 1em;
 	width: .75em;
-	filter: brightness(125%);
 }
 #wz-alsius {
 	grid-area: alsius;
@@ -277,6 +302,8 @@ h1 {
 }
 #wz-events {
 	grid-area: events;
+	padding: 1em;
+	justify-self: center;
 }
 #wz-events-header {
 	padding-bottom: .5em;
@@ -289,6 +316,7 @@ h1 {
 		"gems forts"
 		"relics forts";
 	gap: 0 2em;
+	padding: 1em;
 }
 #wz-alsius span, #wz-ignis span, #wz-syrtis span {
 	display: block;
@@ -321,13 +349,13 @@ h1 {
 	#menu {
 		line-height: 2em;
 		text-align: left;
+		padding: 1em;
 	}
 	#menu, #footer {
-		box-shadow: 0px 0px 2px 2px #aaa;
+		box-shadow: 0px 0px 2px 2px rgba(200, 200, 200, .4);
 	}
 	#hamburger {
 		display:inline-block;
-		padding-left: 1em;
 	}
 	#hamburger a {
 		display: inline-block;
@@ -339,6 +367,7 @@ h1 {
 	}
 	#lang {
 		margin-left: 2em;
+		margin-top: 1em;
 	}
 	#menu-content span:nth-child(even) {
 		background: #313131;
@@ -356,5 +385,16 @@ h1 {
 		padding-top: 1em;
 		padding-bottom: 1em;
 		width: 100%;
+	}
+}
+@media (min-width: 800px) {
+	#menu a {
+		padding: .5em;
+	}
+	#menu a:hover {
+		background: #313131;
+		color: rgba(255, 255, 255, 1);
+		box-shadow: 0 .1em .3em rgba(140, 140, 140, .4);
+		transition-duration: 1s;
 	}
 }

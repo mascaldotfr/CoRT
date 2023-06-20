@@ -74,6 +74,7 @@ function feed_bz() {
 	let current_day = parseInt(current_date.getUTCDay());
 	let current_hour = parseInt(current_date.getUTCHours());
 	let tomorrow = current_day + 1 <= 6 ? current_day + 1 : 0;
+	let aftertomorrow = tomorrow + 1 <= 6 ? tomorrow + 1 : 0;
 	// is bz on ?
 	for (let hour in bz_begin[current_day]) {
 		if (current_hour >= bz_begin[current_day][hour] &&
@@ -84,7 +85,7 @@ function feed_bz() {
 		}
 	}
 	// compute future bzs
-	let future_bz_days = [current_day, tomorrow];
+	let future_bz_days = [current_day, tomorrow, aftertomorrow];
 	for (let day of future_bz_days) {
 		for (let hour in bz_begin[day]) {
 			if (day == current_day && parseInt(bz_begin[day][hour]) <= current_hour) {

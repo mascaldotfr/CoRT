@@ -2,16 +2,16 @@ let external_link = `
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAvUlEQVQ4y7WTMQ4CIRBFH8bS0gPY2ngCLfYqkHCoTWavsjWXgFPYOjbLujFAWBN/Axnm/598ZgDuMUYtwXuvAN774ruIqFFVTSkxzzPfcM6dgCdwEZGU69baT1NWog9GRFZ3VdUD/TAi8rLWMk3TWuwW2JKdc2aXgIhoiQxw/JUcQiCE0A5xG1jVodbQQT4D16JAHpyWczYoZjCOowF0OZuo/kIPedcc/E3AxBgVKC5TC8MwrPdHbZ1bWIxvbxir8kTznLrSAAAAAElFTkSuQmCC" style="height: .90em">
 `;
 let menu = `
-	<div id="menu">
+	<div id="menu" class="card">
 	<div id="hamburger">
 	<a href="javascript:toggle_menu('on')" id="menu_toggler">${_("☰  Menu")}</a>
 	</div>
 	<div id="menu-content">
-		<span class="menuitem">🏫<b><a href="index.html">${_("Trainer")}</a></b></span>
-		<span class="menuitem">🪓<b><a href="wz.html">${_("WZ status")}</a></b></span>
-		<span class="menuitem">👾<b><a href="bosses.html">${_("Bosses status")}</a></b></span>
-		<span class="menuitem">🏟<b><a href="bz.html">${_("BZ status")}</a></b></span>
-		<span class="menuitem">🛡<a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">${_("Armor Calculator")}
+		<span class="menuitem"><b><a href="index.html">🏫${_("Trainer")}</a></b></span>
+		<span class="menuitem"><b><a href="wz.html">🪓${_("WZ status")}</a></b></span>
+		<span class="menuitem"><b><a href="bosses.html">👾${_("Bosses status")}</a></b></span>
+		<span class="menuitem"><b><a href="bz.html">🏟${_("BZ status")}</a></b></span>
+		<span class="menuitem"><a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">🛡${_("Armor Calculator")}
 		${external_link}</a></span>
 		<select id="lang">
 			<option value="en">🇬🇧 English</option>
@@ -23,7 +23,7 @@ let menu = `
 	</div>
 `;
 let footer = `
-	<div id="footer">
+	<div id="footer" class="card">
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.</i></p>
@@ -36,7 +36,7 @@ function menu_adapt() {
 	if (window.innerWidth >= 800) {
 		toggle_menu("off");
 		$("#hamburger").css("display", "none");
-		$("#menu-content").css("display", "block");
+		$("#menu-content").css("display", "flex");
 	}
 	else if (old_menu_width >= 800) {
 		// ^ Ensure we don't hide the menu if the mobile

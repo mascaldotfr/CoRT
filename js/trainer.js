@@ -296,7 +296,7 @@ async function load_tree() {
 		treepos++;
 		let spellpos = 0;
 		let iconsrc = "data/" + trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".jpg";
-		trainerhtml = trainerhtml.concat(`<div treepos="${treepos}" class="t${treepos}">`);
+		trainerhtml = trainerhtml.concat(`<div treepos="${treepos}" class="t${treepos} card">`);
 		trainerhtml = trainerhtml.concat(icon_factory(spellpos, iconsrc, treepos, tree, ""));
 		trainerdata.disciplines[tree].spells.forEach( (spell) => {
 			spellpos++;
@@ -336,6 +336,8 @@ async function load_tree() {
 		}
 	});
 	input_setup_from_url();
+	// Populate skillinfo
+	$("#t-trainer .t7 .p2 .icon").trigger("click");
 	$(".setup").show();
 }
 
