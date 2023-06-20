@@ -1,7 +1,7 @@
 body {
 	background-color: #212121;
 	color: white;
-	font-family: sans-serif;
+	font-family: sans-serif, 'Noto Color Emoji';
 	margin: 0 auto;
 	max-width: 1000px;
 	min-height: 100dvh;
