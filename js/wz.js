@@ -109,7 +109,7 @@ async function display_wz(force_display) {
 		return;
 	}
 	try {
-		var data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus.txt");
+		var data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/warstatus.txt");
 		$("#wz-info-error").empty();
 		// Do nothing if nothing changed compared to the last fetch
 		if (data["map_changed"] === false && data["gems_changed"] === false &&
