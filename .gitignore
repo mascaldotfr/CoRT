@@ -1,1 +1,4 @@
 warstatus/*.txt
+warstatus/stats/*.txt
+warstatus/stats/*.sqlite
+__pycache__**
