@@ -97,6 +97,7 @@ def main():
                 old_status = json.load(jsonfile)
                 if "events_log" in old_status:
                     events_log = old_status["events_log"]
+
         # Forts events
         i = 0
         for fort in status["forts"]:
@@ -106,7 +107,9 @@ def main():
                                        "location": fort["location"], "owner": fort["owner"],
                                        "type": "fort" })
             i += 1
+
         # Gem events
+        recovered_gems = {}
         i = 0
         for gem in status["gems"]:
             if "gems" not in old_status or (gem != old_status["gems"][i] and not "gem_0" in gem):
@@ -121,7 +124,35 @@ def main():
                 events_log.insert(0, { "date": timestamp, "name": gem_number,
                                       "location": gem_location, "owner": gem_owner,
                                       "type": "gem" })
+                # Store the amount of gems recovered by realm (used for dragon wish)
+                if gem_owner == gem_location:
+                    if gem_owner in recovered_gems:
+                        recovered_gems[gem_owner] += int(gem_number)
+                    else:
+                        recovered_gems[gem_owner] = int(gem_number)
             i += 1
+
+        # Estimate a dragon wish. If two realms recovered gems during the same minute
+        wisher = ""
+        if len(recovered_gems) == 2:
+            realms_full_gem_recovery = 0
+            # Then check if each concerned realm has recovered their 2 gems
+            for realm in recovered_gems:
+                if recovered_gems[realm] == 3:
+                    realms_full_gem_recovery += 1
+            # If the two realms get all their gems back then deduce the wisher
+            if realms_full_gem_recovery == 2:
+                potential_wishers = realms
+                for realm in potential_wishers:
+                    if realm in recovered_gems:
+                        potential_wishers.remove(realm)
+                wisher = potential_wishers[0]
+                # Record the wish, ensure it has the same structure as other
+                # events So stats.generate does not fail
+                events_log.insert(0, { "date": timestamp, "name": "",
+                                      "location": wisher, "owner": "",
+                                      "type": "wish" })
+
         # Relic events
         for realm in status["relics"]:
             for relic in status["relics"][realm]:

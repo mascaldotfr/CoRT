@@ -38,6 +38,12 @@ following format.
 A gem steal means that a realm (ex: Syrtis) has stolen a gem from another realm
 (ex: Ignis). If Ignis recovered its own gem from Syrtis, it's not counted.
 
+Dragon wishes are an estimate, false positive may happen **VERY** rarely but
+they exist, see
+https://discord.com/channels/542061814704373782/543072176841162763/1120071439349977198
+for example.
+
+
 ```
 [
   [
@@ -46,7 +52,7 @@ A gem steal means that a realm (ex: Syrtis) has stolen a gem from another realm
       generation_time: "duration (s) of reports generation"
     }
   ],
-  [  { # 7 days report
+  [{ # 7 days report
   	"Realm": {
 	  forts: {
 	   captured: "Total number of captured forts",
@@ -64,18 +70,21 @@ A gem steal means that a realm (ex: Syrtis) has stolen a gem from another realm
 	       location: "Last realm invaded",
 	       date: "Timestamp of the last invasion"
 	     }
-	   }
+	   },
 	   gems: {
 	   	stolen: "Timestamp of the last gem steal",
 		count: "Number of gems stolen"
-           }
-         }
+       },
+       wishes: {
+         last: "Timestamp of the last dragon wish",
+         count: "Number of dragon wishes"
        }
      },
-       [...Two more realms...]
-  ],
-  [...30 days report, same format...],
-  [...90 days report, same format...]
+     [...Two more realms...]
+  }
+ ],
+ [...30 days report, same format...],
+ [...90 days report, same format...]
 ]
 ```
 

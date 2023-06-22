@@ -166,7 +166,8 @@ class Reporter:
 
         # Get last gem stolen date and total count
         self.sql.execute(f"""select owner as realm, date, count(date) as count
-                             from events where type="gem" and location != owner
+                             from events
+                             where type="gem" and location != owner
                              and date > {self.startfrom}
                              group by owner
                              order by max(date);""")
@@ -174,5 +175,18 @@ class Reporter:
             self.stats[r["realm"]]["gems"] = {}
             self.stats[r["realm"]]["gems"]["stolen"] = r["date"]
             self.stats[r["realm"]]["gems"]["count"] = r["count"]
+
+        # Get last dragon wish and wishes count
+        self.sql.execute(f"""select location as realm, count(rowid) as count, date
+                             from events
+                             where type="wish"
+                             and date > {self.startfrom}
+                             group by location
+                             order by max(date);""")
+        for r in self.sql.fetchall():
+            if "wishes" not in self.stats[r["realm"]]:
+                self.stats[r["realm"]]["wishes"] = {}
+            self.stats[r["realm"]]["wishes"]["last"] = r["date"]
+            self.stats[r["realm"]]["wishes"]["count"] = r["count"]
 
         return self.stats
