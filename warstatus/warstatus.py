@@ -145,4 +145,12 @@ def main():
         with open(outfile, "w") as jsonfile:
             json.dump(status, jsonfile)
 
+        # Make statistics non mandatory
+        try:
+            import stats.generate
+        except Exception as e:
+            print(e)
+            sys.exit();
+        stats.generate.statistics(status["events_log"])
+
 main()

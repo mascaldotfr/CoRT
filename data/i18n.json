@@ -163,7 +163,7 @@ __i18n__ = {
 	{
 		"fr": "Charger / Réinitialiser",
 		"es": "Cargar / Reiniciar",
-		"de": "Laden/ Zurücksetzen"
+		"de": "Laden / Zurücksetzen"
 	},
 	"Share / Save":
 	{
@@ -229,7 +229,7 @@ __i18n__ = {
 	{
 		"comment": "Comes after 'Click here'",
 		"fr": "pour mettre à jour les points de discipline et de pouvoir vers la dernière version (%s).",
-		"es": "para actualizar la disciplina y los puntos de poder a la última versión (%s).",
+		"es": "para actualizar los puntos de poderes y de disciplinas a la última versión (%s).",
 		"de": "um Disziplin- und Kraftpunkte auf die neueste Version (%s) zu aktualisieren."
 	},
 	"Your shared link is bad. Bailing out, sorry!":
@@ -292,8 +292,8 @@ __i18n__ = {
 		"de": "hat %s zurückerobert"
 	},
 	"Last server events (in your timezone):": {
-		"fr": "Derniers événements du serveur (heure locale) :",
-		"es": "Últimos eventos del servidor (hora local):",
+		"fr": "Derniers événements (heure locale) :",
+		"es": "Últimos eventos (hora local):",
 		"de": "Neueste Serverereignisse (Ortszeit):"
 	},
 	"is back to its altar.": {
@@ -310,5 +310,65 @@ __i18n__ = {
 		"fr": "La relique de %s",
 		"es": "La reliquia de %s",
 		"de": "Das %s-Relikt"
+	},
+	"WZ statistics": {
+		"fr": "Statistiques de la WZ",
+		"es": "Estadísticas de la WZ",
+		"de": "WZ-Statistik"
+	},
+	"Last updated:": {
+		"fr": "Mis à jour :",
+		"es": "Última actualización:",
+		"de": "Letzte Aktualisierung:"
+	},
+	"Last %s days": {
+		"fr": "Les %s derniers jours",
+		"es": "Últimos %s días",
+		"de": "Letzte %s Tage"
+	},
+	"Last invasion": {
+		"fr": "Dernière invasion",
+		"es": "Última invasión",
+		"de": "Letzte Invasion"
+	},
+	"Last gem stolen": {
+		"fr": "Dernière gemme volée",
+		"es": "Última gema robada",
+		"de": "Letzter Juwel gestohlen"
+	},
+	"Forts captured": {
+		"fr": "Forts capturés",
+		"es": "Fuertes capturados",
+		"de": "Forts erobert"
+	},
+	"Most captured fort": {
+		"fr": "Fort le plus capturé",
+		"es": "Fuerte más capturado",
+		"de": "Meist eingenommene Fort"
+	},
+	"Forts recovered": {
+		"fr": "Forts récupérés",
+		"es": "Fuertes recuperados",
+		"de": "Forts erholten sich"
+	},
+	"Has invaded": {
+		"fr": "A envahi",
+		"es": "Invadió",
+		"de": "Realm einfielen in"
+	},
+	"Has been invaded": {
+		"fr": "S'est fait envahir",
+		"es": "Invadido",
+		"de": "Eingefallen Realm"
+	},
+	"Stolen gems": {
+		"fr": "Gemmes volées",
+		"es": "Gemas robadas",
+		"de": "Gestohlene Juwelen"
+	},
+	"%s ago": {
+		"fr": "il y a %s",
+		"es": "hace %s",
+		"de": "vor %s"
 	}
 }

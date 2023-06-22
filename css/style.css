@@ -3,7 +3,7 @@ body {
 	color: white;
 	font-family: sans-serif, 'Noto Color Emoji';
 	margin: 0 auto;
-	max-width: 1000px;
+	max-width: 1600px;
 	min-height: 100dvh;
 	display: grid;
 	grid-template-rows: 1fr auto;
@@ -17,6 +17,9 @@ select, button, textarea {
 	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
 	border-radius: 3px;
 	border: 0px;
+}
+select, button {
+	padding: .5em;
 }
 select {
 	/* let us style <select> on webkit browsers */
@@ -40,6 +43,7 @@ select {
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-items: center;
+	line-height: 3em;
 }
 #menu a {
 	text-decoration: none;
@@ -85,7 +89,7 @@ h1 {
 .center { text-align:center; }
 .bold { font-weight: bold; }
 
-/* TRAINER */
+/* TRAINER (main namespace)*/
 
 #trainer-container {
     display: grid;
@@ -114,7 +118,7 @@ h1 {
 
 .p0, .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10 {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: auto 1fr;
 	justify-content: space-around;
 	padding: .5em;
 }
@@ -137,7 +141,7 @@ h1 {
 }
 .skillspinner { height: 48px; margin-top: 1px; }
 .icon .skilllvl { background-color: white; color: black; border-radius: 4px;}
-.minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px}
+.minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px; padding: 2px;}
 .minus { margin-top: 6px}
 #skillinfo div[class^="p"] {
 	margin: .5em;
@@ -255,16 +259,12 @@ h1 {
 /* WARZONE STATUS */
 
 #wz-container {
-	display: grid;
-	grid-template-areas:
-		"map alsius"
-		"map ignis"
-		"map syrtis"
-		"events events";
-	align-items: center;
-	justify-items: stretch;
-	gap: 1em;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3em 1em;
 	margin-top: 3em;
+	align-items: center;
+	justify-content: space-evenly;
 }
 #wz-container h2 {
 	margin: 0;
@@ -274,16 +274,11 @@ h1 {
 	font-weight: bold;
 }
 #wz-map {
-	grid-area: map;
-	justify-self: left;
-	/* avoid an optical illusion or whatever it is */
-	margin-top: 4px;
+	justify-self: right;
 }
 #wz-map-map {
-	max-width: 100%;
-	width: 100%;
 	border-radius: 8px;
-	box-shadow: 0 .1em .2em rgba(140, 140, 140, .4);
+	max-width: 100%;
 }
 .wz-icon {
 	padding: 0;
@@ -291,61 +286,92 @@ h1 {
 	height: 1em;
 	width: .75em;
 }
-#wz-alsius {
-	grid-area: alsius;
-}
-#wz-ignis {
-	grid-area: ignis;
-}
-#wz-syrtis {
-	grid-area: syrtis;
-}
 #wz-events {
-	grid-area: events;
 	padding: 1em;
-	justify-self: center;
+	align-self: center;
+	overflow-y: scroll;
+	max-height: 25em;
 }
 #wz-events-header {
 	padding-bottom: .5em;
 }
+#wz-realms-info {
+	align-self: center;
+	max-height: 25em;
+}
 #wz-alsius, #wz-ignis, #wz-syrtis {
 	display: grid;
-	grid-template-columns: 35% auto;
 	grid-template-areas:
 		"realm forts"
 		"gems forts"
 		"relics forts";
 	gap: 0 2em;
-	padding: 1em;
+	padding-top: .5em;
+	padding-bottom: .5em;
+	margin-bottom: 3em;
 }
 #wz-alsius span, #wz-ignis span, #wz-syrtis span {
 	display: block;
 }
-.realmname {
+#wz-container .realmname {
 	grid-area: realm;
 	text-align: right;
 }
-.gems {
+#wz-container .gems {
 	grid-area: gems;
 	text-align: right;
 	min-width: max-content;
 }
-.relics {
+#wz-container .relics {
 	grid-area: relics;
 	text-align: right;
 }
-.forts {
+#wz-container .forts {
 	grid-area: forts;
 	margin-top: auto;
 }
-@media (max-width: 800px) {
-	#wz-container {
-		grid-template-areas: "map" "alsius" "ignis" "syrtis" "events";
-	}
-	#wz-map {
-		margin-bottom: 1em;
-		justify-self: center;
-	}
+
+/* WAR STATISTICS */
+
+#ws-container {
+}
+
+#ws-container .ws-card {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: stretch;
+	gap: 1em;
+}
+#ws-container .statcard {
+	padding: .5em;
+	flex: 1;
+}
+#ws-container h3 {
+	text-align: center;
+}
+#ws-container table {
+	 border-collapse: collapse;
+	 margin: 0 auto;
+ }
+#ws-container tr {
+	margin: 0px;
+	border-bottom: 1px solid #717171;
+}
+#ws-container tr:last-child {
+	border-bottom: unset;
+}
+#ws-container td {
+	padding: .5em;
+}
+#ws-container td:nth-child(even) {
+	padding-left: 1em;
+}
+
+
+
+
+@media (max-width: 799px) {
 	#menu {
 		line-height: 2em;
 		text-align: left;
@@ -384,6 +410,19 @@ h1 {
 		display: inline-block;
 		padding-top: 1em;
 		padding-bottom: 1em;
+		width: 100%;
+	}
+	/* WAR STATUS */
+	#wz-container {
+		grid-template-areas: "map" "alsius" "ignis" "syrtis" "events";
+		grid-template-columns: 1fr;
+	}
+	#wz-map {
+		margin-bottom: 1em;
+		justify-self: center;
+	}
+	/* WAR STATISTICS */
+	#ws-container .statcard {
 		width: 100%;
 	}
 }

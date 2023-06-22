@@ -12,6 +12,9 @@ The output is meant to placed in a file reachable by a webserver.
 You can see it in action at https://hail.thebus.top/cortdata/warstatus/warstatus.txt --
 informations are refreshed every minute.
 
+The `stats` directory includes the code used to generate the WZ statistics, and
+has its own README.
+
 ## Requirements
 
 - Python 3 (with beautifulsoup4; `python3-bs4` in debian packages)

@@ -11,6 +11,7 @@ let menu = `
 		<span class="menuitem"><b><a href="wz.html">🪓${_("WZ status")}</a></b></span>
 		<span class="menuitem"><b><a href="bosses.html">👾${_("Bosses status")}</a></b></span>
 		<span class="menuitem"><b><a href="bz.html">🏟${_("BZ status")}</a></b></span>
+		<span class="menuitem"><b><a href="wstats.html">📊 ${_("WZ statistics")} (beta)</a></b></span>
 		<span class="menuitem"><a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">🛡${_("Armor Calculator")}
 		${external_link}</a></span>
 		<select id="lang">

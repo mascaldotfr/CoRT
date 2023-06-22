@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="keywords" content="regnumsentinel champions regnum online trainer entrenador bosses war warzone guerra status">
+		<meta name="description" content="Champions of Regnum trainer, war status, bosses respawn and bz countdowns">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<script type="text/javascript" src="js/importemojis.js"></script>
+		<script type="text/javascript" src="js/lamaiquery.js"></script>
+		<script type="text/javascript" src="data/i18n.json"></script>
+		<script type="text/javascript" src="js/i18n.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/wstats.js"></script>
+		<script>document.title = "CoRT - " + _("WZ statistics")</script>
+	</head>
+	<body>
+	<div id="main-container">
+		<div class="bugnum but on your side">
+			<noscript>
+				For full functionality of this site it is necessary to enable JavaScript.
+				Here are the <a href="https://www.enable-javascript.com/">
+					instructions how to enable JavaScript in your web browser</a>.
+			</noscript>
+		</div>
+		<h1><script>document.write(_("WZ statistics"))</script></h1>
+		<div id="ws-info" class="center">
+			<p>
+				<b><script>document.write(_("Last updated:"))</script></b>
+				<span id="ws-last-updated"></span>
+			</p>
+			<div id="ws-info-error" class="red"></div>
+		</div>
+		<div id="ws-container">
+			<h2><script>document.write(_("Last %s days", 7))</script></h2>
+			<div class="ws-card" id="ws-7d">
+				<div class="card statcard" id="ws-7d-alsius"></div>
+				<div class="card statcard" id="ws-7d-ignis"></div>
+				<div class="card statcard" id="ws-7d-syrtis"></div>
+			</div>
+			<h2><script>document.write(_("Last %s days", 30))</script></h2>
+			<div class="ws-card" id="ws-30d">
+				<div class="card statcard" id="ws-30d-alsius"></div>
+				<div class="card statcard" id="ws-30d-ignis"></div>
+				<div class="card statcard" id="ws-30d-syrtis"></div>
+			</div>
+			<h2><script>document.write(_("Last %s days", 90))</script></h2>
+			<div class="ws-card" id="ws-90d">
+				<div class="card statcard" id="ws-90d-alsius"></div>
+				<div class="card statcard" id="ws-90d-ignis"></div>
+				<div class="card statcard" id="ws-90d-syrtis"></div>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>
