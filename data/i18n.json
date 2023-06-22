@@ -26,6 +26,11 @@ __i18n__ = {
 		"es": "Cuenta atras de los jefes",
 		"de": "Boss-Countdown"
 	},
+	"WZ statistics": {
+		"fr": "Statistiques de la WZ",
+		"es": "Estadísticas de la ZG",
+		"de": "WZ-Statistik"
+	},
 	"Armor Calculator":
 	{
 		"fr": "Calculateur d'armure",
@@ -310,11 +315,6 @@ __i18n__ = {
 		"fr": "La relique de %s",
 		"es": "La reliquia de %s",
 		"de": "Das %s-Relikt"
-	},
-	"WZ statistics": {
-		"fr": "Statistiques de la WZ",
-		"es": "Estadísticas de la WZ",
-		"de": "WZ-Statistik"
 	},
 	"Last updated:": {
 		"fr": "Mis à jour :",

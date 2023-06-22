@@ -169,7 +169,7 @@ h1 {
 #skillinfo th {
 	text-align: left;
 	border: 1px solid white;
-	padding:.25em 1em .25em 1em;
+	padding: .25em 1em .25em 1em;
 }
 #skillinfo thead > tr > th:first-child {
   visibility: hidden;
@@ -180,11 +180,11 @@ h1 {
 }
 #skillinfo thead > tr > th {
 	text-align: center;
-	padding:.25em 1em .25em 1em;
+	padding: .25em 1em .25em 1em;
 }
 #skillinfo td {
 	text-align: center;
-	padding:.25em 1em .25em 1em;
+	padding: .25em 1em .25em 1em;
 	border: 1px solid white;
 }
 #t-dialog {
@@ -290,14 +290,13 @@ h1 {
 	padding: 1em;
 	align-self: center;
 	overflow-y: scroll;
-	max-height: 25em;
+	max-height: 30em;
 }
 #wz-events-header {
 	padding-bottom: .5em;
 }
 #wz-realms-info {
 	align-self: center;
-	max-height: 25em;
 }
 #wz-alsius, #wz-ignis, #wz-syrtis {
 	display: grid;
@@ -308,6 +307,8 @@ h1 {
 	gap: 0 2em;
 	padding-top: .5em;
 	padding-bottom: .5em;
+}
+#wz-alsius, #wz-ignis {
 	margin-bottom: 3em;
 }
 #wz-alsius span, #wz-ignis span, #wz-syrtis span {
@@ -418,7 +419,6 @@ h1 {
 		grid-template-columns: 1fr;
 	}
 	#wz-map {
-		margin-bottom: 1em;
 		justify-self: center;
 	}
 	/* WAR STATISTICS */
