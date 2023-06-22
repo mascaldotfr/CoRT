@@ -41,7 +41,7 @@ select {
 #menu-content {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	align-items: center;
 	line-height: 3em;
 }
@@ -69,11 +69,6 @@ select {
 	padding-right: 1em;
 	padding-bottom: 0px;
 	margin-bottom: 2em;
-}
-#lang {
-	margin-top: .5em;
-	margin-bottom: .5em;
-	padding: .5em;
 }
 h1 {
 	text-align: center;
@@ -370,7 +365,7 @@ h1 {
 }
 
 
-
+/* ADAPTATIVE VIEWS */
 
 @media (max-width: 799px) {
 	#menu {
@@ -428,12 +423,23 @@ h1 {
 }
 @media (min-width: 800px) {
 	#menu a {
+		/* Make menu items appear as buttons */
 		padding: .5em;
+		background-color: #515151;
+		color: white;
+		box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
+		border-radius: 3px;
+	}
+	#menu select {
+		padding: .5em;
+		font-size: 1em;
+		min-width: 250px;
+		text-align: center;
 	}
 	#menu a:hover {
 		background: #313131;
-		color: rgba(255, 255, 255, 1);
+		color: #ccaaff;
 		box-shadow: 0 .1em .3em rgba(140, 140, 140, .4);
-		transition-duration: 1s;
+		transition-duration: .5s;
 	}
 }
