@@ -316,6 +316,11 @@ __i18n__ = {
 		"es": "La reliquia de %s",
 		"de": "Das %s-Relikt"
 	},
+	"%s made a dragon wish!": {
+		"fr": "%s a fait un voeu du dragon !",
+		"es": "¡%s pidió un deseo de dragón!",
+		"de": "hat sich einen Drachenwunsch geäußert!"
+	},
 	"Last updated:": {
 		"fr": "Mis à jour :",
 		"es": "Última actualización:",

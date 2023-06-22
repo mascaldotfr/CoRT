@@ -195,6 +195,11 @@ async function display_wz(force_display) {
 				events_html += `${relic} ${_("is in transit.")}`;
 			}
 		}
+		else if (anevent["type"] == "wish") {
+			let location_color = realm_colors[anevent["location"]];
+			let sentence = _("%s made a dragon wish!", anevent["location"]);
+			events_html += `<span class="${location_color} bold">${sentence}</span>`;
+		}
 		events_html += `<br>`;
 	}
 	events_html += `</span>`;
