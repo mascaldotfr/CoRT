@@ -176,6 +176,17 @@ class Reporter:
             self.stats[r["realm"]]["gems"]["stolen"] = r["date"]
             self.stats[r["realm"]]["gems"]["count"] = r["count"]
 
+        # Get lost gems count
+        self.sql.execute(f"""select owner as realm, count(rowid) as count
+                             from events
+                             where type="gem" and  location == owner
+                             and date > {self.startfrom}
+                             group by owner;""")
+        for r in self.sql.fetchall():
+            if "gems" not in self.stats[r["realm"]]:
+                self.stats[r["realm"]]["gems"] = {}
+            self.stats[r["realm"]]["gems"]["lost"] = r["count"]
+
         # Get last dragon wish and wishes count
         self.sql.execute(f"""select location as realm, count(rowid) as count, date
                              from events

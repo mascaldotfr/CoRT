@@ -371,6 +371,11 @@ __i18n__ = {
 		"es": "Gemas robadas",
 		"de": "Gestohlene Juwelen"
 	},
+	"Lost gems": {
+		"fr": "Gemmes perdues",
+		"es": "Gemas perdidas",
+		"de": "Verlorene Juwelen"
+	},
 	"Dragon wishes": {
 		"fr": "Voeux du dragon",
 		"es": "Deseos del dragón",

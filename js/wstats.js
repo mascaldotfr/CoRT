@@ -38,6 +38,14 @@ function ts_to_human(ts) {
 	return _("%s ago", output);
 }
 
+// undefined => N/A or 0
+function naify(value, failover="0") {
+	if (value === undefined)
+		return failover;
+	else
+		return value;
+}
+
 // Create translatable strings according to english order of words
 // XXX Beware, not exactly the same a the wz status one
 function translate_fort(fort) {
@@ -74,30 +82,16 @@ async function display_stat() {
 	$("#ws-last-updated").text(ts_to_human(infos["generated"]));
 
 
-	// XXX Note that on first runs, it may error out due to missing data
-	// but i'm half discarding such error handling as it should populate
-	// pretty quickly (24 hours at worse) and would make the code heavy
 	for (let report = 0; report < data.length; report++) {
 		let days = report_days[report];
 
 		for (let realm in data[report]) {
 			let r = data[report][realm];
-			if (r.invasions === undefined) {
-				r.invasions = {};
-				r.invasions.count = "0";
-				r.invasions.last.date = undefined;
-				r.invasions.last.location = "N/A";
-				r.invasions.invaded.count = "0";
-			}
-			if (r.gems === undefined) {
-				r.gems = {};
-				r.gems.last = undefined;
-				r.gems.count = "0";
-			}
-			if (r.wishes === undefined) {
-				r.wishes = {};
-				r.wishes.last = undefined;
-				r.wishes.count = "0";
+			// Create possible missing base entries
+			for (let item of ["gems", "wishes", "forts", "invasions"]) {
+				if (!(item in r)) {
+					r[item] = {};
+				}
 			}
 			// Hide "last" entries out of the first 7 days report
 			let last_invasion = "";
@@ -107,7 +101,7 @@ async function display_stat() {
 				last_invasion = `<tr>
 					<td><b>${_("Last invasion")}</b></td>
 					<td>${ts_to_human(r.invasions.last.date)}
-					    (${r.invasions.last.location})</td>
+					    (${naify(r.invasions.last.location, "N/A")})</td>
 					</tr>`;
 				last_gem = `<tr>
 					<td><b>${_("Last gem stolen")}</b></td>
@@ -123,38 +117,42 @@ async function display_stat() {
 				<table>
 				<tr>
 					<td><b>${_("Forts captured")} (total)</b></td>
-					<td>${r.forts.total}</td>
+					<td>${naify(r.forts.total)}</td>
 				</tr>
 				<tr>
 					<td><b>${_("Forts captured")}</b></td>
-					<td>${r.forts.captured}</td>
+					<td>${naify(r.forts.captured)}</td>
 				</tr>
 				<tr>
 					<td><b>${_("Most captured fort")}</b></td>
 					<td>${translate_fort(r.forts.most_captured.name)}
-					    (${r.forts.most_captured.count})</td>
+					    (${naify(r.forts.most_captured.count, "N/A")})</td>
 				</tr>
 				<tr>
 					<td><b>${_("Forts recovered")}</b></td>
-					<td>${r.forts.recovered}
+					<td>${naify(r.forts.recovered)}</td>
 				</tr>
 				<tr>
 					<td><b>${_("Has invaded")}</b></td>
-					<td>${r.invasions.count}</td>
+					<td>${naify(r.invasions.count)}</td>
 				</tr>
 				${last_invasion}
 				<tr>
 					<td><b>${_("Has been invaded")}</b></td>
-					<td>${r.invasions.invaded.count}</td>
+					<td>${naify(r.invasions.invaded.count)}</td>
 				</tr>
 				<tr>
 					<td><b>${_("Stolen gems")}</b></td>
-					<td>${r.gems.count}</td>
+					<td>${naify(r.gems.count)}</td>
 				</tr>
 				${last_gem}
 				<tr>
+					<td><b>${_("Lost gems")}</b></td>
+					<td>${naify(r.gems.lost)}</td>
+				</tr>
+				<tr>
 					<td><b>${_("Dragon wishes")}</b></td>
-					<td>${r.wishes.count}</td>
+					<td>${naify(r.wishes.count)}</td>
 				</tr>
 				${last_wish}
 				</table>
