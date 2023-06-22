@@ -166,11 +166,10 @@ class Reporter:
 
         # Get last gem stolen date and total count
         self.sql.execute(f"""select owner as realm, date, count(date) as count
-                             from events
-                             where type="gem" and location != owner
+                             from events where type="gem" and location != owner
                              and date > {self.startfrom}
                              group by owner
-                             order by date desc;""")
+                             order by max(date);""")
         for r in self.sql.fetchall():
             self.stats[r["realm"]]["gems"] = {}
             self.stats[r["realm"]]["gems"]["stolen"] = r["date"]
