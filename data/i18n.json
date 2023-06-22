@@ -371,6 +371,16 @@ __i18n__ = {
 		"es": "Gemas robadas",
 		"de": "Gestohlene Juwelen"
 	},
+	"Dragon wishes": {
+		"fr": "Voeux du dragon",
+		"es": "Deseos del dragón",
+		"de": "Drachenwünsche"
+	},
+	"Last dragon wish": {
+		"fr": "Dernier voeu du dragon",
+		"es": "Último deseo del dragón",
+		"de": "Letzter Drachenwunsch"
+	},
 	"%s ago": {
 		"fr": "il y a %s",
 		"es": "hace %s",

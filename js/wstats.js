@@ -77,26 +77,32 @@ async function display_stat() {
 	// XXX Note that on first runs, it may error out due to missing data
 	// but i'm half discarding such error handling as it should populate
 	// pretty quickly (24 hours at worse) and would make the code heavy
-	for (report = 0; report < data.length; report++) {
+	for (let report = 0; report < data.length; report++) {
 		let days = report_days[report];
 
-		for (realm in data[report]) {
+		for (let realm in data[report]) {
 			let r = data[report][realm];
 			if (r.invasions === undefined) {
 				r.invasions = {};
 				r.invasions.count = "0";
-				r.invasions.last.data = "N/A";
+				r.invasions.last.date = undefined;
 				r.invasions.last.location = "N/A";
 				r.invasions.invaded.count = "0";
 			}
 			if (r.gems === undefined) {
 				r.gems = {};
-				r.gems.last = "N/A";
+				r.gems.last = undefined;
 				r.gems.count = "0";
+			}
+			if (r.wishes === undefined) {
+				r.wishes = {};
+				r.wishes.last = undefined;
+				r.wishes.count = "0";
 			}
 			// Hide "last" entries out of the first 7 days report
 			let last_invasion = "";
 			let last_gem = "";
+			let last_wish = "";
 			if (report == 0) {
 				last_invasion = `<tr>
 					<td><b>${_("Last invasion")}</b></td>
@@ -106,6 +112,10 @@ async function display_stat() {
 				last_gem = `<tr>
 					<td><b>${_("Last gem stolen")}</b></td>
 					<td>${ts_to_human(r.gems.stolen)}</td>
+					</tr>`;
+				last_wish = `<tr>
+					<td><b>${_("Last dragon wish")}</b></td>
+					<td>${ts_to_human(r.wishes.last)}</td>
 					</tr>`;
 			}
 			let template = `
@@ -142,6 +152,11 @@ async function display_stat() {
 					<td>${r.gems.count}</td>
 				</tr>
 				${last_gem}
+				<tr>
+					<td><b>${_("Dragon wishes")}</b></td>
+					<td>${r.wishes.count}</td>
+				</tr>
+				${last_wish}
 				</table>
 			`;
 			$(`#ws-${days}d-${realm.toLowerCase()}`).append(template);
