@@ -27,7 +27,10 @@
 		<h1><script>document.write(_("WZ statistics"))</script></h1>
 		<div id="ws-info" class="center">
 			<p>
-				<b><script>document.write(_("Last updated:"))</script></b>
+				<b><script>
+					document.write(_("The page will update itself every minute.") +
+						" " + _("Last event:"))
+				</script></b>
 				<span id="ws-last-updated"></span>
 			</p>
 			<div id="ws-info-error" class="red"></div>

@@ -326,6 +326,11 @@ __i18n__ = {
 		"es": "Última actualización:",
 		"de": "Letzte Aktualisierung:"
 	},
+	"Last event:": {
+		"fr": "Dernier événement :",
+		"es": "Último evento:",
+		"de": "Letzte Veranstaltung:"
+	},
 	"Last %s days": {
 		"fr": "Les %s derniers jours",
 		"es": "Últimos %s días",

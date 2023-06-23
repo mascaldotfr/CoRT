@@ -157,9 +157,14 @@ async function display_stat() {
 				${last_wish}
 				</table>
 			`;
+			$(`#ws-${days}d-${realm.toLowerCase()}`).empty();
 			$(`#ws-${days}d-${realm.toLowerCase()}`).append(template);
 		}
 	}
 }
 
-display_stat();
+$(document).ready(function() {
+	display_stat();
+});
+
+setInterval(display_stat, 60 * 1000);
