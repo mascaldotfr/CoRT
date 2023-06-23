@@ -111,6 +111,10 @@ async function display_wz(force_display) {
 	try {
 		var data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/warstatus.txt");
 		$("#wz-info-error").empty();
+		let dt = new Date();
+		let datetime = dt.toLocaleTimeString(undefined,
+			{hour: "2-digit", minute: "2-digit", second: "2-digit"});
+		$("#wz-info-updated").text(datetime);
 		// Do nothing if nothing changed compared to the last fetch
 		if (data["map_changed"] === false && data["gems_changed"] === false &&
 		    data["relics_changed"] === false && force_display !== true)

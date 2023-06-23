@@ -27,7 +27,11 @@
 		<h1><script>document.write(_("WZ status"))</script></h1>
 		<div id="wz-info">
 			<p>
-				<script>document.write(_("The page will update itself every minute."))</script>
+				<script>
+					document.write(_("The page will update itself every minute.") +
+					" " + _("Last updated:"));
+				</script>
+				<span id="wz-info-updated"></span>
 			</p>
 			<div id="wz-info-error" class="red"></div>
 		</div>
