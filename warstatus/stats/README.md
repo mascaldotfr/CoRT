@@ -73,7 +73,8 @@ for example.
 	   },
 	   gems: {
 	   	stolen: "Timestamp of the last gem steal",
-		count: "Number of gems stolen"
+		count: "Number of gems stolen",
+        lost: "Number of lost gems"
        },
        wishes: {
          last: "Timestamp of the last dragon wish",
