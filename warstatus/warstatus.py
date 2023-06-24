@@ -41,6 +41,7 @@ def filename(url):
 	return url.split('/').pop();
 
 def main():
+    failure = ""
     with urlopen("https://championsofregnum.com/index.php?l=1&sec=3") as response:
         page = BeautifulSoup(response.read(), "html.parser")
         forts_names = []
@@ -55,6 +56,8 @@ def main():
                 relic_name = relic.attrs["title"].split(" relic")[0]
                 status["relics"][realms[i]][relic_name] = filename(relic.attrs["src"])
             i += 1
+        if len(status["gems"]) != 18:
+            failure += f'Fetching gems failed: {status["gems"]}'
 
         icons = page.findAll("div", {"class" : "war-status-bulding-icons"})
         for icon_block in icons:
@@ -65,16 +68,13 @@ def main():
         for name in names:
             forts_names.append(name.text)
 
-        if len(status["gems"]) == 0 or len(forts_names) == 0 or len(forts_icons) == 0 :
-            print("The output is wrong: " + str(status["gems"]) + str(forts_names) + \
-                                            str(forts_icons), file=sys.stderr)
-            sys.exit(1)
-
         i = 0
         for item in forts_names:
             owner = ''.join(os.path.normpath(forts_icons[i]).split("/")[-1:])
             owner = owner.replace("keep_", "")
             owner = owner.replace(".gif", "").capitalize()
+            if owner not in realms:
+                failure += f"Bad input: names => {forts_names} icons => {forts_icons}"
             location = realms[int(i / 4)]
             status["forts"].append({ "name": forts_names[i], "location": location,
                                      "owner":owner, "icon":forts_icons[i] })
@@ -97,6 +97,16 @@ def main():
                 old_status = json.load(jsonfile)
                 if "events_log" in old_status:
                     events_log = old_status["events_log"]
+
+        # Fetching the data from NGE's website failed in a way or another.
+        # Bail out, but not without keeping the event log
+        if len(failure) != 0:
+            status["failed"] = failure
+            if "events_log" in old_status:
+                status["events_log"] = old_status["events_log"]
+            with open(outfile, "w") as jsonfile:
+                json.dump(status, jsonfile)
+            sys.exit(1)
 
         # Forts events
         i = 0

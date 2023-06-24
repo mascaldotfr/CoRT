@@ -115,6 +115,14 @@ async function display_wz(force_display) {
 		let datetime = dt.toLocaleTimeString(undefined,
 			{hour: "2-digit", minute: "2-digit", second: "2-digit"});
 		$("#wz-info-updated").text(datetime);
+		if ("failed" in data) {
+			$("#wz-info-error").text(`
+			  Fetching the data from NGE's site failed and may have errors!
+			  Check out <a href="https://championsofregnum.com/index.php?l=1&sec=3">
+			  NGE's page</a>!`);
+			console.error(data["failed"]);
+			return;
+		}
 		// Do nothing if nothing changed compared to the last fetch
 		if (data["map_changed"] === false && data["gems_changed"] === false &&
 		    data["relics_changed"] === false && force_display !== true)

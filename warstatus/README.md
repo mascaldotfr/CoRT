@@ -82,6 +82,8 @@ website code, sacrificing a bit of the consistency.
     gems_changed: "same as map_changed, but for gems",
     relics_changed: "same as map_changed, but for relics",
     "generated": "Unix timestamp representing the date and time when the response has been generated",
+    "failed": "If present, NGE's site is probably in bad shape because the data integrity is wrong
+               This contains the debug infos."
 }
 ```
 
