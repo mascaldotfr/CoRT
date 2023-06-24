@@ -120,13 +120,13 @@ __i18n__ = {
 	{
 		"fr": "Cliquer sur l'îcone d'un sort montrera sa description.",
 		"es": "Al hacer clic en el icono de un hechizo, se mostrará su descripción.",
-		"de": "Wenn Sie auf das Symbol eines Zaubers klicken, wird dessen Beschreibung angezeigt."
+		"de": "Wenn du auf das Symbol eines Zaubers klickst, wird dessen Beschreibung angezeigt."
 	},
 	"Selecting an higher character level will upgrade your current setup to that level.":
 	{
 		"fr": "Selectionner un niveau du personnage supérieur à l'actuel transférera votre configuration à ce niveau.",
 		"es": "Seleccionar un nivel de personaje superior al actual transferirá su configuración a ese nivel.",
-		"de": "Wenn Sie eine höhere Charakterstufe als die aktuelle auswählen, wird Ihre Konfiguration auf diese Stufe übertragen."
+		"de": "Wenn du ein höhes Level als das aktuelle auswählst, wird deine Konfiguration auf dieses Level übertragen."
 	},
 	"Knight":
 	{
@@ -198,13 +198,13 @@ __i18n__ = {
 	{
 		"fr": "Veuillez sélectionner un niveau",
 		"es": "Por favor seleccione un nivel",
-		"de": "Bitte wählen Sie ein Level aus"
+		"de": "Bitte wähle ein Level aus"
 	},
 	"Please select a class":
 	{
 		"fr": "Veuillez sélectionner une class",
 		"es": "Por favor seleccione una clase",
-		"de": "Bitte wählen Sie eine Klasse aus"
+		"de": "Bitte wähle eine Klasse aus"
 	},
 	"You need first to load trees by clicking on \"%s\"!":
 	{
@@ -216,7 +216,7 @@ __i18n__ = {
 	{
 		"fr": "Voici le lien vers votre configuration :",
 		"es": "Aquí está el enlace a su configuración:",
-		"de": "Hier ist der Link zu Ihrer Konfiguration:"
+		"de": "Hier ist der Link zu deiner Konfiguration:"
 	},
 	"This setup is being made with an older version (%s) of CoR, and may be out of date.":
 	{
@@ -274,7 +274,7 @@ __i18n__ = {
 	"Great Wall of %s": {
 		"fr": "Grande Muraille de %s",
 		"es": "Gran Muralla de %s",
-		"de": "%s Mauer"
+		"de": "Große Mauer von %s"
 	},
 	"The page will update itself every minute.": {
 		"fr": "La page sera rafraîchie toutes les minutes.",
@@ -314,12 +314,12 @@ __i18n__ = {
 	"%s's relic": {
 		"fr": "La relique de %s",
 		"es": "La reliquia de %s",
-		"de": "Das %s-Relikt"
+		"de": "%s' Relikt"
 	},
 	"%s made a dragon wish!": {
 		"fr": "%s a fait un voeu du dragon !",
 		"es": "¡%s pidió un deseo de dragón!",
-		"de": "hat sich einen Drachenwunsch geäußert!"
+		"de": "hat einen Drachenwunsch geäußert!"
 	},
 	"Last updated:": {
 		"fr": "Mis à jour :",
@@ -344,7 +344,7 @@ __i18n__ = {
 	"Last gem stolen": {
 		"fr": "Dernière gemme volée",
 		"es": "Última gema robada",
-		"de": "Letzter Juwel gestohlen"
+		"de": "Letztes Juwel gestohlen"
 	},
 	"Forts captured": {
 		"fr": "Forts capturés",
@@ -354,32 +354,32 @@ __i18n__ = {
 	"Most captured fort": {
 		"fr": "Fort le plus capturé",
 		"es": "Fuerte más capturado",
-		"de": "Meist eingenommene Fort"
+		"de": "Meist eingenommenes Fort"
 	},
 	"Forts recovered": {
 		"fr": "Forts récupérés",
 		"es": "Fuertes recuperados",
-		"de": "Forts erholten sich"
+		"de": "Forts zurückerobert"
 	},
 	"Has invaded": {
 		"fr": "A envahi",
 		"es": "Invadió",
-		"de": "Realm einfielen in"
+		"de": "Invasionen durchgeführt"
 	},
 	"Has been invaded": {
 		"fr": "S'est fait envahir",
 		"es": "Invadido",
-		"de": "Eingefallen Realm"
+		"de": "Invasionen erlitten"
 	},
 	"Stolen gems": {
 		"fr": "Gemmes volées",
 		"es": "Gemas robadas",
-		"de": "Gestohlene Juwelen"
+		"de": "Juwelen gestohlen"
 	},
 	"Lost gems": {
 		"fr": "Gemmes perdues",
 		"es": "Gemas perdidas",
-		"de": "Verlorene Juwelen"
+		"de": "Juwelen verloren"
 	},
 	"Dragon wishes": {
 		"fr": "Voeux du dragon",
