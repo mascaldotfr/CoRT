@@ -27,25 +27,25 @@ from bs4 import BeautifulSoup
 outfile = "warstatus.txt"
 base_url = "https://championsofregnum.com/"
 
-status = {"forts": [], "gems": []}
-status["relics"] = {
-        "Alsius": { "Imperia": None, "Aggersborg": None, "Trelleborg": None },
-        "Ignis": { "Shaanarid": None, "Samal": None, "Menirah": None },
-        "Syrtis": { "Eferias": None, "Herbred": None, "Algaros": None }
-}
-realms = ["Alsius", "Ignis", "Syrtis"] # in site order for forts
-realms_gem = ["Ignis", "Alsius", "Syrtis"] # in site order for gems images (gem_X.png)
-
 # return just the filename part of the url
 def filename(url):
 	return url.split('/').pop();
 
 def main():
-    failure = ""
     with urlopen("https://championsofregnum.com/index.php?l=1&sec=3") as response:
-        page = BeautifulSoup(response.read(), "html.parser")
+        failure = ""
+        status = {"forts": [], "gems": []}
+        status["relics"] = {
+                "Alsius": { "Imperia": None, "Aggersborg": None, "Trelleborg": None },
+                "Ignis": { "Shaanarid": None, "Samal": None, "Menirah": None },
+                "Syrtis": { "Eferias": None, "Herbred": None, "Algaros": None }
+                }
+        realms = ["Alsius", "Ignis", "Syrtis"] # in site order for forts
+        realms_gem = ["Ignis", "Alsius", "Syrtis"] # in site order for gems images (gem_X.png)
         forts_names = []
         forts_icons = []
+
+        page = BeautifulSoup(response.read(), "html.parser")
 
         headers = page.findAll("div", {"class" : "war-status-realm"})
         i = 0
@@ -120,7 +120,8 @@ def main():
         recovered_gems = {}
         i = 0
         for gem in status["gems"]:
-            if "gems" not in old_status or (gem != old_status["gems"][i] and not "gem_0" in gem):
+            if "gems" not in old_status or len(old_status["gems"]) == 0 \
+               or (gem != old_status["gems"][i] and not "gem_0" in gem):
                 status["gems_changed"] = True
                 gem_location = gem.replace("gem_", "")
                 gem_location = gem_location.replace(".png", "")
