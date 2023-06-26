@@ -98,12 +98,10 @@ def main():
                 if "events_log" in old_status:
                     events_log = old_status["events_log"]
 
-        # Fetching the data from NGE's website failed in a way or another.
-        # Bail out, but not without keeping the event log
+        # Fetching the data from NGE's website failed in a way or another. Bail out.
         if len(failure) != 0:
+            status = old_status
             status["failed"] = failure
-            if "events_log" in old_status:
-                status["events_log"] = old_status["events_log"]
             with open(outfile, "w") as jsonfile:
                 json.dump(status, jsonfile)
             sys.exit(1)
