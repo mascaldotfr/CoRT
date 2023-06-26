@@ -80,6 +80,12 @@ async function display_stat() {
 
 	let infos = data.splice(0, 1)[0];
 	$("#ws-last-updated").text(ts_to_human(infos["generated"]));
+	let now = new Date();
+	if (now.getTime() / 1000 - infos["generated"] > 3 * 3600) {
+		$("#ws-info-error").html(`<b>Nothing happened since the last 3 hours,
+			<a href="https://championsofregnum.com/index.php?l=1&sec=3">
+			NGE's page</a> is probably not working.</b>`);
+	}
 
 
 	for (let report = 0; report < data.length; report++) {
