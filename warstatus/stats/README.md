@@ -11,7 +11,7 @@ split sqlite3 from the main python distribution; in such case you'll need the
 `python3-sqlite` (or whatever it is called) package. You don't have any extra
 step, as `../warstatus.py` with do the necessary to make it work.
 
-The "API endpoint" URL is: https://hail.thebus.top/cortdata/warstatus/stats/statistics.txt
+The "API endpoint" URL is: https://hail.thebus.top/cortdata/warstatus/stats/statistics.json
 The full database is publicly available at: https://hail.thebus.top/cortdata/warstatus/stats/events.sqlite
 
 As the time of writing this, this is in beta stage. Due to uncertainity, I

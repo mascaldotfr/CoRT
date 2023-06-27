@@ -9,7 +9,7 @@ status and map URLs in a file as JSON (see `outfile` in `warstatus.py`).
 
 The output is meant to placed in a file reachable by a webserver.
 
-You can see it in action at https://hail.thebus.top/cortdata/warstatus/warstatus.txt --
+You can see it in action at https://hail.thebus.top/cortdata/warstatus/warstatus.json --
 informations are refreshed every minute.
 
 The `stats` directory includes the code used to generate the WZ statistics, and

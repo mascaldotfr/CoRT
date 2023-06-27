@@ -109,7 +109,7 @@ async function display_wz(force_display) {
 		return;
 	}
 	try {
-		var data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/warstatus.txt");
+		var data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/warstatus.json");
 		$("#wz-info-error").empty();
 		let dt = new Date();
 		let datetime = dt.toLocaleTimeString(undefined,

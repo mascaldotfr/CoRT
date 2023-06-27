@@ -24,7 +24,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 # File where to dump the status
-outfile = "warstatus.txt"
+outfile = "warstatus.json"
 base_url = "https://championsofregnum.com/"
 
 # return just the filename part of the url

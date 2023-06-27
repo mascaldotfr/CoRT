@@ -22,7 +22,7 @@ import sys
 from timeit import default_timer as timer
 
 db_file = "stats/events.sqlite"
-outfile = "stats/statistics.txt"
+outfile = "stats/statistics.json"
 db_schema = """
 create table if not exists events (
     date integer not null,

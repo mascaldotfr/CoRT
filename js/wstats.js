@@ -66,7 +66,7 @@ function translate_fort(fort) {
 async function display_stat() {
 
 	try {
-		var data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/stats/statistics.txt");
+		var data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/stats/statistics.json");
 		$("#ws-info-error").empty();
 	}
 	catch (error) {
