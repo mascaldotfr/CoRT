@@ -187,10 +187,13 @@ def main():
 
         # Make statistics non mandatory
         try:
+            # Don't record stats if we're recovering from a NGE's page failure
+            if "failed" in old_status:
+                sys.exit(0)
             import stats.generate
         except Exception as e:
             print(e)
-            sys.exit();
+            sys.exit(1)
         stats.generate.statistics(status["events_log"])
 
 main()
