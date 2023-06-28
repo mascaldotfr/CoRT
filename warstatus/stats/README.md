@@ -84,8 +84,7 @@ for example.
      [...Two more realms...]
   }
  ],
- [...30 days report, same format...],
- [...90 days report, same format...]
+ [...30 days report, same format...]
 ]
 ```
 

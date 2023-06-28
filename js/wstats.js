@@ -75,7 +75,7 @@ async function display_stat() {
 	}
 
 	// sync with statistics.txt
-	let report_days = [7, 30, 90];
+	let report_days = [7, 30];
 	let realm_colors = {"Alsius": "blue", "Ignis": "red", "Syrtis": "green"};
 
 	let infos = data.splice(0, 1)[0];

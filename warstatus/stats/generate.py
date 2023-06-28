@@ -73,7 +73,7 @@ def statistics(events):
         sql.executemany("insert into events values(?, ?, ?, ?, ?)", insert_queries)
         conn.commit()
         full_report = [{"generated": int(datetime.now().timestamp())}]
-        for days in [7, 30, 90]:
+        for days in [7, 30]:
             reporter = Reporter(conn, days)
             full_report.append(reporter.generate_stats())
         end_time = timer()

@@ -142,6 +142,7 @@ def main():
             i += 1
 
         # Estimate a dragon wish. If two realms recovered gems during the same minute
+        print("recovered_gems => ", recovered_gems)
         wisher = ""
         if len(recovered_gems) == 2:
             realms_full_gem_recovery = 0
@@ -149,12 +150,14 @@ def main():
             for realm in recovered_gems:
                 if recovered_gems[realm] == 3:
                     realms_full_gem_recovery += 1
+            print("realms_full_gem_recovery => ", realms_full_gem_recovery)
             # If the two realms get all their gems back then deduce the wisher
             if realms_full_gem_recovery == 2:
                 potential_wishers = realms
                 for realm in potential_wishers:
                     if realm in recovered_gems:
                         potential_wishers.remove(realm)
+                    print("potential_wishers => ", potential_wishers)
                 wisher = potential_wishers[0]
                 # Record the wish, ensure it has the same structure as other
                 # events So stats.generate does not fail
