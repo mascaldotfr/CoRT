@@ -136,9 +136,9 @@ class Reporter:
             self.stats[r["realm"]]["forts"]["most_captured"]["count"] = r["count"]
 
         # Get count of invasions and last invasion by realm
-        self.sql.execute(f"""select  owner as realm, location, max(date) as date, count(name) as count
+        self.sql.execute(f"""select owner as realm, location, max(date) as date, count(name) as count
                              from events
-                             where type="fort" and owner != location
+                             where type = "fort" and owner != location
                              and name like "Great Wall of %"
                              and date > {self.startfrom}
                              group by owner
@@ -154,7 +154,7 @@ class Reporter:
         # Get the number of times a realm got invaded
         self.sql.execute(f"""select owner as realm, count(name) as count
                              from events
-                             where type="fort" and owner = location
+                             where type = "fort" and owner = location
                              and name like "Great Wall of %"
                              and date > {self.startfrom}
                              group by location;""")
@@ -167,7 +167,7 @@ class Reporter:
         # Get last gem stolen date and total count
         self.sql.execute(f"""select owner as realm, date, count(date) as count
                              from events
-                             where type="gem" and location != owner
+                             where type = "gem" and location != owner
                              and date > {self.startfrom}
                              group by owner
                              order by max(date);""")
@@ -179,7 +179,7 @@ class Reporter:
         # Get lost gems count
         self.sql.execute(f"""select owner as realm, count(rowid) as count
                              from events
-                             where type="gem" and  location == owner
+                             where type = "gem" and  location = owner
                              and date > {self.startfrom}
                              group by owner;""")
         for r in self.sql.fetchall():
@@ -190,7 +190,7 @@ class Reporter:
         # Get last dragon wish and wishes count
         self.sql.execute(f"""select location as realm, count(rowid) as count, date
                              from events
-                             where type="wish"
+                             where type = "wish"
                              and date > {self.startfrom}
                              group by location
                              order by max(date);""")
