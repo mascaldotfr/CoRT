@@ -154,7 +154,7 @@ def main():
             # If the two realms get all their gems back then deduce the wisher
             if realms_full_gem_recovery == 2:
                 potential_wishers = realms
-                for realm in potential_wishers:
+                for realm in potential_wishers.copy():
                     if realm in recovered_gems:
                         potential_wishers.remove(realm)
                     print("potential_wishers => ", potential_wishers)
