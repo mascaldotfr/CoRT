@@ -1,4 +1,4 @@
-warstatus/*.txt
-warstatus/stats/*.txt
+warstatus/*.json
+warstatus/stats/*.json
 warstatus/stats/*.sqlite
 __pycache__**
