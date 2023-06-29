@@ -14,19 +14,20 @@ step, as `../warstatus.py` with do the necessary to make it work.
 The "API endpoint" URL is: https://hail.thebus.top/cortdata/warstatus/stats/statistics.json
 The full database is publicly available at: https://hail.thebus.top/cortdata/warstatus/stats/events.sqlite
 
-As the time of writing this, this is in beta stage. Due to uncertainity, I
-can't give a refresh interval, because i will have to assert performance once
-the database is stuffed, and act accordingly. But according to benchmarks, a
-run would last 1 second in a few years (from ~15ms currently), if there is an
-average of 250 events a day.
-
-Relics events are not recorded.
 
 ## Database format
 
 This is a carbon copy of the warstatus events array. Please see `warstatus/README.md`.
 
-## Reponse format
+While the database could be optimized, according to benchmarks, each year of
+events (~100000 events) is leading to an additional 300ms execution time, and a
+database size increase of 4MB. Given the linearity of the increase, that's 3
+seconds in 10 years. Which is acceptable, given that the script has at worst 1
+minute to finish. All this on a cheap single core SSD VPS with 512MB of RAM.
+
+Relics events are not recorded.
+
+## Response format
 
 Note that the frontend code exploiting the JSON report `/js/wstats.js` expects
 the database has been populated since at least 24 hours and all events at least
