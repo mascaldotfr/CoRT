@@ -93,6 +93,7 @@
           "cast":0.5,
           "gcd":"Short",
           "cooldown":40.0,
+          "range": 20,
           "duration":[1,2,3,4,5],
           "debuffs":{
             "Immobilize":true
