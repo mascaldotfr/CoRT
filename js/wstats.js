@@ -92,7 +92,6 @@ function show_graphs(data, selector) {
 			axisX: {
 				labelInterpolationFnc: function (value) {
 					let hour = Number(value.substring(0,2));
-					console.log(hour);
 					if (hour % 2 == 0 && hour >= 1 && hour <= 22) {
 						return hour;
 					}
