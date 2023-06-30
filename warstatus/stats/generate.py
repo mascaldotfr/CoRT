@@ -73,9 +73,12 @@ def statistics(events):
         sql.executemany("insert into events values(?, ?, ?, ?, ?)", insert_queries)
         conn.commit()
         full_report = [{"generated": int(datetime.now().timestamp())}]
-        for days in [7, 30]:
-            reporter = Reporter(conn, days)
+        days = [7, 30]
+        for day in days:
+            reporter = Reporter(conn, day)
             full_report.append(reporter.generate_stats())
+            if day == max(days):
+                full_report[0]["activity"] = reporter.get_activity()
         end_time = timer()
         full_report[0]["generation_time"] = end_time - start_time;
         with open(outfile, "w") as jsonfile:
@@ -95,6 +98,21 @@ class Reporter:
         self.startfrom = datetime.now() - timedelta(days=lastxdays)
         self.startfrom = self.startfrom.timestamp()
         self.stats = {"Alsius": {}, "Ignis": {}, "Syrtis": {}}
+
+    def get_activity(self):
+        activity = {"Alsius": [0] * 24, "Ignis": [0] * 24, "Syrtis": [0] * 24}
+        self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
+                             count(rowid) as count
+                             from events
+                             where type = "fort" and owner != location
+                             and date > {self.startfrom}
+                             group by owner, time
+                             order by time;""")
+        for r in self.sql.fetchall():
+            print(r["time"], r["owner"], r["count"], len(activity[r["owner"]]))
+            activity[r["owner"]][int(r["time"])] = r["count"]
+        return activity
+
 
     def generate_stats(self):
         # Total forts captures per realm

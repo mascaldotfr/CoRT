@@ -63,6 +63,49 @@ function translate_fort(fort) {
 	return _(fort_type, fort_name)
 }
 
+function show_activity_graph(data) {
+	let realms = ["Alsius", "Ignis", "Syrtis"];
+	// skip 00:00 and 23:00 as it overflows
+	let hours = [""];
+	for (let i = 1; i < 23; i++) {
+		let hour = String(i).padStart(2, "0");
+		hours.push(`${hour}:00`);
+	}
+	let dataset = {
+		labels: hours,
+		series: [
+			  data[realms[0]],
+			  data[realms[1]],
+			  data[realms[2]]
+		]
+	};
+	let options = {
+		fullWidth: true,
+		axisY: {
+			onlyInteger: true,
+		},
+		axisX: {
+		}
+	};
+	let responsive = [
+		["screen and (max-width: 800px)", {
+			axisX: {
+				labelInterpolationFnc: function (value) {
+					let hour = Number(value.substring(0,2));
+					console.log(hour);
+					if (hour % 2 == 0 && hour >= 1 && hour <= 22) {
+						return hour;
+					}
+					else {
+						return "";
+					}
+				}
+			}
+		}]
+	];
+	new Chartist.Line('#ws-activity-chart', dataset, options, responsive);
+}
+
 async function display_stat() {
 
 	try {
@@ -167,6 +210,7 @@ async function display_stat() {
 			$(`#ws-${days}d-${realm.toLowerCase()}`).append(template);
 		}
 	}
+	show_activity_graph(infos["activity"]);
 }
 
 $(document).ready(function() {

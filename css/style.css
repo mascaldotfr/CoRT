@@ -1,3 +1,11 @@
+:root {
+	--red: #ffa1a7;
+	--blue: #9ccdf9;
+	--green: #7de384;
+	--purple: #bd93ff;
+	--faded: #ccc;
+}
+
 body {
 	background-color: #212121;
 	color: white;
@@ -76,11 +84,11 @@ h1 {
 .bugnum {
 	text-align: center;
 }
-.red { color: #ffa1a7; }
-.blue { color: #9ccdf9; }
-.green { color: #00ff11; }
-.purple { color: #bd93ff; }
-.faded { color: #ccc; }
+.red { color: var(--red); }
+.blue { color: var(--blue); }
+.green { color: var(--green); }
+.purple { color: var(--purple); }
+.faded { color: var(--faded); }
 .center { text-align:center; }
 .bold { font-weight: bold; }
 
@@ -363,7 +371,27 @@ h1 {
 #ws-container td:nth-child(even) {
 	padding-left: 1em;
 }
-
+#ws-activity-chart .ct-chart-line {
+	min-height: 300px;
+}
+#ws-activity-chart .ct-series-a * {
+	stroke: var(--blue);
+}
+#ws-activity-chart .ct-series-b * {
+	stroke: var(--red);
+}
+#ws-activity-chart .ct-series-c * {
+	stroke: var(--green);
+}
+#ws-activity-chart .ct-label, #ws-activity-chart .ct-axis {
+	color: white;
+}
+#ws-activity-chart .ct-label {
+	margin-left: -1.4em;
+}
+#ws-activity-chart .ct-label, #ws-activity-chart .ct-grid {
+	stroke: var(--faded);
+}
 
 /* ADAPTATIVE VIEWS */
 
