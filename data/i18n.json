@@ -402,7 +402,7 @@ __i18n__ = {
 		"de": "vor %s"
 	},
 	"Enemy fortifications captured per hour (total, UTC time, last %s days)": {
-		"fr": "Fortications ennemies capturées par heure (total, heure UTC, %s derniers jours",
+		"fr": "Fortications ennemies capturées par heure (total, heure UTC, %s derniers jours)",
 		"es": "Fortificaciones enemigas capturadas por hora (total, hora UTC, últimos %s días)",
 		"de": "Eroberte feindliche Befestigungen pro Stunde (insgesamt, UTC-Zeit, letzte %s Tage)"
 	}
