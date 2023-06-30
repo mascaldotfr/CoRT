@@ -373,6 +373,7 @@ h1 {
 }
 .ws-chart .ct-chart-line {
 	min-height: 300px;
+	margin-top: 1.4em;
 }
 .ws-chart .ct-series-a * {
 	stroke: var(--blue);
