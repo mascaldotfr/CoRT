@@ -63,7 +63,7 @@ function translate_fort(fort) {
 	return _(fort_type, fort_name)
 }
 
-function show_activity_graph(data) {
+function show_graphs(data, selector) {
 	let realms = ["Alsius", "Ignis", "Syrtis"];
 	// skip 00:00 and 23:00 as it overflows
 	let hours = [""];
@@ -103,7 +103,7 @@ function show_activity_graph(data) {
 			}
 		}]
 	];
-	new Chartist.Line('#ws-activity-chart', dataset, options, responsive);
+	new Chartist.Line(selector, dataset, options, responsive);
 }
 
 async function display_stat() {
@@ -210,7 +210,8 @@ async function display_stat() {
 			$(`#ws-${days}d-${realm.toLowerCase()}`).append(template);
 		}
 	}
-	show_activity_graph(infos["activity"]);
+	show_graphs(infos["activity"], "#ws-activity-chart");
+	show_graphs(infos["invasions"], "#ws-invasion-chart");
 }
 
 $(document).ready(function() {

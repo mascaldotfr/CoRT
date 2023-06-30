@@ -79,6 +79,7 @@ def statistics(events):
             full_report.append(reporter.generate_stats())
             if day == max(days):
                 full_report[0]["activity"] = reporter.get_activity()
+                full_report[0]["invasions"] = reporter.get_invasions()
         end_time = timer()
         full_report[0]["generation_time"] = end_time - start_time;
         with open(outfile, "w") as jsonfile:
@@ -109,9 +110,22 @@ class Reporter:
                              group by owner, time
                              order by time;""")
         for r in self.sql.fetchall():
-            print(r["time"], r["owner"], r["count"], len(activity[r["owner"]]))
             activity[r["owner"]][int(r["time"])] = r["count"]
         return activity
+
+    def get_invasions(self):
+        invasions = {"Alsius": [0] * 24, "Ignis": [0] * 24, "Syrtis": [0] * 24}
+        self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
+                             count(rowid) as count
+                             from events
+                             where type = "fort" and location != owner
+                             and name like "Great Wall of %"
+                             and date > {self.startfrom}
+                             group by owner, time
+                             order by time;""")
+        for r in self.sql.fetchall():
+            invasions[r["owner"]][int(r["time"])] = r["count"]
+        return invasions
 
 
     def generate_stats(self):

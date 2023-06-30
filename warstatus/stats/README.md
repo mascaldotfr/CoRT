@@ -57,6 +57,7 @@ for example.
       generated: "timestamp of generation",
       generation_time: "duration (s) of reports generation",
       activity: { // number of enemy forts captured by realm and UTC hour }
+      invasions: { // number of invasions by realm and UTC hour }
     }
   ],
   [{ # 7 days report

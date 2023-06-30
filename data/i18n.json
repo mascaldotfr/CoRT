@@ -401,9 +401,14 @@ __i18n__ = {
 		"es": "hace %s",
 		"de": "vor %s"
 	},
-	"Enemy fortifications captured per hour (total, UTC time, last %s days)": {
-		"fr": "Fortications ennemies capturées par heure (total, heure UTC, %s derniers jours)",
-		"es": "Fortificaciones enemigas capturadas por hora (total, hora UTC, últimos %s días)",
-		"de": "Eroberte feindliche Befestigungen pro Stunde (insgesamt, UTC-Zeit, letzte %s Tage)"
+	"Total sum of enemy fortifications captured per hour (UTC) and realm on the last %s days": {
+		"fr": "Somme totale des fortications ennemies capturées par heure (UTC) et royaume les %s derniers jours",
+		"es": "Suma total de fortificaciones enemigas capturadas por hora (UTC) y reino en los últimos %s días",
+		"de": "Gesamtsumme der in den letzten %s Tagen pro Stunde und Realm (UTC-Zeit) eroberten feindlichen Befestigungen"
+	},
+	"Total sum of invasions per hour (UTC) on the last %s days": {
+		"fr": "Somme totale des invasions par heure (UTC) les %s derniers jours",
+		"es": "Suma total de invasiones por hora (UTC) en los últimos %s días",
+		"de": "Gesamtsumme der Invasionen pro Stunde (UTC) an den letzten %s Tagen"
 	}
 }

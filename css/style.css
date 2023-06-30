@@ -371,25 +371,25 @@ h1 {
 #ws-container td:nth-child(even) {
 	padding-left: 1em;
 }
-#ws-activity-chart .ct-chart-line {
+.ws-chart .ct-chart-line {
 	min-height: 300px;
 }
-#ws-activity-chart .ct-series-a * {
+.ws-chart .ct-series-a * {
 	stroke: var(--blue);
 }
-#ws-activity-chart .ct-series-b * {
+.ws-chart .ct-series-b * {
 	stroke: var(--red);
 }
-#ws-activity-chart .ct-series-c * {
+.ws-chart .ct-series-c * {
 	stroke: var(--green);
 }
-#ws-activity-chart .ct-label, #ws-activity-chart .ct-axis {
+.ws-chart .ct-label, .ws-chart .ct-axis {
 	color: white;
 }
-#ws-activity-chart .ct-label {
+.ws-chart .ct-label {
 	margin-left: -1.4em;
 }
-#ws-activity-chart .ct-label, #ws-activity-chart .ct-grid {
+.ws-chart .ct-label, .ws-chart .ct-grid {
 	stroke: var(--faded);
 }
 
