@@ -1,11 +1,13 @@
 # WARSTATUS
 
-There is no such things as an API for the war status, so that part has to be
-run server side for CoRT, due to NGE not allowing cross origin request
+There is no such things as a public API for the war status, so that part has to
+be run server side for CoRT, due to NGE not allowing cross origin request
 ([CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)).
 
 `warstatus.py` fetches the official war status page and dump the gems/forts
-status and map URLs in a file as JSON (see `outfile` in `warstatus.py`).
+status in a file as JSON (see `outfile` in `warstatus.py`). The official map
+isn't fetched, because it has a static URL and CoRT actually draws one using
+HTML5 canvas for speed and bandwidth economy (NGE's site is slow).
 
 The output is meant to placed in a file reachable by a webserver.
 
@@ -13,12 +15,15 @@ You can see it in action at https://hail.thebus.top/cortdata/warstatus/warstatus
 informations are refreshed every minute.
 
 The `stats` directory includes the code used to generate the WZ statistics, and
-has its own README.
+has its own README, but also needs `warstatus.py` to work in order to generate
+statistics.
 
 ## Requirements
 
 - Python 3 (with beautifulsoup4; `python3-bs4` in debian packages)
-- A server running Linux (it will work on Windows through different means but I don't use it)
+- A server running Linux (it will work on Windows through different means but I
+  don't use it), performance and storage doesn't matter (it currently runs on
+  1CPU/512MB RAM/10G SSD VPS!)
 - A web server that is able to serve static files and where CORS is enabled
   (see https://enable-cors.org/server.html), unless you serve CoRT and this
   "API endpoint" (*ahem*) on the same domain
@@ -41,7 +46,7 @@ That's it.
 
 ## Response Format
 
-It's advised to read /js/wz.js as well for exploitation. Clearly the format has
+It's advised to read `/js/wz.js` as well for exploitation. Clearly the format has
 been optimized for display on the site and try to play well with NGE inconsistent
 website code, sacrificing a bit of the consistency.
 

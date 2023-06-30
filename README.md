@@ -7,11 +7,14 @@ some outdated mechanics.
 
 This is a (simpler) knockoff of the regnumsentinel website trainer, this one
 will be alive as long as GitHub exists and is free software. On top of that,
-there are countdown pages for bosses, BZ and WZ statuses.
+there are countdown pages for bosses, BZ and WZ statuses, and statistics.
 
-It just requires a webserver serving static files to run, everything is run
-client side, with the exception of the War Status (see the `warstatus`
-directory) but it can be replaced by a link to NGE's official page.
+The website just requires a webserver serving static files to run, everything
+is run client side, with the exception of the WZ status and statistics (see the
+`warstatus` directory) that can partly be replaced by a link to NGE's official
+page, and anonymous setup collection (see the `collect` directory) which by
+default only works for https://mascaldotfr.github.io and can be completely
+skipped.
 
 ## Known issues
 
@@ -21,7 +24,7 @@ directory) but it can be replaced by a link to NGE's official page.
 * shared urls are long, this could be fixed by using an url shortener api, but
   free plans may be quickly limit rated and they're not permanent. I don't want
   to have a database server, since it then would require a separate server and
-  a domain, and could go down like regnumsentinel.
+  a domain for such a feature, that could go down like regnumsentinel.
 
 ## Setting a local webserver
 
