@@ -31,7 +31,12 @@ __i18n__ = {
 		"es": "Estadísticas de la ZG",
 		"de": "WZ-Statistik"
 	},
-	"Armor Calculator":
+	"Trainer statistics": {
+		"fr": "Statistiques de l'entraîneur",
+		"es": "Estadísticas del entrenador",
+		"de": "Skilltrainer-Statistik"
+	},
+	"Armor calculator":
 	{
 		"fr": "Calculateur d'armure",
 		"es": "Calculadora de armadura",

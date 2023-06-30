@@ -433,7 +433,6 @@ h1 {
 	#menu select {
 		padding: .5em;
 		font-size: 1em;
-		min-width: 250px;
 		text-align: center;
 	}
 	#menu a:hover {
