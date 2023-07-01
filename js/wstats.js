@@ -155,10 +155,6 @@ async function display_stat() {
 					<td><b>${_("Last gem stolen")}</b></td>
 					<td>${ts_to_human(r.gems.stolen)}</td>
 					</tr>`;
-				last_wish = `<tr>
-					<td><b>${_("Last dragon wish")}</b></td>
-					<td>${ts_to_human(r.wishes.last)}</td>
-					</tr>`;
 			}
 			let template = `
 				<h3 class="${realm_colors[realm]}">${realm}</h3>
@@ -202,7 +198,10 @@ async function display_stat() {
 					<td><b>${_("Dragon wishes")}</b></td>
 					<td>${naify(r.wishes.count)}</td>
 				</tr>
-				${last_wish}
+				<tr>
+					<td><b>${_("Last dragon wish")}</b></td>
+					<td>${ts_to_human(r.wishes.last)}</td>
+				</tr>
 				</table>
 			`;
 			$(`#ws-${days}d-${realm.toLowerCase()}`).empty();
