@@ -372,8 +372,6 @@ h1 {
 	padding-left: 1em;
 }
 .ws-chart .ct-chart-line {
-	margin-top: 1.4em;
-	margin-bottom: 3em;
 	min-height: 250px;
 }
 .ws-chart .ct-series-a * {

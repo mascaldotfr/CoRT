@@ -81,8 +81,10 @@ function show_graphs(data, selector, onlyinteger=true) {
 	};
 	let options = {
 		fullWidth: true,
+		chartPadding: {left: 15, top: 30, bottom: 0},
 		axisY: {
 			onlyInteger: onlyinteger,
+			offset: 50
 		},
 		axisX: {
 		}
