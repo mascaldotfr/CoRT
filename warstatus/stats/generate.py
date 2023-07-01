@@ -110,6 +110,7 @@ class Reporter:
                              and date > {self.startfrom};""")
         sample_days = self.sql.fetchone()["days"]
 
+        # Captured forts
         self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
                              cast(count(rowid) as float) / {sample_days} as average
                              from events
@@ -119,6 +120,18 @@ class Reporter:
                              order by time;""")
         for r in self.sql.fetchall():
             activity[r["owner"]][int(r["time"])] = r["average"]
+
+        # Recovered forts
+        self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
+                             cast(count(rowid) as float) / {sample_days} as average
+                             from events
+                             where type = "fort" and owner = location
+                             and date > {self.startfrom}
+                             group by owner, time
+                             order by time;""")
+        for r in self.sql.fetchall():
+            activity[r["owner"]][int(r["time"])] -= r["average"]
+
         return activity
 
     def get_invasions(self):
@@ -132,6 +145,7 @@ class Reporter:
                              and date > {self.startfrom};""")
         sample_days = self.sql.fetchone()["days"]
 
+        # Invasion
         self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
                              cast(count(rowid) as float) / {sample_days} as average
                              from events
@@ -142,6 +156,19 @@ class Reporter:
                              order by time;""")
         for r in self.sql.fetchall():
             invasions[r["owner"]][int(r["time"])] = r["average"]
+
+        # Invaded
+        self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
+                             cast(count(rowid) as float) / {sample_days} as average
+                             from events
+                             where type = "fort" and location = owner
+                             and name like "Great Wall of %"
+                             and date > {self.startfrom}
+                             group by owner, time
+                             order by time;""")
+        for r in self.sql.fetchall():
+            invasions[r["owner"]][int(r["time"])] -= r["average"]
+
         return invasions
 
 

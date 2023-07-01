@@ -401,14 +401,14 @@ __i18n__ = {
 		"es": "hace %s",
 		"de": "vor %s"
 	},
-	"Average enemy fortifications captured per hour (UTC) and realm on the last %s days": {
-		"fr": "Moyenne des fortifications ennemies capturées par heure (UTC) et royaume les %s derniers jours",
-		"es": "Promedio de las fortificaciones enemigas capturadas por hora (UTC) y reino en los últimos %s días",
-		"de": "Durchschnitt der in den letzten %s Tagen pro Stunde und Realm (UTC-Zeit) eroberten feindlichen Befestigungen"
+	"Net average of fortifications captured per hour (UTC) and realm on the last %s days": {
+		"fr": "Moyenne nette des fortifications ennemies capturées par heure (UTC) et royaume les %s derniers jours",
+		"es": "Promedio neto de las fortificaciones enemigas capturadas por hora (UTC) y reino en los últimos %s días",
+		"de": "Nettodurchschnitt der in den letzten %s Tagen pro Stunde und Realm (UTC-Zeit) eroberten feindlichen Befestigungen"
 	},
-	"Average invasions per hour (UTC) on the last %s days": {
-		"fr": "Moyenne des invasions par heure (UTC) les %s derniers jours",
-		"es": "Promedio de las invasiónes por hora (UTC) en los últimos %s días",
-		"de": "Durchschnitt der Invasionen pro Stunde (UTC) an den letzten %s Tagen"
+	"Net average of invasions per hour (UTC) on the last %s days": {
+		"fr": "Moyenne nette des invasions par heure (UTC) les %s derniers jours",
+		"es": "Promedio neto de las invasiónes por hora (UTC) en los últimos %s días",
+		"de": "Nettodurchschnitt der Invasionen pro Stunde (UTC) an den letzten %s Tagen"
 	}
 }
