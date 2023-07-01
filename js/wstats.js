@@ -63,7 +63,7 @@ function translate_fort(fort) {
 	return _(fort_type, fort_name)
 }
 
-function show_graphs(data, selector) {
+function show_graphs(data, selector, onlyinteger=true) {
 	let realms = ["Alsius", "Ignis", "Syrtis"];
 	// skip 00:00 and 23:00 as it overflows
 	let hours = [""];
@@ -82,7 +82,7 @@ function show_graphs(data, selector) {
 	let options = {
 		fullWidth: true,
 		axisY: {
-			onlyInteger: true,
+			onlyInteger: onlyinteger,
 		},
 		axisX: {
 		}
@@ -209,7 +209,7 @@ async function display_stat() {
 		}
 	}
 	show_graphs(infos["activity"], "#ws-activity-chart");
-	show_graphs(infos["invasions"], "#ws-invasion-chart");
+	show_graphs(infos["invasions"], "#ws-invasion-chart", false);
 }
 
 $(document).ready(function() {

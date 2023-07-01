@@ -372,8 +372,8 @@ h1 {
 	padding-left: 1em;
 }
 .ws-chart .ct-chart-line {
-	min-height: 300px;
 	margin-top: 1.4em;
+	min-height: 250px;
 }
 .ws-chart .ct-series-a * {
 	stroke: var(--blue);
