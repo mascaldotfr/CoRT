@@ -34,13 +34,6 @@ Relics events are not recorded.
 
 ## Response format
 
-Note that the frontend code exploiting the JSON report `/js/wstats.js` expects
-the database has been populated since at least 24 hours and all events at least
-occurred once in order to have some visible results.
-
-Invasions and gems events may not be present during the first runs in the
-following format.
-
 A gem steal means that a realm (ex: Syrtis) has stolen a gem from another realm
 (ex: Ignis). If Ignis recovered its own gem from Syrtis, it's not counted.
 
@@ -67,8 +60,8 @@ for example.
 	   total: "Total number of captured and recovered forts",
 	   recovered: "Total number of recovered forts"
 	   most_captured: {
-	     name: "Name of the most captured fort",
-	     count: "Number of time said fort has been captured"
+	       name: "Name of the most captured fort",
+	       count: "Number of time said fort has been captured"
 	     }
 	  },
 	   invasions: {
@@ -80,9 +73,11 @@ for example.
 	     }
 	   },
 	   gems: {
-	   	stolen: "Timestamp of the last gem steal",
-		count: "Number of gems stolen",
-        lost: "Number of lost gems"
+         stolen: {
+           last: "Timestamp of the last gem steal",
+		   count: "Number of gems stolen"
+         },
+         lost: "Number of lost gems"
        },
        wishes: {
          last: "Timestamp of the last dragon wish",

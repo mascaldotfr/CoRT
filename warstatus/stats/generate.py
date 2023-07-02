@@ -149,6 +149,39 @@ class Reporter:
 
     def generate_stats(self):
 
+        for realm in self.stats:
+            self.stats[realm] = {
+                "forts": {
+                    "total": 0,
+                    "recovered": 0,
+                    "captured": 0,
+                    "most_captured": {
+                        "name": None,
+                        "count": 0
+                    }
+                },
+                "invasions": {
+                    "invaded": {
+                        "count": 0
+                    },
+                    "last": {
+                        "location": None,
+                        "date": None
+                    }
+                },
+                "gems": {
+                    "stolen": {
+                        "last": None,
+                        "count": 0
+                    },
+                    "lost": 0
+                },
+                "wishes": {
+                    "count": 0,
+                    "last": None
+                }
+            }
+
         def query_fort_events(condition):
             return f"""select owner as realm, count(rowid) as count
                        from events
@@ -160,8 +193,6 @@ class Reporter:
         for param in [ ["captured", "!="], ["recovered", "="] ]:
             self.sql.execute(query_fort_events(param[1]))
             for r in self.sql.fetchall():
-                if not "forts" in self.stats[r["realm"]]:
-                    self.stats[r["realm"]]["forts"] = {}
                 self.stats[r["realm"]]["forts"][param[0]] = r["count"]
 
         # Deduce total forts captures
@@ -179,7 +210,6 @@ class Reporter:
         for r in self.sql.fetchall():
             if "most_captured" in self.stats[r["realm"]]:
                 continue
-            self.stats[r["realm"]]["forts"]["most_captured"] = {}
             self.stats[r["realm"]]["forts"]["most_captured"]["name"] = r["name"]
             self.stats[r["realm"]]["forts"]["most_captured"]["count"] = r["count"]
 
@@ -191,9 +221,6 @@ class Reporter:
                              and date > {self.startfrom}
                              group by owner;""")
         for r in self.sql.fetchall():
-            if "invasions" not in self.stats[r["realm"]]:
-                self.stats[r["realm"]]["invasions"] = {}
-            self.stats[r["realm"]]["invasions"]["last"] = {}
             self.stats[r["realm"]]["invasions"]["last"]["location"] = r["location"]
             self.stats[r["realm"]]["invasions"]["last"]["date"] = r["date"]
             self.stats[r["realm"]]["invasions"]["count"] = r["count"]
@@ -206,9 +233,6 @@ class Reporter:
                              and date > {self.startfrom}
                              group by location;""")
         for r in self.sql.fetchall():
-            if "invasions" not in self.stats[r["realm"]]:
-                self.stats[r["realm"]]["invasions"] = {}
-            self.stats[r["realm"]]["invasions"]["invaded"] = {}
             self.stats[r["realm"]]["invasions"]["invaded"]["count"] = r["count"]
 
         # Get last gem stolen date and total count
@@ -218,9 +242,8 @@ class Reporter:
                              and date > {self.startfrom}
                              group by owner;""")
         for r in self.sql.fetchall():
-            self.stats[r["realm"]]["gems"] = {}
-            self.stats[r["realm"]]["gems"]["stolen"] = r["date"]
-            self.stats[r["realm"]]["gems"]["count"] = r["count"]
+            self.stats[r["realm"]]["gems"]["stolen"]["last"] = r["date"]
+            self.stats[r["realm"]]["gems"]["stolen"]["count"] = r["count"]
 
         # Get lost gems count
         self.sql.execute(f"""select owner as realm, count(rowid) as count
@@ -229,8 +252,6 @@ class Reporter:
                              and date > {self.startfrom}
                              group by owner;""")
         for r in self.sql.fetchall():
-            if "gems" not in self.stats[r["realm"]]:
-                self.stats[r["realm"]]["gems"] = {}
             self.stats[r["realm"]]["gems"]["lost"] = r["count"]
 
         # Get last dragon wish and wishes count
@@ -241,8 +262,6 @@ class Reporter:
                              and date > {self.startfrom}
                              group by location;""")
         for r in self.sql.fetchall():
-            if "wishes" not in self.stats[r["realm"]]:
-                self.stats[r["realm"]]["wishes"] = {}
             self.stats[r["realm"]]["wishes"]["last"] = r["date"]
             self.stats[r["realm"]]["wishes"]["count"] = r["count"]
 

@@ -16,7 +16,7 @@
  */
 
 function ts_to_human(ts) {
-	if (ts === undefined)
+	if (ts === null || ts == 0)
 		return "N/A";
 
 	let then = new Date(ts * 1000);
@@ -38,9 +38,9 @@ function ts_to_human(ts) {
 	return _("%s ago", output);
 }
 
-// undefined => N/A or 0
+// undefined / null => N/A or 0
 function naify(value, failover="0") {
-	if (value === undefined)
+	if (value === null || value === undefined)
 		return failover;
 	else
 		return value;
@@ -49,6 +49,8 @@ function naify(value, failover="0") {
 // Create translatable strings according to english order of words
 // XXX Beware, not exactly the same a the wz status one
 function translate_fort(fort) {
+	if (fort === null)
+		return "N/A";
 	let words = fort.split(" ");
 	let fort_name;
 	let fort_type;
@@ -137,16 +139,9 @@ async function display_stat() {
 
 		for (let realm in data[report]) {
 			let r = data[report][realm];
-			// Create possible missing base entries
-			for (let item of ["gems", "wishes", "forts", "invasions"]) {
-				if (!(item in r)) {
-					r[item] = {};
-				}
-			}
 			// Hide "last" entries out of the first 7 days report
 			let last_invasion = "";
 			let last_gem = "";
-			let last_wish = "";
 			if (report == 0) {
 				last_invasion = `<tr>
 					<td><b>${_("Last invasion")}</b></td>
@@ -155,7 +150,7 @@ async function display_stat() {
 					</tr>`;
 				last_gem = `<tr>
 					<td><b>${_("Last gem stolen")}</b></td>
-					<td>${ts_to_human(r.gems.stolen)}</td>
+					<td>${ts_to_human(r.gems.stolen.last)}</td>
 					</tr>`;
 			}
 			let template = `
@@ -189,7 +184,7 @@ async function display_stat() {
 				</tr>
 				<tr>
 					<td><b>${_("Stolen gems")}</b></td>
-					<td>${naify(r.gems.count)}</td>
+					<td>${naify(r.gems.stolen.count)}</td>
 				</tr>
 				${last_gem}
 				<tr>
