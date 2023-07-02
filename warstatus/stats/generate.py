@@ -55,7 +55,7 @@ def statistics(events):
             sys.exit(1)
 
     insert_queries = []
-    sql.execute("select max(date) from events;")
+    sql.execute("select max(date) from events limit 1;")
     latest_recorded_event = sql.fetchone()[0]
     if latest_recorded_event == None:
         latest_recorded_event = 0 # the db is empty
@@ -87,10 +87,6 @@ def statistics(events):
 
 
 
-
-
-
-
 class Reporter:
 
     def __init__(self, conn, lastxdays):
@@ -99,103 +95,79 @@ class Reporter:
         self.startfrom = datetime.now() - timedelta(days=lastxdays)
         self.startfrom = self.startfrom.timestamp()
         self.stats = {"Alsius": {}, "Ignis": {}, "Syrtis": {}}
+        self.sample_days = None
 
-    def get_activity(self):
-        activity = {"Alsius": [0] * 24, "Ignis": [0] * 24, "Syrtis": [0] * 24}
-
+    def get_oldest_event(self):
         # Ensure proper average value if we've less than self.startfrom days of data
         self.sql.execute(f"""select (unixepoch("now") - min(date)) / (24 * 3600) as days
                              from events
-                             where type = "fort"
-                             and date > {self.startfrom};""")
-        sample_days = self.sql.fetchone()["days"]
+                             where date > {self.startfrom};""")
+        self.sample_days = self.sql.fetchone()["days"]
 
-        # Captured forts
-        self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
-                             cast(count(rowid) as float) / {sample_days} as average
-                             from events
-                             where type = "fort" and owner != location
-                             and date > {self.startfrom}
-                             group by owner, time
-                             order by time;""")
-        for r in self.sql.fetchall():
-            activity[r["owner"]][int(r["time"])] = r["average"]
+    def get_activity(self):
+        activity = {"Alsius": [0] * 24, "Ignis": [0] * 24, "Syrtis": [0] * 24}
+        if self.sample_days is None:
+            self.get_oldest_event()
+        def query(condition, sign=""):
+            return f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
+                       {sign} cast(count (rowid) as float) / {self.sample_days} as average
+                       from events
+                       where type = "fort" and owner {condition} location
+                       and date > {self.startfrom}
+                       group by owner, time
+                       order by time;"""
 
-        # Recovered forts
-        self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
-                             cast(count(rowid) as float) / {sample_days} as average
-                             from events
-                             where type = "fort" and owner = location
-                             and date > {self.startfrom}
-                             group by owner, time
-                             order by time;""")
-        for r in self.sql.fetchall():
-            activity[r["owner"]][int(r["time"])] -= r["average"]
+        # Captured then recovered forts
+        for param in [ ["!=", ""], ["=", "0 -"] ]:
+            self.sql.execute(query(param[0], param[1]))
+            for r in self.sql.fetchall():
+                activity[r["owner"]][int(r["time"])] += r["average"]
 
         return activity
 
     def get_invasions(self):
         invasions = {"Alsius": [0] * 24, "Ignis": [0] * 24, "Syrtis": [0] * 24}
+        if self.sample_days is None:
+            self.get_oldest_event()
+        def query(condition, sign=""):
+            return f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
+                       {sign} cast(count(rowid) as float) / {self.sample_days} as average
+                       from events
+                       where type = "fort" and owner {condition} location
+                       and name like "Great Wall of %"
+                       and date > {self.startfrom}
+                       group by owner, time
+                       order by time;"""
 
-        # Ensure proper average value if we've less than self.startfrom days of data
-        self.sql.execute(f"""select (unixepoch("now") - min(date)) / (24 * 3600) as days
-                             from events
-                             where type = "fort" and location != owner
-                             and name like "Great Wall of %"
-                             and date > {self.startfrom};""")
-        sample_days = self.sql.fetchone()["days"]
-
-        # Invasion
-        self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
-                             cast(count(rowid) as float) / {sample_days} as average
-                             from events
-                             where type = "fort" and location != owner
-                             and name like "Great Wall of %"
-                             and date > {self.startfrom}
-                             group by owner, time
-                             order by time;""")
-        for r in self.sql.fetchall():
-            invasions[r["owner"]][int(r["time"])] = r["average"]
-
-        # Invaded
-        self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
-                             cast(count(rowid) as float) / {sample_days} as average
-                             from events
-                             where type = "fort" and location = owner
-                             and name like "Great Wall of %"
-                             and date > {self.startfrom}
-                             group by owner, time
-                             order by time;""")
-        for r in self.sql.fetchall():
-            invasions[r["owner"]][int(r["time"])] -= r["average"]
+        # Captured then recovered forts
+        for param in [ ["!=", ""], ["=", "0 -"] ]:
+            self.sql.execute(query(param[0], param[1]))
+            for r in self.sql.fetchall():
+                invasions[r["owner"]][int(r["time"])] += r["average"]
 
         return invasions
 
-
     def generate_stats(self):
-        # Total forts captures per realm
-        self.sql.execute(f"""select owner as realm, count(rowid) as count
-                            from events
-                            where type = "fort"
-                            and date > {self.startfrom}
-                            group by owner;""")
-        for r in self.sql.fetchall():
-             self.stats[r["realm"]]["forts"] = {}
-             self.stats[r["realm"]]["forts"]["total"] = r["count"]
 
-        # Total forts recapture per realm
-        self.sql.execute(f"""select owner as realm, count(rowid) as count
-                            from events
-                            where type = "fort" and owner = location
-                            and date > {self.startfrom}
-                            group by owner;""")
-        for r in self.sql.fetchall():
-            self.stats[r["realm"]]["forts"]["recovered"] = r["count"]
+        def query_fort_events(condition):
+            return f"""select owner as realm, count(rowid) as count
+                       from events
+                       where type = "fort" and owner {condition} location
+                       and date > {self.startfrom}
+                       group by owner;"""
 
-        # Deduce foreign forts captures
+        # Get captured and recovered forts
+        for param in [ ["captured", "!="], ["recovered", "="] ]:
+            self.sql.execute(query_fort_events(param[1]))
+            for r in self.sql.fetchall():
+                if not "forts" in self.stats[r["realm"]]:
+                    self.stats[r["realm"]]["forts"] = {}
+                self.stats[r["realm"]]["forts"][param[0]] = r["count"]
+
+        # Deduce total forts captures
         for realm in self.stats:
-            self.stats[realm]["forts"]["captured"] = \
-                self.stats[realm]["forts"]["total"] - self.stats[realm]["forts"]["recovered"]
+            self.stats[realm]["forts"]["total"] = \
+                self.stats[realm]["forts"]["captured"] + self.stats[realm]["forts"]["recovered"]
 
         # Get most captured forts by realm
         self.sql.execute(f"""select  owner as realm, name, count(name) as count
@@ -203,7 +175,7 @@ class Reporter:
                              where type="fort" and owner != location
                              and date > {self.startfrom}
                              group by owner, name
-                             order by count(name) asc;""")
+                             order by count asc;""")
         for r in self.sql.fetchall():
             if "most_captured" in self.stats[r["realm"]]:
                 continue
@@ -217,8 +189,7 @@ class Reporter:
                              where type = "fort" and owner != location
                              and name like "Great Wall of %"
                              and date > {self.startfrom}
-                             group by owner
-                             order by date desc;""")
+                             group by owner;""")
         for r in self.sql.fetchall():
             if "invasions" not in self.stats[r["realm"]]:
                 self.stats[r["realm"]]["invasions"] = {}
@@ -241,12 +212,11 @@ class Reporter:
             self.stats[r["realm"]]["invasions"]["invaded"]["count"] = r["count"]
 
         # Get last gem stolen date and total count
-        self.sql.execute(f"""select owner as realm, date, count(date) as count
+        self.sql.execute(f"""select owner as realm, max(date) as date, count(date) as count
                              from events
                              where type = "gem" and location != owner
                              and date > {self.startfrom}
-                             group by owner
-                             order by max(date);""")
+                             group by owner;""")
         for r in self.sql.fetchall():
             self.stats[r["realm"]]["gems"] = {}
             self.stats[r["realm"]]["gems"]["stolen"] = r["date"]
@@ -264,12 +234,12 @@ class Reporter:
             self.stats[r["realm"]]["gems"]["lost"] = r["count"]
 
         # Get last dragon wish and wishes count
-        self.sql.execute(f"""select location as realm, count(rowid) as count, date
+        self.sql.execute(f"""select location as realm, count(rowid) as count,
+                             max(date) as date
                              from events
                              where type = "wish"
                              and date > {self.startfrom}
-                             group by location
-                             order by max(date);""")
+                             group by location;""")
         for r in self.sql.fetchall():
             if "wishes" not in self.stats[r["realm"]]:
                 self.stats[r["realm"]]["wishes"] = {}
