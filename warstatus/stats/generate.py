@@ -35,7 +35,6 @@ create table if not exists events (
 
 
 def statistics(events):
-    start_time = timer()
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -72,6 +71,7 @@ def statistics(events):
     if len(insert_queries) > 0:
         sql.executemany("insert into events values(?, ?, ?, ?, ?)", insert_queries)
         conn.commit()
+        start_time = timer()
         full_report = [{"generated": int(datetime.now().timestamp())}]
         days = [7, 30]
         for day in days:
@@ -121,7 +121,8 @@ class Reporter:
         for param in [ ["!=", ""], ["=", "0 -"] ]:
             self.sql.execute(query(param[0], param[1]))
             for r in self.sql.fetchall():
-                activity[r["owner"]][int(r["time"])] += r["average"]
+                if r["average"] is not None:
+                    activity[r["owner"]][int(r["time"])] += r["average"]
 
         return activity
 
@@ -244,15 +245,6 @@ class Reporter:
         for r in self.sql.fetchall():
             self.stats[r["realm"]]["gems"]["stolen"]["last"] = r["date"]
             self.stats[r["realm"]]["gems"]["stolen"]["count"] = r["count"]
-
-        # Get lost gems count
-        self.sql.execute(f"""select owner as realm, count(rowid) as count
-                             from events
-                             where type = "gem" and  location = owner
-                             and date > {self.startfrom}
-                             group by owner;""")
-        for r in self.sql.fetchall():
-            self.stats[r["realm"]]["gems"]["lost"] = r["count"]
 
         # Get last dragon wish and wishes count
         self.sql.execute(f"""select location as realm, count(rowid) as count,

@@ -76,8 +76,7 @@ for example.
          stolen: {
            last: "Timestamp of the last gem steal",
 		   count: "Number of gems stolen"
-         },
-         lost: "Number of lost gems"
+         }
        },
        wishes: {
          last: "Timestamp of the last dragon wish",
@@ -95,3 +94,51 @@ for example.
 
 The code is considered pretty naive by the way. I'm not very good with SQL.
 If anyone contribute, please keep things simple.
+
+### The sum of all the captured forts is not equal to the recovered ones
+
+It's not a bug. Imagine this situation:
+
+```
+01:00 Alsius has captured Fort Samal
+01:05 Syrtis has captured Fort Samal
+01:20 Ignis has recovered Fort Samal
+```
+
+It's 2 captures for 1 recovery and it's totally legit. That's why a perfect
+equality won't happen, unless the database is pretty empty.
+
+### No lost gems count?
+
+Lost gems cannot be reliably counted without major changes, imagine this
+situation:
+
+```
+01:00 Alsius has captured Ignis gem#1
+03:07 Syrtis has captured Ignis gem#1
+```
+
+- Ignis lost a gem
+- Alsius get an enemy gem
+- Syrtis stole that enemy gem from Alsius
+
+Because the events has no mention of the previous owner, currently if we try to
+count the lost gems, `Syrtis stole that enemy gem from Alsius` would be in
+fact `Syrtis stole that enemy gem from Ignis`.
+
+This can be fixed by storing the previous owner in the database, and ensuring
+that:
+
+- The original location, the previous owner, and the current owner are
+  different. (`generate.py`, gems queries)
+- But then dragon wishes need also to take this change into account, and
+  requires that previous and current owner are different and that current owner
+  is the same as the original location. (`../warstatus.py`)
+
+That's possible, but i see this as too much complexity added for a single value
+in a single type of event, especially that the dragon wishes and enemy
+stolen gems counts give already a good idea on what's going on, and that
+figuring out the problem took me too much time for my own code already.
+
+I would refactor the code if the invasion system changes to take that into
+account though.
