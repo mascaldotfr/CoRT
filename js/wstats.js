@@ -188,10 +188,6 @@ async function display_stat() {
 				</tr>
 				${last_gem}
 				<tr>
-					<td><b>${_("Lost gems")}</b></td>
-					<td>${naify(r.gems.lost)}</td>
-				</tr>
-				<tr>
 					<td><b>${_("Dragon wishes")}</b></td>
 					<td>${naify(r.wishes.count)}</td>
 				</tr>
