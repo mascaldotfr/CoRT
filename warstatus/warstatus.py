@@ -178,7 +178,11 @@ def main():
 
         # Sort and store events
         events_log = sorted(events_log, key=lambda d: d["date"], reverse=True)
-        status["events_log"] = events_log[:25]
+        # Initialize all events on the first run
+        if len(old_status) == 0:
+            status["events_log"] = events_log
+        else:
+            status["events_log"] = events_log[:25]
 
         status["generated"] = str(timestamp)
 
