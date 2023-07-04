@@ -148,6 +148,7 @@
           "cast":1.0,
           "gcd":"Short",
           "cooldown":30.0,
+          "range": 0,
           "duration":[8,9,10,11,12],
           "damage":{
             "Raw damage": [20,30,40,50,60]
@@ -317,11 +318,11 @@
           "cooldown":45.0,
           "duration":30.0,
           "range":0.0,
-          "buffs":{
+          "debuffs":{
             "Concentration":["-15%","-20%","-25%","-30%","-35%"],
             "Cast Speed":["-10%","-15%","-20%","-25%","-30%"],
-            "Resist immobilize":["10%","10%","15%","15%","20%"],
-            "Resist dizzy":["10%","10%","15%","15%","20%"]
+            "Resist immobilize":["-10%","-10%","-15%","-15%","-20%"],
+            "Resist dizzy":["-10%","-10%","-15%","-15%","-20%"]
           }
         },
         {
@@ -508,10 +509,7 @@
           "cast":1,
           "gcd":"Short",
           "cooldown":80,
-          "duration":[2,4,6,8,10],
-          "buffs":{
-            "Evade chance":"+30%"
-          }
+          "duration":[2,4,6,8,10]
         },
         {
           "id":200,
@@ -592,7 +590,7 @@
           "gcd":"Short",
           "cooldown":75.0,
           "buffs":{
-            "Evade":true
+            "Absolute evasion chance": "100%"
           }
         },
         {
@@ -607,15 +605,15 @@
         {
           "id":203,
           "name":"Low profile",
-          "description":"The archer cannot attack or be attacked.",
+          "description":"The archer cannot attack or be attacked. (Removes any positive effect that is active on the archer)",
           "mana":[180,200,220,240,260],
           "type":"Constant",
           "cast":0.5,
           "gcd":"Short",
           "cooldown":60,
           "duration":[4,5,6,8,10],
-          "debuffs":{
-            "Removes any positive effect that is active on the archer":true
+          "buffs":{
+            "Sanctuary":true
           }
         },
         {
@@ -629,7 +627,7 @@
           "cooldown":50,
           "duration":[3,4,5,6,8],
           "buffs":{
-            "Spell resistance":true
+            "Absolute spell resistance chance":"100%"
           }
         }
       ]
