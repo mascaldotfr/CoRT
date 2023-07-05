@@ -347,23 +347,22 @@ h1 {
 }
 #we-select {
 	display: flex;
+	gap: 1em;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 }
 #we-select label {
 	font-weight: bold;
-	flex: 0;
 }
 #we-events, #we-select, #we-top {
 	margin-top: 1em;
 	padding: 1em;
 }
-/*#we-top {
-	position: fixed;
-	bottom: .5em;
-	height: 1em;
-	left: 0px;
-}*/
+#we-prev-day {
+	visibility: hidden;
+}
+
+
 /* WAR STATISTICS */
 
 #ws-container {

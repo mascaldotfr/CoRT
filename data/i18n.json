@@ -431,6 +431,16 @@ __i18n__ = {
 		"es": "Filtro:",
 		"de": "Filter:"
 	},
+	"Date:": {
+		"fr": "Date :",
+		"es": "Fecha:",
+		"de": "Datum:"
+	},
+	"No matching event found!": {
+		"fr": "Aucun événement correspondant trouvé !",
+		"es": "¡No se ha encontrado ningún evento coincidente!",
+		"de": "Keine passende Veranstaltung gefunden!"
+	},
 	"None": {
 		"fr": "Aucun",
 		"es": "Ningún",
