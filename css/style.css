@@ -335,6 +335,35 @@ h1 {
 	margin-top: auto;
 }
 
+
+/* WZ EVENTS */
+#we-container {
+	width: fit-content;
+	margin: 0 auto;
+	padding: 1em;
+}
+#we-info {
+	text-align: center;
+}
+#we-select {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#we-select label {
+	font-weight: bold;
+	flex: 0;
+}
+#we-events, #we-select, #we-top {
+	margin-top: 1em;
+	padding: 1em;
+}
+/*#we-top {
+	position: fixed;
+	bottom: .5em;
+	height: 1em;
+	left: 0px;
+}*/
 /* WAR STATISTICS */
 
 #ws-container {

@@ -78,28 +78,9 @@ function draw_map(images) {
 	}
 }
 
-
-
-// Create translatable strings according to english order of words
-function translate_fort(fort) {
-	let words = fort.split(" ");
-	let fort_id = words.pop();
-	let fort_name;
-	let fort_type;
-	if (words[1] == "Castle") {
-		fort_name = words.shift();
-		fort_type = "%s " + words.join(" ");
-	}
-	else {
-		fort_name = words.pop();
-		fort_type = words.join(" ") + " %s";
-	}
-	return _(fort_type, fort_name) + ` ${fort_id}`
-}
-
 async function display_wz(force_display) {
 	// Same order as the website
-	let realm_colors = {"Alsius": "blue", "Ignis": "red", "Syrtis": "green"};
+	let realm_colors = get_realm_colors();
 	let gems = [];
 	let forts = [];
 
@@ -162,60 +143,14 @@ async function display_wz(force_display) {
 		`)
 	}
 
-	let events_html = `<h2 id="wz-events-header">
+	$("#wz-events").html(`<h2 id="wz-events-header">
 		<span class="purple">${_("Last server events (in your timezone):")} </span>
 		</h2>
 		<span>
-		`;
-	for (let anevent of data["events_log"]) {
-		let dt = new Date(anevent["date"] * 1000);
-		let date_options = {
-			month: 'numeric', day: 'numeric',
-			hour: '2-digit', minute: '2-digit' };
-		let datetime = dt.toLocaleDateString(undefined, date_options);
-		let owner = anevent["owner"];
-		let owner_color = realm_colors[owner];
-		let captured = anevent["name"];
-		events_html += `<b>${datetime}</b>&nbsp;`
-		if (anevent["type"] == "fort" || anevent["type"] == "gem") {
-			let location_color = realm_colors[anevent["location"]];
-			if (anevent["type"] == "fort") {
-				captured = translate_fort(captured);
-				// remove fort number
-				captured = captured.substring(0, captured.lastIndexOf(" "));
-			}
-			else if (anevent["type"] == "gem") {
-				captured = _("Gem") + " #" + captured;
-			}
-			let target = `<span class="${location_color} bold">${captured}</span>`;
-			let action;
-			if (anevent["location"] == anevent["owner"]) {
-				action = _("has recovered %s", target);
-			}
-			else {
-				action = _("has captured %s", target);
-			}
-			events_html += `<span class="${owner_color} bold">${owner}</span> ${action}.`;
-		}
-		else if (anevent["type"] == "relic") {
-			let location_color = realm_colors[anevent["owner"]];
-			let relic = `<span class="${location_color} bold">${_("%s's relic", captured)}</span>`;
-			if (anevent["location"] == "altar") {
-				events_html += `${relic} ${_("is back to its altar.")}`;
-			}
-			else {
-				events_html += `${relic} ${_("is in transit.")}`;
-			}
-		}
-		else if (anevent["type"] == "wish") {
-			let location_color = realm_colors[anevent["location"]];
-			let sentence = _("%s made a dragon wish!", anevent["location"]);
-			events_html += `<span class="${location_color} bold">${sentence}</span>`;
-		}
-		events_html += `<br>`;
-	}
-	events_html += `</span>`;
-	$("#wz-events").html(events_html);
+		${humanise_events(data["events_log"], true)}
+		<br>
+		<a href="wevents.html?f=none">${_("More events")}...</a>
+		</span>`);
 }
 
 $(document).ready(function() {

@@ -20,6 +20,11 @@ __i18n__ = {
 		"es": "Estado de la ZG",
 		"de": "Zustand der WZ"
 	},
+	"WZ events": {
+		"fr": "Evénements de la WZ",
+		"es": "Eventos de la ZG",
+		"de": "WZ-Events"
+	},
 	"Bosses Countdown":
 	{
 		"fr": "Compte à rebours des boss",
@@ -306,6 +311,11 @@ __i18n__ = {
 		"es": "Últimos eventos (hora local):",
 		"de": "Neueste Serverereignisse (Ortszeit):"
 	},
+	"More events": {
+		"fr": "Plus d'événements",
+		"es": "Más eventos",
+		"de": "Weitere Events"
+	},
 	"is back to its altar.": {
 		"fr": "est de retour sur son autel.",
 		"es": "está de vuelta en su altar.",
@@ -324,7 +334,7 @@ __i18n__ = {
 	"%s made a dragon wish!": {
 		"fr": "%s a fait un voeu du dragon !",
 		"es": "¡%s pidió un deseo de dragón!",
-		"de": "hat einen Drachenwunsch geäußert!"
+		"de": "%s hat einen Drachenwunsch geäußert!"
 	},
 	"Last updated:": {
 		"fr": "Mis à jour :",
@@ -410,5 +420,40 @@ __i18n__ = {
 		"fr": "Moyenne nette des invasions par heure (UTC) les %s derniers jours",
 		"es": "Promedio neto de las invasiónes por hora (UTC) en los últimos %s días",
 		"de": "Nettodurchschnitt der Invasionen pro Stunde (UTC) an den letzten %s Tagen"
+	},
+	"All events (except relics) over the last 30 days.": {
+		"fr": "Tous les événements (sauf reliques) sur les derniers 30 jours.",
+		"es": "Todos los eventos (excepto reliquias) durante los últimos 30 días.",
+		"de": "Alle Ereignisse (außer Relikte) der letzten 30 Tage."
+	},
+	"Filter:": {
+		"fr": "Filtre :",
+		"es": "Filtro:",
+		"de": "Filter:"
+	},
+	"None": {
+		"fr": "Aucun",
+		"es": "Ningún",
+		"de": "Keine"
+	},
+	"No forts": {
+		"fr": "Sans forts",
+		"es": "Sin fuertes",
+		"de": "Ohne Festungen"
+	},
+	"Invasions only": {
+		"fr": "Invasions uniquement",
+		"es": "Solo invasiones",
+		"de": "Nur Invasionen"
+	},
+	"Gems only": {
+		"fr": "Gemmes uniquements",
+		"es": "Solo gemas",
+		"de": "Nur Juwelen"
+	},
+	"Dragon wishes only": {
+		"fr": "Voeux du dragon uniquement",
+		"es": "Solo deseos de dragón",
+		"de": "Nur Drachenwünsche"
 	}
 }

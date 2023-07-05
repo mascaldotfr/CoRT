@@ -53,8 +53,13 @@ const $ = (function (selector) {
 			document.querySelector(selector).innerHTML = html;
 		},
 		on: function(anevent, callable) {
-			document.querySelectorAll(selector).forEach( (elm) =>
-				elm.addEventListener(anevent, callable) );
+			try { // real selector
+				document.querySelectorAll(selector).forEach( (elm) =>
+					elm.addEventListener(anevent, callable) );
+			}
+			catch {
+				selector.addEventListener(anevent, callable);
+			}
 		},
 		prepend: function(html) {
 			document.querySelector(selector).insertAdjacentHTML("afterbegin", html);

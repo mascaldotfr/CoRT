@@ -46,25 +46,6 @@ function naify(value, failover="0") {
 		return value;
 }
 
-// Create translatable strings according to english order of words
-// XXX Beware, not exactly the same a the wz status one
-function translate_fort(fort) {
-	if (fort === null)
-		return "N/A";
-	let words = fort.split(" ");
-	let fort_name;
-	let fort_type;
-	if (words[1] == "Castle") {
-		fort_name = words.shift();
-		fort_type = "%s " + words.join(" ");
-	}
-	else {
-		fort_name = words.pop();
-		fort_type = words.join(" ") + " %s";
-	}
-	return _(fort_type, fort_name)
-}
-
 function show_graphs(data, selector, onlyinteger=true) {
 	let realms = ["Alsius", "Ignis", "Syrtis"];
 	// skip 00:00 and 23:00 as it overflows
@@ -122,7 +103,7 @@ async function display_stat() {
 
 	// sync with statistics.txt
 	let report_days = [7, 30];
-	let realm_colors = {"Alsius": "blue", "Ignis": "red", "Syrtis": "green"};
+	let realm_colors = get_realm_colors();
 
 	let infos = data.splice(0, 1)[0];
 	$("#ws-last-updated").text(ts_to_human(infos["generated"]));
@@ -166,7 +147,7 @@ async function display_stat() {
 				</tr>
 				<tr>
 					<td><b>${_("Most captured fort")}</b></td>
-					<td>${translate_fort(r.forts.most_captured.name)}
+					<td>${translate_fort(r.forts.most_captured.name, false)}
 					    (${naify(r.forts.most_captured.count, "N/A")})</td>
 				</tr>
 				<tr>

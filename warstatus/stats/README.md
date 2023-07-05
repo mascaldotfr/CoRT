@@ -3,8 +3,9 @@
 This directory includes the necessary code used to generate statistics.
 
 `generate.py` is called by `../warstatus.py`. It writes new events in a sqlite3
-database `events.sqlite` and generates a small JSON report called
-`statistics.txt` if any change happened since the last run. The default output
+database `events.sqlite`. It generates a small JSON report called
+`statistics.json` and big JSON one `events.json` containing a dump of the events
+the last 30 days if any change happened since the last run. The default output
 directory is this very directory.
 
 **You must have a working warstatus (see `/warstatus/README.md`) for statistics
@@ -15,6 +16,10 @@ system split sqlite3 from the main python distribution; in such case you'll
 need the `python3-sqlite3` (or whatever it is called) package. You don't have
 any extra step to perform, as `../warstatus.py` will do the necessary to make
 it work.
+
+Using the brotli or gzip compression in your web server is recommended,
+especially for `events.json` which weights 500K uncompressed but only a few
+kilobytes with brotli's level 4 compression.
 
 The "API endpoint" URL is: https://hail.thebus.top/cortdata/warstatus/stats/statistics.json
 The full database is publicly available at: https://hail.thebus.top/cortdata/warstatus/stats/events.sqlite
@@ -33,6 +38,12 @@ minute to finish. All this on a cheap single core SSD VPS with 512MB of RAM.
 Relics events are not recorded.
 
 ## Response format
+
+###  events.json
+
+This is a carbon copy of the warstatus events array. Please see `/warstatus/README.md`.
+
+### statistics.json
 
 A gem steal means that a realm (ex: Syrtis) has stolen a gem from another realm
 (ex: Ignis). If Ignis recovered its own gem from Syrtis, it's not counted.

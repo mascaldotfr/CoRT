@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="keywords" content="regnumsentinel champions regnum online trainer entrenador bosses war warzone guerra status">
+		<meta name="description" content="Champions of Regnum trainer, war status, bosses respawn and bz countdowns">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<script type="text/javascript" src="js/importemojis.js"></script>
+		<script type="text/javascript" src="js/lamaiquery.js"></script>
+		<script type="text/javascript" src="data/i18n.json"></script>
+		<script type="text/javascript" src="js/i18n.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/wztools.js"></script>
+		<script type="text/javascript" src="js/wevents.js"></script>
+		<script>document.title = "CoRT - " + _("WZ events")</script>
+	</head>
+	<body>
+	<div id="main-container">
+		<div class="bugnum but on your side">
+			<noscript>
+				For full functionality of this site it is necessary to enable JavaScript.
+				Here are the <a href="https://www.enable-javascript.com/">
+					instructions how to enable JavaScript in your web browser</a>.
+			</noscript>
+		</div>
+		<h1><script>document.write(_("WZ events"))</script></h1>
+		<div id="we-info">
+			<p>
+				<b><script> document.write(
+					_("All events (except relics) over the last 30 days.") +
+					" " + _("Last updated:"))
+				</script></b>
+				<span id="we-info-updated"></span>
+			</p>
+			<div id="we-info-error" class="red"></div>
+		</div>
+		<div id="we-container">
+			<div id="we-select" class="card">
+				<div>
+				<label for="we-filter">
+					<script>document.write(_("Filter:"))</script>
+				</label>
+				<select id="we-filter">
+					<option value="none">
+						<script>document.write(_("None"))</script>
+					</option>
+					<option value="noforts">
+						<script>document.write(_("No forts"))</script>
+					</option>
+					<option value="invas">
+						<script>document.write(_("Invasions only"))</script>
+					</option>
+					<option value="gems">
+						<script>document.write(_("Gems only"))</script>
+					</option>
+					<option value="wishes">
+						<script>document.write(_("Dragon wishes only"))</script>
+					</option>
+				</select>
+				</div>
+			</div>
+			<div id="we-events" class="card"></div>
+			<!-- <div id="we-top" class="card"><a href="#main-container">Back to the top</a></div> -->
+		</div>
+	</div>
+	</body>
+</html>

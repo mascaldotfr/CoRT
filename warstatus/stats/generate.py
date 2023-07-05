@@ -23,6 +23,7 @@ from timeit import default_timer as timer
 
 db_file = "stats/events.sqlite"
 outfile = "stats/statistics.json"
+outfile_events = "stats/events.json"
 db_schema = """
 create table if not exists events (
     date integer not null,
@@ -72,7 +73,8 @@ def statistics(events):
         sql.executemany("insert into events values(?, ?, ?, ?, ?)", insert_queries)
         conn.commit()
         start_time = timer()
-        full_report = [{"generated": int(datetime.now().timestamp())}]
+        now = datetime.now()
+        full_report = [{"generated": int(now.timestamp())}]
         days = [7, 30]
         for day in days:
             reporter = Reporter(conn, day)
@@ -80,6 +82,8 @@ def statistics(events):
             if day == max(days):
                 full_report[0]["activity"] = reporter.get_activity()
                 full_report[0]["invasions"] = reporter.get_invasions()
+                with open(outfile_events, "w") as jsonfile:
+                    json.dump(reporter.dump_events(), jsonfile)
         end_time = timer()
         full_report[0]["generation_time"] = end_time - start_time;
         with open(outfile, "w") as jsonfile:
@@ -258,3 +262,15 @@ class Reporter:
             self.stats[r["realm"]]["wishes"]["count"] = r["count"]
 
         return self.stats
+
+    def dump_events(self):
+        self.sql.execute(f"""select *
+                             from events
+                             where date > {self.startfrom}
+                             order by date desc""")
+        # Since we're getting 6k events it's acceptable to not use a generator
+        # as it's faster like this than calling json.dump() repeatedly
+        output = [{"generated": int(datetime.now().timestamp())}]
+        for r in self.sql.fetchall():
+            output.append(dict(r))
+        return output

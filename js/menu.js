@@ -11,7 +11,8 @@ let menu = `
 		<span class="menuitem"><b><a href="wz.html">🪓${_("WZ status")}</a></b></span>
 		<span class="menuitem"><b><a href="bosses.html">👾${_("Bosses status")}</a></b></span>
 		<span class="menuitem"><b><a href="bz.html">🏟${_("BZ status")}</a></b></span>
-		<span class="menuitem"><b><a href="wstats.html">📊 ${_("WZ statistics")}</a></b></span>
+		<span class="menuitem"><b><a href="wstats.html">📊${_("WZ statistics")}</a></b></span>
+		<span class="menuitem"><b><a href="wevents.html">🗓️${_("WZ events")}</a></b></span>
 		<span class="menuitem"><a href="https://poludnica.shinyapps.io/configs/" target="_blank">📈${_("Trainer statistics")}
 		${external_link}</a></span>
 		<span class="menuitem"><a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">🛡${_("Armor calculator")}
