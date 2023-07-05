@@ -93,7 +93,7 @@ function show_graphs(data, selector, onlyinteger=true) {
 async function display_stat() {
 
 	try {
-		var data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/stats/statistics.json");
+		var data = await $().getJSON(__api__urls["stats"]);
 		$("#ws-info-error").empty();
 	}
 	catch (error) {

@@ -90,7 +90,7 @@ async function display_wz(force_display) {
 		return;
 	}
 	try {
-		var data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/warstatus.json");
+		var data = await $().getJSON(__api__urls["wstatus"]);
 		$("#wz-info-error").empty();
 		let dt = new Date();
 		let datetime = dt.toLocaleTimeString(undefined,

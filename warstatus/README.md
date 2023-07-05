@@ -30,7 +30,7 @@ statistics.
 
 ## Deployment
 
-1. Put `warstatus.py` in some place on your server
+1. Put `warstatus.py` in some place on your server that is accessible to your web server
 2. Ensure that you have some place that is reachable by your web server that
    can be written by the user that will execute `warstatus.py`
 3. Log in as this user, then edit their crontab:
@@ -41,6 +41,7 @@ statistics.
 	```
 	* * * * * /where/is/warstatus.py
 	```
+5. Modify `js/api_url.js` with your own urls
 
 That's it.
 

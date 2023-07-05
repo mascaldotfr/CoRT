@@ -164,10 +164,10 @@ function manage_dataset_versions() {
 }
 
 async function collect_setup(setupstring) {
-	if (window.location.origin != "https://mascaldotfr.github.io")
+	if (window.location.origin != __api__frontsite)
 		return;
 	try {
-		await $().post("https://hail.thebus.top/cortdata/submit.php", {"setup":setupstring});
+		await $().post(__api__urls["submit_trainer"], {"setup":setupstring});
 	}
 	catch (error) {
 		console.error(`Failed to send setup: ${error}`);

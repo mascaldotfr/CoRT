@@ -59,7 +59,7 @@ function display_events() {
 
 async function get_data() {
 	try {
-		data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/stats/events.json");
+		data = await $().getJSON(__api__urls["events"]);
 		$("#we-info-error").empty();
 	}
 	catch (error) {
