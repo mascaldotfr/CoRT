@@ -119,6 +119,13 @@ $(document).ready(async function() {
 	}
 	$("#we-date").append(day_select_html);
 
+
+	$("#we-filter").on("change", function () {
+		__wevents__filter = $("#we-filter").val();
+		display_events();
+	});
+	$("#we-date").on("change", display_events)
+
 	let urlsearch = new URLSearchParams(window.location.search);
 	let filter = urlsearch.get("f");
 	if (!filter) {
@@ -126,13 +133,8 @@ $(document).ready(async function() {
 		display_events();
 	}
 	else {
+		console.log("filter found");
 		$("#we-filter").val(filter);
 		$("#we-filter").trigger("change");
 	}
-
-	$("#we-filter").on("change", function () {
-		__wevents__filter = $("#we-filter").val();
-		display_events();
-	});
-	$("#we-date").on("change", display_events)
 });
