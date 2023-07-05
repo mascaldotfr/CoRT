@@ -18,9 +18,11 @@
 let __wevents__seek = 0;
 let __wevents__step = 100;
 let __wevents__filter = "none";
-let data;
+let data = null;
 
-function generate_events() {
+async function display_events(clear=false) {
+	if (data === null)
+		await get_data();
 	if (__wevents__filter == "none") {
 		let slice = data.slice(__wevents__seek, __wevents__seek + __wevents__step);
 		var html = humanise_events(slice, false);
@@ -66,31 +68,28 @@ function generate_events() {
 		});
 		var html = humanise_events(filtered, false);
 	}
-	return html;
+	if (clear === true) {
+		$("#we-events").empty();
+		$("#we-events").html(html);
+	}
+	else {
+		$("#we-events").append(html);
+	}
 }
 
-async function display_events(clear=false) {
-	let realm_colors = get_realm_colors();
-
+async function get_data() {
 	try {
-		data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/stats/events.json");
-		$("#we-info-error").empty();
-		let generated = new Date(data.shift()["generated"] * 1000);
-		let datetime = generated.toLocaleTimeString(undefined,
-			{hour: "2-digit", minute: "2-digit"});
-		$("#we-info-updated").text(datetime);
+			data = await $().getJSON("https://hail.thebus.top/cortdata/warstatus/stats/events.json");
+			$("#we-info-error").empty();
+			// Keep static values here
+			let generated = new Date(data.shift()["generated"] * 1000);
+			let datetime = generated.toLocaleTimeString(undefined,
+				{hour: "2-digit", minute: "2-digit"});
+			$("#we-info-updated").text(datetime);
 	}
 	catch (error) {
 		$("#we-info-error").html(`<b>Failed to get the events:</b> <code>${error}</code>`);
 		return;
-	}
-
-	if (clear === true) {
-		$("#we-events").empty();
-		$("#we-events").html(generate_events());
-	}
-	else {
-		$("#we-events").append(generate_events());
 	}
 }
 
