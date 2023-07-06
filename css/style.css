@@ -348,11 +348,22 @@ h1 {
 #we-select {
 	display: flex;
 	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: stretch;
+}
+#we-select > div {
+	display: flex;
+	gap: 1em;
 	align-items: center;
-	justify-content: space-between;
+	flex-grow: 1;
 }
 #we-select label {
 	font-weight: bold;
+	min-width: 3em;
+}
+#we-select button, select {
+	min-width: 4em;
+	flex: 1;
 }
 #we-events, #we-select, #we-top {
 	margin-top: 1em;

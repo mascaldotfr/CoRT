@@ -68,10 +68,15 @@ async function get_data() {
 	}
 }
 
+// when direction is undefined the <option> has been directly chosen by the
+// user and doesn't need a trigger event to notify the change as well
 function date_change(direction) {
 	let selector = document.getElementById("we-date");
 	let index = selector.selectedIndex;
-	index += direction == "next" ? 1 : -1;
+	if (direction !== undefined) {
+		index += direction == "next" ? 1 : -1;
+		selector.options[index%selector.options.length].selected = true;
+	}
 	if (index < 0) {
 		$("#we-prev-day").hide();
 	}
@@ -87,8 +92,8 @@ function date_change(direction) {
 			$("#we-next-day").show();
 		else
 			$("#we-next-day").hide();
-		selector.options[index%selector.options.length].selected = true;
-		$("#we-date").trigger("change");
+		if (direction !== undefined)
+			$("#we-date").trigger("change");
 	}
 }
 
@@ -124,7 +129,10 @@ $(document).ready(async function() {
 		__wevents__filter = $("#we-filter").val();
 		display_events();
 	});
-	$("#we-date").on("change", display_events)
+	$("#we-date").on("change", function () {
+		date_change();
+		display_events();
+	});
 
 	let urlsearch = new URLSearchParams(window.location.search);
 	let filter = urlsearch.get("f");
