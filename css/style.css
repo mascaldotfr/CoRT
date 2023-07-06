@@ -51,6 +51,7 @@ select {
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	align-items: center;
+	gap: .5em;
 	line-height: 3em;
 }
 #menu a {
@@ -361,7 +362,7 @@ h1 {
 	font-weight: bold;
 	min-width: 3em;
 }
-#we-select button, select {
+#we-select button, #we-select select {
 	min-width: 4em;
 	flex: 1;
 }
