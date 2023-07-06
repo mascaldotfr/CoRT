@@ -154,6 +154,12 @@ async function display_wz(force_display) {
 }
 
 $(document).ready(function() {
+	document.title = "CoRT - " + _("WZ status");
+	$("#title").text(_("WZ status"));
+	$("#wz-info-info").text(
+		_("The page will update itself every minute.") +
+		" " + _("Last updated:"));
+
 	display_wz(true);
 });
 

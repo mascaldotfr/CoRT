@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<title>Champions of Regnum bosses respawn</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="regnumsentinel champions regnum online trainer entrenador bosses war guerra status">
 		<meta name="description" content="Champions of Regnum trainer, war status, bosses respawn and bz countdowns">
@@ -13,7 +14,6 @@
 		<script type="text/javascript" src="js/i18n.js"></script>
 		<script type="text/javascript" src="js/bosses.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
-		<script>document.title = "CoRT - " + _("Bosses Countdown")</script>
 	</head>
 	<body>
 	<div id="main-container">
@@ -26,10 +26,8 @@
 			</noscript>
 		</div>
 		<div id="boss_container">
-			<h1><script>document.write(_("Bosses Countdown"))</script></h1>
-			<p class="center">
-				<script>document.write(_("The page refreshes itself every minute. Dates and times are in your timezone."))</script>
-			</p>
+			<h1 id="title"></h1>
+			<p id="bosses_info" class="center"></p>
 			<div id="bosses_list">
 				<div id="daen" class="card">
 					<img src="data/bosses/daen.jpg" title="Daen Rha (Ignis)"/>

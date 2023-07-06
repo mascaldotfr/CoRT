@@ -98,6 +98,21 @@ function date_change(direction) {
 }
 
 $(document).ready(async function() {
+	document.title = "CoRT - " + _("WZ events");
+	$("#title").text(_("WZ events"));
+	$("#we-info-info").text(
+		_("All events (except relics) over the last 30 days.") +
+		" " + _("Last updated:"));
+	$("#we-filter-label").text(_("Filter:"));
+	let options = [ ["none", _("None")],
+			["noforts", _("No forts")],
+			["invas", _("Invasions only")],
+			["gems", _("Gems only")],
+			["wishes", _("Dragon wishes only")] ];
+	for (let o of options)
+		$("#we-filter").append(`<option value="${o[0]}">${o[1]}</option>`);
+	$("#we-date-label").text(_("Date:"));
+
 	await get_data();
 	let generated = new Date(data.shift()["generated"] * 1000);
 	generated = generated.toLocaleTimeString(undefined,

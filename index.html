@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="regnumsentinel champions regnum online trainer entrenador bosses war guerra status">
 		<meta name="description" content="Champions of Regnum trainer, war status, bosses respawn and bz countdowns">
+		<title>CoRT - Champions of Regnum Trainer</title>
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="icon" type="image/png" href="favicon.png" />
 		<script type="text/javascript" src="js/api_url.js"></script>
@@ -16,7 +17,6 @@
 		<script type="text/javascript" src="js/lz-string.min.js"></script>
 		<script type="text/javascript" src="js/trainerdatasets.js" defer></script>
 		<script type="text/javascript" src="js/trainer.js" defer></script>
-		<script type="text/javascript">document.title = "CoRT - " + _("Trainer")</script>
 	</head>
 	<body>
 	<div id="main-container">
@@ -28,30 +28,14 @@
 					instructions how to enable JavaScript in your web browser</a>.
 			</noscript>
 		</div>
-		<h1><script>document.write(_("Trainer"))</script></h1>
-		<div class="bugnum">
-			<p><script>document.write(_("Clicking on a skill icon will show its description."))</script>
-			<br><script>document.write(
-				_("Selecting an higher character level will upgrade your current setup to that level."))</script>
-			</p>
-		</div>
+		<h1 id="title"></h1>
+		<div id="titleinfo"></div>
 		<div class="setup">
 			<div class="version">
-				<select id="t-version">
-				</select>
+				<select id="t-version"></select>
 			</div>
 			<div class="class">
-				<select id="t-class">
-					<script>document.write(`
-						<option value="knight" default selected>${_("Knight")}</option>
-						<option value="barbarian">${_("Barbarian")}</option>
-						<option value="conjurer">${_("Conjurer")}</option>
-						<option value="warlock">${_("Warlock")}</option>
-						<option value="hunter">${_("Hunter")}</option>
-						<option value="marksman">${_("Marksman")}</option>
-					`)
-					</script>
-				</select>
+				<select id="t-class"></select>
 			</div>
 			<div class="level">
 				<select id="t-level">
@@ -59,30 +43,21 @@
 				</select>
 			</div>
 			<div class="load">
-				<button id="t-load"><script>document.write(_("Load / Reset"))</script></button>
+				<button id="t-load"></script></button>
 			</div>
 			<div class="save">
-				<button id="t-save"><script>document.write(_("Share / Save"))</script></button>
+				<button id="t-save"></button>
 			</div>
 		</div>
-		<div class="points" id="t-points">
-			<p>
-				<script>document.write(`
-					<b>${_("Discipline points:")}</b> <span id="t-dpointsleft">x</span>/<span id="t-dpointstotal">x</span>
-					<b>${_("Power points:")}</b> <span id="t-ppointsleft">x</span>/<span id="t-ppointstotal">x</span>
-				`)</script>
-			</p>
-		</div>
-		<div id="t-trainer" class="trainer"> </div>
-		<div id="skillinfo" class="skillinfo card"> </div>
+		<div class="points" id="t-points"><p></p></div>
+		<div id="t-trainer" class="trainer"></div>
+		<div id="skillinfo" class="skillinfo card"></div>
 		<dialog id="t-dialog">
-			<h3>
-				<script>document.write(_("Here is the link to your setup:"))</script>
-			</h3>
+			<h3></h3>
 			<textarea id="t-dialog-url" readonly rows="5" cols="50"></textarea>
 			<div id="t-dialog-buttons">
-				<button id="t-dialog-copy"><script>document.write(_("Copy link"))</script></button>
-				<button id="t-dialog-close"><script>document.write(_("Close"))</script> (Esc)</button>
+				<button id="t-dialog-copy"></button>
+				<button id="t-dialog-close"></button>
 			</div>
 		</dialog>
 	</div>

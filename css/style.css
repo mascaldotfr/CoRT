@@ -83,8 +83,10 @@ select {
 h1 {
 	text-align: center;
 }
-.bugnum {
+#titleinfo {
 	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 .red { color: var(--red); }
 .blue { color: var(--blue); }

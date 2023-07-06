@@ -38,6 +38,28 @@ var powerpoints = 0;
 var saved_setup;
 
 $(document).ready(function() {
+	document.title = "CoRT - " + _("Trainer");
+	$("#title").text(_("Trainer"));
+	$("#titleinfo").text(
+		_("Clicking on a skill icon will show its description.") +
+		"<br>" +
+		_("Selecting an higher character level will upgrade your current setup to that level."));
+	let classes = ["Knight", "Barbarian", "Conjurer", "Warlock", "Hunter", "Marksman"];
+	for (let clas of classes) {
+		$("#t-class").append(`
+			<option value="${clas.toLowerCase()}">${_(clas)}</option>`);
+	}
+	$("#t-load").text(_("Load / Reset"));
+	$("#t-save").text(_("Share / Save"));
+	$("#t-points p").html(`
+		<b>${_("Discipline points:")}</b>
+			<span id="t-dpointsleft">x</span>/<span id="t-dpointstotal">x</span>
+		<b>${_("Power points:")}</b>
+			<span id="t-ppointsleft">x</span>/<span id="t-ppointstotal">x</span>`);
+ 	$("#t-dialog h3").text(_("Here is the link to your setup:"));
+	$("#t-dialog-copy").text(_("Copy link"));
+	$("#t-dialog-close").text(_("Close") + " (Esc)");
+
 	// generate characters levels options
 	for (let i = maxlevel - 1; i >= minlevel; i--) {
 		$("#t-level").append(`<option value="${i}">${i}</option>`);

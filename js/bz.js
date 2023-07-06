@@ -115,7 +115,7 @@ function feed_bz() {
 		let time_options = {hour: '2-digit', minute: '2-digit'};
 		let bz_begin_datetime = bz_begin_date.toLocaleDateString(undefined, date_options);
 		let bz_end_time = bz_end_date.toLocaleTimeString(undefined, time_options);
-		let interval = `<li>${bz_begin_datetime} - ${bz_end_time}</li>`
+		let interval = `<li>${bz_begin_datetime} - ${bz_end_time}</li>`;
 		$("#future_bzs").append(interval);
 	}
 
@@ -123,6 +123,9 @@ function feed_bz() {
 }
 
 $(document).ready(function() {
+	document.title = "CoRT - " + _("BZ status");
+	$("#title").text(_("BZ status"));
+	$("#next_bzs_title").text(_("Next BZ (in your timezone):"));
 	feed_bz();
 });
 

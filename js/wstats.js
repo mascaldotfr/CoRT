@@ -15,6 +15,9 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// sync with statistics.txt
+let report_days = [7, 30];
+
 function ts_to_human(ts) {
 	if (ts === null || ts == 0)
 		return "N/A";
@@ -101,8 +104,6 @@ async function display_stat() {
 		return;
 	}
 
-	// sync with statistics.txt
-	let report_days = [7, 30];
 	let realm_colors = get_realm_colors();
 
 	let infos = data.splice(0, 1)[0];
@@ -187,6 +188,18 @@ async function display_stat() {
 }
 
 $(document).ready(function() {
+	document.title = "CoRT - " + _("WZ statistics")
+	$("#title").text(_("WZ statistics"));
+	$("#ws-info-info").text(_("The page will update itself every minute.") +
+		                " " + _("Last event:"));
+	for (let day of report_days)
+		$(`#ws-${day}d-title`).text(_("Last %s days", day));
+	let max_report_days = Math.max(...report_days);
+	$("#ws-chart1-title").text(_("Net average of fortifications captured per hour (UTC) and realm on the last %s days",
+				   max_report_days));
+	$("#ws-chart2-title").text(_("Net average of invasions per hour (UTC) on the last %s days",
+				   max_report_days));
+
 	display_stat();
 });
 

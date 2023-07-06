@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<title>Champions of Regnum Battle Zone / BZ status</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="regnumsentinel champions regnum online trainer entrenador bosses war guerra status">
 		<meta name="description" content="Champions of Regnum trainer, war status, bosses respawn and bz countdowns">
@@ -13,7 +14,6 @@
 		<script type="text/javascript" src="js/i18n.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/bz.js"></script>
-		<script>document.title = "CoRT - " + _("BZ status")</script>
 	</head>
 	<body>
 	<div id="main-container">
@@ -26,7 +26,7 @@
 			</noscript>
 		</div>
 		<div id="bz_container">
-			<h1><script>document.write(_("BZ status"))</script></h1>
+			<h1 id="title"></h1>
 			<div id="bz_countdown" class="card">
 			<h2>
 				<span id="bz_status"></span>
@@ -34,11 +34,7 @@
 			</h2>
 			</div>
 			<div id="next_bzs" class="card">
-			<h3>
-				<span class="green">
-				<script>document.write(_("Next BZ (in your timezone):"))</script>
-				</span>
-			</h3>
+			<h3 class="green" id="next_bzs_title"></h3>
 			<ul id="future_bzs"></ul>
 			</div>
 		</div>

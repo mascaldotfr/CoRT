@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<title>Champions of Regnum - Warzone Statistics</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="regnumsentinel champions regnum online trainer entrenador bosses war warzone guerra status">
 		<meta name="description" content="Champions of Regnum trainer, war status, bosses respawn and bz countdowns">
@@ -17,7 +18,6 @@
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/wztools.js"></script>
 		<script type="text/javascript" src="js/wstats.js"></script>
-		<script>document.title = "CoRT - " + _("WZ statistics")</script>
 	</head>
 	<body>
 	<div id="main-container">
@@ -29,35 +29,29 @@
 					instructions how to enable JavaScript in your web browser</a>.
 			</noscript>
 		</div>
-		<h1><script>document.write(_("WZ statistics"))</script></h1>
+		<h1 id="title"></h1>
 		<div id="ws-info" class="center">
-			<p>
-				<b><script>
-					document.write(_("The page will update itself every minute.") +
-						" " + _("Last event:"))
-				</script></b>
-				<span id="ws-last-updated"></span>
-			</p>
+			<p><b><span id="ws-info-info"></span>&nbsp;</b><span id="ws-last-updated"></span></p>
 			<div id="ws-info-error" class="red"></div>
 		</div>
 		<div id="ws-container">
-			<h2><script>document.write(_("Last %s days", 7))</script></h2>
+			<h2 id="ws-7d-title"></h2>
 			<div class="ws-card" id="ws-7d">
 				<div class="card statcard" id="ws-7d-alsius"></div>
 				<div class="card statcard" id="ws-7d-ignis"></div>
 				<div class="card statcard" id="ws-7d-syrtis"></div>
 			</div>
-			<h2><script>document.write(_("Last %s days", 30))</script></h2>
+			<h2 id="ws-30d-title"></h2>
 			<div class="ws-card" id="ws-30d">
 				<div class="card statcard" id="ws-30d-alsius"></div>
 				<div class="card statcard" id="ws-30d-ignis"></div>
 				<div class="card statcard" id="ws-30d-syrtis"></div>
 			</div>
-			<h2><script>document.write(_("Net average of fortifications captured per hour (UTC) and realm on the last %s days", 30))</script></h2>
+			<h2 id="ws-chart1-title"></h2>
 			<div class="ws-card">
 				<div class="card statcard ws-chart" id="ws-activity-chart"></div>
 			</div>
-			<h2><script>document.write(_("Net average of invasions per hour (UTC) on the last %s days", 30))</script></h2>
+			<h2 id="ws-chart2-title"></h2>
 			<div class="ws-card">
 				<div class="card statcard ws-chart" id="ws-invasion-chart"></div>
 			</div>

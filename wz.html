@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<title>Champions of Regnum War Status</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="regnumsentinel champions regnum online trainer entrenador bosses war warzone guerra status">
 		<meta name="description" content="Champions of Regnum trainer, war status, bosses respawn and bz countdowns">
@@ -15,7 +16,6 @@
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/wztools.js"></script>
 		<script type="text/javascript" src="js/wz.js"></script>
-		<script>document.title = "CoRT - " + _("WZ status")</script>
 	</head>
 	<body>
 	<div id="main-container">
@@ -27,14 +27,10 @@
 					instructions how to enable JavaScript in your web browser</a>.
 			</noscript>
 		</div>
-		<h1><script>document.write(_("WZ status"))</script></h1>
+		<h1 id="title"></h1>
 		<div id="wz-info">
 			<p>
-				<script>
-					document.write(_("The page will update itself every minute.") +
-					" " + _("Last updated:"));
-				</script>
-				<span id="wz-info-updated"></span>
+				<span id="wz-info-info"></span>&nbsp;<span id="wz-info-updated"></span>
 			</p>
 			<div id="wz-info-error" class="red"></div>
 		</div>
