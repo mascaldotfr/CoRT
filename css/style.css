@@ -45,6 +45,7 @@ select {
 #menu {
 	padding: .75em;
 	margin-top: .3em;
+	min-height: 3em;
 }
 #menu-content {
 	display: flex;
@@ -291,16 +292,22 @@ h1 {
 	width: .75em;
 }
 #wz-events {
-	padding: 1em;
+	padding: .5em;
 	align-self: center;
 	overflow-y: scroll;
 	max-height: 30em;
+	min-width: 25em;
+	min-height: 20em;
+	margin-left: 1em;
+	margin-right: 1em;
 }
 #wz-events-header {
 	padding-bottom: .5em;
 }
 #wz-realms-info {
 	align-self: center;
+	min-width: 25em;
+	min-height: 20em;
 }
 #wz-alsius, #wz-ignis, #wz-syrtis {
 	display: grid;
@@ -311,6 +318,7 @@ h1 {
 	gap: 0 2em;
 	padding-top: .5em;
 	padding-bottom: .5em;
+	min-height: 5em;
 }
 #wz-alsius, #wz-ignis {
 	margin-bottom: 3em;
@@ -368,7 +376,10 @@ h1 {
 }
 #we-events, #we-select, #we-top {
 	margin-top: 1em;
-	padding: 1em;
+	padding: .5em;
+}
+#we-events {
+	min-height: 30vw;
 }
 #we-prev-day {
 	visibility: hidden;
@@ -390,6 +401,15 @@ h1 {
 #ws-container .statcard {
 	padding: .5em;
 	flex: 1;
+}
+#ws-7d, #ws-30d {
+	min-width: 80vw;
+}
+#ws-7d {
+	min-height: 30em;
+}
+#ws-30d {
+	min-height: 20em;
 }
 #ws-container h3 {
 	text-align: center;
@@ -436,10 +456,14 @@ h1 {
 /* ADAPTATIVE VIEWS */
 
 @media (max-width: 799px) {
+	#main-container {
+		padding: .1em;
+	}
 	#menu {
 		line-height: 2em;
 		text-align: left;
 		padding: 1em;
+		min-height: 2em;
 	}
 	#menu, #footer {
 		box-shadow: 0px 0px 2px 2px rgba(200, 200, 200, .4);
@@ -482,11 +506,40 @@ h1 {
 		grid-template-columns: 1fr;
 	}
 	#wz-map {
-		justify-self: center;
+		text-align: center;
+		width: 90vw;
+		min-height: 65vw;
+	}
+	#wz-events, #wz-map, #wz-realms-info {
+		min-width: auto;
 	}
 	/* WAR STATISTICS */
 	#ws-container .statcard {
 		width: 100%;
+	}
+	#ws-7d > div {
+		min-height: 30em;
+		min-width: 80vw;
+	}
+	#ws-30d > div {
+		min-height: 25em;
+		min-width: 80vw;
+	}
+}
+@media (min-width: 800px) and (max-width: 1600px) {
+	#menu {
+		/* CLS fix on multiline menu */
+		min-height: 6em;
+	}
+}
+@media (min-width: 800px) and (max-width: 1400px) {
+	#ws-7d > div {
+		min-height: 32em;
+		min-width: 20vw;
+	}
+	#ws-30d > div {
+		min-height: 25em;
+		min-width: 20vw;
 	}
 }
 @media (min-width: 800px) {
@@ -508,5 +561,8 @@ h1 {
 		color: #ccaaff;
 		box-shadow: 0 .1em .3em rgba(140, 140, 140, .4);
 		transition-duration: .5s;
+	}
+	#wz-map-map {
+		width: 500px
 	}
 }

@@ -2,7 +2,6 @@ let external_link = `
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAvUlEQVQ4y7WTMQ4CIRBFH8bS0gPY2ngCLfYqkHCoTWavsjWXgFPYOjbLujFAWBN/Axnm/598ZgDuMUYtwXuvAN774ruIqFFVTSkxzzPfcM6dgCdwEZGU69baT1NWog9GRFZ3VdUD/TAi8rLWMk3TWuwW2JKdc2aXgIhoiQxw/JUcQiCE0A5xG1jVodbQQT4D16JAHpyWczYoZjCOowF0OZuo/kIPedcc/E3AxBgVKC5TC8MwrPdHbZ1bWIxvbxir8kTznLrSAAAAAElFTkSuQmCC" style="height: .90em">
 `;
 let menu = `
-	<div id="menu" class="card">
 	<div id="hamburger">
 	<a href="javascript:toggle_menu('on')" id="menu_toggler">${_("☰  Menu")}</a>
 	</div>
@@ -24,14 +23,11 @@ let menu = `
 			<option value="fr">🇫🇷 Français</option>
 		</select>
 	</div>
-	</div>
 `;
 let footer = `
-	<div id="footer" class="card">
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.</i></p>
-	</div>
 `;
 
 let old_menu_width = 100000000;
@@ -63,8 +59,8 @@ function toggle_menu(state) {
 
 $(document).ready(function() {
 
-	$("#main-container").prepend(menu);
-	$("body").append(footer);
+	$("#menu").html(menu);
+	$("#footer").append(footer);
 	cookie = decodeURIComponent(document.cookie).split("=");
 	if (cookie[0] == "__i18n__lang" && __i18n__.supported_lang.includes(cookie[1])) {
 		$("#lang").val(cookie[1]);
