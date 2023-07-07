@@ -72,7 +72,7 @@ function draw_map(images) {
 		}
 		return canvas.toDataURL("image/png");
 	}
-	catch {
+	catch (_unused) {
 		console.log("canvas failed, using NGE's map");
 		return "https://www.championsofregnum.com/ranking/data/ra/gen_map.jpg";
 	}

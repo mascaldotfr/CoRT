@@ -40,6 +40,33 @@ If you want to make changes to CoRT or run it locally, you can use python to
    Some parts of the site are MIT licensed as exceptions, please see their
    header files.
 
+## Contributing
+
+If you plan to bring code improvements:
+
+0. The site should be *usable* despite small visual glitches with Firefox 52.9.0 on
+   Windows XP, keep that in mind for the frontend, even if these requirements
+   may change in the future. I will fix old compat stuff if needed. Also check
+   if your changes are fine in a mobile browser.
+1. Keep things simple; simple code may be slower but given the simplicity of
+   the proposed tools there is no bottleneck, and i don't want them when
+   maintaining.
+2. Keep the style consistent, even if sometimes it's gross like not using dot
+   notation for hashes.
+3. Javascript ecmascript version must not be greater than 8, please use
+   [JSHint](https://jshint.com/install/) to check this out, or mention
+   you didn't. Please avoid big polyfills the best you can. Linux usage:
+   ```shell
+   cd /tmp
+   npm install jshint
+   cd node_modules/jshint
+   echo '{ "esversion"     : 8 }' > jshintrc
+   ./jshint -c jshintrc /where/is/CoRT/js/*.js | grep esversion
+   # Should return nothing
+   ```
+4. If you touch the python code, try to not adding extra modules as a dependency.
+
+
 ## Credits
 
 * [Xia](https://github.com/xia) and Edward "[urkle](https://github.com/urkle)"

@@ -34,14 +34,14 @@ const $ = (function (selector) {
 			try {
 				selector = document.querySelector(selector);
 			}
-			catch { } // it's already a node
+			catch (_unused) { } // it's already a node
 			Object.assign(selector.style, jscss);
 		},
 		empty: function() {
 			try {
 				document.querySelector(selector).replaceChildren();
 			}
-			catch { // old browsers
+			catch (_unused) { // old browsers
 				document.querySelector(selector).innerHTML = "";
 			}
 		},
@@ -62,7 +62,7 @@ const $ = (function (selector) {
 				document.querySelectorAll(selector).forEach( (elm) =>
 					elm.addEventListener(anevent, callable) );
 			}
-			catch {
+			catch (_unused) {
 				selector.addEventListener(anevent, callable);
 			}
 		},
@@ -98,7 +98,7 @@ const $ = (function (selector) {
 				try {
 					document.querySelector(selector).innerHTML = text;
 				}
-				catch {
+				catch (_unused) {
 					selector.innerHTML = text;
 				}
 			}
@@ -107,7 +107,7 @@ const $ = (function (selector) {
 					// real selector
 					return document.querySelector(selector).innerText;
 				}
-				catch {
+				catch (_unused) {
 					// selector is actually a node
 					return selector.innerText;
 				}
@@ -123,7 +123,7 @@ const $ = (function (selector) {
 				try {
 					document.querySelector(selector).value = value;
 				}
-				catch {
+				catch (_unused) {
 					selector.value = value;
 				}
 			}
@@ -132,7 +132,7 @@ const $ = (function (selector) {
 					// real selector
 					return document.querySelector(selector).value;
 				}
-				catch {
+				catch (_unused) {
 					// selector is actually a node
 					return selector.value;
 				}
