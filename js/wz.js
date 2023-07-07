@@ -104,10 +104,6 @@ async function display_wz(force_display) {
 			console.error(data["failed"]);
 			return;
 		}
-		// Do nothing if nothing changed compared to the last fetch
-		if (data["map_changed"] === false && data["gems_changed"] === false &&
-		    data["relics_changed"] === false && force_display !== true)
-			return;
 	}
 	catch (error) {
 		$("#wz-info-error").html(`<b>Failed to get the warstatus:</b> <code>${error}</code>`);

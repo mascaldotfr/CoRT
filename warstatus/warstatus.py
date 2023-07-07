@@ -176,6 +176,11 @@ def main():
                     output["location"] = "altar" if old_relic == None else "transit"
                     events_log.insert(0, output)
 
+        # Bail out if nothing changed
+        if not status["relics_changed"] and not status["map_changed"] \
+           and not status["gems_changed"]:
+               sys.exit(0)
+
         # Sort and store events
         events_log = sorted(events_log, key=lambda d: d["date"], reverse=True)
         # Initialize all events on the first run
