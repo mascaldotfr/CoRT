@@ -38,7 +38,12 @@ const $ = (function (selector) {
 			Object.assign(selector.style, jscss);
 		},
 		empty: function() {
-			document.querySelector(selector).replaceChildren();
+			try {
+				document.querySelector(selector).replaceChildren();
+			}
+			catch { // old browsers
+				document.querySelector(selector).innerHTML = "";
+			}
 		},
 		getJSON: async function(url) {
 			const reply = await fetch(url)
