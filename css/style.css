@@ -120,9 +120,7 @@ h1 {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 	margin-bottom: .5em;
-	width: 100%;
 }
-
 .p0, .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10 {
 	display: grid;
 	grid-template-columns: auto 1fr;
@@ -460,6 +458,9 @@ h1 {
 @media (max-width: 799px) {
 	.card {
 		margin: .25em;
+	}
+	.t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
+		margin-bottom: .5em;
 	}
 	#main-container {
 		padding: .1em;
