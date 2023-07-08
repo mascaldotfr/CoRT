@@ -13,10 +13,5 @@ try {
 	document.addEventListener("DOMContentLoaded", async_or_die);
 }
 catch (_unused) {
-	try {
-		window.attachEvent("onload", async_or_die);
-	}
-	catch (_unused) {
-		window.onload = async_or_die;
-	}
+	window.onload = async_or_die;
 }
