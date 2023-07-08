@@ -98,10 +98,9 @@ h1 {
 
 /* TRAINER (main namespace)*/
 
-#trainer-container {
-    display: grid;
-    align-items: center;
-    grid-template-rows: 1fr 1fr 1fr 1fr auto;
+#t-container {
+	max-width: 1024px;
+	margin: 0 auto;
 }
 .setup {
 	display: flex;
