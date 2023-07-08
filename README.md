@@ -69,10 +69,8 @@ If you plan to bring code improvements:
 (0) Why this specific version and browser? This is the oldest version
 supporting JS async functions, Chrome implement things earlier, and it works
 under XP and Vista, avoiding IE polyfills, making it work almost everywhere.
-Actually the trainer `<dialog>` is not displaying well and it's considered
-acceptable to the point i don't want to add a 28kb polyfill. The oldest browser
-a bug was reported against was Chrome 80 by the way (replaceChildren missing)
-in 9 monthes, so we've mostly up to date users.
+The oldest browser a bug was reported against was Chrome 80 by the way
+(replaceChildren missing) in 9 monthes, so we've mostly up to date users.
 
 (1) You can also test by installing Win XP in a virtual machine, or use an old
    [Debian Live image which has already that version preloaded](https://cdimage.debian.org/cdimage/archive/9.2.0-live/amd64/iso-hybrid/debian-live-9.2.0-amd64-xfce.iso) in a virtual machine as well.

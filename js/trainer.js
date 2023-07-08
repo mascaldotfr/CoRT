@@ -56,9 +56,14 @@ $(document).ready(function() {
 			<span id="t-dpointsleft">x</span>/<span id="t-dpointstotal">x</span>
 		<b>${_("Power points:")}</b>
 			<span id="t-ppointsleft">x</span>/<span id="t-ppointstotal">x</span>`);
- 	$("#t-dialog h3").text(_("Here is the link to your setup:"));
-	$("#t-dialog-copy").text(_("Copy link"));
-	$("#t-dialog-close").text(_("Close") + " (Esc)");
+	if (typeof HTMLDialogElement === "function") {
+		$("#t-dialog h3").text(_("Here is the link to your setup:"));
+		$("#t-dialog-copy").text(_("Copy link"));
+		$("#t-dialog-close").text(_("Close") + " (Esc)");
+	}
+	else { // browser with no <dialog> support
+		$("#t-dialog").hide();
+	}
 
 	// generate characters levels options
 	for (let i = maxlevel - 1; i >= minlevel; i--) {
@@ -120,12 +125,17 @@ $("#t-save").on("click", function() {
 		return;
 	}
 	let saved_url = save_setup_to_url();
-	$("#t-dialog-url").val(saved_url);
-	$("#t-dialog").attr("inert", "true");
-	document.getElementById("t-dialog").showModal();
-	$("#t-dialog").removeAttr("inert");
-	$("body").css("filter", "blur(10px)");
-
+	if (typeof HTMLDialogElement === "function") {
+		$("#t-dialog-url").val(saved_url);
+		$("#t-dialog").attr("inert", "true");
+		document.getElementById("t-dialog").showModal();
+		$("#t-dialog").removeAttr("inert");
+		$("body").css("filter", "blur(10px)");
+	}
+	else { // <dialog> unsupported
+		window.prompt(_("Here is the link to your setup:"), saved_url);
+		window.location.href = saved_url;
+	}
 });
 
 document.addEventListener('keyup', function(e) {
