@@ -44,10 +44,10 @@ If you want to make changes to CoRT or run it locally, you can use python to
 
 If you plan to bring code improvements:
 
-0. The site should be *usable* despite small visual glitches with Firefox 52.9.0 on
-   Windows XP, keep that in mind for the frontend, even if these requirements
-   may change in the future. I will fix old compat stuff if needed. Also check
-   if your changes are fine in a mobile browser.
+0. The site should be *usable* despite obvious visual glitches with Firefox 52 (0),
+   keep that in mind for the frontend, even if these requirements
+   may change in the future. At least check at https://caniuse.com/ (1)
+   I'll fix things if you struggle or didn't notice.
 1. Keep things simple; simple code may be slower but given the simplicity of
    the proposed tools there is no bottleneck, and i don't want them when
    maintaining.
@@ -66,6 +66,16 @@ If you plan to bring code improvements:
    ```
 4. If you touch the python code, try to not adding extra modules as a dependency.
 
+(0) Why this specific version and browser? This is the oldest version
+supporting JS async functions, Chrome implement things earlier, and it works
+under XP and Vista, avoiding IE polyfills, making it work almost everywhere.
+Actually the trainer `<dialog>` is not displaying well and it's considered
+acceptable to the point i don't want to add a 28kb polyfill. The oldest browser
+a bug was reported against was Chrome 80 by the way (replaceChildren missing)
+in 9 monthes, so we've mostly up to date users.
+
+(1) You can also test by installing Win XP in a virtual machine, or use an old
+   [Debian Live image which has already that version preloaded](https://cdimage.debian.org/cdimage/archive/9.2.0-live/amd64/iso-hybrid/debian-live-9.2.0-amd64-xfce.iso) in a virtual machine as well.
 
 ## Credits
 
