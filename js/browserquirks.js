@@ -28,5 +28,25 @@ function loademojis() {
 	style.appendChild(document.createTextNode(css));
 	head.appendChild(style);
 };
-loademojis();
 
+// Deal with browsers not supporting flexbox gaps (old firefox, not so old safari)
+function is_gap_supported() {
+	if (CSS.supports("gap", "1em"))
+		return;
+	let head = document.getElementsByTagName("head")[0];
+	let link = document.createElement("link");
+	link.rel = "stylesheet";
+	link.type = "text/css";
+	link.href= "css/unsupported_gap.css";
+	head.appendChild(link);
+}
+
+
+try {
+	document.addEventListener("DOMContentLoaded", loademojis);
+	document.addEventListener("DOMContentLoaded", is_gap_supported);
+}
+catch (_unused) {
+	window.onload = loademojis;
+	window.onload = is_gap_supported;
+}
