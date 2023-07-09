@@ -376,6 +376,7 @@ async function load_tree() {
 		}
 	});
 	input_setup_from_url();
+	$("#skillinfo").show();
 	// Populate skillinfo
 	$("#t-trainer .t7 .p2 .icon").trigger("click");
 	$(".setup").show();

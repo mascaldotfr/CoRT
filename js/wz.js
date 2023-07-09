@@ -130,11 +130,11 @@ async function display_wz() {
 			}
 		}
 		$(`#wz-${realm.toLowerCase()}`).html(`
-				<h2>
+				<span class="wz-realm-header">
 				<span class="realmname ${realm_colors[realm]}">${realm}</span>
 				<span class="gems">${gems.splice(0, 6).join("")}</span>
 				<span class="relics">${relics}</span>
-				</h2>
+				</span>
 				<span class="forts">${forts.splice(0, 4).join("")}</span>
 		`)
 	}
