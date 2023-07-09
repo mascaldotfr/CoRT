@@ -78,15 +78,15 @@ function draw_map(images) {
 	}
 }
 
-async function display_wz(force_display) {
+async function display_wz() {
 	// Same order as the website
 	let realm_colors = get_realm_colors();
 	let gems = [];
 	let forts = [];
 
-	if (navigator.onLine === false) {
-		$("#wz-info-error").html(`<b>You are offline, can't refresh the status.
-			                  Will retry once you are online.</b>`);
+	if ($onlinemanager.online() === false) {
+		$("#wz-info-error").html($onlinemanager.offlineMessage +
+					 " " + $onlinemanager.willRetryMessage);
 		return;
 	}
 	try {
@@ -156,20 +156,9 @@ $(document).ready(function() {
 		_("The page will update itself every minute.") +
 		" " + _("Last updated:"));
 
-	display_wz(true);
+	display_wz();
 });
 
-// timer are stopped when phones and tablets are on sleep mode,
-// force reload when they're woken up
-if ("ontouchstart" in document.documentElement) {
-	window.addEventListener("visibilitychange", (e) => {
-		if (document.visibilityState == "visible")
-			display_wz(true);
-	});
-}
-// Same idea as above but when the connection is available again
-window.addEventListener("online", (e) => {
-	display_wz(true);
-});
+$onlinemanager.whenBackOnline(display_wz);
 
 setInterval(display_wz, 30 * 1000)

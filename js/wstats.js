@@ -95,6 +95,11 @@ function show_graphs(data, selector, onlyinteger=true) {
 
 async function display_stat() {
 
+	if ($onlinemanager.online() === false) {
+		$("#ws-info-error").html($onlinemanager.offlineMessage +
+					 " " + $onlinemanager.willRetryMessage);
+		return;
+	}
 	try {
 		var data = await $().getJSON(__api__urls["stats"]);
 		$("#ws-info-error").empty();
@@ -202,5 +207,7 @@ $(document).ready(function() {
 
 	display_stat();
 });
+
+$onlinemanager.whenBackOnline(display_stat);
 
 setInterval(display_stat, 60 * 1000);

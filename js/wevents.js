@@ -58,6 +58,11 @@ function display_events() {
 }
 
 async function get_data() {
+	if ($onlinemanager.online() === false) {
+		$("#we-info-error").html($onlinemanager.offlineMessage +
+					 " " + $onlinemanager.wontRetryMessage);
+		return;
+	}
 	try {
 		data = await $().getJSON(__api__urls["events"]);
 		$("#we-info-error").empty();
@@ -102,7 +107,7 @@ $(document).ready(async function() {
 	$("#title").text(_("WZ events"));
 	$("#we-info-info").text(
 		_("All events (except relics) over the last 30 days.") +
-		" " + _("Last updated:"));
+		" " + _("Last updated:") + " ");
 	$("#we-filter-label").text(_("Filter:"));
 	let options = [ ["none", _("None")],
 			["noforts", _("No forts")],
@@ -161,3 +166,5 @@ $(document).ready(async function() {
 		$("#we-filter").trigger("change");
 	}
 });
+
+$onlinemanager.whenBackOnline(display_events);

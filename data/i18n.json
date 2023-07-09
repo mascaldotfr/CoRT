@@ -1,5 +1,20 @@
 __i18n__ = {
 	"supported_lang": ["en", "fr", "es", "de"],
+	"You are offline. Impossible to fetch the data.": {
+		"fr": "Vous êtes hors ligne. Impossible de récupérer les données",
+		"es": "Estas desconectado. Imposible recuperar los datos.",
+		"de": "Du bist offline. Es ist nicht möglich, die Daten abzurufen."
+	},
+	"I will retry once you are online.": {
+		"fr": "Je vais réessayer une fois en ligne",
+		"es": "Volveré a intentarlo una vez que esté en línea.",
+		"de": "Ich werde es erneut versuchen, sobald du online bist."
+	},
+	"Please get back online and refresh this page.": {
+		"fr": "Veuillez vous reconnecter et rafraîchir cette page",
+		"es": "Vuelva a conectarse y actualice esta página.",
+		"de": "Bitte gehst du  wieder online und aktualisierst du diese Seite."
+	},
 	"Trainer": {
 		"fr": "Entraîneur",
 		"es": "Entrenador",
