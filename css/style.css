@@ -153,8 +153,9 @@ h1 {
 #skillinfo p.description {
 	margin: initial;
 }
-#skillinfo > div > p {
-	margin: var(--default_margin_padding);
+#skillinfo > p {
+	margin: initial;
+	margin-left: var(--default_margin_padding);
 }
 #skillinfo table {
 	margin: var(--default_margin_padding);

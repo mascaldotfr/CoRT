@@ -456,7 +456,7 @@ function display_spell(spellinfo) {
 			   <th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
 			  </tr></thead>`;
 		let tfooter = "</table></div>";
-		spellhtml = theader + spellhtml + tabularhtml + tfooter;
+		spellhtml = spellhtml + theader + tabularhtml + tfooter;
 	}
 	$("#skillinfo").html(spellhtml);
 }
