@@ -68,8 +68,7 @@ select {
 	border-radius: 5px;
 }
 #footer {
-	/* override default from .card, as this one needs an upward shadow */
-	box-shadow: 0 -.1em .3em rgba(140, 140, 140, .4);
+	margin-top: 2em;
 }
 h1 {
 	text-align: center;
