@@ -6,8 +6,8 @@ Regnum forum *(update: they ended up using this trainer instead)* but it has
 some outdated mechanics.
 
 This is a (simpler) knockoff of the regnumsentinel website trainer, this one
-will be alive as long as GitHub exists and is free software. On top of that,
-there are countdown pages for bosses, BZ and WZ statuses, and statistics.
+will be alive as long as GitHub exists and is open source software. On top of
+that, there are countdown pages for bosses and BZ, WZ status and statistics.
 
 The website just requires a webserver serving static files to run, everything
 is run client side, with the exception of the WZ status and statistics (see the
@@ -44,18 +44,18 @@ If you want to make changes to CoRT or run it locally, you can use python to
 
 If you plan to bring code improvements:
 
-0. The site should be *usable* despite obvious visual glitches with Firefox 52 (0),
-   keep that in mind for the frontend, even if these requirements
-   may change in the future. At least check at https://caniuse.com/ (1)
-   I'll fix things if you struggle or didn't notice.
+0. The site should be *usable* despite obvious visual glitches with [Firefox 52](#why-using-firefox-52-as-a-baseline),
+   and is expected to look as intended in the latest stable versions of major
+   browsers (Chrome, Firefox, Edge, Safari, and on mobile as well). Keep that
+   in mind for the frontend. At least check at https://caniuse.com/ .
 1. Keep things simple; simple code may be slower but given the simplicity of
    the proposed tools there is no bottleneck, and i don't want them when
-   maintaining.
+   maintaining. That includes bringing big libraries and polyfills.
 2. Keep the style consistent, even if sometimes it's gross like not using dot
    notation for hashes.
-3. Javascript ecmascript version must not be greater than 8, please use
-   [JSHint](https://jshint.com/install/) to check this out, or mention
-   you didn't. Please avoid big polyfills the best you can. Linux usage:
+3. The javascript used in CoRT must follow ECMAScript 8, please use
+   [JSHint](https://jshint.com/) to check this out, or mention
+   you didn't. Linux usage:
    ```shell
    cd /tmp
    npm install jshint
@@ -66,14 +66,20 @@ If you plan to bring code improvements:
    ```
 4. If you touch the python code, try to not adding extra modules as a dependency.
 
-(0) Why this specific version and browser? This is the oldest version
-supporting JS async functions, Chrome implement things earlier, and it works
-under XP and Vista, avoiding IE polyfills, making it work almost everywhere.
+### Why using Firefox 52 as a baseline
+
+This is the oldest Firefox version supporting JS async functions, Chrome
+implements things earlier, and it works under XP and Vista, avoiding IE
+polyfills, making it work almost everywhere.
+
 The oldest browser a bug was reported against was Chrome 80 by the way
 (replaceChildren missing) in 9 monthes, so we've mostly up to date users.
 
-(1) You can also test by installing Win XP in a virtual machine, or use an old
+You can test by installing Win XP in a virtual machine, or use an old
    [Debian Live image which has already that version preloaded](https://cdimage.debian.org/cdimage/archive/9.2.0-live/amd64/iso-hybrid/debian-live-9.2.0-amd64-xfce.iso) in a virtual machine as well.
+
+Note that this requirement may change over time, for example if TLS technology
+changes and makes this version unable to connect to https sites.
 
 ## Credits
 
@@ -83,4 +89,5 @@ The oldest browser a bug was reported against was Chrome 80 by the way
 * [Joshua2504](https://github.com/Joshua2504) and
   [Shaiko](https://github.com/Shaiko35) from https://cor-forum.de/ for keeping
   the spell database updated
-* Slartibartfast, the regnumsentinel.com creator
+* Slartibartfast, the regnumsentinel.com creator, site that gave me big hints about
+  the UI should be done.
