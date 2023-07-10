@@ -46,13 +46,10 @@ def statistics(events):
     conn.row_factory = sqlite3.Row
     sql = conn.cursor()
     try:
-        sql.execute("select count(*) from events limit 1;")
-    except:
-        try:
-            sql.executescript(db_schema)
-        except Exception as e:
-            print("Failed to create db: ", e)
-            sys.exit(1)
+        sql.executescript(db_schema)
+    except Exception as e:
+        print("Failed to create db: ", e)
+        sys.exit(1)
 
     insert_queries = []
     sql.execute("select max(date) from events limit 1;")
