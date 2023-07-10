@@ -109,7 +109,7 @@ class Reporter:
         # Ensure proper average value if we've less than self.startfrom days of data
         self.sql.execute(f"""select (unixepoch("now") - min(date)) / (24 * 3600) as days
                              from report
-                             where date > {self.startfrom};""")
+                             where date >= {self.startfrom};""")
         self.sample_days = self.sql.fetchone()["days"]
 
     def get_activity(self):
@@ -121,7 +121,7 @@ class Reporter:
                        {sign} cast(count (rowid) as float) / {self.sample_days} as average
                        from report
                        where type = "fort" and owner {condition} location
-                       and date > {self.startfrom}
+                       and date >= {self.startfrom}
                        group by owner, time
                        order by time;"""
 
@@ -144,7 +144,7 @@ class Reporter:
                        from report
                        where type = "fort" and owner {condition} location
                        and name like "Great Wall of %"
-                       and date > {self.startfrom}
+                       and date >= {self.startfrom}
                        group by owner, time
                        order by time;"""
 
@@ -195,7 +195,7 @@ class Reporter:
             return f"""select owner as realm, count(rowid) as count
                        from report
                        where type = "fort" and owner {condition} location
-                       and date > {self.startfrom}
+                       and date >= {self.startfrom}
                        group by owner;"""
 
         # Get captured and recovered forts
@@ -213,7 +213,7 @@ class Reporter:
         self.sql.execute(f"""select  owner as realm, name, count(name) as count
                              from report
                              where type="fort" and owner != location
-                             and date > {self.startfrom}
+                             and date >= {self.startfrom}
                              group by owner, name
                              order by count asc;""")
         for r in self.sql.fetchall():
@@ -227,7 +227,7 @@ class Reporter:
                              from report
                              where type = "fort" and owner != location
                              and name like "Great Wall of %"
-                             and date > {self.startfrom}
+                             and date >= {self.startfrom}
                              group by owner;""")
         for r in self.sql.fetchall():
             self.stats[r["realm"]]["invasions"]["last"]["location"] = r["location"]
@@ -239,7 +239,7 @@ class Reporter:
                              from report
                              where type = "fort" and owner = location
                              and name like "Great Wall of %"
-                             and date > {self.startfrom}
+                             and date >= {self.startfrom}
                              group by location;""")
         for r in self.sql.fetchall():
             self.stats[r["realm"]]["invasions"]["invaded"]["count"] = r["count"]
@@ -248,7 +248,7 @@ class Reporter:
         self.sql.execute(f"""select owner as realm, max(date) as date, count(date) as count
                              from report
                              where type = "gem" and location != owner
-                             and date > {self.startfrom}
+                             and date >= {self.startfrom}
                              group by owner;""")
         for r in self.sql.fetchall():
             self.stats[r["realm"]]["gems"]["stolen"]["last"] = r["date"]
@@ -259,7 +259,7 @@ class Reporter:
                              max(date) as date
                              from report
                              where type = "wish"
-                             and date > {self.startfrom}
+                             and date >= {self.startfrom}
                              group by location;""")
         for r in self.sql.fetchall():
             self.stats[r["realm"]]["wishes"]["last"] = r["date"]
@@ -270,7 +270,7 @@ class Reporter:
     def dump_events(self):
         self.sql.execute(f"""select *
                              from report
-                             where date > {self.startfrom}
+                             where date >= {self.startfrom}
                              order by date desc""")
         # Since we're getting 6k events it's acceptable to not use a generator
         # as it's faster like this than calling json.dump() repeatedly
