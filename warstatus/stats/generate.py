@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
 
-from datetime import datetime, timedelta
+from datetime import datetime
 import json
 import sqlite3
 import sys
@@ -71,10 +71,17 @@ def statistics(events):
         conn.commit()
         start_time = timer()
         now = datetime.now()
-        full_report = [{"generated": int(now.timestamp())}]
         days = [7, 30]
+
+        # Optimise queries by using only the needed subset of the table
+        report_mints = int(now.timestamp()) - (max(days) * 24 * 3600)
+        sql.execute(f"""create temporary table report as
+                      select * from events where date >= {report_mints};""")
+
+        full_report = [{"generated": int(now.timestamp())}]
         for day in days:
-            reporter = Reporter(conn, day)
+            seconds_ago = int(now.timestamp()) - (day * 24 * 3600)
+            reporter = Reporter(conn, seconds_ago)
             full_report.append(reporter.generate_stats())
             if day == max(days):
                 full_report[0]["activity"] = reporter.get_activity()
@@ -83,6 +90,7 @@ def statistics(events):
                     json.dump(reporter.dump_events(), jsonfile)
         end_time = timer()
         full_report[0]["generation_time"] = end_time - start_time;
+
         with open(outfile, "w") as jsonfile:
             json.dump(full_report, jsonfile)
 
@@ -90,18 +98,17 @@ def statistics(events):
 
 class Reporter:
 
-    def __init__(self, conn, lastxdays):
+    def __init__(self, conn, lastxseconds):
         self.conn = conn
         self.sql = self.conn.cursor()
-        self.startfrom = datetime.now() - timedelta(days=lastxdays)
-        self.startfrom = self.startfrom.timestamp()
+        self.startfrom = lastxseconds
         self.stats = {"Alsius": {}, "Ignis": {}, "Syrtis": {}}
         self.sample_days = None
 
     def get_oldest_event(self):
         # Ensure proper average value if we've less than self.startfrom days of data
         self.sql.execute(f"""select (unixepoch("now") - min(date)) / (24 * 3600) as days
-                             from events
+                             from report
                              where date > {self.startfrom};""")
         self.sample_days = self.sql.fetchone()["days"]
 
@@ -112,7 +119,7 @@ class Reporter:
         def query(condition, sign=""):
             return f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
                        {sign} cast(count (rowid) as float) / {self.sample_days} as average
-                       from events
+                       from report
                        where type = "fort" and owner {condition} location
                        and date > {self.startfrom}
                        group by owner, time
@@ -134,7 +141,7 @@ class Reporter:
         def query(condition, sign=""):
             return f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
                        {sign} cast(count(rowid) as float) / {self.sample_days} as average
-                       from events
+                       from report
                        where type = "fort" and owner {condition} location
                        and name like "Great Wall of %"
                        and date > {self.startfrom}
@@ -186,7 +193,7 @@ class Reporter:
 
         def query_fort_events(condition):
             return f"""select owner as realm, count(rowid) as count
-                       from events
+                       from report
                        where type = "fort" and owner {condition} location
                        and date > {self.startfrom}
                        group by owner;"""
@@ -204,7 +211,7 @@ class Reporter:
 
         # Get most captured forts by realm
         self.sql.execute(f"""select  owner as realm, name, count(name) as count
-                             from events
+                             from report
                              where type="fort" and owner != location
                              and date > {self.startfrom}
                              group by owner, name
@@ -217,7 +224,7 @@ class Reporter:
 
         # Get count of invasions and last invasion by realm
         self.sql.execute(f"""select owner as realm, location, max(date) as date, count(name) as count
-                             from events
+                             from report
                              where type = "fort" and owner != location
                              and name like "Great Wall of %"
                              and date > {self.startfrom}
@@ -229,7 +236,7 @@ class Reporter:
 
         # Get the number of times a realm got invaded
         self.sql.execute(f"""select owner as realm, count(name) as count
-                             from events
+                             from report
                              where type = "fort" and owner = location
                              and name like "Great Wall of %"
                              and date > {self.startfrom}
@@ -239,7 +246,7 @@ class Reporter:
 
         # Get last gem stolen date and total count
         self.sql.execute(f"""select owner as realm, max(date) as date, count(date) as count
-                             from events
+                             from report
                              where type = "gem" and location != owner
                              and date > {self.startfrom}
                              group by owner;""")
@@ -250,7 +257,7 @@ class Reporter:
         # Get last dragon wish and wishes count
         self.sql.execute(f"""select location as realm, count(rowid) as count,
                              max(date) as date
-                             from events
+                             from report
                              where type = "wish"
                              and date > {self.startfrom}
                              group by location;""")
@@ -262,7 +269,7 @@ class Reporter:
 
     def dump_events(self):
         self.sql.execute(f"""select *
-                             from events
+                             from report
                              where date > {self.startfrom}
                              order by date desc""")
         # Since we're getting 6k events it's acceptable to not use a generator

@@ -51,6 +51,8 @@ It's advised to read `/js/wz.js` as well for exploitation. Clearly the format ha
 been optimized for display on the site and try to play well with NGE inconsistent
 website code, sacrificing a bit of the consistency.
 
+Note that the API is [static](https://www.seancdavis.com/posts/lets-talk-about-static-apis/).
+
 ```
 {
     "forts": [ // forts in official site order

@@ -21,7 +21,8 @@ Using the brotli or gzip compression in your web server is recommended,
 especially for `events.json` which weights 500K uncompressed but only a few
 kilobytes with brotli's level 4 compression.
 
-The "API endpoint" URL is: https://hail.thebus.top/cortdata/warstatus/stats/statistics.json
+The "API endpoint" for statistics URL is: https://hail.thebus.top/cortdata/warstatus/stats/statistics.json
+The "API endpoint" for events URL is: https://hail.thebus.top/cortdata/warstatus/stats/events.json
 The full database is publicly available at: https://hail.thebus.top/cortdata/warstatus/stats/events.sqlite
 
 
@@ -30,12 +31,17 @@ The full database is publicly available at: https://hail.thebus.top/cortdata/war
 This is a carbon copy of the warstatus events array. Please see `/warstatus/README.md`.
 
 While the database could be optimized, according to benchmarks, each year of
-events (~100000 events) is leading to an additional 300ms execution time, and a
-database size increase of 4MB. Given the linearity of the increase, that's 3
-seconds in 10 years. Which is acceptable, given that the script has at worst 1
-minute to finish. All this on a cheap single core SSD VPS with 512MB of RAM.
+events (~100000 events) is leading to an additional 8ms execution time, and a
+database size increase of 4MB. That's 86ms in 2033 for example. Which is more
+than acceptable, given that the script has at worst 1 minute to finish. All
+this on a cheap single core non NVME SSD VPS with 512MB of RAM, by the way.
 
-Relics events are not recorded.
+Events are never deleted, since anyway statistics are made from a temporary
+table containing only the events needed, and as mentioned above using the
+database as an all-time archive does not lead to an amazingly high overhead,
+especially that the statistics API is [static](https://www.seancdavis.com/posts/lets-talk-about-static-apis/).
+
+Relics events are not recorded, but will if they matter again in the invasions.
 
 ## Response format
 
