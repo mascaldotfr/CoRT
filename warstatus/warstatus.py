@@ -16,6 +16,7 @@
 # along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import datetime, timezone
+import gzip
 import json
 import os
 import sys
@@ -25,6 +26,9 @@ from bs4 import BeautifulSoup
 
 # File where to dump the status
 outfile = "warstatus.json"
+stats_db_file = "stats/events.sqlite"
+stats_outfile = "stats/statistics.json"
+stats_outfile_events = "stats/events.json"
 base_url = "https://championsofregnum.com/"
 
 # return just the filename part of the url
@@ -102,8 +106,7 @@ def main():
         if len(failure) != 0:
             status = old_status
             status["failed"] = failure
-            with open(outfile, "w") as jsonfile:
-                json.dump(status, jsonfile)
+            writer(json.dumps(status), outfile)
             sys.exit(1)
 
         # Forts events
@@ -191,8 +194,7 @@ def main():
 
         status["generated"] = str(timestamp)
 
-        with open(outfile, "w") as jsonfile:
-            json.dump(status, jsonfile)
+        writer(json.dumps(status), outfile)
 
         # Make statistics non mandatory
         try:
@@ -201,9 +203,19 @@ def main():
             if len(old_status) == 0 or "failed" in old_status:
                 sys.exit(0)
             import stats.generate
+            st, ev = stats.generate.statistics(status["events_log"], stats_db_file,
+                                               stats_outfile, stats_outfile_events)
+            writer(st, stats_outfile)
+            writer(ev, stats_outfile_events)
         except Exception as e:
             print(e)
             sys.exit(1)
-        stats.generate.statistics(status["events_log"])
+
+def writer(data, fname):
+    with open(fname, "w") as f:
+        f.write(data)
+    with gzip.open(fname + ".gz", "wb") as f:
+        f.write(data.encode())
+
 
 main()

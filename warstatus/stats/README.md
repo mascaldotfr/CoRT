@@ -6,7 +6,11 @@ This directory includes the necessary code used to generate statistics.
 database `events.sqlite`. It generates a small JSON report called
 `statistics.json` and big JSON one `events.json` containing a dump of the events
 the last 30 days if any change happened since the last run. The default output
-directory is this very directory.
+directory is this very directory and can be modified in `../warstatus.py`.
+
+On top of the generated files, pre compressed gzip files are generated. Please
+see you web server documentation if you don't know how to activate the serving
+of such files.
 
 **You must have a working warstatus (see `/warstatus/README.md`) for statistics
 to be generated.** You can disable statistics just by renaming `generate.py`.
@@ -111,6 +115,10 @@ for example.
 
 The code is considered pretty naive by the way. I'm not very good with SQL.
 If anyone contribute, please keep things simple.
+
+Brotli precompressed files should be supported, but it requires extra
+dependencies for negligible benefits on the output size given the traffic the
+site generates.
 
 ### The sum of all the captured forts is not equal to the recovered ones
 

@@ -21,9 +21,6 @@ import sqlite3
 import sys
 from timeit import default_timer as timer
 
-db_file = "stats/events.sqlite"
-outfile = "stats/statistics.json"
-outfile_events = "stats/events.json"
 db_schema = """
 create table if not exists events (
     date integer not null,
@@ -35,7 +32,7 @@ create table if not exists events (
 """
 
 
-def statistics(events):
+def statistics(events, db_file, outfile, outfile_events):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -86,13 +83,10 @@ def statistics(events):
             if day == max(days):
                 full_report[0]["activity"] = reporter.get_activity()
                 full_report[0]["invasions"] = reporter.get_invasions()
-                with open(outfile_events, "w") as jsonfile:
-                    json.dump(reporter.dump_events(), jsonfile)
         end_time = timer()
         full_report[0]["generation_time"] = end_time - start_time;
 
-        with open(outfile, "w") as jsonfile:
-            json.dump(full_report, jsonfile)
+        return [json.dumps(full_report), json.dumps(reporter.dump_events())]
 
 
 
