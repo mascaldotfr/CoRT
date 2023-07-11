@@ -10,6 +10,15 @@ easily deploy CoRT it as promised.
 
 The dataset is available at: https://hail.thebus.top/cortdata/data.txt
 
+## Deployment
+
+- You need a PHP capable webserver and that's it. Put `submit.php` in some place on your server.
+- The file is compressed to `data.txt.gz` at every run for people having static
+  gzip compression enabled on their server (i let you google that as it's not
+  mandatory).
+- In case you get a weird setup, don't forget to ensure that the user running
+  php is allowed to write files in the same directory than `submit.php`.
+
 ## Data exploitation
 
 A simple python exploit code can be found at [exploit.py](exploit.py) in this
