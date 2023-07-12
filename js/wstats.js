@@ -116,7 +116,7 @@ async function display_stat() {
 	let now = new Date();
 	if (now.getTime() / 1000 - infos["generated"] > 3 * 3600) {
 		$("#ws-info-error").html(`<b>Nothing happened since the last 3 hours,
-			<a href="https://championsofregnum.com/index.php?l=1&sec=3">
+			<a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 			NGE's page</a> is probably not working.</b>`);
 	}
 

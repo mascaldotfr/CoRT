@@ -99,7 +99,7 @@ async function display_wz() {
 		if ("failed" in data) {
 			$("#wz-info-error").text(`
 			  Fetching the data from NGE's site failed and may have errors!
-			  Check out <a href="https://championsofregnum.com/index.php?l=1&sec=3">
+			  Check out <a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 			  NGE's page</a>!`);
 			console.error(data["failed"]);
 			return;
