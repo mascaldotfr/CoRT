@@ -1,4 +1,6 @@
 warstatus/*.json
+warstatus/*.json.gz
 warstatus/stats/*.json
+warstatus/stats/*.json.gz
 warstatus/stats/*.sqlite
 __pycache__**
