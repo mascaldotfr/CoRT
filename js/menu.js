@@ -6,7 +6,7 @@ let menu = `
 	<a href="javascript:toggle_menu('on')" id="menu_toggler">${_("☰  Menu")}</a>
 	</div>
 	<div id="menu-content">
-		<span class="menuitem"><b><a href="index.html">🏫${_("Trainer")}</a></b></span>
+		<span class="menuitem"><b><a href="./">🏫${_("Trainer")}</a></b></span>
 		<span class="menuitem"><b><a href="wz.html">🪓${_("WZ status")}</a></b></span>
 		<span class="menuitem"><b><a href="bosses.html">👾${_("Bosses status")}</a></b></span>
 		<span class="menuitem"><b><a href="bz.html">🏟${_("BZ status")}</a></b></span>
