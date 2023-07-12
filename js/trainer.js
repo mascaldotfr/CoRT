@@ -23,6 +23,8 @@ const class_type_masks = {
 	'warrior':0x40, 'barbarian':0x41, 'knight':0x42
 };
 
+const trainerdatasets = ["1.33.2", "1.33.3", "1.33.6", "1.33.12"];
+const newest_dataset = trainerdatasets.slice(-1);
 var trainerdata = null;
 var trainerdataversion = null;
 
@@ -30,12 +32,14 @@ const mindlevel = 1;
 const maxdlevel = 19;
 const minplevel = 0;
 const maxplevel = 5;
+const classes = ["knight", "barbarian", "conjurer", "warlock", "hunter", "marksman"];
 var currlevel = 0;
 var currclass = null;
 var wmrow = 0;
 var powerpoints = 0;
 // XXX beware it's just a buffer that is unexploitable once the setup is loaded
 var saved_setup;
+var automated_clicks = false;
 
 $(document).ready(function() {
 	document.title = "CoRT - " + _("Trainer");
@@ -44,10 +48,9 @@ $(document).ready(function() {
 		_("Clicking on a skill icon will show its description.") +
 		"<br>" +
 		_("Selecting an higher character level will upgrade your current setup to that level."));
-	let classes = ["Knight", "Barbarian", "Conjurer", "Warlock", "Hunter", "Marksman"];
 	for (let clas of classes) {
 		$("#t-class").append(`
-			<option value="${clas.toLowerCase()}">${_(clas)}</option>`);
+			<option value="${clas}">${_(capitalize(clas))}</option>`);
 	}
 	$("#t-load").text(_("Load / Reset"));
 	$("#t-save").text(_("Share / Save"));
@@ -70,9 +73,9 @@ $(document).ready(function() {
 		$("#t-level").append(`<option value="${i}">${i}</option>`);
 	}
 	// generate datasets version
-	$("#t-version").append(`<option value="${trainerdatasets[0]}" default selected>
-		${_("Current game version")} (${trainerdatasets[0]})</option>`);
-	for (let i = 1; i < trainerdatasets.length; i++) {
+	$("#t-version").append(`<option value="${newest_dataset}" default selected>
+		${_("Current game version")} (${newest_dataset})</option>`);
+	for (let i = trainerdatasets.length - 2; i >= 0; i--) {
 		$("#t-version").append(`<option value="${trainerdatasets[i]}">${trainerdatasets[i]}</option>`);
 	}
 	// search for a given trainer dataset in url, and skillset then
@@ -173,23 +176,27 @@ $("#t-dialog-copy").on("click", function() {
 	}
 });
 
+function capitalize(string) {
+	return string[0].toUpperCase() + string.slice(1);
+}
+
 function manage_dataset_versions() {
 	// valid dataset ?
 	if (!trainerdatasets.includes(trainerdataversion)) {
 		// invalid dataset supplied
-		trainerdataversion = trainerdatasets[0];
+		trainerdataversion = newest_dataset;
 	}
 	// display a warning if an old version of the datasets are used, and
 	// remove it if the latest dataset is loaded after.
 	$("#oldversion").remove();
-	if (trainerdataversion != trainerdatasets[0]) {
+	if (trainerdataversion != newest_dataset) {
 		$("#t-points").append(`	<div id="oldversion">
 					<p class="red"><b>
 					${_("This setup is being made with an older version (%s) of CoR, and may be out of date.",
 					trainerdataversion)}<p>
 					<p><a href="javascript:upgrade_setup_to_new_version()">${_("Click here")}</a>
 					${_("to upgrade this setup's discipline and power points to the latest version (%s).",
-					trainerdatasets[0])}</p>
+					newest_dataset)}</p>
 					</div>
 					`);
 	}
@@ -207,12 +214,12 @@ async function collect_setup(setupstring) {
 }
 
 function upgrade_setup_to_new_version() {
-	trainerdataversion = trainerdatasets[0];
+	trainerdataversion = trainerdatasets.slice(-1);
 	window.location.assign(save_setup_to_url(false));
 }
 
 function save_setup_to_url(shared = true) {
-	let setup = "";
+	let setup = trainerdataversion + "+";
 	setup = setup.concat(currclass + "+");
 	setup = setup.concat(currlevel + "+");
 	// WM row is always the latest one
@@ -229,19 +236,33 @@ function save_setup_to_url(shared = true) {
 	if (shared == true)
 		collect_setup(`${trainerdataversion}+${setup}`);
 	return window.location.origin + window.location.pathname +
-	       "?d=" + trainerdataversion + "&s=" +
-		LZString.compressToEncodedURIComponent(setup);
+	       "?s=" + compressor.compress(setup);
+}
+
+function bad_shared_link() {
+	window.alert(_("Your shared link is bad. Bailing out, sorry!"));
+	window.location.assign(window.location.origin + window.location.pathname);
 }
 
 // load_tree() being async, you need the tree to be loaded
 // in order to click stuff so this is before loading the tree ...
 function load_setup_from_url(skillset) {
-	saved_setup = LZString.decompressFromEncodedURIComponent(skillset);
+	saved_setup = null;
+	if (trainerdataversion !== null) {
+		// Old LZstring URL, redirect to new url format
+		saved_setup = LZString.decompressFromEncodedURIComponent(skillset);
+		saved_setup = trainerdataversion + "+" + saved_setup;
+		window.location.assign(window.location.origin + window.location.pathname +
+				       "?s=" + compressor.compress(saved_setup));
+
+	}
+	saved_setup = compressor.decompress(skillset);
 	if (saved_setup == null) {
-		window.alert(_("Your shared link is bad. Bailing out, sorry!"));
+		bad_shared_link();
 		return;
 	}
 	saved_setup = saved_setup.split("+");
+	trainerdataversion = saved_setup.shift();
 	$("#t-class").val(saved_setup.shift());
 	$("#t-level").val(saved_setup.shift());
 	manage_dataset_versions();
@@ -253,6 +274,7 @@ function load_setup_from_url(skillset) {
 function input_setup_from_url() {
 	if (saved_setup === undefined)
 		return;
+	automated_clicks = true;
 	let row = 0;
 	for (let item = 0; item < saved_setup.length; item++) {
 		if (item % 2 == 0) {
@@ -260,7 +282,14 @@ function input_setup_from_url() {
 			row++;
 			do_clicks = (saved_setup[item] - 1) / 2 ;
 			for (let i = 0; i < do_clicks; i++) {
-				$(`#t-trainer .t${row} .p0 .skillspinner .plus`).trigger("click");
+				try {
+					$(`#t-trainer .t${row} .p0 .skillspinner .plus`).trigger("click");
+				}
+				catch (_unused) {
+					bad_shared_link();
+					automated_clicks = false;
+					return;
+				}
 			}
 		}
 		else {
@@ -271,12 +300,20 @@ function input_setup_from_url() {
 			for (let power in powers) {
 				power = parseInt(power);
 				for (let i = 0; i < powers[power]; i++) {
-					$(`div[treepos="${row}"] .p${power + 1} .skillspinner .plus`).trigger("click");
+					try {
+						$(`div[treepos="${row}"] .p${power + 1} .skillspinner .plus`).trigger("click");
+					}
+					catch (_unused) {
+						automated_clicks = false;
+						bad_shared_link();
+						return;
+					}
 				}
 			}
 		}
 	}
 	saved_setup = undefined;
+	automated_clicks = false;
 }
 
 function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
@@ -471,15 +508,18 @@ function power_change(power) {
 	let maxslvl = trainerdata.required.power[discipline_level];
 	if (wanted_level > maxplevel || wanted_level < minplevel) {
 		console.log("bad power level", wanted_level);
+		if (automated_clicks == true) bad_shared_link();
 		return;
 	}
 	let ppointsleft = parseInt($("#t-ppointsleft").text());
 	if (ppointsleft < wanted_level - skill_level) {
 		console.log("not enough power points");
+		if (automated_clicks == true) bad_shared_link();
 		return;
 	}
 	if (wanted_level > maxslvl) {
 		console.log("not enough discipline points");
+		if (automated_clicks == true) bad_shared_link();
 		return;
 	}
 	// valid, change it
@@ -495,10 +535,12 @@ function discipline_change(discipline) {
 	let wanted_level = change_direction == "plus" ? current_level + 2 : current_level - 2;
 	if (wanted_level > maxdlevel || wanted_level < mindlevel) {
 		console.log("bad discipline level", wanted_level);
+		if (automated_clicks == true) bad_shared_link();
 		return;
 	}
 	if (trainerdata.required.level[wanted_level- 1] > currlevel) {
 		console.log("player level is too low");
+		if (automated_clicks == true) bad_shared_link();
 		return;
 	}
 	// check if we have enough discipline points left
@@ -509,6 +551,7 @@ function discipline_change(discipline) {
 	if (	change_direction == "plus" &&
 		current_discipline_points + discipline_points_balance < 0 ) {
 		console.log("not enough discipline points");
+		if (automated_clicks == true) bad_shared_link();
 		return;
 	}
 	// valid, do the change
@@ -584,3 +627,71 @@ function update_tree(treepos) {
 	}
 	return;
 }
+
+class SetupCompressor {
+
+	constructor() {
+		this.lookup = {};
+		this.b66chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
+		let i = 0;
+		for (let x = 0; x < 6; x++) {
+			for (let y = 0; y < 6; y++) {
+				this.lookup[this.b66chars[i]] = [x, y];
+				if (x != y)
+					this.lookup[this.b66chars[i + 31]] = [y, x];
+				i++;
+			}
+		}
+	}
+
+	compress(setup) {
+		let output = "";
+		setup = setup.split("+");
+		output += this.b66chars[trainerdatasets.indexOf(setup.shift())];
+		output += this.b66chars[classes.indexOf(setup.shift())];
+		output += this.b66chars[parseInt(setup.shift())]; // level
+		for (let i = 0; i < setup.length; i++) {
+			if (i % 2 == 0) { // discipline points
+				output += this.b66chars[parseInt(setup[i])];
+			}
+			else { // power points
+				for (let pos = 0; pos < 10; pos += 2) {
+					let searchfor = Array.from(setup[i].slice(pos, pos+2));
+					for (let combi in this.lookup) {
+						if (this.lookup[combi].toString() == searchfor) {
+							output += combi;
+							break;
+						}
+					}
+				}
+			}
+		}
+		return output
+	}
+
+	decompress(string) {
+		let setup = "";
+		setup += trainerdatasets[this.b66chars.indexOf(string[0])] + "+";
+		setup += classes[this.b66chars.indexOf(string[1])] + "+";
+		setup += this.b66chars.indexOf(string[2]) + "+"; // level
+		string = string.substring(3);
+		for (let pos = 0; pos <= string.length -1; pos += 6) {
+			let disc = Array.from(string.slice(pos,pos+6));
+			// discipline points
+			setup += this.b66chars.indexOf(disc.shift()) + "+";
+			// skill points
+			for (let skills of disc) {
+				setup += this.lookup[skills].join("");
+			}
+			setup += "+";
+		}
+		setup = setup.substring(0, setup.length - 1);
+		let setup_length = setup.split("+").length;
+		// Check if setup looks valid (19 fields for mages, 17 for the others)
+		if (setup_length != 17 && setup_length != 19)
+			return null;
+		return setup;
+	}
+
+}
+var compressor = new SetupCompressor();
