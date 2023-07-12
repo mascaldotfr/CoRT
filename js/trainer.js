@@ -234,7 +234,7 @@ function save_setup_to_url(shared = true) {
 		}
 	}
 	if (shared == true)
-		collect_setup(`${trainerdataversion}+${setup}`);
+		collect_setup(setup);
 	return window.location.origin + window.location.pathname +
 	       "?s=" + compressor.compress(setup);
 }
