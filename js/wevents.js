@@ -47,6 +47,14 @@ function display_events() {
 	else if (__wevents__filter == "wishes") {
 		filtered = data.filter(i => i["type"] == "wish");
 	}
+	else if (__wevents__filter.startsWith("r:")) {
+		let realm = __wevents__filter.split(":")[1];
+		filtered = data.filter(i => i["owner"] == realm);
+	}
+	else if (__wevents__filter.startsWith("f:")) {
+		let name = __wevents__filter.split(":")[1];
+		filtered = data.filter(i => i["name"].indexOf(name) != -1);
+	}
 	let ondate = $("#we-date").val();
 	if (ondate != "none")
 		filtered = day_filter(filtered, ondate);
@@ -109,14 +117,36 @@ $(document).ready(async function() {
 		_("All events (except relics) over the last 30 days.") +
 		" " + _("Last updated:") + " ");
 	$("#we-filter-label").text(_("Filter:"));
-	let options = [ ["none", _("None")],
-			["noforts", _("No forts")],
-			["invas", _("Invasions only")],
-			["gems", _("Gems only")],
-			["wishes", _("Dragon wishes only")] ];
-	for (let o of options)
-		$("#we-filter").append(`<option value="${o[0]}">${o[1]}</option>`);
 	$("#we-date-label").text(_("Date:"));
+	let options = { "Global": [
+				["none", _("None")],
+				["noforts", _("No forts")],
+				["invas", _("Invasions only")],
+				["gems", _("Gems only")],
+				["wishes", _("Dragon wishes only")] ],
+			"Realms": [
+				["r:Alsius", "Alsius"],
+				["r:Ignis", "Ignis"],
+				["r:Syrtis", "Syrtis"] ],
+			"Forts": [
+				["f:Imperia", "Imperia"],
+				["f:Aggersborg", "Aggersborg"],
+				["f:Trelleborg", "Trelleborg"],
+				["f:Menirah", "Menirah"],
+				["f:Shaanarid", "Shaanarid"],
+				["f:Samal", "Samal"],
+				["f:Algaros", "Algaros"],
+				["f:Herbred", "Herbred"],
+				["f:Eferias", "Eferias"] ]
+	};
+	let options_html = "";
+	for (let group in options) {
+		options_html += `<optgroup label="${_(group)}">`;
+		for (let o of options[group])
+			options_html += `<option value="${o[0]}">${o[1]}</option>`;
+		options_html += `</optgroup>`;
+	}
+	$("#we-filter").append(options_html);
 
 	await get_data();
 	let generated = new Date(data.shift()["generated"] * 1000);

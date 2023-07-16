@@ -480,5 +480,20 @@ __i18n__ = {
 		"fr": "Voeux du dragon uniquement",
 		"es": "Solo deseos de dragón",
 		"de": "Nur Drachenwünsche"
+	},
+	"Global": {
+		"fr": "Genéral",
+		"es": "Global",
+		"de": "Global"
+	},
+	"Realms": {
+		"fr": "Royaumes",
+		"es": "Reinos",
+		"de": "Realms"
+	},
+	"Forts": {
+		"fr": "Forts",
+		"es": "Fuertes",
+		"de": "Forts"
 	}
 }
