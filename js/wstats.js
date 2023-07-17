@@ -190,6 +190,7 @@ async function display_stat() {
 	}
 	show_graphs(infos["activity"], "#ws-activity-chart");
 	show_graphs(infos["invasions"], "#ws-invasion-chart", false);
+	show_graphs(infos["gems"], "#ws-gems-chart");
 }
 
 $(document).ready(function() {
@@ -203,6 +204,8 @@ $(document).ready(function() {
 	$("#ws-chart1-title").text(_("Net average of fortifications captured per hour (UTC) and realm on the last %s days",
 				   max_report_days));
 	$("#ws-chart2-title").text(_("Net average of invasions per hour (UTC) on the last %s days",
+				   max_report_days));
+	$("#ws-chart3-title").text(_("Total stolen gems per hour (UTC) on the last %s days",
 				   max_report_days));
 
 	display_stat();

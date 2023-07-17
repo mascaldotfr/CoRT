@@ -83,6 +83,7 @@ def statistics(events, db_file, outfile, outfile_events):
             if day == max(days):
                 full_report[0]["activity"] = reporter.get_activity()
                 full_report[0]["invasions"] = reporter.get_invasions()
+                full_report[0]["gems"] = reporter.get_gems()
         end_time = timer()
         full_report[0]["generation_time"] = end_time - start_time;
 
@@ -149,6 +150,18 @@ class Reporter:
                 invasions[r["owner"]][int(r["time"])] += r["average"]
 
         return invasions
+
+    def get_gems(self):
+        gems = {"Alsius": [0] * 24, "Ignis": [0] * 24, "Syrtis": [0] * 24}
+        self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
+                             count(rowid) as count
+                             from report
+                             where type="gem" and location != owner
+                             group by owner, time;""")
+        for r in self.sql.fetchall():
+            gems[r["owner"]][int(r["time"])] = r["count"]
+
+        return gems
 
     def generate_stats(self):
 

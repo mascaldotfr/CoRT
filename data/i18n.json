@@ -436,6 +436,11 @@ __i18n__ = {
 		"es": "Promedio neto de las invasiónes por hora (UTC) en los últimos %s días",
 		"de": "Nettodurchschnitt der Invasionen pro Stunde (UTC) an den letzten %s Tagen"
 	},
+	"Total stolen gems per hour (UTC) on the last %s days": {
+		"fr": "Nombre total de gemmes volées par heure (UTC) les %s derniers jours",
+		"es": "Total de gemas robadas por hora (UTC) en los últimos %s días",
+		"de": "Insgesamt gestohlene Edelsteine pro Stunde (UTC) an den letzten %s Tagen"
+	},
 	"All events (except relics) over the last 30 days.": {
 		"fr": "Tous les événements (sauf reliques) sur les derniers 30 jours.",
 		"es": "Todos los eventos (excepto reliquias) durante los últimos 30 días.",
