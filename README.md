@@ -40,20 +40,24 @@ If you want to make changes to CoRT or run it locally, you can use python to
    Some parts of the site are MIT licensed as exceptions, please see their
    header files.
 
+   [Chartist](https://github.com/chartist-js/chartist) is dual licensed under
+   MIT/WTFPL licenses terms. A local copy has been taken from
+   [UNPKG](https://unpkg.com/browse/chartist@1.3.0/dist/).
+
 ## Contributing
 
 If you plan to bring code improvements:
 
-0. The site should be *usable* despite obvious visual glitches with [Firefox 52](#why-using-firefox-52-as-a-baseline),
+0. The site should be *usable* despite obvious visual glitches with [Firefox 60](#why-using-firefox-60-as-a-baseline),
    and is expected to look as intended in the latest stable versions of major
    browsers (Chrome, Firefox, Edge, Safari, and on mobile as well). Keep that
    in mind for the frontend. At least check at https://caniuse.com/ .
 1. Keep things simple; simple code may be slower but given the simplicity of
    the proposed tools there is no bottleneck, and i don't want them when
-   maintaining. That includes bringing big libraries and polyfills.
+   maintaining.
 2. Keep the style consistent, even if sometimes it's gross like not using dot
    notation for hashes.
-3. The javascript used in CoRT must follow ECMAScript 8, please use
+3. The javascript used in CoRT must follow ECMAScript <= 8, please use
    [JSHint](https://jshint.com/) to check this out, or mention
    you didn't. Linux usage:
    ```shell
@@ -66,19 +70,22 @@ If you plan to bring code improvements:
    ```
 4. If you touch the python code, try to not adding extra modules as a dependency.
 
-### Why using Firefox 52 as a baseline
+### Why using Firefox 60 as a baseline
 
-This is the oldest Firefox version supporting JS async functions, Chrome
-implements things earlier, and it works under XP and Vista, avoiding IE
-polyfills, making it work almost everywhere.
+The oldest browser a valid bug was reported against was Chrome 80
+(`element.replaceChildren()` missing), so we've mostly up to date users, thanks
+to browser updating themselves. But the baseline is born from it.
 
-The oldest browser a bug was reported against was Chrome 80 by the way
-(replaceChildren missing) in 9 monthes, so we've mostly up to date users.
+Actually the site works even with Firefox 52 (XP/Vista), minus the charts. As
+such, Firefox 60 (May 2018) was chosen because it was the closest ESR version
+to 52 supporting the charts, and any bug report for a browser older than that
+will be rejected.
 
-You can test by installing Win XP in a virtual machine, or use an old
-   [Debian Live image which has already that version preloaded](https://cdimage.debian.org/cdimage/archive/9.2.0-live/amd64/iso-hybrid/debian-live-9.2.0-amd64-xfce.iso) in a virtual machine as well.
+You can use an old [Debian Live image which has already that version
+preloaded](https://cdimage.debian.org/cdimage/archive/9.7.0-live/amd64/iso-hybrid/debian-live-9.7.0-amd64-xfce.iso)
+in a virtual machine to test.
 
-Note that this requirement may change over time, for example if TLS technology
+Note that this requirement will change over time, for example if TLS technology
 changes and makes this version unable to connect to https sites.
 
 ## Credits
