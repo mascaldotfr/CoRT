@@ -90,7 +90,7 @@ function show_graphs(data, selector, onlyinteger=true) {
 			}
 		}]
 	];
-	new Chartist.Line(selector, dataset, options, responsive);
+	new Chartist.LineChart(selector, dataset, options, responsive);
 }
 
 async function display_stat() {
