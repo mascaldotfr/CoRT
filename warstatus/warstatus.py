@@ -190,7 +190,7 @@ def main():
         if len(old_status) == 0:
             status["events_log"] = events_log
         else:
-            status["events_log"] = events_log[:25]
+            status["events_log"] = events_log[:100]
 
         status["generated"] = str(timestamp)
 
