@@ -54,7 +54,8 @@ function get_hits() {
 	let head = document.getElementsByTagName("head")[0];
 	let script = document.createElement("script");
 	script.type = "text/javascript";
-	script.src= __api__base + "/ping?=" + window.location.pathname;
+	script.src = __api__base + "/ping?p=" +
+		     window.location.pathname.split("/").pop();
 	head.appendChild(script);
 }
 if (window.location.origin == __api__frontsite)
