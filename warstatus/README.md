@@ -9,8 +9,6 @@ status in a file as JSON (see `outfile` in `warstatus.py`). The official map
 isn't fetched, because it has a static URL and CoRT actually draws one using
 HTML5 canvas for speed and bandwidth economy (NGE's site is slow).
 
-The output is meant to placed in a file reachable by a webserver.
-
 You can see it in action at https://hail.thebus.top/cortdata/warstatus/warstatus.json --
 informations are refreshed every minute.
 
@@ -25,23 +23,29 @@ statistics.
   don't use it), performance and storage doesn't matter (it currently runs on
   1CPU/512MB RAM/10G SSD VPS!)
 - A web server that is able to serve static files and where CORS is enabled
-  (see https://enable-cors.org/server.html), unless you serve CoRT and this
+  (see https://enable-cors.org/server.html), **unless** you serve CoRT and this
   "API endpoint" (*ahem*) on the same domain
 
 ## Deployment
 
-1. Put `warstatus.py` in some place on your server that is accessible to your web server
-2. Ensure that you have some place that is reachable by your web server that
-   can be written by the user that will execute `warstatus.py`
-3. Log in as this user, then edit their crontab:
+While it's very flexible, if you serve the API and the website in the same
+place it's recommended to put the whole repository in a place accessible by
+your webserver. It's easier to update and anyway the API doesn't deal with
+sensitive content (credentials etc.).
+
+1. Put this directory in some place on your server. Ensure that place can be
+   written by the user that will execute `warstatus.py` and can be accessed by
+   your webserver. You can change the various `outfile` variables in
+   `warstatus.py` to make it a different place.
+2. Log in as this user, then edit their crontab:
 	```
 	crontab -e
 	```
-4. Add the following line:
+3. Add the following line:
 	```
 	* * * * * /where/is/warstatus.py
 	```
-5. Modify `js/api_url.js` with your own urls
+4. Modify `js/api_url.js` with your own urls
 
 That's it.
 

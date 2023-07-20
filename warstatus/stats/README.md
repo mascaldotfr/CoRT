@@ -12,6 +12,8 @@ On top of the generated files, pre compressed gzip files are generated. Please
 see you web server documentation if you don't know how to activate the serving
 of such files.
 
+## Deployment
+
 **You must have a working warstatus (see `/warstatus/README.md`) for statistics
 to be generated.** You can disable statistics just by renaming `generate.py`.
 
@@ -21,14 +23,13 @@ need the `python3-sqlite3` (or whatever it is called) package. You don't have
 any extra step to perform, as `../warstatus.py` will do the necessary to make
 it work.
 
-Using the brotli or gzip compression in your web server is recommended,
-especially for `events.json` which weights 500K uncompressed but only a few
-kilobytes with brotli's level 4 compression.
+Using static gzip compression in your web server is recommended, especially for
+`events.json` which weights 500K uncompressed but only a few kilobytes
+compressed.
 
-The "API endpoint" for statistics URL is: https://hail.thebus.top/cortdata/warstatus/stats/statistics.json
-The "API endpoint" for events URL is: https://hail.thebus.top/cortdata/warstatus/stats/events.json
-The full database is publicly available at: https://hail.thebus.top/cortdata/warstatus/stats/events.sqlite
-
+- The "API endpoint" for statistics URL is: https://hail.thebus.top/cortdata/warstatus/stats/statistics.json
+- The "API endpoint" for events URL is: https://hail.thebus.top/cortdata/warstatus/stats/events.json
+- The full database is publicly available at: https://hail.thebus.top/cortdata/warstatus/stats/events.sqlite
 
 ## Database format
 
