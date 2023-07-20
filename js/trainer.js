@@ -78,6 +78,9 @@ $(document).ready(function() {
 	for (let i = trainerdatasets.length - 2; i >= 0; i--) {
 		$("#t-version").append(`<option value="${trainerdatasets[i]}">${trainerdatasets[i]}</option>`);
 	}
+	// Drop "index.html" from the URL bar if you are coming from search engines
+	if (window.location.pathname == `${__api__frontsite_dir}/index.html`)
+		window.location.pathname = __api__frontsite_dir;
 	// search for a given trainer dataset in url, and skillset then
 	// set the version accordingly. See also manage_dataset_versions.
 	let urlsearch = new URLSearchParams(window.location.search);
