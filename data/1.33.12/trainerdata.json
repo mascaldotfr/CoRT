@@ -51,7 +51,6 @@
       "class":"Archer",
       "spells":[
         {
-          "id":127,
           "name":"Dual shot",
           "description":"The archer fires two arrows at the same time.",
           "mana":[40,60,80,95,110],
@@ -68,7 +67,6 @@
           }
         },
         {
-          "id":126,
           "name":"Rapid shot",
           "description":"The shooting frequency increases, at expenses of the accuracy.",
           "mana":[60,85,110,135,160],
@@ -85,7 +83,6 @@
           }
         },
         {
-          "id":147,
           "name":"Grounding arrow",
           "description":"The arrow is shot to the opponent's feet, hindering movement.",
           "mana":[95,120,145,170,195],
@@ -103,7 +100,6 @@
           }
         },
         {
-          "id":150,
           "name":"Lightness",
           "description":"The archer is naturally fast and light.",
           "type":"Passive",
@@ -112,7 +108,6 @@
           }
         },
         {
-          "id":148,
           "name":"Meditation",
           "description":"A meditation period makes the archer be more aware of her surroundings.",
           "mana":[50,75,100,125,150],
@@ -126,7 +121,6 @@
           }
         },
         {
-          "id":149,
           "name":"Adaptability",
           "description":"The archer can rapidly adapt to combat conditions and get the best advantage.",
           "mana":[180,220,260,290,330],
@@ -140,7 +134,6 @@
           }
         },
         {
-          "id":151,
           "name":"Tear apart",
           "description":"The arrow tears apart the opponent's flesh, which bleeds over time.",
           "mana":[130,160,190,220,250],
@@ -155,7 +148,6 @@
           }
         },
         {
-          "id":152,
           "name":"Duelist",
           "description":"The archer is adept at firing rapidly and with precision.",
           "type":"Passive",
@@ -164,7 +156,6 @@
           }
         },
         {
-          "id":153,
           "name":"Hinder",
           "description":"The enemy movement and attack is hampered.",
           "mana":[75,125,175,225,275],
@@ -181,7 +172,6 @@
           }
         },
         {
-          "id":154,
           "name":"Repetition shot",
           "description":"Multiple shots in arc. Those in the area receive piercing damage.",
           "mana":[340,380,420,460,500],
@@ -200,7 +190,6 @@
       "class":"Archer",
       "spells":[
         {
-          "id":176,
           "name":"Shield piercing",
           "description":"An arrow is fired with such a strength it cuts through all defenses.",
           "mana":[45,70,90,110,130],
@@ -215,7 +204,6 @@
           }
         },
         {
-          "id":175,
           "name":"Parabolic shot",
           "description":"The shot range increases, but the efficiency decreases.",
           "mana":[60,75,90,105,120],
@@ -229,7 +217,6 @@
           }
         },
         {
-          "id":178,
           "name":"Maneuver",
           "description":"A quick analysis of the battle allows the archer to find the best evasive technique.",
           "mana":[100,130,160,190,220],
@@ -243,7 +230,6 @@
           }
         },
         {
-          "id":177,
           "name":"Eagle's eye",
           "description":"The impact chances are increased.",
           "mana":[90,110,130,150,170],
@@ -257,7 +243,6 @@
           }
         },
         {
-          "id":179,
           "name":"Point shot",
           "description":"The archer observes air spots in armor, increasing critical hit chance.",
           "mana":[115,140,165,190,215],
@@ -272,7 +257,6 @@
           }
         },
         {
-          "id":180,
           "name":"Omnipresent",
           "description":"The archer rapidly finds the best way to penetrate defenses.",
           "type":"Passive",
@@ -281,7 +265,6 @@
           }
         },
         {
-          "id":181,
           "name":"Break apart",
           "description":"The arrow tears away the opponent's flesh.",
           "mana":[150,175,200,225,250],
@@ -299,7 +282,6 @@
           }
         },
         {
-          "id":182,
           "name":"Specialist",
           "description":"The archer is adept to finding the maximum weakness spots.",
           "type":"Passive",
@@ -308,7 +290,6 @@
           }
         },
         {
-          "id":183,
           "name":"Obfuscate",
           "description":"The opponent loses hit visual focus, her critical hit chances decreases.",
           "mana":[150,175,200,225,250],
@@ -326,7 +307,6 @@
           }
         },
         {
-          "id":184,
           "name":"Projectile rain",
           "description":"Multiple parabolic shots to an area damage those who are in it.",
           "mana":[320,340,360,380,400],
@@ -347,7 +327,6 @@
       "class":"Archer",
       "spells":[
         {
-          "id":186,
           "name":"Ambush",
           "description":"The enemy gets surprised. While disoriented, It won't be able to attack.",
           "mana":[50,75,95,115,130],
@@ -363,7 +342,6 @@
           }
         },
         {
-          "id":188,
           "name":"Sudden strike",
           "description":"The archer attacks while the opponent is off guard. The target defenses are lowered down.",
           "mana":[80,90,100,110,120],
@@ -378,7 +356,6 @@
           }
         },
         {
-          "id":193,
           "name":"Stunning fist",
           "description":"Rapid punch to the nose with the hand that holds the bow.",
           "mana":[120,140,160,180,200],
@@ -395,7 +372,6 @@
           }
         },
         {
-          "id":187,
           "name":"Retaliation",
           "description":"Part of the damage received in the next enemy impact is returned to the attacker. This skill wears off by duration or when first attack is received.",
           "mana":[120,140,160,180,200],
@@ -409,7 +385,6 @@
           }
         },
         {
-          "id":189,
           "name":"Sticky touch",
           "description":"The archer throws a sticky substance to the opponent, hindering her movement.",
           "mana":[70,90,110,130,150],
@@ -424,7 +399,6 @@
           }
         },
         {
-          "id":190,
           "name":"Dirty fighting",
           "description":"Archer improves short ranged damage.",
           "mana":[120,140,160,180,200],
@@ -441,7 +415,6 @@
           }
         },
         {
-          "id":192,
           "name":"Finesse",
           "description":"The archer is adept to maneuver and feint while fighting.",
           "mana":[70,100,130,160,190],
@@ -455,7 +428,6 @@
           }
         },
         {
-          "id":212,
           "name":"Sentinel",
           "description":"The hunter enhances her senses.",
           "type":"Passive",
@@ -465,7 +437,6 @@
           }
         },
         {
-          "id":185,
           "name":"Distracting shot",
           "description":"A random shot distracts the opponent, who fails to react.",
           "mana":[75,100,125,150,175],
@@ -480,7 +451,6 @@
           }
         },
         {
-          "id":194,
           "name":"Caltrop's arrow",
           "description":"An arrow that scatters caltrops damaging the opponent's feet. Reduces enemy movement speed on the impact area.",
           "mana":[330,360,390,420,450],
@@ -501,7 +471,6 @@
       "class":"Archer",
       "spells":[
         {
-          "id":198,
           "name":"Dodge",
           "description":"Resists next crowd control effect",
           "mana":[120,140,160,180,200],
@@ -512,7 +481,6 @@
           "duration":[2,4,6,8,10]
         },
         {
-          "id":200,
           "name":"Mobility",
           "description":"The archer runs faster.",
           "mana":[130,155,180,205,230],
@@ -526,7 +494,6 @@
           }
         },
         {
-          "id":196,
           "name":"Evasive tactics",
           "description":"The archer fires while dodging. Her defenses increase, but her attack effectiveness decreases.",
           "mana":[70,100,130,160,190],
@@ -543,7 +510,6 @@
           }
         },
         {
-          "id":195,
           "name":"Cat reflexes",
           "description":"The archer enhances their reflexes for a mayor capacity to elude attacks.",
           "type":"Passive",
@@ -552,7 +518,6 @@
           }
         },
         {
-          "id":199,
           "name":"Acrobatic",
           "description":"Using acrobatics, the archer reduces the lethality of the received physical attacks.",
           "mana":[50,65,80,95,110],
@@ -566,7 +531,6 @@
           }
         },
         {
-          "id":201,
           "name":"Spell elude",
           "description":"The archer moves constantly to reduce enemy spell impact chances.",
           "mana":[150,175,200,225,250],
@@ -580,7 +544,6 @@
           }
         },
         {
-          "id":197,
           "name":"Escapist",
           "description":"The archer becomes agile and evades almost every enemy attack.",
           "mana":[120,150,185,215,250],
@@ -594,7 +557,6 @@
           }
         },
         {
-          "id":202,
           "name":"Wits",
           "description":"The archer knows how to take advantage of the situation and power using.",
           "type":"Passive",
@@ -603,7 +565,6 @@
           }
         },
         {
-          "id":203,
           "name":"Low profile",
           "description":"The archer cannot attack or be attacked. (Removes any positive effect that is active on the archer)",
           "mana":[180,200,220,240,260],
@@ -617,7 +578,6 @@
           }
         },
         {
-          "id":204,
           "name":"Son of the wind",
           "description":"The archer moves and evades easy as the wind. She evades almost any attack and spell.",
           "mana":[150,185,225,260,300],
@@ -636,7 +596,6 @@
       "class":"Hunter",
       "spells":[
         {
-          "id":206,
           "name":"Ensnaring arrow",
           "description":"A fast arrow shot at the opponent's legs. Inflicts damage and reduces movement.",
           "mana":[100,125,150,175,200],
@@ -655,7 +614,6 @@
           }
         },
         {
-          "id":205,
           "name":"Death sentence",
           "description":"The hunter marks the target. While the power is active, every attack from within 3 meters to the target cause extra damage.",
           "mana":[50,80,110,140,170],
@@ -670,7 +628,6 @@
           }
         },
         {
-          "id":208,
           "name":"Enemy surveillance",
           "description":"Gathers tactical information about realm enemies. (Can be used under the effects of Camouflage).",
           "mana":[100,120,140,160,180],
@@ -683,7 +640,6 @@
           }
         },
         {
-          "id":211,
           "name":"Wild spirit",
           "description":"The hunter is adept at moving through hostile enviroments.",
           "type":"Passive",
@@ -692,7 +648,6 @@
           }
         },
         {
-          "id":209,
           "name":"Camouflage",
           "description":"The hunter merges with the surroundings. While the effect is active, the hunter causes an extra damage in his first attack.\n\nThe hunter loses control of his pet when launching this power.",
           "mana":[300,325,350,375,400],
@@ -710,7 +665,6 @@
           }
         },
         {
-          "id":210,
           "name":"Inherited Lightness",
           "description":"The hunter has an aura that benefits allies in dexterity, which will help other archers, and basic mana regeneration.",
           "mana":[150,200,250,300,350],
@@ -726,7 +680,6 @@
           }
         },
         {
-          "id":214,
           "name":"Cold blood",
           "description":"The hunter attacks his victim in cold blood, inflicting large amounts of damage.",
           "mana":[180,210,240,270,300],
@@ -754,7 +707,6 @@
           }
         },
         {
-          "id":191,
           "name":"Confuse",
           "description":"The enemy is constantly distracted. He cannot use non-offensive powers (Any spell that do not inflict direct damage).",
           "mana":[120,140,160,180,200],
@@ -770,7 +722,6 @@
           }
         },
         {
-          "id":213,
           "name":"Stalker surroundings",
           "description":"Allies near the hunter become invisible when the power is cast. They also have their movement speed reduced. Getting away from the hunter, attacking a target or interacting with objects removes the effect.",
           "mana":[440,480,520,560,600],
@@ -793,7 +744,6 @@
       "class":"Hunter",
       "spells":[
         {
-          "id":220,
           "name":"Natural Dominance",
           "description":"Through a bond with the environment, the hunter has chances to tame a creature.",
           "mana":[150,225,300,350,400],
@@ -807,7 +757,6 @@
           }
         },
         {
-          "id":215,
           "name":"Heal Pet",
           "description":"The hunter heals her pet.",
           "mana":[50,75,110,150,200],
@@ -821,7 +770,6 @@
           }
         },
         {
-          "id":217,
           "name":"Wild Defense",
           "description":"Part of the damage received by the hunter is redirected to the pet.",
           "mana":["75","100","125","150","175"],
@@ -835,7 +783,6 @@
           }
         },
         {
-          "id":219,
           "name":"Prominent Sight",
           "description":"The hunter uses the bond with the pet to enhance the sight scope. The pet loses part of its attack power due to being distracted with the environment.",
           "mana":["60","75","90","105","120"],
@@ -849,7 +796,6 @@
           }
         },
         {
-          "id":218,
           "name":"Training",
           "description":"Training keeps the pet strong and agile.",
           "type":"Passive",
@@ -858,7 +804,6 @@
           }
         },
         {
-          "id":223,
           "name":"Revive Pet",
           "description":"The hunter makes a pact with nature to return his pet to life.\n\nWhen pet dies or the character has connected recently, the hunter will have to wait the specified time to use this skill.\n\nThe cast of this skill is lost if the is attacked.\n\nIt is required an appropriate level of Taming to use this skill.",
           "type":"Direct",
@@ -871,7 +816,6 @@
           }
         },
         {
-          "id":222,
           "name":"Bestial wrath",
           "description":"The pet is overcome by a rage it cannot control. It gains strength at expenses of its dexterity.",
           "mana":[200,225,250,275,300],
@@ -888,7 +832,6 @@
           }
         },
         {
-          "id":372,
           "name":"Natural armor",
           "description":"The creature gains more resistance to damage.",
           "type":"Passive",
@@ -915,7 +858,6 @@
           }
         },
         {
-          "id":224,
           "name":"Skin of the Beast",
           "description":"The pet's thick contecture protects it from damage",
           "type":"Constant",
@@ -1037,7 +979,6 @@
       "class":"Marksman",
       "spells":[
         {
-          "id":234,
           "name":"Recharged arrows",
           "description":"The marksman channels her vital energy into arrows to improve damage. Only the basic attack is affected by this power.",
           "mana":[40,55,70,85,100],
@@ -1054,7 +995,6 @@
           }
         },
         {
-          "id":235,
           "name":"Winter stroke",
           "description":"The marksman throws an ice burst to her opponent, receiving cold damage and remaining frozen.",
           "mana":[80,110,140,170,200],
@@ -1072,7 +1012,6 @@
           }
         },
         {
-          "id":338,
           "name":"Burst of wind",
           "description":"A burst of wind leaves the opponent dizzy.",
           "mana":[130,160,190,220,250],
@@ -1087,7 +1026,6 @@
           }
         },
         {
-          "id":237,
           "name":"Serpent bite",
           "description":"Special arrow that inflicts poison damage.",
           "mana":[70,90,110,130,150],
@@ -1102,7 +1040,6 @@
           }
         },
         {
-          "id":238,
           "name":"Ignus scorch",
           "description":"A flaming arrow burns whoever crosses its path.",
           "mana":[70,100,130,160,190],
@@ -1119,7 +1056,6 @@
           }
         },
         {
-          "id":239,
           "name":"Ethereal arrow",
           "description":"An incorporeal arrow ignores the target's protections.",
           "mana":[75,110,145,180,215],
@@ -1133,7 +1069,6 @@
           }
         },
         {
-          "id":240,
           "name":"Needle blast",
           "description":"The marksman fires an arrow that blasts into tiny pieces, causing slash damage in the area.",
           "mana":[250,275,300,325,350],
@@ -1147,7 +1082,6 @@
           }
         },
         {
-          "id":241,
           "name":"Arcana strike",
           "description":"An arrow that makes elemental damage.",
           "mana":[200,235,270,305,340],
@@ -1163,7 +1097,6 @@
           }
         },
         {
-          "id":242,
           "name":"Fire rain",
           "description":"The marksman fires an arrow that blows up in the sky and falls as a rain of fire.",
           "mana":[280,310,340,370,400],
@@ -1179,7 +1112,6 @@
           }
         },
         {
-          "id":243,
           "name":"Lightning arrow",
           "description":"An arrow that carries electrical damage strikes an objective and all of those that surround it.",
           "mana":[260,290,320,350,380],
@@ -1203,7 +1135,6 @@
       "class":"Marksman",
       "spells":[
         {
-          "id":36,
           "name":"Dead eye",
           "description":"The marksman takes her time to choose the right spot, maximizing the damage of her shots.",
           "mana":[50,80,110,140,170],
@@ -1220,7 +1151,6 @@
           }
         },
         {
-          "id":225,
           "name":"Focus",
           "description":"The marksman enhances the possibilities of descrying the enemy by moving slower..",
           "mana":[40,80,120,160,200],
@@ -1238,7 +1168,6 @@
           "note":"Power has no duration limits. (It may be deactivated)"
         },
         {
-          "id":227,
           "name":"Skin Piercer",
           "description":"Attack centered in the opponent's skin, considerably reducing their resistances. Works only if the enemy has these resistance raised.",
           "mana":[150,175,200,225,250],
@@ -1256,7 +1185,6 @@
           }
         },
         {
-          "id":226,
           "name":"Foresight",
           "description":"Increases attack range.",
           "type":"Passive",
@@ -1265,8 +1193,6 @@
           }
         },
         {
-          "id":228,
-          "alt_id":406,
           "name":"Cyclops curse",
           "description":"Strike oriented to the opponent's eyes.",
           "mana":[180,205,230,255,280],
@@ -1285,7 +1211,6 @@
           }
         },
         {
-          "id":229,
           "name":"Lethal strike",
           "description":"It looks for critical areas in the blank.",
           "mana":[185,209,233,257,281],
@@ -1301,7 +1226,6 @@
           }
         },
         {
-          "id":230,
           "name":"Strategic position",
           "description":"The marskman knows how to locate herself in advantagous positions in battle.",
           "mana":[120,140,160,180,200],
@@ -1315,7 +1239,6 @@
           }
         },
         {
-          "id":232,
           "name":"Trained eye",
           "description":"The marksman improves her impact chances.",
           "type":"Passive",
@@ -1324,7 +1247,6 @@
           }
         },
         {
-          "id":231,
           "name":"Seeking strike",
           "description":"The arrow fired automatically seeks a weakening spot in the target.",
           "mana":[255,277,299,321,343],
@@ -1339,7 +1261,6 @@
           }
         },
         {
-          "id":233,
           "name":"Hawk's gaze",
           "description":"The marksman can find her opponent and target her easily.",
           "mana":[260,290,320,350,380],
