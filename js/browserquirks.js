@@ -1,4 +1,3 @@
-// Website requires working async/await and by the way detects non ES8 browser
 // Load better or censored by Microsoft (flags) emojis from google on Windows system
 // See https://developers.google.com/fonts/docs/getting_started?hl=en
 function loademojis() {
@@ -41,7 +40,6 @@ function is_gap_supported() {
 	head.appendChild(link);
 }
 
-
 try {
 	document.addEventListener("DOMContentLoaded", loademojis);
 	document.addEventListener("DOMContentLoaded", is_gap_supported);
@@ -50,3 +48,14 @@ catch (_unused) {
 	window.onload = loademojis;
 	window.onload = is_gap_supported;
 }
+
+// get basic hit statistics
+function get_hits() {
+	let head = document.getElementsByTagName("head")[0];
+	let script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src= __api__base + "/ping?=" + window.location.pathname;
+	head.appendChild(script);
+}
+if (window.location.origin == __api__frontsite)
+	get_hits();
