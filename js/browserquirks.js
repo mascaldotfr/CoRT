@@ -56,6 +56,7 @@ function get_hits() {
 	script.type = "text/javascript";
 	script.src = __api__base + "/ping.js?p=/" +
 		     window.location.pathname.split("/").pop();
+	script.setAttribute("defer", "");
 	head.appendChild(script);
 }
 if (window.location.origin == __api__frontsite)

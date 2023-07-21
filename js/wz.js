@@ -111,10 +111,10 @@ async function display_wz() {
 	}
 
 	for (let gem of data["gems"]) {
-		gems.push(`<img src="${rebase_img(gem)}" class="wz-icon">`);
+		gems.push(`<img src="${rebase_img(gem)}" class="wz-icon" loading="lazy">`);
 	}
 	for (let fort of data["forts"]) {
-		let icon = `<img src="${rebase_img(fort["icon"])}" class="wz-icon">`;
+		let icon = `<img src="${rebase_img(fort["icon"])}" class="wz-icon" loading="lazy">`;
 		let name = translate_fort(fort["name"]);
 		forts.push(`${icon}&nbsp;${name}<br>`);
 	}
@@ -126,7 +126,7 @@ async function display_wz() {
 		for (let relic of Object.keys(data["relics"][realm])) {
 			let url = data["relics"][realm][relic];
 			if (url !== null) {
-				relics += `<img src="${rebase_img(url)}" class="wz-icon">`;
+				relics += `<img src="${rebase_img(url)}" class="wz-icon" loading="lazy">`;
 			}
 		}
 		$(`#wz-${realm.toLowerCase()}`).html(`
