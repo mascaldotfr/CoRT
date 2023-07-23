@@ -144,11 +144,12 @@ $("#t-save").on("click", function() {
 	}
 });
 
-document.addEventListener('keyup', function(e) {
-    if (e.keyCode == 27) {
-	    document.getElementById("t-dialog").close();
-	    window.location.href = $("#t-dialog-url").val();
-    }
+$("#t-dialog").on("cancel", function(e) {
+	e.preventDefault();
+	document.getElementById("t-dialog").close();
+	// Don't get a blurred page if people press 2 times ESC
+	$("body").css("filter", "");
+	window.location.href = $("#t-dialog-url").val();
 });
 
 $("#t-dialog-close").on("click", function() {
