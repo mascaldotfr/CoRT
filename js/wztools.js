@@ -30,8 +30,10 @@ function humanise_events(events, has_id=true)  {
 		let datetime = dt.toLocaleDateString(undefined, date_options);
 		let owner = anevent["owner"];
 		let owner_color = realm_colors[owner];
+		let location_color = realm_colors[anevent["location"]];
 		let captured = anevent["name"];
-		events_html += `<b>${datetime}</b>&nbsp;`
+		let dt_color = anevent["type"] == "wish" ? location_color: "";
+		events_html += `<b class="${dt_color}">${datetime}</b>&nbsp;`;
 		if (anevent["type"] == "fort" || anevent["type"] == "gem") {
 			let location_color = realm_colors[anevent["location"]];
 			if (anevent["type"] == "fort") {
@@ -63,7 +65,6 @@ function humanise_events(events, has_id=true)  {
 			}
 		}
 		else if (anevent["type"] == "wish") {
-			let location_color = realm_colors[anevent["location"]];
 			let sentence = _("%s made a dragon wish!", anevent["location"]);
 			events_html += `<span class="${location_color} bold">${sentence}</span>`;
 		}
