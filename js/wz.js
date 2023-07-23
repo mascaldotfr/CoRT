@@ -106,7 +106,7 @@ async function display_wz() {
 		}
 	}
 	catch (error) {
-		$("#wz-info-error").html(`<b>Failed to get the warstatus:</b> <code>${error}</code>`);
+		$("#wz-info-error").html(`<p><b>Failed to get the warstatus:</b> <code>${error}</code></p>`);
 		return;
 	}
 
