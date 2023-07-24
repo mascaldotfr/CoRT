@@ -2488,7 +2488,7 @@
       "class":"Warlock",
       "spells":[
         {
-          "name":"Stalagamite",
+          "name":"Stalagmite",
           "description":"A sharp rock comes out the earth, below the objective, who receives piercing damage.",
           "mana":[90,120,150,180,210],
           "type":"Direct",
@@ -2714,7 +2714,7 @@
           }
         },
         {
-          "name":"Sadictic servants",
+          "name":"Sadistic servants",
           "description":"It calls the earth wandering souls. They attack a realm enemy from whom they drain mana.",
           "type":"Constant",
           "duration":30,
