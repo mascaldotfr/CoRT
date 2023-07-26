@@ -145,6 +145,7 @@ h1 {
 }
 #skillinfo {
 	visibility: hidden;
+	max-width: calc(100vw - 4 * var(--default_margin_padding));
 }
 #skillinfo h2 {
 	margin: 0;
@@ -437,10 +438,7 @@ h1 {
 	#lang, .menuitem {
 		display: block;
 		font-size: 120%;
-	}
-	#lang {
-		margin-left: 2em;
-		margin-top: 1em;
+		margin-bottom: var(--default_margin_padding);
 	}
 	#menu-content span:nth-child(even) {
 		background: #313131;
@@ -453,8 +451,7 @@ h1 {
 	}
 	.menuitem a {
 		display: inline-block;
-		padding: 1em;
-		width: 100%;
+		width: calc(100vw - 6 * var(--default_margin_padding));
 	}
 	/* WAR STATUS */
 	#wz-container {
