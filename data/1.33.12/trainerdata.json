@@ -3103,7 +3103,7 @@
           "description":"The fighter is naturally agile.",
           "buffs":{
             "Slashing damage":["+2%","+4%","+6%","+8%","+10%"],
-            "Mana recover per hit":["+4","+4","+6","+6","+10%"]
+            "Mana recover per hit":["+4","+4","+6","+6","+10"]
           }
         },
         {
