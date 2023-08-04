@@ -3698,7 +3698,7 @@
         },
         {
           "name":"Thirst for blood",
-          "description":"The barbarian channels all her fury. Normal attacks receive a damage bonus that increments on every successful impact. Power wears off by duration and also when inflicting 5 Successful blows. Evaded and blocked attacks are not counted toward power expiration",
+          "description":"The barbarian channels all her fury. Normal attacks receive a damage bonus that increments on every successful impact. Power wears off by duration and also when inflicting 5 successful blows. Evaded and blocked attacks are not counted toward power expiration.",
           "mana":[80,120,160,200,240],
           "type":"Constant",
           "cast":0.5,
@@ -3722,7 +3722,7 @@
           "gcd":"Short",
           "buffs":{
             "Casting speed":[ "+10%", "+15%", "+20%", "+25%", "+30%" ],
-            "Resist next crowd control effect":["0", "0" ,"0" ,"0" ,"+100%"]
+            "Resist next crowd control effect":["-", "-", "-", "-", "yes"]
           }
         },
         {
@@ -3765,7 +3765,7 @@
         },
         {
           "name":"Spring",
-          "description":"The warrior attacks and moves fast, staying away from damage.",
+          "description":"Allows the barbarian to quickly get closer to the enemy.",
           "mana":[100,120,140,160,180],
           "type":"Constant",
           "duration":10,
@@ -3802,21 +3802,20 @@
       "spells":[
         {
           "name":"Threat",
-          "description":"The barbarian intimidates the opponent, that fights with increased miss chance.",
+          "description":"Anyone near the barbarian will be intimidated and the critical hits they receive will be stronger.",
           "mana":[100,120,140,160,180],
           "type":"Constant",
           "duration":[10,14,16,18,25],
           "cooldown":60,
           "cast":0.0,
-          "gcd":"Normal",
-          "range":8,
+          "gcd":"Short",
           "buffs":{
             "Critical damage":["+10%","+13%","+16%","+20%","+30%"]
           }
         },
         {
           "name":"Spiritual blow",
-          "description":"The Barbarian extends an attack beyond her normal distance",
+          "description":"The Barbarian extends an attack beyond her normal distance.",
           "mana":[80,110,140,170,200],
           "type":"Constant",
           "cast":0,
