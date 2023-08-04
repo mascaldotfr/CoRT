@@ -4071,8 +4071,8 @@
           "range":25,
           "blockable_100":true,
           "debuffs":{
-            "Opponent resistance to knock down":["-20%", "-40%", "-60%", "-80%", "-100%"],
-            "Opponent concentration":["-10%", "-15%", "-20%", "-25%", "-30%"]
+            "Resist knock":["-20%", "-40%", "-60%", "-80%", "-100%"],
+            "Concentration":["-10%", "-15%", "-20%", "-25%", "-30%"]
           }
         },
         {
@@ -4103,7 +4103,7 @@
           "range":0.0,
           "blockable_100":true,
           "debuffs":{
-            "Knock down":["2s", "3s", "4s", "5s", "6s"]
+            "Knock down":true
           }
         },
         {
@@ -4161,7 +4161,7 @@
           "gcd":"Normal",
           "range":0,
           "buffs":{
-            "Health":["+200", "+250" , "+450", "+600", "+1000"]
+            "Health":["+200", "+300" , "+450", "+600", "+1000"]
           }
         },
         {
@@ -4170,11 +4170,11 @@
           "mana":[50, 80, 110, 140, 170],
           "type":"Constant",
           "cast":0.0,
+          "duration":4,
           "cooldown":100,
           "gcd":"Very Short",
           "buffs":{
-            "Movement speed":["+5%", "+10%", "+15%", "+20%", "+50%"],
-            "Duration":["4s", "4s", "4s", "4s", "4s"]
+            "Movement speed":["+5%", "+10%", "+15%", "+20%", "+50%"]
           }
         },
         {
@@ -4284,7 +4284,7 @@
           },
           "debuffs":{
             "Cannot cast damaging powers":true,
-            "Damage bonus":"-90%"
+            "Weapon damage bonus":"-90%"
           }
         },
         {
@@ -4416,7 +4416,7 @@
           "description":"The Warmaster enhances his class main attribute.",
           "type":"Passive",
           "buffs":{
-            "Class Attribute":"+15%"
+            "Constitution":"+15%"
           }
         },
         {
