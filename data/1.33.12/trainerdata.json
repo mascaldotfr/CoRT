@@ -2489,7 +2489,7 @@
       "spells":[
         {
           "name":"Stalagmite",
-          "description":"A sharp rock comes out the earth, below the objective, who receives piercing damage.",
+          "description":"A sharp rock comes out the earth, below the objective, who receives piercing and ice damage.",
           "mana":[90,120,150,180,210],
           "type":"Direct",
           "cooldown":25.0,
@@ -2682,10 +2682,8 @@
           "gcd":"Very Short",
           "range":25.0,
           "blockable_100":true,
-          "buffs":{
-            "Protection":[ "-30%", "-35%", "-40%", "-45%", "-50%" ]
-          },
           "debuffs":{
+            "Protection":[ "-30%", "-35%", "-40%", "-45%", "-50%" ],
             "Concentration":[ "-10", "-15", "-20", "-25", "-30" ]
           }
         },
