@@ -3100,7 +3100,7 @@
         {
           "name":"Athletic",
           "type":"Passive",
-          "description":"The fighter is naturally agile.",
+          "description":"Enhanced agility and superior physical condition allows the warrior to be more effective while wielding a weapon, making each cut caused to the enemy take less effort and save energy in each attack",
           "buffs":{
             "Slashing damage":["+2%","+4%","+6%","+8%","+10%"],
             "Mana recover per hit":["+4","+4","+6","+6","+10"]
@@ -3132,7 +3132,7 @@
           "weapon_interval": true,
           "resistible_100":true,
           "damage":{
-            "Attack":["100%", "100%", "100%", "100%", "100%"]
+            "Attack":"110%"
           },
           "debuffs":{
             "Evade Chance":["-50%","-60%","-70%","-80%","-100%"],
@@ -3342,7 +3342,7 @@
           },
           "damage":{
             "Attack":[ "80%", "90%", "100%", "120%", "150%" ],
-            "Blunt":[ "50%", "100%", "150%", "200%", "250%" ]
+            "Blunt":[ "50", "100", "150", "200", "250" ]
           }
         }
       ]
@@ -3391,7 +3391,7 @@
           "gcd":"Normal",
           "weapon_interval": true,
           "range":0.0,
-          "buffs":{
+          "debuffs":{
             "Immobilize":true
           },
           "damage":{
@@ -3409,7 +3409,7 @@
         },
         {
           "name":"Ripost",
-          "description":"The warrior takes advantage of an opponent's bad move, and strikes with lethal accuracy",
+          "description":"The warrior takes advantage of an opponent's bad move, and strikes with lethal accuracy.",
           "mana":[80,95,110,125,140],
           "type":"Direct",
           "cooldown":30,
@@ -3426,7 +3426,7 @@
         },
         {
           "name":"Impale",
-          "description":"The spear crosses the opponent from side to side",
+          "description":"The spear crosses the opponent from side to side.",
           "mana":[125,150,175,200,225],
           "type":"Constant",
           "duration":[12,15,17,19,21],
@@ -3448,7 +3448,7 @@
         },
         {
           "name":"Brain piercing",
-          "description":"Distracting attack that allows the interruption of power casting",
+          "description":"Distracting attack that allows the interruption of power casting.",
           "mana":[120,150,180,210,250],
           "type":"Constant",
           "duration":[10,12,12,15,15],
@@ -3467,7 +3467,7 @@
         },
         {
           "name":"Bendable",
-          "description":"The warrior has resistance against slashing damage",
+          "description":"The warrior has resistance against slashing damage.",
           "type":"Passive",
           "buffs":{
             "Resist slashing damage":["+5%", "6%", "7%", "8%", "10%"]
@@ -3475,7 +3475,7 @@
         },
         {
           "name":"Multiple thrust",
-          "description":"Multiple attacks strike in an arc area. Opponents in the area receive weapon damage",
+          "description":"Multiple attacks strike in an arc area. Opponents in the area receive weapon damage.",
           "mana":[200,230,255,280,300],
           "type":"Direct",
           "cooldown":70,
@@ -3503,6 +3503,9 @@
           "buffs":{
             "Attack damage":["+80%", "+90%", "+100%", "+120%", "+150%"],
             "Piercing":["50", "100", "150", "200", "250"]
+          },
+          "debuffs":{
+            "Dizzy": true
           }
         }
       ]
