@@ -988,8 +988,8 @@
           "gcd":"Short",
           "cooldown":15.0,
           "debuffs":{
-            "Health per arrow":[10,15,20,25,30],
-            "Mana per arrow":[20,25,30,35,40]
+            "Health per arrow":[-10,-15,-20,-25,-30],
+            "Mana per arrow":[-20,-25,-30,-35,-40]
           },
           "buffs":{
             "Weapon damage bonus":["+20%","+25%","+30%","+35%","+40%"]
@@ -1169,7 +1169,7 @@
           "note":"Power has no duration limits. (It may be deactivated)"
         },
         {
-          "name":"Skin Piercer",
+          "name":"Skin piercer",
           "description":"Attack centered in the opponent's skin, considerably reducing their resistances. Works only if the enemy has these resistance raised.",
           "mana":[150,175,200,225,250],
           "type":"Constant",
@@ -1178,6 +1178,7 @@
           "cooldown":60.0,
           "duration":[3,3,4,4,5],
           "range":0.0,
+          "blockable_100": true,
           "debuffs":{
             "Resistance to Physical and Magical Damage":["-10%","-20%","-30%","-40%","-50%"]
           },
@@ -1204,7 +1205,7 @@
           "duration":30.0,
           "range":0.0,
           "damage":{
-            "+125% Attack":true
+            "Attack":"+125%"
           },
           "debuffs":{
             "Critical chance reduction":["-20%","-30%","-40%","-50%","-75%"],
@@ -1221,9 +1222,9 @@
           "cooldown":50.0,
           "range":0.0,
           "damage":{
-            "+100% Attack":true,
-            "(chance) +60% Attack":["20%","24%","28%","32%","36%"],
-            "Attack":["20/50%","36/66%","50/82%","65/99%","80/115%"]
+            "Attack":"+100%",
+            "(extra) Attack":["20/50%","36/66%","50/82%","65/99%","80/115%"],
+            "(chance) +60% Attack":["20%","24%","28%","32%","36%"]
           }
         },
         {
