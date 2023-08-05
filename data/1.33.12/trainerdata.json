@@ -624,7 +624,7 @@
           "duration":30,
           "cooldown":30,
           "range":25,
-          "buffs":{
+          "debuffs":{
             "Melee received damage":["+5%", "+8%", "+12%", "+16%", "+20%"]
           }
         },
@@ -695,7 +695,7 @@
         },
         {
           "name":"Reveal",
-          "description": "Guided by her instinct and by hints from the environment, the hunter throws a flaming arrow, revealing the position of hidden enemies. It cancels the effects of Camouflage, Camouflage Corpse and Stalker Surroundings active on enemies.",
+          "description": "Guided by her instinct and by hints from the environment, the hunter throws a flaming arrow, revealing the position of hidden enemies. It cancels the effects of Camouflage, <s>Camouflage Corpse</s> and Stalker Surroundings active on enemies.",
           "mana":[200, 225, 250, 275, 300],
           "type":"Constant",
           "cast":1.0,
@@ -733,7 +733,7 @@
           "duration":[60,120,180,240,300],
           "area":10.0,
           "buffs":{
-            "Invisibility":["1 ally","2 allies","3 allies","4 allies","5 allies"]
+            "Invisibility for the Hunter and...":["1 ally","2 allies","3 allies","4 allies","5 allies"]
           },
           "debuffs": {
             "Movement speed": "-40%"
