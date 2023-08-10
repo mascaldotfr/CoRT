@@ -33,28 +33,3 @@ is the **heavily recommended method**.
 
 Update the array containing all available versions in `js/trainer.js` with the
 newest version last.
-
-## The version 66 problem
-
-I don't want to spread fear among people, because it won't happen, yet i can't
-left you ignorant of that fact.
-
-You can't have more than 66 datasets versions with the current short URL
-format. In the unlikely case we hit that limit, the simplest solution is to use
-an extra parameter, let's say `g` as generation and move the versions in a
-multidimensional array.
-
-In js/trainer.js:
-
-```javascript
-let trainerdataversions = [
-    [66 oldest versions, ...],
-    [x newer versions, ...]
-];
-```
-
-Then assume in `$(document).ready(...)` that an undefined `g` is
-`trainerdataserversions[0]`, otherwise it's `trainerdataserversions[g]`.
-
-On top of that you'll need to change `save_setup_to_url()` to add that
-parameter for future saved URLs.

@@ -27,6 +27,9 @@ const trainerdatasets = ["1.33.2", "1.33.3", "1.33.6", "1.33.12"];
 const newest_dataset = trainerdatasets.slice(-1);
 var trainerdata = null;
 var trainerdataversion = null;
+// 0: trainerdataset on 1 digit (?s=)
+// 1: trainerdataset on 2 digits (?t=)
+var skillset_urlformat = 0;
 
 const mindlevel = 1;
 const maxdlevel = 19;
@@ -85,6 +88,11 @@ $(document).ready(function() {
 	// set the version accordingly. See also manage_dataset_versions.
 	let urlsearch = new URLSearchParams(window.location.search);
 	let skillset = urlsearch.get("s");
+	if (!skillset) {
+		skillset = urlsearch.get("t");
+		if (skillset)
+			skillset_urlformat = 1;
+	}
 	trainerdataversion = urlsearch.get("d");
 	if (skillset) {
 		load_setup_from_url(skillset);
@@ -240,7 +248,7 @@ function save_setup_to_url(shared = true) {
 	if (shared == true)
 		collect_setup(setup);
 	return window.location.origin + window.location.pathname +
-	       "?s=" + compressor.compress(setup);
+	       "?t=" + compressor.compress(setup);
 }
 
 function bad_shared_link() {
@@ -257,7 +265,7 @@ function load_setup_from_url(skillset) {
 		saved_setup = LZString.decompressFromEncodedURIComponent(skillset);
 		saved_setup = trainerdataversion + "+" + saved_setup;
 		window.location.assign(window.location.origin + window.location.pathname +
-				       "?s=" + compressor.compress(saved_setup));
+				       "?t=" + compressor.compress(saved_setup));
 
 	}
 	saved_setup = compressor.decompress(skillset);
@@ -648,10 +656,17 @@ class SetupCompressor {
 		}
 	}
 
+	compress_version1(version) {
+		let multiplier = Math.floor(version / 60);
+		let remainder = version % 60;
+		return this.b66chars[multiplier] + this.b66chars[remainder];
+
+	}
+
 	compress(setup) {
 		let output = "";
 		setup = setup.split("+");
-		output += this.b66chars[trainerdatasets.indexOf(setup.shift())];
+		output += this.compress_version1(trainerdatasets.indexOf(setup.shift()));
 		output += this.b66chars[classes.indexOf(setup.shift())];
 		output += this.b66chars[parseInt(setup.shift())]; // level
 		for (let i = 0; i < setup.length; i++) {
@@ -673,12 +688,25 @@ class SetupCompressor {
 		return output
 	}
 
+	decompress_version1(string) {
+		let version_index = 60 * this.b66chars.indexOf(string[0]);
+		version_index += this.b66chars.indexOf(string[1]);
+		return trainerdatasets[version_index];
+	}
+
 	decompress(string) {
 		let setup = "";
-		setup += trainerdatasets[this.b66chars.indexOf(string[0])] + "+";
-		setup += classes[this.b66chars.indexOf(string[1])] + "+";
-		setup += this.b66chars.indexOf(string[2]) + "+"; // level
-		string = string.substring(3);
+		let offset = 0;
+		if (skillset_urlformat == 0) {
+			setup += trainerdatasets[this.b66chars.indexOf(string[0])] + "+";
+		}
+		else if (skillset_urlformat == 1) {
+			setup += this.decompress_version1(string.slice(0,2)) + "+";
+			offset = 1;
+		}
+		setup += classes[this.b66chars.indexOf(string[offset + 1])] + "+";
+		setup += this.b66chars.indexOf(string[offset + 2]) + "+"; // level
+		string = string.substring(offset + 3);
 		for (let pos = 0; pos <= string.length -1; pos += 6) {
 			let disc = Array.from(string.slice(pos,pos+6));
 			// discipline points
