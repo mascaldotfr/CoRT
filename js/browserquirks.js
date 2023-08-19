@@ -49,6 +49,7 @@ catch (_unused) {
 	window.onload = is_gap_supported;
 }
 
+/*
 // get basic hit statistics
 function get_hits() {
 	let head = document.getElementsByTagName("head")[0];
@@ -61,3 +62,4 @@ function get_hits() {
 }
 if (window.location.origin == __api__frontsite)
 	get_hits();
+*/
