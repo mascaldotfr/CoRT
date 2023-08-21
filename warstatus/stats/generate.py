@@ -32,7 +32,7 @@ create table if not exists events (
 """
 
 
-def statistics(events, db_file, outfile, outfile_events):
+def statistics(events, db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)

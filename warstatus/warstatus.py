@@ -203,8 +203,8 @@ def main():
             if len(old_status) == 0 or "failed" in old_status:
                 sys.exit(0)
             import stats.generate
-            st, ev = stats.generate.statistics(status["events_log"], stats_db_file,
-                                               stats_outfile, stats_outfile_events)
+            st, ev = stats.generate.statistics(status["events_log"],
+                                               stats_db_file)
             writer(st, stats_outfile)
             writer(ev, stats_outfile_events)
         except Exception as e:
