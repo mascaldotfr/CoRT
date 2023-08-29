@@ -19,8 +19,11 @@
 
 
 // id is the (x) thing at the end of each fortification
-function humanise_events(events, has_id=true)  {
+// notify allows to return an array with the events without coloration if > 0
+// (unix timestamp from the last event) for use in a desktop notification
+function humanise_events(events, has_id=true, notify=0)  {
 	events_html = "";
+	events_notify = "";
 	realm_colors = get_realm_colors();
 	for (let anevent of events) {
 		let dt = new Date(anevent["date"] * 1000);
@@ -46,30 +49,44 @@ function humanise_events(events, has_id=true)  {
 			}
 			let target = `<span class="${location_color} bold">${captured}</span>`;
 			let action;
+			let action_notify;
 			if (anevent["location"] == anevent["owner"]) {
 				action = _("has recovered %s", target);
+				action_notify = _("has recovered %s", captured);
 			}
 			else {
 				action = _("has captured %s", target);
+				action_notify = _("has captured %s", captured);
 			}
 			events_html += `<span class="${owner_color} bold">${owner}</span> ${action}.`;
+			if (notify > 0 && anevent["date"] >= notify)
+				events_notify += `${owner} ${action_notify}\n`;
 		}
 		else if (anevent["type"] == "relic") {
 			let location_color = realm_colors[anevent["owner"]];
 			let relic = `<span class="${location_color} bold">${_("%s's relic", captured)}</span>`;
+			let relic_notify = `${_("%s's relic", captured)}`;
 			if (anevent["location"] == "altar") {
 				events_html += `${relic} ${_("is back to its altar.")}`;
+				if (notify > 0 && anevent["date"] >= notify)
+					events_notify += `${relic_notify} ${_("is back to its altar.")}\n`;
 			}
 			else {
 				events_html += `${relic} ${_("is in transit.")}`;
+				if (notify > 0 && anevent["date"] >= notify)
+					events_notify += `${relic_notify} ${_("is in transit.")}\n`;
 			}
 		}
 		else if (anevent["type"] == "wish") {
 			let sentence = _("%s made a dragon wish!", anevent["location"]);
 			events_html += `<span class="${location_color} bold">${sentence}</span>`;
+			if (notify > 0 && anevent["date"] >= notify)
+				events_notify += sentence + "\n";
 		}
 		events_html += `<br>`;
 	}
+	if (notify > 0)
+		return [events_html, events_notify];
 	return events_html;
 }
 

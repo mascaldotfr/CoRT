@@ -15,6 +15,9 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Unix timestamp of the last update
+let wz_lastupdate = Math.floor(new Date().getTime() / 1000);
+
 // Use local versions of images because NGE's site is slow
 function rebase_img(url) {
 	return "data/warstatus/" + url;
@@ -138,15 +141,18 @@ async function display_wz() {
 				<span class="forts">${forts.splice(0, 4).join("")}</span>
 		`)
 	}
-
+	let events_list = humanise_events(data["events_log"], true, wz_lastupdate);
 	$("#wz-events").html(`<h2 id="wz-events-header">
 		<span class="purple">${_("Last server events (in your timezone):")} </span>
 		</h2>
 		<span>
-		${humanise_events(data["events_log"], true)}
+		${events_list[0]}
 		<br>
 		<a href="wevents.html?f=none">${_("More events")}...</a>
 		</span>`);
+	wz_lastupdate = Math.floor(new Date().getTime() / 1000);
+	if (events_list[1].length > 0)
+		mynotify(_("WZ status"), events_list[1]);
 }
 
 $(document).ready(function() {
