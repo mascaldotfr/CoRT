@@ -15,24 +15,29 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Bootstrap notifications permissions before mynotify is called
+if (Notification.permission !== "denied")
+	Notification.requestPermission();
+
 function mynotify(title, text) {
-	let options = {
+	const options = {
 		icon: "favicon.png",
 		body: text
 	};
-	if (!Notification)
-		return; // unsupported browser
-
-	if (Notification.permission === "granted") {
-		let notification = new Notification(title, options);
+	if (!("Notification" in window)) {
+		console.log("Browser does not support notifications");
 		return;
 	}
 
-	if (Notification.permission !== "denied") {
-		permission = Notification.requestPermission();
-		if (permission === "granted") {
-			let notification = new Notification(title, options);
-		}
+	if (Notification.permission === "granted") {
+		const notification = new Notification(title, options);
+	}
+	else if (Notification.permission !== "denied") {
+		Notification.requestPermission().then((permission) => {
+			if (permission === "granted") {
+				const notification = new Notification(title, options);
+			}
+		});
 	}
 }
 
