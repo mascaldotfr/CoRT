@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 mascal
+ * Copyright (c) 2022-2023 mascal
  *
  * CoRT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -24,6 +24,7 @@ respawn_time = 109 * 3600;   // 109 hours
 first_respawns = { "thorkul": 1681656552, "evendim": 1693095192, "daen": 1692789192 };
 next_respawns = { "evendim": [], "daen": [], "thorkul": [] };
 previous_respawns = first_respawns;
+notified_10m = false;
 
 function time_now() {
 	return Math.floor(new Date().getTime() / 1000);
@@ -74,6 +75,19 @@ function display_next_respawn(boss) {
 	next_respawn_in.hours = next_respawn_in.hours == "00" ? "" : next_respawn_in.hours + _("h");
 	$(`#${boss}_countdown`).text(`${_("Next respawn in")}
 		${next_respawn_in.days} ${next_respawn_in.hours} ${next_respawn_in.minutes}${_("m")}`);
+	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
+	if (next_respawn_in.days == 0 && next_respawn_in.hours == 0) {
+		if (next_respawn_in.minutes <= 10 && next_respawn_in.minutes >= 1 &&
+		    notified_10m === false) {
+			mynotify(_("Bosses status"), `${bossname}: ${_("Next respawn in")} ` +
+				 `${next_respawn_in.minutes}${_("m")}`);
+			notified_10m = true;
+		}
+		else if (next_respawn_in.minutes == 0) {
+			mynotify(_("Bosses status"),`${bossname} ${_("should appear very soon!")}`);
+			notified_10m = false;
+		}
+	}
 }
 
 function refresh_display() {

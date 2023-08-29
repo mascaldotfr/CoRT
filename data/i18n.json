@@ -90,6 +90,12 @@ __i18n__ = {
 		"es": "Próxima aparición en",
 		"de": "Nächster Auftritt in"
 	},
+	"should appear very soon!":
+	{
+		"fr": "devrait apparaître très bientôt !",
+		"es": "debería aparecer muy pronto!",
+		"de": "sollte sehr bald erscheinen!"
+	},
 	"d":
 	{
 		"comment": "short for days",
