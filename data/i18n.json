@@ -147,6 +147,26 @@ __i18n__ = {
 		"es": "Cerrada",
 		"de": "Geschlossen"
 	},
+	"BZ starting in": {
+		"fr": "La BZ commence dans",
+		"es": "La BZ comienza en",
+		"de": "Die BZ beggint in"
+	},
+	"BZ started!": {
+		"fr": "La BZ a commencé !",
+		"es": "La BZ ha comenzado!",
+		"de": "Die BZ hat begonnen!"
+	},
+	"BZ ending in": {
+		"fr": "La BZ se termine dans",
+		"es": "La BZ termina en",
+		"de": "Die BZ endet in"
+	},
+	"BZ is closed!": {
+		"fr": "La BZ est terminée",
+		"es": "La BZ ha terminado",
+		"de": "Die BZ ist vorbei"
+	},
 	"Clicking on a skill icon will show its description.":
 	{
 		"fr": "Cliquer sur l'îcone d'un sort montrera sa description.",

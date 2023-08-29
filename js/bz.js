@@ -34,6 +34,7 @@ bz_end = [	[16, 21],
 		[17, 23],
 		[6, 16, 23] 	];
 
+notified_10m = false;
 
 function future_date(in_day, at_hour) {
 	let d = new Date();
@@ -100,11 +101,30 @@ function feed_bz() {
 	if (bz_on) {
 		$("#bz_status").html(`<span class="green"><b>${_("ON")}</b></span>`);
 		$("#next_bz").text(`${_("Ends in")} ${bz_ends_at.hours}:${bz_ends_at.minutes}:${bz_ends_at.seconds}`);
+		if (bz_ends_at.hours == 0 && bz_ends_at.minutes <= 10 && bz_ends_at.minutes >= 1 &&
+			notified_10m === false) {
+			notified_10m = true;
+			mynotify(_("BZ status"), `${_("BZ ending in")} ${bz_ends_at.minutes}${_("m")}`);
+		}
+		if (bz_ends_at.hours == 0 && bz_ends_at.minutes == 0 && bz_ends_at.seconds == 0) {
+			notified_10m = false;
+			mynotify(_("BZ status"), _("BZ is closed!"));
+		}
 	}
 	else {
 		$("#bz_status").html(`<span class="red"><b>${_("OFF")}</b></span>`);
 		var next_bz_in = date_difference_from_now(next_bzs_begin[0]);
 		$("#next_bz").text(`${_("Next BZ in")} ${next_bz_in.hours}:${next_bz_in.minutes}:${next_bz_in.seconds}`);
+		if (next_bz_in.hours == 0 && next_bz_in.minutes <= 10 && next_bz_in.minutes >= 1 &&
+		    notified_10m === false) {
+			notified_10m = true;
+			mynotify(_("BZ status"), `${_("BZ starting in")} ${next_bz_in.minutes}${_("m")}`);
+		}
+		if (next_bz_in.hours == 0 && next_bz_in.minutes == 0 && next_bz_in.seconds == 0) {
+			notified_10m = false;
+			mynotify(_("BZ status"), _("BZ started!"));
+		}
+
 	}
 	for (let next_bz in next_bzs_begin) {
 		let bz_begin_date = new Date(next_bzs_begin[next_bz]);
