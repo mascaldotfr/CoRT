@@ -20,8 +20,8 @@ respawn_time = 109 * 3600;   // 109 hours
 // You can update it by looking at your browser console and getting the last
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
 // will run ~ 80 times/boss after all that time.
-// Last checked: Eve/Daen: 2023-08-27, TK: 2023-03-03
-first_respawns = { "thorkul": 1681656552, "evendim": 1693095192, "daen": 1692789192 };
+// Last checked: Eve/Daen: 2023-08-27, TK: 2023-08-30
+first_respawns = { "thorkul": 1693428668, "evendim": 1693095192, "daen": 1692789192 };
 next_respawns = { "evendim": [], "daen": [], "thorkul": [] };
 previous_respawns = first_respawns;
 notified_10m = false;
