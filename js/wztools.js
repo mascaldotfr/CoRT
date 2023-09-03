@@ -35,6 +35,7 @@ function humanise_events(events, has_id=true, notify=0)  {
 		let owner_color = realm_colors[owner];
 		let location_color = realm_colors[anevent["location"]];
 		let captured = anevent["name"];
+		let captured_notify = anevent["name"];
 		let dt_color = anevent["type"] == "wish" ? location_color: "";
 		events_html += `<b class="${dt_color}">${datetime}</b>&nbsp;`;
 		if (anevent["type"] == "fort" || anevent["type"] == "gem") {
@@ -42,8 +43,10 @@ function humanise_events(events, has_id=true, notify=0)  {
 			if (anevent["type"] == "fort") {
 				captured = translate_fort(captured, has_id);
 				captured_notify = captured;
-				if (has_id === true)
+				if (has_id === true) {
 					captured = captured.substring(0, captured.lastIndexOf(" "));
+					captured_notify = captured;
+				}
 			}
 			else if (anevent["type"] == "gem") {
 				captured = `${_("Gem")} #${captured}`;
@@ -54,7 +57,7 @@ function humanise_events(events, has_id=true, notify=0)  {
 			let action_notify;
 			if (anevent["location"] == anevent["owner"]) {
 				action = _("has recovered %s", target);
-				action_notify = _("has recovered %s", captured);
+				action_notify = _("has recovered %s", captured_notify);
 			}
 			else {
 				action = _("has captured %s", target);
