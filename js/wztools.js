@@ -45,7 +45,8 @@ function humanise_events(events, has_id=true, notify=0)  {
 					captured = captured.substring(0, captured.lastIndexOf(" "));
 			}
 			else if (anevent["type"] == "gem") {
-				captured = _("Gem") + " #" + captured;
+				captured = `${_("Gem")} #${captured}`;
+				captured_notify = `${captured} [${anevent["location"]}]`;
 			}
 			let target = `<span class="${location_color} bold">${captured}</span>`;
 			let action;
@@ -56,7 +57,7 @@ function humanise_events(events, has_id=true, notify=0)  {
 			}
 			else {
 				action = _("has captured %s", target);
-				action_notify = _("has captured %s", captured);
+				action_notify = _("has captured %s", captured_notify);
 			}
 			events_html += `<span class="${owner_color} bold">${owner}</span> ${action}.`;
 			if (notify > 0 && anevent["date"] >= notify)
