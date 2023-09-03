@@ -41,6 +41,7 @@ function humanise_events(events, has_id=true, notify=0)  {
 			let location_color = realm_colors[anevent["location"]];
 			if (anevent["type"] == "fort") {
 				captured = translate_fort(captured, has_id);
+				captured_notify = captured;
 				if (has_id === true)
 					captured = captured.substring(0, captured.lastIndexOf(" "));
 			}
