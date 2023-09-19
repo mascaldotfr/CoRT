@@ -275,6 +275,24 @@ __i18n__ = {
 		"es": "Esta configuración se creó con una versión anterior de CoR (%s) y puede estar desactualizada.",
 		"de": "Diese Konfiguration wurde mit einer alten Version von CoR (%s) erstellt und ist möglicherweise veraltet."
 	},
+	"This is the beta trainer for versions on Amun. Things can change quickly.":
+	{
+		"fr": "Ceci est l'entraîneur en beta pour les versions sur Amun. Les choses peuvent changer rapidement.",
+		"es": "Este es el entrenador beta para las versiones de Amun. Las cosas pueden cambiar rápidamente.",
+		"de": "Dies ist der Beta-Trainer für die Amun-Versionen. Dinge können sich schnell ändern."
+	},
+	"It's not recommended to permanently save setups in here.":
+	{
+		"fr": "Il n'est pas recommandé de sauvegarder les configurations de manière permamente ici.",
+		"es": "No se recomienda guardar configuraciones permanentemente aquí.",
+		"de": "Es wird nicht empfohlen, Setups hier dauerhaft zu speichern."
+	},
+	"Instead you should click here to convert your setup to the latest live version.":
+	{
+		"fr": "Vous devriez cliquer ici pour convertir votre configuration à la dernière version live",
+		"es": "En su lugar, deberías hacer clic aquí para convertir tu configuración a la ultima versión en vivo.",
+		"de": "Stattdessen sollten Sie hier klicken, um Ihr Setup in die Live-Version zu konvertieren."
+	},
 	"Click here":
 	{
 		"fr": "Cliquez ici",

@@ -23,7 +23,12 @@ const class_type_masks = {
 	'warrior':0x40, 'barbarian':0x41, 'knight':0x42
 };
 
-const trainerdatasets = ["1.33.2", "1.33.3", "1.33.6", "1.33.12"];
+var trainerdatasets = ["1.33.2", "1.33.3", "1.33.6", "1.33.12"];
+const is_beta = location.pathname.split("/").pop() == "beta.html";
+if (is_beta) {
+	var live_datasets = trainerdatasets;
+	trainerdatasets = ["beta"];
+}
 const newest_dataset = trainerdatasets.slice(-1);
 var trainerdata = null;
 var trainerdataversion = null;
@@ -51,6 +56,8 @@ $(document).ready(function() {
 		_("Clicking on a skill icon will show its description.") +
 		"<br>" +
 		_("Selecting an higher character level will upgrade your current setup to that level."));
+	if (is_beta)
+		$("#title").append(`&nbsp;<span class="red">(AMUN/BETA)</span>`);
 	for (let clas of classes) {
 		$("#t-class").append(`
 			<option value="${clas}">${_(capitalize(clas))}</option>`);
@@ -201,6 +208,7 @@ function manage_dataset_versions() {
 	// display a warning if an old version of the datasets are used, and
 	// remove it if the latest dataset is loaded after.
 	$("#oldversion").remove();
+	$("#betaversion").remove();
 	if (trainerdataversion != newest_dataset) {
 		$("#t-points").append(`	<div id="oldversion">
 					<p class="red"><b>
@@ -212,10 +220,22 @@ function manage_dataset_versions() {
 					</div>
 					`);
 	}
+	if (is_beta)
+		$("#t-points").append(`
+			<div id="betaversion">
+			<p class="red"><b>
+			${_("This is the beta trainer for versions on Amun. Things can change quickly.")}
+			<br> ${_("It's not recommended to permanently save setups in here.")}
+			<br>
+			<a href="javascript:convert_beta_to_live()">
+			${_("Instead you should click here to convert your setup to the latest live version.")}
+			</a></b></p>
+			</div>
+		`);
 }
 
 async function collect_setup(setupstring) {
-	if (window.location.origin != __api__frontsite)
+	if (window.location.origin != __api__frontsite || is_beta)
 		return;
 	try {
 		await $().post(__api__urls["submit_trainer"], {"setup":setupstring});
@@ -230,7 +250,14 @@ function upgrade_setup_to_new_version() {
 	window.location.assign(save_setup_to_url(false));
 }
 
-function save_setup_to_url(shared = true) {
+function convert_beta_to_live() {
+	trainerdataversion = live_datasets.slice(-1);
+	// Reassign live datasets for the compressor
+	trainerdatasets = live_datasets;
+	window.location.assign(save_setup_to_url(shared=false, beta2live=true));
+}
+
+function save_setup_to_url(shared=true, beta2live=false) {
 	let setup = trainerdataversion + "+";
 	setup = setup.concat(currclass + "+");
 	setup = setup.concat(currlevel + "+");
@@ -245,10 +272,13 @@ function save_setup_to_url(shared = true) {
 			setup = setup.concat("+");
 		}
 	}
-	if (shared == true)
+	if (shared)
 		collect_setup(setup);
-	return window.location.origin + window.location.pathname +
-	       "?t=" + compressor.compress(setup);
+	let pathname = window.location.pathname;
+	if (beta2live)
+		pathname = pathname.substring(0, pathname.lastIndexOf("/") + 1);
+
+	return window.location.origin + pathname + "?t=" + compressor.compress(setup);
 }
 
 function bad_shared_link() {
