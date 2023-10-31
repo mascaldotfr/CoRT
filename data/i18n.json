@@ -13,7 +13,7 @@ __i18n__ = {
 	"Please get back online and refresh this page.": {
 		"fr": "Veuillez vous reconnecter et rafraîchir cette page.",
 		"es": "Vuelva a conectarse y actualice esta página.",
-		"de": "Bitte gehst du  wieder online und aktualisierst du diese Seite."
+		"de": "Bitte gehst du wieder online und aktualisierst du diese Seite."
 	},
 	"Trainer": {
 		"fr": "Entraîneur",
@@ -23,17 +23,17 @@ __i18n__ = {
 	"Bosses status": {
 		"fr": "Etat des boss",
 		"es": "Jefes",
-		"de": "Zustand der Bosse"
+		"de": "Bosse"
 	},
 	"BZ status": {
 		"fr": "Etat des BZ",
 		"es": "Estado de las BZ",
-		"de": "Zustand der BZ"
+		"de": "Battle Zones"
 	},
 	"WZ status": {
 		"fr": "Etat de la WZ",
 		"es": "Estado de la ZG",
-		"de": "Zustand der WZ"
+		"de": "WZ-Status"
 	},
 	"WZ events": {
 		"fr": "Evénements de la WZ",
@@ -82,13 +82,13 @@ __i18n__ = {
 	{
 		"fr": "Dernière apparition",
 		"es": "Última reaparición",
-		"de": "Letzter Auftritt"
+		"de": "Letzter Spawn"
 	},
 	"Next respawn in":
 	{
 		"fr": "Prochaine apparition dans",
 		"es": "Próxima aparición en",
-		"de": "Nächster Auftritt in"
+		"de": "Nächster Spawn in"
 	},
 	"should appear very soon!":
 	{
@@ -310,7 +310,7 @@ __i18n__ = {
 	{
 		"fr": "Ce lien partagé est mauvais. J'abandonne, désolé !",
 		"es": "Este enlace compartido es malo. ¡Me doy por vencido, lo siento!",
-		"de": "Dieser geteilte Link ist schlecht. Ich gebe auf, sorry!"
+		"de": "Der geteilte Link ist ungültig. Ich gebe auf, sorry!"
 	},
 	"Copy link":
 	{
@@ -403,7 +403,7 @@ __i18n__ = {
 	"Last event:": {
 		"fr": "Dernier événement :",
 		"es": "Último evento:",
-		"de": "Letzte Veranstaltung:"
+		"de": "Letzter Eintrag:"
 	},
 	"Last %s days": {
 		"fr": "Les %s derniers jours",
@@ -538,7 +538,7 @@ __i18n__ = {
 	"Realms": {
 		"fr": "Royaumes",
 		"es": "Reinos",
-		"de": "Realms"
+		"de": "Reiche"
 	},
 	"Forts": {
 		"fr": "Forts",
