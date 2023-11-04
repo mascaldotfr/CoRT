@@ -15,8 +15,8 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// sync with statistics.txt
-let report_days = [7, 30];
+// sync with statistics.json
+let report_days = [7, 30, 90];
 
 function ts_to_human(ts) {
 	if (ts === null || ts == 0)

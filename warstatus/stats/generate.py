@@ -68,7 +68,7 @@ def statistics(events, db_file):
         conn.commit()
         start_time = timer()
         now = datetime.now()
-        days = [7, 30]
+        days = [7, 30, 90]
 
         # Optimise queries by using only the needed subset of the table
         report_mints = int(now.timestamp()) - (max(days) * 24 * 3600)
