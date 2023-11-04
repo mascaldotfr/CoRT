@@ -7,13 +7,22 @@ know these basics.
 
 ## Doing a balance update
 
+There are shorter ways to do so, but this way you can update a new trainer
+dataset beta after beta, until the final release, making 0-day releases of the
+live version without spending a lot of time on the said release day.
+
 ### Create a new version
 
-Copy the newest version folder in `data` to a new version number.
+As soon as the first beta/rc is released, remove the `data/beta` directory and
+copy the newest version folder to `data/beta` (called "beta folder" later).
 
 ### Change the trainer data
 
-Modify with the new `trainerdata.json` in that new folder with the new balance changes.
+Modify the new `trainerdata.json` in the beta folder with the new balance
+changes in [#experimental](https://discord.com/channels/542061814704373782/542403024417456138).
+
+Until the final release is live, you can checkout `beta.html` to test things
+out, beta after beta.
 
 ### Change the icons
 
@@ -29,7 +38,11 @@ That pack also includes a python script to automatically refresh skills icons fr
 your edited `trainerdata.json`. Its usage is explained in the pack's README, and
 is the **heavily recommended method**.
 
-### Making the new version available on the website
+### Making the new version available on the website once the new version is live
+
+Copy the beta folder to `data/trainer/1.x.x` according to the new version number.
 
 Update the array containing all available versions in `js/trainer.js` with the
 newest version last.
+
+That's it.
