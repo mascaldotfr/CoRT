@@ -399,7 +399,7 @@ async function load_tree() {
 	$("#t-trainer").empty();
 	$("#skillinfo").empty();
 	try {
-		trainerdata = await $().getJSON("data/" + trainerdataversion + "/trainerdata.json");
+		trainerdata = await $().getJSON("data/trainer/" + trainerdataversion + "/trainerdata.json");
 	}
 	catch (error) {
 		// Should never happen as the data is local...
@@ -414,7 +414,7 @@ async function load_tree() {
 	alltrees.forEach( (tree) => {
 		treepos++;
 		let spellpos = 0;
-		let iconsrc = "data/" + trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".jpg";
+		let iconsrc = "data/trainer/" + trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".jpg";
 		trainerhtml = trainerhtml.concat(`<div treepos="${treepos}" class="t${treepos} card">`);
 		trainerhtml = trainerhtml.concat(icon_factory(spellpos, iconsrc, treepos, tree, ""));
 		trainerdata.disciplines[tree].spells.forEach( (spell) => {
