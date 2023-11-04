@@ -5,7 +5,7 @@ This directory includes the necessary code used to generate statistics.
 `generate.py` is called by `../warstatus.py`. It writes new events in a sqlite3
 database `events.sqlite`. It generates a small JSON report called
 `statistics.json` and big JSON one `events.json` containing a dump of the events
-the last 30 days if any change happened since the last run. The default output
+the last 90 days if any change happened since the last run. The default output
 directory is this very directory and can be modified in `../warstatus.py`.
 
 On top of the generated files, pre compressed gzip files are generated. Please
@@ -37,9 +37,9 @@ This is a carbon copy of the warstatus events array. Please see `/warstatus/READ
 
 While the database could be optimized, according to benchmarks, each year of
 events (~100000 events) is leading to an additional 8ms execution time, and a
-database size increase of 4MB. That's 86ms in 2033 for example. Which is more
-than acceptable, given that the script has at worst 1 minute to finish. All
-this on a cheap single core non NVME SSD VPS with 512MB of RAM, by the way.
+database size increase of 4MB. That's about 200ms in 2033 for example. Which is
+more than acceptable, given that the script has at worst 1 minute to finish.
+All this on a cheap single core non NVME SSD VPS with 512MB of RAM, by the way.
 
 Events are never deleted, since anyway statistics are made from a temporary
 table containing only the events needed, and as mentioned above using the
