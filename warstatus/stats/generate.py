@@ -275,11 +275,13 @@ class Reporter:
         return self.stats
 
     def dump_events(self):
+        # Whatever the maximum number of days chosen for the stats,
+        # use 30 days max for the events
         self.sql.execute(f"""select *
                              from report
-                             where date >= {self.startfrom}
+                             where date > unixepoch() - 30 * 24 * 3600
                              order by date desc""")
-        # Since we're getting 6k events it's acceptable to not use a generator
+        # Since we're getting 15k events it's acceptable to not use a generator
         # as it's faster like this than calling json.dump() repeatedly
         output = [{"generated": int(datetime.now().timestamp())}]
         for r in self.sql.fetchall():
