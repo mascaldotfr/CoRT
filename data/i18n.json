@@ -289,7 +289,7 @@ __i18n__ = {
 	},
 	"Instead you should click here to convert your setup to the latest live version.":
 	{
-		"fr": "Vous devriez cliquer ici pour convertir votre configuration à la dernière version live",
+		"fr": "Vous devriez cliquer ici pour convertir votre configuration à la dernière version live.",
 		"es": "En su lugar, deberías hacer clic aquí para convertir tu configuración a la ultima versión en vivo.",
 		"de": "Stattdessen sollten Sie hier klicken, um Ihr Setup in die Live-Version zu konvertieren."
 	},
