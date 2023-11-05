@@ -199,7 +199,7 @@ def main():
         # Make statistics non mandatory
         try:
             # Don't record stats if we're recovering from a NGE's page failure
-            # Or if it's our first run
+            # Or if it's our first run, avoid bogus stats.
             if len(old_status) == 0 or "failed" in old_status:
                 sys.exit(0)
             import stats.generate
@@ -218,4 +218,10 @@ def writer(data, fname):
         f.write(data.encode())
 
 
-main()
+try:
+    main()
+except Exception as err:
+    # NGE's site totally not available
+    import traceback
+    traceback.print_exception()
+    writer(json.dumps({"failed":str(err)}), outfile)
