@@ -223,5 +223,5 @@ try:
 except Exception as err:
     # NGE's site totally not available
     import traceback
-    traceback.print_exception()
+    print(traceback.format_exc())
     writer(json.dumps({"failed":str(err)}), outfile)
