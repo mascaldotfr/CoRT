@@ -224,4 +224,15 @@ except Exception as err:
     # NGE's site totally not available
     import traceback
     print(traceback.format_exc())
-    writer(json.dumps({"failed":str(err)}), outfile)
+    # Keep old status to help recovery later
+    old_status = {}
+    if os.path.exists(outfile):
+        with open(outfile, "r") as jsonfile:
+            old_status = json.load(jsonfile)
+            # Don't rewrite every minute to allow caching if the error is still
+            # the same
+            if "failed" in old_status and old_status["failed"] == str(err):
+                sys.exit(1)
+    old_status["failed"] = str(err)
+    writer(json.dumps(old_status), outfile)
+
