@@ -18,7 +18,11 @@ statistics.
 
 ## Requirements
 
-- Python 3 (with beautifulsoup4; `python3-bs4` in debian packages)
+- Python 3 (with beautifulsoup4; `python3-bs4` in debian packages). Unlike
+  `/collect` written in PHP, I chose python because `warstatus.py` needs to run
+  every minute, something that is rarely proposed by standard webhosting offers
+  and is a call for using a VPS. Also I'm more fluent in python than PHP
+  nowadays, and has almost all the batteries included for the job.
 - A server running Linux (it will work on Windows through different means but I
   don't use it), performance and storage doesn't matter (it currently runs on
   1CPU/512MB RAM/10G SSD VPS!)

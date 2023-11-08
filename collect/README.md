@@ -1,22 +1,28 @@
 # Setup collector
 
-`submit.php`  is the source code for the setup collector. This is fully
-anonymized and only triggerred when using https://mascaldotfr.github.io.
+`submit.php` is the source code for the setup collector. It receives a saved
+setup through a HTTP POST request, and if it is valid, add a line in `data.txt`
+in the same directory as the script itself, and returns an HTTP 200 code. If
+the setup is invalid, then an HTTP 417 code is returned.
+
+This is fully anonymized and only triggerred when using
+https://mascaldotfr.github.io, unless you do the appropriate changes in the
+source code (`submit.php` and `../js/api_url.js`)
 
 The client code [can be found here](https://github.com/mascaldotfr/CoRT/commit/677a0c6cac5f265a5cf7719857bf2db9a1b483e1).
 
-It means that this collection does not enter in conflict with the ability to
-easily deploy CoRT it as promised.
-
 The dataset is available at: https://hail.thebus.top/cortdata/data.txt
+
+Unlike `/warstatus` written in python, the collector is written in PHP, because
+it's easier to deploy for people having a standard PHP enabled webhosting.
 
 ## Deployment
 
 - You need a PHP capable webserver and that's it. Put `submit.php` in some place on your server.
-- The file is compressed to `data.txt.gz` at every run for people having static
-  gzip compression enabled on their server (i let you google that as it's not
-  mandatory).
-- In case you get a weird setup, don't forget to ensure that the user running
+- The file is compressed to `data.txt.gz` at every run. This for people having
+  static gzip compression enabled on their server (i let you google that as
+  it's not mandatory but heavily recommended).
+- In case you get a weird/hardened setup, don't forget to ensure that the user running
   php is allowed to write files in the same directory than `submit.php`.
 
 ## Data exploitation
