@@ -22,7 +22,7 @@ if (__notification_support === true) {
 		.query({ name: "notifications" })
 		.then((permissionStatus) => {
 			permissionStatus.onchange = () => {
-				if(permissionStatus.state === "prompt")
+				if (permissionStatus.state === "prompt")
 					insert_notification_link();
 			};
 		});
