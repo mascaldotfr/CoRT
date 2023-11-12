@@ -20,7 +20,7 @@ If you plan to bring code improvements:
    cd node_modules/jshint
    echo '{ "esversion"     : 8 }' > jshintrc
    ./jshint -c jshintrc /where/is/CoRT/js/*.js | grep esversion
-   # Should return nothing
+   # Should return nothing out of chartist.js which is not considered essential
    ```
 4. If you touch the python code, try to not adding extra modules as a dependency.
 
