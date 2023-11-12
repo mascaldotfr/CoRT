@@ -183,6 +183,9 @@ $(document).ready(async function() {
 		date_change();
 		display_events();
 	});
+	["prev", "next"].forEach(day => {
+		$(`#we-${day}-day`).on("click", () => date_change(day));
+	});
 
 	let urlsearch = new URLSearchParams(window.location.search);
 	let filter = urlsearch.get("f");
