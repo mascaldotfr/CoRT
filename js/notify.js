@@ -15,16 +15,37 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Bootstrap notifications permissions before mynotify is called
-if (Notification.permission !== "denied")
-	Notification.requestPermission();
+__notification_support = "Notification" in window;
+
+if (__notification_support === true) {
+	navigator.permissions
+		.query({ name: "notifications" })
+		.then((permissionStatus) => {
+			permissionStatus.onchange = () => {
+				if(permissionStatus.state === "prompt")
+					insert_notification_link();
+			};
+		});
+}
+
+function insert_notification_link() {
+	if (Notification.permission !== "default" || __notification_support === false)
+		return;
+	$("#title").append(`
+		<a href="#" id="ask-notifications" class="nodeco" title="Notifications">&nbsp;🔔</a>
+	`);
+	$("#ask-notifications").on("click", function () {
+		$("#ask-notifications").remove();
+		Notification.requestPermission();
+	});
+}
 
 function mynotify(title, text) {
 	const options = {
 		icon: "favicon.png",
 		body: text
 	};
-	if (!("Notification" in window)) {
+	if (__notification_support === false) {
 		console.log("Browser does not support notifications");
 		return;
 	}
@@ -40,5 +61,3 @@ function mynotify(title, text) {
 		});
 	}
 }
-
-

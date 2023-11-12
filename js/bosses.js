@@ -115,6 +115,7 @@ $(document).ready(function() {
 	document.title = "CoRT - " + _("Bosses Countdown");
 	$("#title").text(_("Bosses Countdown"));
 	$("#bosses_info").text(_("The page refreshes itself every minute. Dates and times are in your timezone."));
+	insert_notification_link();
 	refresh_display();
 });
 

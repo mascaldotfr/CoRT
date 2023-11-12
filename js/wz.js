@@ -161,6 +161,7 @@ $(document).ready(function() {
 	$("#wz-info-info").text(
 		_("The page will update itself every minute.") +
 		" " + _("Last updated:"));
+	insert_notification_link();
 
 	display_wz();
 });

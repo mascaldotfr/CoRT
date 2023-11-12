@@ -146,6 +146,7 @@ $(document).ready(function() {
 	document.title = "CoRT - " + _("BZ status");
 	$("#title").text(_("BZ status"));
 	$("#next_bzs_title").text(_("Next BZ (in your timezone):"));
+	insert_notification_link();
 	feed_bz();
 });
 
