@@ -8,6 +8,18 @@
 	--table_padding: .25em .5em;
 }
 
+/* CURSORS */
+
+body, label, button {
+	cursor: url('../data/cursor/normal.cur'), default;
+}
+
+label, select, button, textarea, a:hover, a:active {
+	cursor: url('../data/cursor/links.cur'), default;
+}
+
+/* GLOBAL */
+
 body {
 	background-color: #212121;
 	color: white;
