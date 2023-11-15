@@ -27,7 +27,9 @@ let menu = `
 let footer = `
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
-		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.</i></p>
+		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
+		<!--VERSION-->Version: 20231115.201434
+		</i></p>
 `;
 
 let old_menu_width = 100000000;
