@@ -42,3 +42,23 @@ in a virtual machine to test.
 Note that this requirement will change over time, for example if TLS technology
 changes and makes this version unable to connect to https sites.
 
+
+### Commit hook for versioning in the footer
+
+This is mostly a note to myself.
+
+You can use that pre-commit hook in `/where/is/CoRT/.git/hooks/pre-commit` on
+GNU coreutils based systems:
+
+```shell
+#!/bin/sh
+# Get root of the repo work tree (allow the hook to work when committing in subfolders)
+GIT_WORK_TREE="$(readlink -f "`dirname ${GIT_INDEX_FILE}`/..")"
+version=`env TZ=UTC LANG=C date +%Y%m%d.%H%M%S`
+sed -i -E 's/(<!--VERSION-->Version: ).+/\1'"${version}"'/' "${GIT_WORK_TREE}/js/menu.js"
+git add "${GIT_WORK_TREE}/js/menu.js"
+echo "Updated last commit date"
+```
+
+Don't forget to make it executable. This will update the versoin for each
+commit, including non user facing changes.
