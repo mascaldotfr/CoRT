@@ -459,6 +459,9 @@ async function load_tree() {
 	// Populate skillinfo
 	$("#t-trainer .t7 .p2 .icon").trigger("click");
 	$(".setup").show();
+
+	if (is_beta)
+		$("#title").append(" - " + trainerdata.version);
 }
 
 function tablify(rowname, columns, color = "") {
