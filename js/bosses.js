@@ -32,7 +32,7 @@ function time_now() {
 
 function unixstamp2human(unixstamp) {
 	let dt = new Date(unixstamp * 1000);
-	return dt.toLocaleDateString(undefined, {
+	return dt.toLocaleDateString(__i18n__lang, {
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
 		hour: 'numeric', minute: 'numeric'});
 }

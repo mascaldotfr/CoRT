@@ -133,8 +133,8 @@ function feed_bz() {
 			weekday: 'long', month: '2-digit', day: 'numeric',
 			hour: '2-digit', minute: '2-digit'};
 		let time_options = {hour: '2-digit', minute: '2-digit'};
-		let bz_begin_datetime = bz_begin_date.toLocaleDateString(undefined, date_options);
-		let bz_end_time = bz_end_date.toLocaleTimeString(undefined, time_options);
+		let bz_begin_datetime = bz_begin_date.toLocaleDateString(__i18n__lang, date_options);
+		let bz_end_time = bz_end_date.toLocaleTimeString(__i18n__lang, time_options);
 		let interval = `<li>${bz_begin_datetime} - ${bz_end_time}</li>`;
 		$("#future_bzs").append(interval);
 	}
