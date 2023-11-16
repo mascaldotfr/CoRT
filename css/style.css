@@ -232,7 +232,7 @@ h1 {
 
 /* BOSSES */
 
-#daen, #evendim, #thorkul {
+#daen, #evendim, #thorkul, #server {
 	display: flex;
 	flex-wrap: wrap;
 	margin-bottom: 1em;
