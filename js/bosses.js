@@ -19,10 +19,10 @@
 // You can update it by looking at your browser console and getting the last
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
 // will run ~ 80 times/boss after all that time.
-// Last checked: Eve/Daen: 2023-11-16, TK: 2023-08-30, Server: 2023-11-16 (+1800s)
+// Last checked: Eve: 2023-11-16, Daen: 2023-11-17, TK: 2023-08-30, Server: 2023-11-16 (+1800s)
 first_respawns = { "thorkul": 1693428668,
 		   "evendim": 1700158549,
-		   "daen": 1699852549,
+		   "daen": 1699852489,
 	           "server": 1700044200 };
 next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
 previous_respawns = first_respawns;
