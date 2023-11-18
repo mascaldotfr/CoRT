@@ -44,9 +44,9 @@ function get_next_respawns(boss) {
 	let now = time_now();
 	while (true) {
 		if (boss == "server")
-			respawn_time = 168 * 3600 // 1 week
+			respawn_time = 168 * 3600; // 1 week
 		else
-			respawn_time = 109 * 3600 // 109 hours
+			respawn_time = 109 * 3600; // 109 hours
 		tried_respawn += respawn_time;
 		if (tried_respawn >= now)
 			next_respawns[boss].push(tried_respawn);
