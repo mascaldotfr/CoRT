@@ -28,7 +28,7 @@ let footer = `
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
-		<!--VERSION-->Version: 20231117.182008
+		<!--VERSION-->Version: 20231118.114437
 		</i></p>
 `;
 
@@ -63,12 +63,11 @@ $(document).ready(function() {
 
 	$("#menu").html(menu);
 	$("#footer").append(footer);
-	cookie = decodeURIComponent(document.cookie).split("=");
-	if (cookie[0] == "__i18n__lang" && __i18n__.supported_lang.includes(cookie[1])) {
-		$("#lang").val(cookie[1]);
-	}
+	let lang = localStorage.getItem("lang");
+	if (__i18n__.supported_lang.includes(lang))
+		$("#lang").val(lang);
 	$("#lang").on("change", function() {
-		document.cookie = "__i18n__lang=" + $("#lang").val();
+		localStorage.setItem("lang", $("#lang").val());
 		location.reload();
 	});
 	menu_adapt();

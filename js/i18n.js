@@ -8,9 +8,9 @@
 var __i18n__lang;
 
 (function() {
-	let cookie = decodeURIComponent(document.cookie).split("=");
-	if (cookie[0] == "__i18n__lang" && __i18n__.supported_lang.includes(cookie[1])) {
-		__i18n__lang = cookie[1];
+	let lang = localStorage.getItem("lang");
+	if (__i18n__.supported_lang.includes(lang)) {
+		__i18n__lang = lang;
 	}
 	else {
 		__i18n__lang = navigator.language.slice(0,2).toLowerCase();
@@ -18,7 +18,7 @@ var __i18n__lang;
 			// unsupported language
 			__i18n__lang = "en";
 		}
-		document.cookie = "__i18n__lang=" + __i18n__lang;
+		localStorage.setItem("lang", __i18n__lang);
 	}
 })();
 
