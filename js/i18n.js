@@ -11,6 +11,8 @@
 	let nav_lang = navigator.language.slice(0,2).toLowerCase();
 	if (!__i18n__.supported_lang.includes(nav_lang))
 		lang = "en";
+	else
+		lang = nav_lang;
 	localStorage.setItem("lang", lang);
 }
 )();
