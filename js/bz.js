@@ -67,6 +67,11 @@ function feed_bz() {
 	let next_bzs_end = [];
 	let bz_on = false;
 	let bz_ends_at = 0;
+	let date_options = {
+		weekday: 'long', month: '2-digit', day: 'numeric',
+		hour: '2-digit', minute: '2-digit'};
+	let time_options = {hour: '2-digit', minute: '2-digit'};
+	let lang = localStorage.getItem("lang");
 	$("#bz_status").empty();
 	$("#next_bz").empty();
 	$("#future_bzs").empty();
@@ -126,14 +131,10 @@ function feed_bz() {
 		}
 
 	}
+	// display future BZs
 	for (let next_bz in next_bzs_begin) {
 		let bz_begin_date = new Date(next_bzs_begin[next_bz]);
 		let bz_end_date = new Date(next_bzs_end[next_bz]);
-		let date_options = {
-			weekday: 'long', month: '2-digit', day: 'numeric',
-			hour: '2-digit', minute: '2-digit'};
-		let time_options = {hour: '2-digit', minute: '2-digit'};
-		let lang = localStorage.getItem("lang");
 		let bz_begin_datetime = bz_begin_date.toLocaleDateString(lang, date_options);
 		let bz_end_time = bz_end_date.toLocaleTimeString(lang, time_options);
 		let interval = `<li>${bz_begin_datetime} - ${bz_end_time}</li>`;
