@@ -189,8 +189,7 @@ class Reporter:
                     "stolen": {
                         "last": None,
                         "count": 0
-                    },
-                    "lost": 0
+                    }
                 },
                 "wishes": {
                     "count": 0,
