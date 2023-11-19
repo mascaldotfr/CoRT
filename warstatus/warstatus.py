@@ -41,7 +41,7 @@ def filename(url):
 
 def main():
     with urlopen("https://championsofregnum.com/index.php?l=1&sec=3") as response:
-        failure = ""
+        failure = {}
         status = {"forts": [], "gems": []}
         status["relics"] = {
                 "Alsius": { "Imperia": None, "Aggersborg": None, "Trelleborg": None },
@@ -64,8 +64,9 @@ def main():
                 relic_name = relic.attrs["title"].split(" relic")[0]
                 status["relics"][realms[i]][relic_name] = filename(relic.attrs["src"])
             i += 1
+        # We don't care about relics failing as they're not important
         if len(status["gems"]) != 18:
-            failure += f'Fetching gems failed: {status["gems"]}'
+            failure["gems"] =  f'Fetching gems failed: {status["gems"]}'
 
         icons = page.findAll("div", {"class" : "war-status-bulding-icons"})
         for icon_block in icons:
@@ -82,7 +83,7 @@ def main():
             owner = owner.replace("keep_", "")
             owner = owner.replace(".gif", "").capitalize()
             if owner not in realms:
-                failure += f"Bad input: names => {forts_names} icons => {forts_icons}"
+                failure["forts"] = f"Bad fort input: names => {forts_names} icons => {forts_icons}"
             location = realms[int(i / 4)]
             status["forts"].append({ "name": forts_names[i], "location": location,
                                      "owner":owner, "icon":forts_icons[i] })
@@ -108,12 +109,16 @@ def main():
 
         # Fetching the data from NGE's website failed in a way or another. Bail out.
         if len(failure) != 0:
-            status = old_status
-            status["failed"] = failure
-            writer(json.dumps(status), outfile)
-            print("Parsing failure: " + failure)
-            if not debug_mode:
-                sys.exit(1)
+            print("Parsing failure: " + str(failure))
+            if "forts" in failure and "gems" in failure:
+                status = old_status
+                status["failed"] = {"status": "fatal", "debug": str(failure)}
+                writer(json.dumps(status), outfile)
+                if not debug_mode:
+                    sys.exit(1)
+            else if not "forts" in failure:
+                # At least display forts, as they're mostly always available
+                status["failed"] = {"status": "partial", "debug": str(failure)}
 
         # Forts events
         i = 0
@@ -129,6 +134,8 @@ def main():
         recovered_gems = {}
         i = 0
         for gem in status["gems"]:
+            if "gems" in failure:
+                break
             if "gems" not in old_status or len(old_status["gems"]) == 0 \
                or (gem != old_status["gems"][i] and not "gem_0" in gem):
                 status["gems_changed"] = True
@@ -173,6 +180,9 @@ def main():
 
         # Relic events
         for realm in status["relics"]:
+            # If gems are not parseable, usually so are relics
+            if "gems" in failure:
+                break
             for relic in status["relics"][realm]:
                 new_relic = status["relics"][realm][relic]
                 old_relic = None

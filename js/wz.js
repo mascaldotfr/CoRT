@@ -100,12 +100,21 @@ async function display_wz() {
 			{hour: "2-digit", minute: "2-digit", second: "2-digit"});
 		$("#wz-info-updated").text(datetime);
 		if ("failed" in data) {
-			$("#wz-info-error").html(`<p>
-			  Fetching the data from NGE's site failed and may have errors!
-			  Check out <a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
-			  NGE's page</a>!</p>`);
-			console.error(data["failed"]);
-			return;
+			if (data["failed"]["status"] == "fatal") {
+				$("#wz-info-error").html(`<p>
+				  Fetching the data from NGE's site totally failed and may have errors!
+				  Check out <a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
+				  NGE's page</a>!</p>`);
+				console.error(data["failed"]);
+				return;
+			}
+			if (data["failed"]["status"] == "partial") {
+				$("#wz-info-error").html(`<p>
+				  Fetching the data from NGE's site partially failed:
+				  <code>${data["failed"]["debug"]}</code>.
+				  Check out <a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
+				  NGE's page</a>!</p>`);
+			}
 		}
 	}
 	catch (error) {
