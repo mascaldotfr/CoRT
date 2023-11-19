@@ -31,8 +31,7 @@ create table if not exists events (
 );
 """
 
-
-def statistics(events, db_file):
+def statistics(events, db_file, force_rewrite = False):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -63,7 +62,7 @@ def statistics(events, db_file):
         insert_queries.append([event["date"], event["name"], event["location"],
                               event["owner"], event["type"]])
 
-    if len(insert_queries) > 0:
+    if ( len(insert_queries) > 0 and not force_rewrite ) or force_rewrite:
         sql.executemany("insert into events values(?, ?, ?, ?, ?)", insert_queries)
         conn.commit()
         start_time = timer()

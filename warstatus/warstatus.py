@@ -30,6 +30,9 @@ stats_db_file = "stats/events.sqlite"
 stats_outfile = "stats/statistics.json"
 stats_outfile_events = "stats/events.json"
 base_url = "https://championsofregnum.com/"
+# Use True to allow unconditional successful runtime for debugging
+# It propagates to stats.generate as well
+debug_mode = False
 
 # return just the filename part of the url
 def filename(url):
@@ -107,7 +110,9 @@ def main():
             status = old_status
             status["failed"] = failure
             writer(json.dumps(status), outfile)
-            sys.exit(1)
+            print("Parsing failure: " + failure)
+            if not debug_mode:
+                sys.exit(1)
 
         # Forts events
         i = 0
@@ -180,9 +185,16 @@ def main():
                     events_log.insert(0, output)
 
         # Bail out if nothing changed
-        if not status["relics_changed"] and not status["map_changed"] \
-           and not status["gems_changed"]:
+        if ( not status["relics_changed"] and not status["map_changed"] \
+             and not status["gems_changed"] ) and not debug_mode:
                sys.exit(0)
+        # Bail out if more than 10 events are recorded at the same time (post
+        # failure recovery that leads to malformed status on official page)
+        if len(old_status) != 0 and \
+           len(events_log) - len(old_status["events_log"]) > 10:
+            print("Messed up upstream HTML, write nothing")
+            if not debug_mode:
+                sys.exit(1)
 
         # Sort and store events
         events_log = sorted(events_log, key=lambda d: d["date"], reverse=True)
@@ -200,11 +212,12 @@ def main():
         try:
             # Don't record stats if we're recovering from a NGE's page failure
             # Or if it's our first run, avoid bogus stats.
-            if len(old_status) == 0 or "failed" in old_status:
+            if not debug_mode and ( len(old_status) == 0 or "failed" in old_status ):
                 sys.exit(0)
             import stats.generate
             st, ev = stats.generate.statistics(status["events_log"],
-                                               stats_db_file)
+                                               stats_db_file,
+                                               force_rewrite = debug_mode)
             writer(st, stats_outfile)
             writer(ev, stats_outfile_events)
         except Exception as e:
