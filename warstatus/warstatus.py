@@ -135,6 +135,7 @@ def main():
         i = 0
         for gem in status["gems"]:
             if "gems" in failure:
+                status["gems"] = old_status["gems"]
                 break
             if "gems" not in old_status or len(old_status["gems"]) == 0 \
                or (gem != old_status["gems"][i] and not "gem_0" in gem):
@@ -182,6 +183,7 @@ def main():
         for realm in status["relics"]:
             # If gems are not parseable, usually so are relics
             if "gems" in failure:
+                status["relics"] = old_status["relics"]
                 break
             for relic in status["relics"][realm]:
                 new_relic = status["relics"][realm][relic]
