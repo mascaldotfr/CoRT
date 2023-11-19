@@ -157,7 +157,7 @@ def main():
                         recovered_gems[gem_owner] = int(gem_number)
             i += 1
         # Fetching the gem info from NGE's web site failed, keep the old one
-        if failure["gems"]:
+        if "gems" in failure:
                 status["gems"] = old_status["gems"]
 
         # Estimate a dragon wish. If two realms recovered gems during the same minute
@@ -198,7 +198,7 @@ def main():
                     output["location"] = "altar" if old_relic == None else "transit"
                     events_log.insert(0, output)
         # Fetching the relics info from NGE's web site failed, keep the old one
-        if failure["gems"]:
+        if "gems" in failure:
                 status["relics"] = old_status["relics"]
 
         # Bail out if nothing changed
@@ -227,9 +227,8 @@ def main():
 
         # Make statistics non mandatory
         try:
-            # Don't record stats if we're recovering from a NGE's page failure
-            # Or if it's our first run, avoid bogus stats.
-            if not debug_mode and ( len(old_status) == 0 or "failed" in old_status ):
+            # If it's our first run, avoid bogus stats.
+            if not debug_mode and len(old_status) == 0:
                 sys.exit(0)
             import stats.generate
             st, ev = stats.generate.statistics(status["events_log"],
