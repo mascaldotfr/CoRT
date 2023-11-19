@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
 
+import copy
 from datetime import datetime, timezone
 import gzip
 import json
@@ -103,7 +104,7 @@ def main():
             with open(outfile, "r") as jsonfile:
                 old_status = json.load(jsonfile)
                 if "events_log" in old_status:
-                    events_log = old_status["events_log"]
+                    events_log = copy.deepcopy(old_status["events_log"])
 
         # Fetching the data from NGE's website failed in a way or another. Bail out.
         if len(failure) != 0:
