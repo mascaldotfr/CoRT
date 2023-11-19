@@ -135,7 +135,6 @@ def main():
         i = 0
         for gem in status["gems"]:
             if "gems" in failure:
-                status["gems"] = old_status["gems"]
                 break
             if "gems" not in old_status or len(old_status["gems"]) == 0 \
                or (gem != old_status["gems"][i] and not "gem_0" in gem):
@@ -157,6 +156,9 @@ def main():
                     else:
                         recovered_gems[gem_owner] = int(gem_number)
             i += 1
+        # Fetching the gem info from NGE's web site failed, keep the old one
+        if failure["gems"]:
+                status["gems"] = old_status["gems"]
 
         # Estimate a dragon wish. If two realms recovered gems during the same minute
         wisher = ""
@@ -183,7 +185,6 @@ def main():
         for realm in status["relics"]:
             # If gems are not parseable, usually so are relics
             if "gems" in failure:
-                status["relics"] = old_status["relics"]
                 break
             for relic in status["relics"][realm]:
                 new_relic = status["relics"][realm][relic]
@@ -196,6 +197,9 @@ def main():
                               "location": None, "type": "relic" }
                     output["location"] = "altar" if old_relic == None else "transit"
                     events_log.insert(0, output)
+        # Fetching the relics info from NGE's web site failed, keep the old one
+        if failure["gems"]:
+                status["relics"] = old_status["relics"]
 
         # Bail out if nothing changed
         if ( not status["relics_changed"] and not status["map_changed"] \
