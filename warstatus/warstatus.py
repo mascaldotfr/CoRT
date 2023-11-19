@@ -116,7 +116,7 @@ def main():
                 writer(json.dumps(status), outfile)
                 if not debug_mode:
                     sys.exit(1)
-            else if not "forts" in failure:
+            elif not "forts" in failure:
                 # At least display forts, as they're mostly always available
                 status["failed"] = {"status": "partial", "debug": str(failure)}
 
