@@ -157,7 +157,7 @@ def main():
                         recovered_gems[gem_owner] = int(gem_number)
             i += 1
         # Fetching the gem info from NGE's web site failed, keep the old one
-        if "gems" in failure:
+        if "gems" in failure and "gems" in old_status:
                 status["gems"] = old_status["gems"]
 
         # Estimate a dragon wish. If two realms recovered gems during the same minute
@@ -198,7 +198,8 @@ def main():
                     output["location"] = "altar" if old_relic == None else "transit"
                     events_log.insert(0, output)
         # Fetching the relics info from NGE's web site failed, keep the old one
-        if "gems" in failure:
+        # Currently if gems fail, so do the relics
+        if "gems" in failure and "relics" in old_status:
                 status["relics"] = old_status["relics"]
 
         # Bail out if nothing changed
