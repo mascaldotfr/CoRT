@@ -86,6 +86,7 @@ async function display_wz() {
 	let realm_colors = get_realm_colors();
 	let gems = [];
 	let forts = [];
+	let failures = {};
 
 	if ($onlinemanager.online() === false) {
 		$("#wz-info-error").html($onlinemanager.offlineMessage +
@@ -100,20 +101,20 @@ async function display_wz() {
 			{hour: "2-digit", minute: "2-digit", second: "2-digit"});
 		$("#wz-info-updated").text(datetime);
 		if ("failed" in data) {
+			console.error(data["failed"]);
+			failures = JSON.parse(data["failed"]["debug"]);
+			let whatfailed = Object.keys(failures).join(" ");
+			let checkout = `Check out <a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
+				  NGE's page</a>!`;
 			if (data["failed"]["status"] == "fatal") {
 				$("#wz-info-error").html(`<p>
 				  Fetching the data from NGE's site totally failed and may have errors!
-				  Check out <a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
-				  NGE's page</a>!</p>`);
-				console.error(data["failed"]);
+				  ${checkout}</p>`);
 				return;
 			}
 			if (data["failed"]["status"] == "partial") {
 				$("#wz-info-error").html(`<p>
-				  Fetching the data from NGE's site partially failed:
-				  <code>${data["failed"]["debug"]}</code>.
-				  Check out <a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
-				  NGE's page</a>!</p>`);
+				  Fetching the data (${whatfailed}) from NGE's site partially failed. ${checkout}</p>`);
 			}
 		}
 	}
@@ -121,9 +122,10 @@ async function display_wz() {
 		$("#wz-info-error").html(`<p><b>Failed to get the warstatus:</b> <code>${error}</code></p>`);
 		return;
 	}
-
-	for (let gem of data["gems"]) {
-		gems.push(`<img src="${rebase_img(gem)}" class="wz-icon" loading="lazy">`);
+	if (!("gems" in failures)) {
+		for (let gem of data["gems"]) {
+				gems.push(`<img src="${rebase_img(gem)}" class="wz-icon" loading="lazy">`);
+		}
 	}
 	for (let fort of data["forts"]) {
 		let icon = `<img src="${rebase_img(fort["icon"])}" class="wz-icon" loading="lazy">`;
@@ -135,10 +137,13 @@ async function display_wz() {
 
 	for (let realm of Object.keys(realm_colors)) {
 		let relics = "";
-		for (let relic of Object.keys(data["relics"][realm])) {
-			let url = data["relics"][realm][relic];
-			if (url !== null) {
-				relics += `<img src="${rebase_img(url)}" class="wz-icon" loading="lazy">`;
+		// XXX Currently relics fail if gems fail
+		if (!("gems" in failures)) {
+			for (let relic of Object.keys(data["relics"][realm])) {
+				let url = data["relics"][realm][relic];
+				if (url !== null) {
+					relics += `<img src="${rebase_img(url)}" class="wz-icon" loading="lazy">`;
+				}
 			}
 		}
 		$(`#wz-${realm.toLowerCase()}`).html(`
