@@ -112,13 +112,13 @@ def main():
             print("Parsing failure: " + str(failure))
             if "forts" in failure and "gems" in failure:
                 status = old_status
-                status["failed"] = {"status": "fatal", "debug": str(failure)}
+                status["failed"] = {"status": "fatal", "debug": json.dumps(failure)}
                 writer(json.dumps(status), outfile)
                 if not debug_mode:
                     sys.exit(1)
             elif not "forts" in failure:
                 # At least display forts, as they're mostly always available
-                status["failed"] = {"status": "partial", "debug": str(failure)}
+                status["failed"] = {"status": "partial", "debug": json.dumps(failure)}
 
         # Forts events
         i = 0
