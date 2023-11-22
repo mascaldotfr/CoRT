@@ -33,6 +33,9 @@ body {
 a {
 	color: lightblue;
 }
+li {
+	list-style: square;
+}
 select, button, textarea {
 	background-color: #515151;
 	color: white;
@@ -226,8 +229,10 @@ h1 {
 	display: inline-block;
 	text-align: left;
 	padding-left: 0px;
-	list-style: none;
 	margin-top: 0;
+}
+#bz_container li {
+	list-style: none;
 }
 
 /* BOSSES */
@@ -367,6 +372,9 @@ h1 {
 
 /* WAR STATISTICS */
 
+#ws-index-list a {
+	text-decoration: none;
+}
 #ws-container .ws-card {
 	display: flex;
 	flex-wrap: wrap;
@@ -427,6 +435,9 @@ h1 {
 }
 .ws-chart .ct-label, .ws-chart .ct-grid {
 	stroke: var(--faded);
+}
+.ws-chart {
+	height: 18em;
 }
 
 /* ADAPTATIVE VIEWS */

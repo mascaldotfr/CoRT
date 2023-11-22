@@ -405,6 +405,11 @@ __i18n__ = {
 		"es": "Último evento:",
 		"de": "Letzter Eintrag:"
 	},
+	"Index": {
+		"fr": "Index",
+		"es": "Índice",
+		"de": "Index"
+	},
 	"Last %s days": {
 		"fr": "Les %s derniers jours",
 		"es": "Últimos %s días",

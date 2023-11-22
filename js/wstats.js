@@ -126,7 +126,8 @@ async function display_stat() {
 
 		for (let realm in data[report]) {
 			let r = data[report][realm];
-			// Hide "last" entries out of the first 7 days report
+			// Hide "last" entries except for the first 7 days
+			// report and excepted Dragon wishes.
 			let last_invasion = "";
 			let last_gem = "";
 			if (report == 0) {
@@ -188,8 +189,8 @@ async function display_stat() {
 			$(`#ws-${days}d-${realm.toLowerCase()}`).append(template);
 		}
 	}
-	show_graphs(infos["activity"], "#ws-activity-chart");
-	show_graphs(infos["invasions"], "#ws-invasion-chart", false);
+	show_graphs(infos["activity"], "#ws-forts-chart");
+	show_graphs(infos["invasions"], "#ws-invasions-chart", false);
 	show_graphs(infos["gems"], "#ws-gems-chart");
 }
 
@@ -198,15 +199,29 @@ $(document).ready(function() {
 	$("#title").text(_("WZ statistics"));
 	$("#ws-info-info").text(_("The page will update itself every minute.") +
 		                " " + _("Last event:"));
-	for (let day of report_days)
-		$(`#ws-${day}d-title`).text(_("Last %s days", day));
+	let ilinks = [];
+	for (let day of report_days) {
+		let txt = _("Last %s days", day)
+		ilinks.push({ "id": `#ws-${day}d-title`, "txt": txt});
+	}
 	let max_report_days = Math.max(...report_days);
-	$("#ws-chart1-title").text(_("Net average of fortifications captured per hour (UTC) and realm on the last %s days",
-				   max_report_days));
-	$("#ws-chart2-title").text(_("Net average of invasions per hour (UTC) on the last %s days",
-				   max_report_days));
-	$("#ws-chart3-title").text(_("Total stolen gems per hour (UTC) on the last %s days",
-				   max_report_days));
+	ilinks.push({"id": "#ws-forts-title", "txt":
+		_("Net average of fortifications captured per hour (UTC) and realm on the last %s days",
+		  max_report_days)});
+	ilinks.push({"id": "#ws-invasions-title", "txt":
+		_("Net average of invasions per hour (UTC) on the last %s days",
+		   max_report_days)});
+	ilinks.push({"id": "#ws-gems-title", "txt":
+		_("Total stolen gems per hour (UTC) on the last %s days",
+		   max_report_days)});
+
+	$("#ws-index-title").text(_("Index"));
+	for (let link in ilinks) {
+		let l = ilinks[link];
+		$(l["id"]).text(l["txt"]);
+		$(l["id"]).append(`<a id="${l["id"]}"></a>`);
+		$("#ws-index-list").append(`<li><a href="${l["id"]}">${l["txt"]}</a></li>`);
+	}
 
 	display_stat();
 });
