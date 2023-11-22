@@ -9,9 +9,9 @@
 (function() {
 	let lang = localStorage.getItem("lang");
 	let nav_lang = navigator.language.slice(0,2).toLowerCase();
-	if (!__i18n__.supported_lang.includes(nav_lang))
+	if (lang === null && !__i18n__.supported_lang.includes(nav_lang))
 		lang = "en";
-	else
+	else if (lang === null)
 		lang = nav_lang;
 	localStorage.setItem("lang", lang);
 }
