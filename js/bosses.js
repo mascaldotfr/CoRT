@@ -20,13 +20,13 @@
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
 // will run ~ 80 times/boss after all that time.
 // Last checked: Eve: 2023-11-16, Daen: 2023-11-17, TK: 2023-08-30, Server: 2023-11-16 (+1800s)
-first_respawns = { "thorkul": 1693428668,
-		   "evendim": 1700158549,
-		   "daen": 1699852489,
-	           "server": 1700044200 };
-next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
-previous_respawns = first_respawns;
-notified_10m = false;
+const first_respawns = { "thorkul": 1693428668,
+		   	 "evendim": 1700158549,
+		   	 "daen": 1699852489,
+	           	 "server": 1700044200 };
+let next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
+let previous_respawns = first_respawns;
+let notified_10m = false;
 
 function time_now() {
 	return Math.floor(new Date().getTime() / 1000);
@@ -68,28 +68,28 @@ function display_next_respawn(boss) {
 	}
 	let next_respawn_in = {};
 	let time_before_respawn = next_respawns[boss][0] - time_now();
-	next_respawn_in.days = Math.floor(time_before_respawn / (24 * 3600));
-	time_before_respawn -= next_respawn_in.days * 24 * 3600;
-	next_respawn_in.hours = Math.floor(time_before_respawn / 3600);
-	time_before_respawn -= next_respawn_in.hours * 3600;
-	next_respawn_in.minutes = Math.floor(time_before_respawn / 60);
+	next_respawn_in["days"] = Math.floor(time_before_respawn / (24 * 3600));
+	time_before_respawn -= next_respawn_in["days"] * 24 * 3600;
+	next_respawn_in["hours"] = Math.floor(time_before_respawn / 3600);
+	time_before_respawn -= next_respawn_in["hours"] * 3600;
+	next_respawn_in["minutes"] = Math.floor(time_before_respawn / 60);
 	for (let dt_elem in next_respawn_in) {
 		next_respawn_in[dt_elem] = String(next_respawn_in[dt_elem]).padStart(2, "0");
 	}
 	// hide days and hours left if there is none of it
-	next_respawn_in.days = next_respawn_in.days == "00" ? "" : next_respawn_in.days + _("d");
-	next_respawn_in.hours = next_respawn_in.hours == "00" ? "" : next_respawn_in.hours + _("h");
+	next_respawn_in["days"] = next_respawn_in["days"] == "00" ? "" : next_respawn_in["days"] + _("d");
+	next_respawn_in["hours"] = next_respawn_in["hours"] == "00" ? "" : next_respawn_in["hours"] + _("h");
 	$(`#${boss}_countdown`).text(`${_("Next respawn in")}
 		${next_respawn_in.days} ${next_respawn_in.hours} ${next_respawn_in.minutes}${_("m")}`);
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
-	if (next_respawn_in.days == 0 && next_respawn_in.hours == 0) {
-		if (next_respawn_in.minutes <= 10 && next_respawn_in.minutes >= 1 &&
+	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
+		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] >= 1 &&
 		    notified_10m === false) {
 			mynotify(_("Bosses status"), `${bossname}: ${_("Next respawn in")} ` +
-				 `${next_respawn_in.minutes}${_("m")}`);
+				 `${next_respawn_in["minutes"]}${_("m")}`);
 			notified_10m = true;
 		}
-		else if (next_respawn_in.minutes == 0) {
+		else if (next_respawn_in["minutes"] == 0) {
 			mynotify(_("Bosses status"),`${bossname} ${_("should appear very soon!")}`);
 			notified_10m = false;
 		}
