@@ -257,19 +257,16 @@ function convert_beta_to_live() {
 }
 
 function save_setup_to_url(shared=true, beta2live=false) {
-	let setup = trainerdataversion + "+";
-	setup = setup.concat(currclass + "+");
-	setup = setup.concat(currlevel + "+");
+	let setup = trainerdataversion + "+" + currclass + "+" + currlevel + "+";
 	// WM row is always the latest one
 	for (let row = 1; row <= wmrow; row++) {
 		// separate discipline skills from power skills
-		setup = setup.concat(parseInt($(`#t-trainer .t${row} .p0 .icon .skilllvl`).text())) + "+";
+		setup += $(`#t-trainer .t${row} .p0 .icon .skilllvl`).text() + "+";
 		for (let col = 1; col < 11; col++) {
 			setup = setup.concat(parseInt($(`#t-trainer .t${row} .p${col} .icon .skilllvl`).text()) || 0);
 		}
-		if (row != wmrow) {
-			setup = setup.concat("+");
-		}
+		if (row != wmrow)
+			setup += "+";
 	}
 	if (shared)
 		collect_setup(setup);
@@ -365,18 +362,16 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 				title="${spellname}" treename="${treename}" iconurl="${iconsrc}" spellpos="${spellpos}">
 		`;
 	// WM tree; don't show skill points
-	if (treepos != wmrow || (treepos == wmrow && spellpos == 0)) {
-		icon = icon.concat(` <span class="skilllvl">${skilllvl}</span>`);
-	}
-	icon = icon.concat(`</div>`);
+	if (treepos != wmrow || (treepos == wmrow && spellpos == 0))
+		icon += `<span class="skilllvl">${skilllvl}</span>`;
+	icon += "</div>";
 	// WM tree has no skill points
 	if (treepos != wmrow || (treepos == wmrow && spellpos == 0 && currlevel == 60)) {
-		icon = icon.concat(`
-				<div class="skillspinner">
+		icon += ` <div class="skillspinner">
 					<button class="plus">+</button><button class="minus">-</button>
-				</div>`);
+				</div>`;
 	}
-	icon = icon.concat(`</div>`);
+	icon += `</div>`;
 	return icon;
 }
 
@@ -414,20 +409,20 @@ async function load_tree() {
 		treepos++;
 		let spellpos = 0;
 		let iconsrc = "data/trainer/" + trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".jpg";
-		trainerhtml = trainerhtml.concat(`<div treepos="${treepos}" class="t${treepos} card">`);
-		trainerhtml = trainerhtml.concat(icon_factory(spellpos, iconsrc, treepos, tree, ""));
+		trainerhtml += `<div treepos="${treepos}" class="t${treepos} card">`;
+		trainerhtml += icon_factory(spellpos, iconsrc, treepos, tree, "");
 		trainerdata["disciplines"][tree]["spells"].forEach( (spell) => {
 			spellpos++;
 			if (treepos == wmrow && spellpos % 2 == 1) {
 				// WM tree; don't display empty skills, put a placeholder instead.
-				trainerhtml = trainerhtml.concat(`<div class="p${spellpos}"><div class="icon"></div></div>`);
+				trainerhtml += `<div class="p${spellpos}"><div class="icon"></div></div>`;
 			}
 			else {
 				let spellname = spell["name"];
-				trainerhtml = trainerhtml.concat(icon_factory(spellpos, iconsrc, treepos, spellname, tree));
+				trainerhtml += icon_factory(spellpos, iconsrc, treepos, spellname, tree);
 			}
 		});
-		trainerhtml = trainerhtml.concat(`</div>`);
+		trainerhtml += "</div>";
 	});
 	$("#t-trainer").append(trainerhtml);
 
@@ -466,14 +461,13 @@ async function load_tree() {
 
 function tablify(rowname, columns, color = "") {
 	if (typeof columns == "string" || typeof columns == "boolean" || typeof columns == "number") {
-		if (columns.length == 0 || columns == true) {
+		if (columns.length == 0 || columns == true)
 			columns = "yes"
-		}
 		return `<tr><th class="${color}">${rowname}</th><td colspan=5>${columns}</td></tr>`;
 	}
 	else {
 		let htmlcolumns = "";
-		columns.forEach( (column) => htmlcolumns = htmlcolumns.concat(`<td>${column}</td>`) );
+		columns.forEach( (column) => htmlcolumns += `<td>${column}</td>`);
 		return `<tr><th class="${color}">${rowname}</th>${htmlcolumns}</tr>`;
 	}
 
@@ -499,38 +493,38 @@ function display_spell(spellinfo) {
 		<p><b>Type:</b> ${spellinfo["type"]}</p>`;
 	let tabularhtml = ""
 	if ("cast" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Cast:</b> ${spellinfo["cast"].toString()}s</p>`);
+		spellhtml += `<p><b>Cast:</b> ${spellinfo["cast"]}s</p>`;
 	if ("gcd" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Global Cooldown:</b> ${spellinfo["gcd"].toString()}</p>`);
+		spellhtml += `<p><b>Global Cooldown:</b> ${spellinfo["gcd"]}</p>`;
 	if ("range" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Range:</b> ${spellinfo["range"].toString()}</p>`);
+		spellhtml += `<p><b>Range:</b> ${spellinfo["range"]}</p>`;
 	if ("area" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Area:</b> ${spellinfo["area"].toString()}</p>`);
+		spellhtml += `<p><b>Area:</b> ${spellinfo["area"]}</p>`;
 	if ("cooldown" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Cooldown:</b> ${spellinfo["cooldown"].toString()}s</p>`);
+		spellhtml += `<p><b>Cooldown:</b> ${spellinfo["cooldown"]}s</p>`;
 	if ("weapon_interval" in spellinfo)
-		spellhtml = spellhtml.concat(`<p class="purple"><b>Affected by weapon interval</b></p>`);
+		spellhtml += `<p class="purple"><b>Affected by weapon interval</b></p>`;
 	if ("blockable_100" in spellinfo)
-		spellhtml = spellhtml.concat(`<p class="purple"><b>Only blockable at 100%</b></p>`);
+		spellhtml += `<p class="purple"><b>Only blockable at 100%</b></p>`;
 	if ("resistible_100" in spellinfo)
-		spellhtml = spellhtml.concat(`<p class="purple"><b>Only resistible at 100%</b></p>`);
+		spellhtml += `<p class="purple"><b>Only resistible at 100%</b></p>`;
 	if ("mana" in spellinfo)
-		tabularhtml = tabularhtml.concat(tablify("Mana", spellinfo["mana"]));
+		tabularhtml += tablify("Mana", spellinfo["mana"]);
 	if ("duration" in spellinfo)
-		tabularhtml = tabularhtml.concat(tablify("Duration (s)", spellinfo["duration"]));
+		tabularhtml += tablify("Duration (s)", spellinfo["duration"]);
 	if ("damage" in spellinfo) {
 		for (let type in spellinfo["damage"]) {
-			tabularhtml = tabularhtml.concat(tablify(`${type} damage`, spellinfo["damage"][type], "red"));
+			tabularhtml += tablify(`${type} damage`, spellinfo["damage"][type], "red");
 		}
 	}
 	if ("debuffs" in spellinfo) {
 		for (let type in spellinfo["debuffs"]) {
-			tabularhtml = tabularhtml.concat(tablify(`${type}`, spellinfo["debuffs"][type], "red"));
+			tabularhtml += tablify(`${type}`, spellinfo["debuffs"][type], "red");
 		}
 	}
 	if ("buffs" in spellinfo) {
 		for (let type in spellinfo["buffs"]) {
-			tabularhtml = tabularhtml.concat(tablify(`${type}`, spellinfo["buffs"][type], "blue"));
+			tabularhtml = tablify(`${type}`, spellinfo["buffs"][type], "blue");
 		}
 	}
 	if (tabularhtml.length != 0) {
