@@ -524,7 +524,7 @@ function display_spell(spellinfo) {
 	}
 	if ("buffs" in spellinfo) {
 		for (let type in spellinfo["buffs"]) {
-			tabularhtml = tablify(`${type}`, spellinfo["buffs"][type], "blue");
+			tabularhtml += tablify(`${type}`, spellinfo["buffs"][type], "blue");
 		}
 	}
 	if (tabularhtml.length != 0) {
