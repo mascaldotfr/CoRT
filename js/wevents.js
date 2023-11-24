@@ -144,7 +144,7 @@ $(document).ready(async function() {
 		options_html += `<optgroup label="${_(group)}">`;
 		for (let o of options[group])
 			options_html += `<option value="${o[0]}">${o[1]}</option>`;
-		options_html += `</optgroup>`;
+		options_html += "</optgroup>";
 	}
 	$("#we-filter").append(options_html);
 
