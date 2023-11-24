@@ -209,7 +209,7 @@ function manage_dataset_versions() {
 	// remove it if the latest dataset is loaded after.
 	$("#oldversion").remove();
 	$("#betaversion").remove();
-	if (trainerdataversion != newest_dataset) {
+	if (trainerdataversion != newest_dataset)
 		$("#t-points").append(`	<div id="oldversion">
 					<p class="red"><b>
 					${_("This setup is being made with an older version (%s) of CoR, and may be out of date.",
@@ -219,7 +219,6 @@ function manage_dataset_versions() {
 					newest_dataset)}</p>
 					</div>
 					`);
-	}
 	if (is_beta)
 		$("#t-points").append(`
 			<div id="betaversion">
@@ -407,8 +406,8 @@ async function load_tree() {
 		$(".setup").show();
 		return;
 	}
-	let alltrees = trainerdata.class_disciplines[base_skills];
-	alltrees = alltrees.concat(trainerdata.class_disciplines[class_skills]);
+	let alltrees = trainerdata["class_disciplines"][base_skills];
+	alltrees = alltrees.concat(trainerdata["class_disciplines"][class_skills]);
 	let trainerhtml = "";
 	let treepos = 0;
 	alltrees.forEach( (tree) => {
@@ -417,14 +416,14 @@ async function load_tree() {
 		let iconsrc = "data/trainer/" + trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".jpg";
 		trainerhtml = trainerhtml.concat(`<div treepos="${treepos}" class="t${treepos} card">`);
 		trainerhtml = trainerhtml.concat(icon_factory(spellpos, iconsrc, treepos, tree, ""));
-		trainerdata.disciplines[tree].spells.forEach( (spell) => {
+		trainerdata["disciplines"][tree]["spells"].forEach( (spell) => {
 			spellpos++;
 			if (treepos == wmrow && spellpos % 2 == 1) {
 				// WM tree; don't display empty skills, put a placeholder instead.
 				trainerhtml = trainerhtml.concat(`<div class="p${spellpos}"><div class="icon"></div></div>`);
 			}
 			else {
-				let spellname = spell.name;
+				let spellname = spell["name"];
 				trainerhtml = trainerhtml.concat(icon_factory(spellpos, iconsrc, treepos, spellname, tree));
 			}
 		});
@@ -432,13 +431,14 @@ async function load_tree() {
 	});
 	$("#t-trainer").append(trainerhtml);
 
-	$("#t-dpointsleft").text(trainerdata.points.discipline[powerpoints][currlevel - 1]);
-	$("#t-dpointstotal").text(trainerdata.points.discipline[powerpoints][currlevel - 1]);
-	$("#t-ppointsleft").text(trainerdata.points.power[powerpoints][currlevel - 1]);
-	$("#t-ppointstotal").text(trainerdata.points.power[powerpoints][currlevel - 1]);
+	$("#t-dpointsleft").text(trainerdata["points"]["discipline"][powerpoints][currlevel - 1]);
+	$("#t-dpointstotal").text(trainerdata["points"]["discipline"][powerpoints][currlevel - 1]);
+	$("#t-ppointsleft").text(trainerdata["points"]["power"][powerpoints][currlevel - 1]);
+	$("#t-ppointstotal").text(trainerdata["points"]["power"][powerpoints][currlevel - 1]);
 	$(".points").show();
 
-	for (let i = 1; i <= wmrow; i++) { update_tree(i); }
+	for (let i = 1; i <= wmrow; i++)
+		update_tree(i);
 
 	// need to add this trigger **once** the trainer UI is generated
 	$(".plus, .minus").on("click", function() {
@@ -461,7 +461,7 @@ async function load_tree() {
 	$(".setup").show();
 
 	if (is_beta)
-		$("#title").append(" - " + trainerdata.version);
+		$("#title").append(" - " + trainerdata["version"]);
 }
 
 function tablify(rowname, columns, color = "") {
@@ -486,28 +486,28 @@ function display_spell(spellinfo) {
 	let iconurl = spellinfo.getAttribute("iconurl");
 	// icon position in spelltree
 	let iconposition = spellinfo.getAttribute("spellpos");
-	spellinfo = trainerdata.disciplines[treename].spells.filter(element => element.name == spellname)[0];
+	spellinfo = trainerdata.disciplines[treename]["spells"].filter(element => element.name == spellname)[0];
 	// don't duplicate css, redraw an icon
 	let spellhtml = `
 		<div class="p${iconposition} descriptionheader">
 			<div class="${iconclass}" style="background-image:url(${iconurl});"></div>
 			<div>
-				<h2>${spellinfo.name}</h2>
-				<p class="description"><i>${spellinfo.description}</i></p>
+				<h2>${spellinfo["name"]}</h2>
+				<p class="description"><i>${spellinfo["description"]}</i></p>
 			</div>
 		</div>
-		<p><b>Type:</b> ${spellinfo.type}</p>`;
+		<p><b>Type:</b> ${spellinfo["type"]}</p>`;
 	let tabularhtml = ""
 	if ("cast" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Cast:</b> ${spellinfo.cast.toString()}s</p>`);
+		spellhtml = spellhtml.concat(`<p><b>Cast:</b> ${spellinfo["cast"].toString()}s</p>`);
 	if ("gcd" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Global Cooldown:</b> ${spellinfo.gcd.toString()}</p>`);
+		spellhtml = spellhtml.concat(`<p><b>Global Cooldown:</b> ${spellinfo["gcd"].toString()}</p>`);
 	if ("range" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Range:</b> ${spellinfo.range.toString()}</p>`);
+		spellhtml = spellhtml.concat(`<p><b>Range:</b> ${spellinfo["range"].toString()}</p>`);
 	if ("area" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Area:</b> ${spellinfo.area.toString()}</p>`);
+		spellhtml = spellhtml.concat(`<p><b>Area:</b> ${spellinfo["area"].toString()}</p>`);
 	if ("cooldown" in spellinfo)
-		spellhtml = spellhtml.concat(`<p><b>Cooldown:</b> ${spellinfo.cooldown.toString()}s</p>`);
+		spellhtml = spellhtml.concat(`<p><b>Cooldown:</b> ${spellinfo["cooldown"].toString()}s</p>`);
 	if ("weapon_interval" in spellinfo)
 		spellhtml = spellhtml.concat(`<p class="purple"><b>Affected by weapon interval</b></p>`);
 	if ("blockable_100" in spellinfo)
@@ -515,22 +515,22 @@ function display_spell(spellinfo) {
 	if ("resistible_100" in spellinfo)
 		spellhtml = spellhtml.concat(`<p class="purple"><b>Only resistible at 100%</b></p>`);
 	if ("mana" in spellinfo)
-		tabularhtml = tabularhtml.concat(tablify("Mana", spellinfo.mana));
+		tabularhtml = tabularhtml.concat(tablify("Mana", spellinfo["mana"]));
 	if ("duration" in spellinfo)
-		tabularhtml = tabularhtml.concat(tablify("Duration (s)", spellinfo.duration));
+		tabularhtml = tabularhtml.concat(tablify("Duration (s)", spellinfo["duration"]));
 	if ("damage" in spellinfo) {
-		for (let type in spellinfo.damage) {
-			tabularhtml = tabularhtml.concat(tablify(`${type} damage`, spellinfo.damage[type], "red"));
+		for (let type in spellinfo["damage"]) {
+			tabularhtml = tabularhtml.concat(tablify(`${type} damage`, spellinfo["damage"][type], "red"));
 		}
 	}
 	if ("debuffs" in spellinfo) {
-		for (let type in spellinfo.debuffs) {
-			tabularhtml = tabularhtml.concat(tablify(`${type}`, spellinfo.debuffs[type], "red"));
+		for (let type in spellinfo["debuffs"]) {
+			tabularhtml = tabularhtml.concat(tablify(`${type}`, spellinfo["debuffs"][type], "red"));
 		}
 	}
 	if ("buffs" in spellinfo) {
-		for (let type in spellinfo.buffs) {
-			tabularhtml = tabularhtml.concat(tablify(`${type}`, spellinfo.buffs[type], "blue"));
+		for (let type in spellinfo["buffs"]) {
+			tabularhtml = tabularhtml.concat(tablify(`${type}`, spellinfo["buffs"][type], "blue"));
 		}
 	}
 	if (tabularhtml.length != 0) {
@@ -550,7 +550,7 @@ function power_change(power) {
 	let skill_level = parseInt($(skill_level_html).text());
 	let discipline_level = parseInt($(power.parentNode.parentNode.parentNode.getElementsByClassName("skilllvl")[0]).text());
 	let wanted_level = change_direction == "plus" ? skill_level + 1 : skill_level - 1;
-	let maxslvl = trainerdata.required.power[discipline_level];
+	let maxslvl = trainerdata["required"]["power"][discipline_level];
 	if (wanted_level > maxplevel || wanted_level < minplevel) {
 		console.log("bad power level", wanted_level);
 		if (automated_clicks == true) bad_shared_link();
@@ -583,15 +583,15 @@ function discipline_change(discipline) {
 		if (automated_clicks == true) bad_shared_link();
 		return;
 	}
-	if (trainerdata.required.level[wanted_level- 1] > currlevel) {
+	if (trainerdata["required"]["level"][wanted_level- 1] > currlevel) {
 		console.log("player level is too low");
 		if (automated_clicks == true) bad_shared_link();
 		return;
 	}
 	// check if we have enough discipline points left
 	let discipline_points_balance = change_direction == "plus" ?
-		0 - ( trainerdata.required.points[wanted_level - 1] -  trainerdata.required.points[current_level - 1] ) :
-		trainerdata.required.points[current_level - 1] - trainerdata.required.points[wanted_level - 1];
+		0 - ( trainerdata["required"]["points"][wanted_level - 1] -  trainerdata["required"]["points"][current_level - 1] ) :
+		trainerdata["required"]["points"][current_level - 1] - trainerdata["required"]["points"][wanted_level - 1];
 	let current_discipline_points = parseInt($("#t-dpointsleft").text());
 	if (	change_direction == "plus" &&
 		current_discipline_points + discipline_points_balance < 0 ) {
@@ -625,7 +625,7 @@ function update_tree(treepos) {
 		}
 		// if tree has been lowered and the skill is no more available,
 		// make it visually disabled
-		if (i > trainerdata.required.available[dlvl - 1]) {
+		if (i > trainerdata["required"]["available"][dlvl - 1]) {
 			maxslvl = 0;
 		}
 		// reduce powerpoints when discipline level is lowered
@@ -639,7 +639,7 @@ function update_tree(treepos) {
 				$("#t-ppointsleft").text(ppointsleft);
 			}
 		}
-		if ( 	(currlevel > trainerdata.required.level[dlvl - 1] && i != 1) ||
+		if ( 	(currlevel > trainerdata["required"]["level"][dlvl - 1] && i != 1) ||
 			(currlevel != maxlevel && treepos == wmrow) ) {
 			// reduce strongly brightness and disable buttons on
 			// unavailable skills due to player or discpline tree
@@ -652,7 +652,7 @@ function update_tree(treepos) {
 		}
 		// if discipline tree level allows the skill to be interacted
 		// with, reenable the skill
-		if ( i <= trainerdata.required.available[dlvl - 1] ) {
+		if ( i <= trainerdata["required"]["available"][dlvl - 1] ) {
 			if (treepos == wmrow) {
 				// WM tree requires no skills points, just make
 				// it fully visible
