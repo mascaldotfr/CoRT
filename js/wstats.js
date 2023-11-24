@@ -133,12 +133,12 @@ async function display_stat() {
 			if (report == 0) {
 				last_invasion = `<tr>
 					<td><b>${_("Last invasion")}</b></td>
-					<td>${ts_to_human(r.invasions.last.date)}
-					    (${naify(r.invasions.last.location, "N/A")})</td>
+					<td>${ts_to_human(r["invasions"]["last"]["date"])}
+					    (${naify(r["invasions"]["last"]["location"], "N/A")})</td>
 					</tr>`;
 				last_gem = `<tr>
 					<td><b>${_("Last gem stolen")}</b></td>
-					<td>${ts_to_human(r.gems.stolen.last)}</td>
+					<td>${ts_to_human(r["gems"]["stolen"]["last"])}</td>
 					</tr>`;
 			}
 			let template = `
@@ -146,42 +146,42 @@ async function display_stat() {
 				<table>
 				<tr>
 					<td><b>${_("Forts captured")} (total)</b></td>
-					<td>${naify(r.forts.total)}</td>
+					<td>${naify(r["forts"]["total"])}</td>
 				</tr>
 				<tr>
 					<td><b>${_("Forts captured")}</b></td>
-					<td>${naify(r.forts.captured)}</td>
+					<td>${naify(r["forts"]["captured"])}</td>
 				</tr>
 				<tr>
 					<td><b>${_("Most captured fort")}</b></td>
-					<td>${translate_fort(r.forts.most_captured.name, false)}
-					    (${naify(r.forts.most_captured.count, "N/A")})</td>
+					<td>${translate_fort(r["forts"]["most_captured"]["name"], false)}
+					    (${naify(r["forts"]["most_captured"]["count"], "N/A")})</td>
 				</tr>
 				<tr>
 					<td><b>${_("Forts recovered")}</b></td>
-					<td>${naify(r.forts.recovered)}</td>
+					<td>${naify(r["forts"]["recovered"])}</td>
 				</tr>
 				<tr>
 					<td><b>${_("Has invaded")}</b></td>
-					<td>${naify(r.invasions.count)}</td>
+					<td>${naify(r["invasions"]["count"])}</td>
 				</tr>
 				${last_invasion}
 				<tr>
 					<td><b>${_("Has been invaded")}</b></td>
-					<td>${naify(r.invasions.invaded.count)}</td>
+					<td>${naify(r["invasions"]["invaded"]["count"])}</td>
 				</tr>
 				<tr>
 					<td><b>${_("Stolen gems")}</b></td>
-					<td>${naify(r.gems.stolen.count)}</td>
+					<td>${naify(r["gems"]["stolen"]["count"])}</td>
 				</tr>
 				${last_gem}
 				<tr>
 					<td><b>${_("Dragon wishes")}</b></td>
-					<td>${naify(r.wishes.count)}</td>
+					<td>${naify(r["wishes"]["count"])}</td>
 				</tr>
 				<tr>
 					<td><b>${_("Last dragon wish")}</b></td>
-					<td>${ts_to_human(r.wishes.last)}</td>
+					<td>${ts_to_human(r["wishes"]["last"])}</td>
 				</tr>
 				</table>
 			`;
