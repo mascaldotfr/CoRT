@@ -4,13 +4,14 @@
 	--green: #7de384;
 	--purple: #bd93ff;
 	--faded: #ccc;
+	--ahover: #ccaaff;
 	--default_margin_padding: .5em;
 	--table_padding: .25em .5em;
 }
 
 /* CURSORS */
 
-body, label, button {
+html, body, label, button {
 	cursor: url('../data/cursor/normal.cur'), default;
 }
 
@@ -32,6 +33,9 @@ body {
 }
 a {
 	color: lightblue;
+}
+a:hover {
+	color: var(--ahover);
 }
 li {
 	list-style: square;
@@ -535,7 +539,7 @@ h1 {
 	}
 	#menu a:hover {
 		background: #313131;
-		color: #ccaaff;
+		color: var(--ahover);
 		box-shadow: 0 .1em .3em rgba(140, 140, 140, .4);
 		transition-duration: .5s;
 	}
