@@ -28,7 +28,7 @@ let footer = `
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
-		<!--VERSION-->Version: 20231125.122029
+		<!--VERSION-->Version: 20231125.133608
 		</i></p>
 `;
 

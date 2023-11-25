@@ -27,6 +27,7 @@ body {
 	font-family: sans-serif, 'Noto Color Emoji';
 	margin: 0 auto;
 	max-width: 1600px;
+	-webkit-max-logical-width: -webkit-fit-content;
 	min-height: 100dvh;
 	display: grid;
 	grid-template-rows: 1fr auto;
