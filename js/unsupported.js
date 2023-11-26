@@ -1,3 +1,5 @@
+// needs to be separated from browserquirks.js because old IE would fail before
+// executing that code
 function async_or_die() {
 	try {
 		eval("async () => {}");
