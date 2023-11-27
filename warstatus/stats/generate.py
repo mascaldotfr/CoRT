@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
 
+from collections import OrderedDict
 from datetime import datetime
 import json
 import sqlite3
@@ -83,6 +84,7 @@ def statistics(events, db_file, force_rewrite = False):
                 full_report[0]["activity"] = reporter.get_activity()
                 full_report[0]["invasions"] = reporter.get_invasions()
                 full_report[0]["gems"] = reporter.get_gems()
+                full_report[0]["fortsheld"] = reporter.get_fortsheld()
         end_time = timer()
         full_report[0]["generation_time"] = end_time - start_time;
 
@@ -161,6 +163,42 @@ class Reporter:
             gems[r["owner"]][int(r["time"])] = r["count"]
 
         return gems
+
+    def get_fortsheld(self):
+        forts_held = {
+          "Aggersborg": {}, "Trelleborg": {}, "Imperia": {},
+          "Samal": {}, "Menirah": {}, "Shaanarid": {},
+          "Herbred": {}, "Algaros": {}, "Eferias":{} }
+        total_forts = OrderedDict({"Alsius": 0, "Ignis": 0, "Syrtis": 0});
+        average_forts = OrderedDict()
+        for fort in forts_held:
+            self.sql.execute(f"""select date, owner
+                            from report
+                            where name like "%{fort}%"
+                            order by date asc;""")
+            events = self.sql.fetchall()
+            for i in range(0, len(events) - 1):
+                ev = events[i]
+                nextev = events[i + 1]
+                timediff = (nextev["date"] - ev["date"]) / 60
+                whoheld = ev["owner"]
+                if not whoheld in forts_held[fort]:
+                    forts_held[fort][whoheld] = {"time": 0, "count": 0}
+                forts_held[fort][whoheld]["time"] += timediff
+                forts_held[fort][whoheld]["count"] += 1
+
+            # Making it friendly for chartist.js in the front
+            for realm in total_forts:
+                average = int(forts_held[fort][realm]["time"] / forts_held[fort][realm]["count"])
+                forts_held[fort][realm]["average"] = average
+                # Compute total and convert minutes to hours
+                total_forts[realm] += int(forts_held[fort][realm]["time"] / 60)
+                # Get only average values for consumption
+                if not realm in average_forts:
+                    average_forts[realm] = []
+                average_forts[realm].append(forts_held[fort][realm]["average"])
+
+        return {"average": average_forts, "total": total_forts}
 
     def generate_stats(self):
 
