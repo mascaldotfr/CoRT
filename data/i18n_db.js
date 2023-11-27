@@ -496,7 +496,7 @@ __i18n__ = {
 		"de": "Durchschnittliche Festungshaltezeit während der letzten %s Tage (in Minuten)"
 	},
 	"Total forts holding time during the last %s days (in hours)": {
-		"fr": "Temps total de possession des forts les %s derniers jours (en minutes)",
+		"fr": "Temps total de possession des forts les %s derniers jours (en heures)",
 		"es": "Tiempo total de ocupación de fuertes durante los últimos %s días (en horas)",
 		"de": "Gesamthaltezeit der Forts während der letzten %s Tage (in Stunden)"
 	},
