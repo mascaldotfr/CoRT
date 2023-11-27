@@ -5,7 +5,7 @@ This directory includes the necessary code used to generate statistics.
 `generate.py` is called by `../warstatus.py`. It writes new events in a sqlite3
 database `events.sqlite`. It generates a small JSON report called
 `statistics.json` and big JSON one `events.json` containing a dump of the events
-the last 90 days if any change happened since the last run. The default output
+the last 30 days if any change happened since the last run. The default output
 directory is this very directory and can be modified in `../warstatus.py`.
 
 On top of the generated files, pre compressed gzip files are generated. Please
@@ -73,6 +73,16 @@ for example.
       generation_time: "duration (s) of reports generation",
       activity: { // average number of enemy forts captured by realm and UTC hour }
       invasions: { // average number of invasions by realm and UTC hour }
+      fortsheld: {
+        average: {
+            "Alsius": [ // average fort holding time in minutes and per fort, in site order ],
+            [... 2 other realms ...]
+        },
+        total: {
+            "Alsius": "(int) total forts holding time (in hours)",
+            [... 2 other realms ...]
+        }
+      }
     }
   ],
   [{ # 7 days report

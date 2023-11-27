@@ -49,8 +49,8 @@ function naify(value, failover="0") {
 		return value;
 }
 
-function show_graphs(data, selector, onlyinteger=true) {
-	let realms = ["Alsius", "Ignis", "Syrtis"];
+function show_graphs_hourly(data, selector, onlyinteger=true) {
+	let realms = get_realms();
 	// skip 00:00 and 23:00 as it overflows
 	let hours = [""];
 	for (let i = 1; i < 23; i++) {
@@ -67,7 +67,7 @@ function show_graphs(data, selector, onlyinteger=true) {
 	};
 	let options = {
 		fullWidth: true,
-		chartPadding: {left: 15, top: 30, bottom: 0},
+		chartPadding: {left: 0, top: 30, bottom: 0},
 		axisY: {
 			onlyInteger: onlyinteger,
 			offset: 50
@@ -91,6 +91,41 @@ function show_graphs(data, selector, onlyinteger=true) {
 		}]
 	];
 	new Chartist.LineChart(selector, dataset, options, responsive);
+}
+
+function show_graphs_fortsheld_avg(data, selector) {
+	let realms = get_realms();
+	// same order as generate.py get_fortsheld()
+	let forts = ["Aggersborg", "Trelleborg", "Imperia",
+		     "Samal", "Menirah", "Shaanarid",
+		     "Herbred", "Algaros", "Eferias"];
+	let dataset = {
+		labels: forts,
+		series: realms.map(f => data[f])
+	};
+	let options = {
+		seriesBarDistance: 30,
+	};
+	let responsive = [
+		["screen and (max-width: 810px)", {
+			seriesBarDistance: 10,
+			axisX: { labelInterpolationFnc: v => v.slice(0,3) }
+		}]
+	];
+	new Chartist.BarChart(selector, dataset, options, responsive);
+}
+
+function show_graphs_fortsheld_total(data, selector) {
+	let realms = get_realms();
+	let dataset = {
+		labels: realms.map(f => ""),
+		series: [ realms.map(f => data[f]) ]
+	};
+	let options = {
+		horizontalBars: true,
+		seriesBarDistance: 30,
+	};
+	new Chartist.BarChart(selector, dataset, options);
 }
 
 async function display_stat() {
@@ -189,9 +224,11 @@ async function display_stat() {
 			$(`#ws-${days}d-${realm.toLowerCase()}`).append(template);
 		}
 	}
-	show_graphs(infos["activity"], "#ws-forts-chart");
-	show_graphs(infos["invasions"], "#ws-invasions-chart", false);
-	show_graphs(infos["gems"], "#ws-gems-chart");
+	show_graphs_hourly(infos["activity"], "#ws-forts-chart");
+	show_graphs_hourly(infos["invasions"], "#ws-invasions-chart", false);
+	show_graphs_hourly(infos["gems"], "#ws-gems-chart");
+	show_graphs_fortsheld_avg(infos["fortsheld"]["average"], "#ws-fortsheld-avg-chart");
+	show_graphs_fortsheld_total(infos["fortsheld"]["total"], "#ws-fortsheld-total-chart");
 }
 
 $(document).ready(function() {
@@ -213,6 +250,12 @@ $(document).ready(function() {
 		   max_report_days)});
 	ilinks.push({"id": "#ws-gems-title", "txt":
 		_("Total stolen gems per hour (UTC) on the last %s days",
+		   max_report_days)});
+	ilinks.push({"id": "#ws-fortsheld-avg-title", "txt":
+		_("Average fort holding time during the last %s days (in minutes)",
+		   max_report_days)});
+	ilinks.push({"id": "#ws-fortsheld-total-title", "txt":
+		_("Total forts holding time during the last %s days (in hours)",
 		   max_report_days)});
 
 	$("#ws-index-title").text(_("Index"));

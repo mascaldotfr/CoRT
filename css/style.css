@@ -421,7 +421,7 @@ h1 {
 	padding-left: 1em;
 }
 .ws-chart .ct-chart-line {
-	min-height: 250px;
+	min-height: 8em;
 }
 .ws-chart .ct-series-a * {
 	stroke: var(--blue);
@@ -435,14 +435,38 @@ h1 {
 .ws-chart .ct-label, .ws-chart .ct-axis {
 	color: white;
 }
-.ws-chart .ct-label {
+.ws-chart-xhours .ct-label.ct-horizontal {
 	margin-left: -1.4em;
+}
+.ws-chart-bartype .ct-label.ct-horizontal {
+	margin-left: 1.4em;
+	@media (max-width: 799px) {
+		margin-left: .2em;
+	}
 }
 .ws-chart .ct-label, .ws-chart .ct-grid {
 	stroke: var(--faded);
 }
+.ws-chart .ct-bar {
+	stroke-width: 20px;
+	@media (max-width: 799px) {
+		stroke-width: 10px;
+	}
+}
+#ws-fortsheld-total-chart .ct-bar:nth-child(1) {
+	stroke: var(--blue);
+}
+#ws-fortsheld-total-chart .ct-bar:nth-child(2) {
+	stroke: var(--red);
+}
+#ws-fortsheld-total-chart .ct-bar:nth-child(3) {
+	stroke: var(--green);
+}
+#ws-fortsheld-total-chart .ct-label.ct-horizontal.ct-end {
+	margin-left: -.7em;
+}
 .ws-chart {
-	height: 18em;
+	height: 15em;
 }
 
 /* ADAPTATIVE VIEWS */

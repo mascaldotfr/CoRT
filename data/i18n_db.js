@@ -490,6 +490,16 @@ __i18n__ = {
 		"es": "Total de gemas robadas por hora (UTC) en los últimos %s días",
 		"de": "Insgesamt gestohlene Edelsteine pro Stunde (UTC) an den letzten %s Tagen"
 	},
+	"Average fort holding time during the last %s days (in minutes)": {
+		"fr": "Temps moyen de possession d'un fort les %s derniers jours (en minutes)",
+		"es": "Tiempo promedio de ocupación del fuerte durante los últimos %s días (en minutos)",
+		"de": "Durchschnittliche Festungshaltezeit während der letzten %s Tage (in Minuten)"
+	},
+	"Total forts holding time during the last %s days (in hours)": {
+		"fr": "Temps total de possession des forts les %s derniers jours (en minutes)",
+		"es": "Tiempo total de ocupación de fuertes durante los últimos %s días (en horas)",
+		"de": "Gesamthaltezeit der Forts während der letzten %s Tage (in Stunden)"
+	},
 	"All events (except relics) over the last 30 days.": {
 		"fr": "Tous les événements (sauf reliques) sur les derniers 30 jours.",
 		"es": "Todos los eventos (excepto reliquias) durante los últimos 30 días.",
