@@ -93,7 +93,7 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 	new Chartist.LineChart(selector, dataset, options, responsive);
 }
 
-function show_graphs_fortsheld_avg(data, selector) {
+function show_graphs_fortsheld_byfort(data, selector) {
 	let realms = get_realms();
 	// same order as generate.py get_fortsheld()
 	let forts = ["Aggersborg", "Trelleborg", "Imperia",
@@ -115,7 +115,7 @@ function show_graphs_fortsheld_avg(data, selector) {
 	new Chartist.BarChart(selector, dataset, options, responsive);
 }
 
-function show_graphs_fortsheld_total(data, selector) {
+function show_graphs_fortsheld_byrealm(data, selector) {
 	let realms = get_realms();
 	let dataset = {
 		labels: realms.map(f => ""),
@@ -227,8 +227,9 @@ async function display_stat() {
 	show_graphs_hourly(infos["activity"], "#ws-forts-chart");
 	show_graphs_hourly(infos["invasions"], "#ws-invasions-chart", false);
 	show_graphs_hourly(infos["gems"], "#ws-gems-chart");
-	show_graphs_fortsheld_avg(infos["fortsheld"]["average"], "#ws-fortsheld-avg-chart");
-	show_graphs_fortsheld_total(infos["fortsheld"]["total"], "#ws-fortsheld-total-chart");
+	show_graphs_fortsheld_byfort(infos["fortsheld"]["count"], "#ws-fortsheld-count-chart");
+	show_graphs_fortsheld_byfort(infos["fortsheld"]["average"], "#ws-fortsheld-avg-chart");
+	show_graphs_fortsheld_byrealm(infos["fortsheld"]["total"], "#ws-fortsheld-total-chart");
 }
 
 $(document).ready(function() {
@@ -250,6 +251,9 @@ $(document).ready(function() {
 		   max_report_days)});
 	ilinks.push({"id": "#ws-gems-title", "txt":
 		_("Total stolen gems per hour (UTC) on the last %s days",
+		   max_report_days)});
+	ilinks.push({"id": "#ws-fortsheld-count-title", "txt":
+		_("Total count of captured enemy forts during the last %s days",
 		   max_report_days)});
 	ilinks.push({"id": "#ws-fortsheld-avg-title", "txt":
 		_("Average fort holding time during the last %s days (in minutes)",

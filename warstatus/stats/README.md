@@ -78,6 +78,11 @@ for example.
             "Alsius": [ // average fort holding time in minutes and per fort, in site order ],
             [... 2 other realms ...]
         },
+        count: {
+            "Alsius": [ // (int) enemy fort holding count per fort, in site order. 0 if the
+                        // fort originally belongs to the realm (aka "recoveries aren't counted") ],
+            [... 2 other realms ...]
+        },
         total: {
             "Alsius": "(int) total forts holding time (in hours)",
             [... 2 other realms ...]

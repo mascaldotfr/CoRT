@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
 
-from collections import OrderedDict
 from datetime import datetime
 import json
 import sqlite3
@@ -169,10 +168,11 @@ class Reporter:
           "Aggersborg": {}, "Trelleborg": {}, "Imperia": {},
           "Samal": {}, "Menirah": {}, "Shaanarid": {},
           "Herbred": {}, "Algaros": {}, "Eferias":{} }
-        total_forts = OrderedDict({"Alsius": 0, "Ignis": 0, "Syrtis": 0});
-        average_forts = OrderedDict()
+        total_forts = {"Alsius": 0, "Ignis": 0, "Syrtis": 0};
+        average_forts = {}
+        count_forts = {}
         for fort in forts_held:
-            self.sql.execute(f"""select date, owner
+            self.sql.execute(f"""select date, owner, location
                             from report
                             where name like "%{fort}%"
                             order by date asc;""")
@@ -186,19 +186,26 @@ class Reporter:
                     forts_held[fort][whoheld] = {"time": 0, "count": 0}
                 forts_held[fort][whoheld]["time"] += timediff
                 forts_held[fort][whoheld]["count"] += 1
+                forts_held[fort][whoheld]["location"] = ev["location"]
 
             # Making it friendly for chartist.js in the front
             for realm in total_forts:
                 average = int(forts_held[fort][realm]["time"] / forts_held[fort][realm]["count"])
                 forts_held[fort][realm]["average"] = average
-                # Compute total and convert minutes to hours
-                total_forts[realm] += int(forts_held[fort][realm]["time"] / 60)
-                # Get only average values for consumption
                 if not realm in average_forts:
                     average_forts[realm] = []
                 average_forts[realm].append(forts_held[fort][realm]["average"])
+                # Compute total and convert minutes to hours
+                total_forts[realm] += int(forts_held[fort][realm]["time"] / 60)
+                # Get count values (could be optimized but KISS)
+                if not realm in count_forts:
+                    count_forts[realm] = []
+                count = 0 # skip fort recoveries
+                if realm != forts_held[fort][realm]["location"]:
+                    count = forts_held[fort][realm]["count"]
+                count_forts[realm].append(count)
 
-        return {"average": average_forts, "total": total_forts}
+        return {"average": average_forts, "total": total_forts, "count": count_forts}
 
     def generate_stats(self):
 

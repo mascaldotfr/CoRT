@@ -505,6 +505,11 @@ __i18n__ = {
 		"es": "Todos los eventos (excepto reliquias) durante los últimos 30 días.",
 		"de": "Alle Ereignisse (außer Relikte) der letzten 30 Tage."
 	},
+	"Total count of captured enemy forts during the last %s days": {
+		"fr": "Nombre total de forts ennemis capturés les %s derniers jours",
+		"es": "Recuento total de fuertes enemigos capturados durante los últimos %s días",
+		"de": "Gesamtzahl der eroberten feindlichen Forts in den letzten %s Tagen"
+	},
 	"Filter:": {
 		"fr": "Filtre :",
 		"es": "Filtro:",
