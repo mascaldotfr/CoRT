@@ -227,6 +227,7 @@ async function display_stat() {
 	show_graphs_hourly(infos["activity"], "#ws-forts-chart");
 	show_graphs_hourly(infos["invasions"], "#ws-invasions-chart", false);
 	show_graphs_hourly(infos["gems"], "#ws-gems-chart");
+	show_graphs_hourly(infos["wishes"], "#ws-wishes-chart");
 	show_graphs_fortsheld_byfort(infos["fortsheld"]["count"], "#ws-fortsheld-count-chart");
 	show_graphs_fortsheld_byfort(infos["fortsheld"]["average"], "#ws-fortsheld-avg-chart");
 	show_graphs_fortsheld_byrealm(infos["fortsheld"]["total"], "#ws-fortsheld-total-chart");
@@ -252,14 +253,17 @@ $(document).ready(function() {
 	ilinks.push({"id": "#ws-gems-title", "txt":
 		_("Total stolen gems per hour (UTC) on the last %s days",
 		   max_report_days)});
+	ilinks.push({"id": "#ws-wishes-title", "txt":
+		_("Total dragon wishes per hour (UTC) on the last %s days",
+		   max_report_days)});
 	ilinks.push({"id": "#ws-fortsheld-count-title", "txt":
-		_("Total count of captured enemy forts during the last %s days",
+		_("Total count of captured enemy forts on the last %s days",
 		   max_report_days)});
 	ilinks.push({"id": "#ws-fortsheld-avg-title", "txt":
-		_("Average fort holding time during the last %s days (in minutes)",
+		_("Average fort holding time on the last %s days (in minutes)",
 		   max_report_days)});
 	ilinks.push({"id": "#ws-fortsheld-total-title", "txt":
-		_("Total forts holding time during the last %s days (in hours)",
+		_("Total forts holding time on the last %s days (in hours)",
 		   max_report_days)});
 
 	$("#ws-index-title").text(_("Index"));
