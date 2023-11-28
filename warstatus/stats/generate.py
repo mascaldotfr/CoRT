@@ -116,7 +116,6 @@ class Reporter:
                        {sign} cast(count (rowid) as float) / {self.sample_days} as average
                        from report
                        where type = "fort" and owner {condition} location
-                       and date >= {self.startfrom}
                        group by owner, time
                        order by time;"""
 
@@ -139,7 +138,6 @@ class Reporter:
                        from report
                        where type = "fort" and owner {condition} location
                        and name like "Great Wall of %"
-                       and date >= {self.startfrom}
                        group by owner, time
                        order by time;"""
 
@@ -168,7 +166,7 @@ class Reporter:
           "Aggersborg": {}, "Trelleborg": {}, "Imperia": {},
           "Samal": {}, "Menirah": {}, "Shaanarid": {},
           "Herbred": {}, "Algaros": {}, "Eferias":{} }
-        total_forts = {"Alsius": 0, "Ignis": 0, "Syrtis": 0};
+        total_forts = {"Alsius": 0, "Ignis": 0, "Syrtis": 0}
         average_forts = {}
         count_forts = {}
         for fort in forts_held:
