@@ -71,8 +71,9 @@ for example.
     {
       generated: "timestamp of generation",
       generation_time: "duration (s) of reports generation",
-      activity: { // average number of enemy forts captured by realm and UTC hour }
-      invasions: { // average number of invasions by realm and UTC hour }
+      activity: { // average number of enemy forts captured by realm and UTC hour },
+      invasions: { // average number of invasions by realm and UTC hour },
+      wishes: { // number of dragon wishes by realm and UTC hour },
       fortsheld: {
         average: {
             "Alsius": [ // average fort holding time in minutes and per fort, in site order ],

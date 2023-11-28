@@ -83,6 +83,7 @@ def statistics(events, db_file, force_rewrite = False):
                 full_report[0]["activity"] = reporter.get_activity()
                 full_report[0]["invasions"] = reporter.get_invasions()
                 full_report[0]["gems"] = reporter.get_gems()
+                full_report[0]["wishes"] = reporter.get_wishes()
                 full_report[0]["fortsheld"] = reporter.get_fortsheld()
         end_time = timer()
         full_report[0]["generation_time"] = end_time - start_time;
@@ -160,6 +161,18 @@ class Reporter:
             gems[r["owner"]][int(r["time"])] = r["count"]
 
         return gems
+
+    def get_wishes(self):
+        wishes = {"Alsius": [0] * 24, "Ignis": [0] * 24, "Syrtis": [0] * 24}
+        self.sql.execute(f"""select location, strftime("%H", time(date, 'unixepoch')) as time,
+                             count(rowid) as count
+                             from report
+                             where type="wish"
+                             group by location, time;""")
+        for r in self.sql.fetchall():
+            wishes[r["location"]][int(r["time"])] = r["count"]
+
+        return wishes
 
     def get_fortsheld(self):
         forts_held = {
