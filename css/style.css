@@ -526,7 +526,7 @@ h1 {
 		min-height: 30em;
 		min-width: 80vw;
 	}
-	#ws-30d > div {
+	#ws-30d > div, #ws-90d > div {
 		min-height: 25em;
 		min-width: 80vw;
 	}
@@ -542,7 +542,7 @@ h1 {
 		min-height: 32em;
 		min-width: 20vw;
 	}
-	#ws-30d > div {
+	#ws-30d > div, #ws-90d > div {
 		min-height: 25em;
 		min-width: 20vw;
 	}
