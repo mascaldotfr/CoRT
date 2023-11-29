@@ -53,10 +53,8 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 	let realms = get_realms();
 	// skip 00:00 and 23:00 as it overflows
 	let hours = [""];
-	for (let i = 1; i < 23; i++) {
-		let hour = String(i).padStart(2, "0");
-		hours.push(`${hour}:00`);
-	}
+	for (let i = 1; i < 23; i++)
+		hours.push(String(i).padStart(2, "0"));
 	let dataset = {
 		labels: hours,
 		series: [
@@ -71,12 +69,10 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 		axisY: {
 			onlyInteger: onlyinteger,
 			offset: 50
-		},
-		axisX: {
 		}
 	};
 	let responsive = [
-		["screen and (max-width: 800px)", {
+		["screen and (max-width: 1600px)", {
 			axisX: {
 				labelInterpolationFnc: function (value) {
 					let hour = Number(value.substring(0,2));
@@ -104,10 +100,11 @@ function show_graphs_fortsheld_byfort(data, selector) {
 		series: realms.map(f => data[f])
 	};
 	let options = {
-		seriesBarDistance: 30,
+		chartPadding: {left: 0, top: 30, bottom: 0},
+		seriesBarDistance: 15,
 	};
 	let responsive = [
-		["screen and (max-width: 810px)", {
+		["screen and (max-width: 1600px)", {
 			seriesBarDistance: 10,
 			axisX: { labelInterpolationFnc: v => v.slice(0,3) }
 		}]
@@ -117,13 +114,18 @@ function show_graphs_fortsheld_byfort(data, selector) {
 
 function show_graphs_fortsheld_byrealm(data, selector) {
 	let realms = get_realms();
+	let series = realms.map(f => data[f]);
 	let dataset = {
-		labels: realms.map(f => ""),
-		series: [ realms.map(f => data[f]) ]
+		labels: realms,
+		series: [ series ]
 	};
 	let options = {
+		chartPadding: {left: 30, top: 30, bottom: 0},
+		axisX: { onlyInteger: true },
 		horizontalBars: true,
 		seriesBarDistance: 30,
+		low: Math.min(...series) - 100,
+		high: Math.max(...series) + 100
 	};
 	new Chartist.BarChart(selector, dataset, options);
 }
