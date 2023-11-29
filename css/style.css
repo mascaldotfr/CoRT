@@ -405,7 +405,8 @@ h1 {
 	grid-auto-columns: minmax(0, 1fr);
 	grid-auto-flow: column;
 }
-#ws-container-graphs h2 {
+#ws-container-graphs h3 {
+	text-align: center;
 	display: block;
 	height: 2em;
 	@media(max-width: 1300px) {
