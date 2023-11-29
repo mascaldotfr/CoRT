@@ -1,3 +1,5 @@
+collect/data.*
+ping.js
 warstatus/*.json
 warstatus/*.json.gz
 warstatus/stats/*.json
