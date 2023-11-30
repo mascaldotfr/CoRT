@@ -71,22 +71,24 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 			offset: 50
 		}
 	};
-	let responsive = [
-		["screen and (max-width: 1600px)", {
-			axisX: {
-				labelInterpolationFnc: function (value) {
-					let hour = Number(value.substring(0,2));
-					if (hour % 2 == 0 && hour >= 1 && hour <= 22) {
-						return hour;
-					}
-					else {
-						return "";
+	let responsive = [];
+	if (__chartist_responsive)
+		responsive = [
+			["screen and (max-width: 1600px)", {
+				axisX: {
+					labelInterpolationFnc: function (value) {
+						let hour = Number(value.substring(0,2));
+						if (hour % 2 == 0 && hour >= 1 && hour <= 22) {
+							return hour;
+						}
+						else {
+							return "";
+						}
 					}
 				}
-			}
-		}]
-	];
-	new Chartist.LineChart(selector, dataset, options, responsive);
+			}]
+		];
+	new Chartist.LineChart(selector, dataset, options, responsive)
 }
 
 function show_graphs_fortsheld_byfort(data, selector) {
@@ -103,12 +105,14 @@ function show_graphs_fortsheld_byfort(data, selector) {
 		chartPadding: {left: 0, top: 30, bottom: 0},
 		seriesBarDistance: 15,
 	};
-	let responsive = [
-		["screen and (max-width: 1600px)", {
-			seriesBarDistance: 10,
-			axisX: { labelInterpolationFnc: v => v.slice(0,3) }
-		}]
-	];
+	let responsive = [];
+	if (__chartist_responsive)
+		responsive = [
+			["screen and (max-width: 1600px)", {
+				seriesBarDistance: 10,
+				axisX: { labelInterpolationFnc: v => v.slice(0,3) }
+			}]
+		];
 	new Chartist.BarChart(selector, dataset, options, responsive);
 }
 
