@@ -496,7 +496,7 @@ __i18n__ = {
 		"de": "Insgesamt gestohlene Edelsteine pro Stunde (UTC) an den letzten %s Tagen"
 	},
 	"Total dragon wishes per hour (UTC) on the last %s days": {
-		"fr": "Nombre total de voeux du dragons par heure (UTC) les %s derniers jours",
+		"fr": "Nombre total de voeux du dragon par heure (UTC) les %s derniers jours",
 		"es": "Total de deseos de dragón por hora (UTC) en los últimos %s días",
 		"de": "Gesamtzahl der Drachenwünsche pro Stunde (UTC) an den letzten %s Tagen"
 	},
