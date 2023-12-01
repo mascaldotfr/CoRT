@@ -5,7 +5,7 @@
 // the pull!
 
 // The root where all API files can be found
-const __api__base = "https://hail.thebus.top/cortdata";
+const __api__base = "https://hail.thebus.top/CoRT";
 // Used by the trainer to filter setup submissions
 const __api__frontsite = "https://mascaldotfr.github.io";
 // Subdirectory where the HTML/JS/CSS/etc. files are placed, relative to your
@@ -13,7 +13,7 @@ const __api__frontsite = "https://mascaldotfr.github.io";
 const __api__frontsite_dir = "/CoRT";
 
 const __api__urls = {
-	"submit_trainer": `${__api__base}/submit.php`,
+	"submit_trainer": `${__api__base}/collect/submit.php`,
 	"events": `${__api__base}/warstatus/stats/events.json`,
 	"stats": `${__api__base}/warstatus/stats/statistics.json`,
 	"wstatus": `${__api__base}/warstatus/warstatus.json`
