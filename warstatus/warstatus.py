@@ -206,11 +206,11 @@ def main():
         if ( not status["relics_changed"] and not status["map_changed"] \
              and not status["gems_changed"] ) and not debug_mode:
                sys.exit(0)
-        # Bail out if more than 10 events are recorded at the same time (post
+        # Bail out if 9 or more events are recorded at the same time (post
         # failure recovery that leads to malformed status on official page)
         if len(old_status) != 0 and \
-           len(events_log) - len(old_status["events_log"]) > 10:
-            print("Messed up upstream HTML, write nothing")
+           len(events_log) - len(old_status["events_log"]) >= 9:
+            print("Messed up upstream HTML or server reboot, write nothing")
             if not debug_mode:
                 sys.exit(1)
 
