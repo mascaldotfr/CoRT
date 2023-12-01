@@ -11,7 +11,7 @@ source code (`submit.php` and `../js/api_url.js`)
 
 The client code [can be found here](https://github.com/mascaldotfr/CoRT/commit/677a0c6cac5f265a5cf7719857bf2db9a1b483e1).
 
-The dataset is available at: https://hail.thebus.top/cortdata/data.txt
+The dataset is available at: https://hail.thebus.top/CoRT/collect/data.txt
 
 Unlike `/warstatus` written in python, the collector is written in PHP, because
 it's easier to deploy for people having a standard PHP enabled webhosting.
