@@ -49,15 +49,6 @@ function mynotify(title, text) {
 		console.log("Browser does not support notifications");
 		return;
 	}
-
-	if (Notification.permission === "granted") {
-		const notification = new Notification(title, options);
-	}
-	else if (Notification.permission !== "denied") {
-		Notification.requestPermission().then((permission) => {
-			if (permission === "granted") {
-				const notification = new Notification(title, options);
-			}
-		});
-	}
+	if (Notification.permission === "granted")
+		new Notification(title, options);
 }
