@@ -6,8 +6,6 @@
 
 // The root where all API files can be found
 const __api__base = "https://hail.thebus.top/CoRT";
-// Preload for faster API fetches on far away clients
-document.head.prepend(`<link rel="preconnect" href="https://${new URL(__api__base).hostname}"/>`);
 // Used by the trainer to filter setup submissions
 const __api__frontsite = "https://mascaldotfr.github.io";
 // Subdirectory where the HTML/JS/CSS/etc. files are placed, relative to your
@@ -20,3 +18,20 @@ const __api__urls = {
 	"stats": `${__api__base}/warstatus/stats/statistics.json`,
 	"wstatus": `${__api__base}/warstatus/warstatus.json`
 };
+const __api__pages = {
+	"wevents.html": __api__urls["events"],
+	"wz.html": __api__urls["wstatus"],
+	"wstats.html": __api__urls["stats"]
+};
+
+(function() {
+	const currpage = location.pathname.split("/").pop();
+	if (currpage in __api__pages) {
+		let l = document.createElement("link");
+		l.href = __api__pages[currpage];
+		l.rel = "preload";
+		l.as = "fetch";
+		l.setAttribute("crossorigin", "anonymous");
+		document.head.appendChild(l);
+	}
+}());
