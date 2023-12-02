@@ -107,7 +107,7 @@ $(document).ready(function() {
 		$(".setup").hide();
 	}
 	// Preload latest dataset as it's likely the one to be chosen
-	__api_create_prefetch(`/data/trainer/${newest_dataset}/trainerdata.json`);
+	__api_create_prefetch(`data/trainer/${newest_dataset}/trainerdata.json`);
 });
 
 $("#t-load").on("click", function() {
