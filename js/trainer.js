@@ -106,6 +106,8 @@ $(document).ready(function() {
 		// Hide setup options while loading
 		$(".setup").hide();
 	}
+	// Preload latest dataset as it's likely the one to be chosen
+	__api_create_prefetch(`/data/trainer/${newest_dataset}/trainerdata.json`);
 });
 
 $("#t-load").on("click", function() {

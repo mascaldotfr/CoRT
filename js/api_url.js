@@ -24,14 +24,19 @@ const __api__pages = {
 	"wstats.html": __api__urls["stats"]
 };
 
-(function() {
-	const currpage = location.pathname.split("/").pop();
-	if (currpage in __api__pages) {
+function __api_create_prefetch(url) {
 		let l = document.createElement("link");
-		l.href = __api__pages[currpage];
+		l.href = url;
 		l.rel = "preload";
 		l.as = "fetch";
 		l.setAttribute("crossorigin", "anonymous");
 		document.head.appendChild(l);
+}
+
+
+(function() {
+	const currpage = location.pathname.split("/").pop();
+	if (currpage in __api__pages) {
+		__api_create_prefetch(__api__pages[currpage]);
 	}
 }());
