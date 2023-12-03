@@ -26,6 +26,10 @@ if (__notification_support === true) {
 					insert_notification_link();
 			};
 		});
+	// Add service worker on mobile so the data gets updated in the
+	// background
+	if (window.navigator.maxTouchPoints > 1)
+		navigator.serviceWorker.register("js/sw.js");
 }
 
 function insert_notification_link() {
