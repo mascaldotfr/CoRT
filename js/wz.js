@@ -81,7 +81,7 @@ function draw_map(images) {
 	}
 }
 
-async function display_wz() {
+async function display_wz(init=false) {
 	// Same order as the website
 	let realm_colors = get_realm_colors();
 	let gems = [];
@@ -122,6 +122,10 @@ async function display_wz() {
 		$("#wz-info-error").html(`<p><b>Failed to get the warstatus:</b> <code>${error}</code></p>`);
 		return;
 	}
+
+	if (init == false && data["events_log"][0]["date"] < wz_lastupdate)
+		return; // nothing new
+
 	if (!("gems" in failures)) {
 		for (let gem of data["gems"]) {
 				gems.push(`<img src="${rebase_img(gem)}" class="wz-icon">`);
@@ -177,9 +181,9 @@ $(document).ready(function() {
 		" " + _("Last updated:"));
 	insert_notification_link();
 
-	display_wz();
+	display_wz(true);
 });
 
-$onlinemanager.whenBackOnline(display_wz);
+$onlinemanager.whenBackOnline(() => display_wz(true));
 
-setInterval(display_wz, 30 * 1000)
+setInterval(display_wz, 5 * 1000)
