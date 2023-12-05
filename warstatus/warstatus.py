@@ -261,8 +261,8 @@ except Exception as err:
             old_status = json.load(jsonfile)
             # Don't rewrite every minute to allow caching if the error is still
             # the same
-            if "failed" in old_status and old_status["failed"] == str(err):
+            if "failed" in old_status and old_status["failed"]["debug"] == str(err):
                 sys.exit(1)
-    old_status["failed"] = str(err)
+    old_status["failed"] = {"status": "fatal", "debug": json.dumps(str(err))}
     writer(json.dumps(old_status), outfile)
 
