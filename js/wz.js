@@ -186,4 +186,4 @@ $(document).ready(function() {
 
 $onlinemanager.whenBackOnline(() => display_wz(true));
 
-setInterval(display_wz, 5 * 1000)
+setInterval(display_wz, 30 * 1000)
