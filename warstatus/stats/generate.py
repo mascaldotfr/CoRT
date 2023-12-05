@@ -92,7 +92,7 @@ def statistics(events, db_file, force_rewrite = False):
 
 
 
-class Reporter:
+class Reporter(object):
 
     def __init__(self, conn, lastxseconds):
         self.conn = conn
@@ -107,6 +107,8 @@ class Reporter:
                              from report
                              where date >= {self.startfrom};""")
         self.sample_days = self.sql.fetchone()["days"]
+        if self.sample_days == 0: # Ensure 1st run is ok
+            self.sample_days = 1
 
     def get_activity(self):
         activity = {"Alsius": [0] * 24, "Ignis": [0] * 24, "Syrtis": [0] * 24}
@@ -181,9 +183,11 @@ class Reporter:
           "Samal": {}, "Menirah": {}, "Shaanarid": {},
           "Herbred": {}, "Algaros": {}, "Eferias":{} }
         total_forts = {"Alsius": 0, "Ignis": 0, "Syrtis": 0}
-        average_forts = {}
-        count_forts = {}
+        average_forts = {"Alsius":[], "Ignis":[], "Syrtis":[]}
+        count_forts = {"Alsius":[], "Ignis":[], "Syrtis":[]}
         for fort in forts_held:
+            for realm in total_forts: # Ensure 1st run is ok
+                forts_held[fort][realm] = {"time": 0, "count": 0}
             self.sql.execute(f"""select date, owner, location
                             from report
                             where name like "%{fort}%"
@@ -194,8 +198,6 @@ class Reporter:
                 nextev = events[i + 1]
                 timediff = (nextev["date"] - ev["date"]) / 60
                 whoheld = ev["owner"]
-                if not whoheld in forts_held[fort]:
-                    forts_held[fort][whoheld] = {"time": 0, "count": 0}
                 forts_held[fort][whoheld]["time"] += timediff
                 forts_held[fort][whoheld]["count"] += 1
                 forts_held[fort][whoheld]["location"] = ev["location"]
@@ -203,24 +205,15 @@ class Reporter:
             # Making it friendly for chartist.js in the front
             for realm in total_forts:
                 # Ensure 1st time run is ok; it's shorter than prepopulating
-                if realm in forts_held:
+                if forts_held[fort][realm]["count"] != 0:
                     average = int(forts_held[fort][realm]["time"] / forts_held[fort][realm]["count"])
                     forts_held[fort][realm]["average"] = average
                 else:
-                    if not realm in forts_held[fort]:
-                        forts_held[fort][realm] = {}
                     forts_held[fort][realm]["average"] = 0
-                if not realm in average_forts:
-                    average_forts[realm] = []
                 average_forts[realm].append(forts_held[fort][realm]["average"])
                 # Compute total and convert minutes to hours
-                if "time" in forts_held[fort][realm]: # Ensure 1st time run is ok
-                    total_forts[realm] += int(forts_held[fort][realm]["time"] / 60)
-                else:
-                    total_forts[realm] = 0
+                total_forts[realm] += int(forts_held[fort][realm]["time"] / 60)
                 # Get count values (could be optimized but KISS)
-                if not realm in count_forts:
-                    count_forts[realm] = []
                 count = 0 # skip fort recoveries
                 # Ensure 1st time run is ok
                 if "location" in forts_held[fort][realm] and \

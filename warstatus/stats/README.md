@@ -24,12 +24,14 @@ any extra step to perform, as `../warstatus.py` will do the necessary to make
 it work.
 
 Using static gzip compression in your web server is recommended, especially for
-`events.json` which weights 500K uncompressed but only a few kilobytes
-compressed.
+`events.json` which weights 500kb uncompressed but only a 25kb compressed.
 
 - The "API endpoint" for statistics URL is: https://hail.thebus.top/CoRT/warstatus/stats/statistics.json
 - The "API endpoint" for events URL is: https://hail.thebus.top/CoRT/warstatus/stats/events.json
 - The full database is publicly available at: https://hail.thebus.top/CoRT/warstatus/stats/events.sqlite
+
+Unless you prepopulate your installation with the downloadable `events.sqlite`
+above, it will need a few days to get meaningful graphs for the statistics.
 
 ## Database format
 
@@ -37,7 +39,7 @@ This is a carbon copy of the warstatus events array. Please see `/warstatus/READ
 
 While the database could be optimized, according to benchmarks, each year of
 events (~100000 events) is leading to an additional 8ms execution time, and a
-database size increase of 4MB. That's about 200ms in 2033 for example. Which is
+database size increase of 4MB. That's about 250ms in 2033 for example. Which is
 more than acceptable, given that the script has at worst 1 minute to finish.
 All this on a cheap single core non NVME SSD VPS with 512MB of RAM, by the way.
 
