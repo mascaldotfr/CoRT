@@ -124,7 +124,7 @@ class Reporter:
         for param in [ ["!=", ""], ["=", "0 -"] ]:
             self.sql.execute(query(param[0], param[1]))
             for r in self.sql.fetchall():
-                if r["average"] is not None:
+                if r["average"] is not None: # Ensure 1st time run is ok
                     activity[r["owner"]][int(r["time"])] += r["average"]
 
         return activity
@@ -146,7 +146,8 @@ class Reporter:
         for param in [ ["!=", ""], ["=", "0 -"] ]:
             self.sql.execute(query(param[0], param[1]))
             for r in self.sql.fetchall():
-                invasions[r["owner"]][int(r["time"])] += r["average"]
+                if r["average"] is not None: # Ensure 1st time run is ok
+                    invasions[r["owner"]][int(r["time"])] += r["average"]
 
         return invasions
 
@@ -201,18 +202,29 @@ class Reporter:
 
             # Making it friendly for chartist.js in the front
             for realm in total_forts:
-                average = int(forts_held[fort][realm]["time"] / forts_held[fort][realm]["count"])
-                forts_held[fort][realm]["average"] = average
+                # Ensure 1st time run is ok; it's shorter than prepopulating
+                if realm in forts_held:
+                    average = int(forts_held[fort][realm]["time"] / forts_held[fort][realm]["count"])
+                    forts_held[fort][realm]["average"] = average
+                else:
+                    if not realm in forts_held[fort]:
+                        forts_held[fort][realm] = {}
+                    forts_held[fort][realm]["average"] = 0
                 if not realm in average_forts:
                     average_forts[realm] = []
                 average_forts[realm].append(forts_held[fort][realm]["average"])
                 # Compute total and convert minutes to hours
-                total_forts[realm] += int(forts_held[fort][realm]["time"] / 60)
+                if "time" in forts_held[fort][realm]: # Ensure 1st time run is ok
+                    total_forts[realm] += int(forts_held[fort][realm]["time"] / 60)
+                else:
+                    total_forts[realm] = 0
                 # Get count values (could be optimized but KISS)
                 if not realm in count_forts:
                     count_forts[realm] = []
                 count = 0 # skip fort recoveries
-                if realm != forts_held[fort][realm]["location"]:
+                # Ensure 1st time run is ok
+                if "location" in forts_held[fort][realm] and \
+                        realm != forts_held[fort][realm]["location"]:
                     count = forts_held[fort][realm]["count"]
                 count_forts[realm].append(count)
 
@@ -220,6 +232,7 @@ class Reporter:
 
     def generate_stats(self):
 
+        # Eferias set as default to ensure proper first time run
         for realm in self.stats:
             self.stats[realm] = {
                 "forts": {
@@ -227,7 +240,7 @@ class Reporter:
                     "recovered": 0,
                     "captured": 0,
                     "most_captured": {
-                        "name": None,
+                        "name": "Eferias Castle",
                         "count": 0
                     }
                 },

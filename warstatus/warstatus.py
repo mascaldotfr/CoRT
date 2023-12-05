@@ -21,6 +21,7 @@ import gzip
 import json
 import os
 import sys
+import traceback
 from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
@@ -238,7 +239,7 @@ def main():
             writer(st, stats_outfile)
             writer(ev, stats_outfile_events)
         except Exception as e:
-            print(e)
+            print(traceback.format_exc())
             sys.exit(1)
 
 def writer(data, fname):
@@ -252,7 +253,6 @@ try:
     main()
 except Exception as err:
     # NGE's site totally not available
-    import traceback
     print(traceback.format_exc())
     # Keep old status to help recovery later
     old_status = {}
