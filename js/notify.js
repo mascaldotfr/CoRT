@@ -15,7 +15,8 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-__notification_support = "Notification" in window;
+// Notification API is not working on mobile, and a serviceworker based approach never worked inside CoRT
+__notification_support = ( "Notification" in window && ! navigator.userAgent.match(/iPhone|iPad|iPod|Android/i) );
 
 if (__notification_support === true) {
 	navigator.permissions
