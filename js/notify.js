@@ -15,25 +15,24 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-__notification_support = "Notification" in window
+__notifications_swsupport = "serviceWorker" in navigator;
 
-if (__notification_support === true) {
-	try {
-		navigator.permissions
-			.query({ name: "notifications" })
-			.then((permissionStatus) => {
-				permissionStatus.onchange = () => {
-					if (permissionStatus.state === "prompt")
-						insert_notification_link();
-				};
-			});
-	}
-	catch(_unused) { /* Unsupported by safari */ };
-	navigator.serviceWorker.register("sw.js");
+try {
+	navigator.permissions
+		.query({ name: "notifications" })
+		.then((permissionStatus) => {
+			permissionStatus.onchange = () => {
+				if (permissionStatus.state === "prompt")
+					insert_notification_link();
+			};
+		});
 }
+catch(_unused) { /* Unsupported by safari */ };
+if (__notifications_swsupport)
+	navigator.serviceWorker.register("sw.js");
 
 function insert_notification_link() {
-	if (Notification.permission !== "default" || __notification_support === false)
+	if (Notification.permission !== "default" || ! __notifications_swsupport)
 		return;
 	$("#title").append(`
 		<a href="#" id="ask-notifications" class="nodeco" title="Notifications">&nbsp;🔔</a>
@@ -52,10 +51,6 @@ function mynotify(title, text, tag) {
 		renotify: true,
 		vibrate: [100, 50, 100]
 	};
-	if (__notification_support === false) {
-		console.log("Browser does not support notifications");
-		return;
-	}
 	if (Notification.permission === "granted") {
 		navigator.serviceWorker.ready.then( reg => {
 			reg.showNotification(title, options)
