@@ -15,18 +15,21 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Notification API is not working on mobile, and a serviceworker based approach never worked inside CoRT
-__notification_support = ( "Notification" in window && ! navigator.userAgent.match(/iPhone|iPad|iPod|Android/i) );
+__notification_support = "Notification" in window
 
 if (__notification_support === true) {
-	navigator.permissions
-		.query({ name: "notifications" })
-		.then((permissionStatus) => {
-			permissionStatus.onchange = () => {
-				if (permissionStatus.state === "prompt")
-					insert_notification_link();
-			};
-		});
+	try {
+		navigator.permissions
+			.query({ name: "notifications" })
+			.then((permissionStatus) => {
+				permissionStatus.onchange = () => {
+					if (permissionStatus.state === "prompt")
+						insert_notification_link();
+				};
+			});
+	}
+	catch(_unused) { /* Unsupported by safari */ };
+	navigator.serviceWorker.register("sw.js");
 }
 
 function insert_notification_link() {
@@ -41,15 +44,21 @@ function insert_notification_link() {
 	});
 }
 
-function mynotify(title, text) {
+function mynotify(title, text, tag) {
 	const options = {
 		icon: "favicon.png",
-		body: text
+		body: text,
+		tag: tag,
+		renotify: true,
+		vibrate: [100, 50, 100]
 	};
 	if (__notification_support === false) {
 		console.log("Browser does not support notifications");
 		return;
 	}
-	if (Notification.permission === "granted")
-		new Notification(title, options);
+	if (Notification.permission === "granted") {
+		navigator.serviceWorker.ready.then( reg => {
+			reg.showNotification(title, options)
+		});
+	}
 }

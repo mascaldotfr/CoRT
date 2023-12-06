@@ -109,11 +109,11 @@ function feed_bz() {
 		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] <= 10 && bz_ends_at["minutes"] >= 1 &&
 			notified_10m === false) {
 			notified_10m = true;
-			mynotify(_("BZ status"), `${_("BZ ending in")} ${bz_ends_at["minutes"]}${_("m")}`);
+			mynotify(_("BZ status"), `${_("BZ ending in")} ${bz_ends_at["minutes"]}${_("m")}`, "bz");
 		}
 		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] == 0 && bz_ends_at["seconds"] == 0) {
 			notified_10m = false;
-			mynotify(_("BZ status"), _("BZ is closed!"));
+			mynotify(_("BZ status"), _("BZ is closed!"), "bz");
 		}
 	}
 	else {
@@ -123,11 +123,11 @@ function feed_bz() {
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] >= 1 &&
 		    notified_10m === false) {
 			notified_10m = true;
-			mynotify(_("BZ status"), `${_("BZ starting in")} ${next_bz_in["minutes"]}${_("m")}`);
+			mynotify(_("BZ status"), `${_("BZ starting in")} ${next_bz_in["minutes"]}${_("m")}`, "bz");
 		}
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] == 0 && next_bz_in["seconds"] == 0) {
 			notified_10m = false;
-			mynotify(_("BZ status"), _("BZ started!"));
+			mynotify(_("BZ status"), _("BZ started!"), "bz");
 		}
 
 	}

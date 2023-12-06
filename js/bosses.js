@@ -86,11 +86,11 @@ function display_next_respawn(boss) {
 		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] >= 1 &&
 		    notified_10m === false) {
 			mynotify(_("Bosses status"), `${bossname}: ${_("Next respawn in")} ` +
-				 `${next_respawn_in["minutes"]}${_("m")}`);
+				 `${next_respawn_in["minutes"]}${_("m")}`, "bosses");
 			notified_10m = true;
 		}
 		else if (next_respawn_in["minutes"] == 0) {
-			mynotify(_("Bosses status"),`${bossname} ${_("should appear very soon!")}`);
+			mynotify(_("Bosses status"),`${bossname} ${_("should appear very soon!")}`, "bosses");
 			notified_10m = false;
 		}
 	}

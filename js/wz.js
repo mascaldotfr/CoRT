@@ -170,7 +170,7 @@ async function display_wz(init=false) {
 		</span>`);
 	wz_lastupdate = Math.floor(new Date().getTime() / 1000);
 	if (events_list[1].length > 0)
-		mynotify(_("WZ status"), events_list[1]);
+		mynotify(_("WZ status"), events_list[1], "wz");
 }
 
 $(document).ready(function() {
