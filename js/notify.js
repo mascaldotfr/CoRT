@@ -15,7 +15,7 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-__notifications_swsupport = "serviceWorker" in navigator;
+__notifications_swsupport = ("Notification" in window && "serviceWorker" in navigator);
 
 try {
 	navigator.permissions
@@ -32,7 +32,7 @@ if (__notifications_swsupport)
 	navigator.serviceWorker.register("sw.js");
 
 function insert_notification_link() {
-	if (Notification.permission !== "default" || ! __notifications_swsupport)
+	if (! __notifications_swsupport || Notification.permission !== "default")
 		return;
 	$("#title").append(`
 		<a href="#" id="ask-notifications" class="nodeco" title="Notifications">&nbsp;🔔</a>
@@ -51,7 +51,7 @@ function mynotify(title, text, tag) {
 		renotify: true,
 		vibrate: [100, 50, 100]
 	};
-	if (Notification.permission === "granted") {
+	if ( __notifications_swsupport && Notification.permission === "granted") {
 		navigator.serviceWorker.ready.then( reg => {
 			reg.showNotification(title, options)
 		});
