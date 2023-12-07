@@ -118,8 +118,6 @@ const $ = (function (selector) {
 		},
 		val: function(value) {
 			if (value !== undefined) { // PUT
-				// Allow to remove newlines without doing anything,
-				// will correct if needed
 				try {
 					document.querySelector(selector).value = value;
 				}
