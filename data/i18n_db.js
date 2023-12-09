@@ -22,7 +22,7 @@ const __i18n__ = {
 	},
 	"Bosses status": {
 		"fr": "Etat des boss",
-		"es": "Jefes",
+		"es": "Épicos",
 		"de": "Bosse"
 	},
 	"BZ status": {
