@@ -251,7 +251,7 @@ $(document).ready(function() {
 	}
 	let max_report_days = Math.max(...report_days);
 	ilinks.push({"id": "#ws-forts-title", "txt":
-		_("Net average of fortifications captured per hour (UTC) and realm on the last %s days",
+		_("Net average of fortifications captured per hour (UTC) on the last %s days",
 		  max_report_days)});
 	ilinks.push({"id": "#ws-invasions-title", "txt":
 		_("Net average of invasions per hour (UTC) on the last %s days",

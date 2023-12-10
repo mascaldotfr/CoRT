@@ -480,10 +480,10 @@ const __i18n__ = {
 		"es": "hace %s",
 		"de": "vor %s"
 	},
-	"Net average of fortifications captured per hour (UTC) and realm on the last %s days": {
-		"fr": "Moyenne nette des fortifications capturées par heure (UTC) et royaume les %s derniers jours",
-		"es": "Promedio neto de las fortificaciones capturadas por hora (UTC) y reino en los últimos %s días",
-		"de": "Nettodurchschnitt der in den letzten %s Tagen pro Stunde und Realm (UTC-Zeit) eroberten Befestigungen"
+	"Net average of fortifications captured per hour (UTC) on the last %s days": {
+		"fr": "Moyenne nette des fortifications capturées par heure (UTC) les %s derniers jours",
+		"es": "Promedio neto de las fortificaciones capturadas por hora (UTC) en los últimos %s días",
+		"de": "Nettodurchschnitt der in den letzten %s Tagen pro Stunde (UTC-Zeit) eroberten Befestigungen"
 	},
 	"Net average of invasions per hour (UTC) on the last %s days": {
 		"fr": "Moyenne nette des invasions par heure (UTC) les %s derniers jours",
