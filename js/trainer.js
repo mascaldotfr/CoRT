@@ -486,7 +486,6 @@ function tablify(rowname, columns, color = "") {
 		columns.forEach( (column) => htmlcolumns += `<td>${column}</td>`);
 		// Better line breaking on mobile
 		htmlcolumns = htmlcolumns.replace(/(\d+)([-\/])(\d+)/g, "$1 $2 $3");
-		console.log(htmlcolumns);
 		return `<tr><th class="${color}">${rowname}</th>${htmlcolumns}</tr>`;
 	}
 
