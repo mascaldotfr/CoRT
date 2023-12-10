@@ -34,15 +34,24 @@ If you want to make changes to CoRT or run it locally, you can use python to
 ## License
 
    This repo is released under the terms of the GNU Affero General Public
-   License v3.0. The discipline/skill icons are the work of Nimble Giant
-   Entertainement, and are used as fair use.
-
+   License v3.0.
    Some parts of the site are MIT licensed as exceptions, please see their
    header files.
 
+### External assets
+
+   The discipline/skill icons are the work of Nimble Giant
+   Entertainement, and are used as fair use.
+
    [Chartist](https://github.com/chartist-js/chartist) is dual licensed under
-   MIT/WTFPL licenses terms. A local copy has been taken from
-   [UNPKG](https://unpkg.com/browse/chartist@1.3.0/dist/).
+   MIT/WTFPL licenses terms.
+
+   [Tippy](https://github.com/atomiks/tippyjs),
+   [Popper](https://github.com/floating-ui/floating-ui)
+   and [LZstring](https://github.com/pieroxy/lz-string) are MIT licensed.
+
+   The [Noto Color Emoji font](https://github.com/googlefonts/noto-emoji) used
+   for Windows users is licensed under the Apache 2.0 license terms.
 
 ## Credits
 

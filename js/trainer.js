@@ -48,12 +48,13 @@ var powerpoints = 0;
 // XXX beware it's just a buffer that is unexploitable once the setup is loaded
 var saved_setup;
 var automated_clicks = false;
+var tooltips = [];
 
 $(document).ready(function() {
 	document.title = "CoRT - " + _("Trainer");
 	$("#title").text(_("Trainer"));
 	$("#titleinfo").text(
-		_("Clicking on a skill icon will show its description.") +
+		_("Hovering your mouse or clicking (on mobile) on a skill icon will show its description.") +
 		"<br>" +
 		_("Selecting an higher character level will upgrade your current setup to that level."));
 	if (is_beta)
@@ -359,9 +360,10 @@ function input_setup_from_url() {
 function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 	// discipline points are always > 1, but skill points must be 0 to simplify code later.
 	let skilllvl = spellpos == 0 ? 1 : 0;
+	let clean_spellname = "trainerskill_" + spellname.replace(/[^a-z0-9]/gi, "");
 	let icon = ` 	<div class="p${spellpos}">
 				<div class="icon" style="background-image:url(${iconsrc});"
-				title="${spellname}" treename="${treename}" iconurl="${iconsrc}" spellpos="${spellpos}">
+				     id="${clean_spellname}" >
 		`;
 	// WM tree; don't show skill points
 	if (treepos != wmrow || (treepos == wmrow && spellpos == 0))
@@ -374,6 +376,24 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 				</div>`;
 	}
 	icon += `</div>`;
+
+	function tooltip_factory(content) {
+		tooltips.push(function () {
+			tippy(`#${clean_spellname}`, {
+				content: content,
+				allowHTML: true,
+				placement: "bottom",
+				maxWidth: "fit-content"
+			})
+		});
+	}
+	if (treename != "") { // skills
+		let spellinfo = trainerdata.disciplines[treename]["spells"].filter(element => element.name == spellname)[0];
+		tooltip_factory(make_spellinfo(spellinfo, spellpos, "icon", iconsrc));
+	}
+	else { // disciplines
+		tooltip_factory(spellname);
+	}
 	return icon;
 }
 
@@ -393,7 +413,6 @@ async function load_tree() {
 		powerpoints = 80;
 	}
 	$("#t-trainer").empty();
-	$("#skillinfo").empty();
 	try {
 		trainerdata = await $().getJSON("data/trainer/" + trainerdataversion + "/trainerdata.json");
 	}
@@ -446,16 +465,11 @@ async function load_tree() {
 			power_change(this);
 		}
 	});
-	$(".icon").on("click", function() {
-		if (this.parentNode.className != "p0") {
-			display_spell(this);
-		}
-	});
 	input_setup_from_url();
-	$("#skillinfo").show();
-	// Populate skillinfo
-	$("#t-trainer .t7 .p2 .icon").trigger("click");
 	$(".setup").show();
+	while (tooltips.length) {
+		tooltips.shift().call();
+	}
 
 	if (is_beta)
 		$("#title").append(" - " + trainerdata["version"]);
@@ -470,19 +484,15 @@ function tablify(rowname, columns, color = "") {
 	else {
 		let htmlcolumns = "";
 		columns.forEach( (column) => htmlcolumns += `<td>${column}</td>`);
+		// Better line breaking on mobile
+		htmlcolumns = htmlcolumns.replace(/(\d+)([-\/])(\d+)/g, "$1 $2 $3");
+		console.log(htmlcolumns);
 		return `<tr><th class="${color}">${rowname}</th>${htmlcolumns}</tr>`;
 	}
 
 }
 
-function display_spell(spellinfo) {
-	let spellname = spellinfo.getAttribute("title");
-	let treename = spellinfo.getAttribute("treename");
-	let iconclass = spellinfo.getAttribute("class");
-	let iconurl = spellinfo.getAttribute("iconurl");
-	// icon position in spelltree
-	let iconposition = spellinfo.getAttribute("spellpos");
-	spellinfo = trainerdata.disciplines[treename]["spells"].filter(element => element.name == spellname)[0];
+function make_spellinfo(spellinfo, iconposition, iconclass, iconurl) {
 	// don't duplicate css, redraw an icon
 	let spellhtml = `
 		<div class="p${iconposition} descriptionheader">
@@ -492,24 +502,24 @@ function display_spell(spellinfo) {
 				<p class="description"><i>${spellinfo["description"]}</i></p>
 			</div>
 		</div>
-		<p><b>Type:</b> ${spellinfo["type"]}</p>`;
+		<span><b>Type:</b> ${spellinfo["type"]}</span><br/>`;
 	let tabularhtml = ""
 	if ("cast" in spellinfo)
-		spellhtml += `<p><b>Cast:</b> ${spellinfo["cast"]}s</p>`;
+		spellhtml += `<span><b>Cast:</b> ${spellinfo["cast"]}s</span><br/>`;
 	if ("gcd" in spellinfo)
-		spellhtml += `<p><b>Global Cooldown:</b> ${spellinfo["gcd"]}</p>`;
+		spellhtml += `<span><b>Global Cooldown:</b> ${spellinfo["gcd"]}</span><br/>`;
 	if ("range" in spellinfo)
-		spellhtml += `<p><b>Range:</b> ${spellinfo["range"]}</p>`;
+		spellhtml += `<span><b>Range:</b> ${spellinfo["range"]}</span><br/>`;
 	if ("area" in spellinfo)
-		spellhtml += `<p><b>Area:</b> ${spellinfo["area"]}</p>`;
+		spellhtml += `<span><b>Area:</b> ${spellinfo["area"]}</span><br/>`;
 	if ("cooldown" in spellinfo)
-		spellhtml += `<p><b>Cooldown:</b> ${spellinfo["cooldown"]}s</p>`;
+		spellhtml += `<span><b>Cooldown:</b> ${spellinfo["cooldown"]}s</span><br/>`;
 	if ("weapon_interval" in spellinfo)
-		spellhtml += `<p class="purple"><b>Affected by weapon interval</b></p>`;
+		spellhtml += `<span class="purple"><b>Affected by weapon interval</b></span><br/>`;
 	if ("blockable_100" in spellinfo)
-		spellhtml += `<p class="purple"><b>Only blockable at 100%</b></p>`;
+		spellhtml += `<span class="purple"><b>Only blockable at 100%</b></span><br/>`;
 	if ("resistible_100" in spellinfo)
-		spellhtml += `<p class="purple"><b>Only resistible at 100%</b></p>`;
+		spellhtml += `<span class="purple"><b>Only resistible at 100%</b></span><br/>`;
 	if ("mana" in spellinfo)
 		tabularhtml += tablify("Mana", spellinfo["mana"]);
 	if ("duration" in spellinfo)
@@ -530,13 +540,13 @@ function display_spell(spellinfo) {
 		}
 	}
 	if (tabularhtml.length != 0) {
-		let theader = `<div style="overflow-x:auto;"><table><thead><tr>
+		let theader = `<div style="overflow-x:auto"><table><thead><tr>
 			   <th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
 			  </tr></thead>`;
 		let tfooter = "</table></div>";
 		spellhtml = spellhtml + theader + tabularhtml + tfooter;
 	}
-	$("#skillinfo").html(spellhtml);
+	return spellhtml;
 }
 
 

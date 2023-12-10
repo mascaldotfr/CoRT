@@ -159,47 +159,51 @@ h1 {
 .icon .skilllvl { background-color: white; color: black; border-radius: 4px; }
 .minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px; padding: 2px; }
 .minus { margin-top: 6px; }
-#skillinfo .descriptionheader {
+.tippy-content {
+	background-color: #545454;
+	border-radius: 5px;
+	border: 1px solid white;
+}
+.tippy-content .descriptionheader {
 	grid-template-columns: 64px auto;
 	justify-content: left;
 	align-items: center;
 }
-#skillinfo {
-	visibility: hidden;
-	max-width: calc(100vw - 4 * var(--default_margin_padding));
-}
-#skillinfo h2 {
+.tippy-content h2 {
 	margin: 0;
 }
-#skillinfo p.description {
+.tippy-content p.description {
 	margin: initial;
+	max-width: 20em;
 }
-#skillinfo > p {
+.tippy-content > p {
 	margin: initial;
 	margin-left: var(--default_margin_padding);
 }
-#skillinfo table {
+.tippy-content table {
 	margin: var(--default_margin_padding);
 	border-collapse: collapse;
 	-moz-margin-start: var(--default_margin_padding);
 }
-#skillinfo th {
+.tippy-content th {
 	text-align: left;
 	border: 1px solid white;
 	padding: var(--table_padding);
 }
-#skillinfo thead > tr > th:first-child {
+.tippy-content thead > tr > th:first-child {
 	visibility: hidden;
 	border: none;
 }
-#skillinfo thead {
+.tippy-content thead {
 	background-color: #212121;
 }
-#skillinfo thead > tr > th, #skillinfo td {
+.tippy-content thead > tr > th, .tippy-content td {
 	text-align: center;
 	padding: var(--table_padding);
+	-webkit-hyphens: auto;
+	hyphens: auto;
 }
-#skillinfo td {
+.tippy-content td {
 	border: 1px solid white;
 }
 #t-dialog {

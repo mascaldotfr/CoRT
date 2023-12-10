@@ -167,11 +167,11 @@ const __i18n__ = {
 		"es": "La BZ ha terminado",
 		"de": "Die BZ ist vorbei"
 	},
-	"Clicking on a skill icon will show its description.":
+	"Hovering your mouse or clicking (on mobile) on a skill icon will show its description.":
 	{
-		"fr": "Cliquer sur l'îcone d'un sort montrera sa description.",
-		"es": "Al hacer clic en el icono de un hechizo, se mostrará su descripción.",
-		"de": "Wenn du auf das Symbol eines Zaubers klickst, wird dessen Beschreibung angezeigt."
+		"fr": "Passer la souris ou cliquer (sur mobile) sur l'îcone d'un sort montrera sa description.",
+		"es": "Pasar el mouse o hacer clic (en el móvil) en el ícono de un hechizo, se mostrará su descripción.",
+		"de": "Wenn du auf das Symbol eines Zaubers klickst (auf Mobilgeräten) oder mit der Maus darüber fahren, wird dessen Beschreibung angezeigt."
 	},
 	"Selecting an higher character level will upgrade your current setup to that level.":
 	{
