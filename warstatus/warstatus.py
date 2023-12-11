@@ -30,7 +30,7 @@ from bs4 import BeautifulSoup
 outfile = "warstatus.json"
 stats_db_file = "stats/events.sqlite"
 stats_outfile = "stats/statistics.json"
-stats_outfile_events = "stats/events.json"
+stats_outfile_events = "stats/allevents.json"
 base_url = "https://championsofregnum.com/"
 # Use True to allow unconditional successful runtime for debugging
 # It propagates to stats.generate as well

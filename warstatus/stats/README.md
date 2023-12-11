@@ -4,7 +4,7 @@ This directory includes the necessary code used to generate statistics.
 
 `generate.py` is called by `../warstatus.py`. It writes new events in a sqlite3
 database `events.sqlite`. It generates a small JSON report called
-`statistics.json` and big JSON one `events.json` containing a dump of the events
+`statistics.json` and big JSON one `allevents.json` containing a dump of the events
 the last 30 days if any change happened since the last run. The default output
 directory is this very directory and can be modified in `../warstatus.py`.
 

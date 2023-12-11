@@ -14,7 +14,7 @@ const __api__frontsite_dir = "/CoRT";
 
 const __api__urls = {
 	"submit_trainer": `${__api__base}/collect/submit.php`,
-	"events": `${__api__base}/warstatus/stats/events.json`,
+	"events": `${__api__base}/warstatus/stats/allevents.json`,
 	"stats": `${__api__base}/warstatus/stats/statistics.json`,
 	"wstatus": `${__api__base}/warstatus/warstatus.json`
 };
