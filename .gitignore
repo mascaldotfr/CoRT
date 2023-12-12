@@ -6,3 +6,6 @@ warstatus/stats/*.json
 warstatus/stats/*.json.gz
 warstatus/stats/*.sqlite
 __pycache__**
+
+# for macOS users
+.DS_Store
