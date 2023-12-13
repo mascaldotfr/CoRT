@@ -54,8 +54,7 @@ def statistics(events, db_file, force_rewrite = False):
         latest_recorded_event = 0 # the db is empty
 
     for event in events:
-        # We can't do much with relics atm
-        if event["date"] <= latest_recorded_event or event["type"] == "relic":
+        if event["date"] <= latest_recorded_event:
             continue
         # Remove fort numbers
         event["name"] = event["name"].rsplit(' ', 1)[0]

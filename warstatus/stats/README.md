@@ -48,8 +48,6 @@ table containing only the events needed, and as mentioned above using the
 database as an all-time archive does not lead to an amazingly high overhead,
 especially that the statistics API is [static](https://www.seancdavis.com/posts/lets-talk-about-static-apis/).
 
-Relics events are not recorded, but will if they matter again in the invasions.
-
 ## Response format
 
 ###  events.json

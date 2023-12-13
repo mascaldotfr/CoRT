@@ -405,10 +405,10 @@ const __i18n__ = {
 		"es": "Último evento:",
 		"de": "Letzter Eintrag:"
 	},
-	"All events (except relics) over the last 30 days.": {
-		"fr": "Tous les événements (sauf reliques) sur les derniers 30 jours.",
-		"es": "Todos los eventos (excepto reliquias) durante los últimos 30 días.",
-		"de": "Alle Ereignisse (außer Relikte) der letzten 30 Tage."
+	"All events over the last 30 days.": {
+		"fr": "Tous les événements sur les derniers 30 jours.",
+		"es": "Todos los eventos durante los últimos 30 días.",
+		"de": "Alle Ereignisse der letzten 30 Tage."
 	},
 	"Index": {
 		"fr": "Index",
@@ -544,6 +544,11 @@ const __i18n__ = {
 		"fr": "Invasions uniquement",
 		"es": "Solo invasiones",
 		"de": "Nur Invasionen"
+	},
+	"Relics only": {
+		"fr": "Reliques uniquement",
+		"es": "Solo reliquias",
+		"de": "Nur Relikte"
 	},
 	"Gems only": {
 		"fr": "Gemmes uniquement",

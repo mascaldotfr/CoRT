@@ -41,6 +41,9 @@ function display_events() {
 		filtered = data.filter(i => i["name"].startsWith("Great Wall of") &&
 					    i["owner"] != i["location"]);
 	}
+	else if (__wevents__filter == "relics") {
+		filtered = data.filter(i => i["type"] == "relic");
+	}
 	else if (__wevents__filter == "gems") {
 		filtered = data.filter(i => i["type"] == "gem");
 	}
@@ -114,7 +117,7 @@ $(document).ready(async function() {
 	document.title = "CoRT - " + _("WZ events");
 	$("#title").text(_("WZ events"));
 	$("#we-info-info").text(
-		_("All events (except relics) over the last 30 days.") +
+		_("All events over the last 30 days.") +
 		" " + _("Last updated:") + " ");
 	$("#we-filter-label").text(_("Filter:"));
 	$("#we-date-label").text(_("Date:"));
@@ -122,6 +125,7 @@ $(document).ready(async function() {
 				["none", _("None")],
 				["noforts", _("No forts")],
 				["invas", _("Invasions only")],
+				["relics", _("Relics only")],
 				["gems", _("Gems only")],
 				["wishes", _("Dragon wishes only")] ],
 			"Realms": [
