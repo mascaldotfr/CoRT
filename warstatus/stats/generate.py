@@ -190,6 +190,7 @@ class Reporter(object):
             self.sql.execute(f"""select date, owner, location
                             from report
                             where name like "%{fort}%"
+                            and type = "fort"
                             order by date asc;""")
             events = self.sql.fetchall()
             for i in range(0, len(events) - 1):
