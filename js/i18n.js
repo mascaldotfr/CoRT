@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 mascal
+ * Copyright (c) 2022-2024 mascal
  *
  * A tiny i18n system. Released under the MIT license.
  *

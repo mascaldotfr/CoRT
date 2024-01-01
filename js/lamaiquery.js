@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 mascal
+ * Copyright (c) 2022-2024 mascal
  *
  * jquery mostly interchangeable knockoff for CoRT containaing only the
  * necessary functions for the site. Released under the MIT license.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (c) 2023 mascal
+# Copyright (c) 2022-2024 mascal
 #
 # CoRT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
