@@ -174,16 +174,16 @@ h1 {
 }
 .tippy-content p.description {
 	margin: initial;
-	max-width: 20em;
+	max-width: 30em;
 }
-.tippy-content > p {
-	margin: initial;
-	margin-left: var(--default_margin_padding);
+.tippy-content > span {
+	margin: var(--default_margin_padding);
 }
 .tippy-content table {
 	margin: var(--default_margin_padding);
 	border-collapse: collapse;
-	-moz-margin-start: var(--default_margin_padding);
+	table-layout: auto;
+	width: calc(100% - 2 * var(--default_margin_padding));
 }
 .tippy-content th {
 	text-align: left;
