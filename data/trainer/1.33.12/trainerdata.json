@@ -4242,7 +4242,7 @@
         },
         {
           "name":"Protect ally",
-          "description":"Dispels crowd control active effects on the an ally.",
+          "description":"Dispels crowd control active effects on an ally.",
           "mana":[130, 150, 170, 190, 210],
           "type":"Direct",
           "cooldown":30.0,
