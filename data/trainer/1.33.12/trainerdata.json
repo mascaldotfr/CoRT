@@ -3426,8 +3426,8 @@
           "gcd":"Normal",
           "weapon_interval": true,
           "range":0,
-          "buffs":{
-            "Attack damage":["+120%", "+130%", "+140%", "+150%", "+170%"]
+          "damage":{
+            "Attack":["+120%", "+130%", "+140%", "+150%", "+170%"]
           },
           "debuffs":{
             "Convert mana to damage":[ "100", "150", "200", "250", "350" ]
