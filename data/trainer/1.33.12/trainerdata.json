@@ -3369,10 +3369,8 @@
           "gcd":"Normal",
           "weapon_interval": true,
           "range":0,
-          "buffs":{
-            "Attack damage":"100%"
-          },
           "damage":{
+            "Attack":"100%",
             "Piercing":["40", "70", "110", "140", "175"]
           }
         },
