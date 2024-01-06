@@ -3927,7 +3927,9 @@
           "cast":0.5,
           "gcd":"Very Long",
           "buffs":{
-            "Damage bonus":["+10%", "+20%", "+30%", "+40%", "+50%"],
+            "Damage bonus":["+10%", "+20%", "+30%", "+40%", "+50%"]
+          },
+          "debuffs":{
             "Cannot cast area spells":true
           }
         },
