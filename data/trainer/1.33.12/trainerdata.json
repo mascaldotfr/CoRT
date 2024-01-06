@@ -4351,7 +4351,7 @@
           "gcd":"Short",
           "area":6,
           "buffs":{
-            "Damage received":["-10%", "-15%", "-20%", "-30%", "-40%"]
+            "Ranged damage received":["-10%", "-15%", "-20%", "-30%", "-40%"]
           },
           "debuffs":{
             "Cannot cast Stars shield":true
