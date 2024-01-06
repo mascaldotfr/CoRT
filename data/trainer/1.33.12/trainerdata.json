@@ -1277,7 +1277,9 @@
           "cooldown":160.0,
           "duration":[40,45,50,55,60],
           "buffs":{
-            "Attack speed":["+5%","+10%","+15%","+20%","+25%"],
+            "Attack speed":["+5%","+10%","+15%","+20%","+25%"]
+          },
+          "debuffs": {
             "Opponent evade chance":["-10%","-20%","-30%","-40%","-50%"]
           }
         }
@@ -1364,10 +1366,10 @@
           "duration":120,
           "weapon_interval": true,
           "buffs":{
-            "Attack range":"+15%",
-            "Opponent evade chance":"-100%"
+            "Attack range":"+15%"
           },
           "debuffs": {
+            "Opponent evade chance":"-100%",
             "Movement speed": "-15%"
           }
         },
