@@ -660,11 +660,13 @@
           "cooldown":120.0,
           "duration":[20,30,45,60,80],
           "buffs":{
-            "Invisibility":true,
-            "Piercing damage":[50, 80, 120, 170, 250]
+            "Invisibility":true
           },
           "debuffs":{
             "Cannot cast Confuse for 5 seconds after it ends":true
+          },
+          "damage": {
+            "Piercing":[50, 80, 120, 170, 250]
           }
         },
         {
