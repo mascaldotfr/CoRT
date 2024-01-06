@@ -792,8 +792,10 @@
           "gcd":"Very Short",
           "cooldown":20.0,
           "buffs":{
-            "Pet Attack Damage":"-25%",
             "Attack range":["+5%", "+8%", "+12%", "+17%", "+30%"]
+          },
+          "debuffs": {
+            "Pet Attack Damage":"-25%"
           }
         },
         {
