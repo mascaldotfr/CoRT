@@ -1041,7 +1041,8 @@
           "duration":10.0,
           "range":0.0,
           "damage":{
-            "Piercing (per second)":[100,200,300,400,500]
+            "Piercing":[100,200,300,400,500],
+            "Piercing (per second)":[60,70,90,110,130]
           }
         },
         {
