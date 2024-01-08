@@ -298,7 +298,7 @@ h1 {
 	overflow-y: scroll;
 	max-height: 30em;
 	min-width: 25em;
-	min-height: 20em;
+	min-height: calc(500px - 2 * var(--default_margin_padding));
 }
 .wz-realm-header {
 	font-size: 150%;
