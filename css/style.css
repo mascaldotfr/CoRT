@@ -1,9 +1,17 @@
 :root {
+	--background: #212121;
+	--card_background: #313131;
+	--menu_background: #414141;
+	--tooltip_background: #515151;
+	--dialog_background: #3F3F3F;
+	--foreground: white;
+	--forms: #515151;
 	--red: #ffa1a7;
 	--blue: #9ccdf9;
 	--green: #7de384;
 	--purple: #bd93ff;
 	--faded: #ccc;
+	--links: lightblue;
 	--ahover: #ccaaff;
 	--default_margin_padding: .5em;
 	--table_padding: .25em .5em;
@@ -22,8 +30,8 @@ label, select, button, textarea, a:hover, a:active {
 /* GLOBAL */
 
 body {
-	background-color: #212121;
-	color: white;
+	background-color: var(--background);
+	color: var(--foreground);
 	font-family: sans-serif, 'Noto Color Emoji';
 	margin: 0 auto;
 	max-width: 1600px;
@@ -33,7 +41,7 @@ body {
 	grid-template-rows: 1fr auto;
 }
 a {
-	color: lightblue;
+	color: var(--links);
 }
 a:hover {
 	color: var(--ahover);
@@ -42,8 +50,8 @@ li {
 	list-style: square;
 }
 select, button, textarea {
-	background-color: #515151;
-	color: white;
+	background-color: var(--forms);
+	color: var(--foreground);
 	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
 	border-radius: 3px;
 	border: 0px;
@@ -57,14 +65,14 @@ select {
 }
 .card {
 	box-shadow: 0 .1em .2em rgba(140, 140, 140, .4);
-	background: #313131;
+	background: var(--card_background);
 	border-radius: 5px;
 	padding: var(--default_margin_padding);
 	margin: var(--default_margin_padding);
 }
 #menu, #footer {
 	text-align: center;
-	background-color: #414141;
+	background-color: var(--menu_background);
 	min-height: 3em;
 }
 #menu-content {
@@ -156,13 +164,14 @@ h1 {
 	border-radius: 3px;
 }
 .skillspinner { height: 48px; margin-top: 1px; }
-.icon .skilllvl { background-color: white; color: black; border-radius: 4px; }
+.icon .skilllvl { background-color: var(--foreground); color: var(--background); border-radius: 4px; }
 .minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px; padding: 2px; }
 .minus { margin-top: 6px; }
 .tippy-content {
-	background-color: #545454;
+	background-color: var(--tooltip_background);
+	color: var(--foreground);
 	border-radius: 5px;
-	border: 1px solid white;
+	border: 1px solid var(--foreground);
 }
 .tippy-content .descriptionheader {
 	grid-template-columns: 64px auto;
@@ -209,7 +218,7 @@ h1 {
 #t-dialog {
 	position: absolute;
 	top: 0px;
-	background: #3F3F3F;
+	background: var(--dialog_background);
 	box-shadow: 0px 0px 2px 2px #aaa;
 	border: 0px;
 }
@@ -523,10 +532,10 @@ h1 {
 		margin-bottom: var(--default_margin_padding);
 	}
 	#menu-content span:nth-child(even) {
-		background: #313131;
+		background: var(--card_background);
 	}
 	#menu-content span:nth-child(odd) {
-		background: #212121;
+		background: var(--background);
 	}
 	#menu-content span {
 		padding-left: var(--default_margin_padding);
@@ -585,8 +594,8 @@ h1 {
 	#menu a {
 		/* Make menu items appear as buttons */
 		padding: var(--default_margin_padding);
-		background-color: #515151;
-		color: white;
+		background-color: var(--tooltip_background);
+		color: var(--foreground);
 		box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
 		border-radius: 3px;
 	}
@@ -596,7 +605,7 @@ h1 {
 		text-align: center;
 	}
 	#menu a:hover {
-		background: #313131;
+		background: var(--card_background);
 		color: var(--ahover);
 		box-shadow: 0 .1em .3em rgba(140, 140, 140, .4);
 		transition-duration: .5s;
