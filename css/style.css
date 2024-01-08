@@ -472,7 +472,7 @@ h1 {
 	stroke: var(--green);
 }
 .ws-chart .ct-label, .ws-chart .ct-axis {
-	color: white;
+	color: var(--foreground);
 }
 .ws-chart-xhours .ct-label.ct-horizontal {
 	margin-left: -.4em;
