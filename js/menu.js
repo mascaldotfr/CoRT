@@ -28,11 +28,11 @@ let __menu_footer = `
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
-		<!--VERSION-->Version: 20240109.213507
+		<!--VERSION-->Version: 20240109.214629
 		</i></p>
 `;
 
-let __menu__old_menu_width = 100000000;
+let __menu_old_menu_width = 100000000;
 
 function menu_adapt() {
 	if (window.innerWidth >= 800) {
