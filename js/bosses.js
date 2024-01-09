@@ -28,10 +28,6 @@ let next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
 let previous_respawns = first_respawns;
 let notified_10m = false;
 
-function time_now() {
-	return Math.floor(new Date().getTime() / 1000);
-}
-
 function unixstamp2human(unixstamp) {
 	let dt = new Date(unixstamp * 1000);
 	return dt.toLocaleDateString(localStorage.getItem("lang"), {
@@ -41,7 +37,7 @@ function unixstamp2human(unixstamp) {
 
 function get_next_respawns(boss) {
 	let tried_respawn = first_respawns[boss];
-	let now = time_now();
+	let now = timestamp_now();
 	while (true) {
 		if (boss == "server")
 			respawn_time = 168 * 3600; // 1 week
@@ -66,21 +62,8 @@ function display_next_respawn(boss) {
 		$(`#${boss}_respawn`).append(`<p class="${color}"><b>
 			${unixstamp2human(next_respawns[boss][respawn])}</b></p>`);
 	}
-	let next_respawn_in = {};
-	let time_before_respawn = next_respawns[boss][0] - time_now();
-	next_respawn_in["days"] = Math.floor(time_before_respawn / (24 * 3600));
-	time_before_respawn -= next_respawn_in["days"] * 24 * 3600;
-	next_respawn_in["hours"] = Math.floor(time_before_respawn / 3600);
-	time_before_respawn -= next_respawn_in["hours"] * 3600;
-	next_respawn_in["minutes"] = Math.floor(time_before_respawn / 60);
-	for (let dt_elem in next_respawn_in) {
-		next_respawn_in[dt_elem] = String(next_respawn_in[dt_elem]).padStart(2, "0");
-	}
-	// hide days and hours left if there is none of it
-	next_respawn_in["days"] = next_respawn_in["days"] == "00" ? "" : next_respawn_in["days"] + _("d");
-	next_respawn_in["hours"] = next_respawn_in["hours"] == "00" ? "" : next_respawn_in["hours"] + _("h");
-	$(`#${boss}_countdown`).text(`${_("Next respawn in")}
-		${next_respawn_in.days} ${next_respawn_in.hours} ${next_respawn_in.minutes}${_("m")}`);
+	let next_respawn_in = timestamp_ago(next_respawns[boss][0]);
+	$(`#${boss}_countdown`).text(`${_("Next respawn in")} ${next_respawn_in.human}`);
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
 		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] >= 1 &&

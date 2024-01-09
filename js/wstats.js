@@ -18,29 +18,6 @@
 // sync with statistics.json
 let report_days = [7, 30, 90];
 
-function ts_to_human(ts) {
-	if (ts === null || ts == 0)
-		return "N/A";
-
-	let then = new Date(ts * 1000);
-	let now = new Date();
-	let output = "";
-
-	let diff = now.getTime() - then.getTime();
-    	let days = Math.floor(diff /1000 / 60 / 60 /24);
-	if (days > 0) output += String(days).padStart(2, "0") + _("d");
-	diff -= days * 1000 * 60 * 60 * 24;
-	let hours = Math.floor(diff / 1000 / 60 / 60);
-	if (hours > 0) output += " " + String(hours).padStart(2, "0") + _("h");
-	diff -= hours * 1000 * 60 * 60;
-	let minutes = Math.floor(diff / 1000 / 60);
-	if (minutes > 0) output += " " + String(minutes).padStart(2, "0") + _("m");
-	diff -= minutes * 1000 * 60;
-
-	if (output == "") output = "00m"; // very fresh data
-	return _("%s ago", output);
-}
-
 // undefined / null => N/A or 0
 function naify(value, failover="0") {
 	if (value === null || value === undefined)
@@ -153,9 +130,8 @@ async function display_stat() {
 	let realm_colors = get_realm_colors();
 
 	let infos = data.splice(0, 1)[0];
-	$("#ws-last-updated").text(ts_to_human(infos["generated"]));
-	let now = new Date();
-	if (now.getTime() / 1000 - infos["generated"] > 3 * 3600) {
+	$("#ws-last-updated").text(timestamp_ago(infos["generated"], passed=true)["human"]);
+	if (timestamp_now() - infos["generated"] > 3 * 3600) {
 		$("#ws-info-error").html(`<b>Nothing happened since the last 3 hours,
 			<a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 			NGE's page</a> is probably not working.</b>`);
@@ -174,12 +150,12 @@ async function display_stat() {
 			if (report == 0) {
 				last_invasion = `<tr>
 					<td><b>${_("Last invasion")}</b></td>
-					<td>${ts_to_human(r["invasions"]["last"]["date"])}
+					<td>${naify(timestamp_ago(r["invasions"]["last"]["date"], passed=true).human, "N/A")}
 					    (${naify(r["invasions"]["last"]["location"], "N/A")})</td>
 					</tr>`;
 				last_gem = `<tr>
 					<td><b>${_("Last gem stolen")}</b></td>
-					<td>${ts_to_human(r["gems"]["stolen"]["last"])}</td>
+					<td>${naify(timestamp_ago(r["gems"]["stolen"]["last"], passed=true).human, "N/A")}</td>
 					</tr>`;
 			}
 			let template = `
@@ -222,7 +198,7 @@ async function display_stat() {
 				</tr>
 				<tr>
 					<td><b>${_("Last dragon wish")}</b></td>
-					<td>${ts_to_human(r["wishes"]["last"])}</td>
+					<td>${naify(timestamp_ago(r["wishes"]["last"], passed=true).human, "N/A")}</td>
 				</tr>
 				</table>
 			`;
