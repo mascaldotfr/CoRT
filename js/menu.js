@@ -1,7 +1,7 @@
-let external_link = `
+let __menu_external_link = `
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAvUlEQVQ4y7WTMQ4CIRBFH8bS0gPY2ngCLfYqkHCoTWavsjWXgFPYOjbLujFAWBN/Axnm/598ZgDuMUYtwXuvAN774ruIqFFVTSkxzzPfcM6dgCdwEZGU69baT1NWog9GRFZ3VdUD/TAi8rLWMk3TWuwW2JKdc2aXgIhoiQxw/JUcQiCE0A5xG1jVodbQQT4D16JAHpyWczYoZjCOowF0OZuo/kIPedcc/E3AxBgVKC5TC8MwrPdHbZ1bWIxvbxir8kTznLrSAAAAAElFTkSuQmCC" style="height: .90em">
 `;
-let menu = `
+let __menu_content = `
 	<div id="hamburger">
 	<a href="javascript:toggle_menu('on')" id="menu_toggler">${_("☰  Menu")}</a>
 	</div>
@@ -13,9 +13,9 @@ let menu = `
 		<span class="menuitem"><b><a href="wevents.html">🗓️${_("WZ events")}</a></b></span>
 		<span class="menuitem"><b><a href="wstats.html">📊${_("WZ statistics")}</a></b></span>
 		<span class="menuitem"><a href="https://poludnica.shinyapps.io/configs/" target="_blank">📈${_("Trainer statistics")}
-		${external_link}</a></span>
+		${__menu_external_link}</a></span>
 		<span class="menuitem"><a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">🛡${_("Armor calculator")}
-		${external_link}</a></span>
+		${__menu_external_link}</a></span>
 		<select id="lang">
 			<option value="en">🇬🇧 English</option>
 			<option value="de">🇩🇪 Deutsch</option>
@@ -24,15 +24,15 @@ let menu = `
 		</select>
 	</div>
 `;
-let footer = `
+let __menu_footer = `
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
-		<!--VERSION-->Version: 20240108.185124
+		<!--VERSION-->Version: 20240109.200358
 		</i></p>
 `;
 
-let old_menu_width = 100000000;
+let __menu__old_menu_width = 100000000;
 
 function menu_adapt() {
 	if (window.innerWidth >= 800) {
@@ -40,13 +40,13 @@ function menu_adapt() {
 		$("#hamburger").css("display", "none");
 		$("#menu-content").css("display", "flex");
 	}
-	else if (old_menu_width >= 800) {
+	else if (__menu_old_menu_width >= 800) {
 		// ^ Ensure we don't hide the menu if the mobile
 		// layout was already used
 		$("#hamburger").css("display", "block");
 		$("#menu-content").css("display", "none");
 	}
-	old_menu_width = window.innerWidth;
+	__menu_old_menu_width = window.innerWidth;
 }
 
 function toggle_menu(state) {
@@ -61,8 +61,8 @@ function toggle_menu(state) {
 
 $(document).ready(function() {
 
-	$("#menu").html(menu);
-	$("#footer").append(footer);
+	$("#menu").html(__menu_content);
+	$("#footer").append(__menu_footer);
 	let lang = localStorage.getItem("lang");
 	if (__i18n__.supported_lang.includes(lang))
 		$("#lang").val(lang);
