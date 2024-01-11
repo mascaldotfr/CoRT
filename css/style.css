@@ -238,18 +238,18 @@ h1 {
 
 /* BATTLEZONES */
 
-#bz_container {
+#bz-container {
 	text-align: center;
 	max-width: 600px;
 	margin: 0 auto;
 }
-#bz_container ul {
+#bz-container ul {
 	display: inline-block;
 	text-align: left;
 	padding-left: 0px;
 	margin-top: 0;
 }
-#bz_container li {
+#bz-container li {
 	list-style: none;
 }
 

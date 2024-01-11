@@ -72,9 +72,9 @@ function feed_bz() {
 		hour: '2-digit', minute: '2-digit'};
 	let time_options = {hour: '2-digit', minute: '2-digit'};
 	let lang = localStorage.getItem("lang");
-	$("#bz_status").empty();
-	$("#next_bz").empty();
-	$("#future_bzs").empty();
+	$("#bz-countdown-status").empty();
+	$("#bz-countdown-countdown").empty();
+	$("#bz-next-future").empty();
 
 	let current_date = new Date();
 	let current_day = parseInt(current_date.getUTCDay());
@@ -104,8 +104,8 @@ function feed_bz() {
 	}
 
 	if (bz_on) {
-		$("#bz_status").html(`<span class="green"><b>${_("ON")}</b></span>`);
-		$("#next_bz").text(`${_("Ends in")} ${bz_ends_at["hours"]}:${bz_ends_at["minutes"]}:${bz_ends_at["seconds"]}`);
+		$("#bz-countdown-status").html(`<span class="green"><b>${_("ON")}</b></span>`);
+		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["hours"]}:${bz_ends_at["minutes"]}:${bz_ends_at["seconds"]}`);
 		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] <= 10 && bz_ends_at["minutes"] >= 1 &&
 			notified_10m === false) {
 			notified_10m = true;
@@ -117,9 +117,9 @@ function feed_bz() {
 		}
 	}
 	else {
-		$("#bz_status").html(`<span class="red"><b>${_("OFF")}</b></span>`);
+		$("#bz-countdown-status").html(`<span class="red"><b>${_("OFF")}</b></span>`);
 		var next_bz_in = date_difference_from_now(next_bzs_begin[0]);
-		$("#next_bz").text(`${_("Next BZ in")} ${next_bz_in["hours"]}:${next_bz_in["minutes"]}:${next_bz_in["seconds"]}`);
+		$("#bz-countdown-countdown").text(`${_("Next BZ in")} ${next_bz_in["hours"]}:${next_bz_in["minutes"]}:${next_bz_in["seconds"]}`);
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] >= 1 &&
 		    notified_10m === false) {
 			notified_10m = true;
@@ -138,7 +138,7 @@ function feed_bz() {
 		let bz_begin_datetime = bz_begin_date.toLocaleDateString(lang, date_options);
 		let bz_end_time = bz_end_date.toLocaleTimeString(lang, time_options);
 		let interval = `<li>${bz_begin_datetime} - ${bz_end_time}</li>`;
-		$("#future_bzs").append(interval);
+		$("#bz-next-future").append(interval);
 	}
 
 	//console.log("bz is on?", bz_on, "bz_ends_at?", bz_ends_at, "next bz in", next_bz_in);
@@ -147,7 +147,7 @@ function feed_bz() {
 $(document).ready(function() {
 	document.title = "CoRT - " + _("BZ status");
 	$("#title").text(_("BZ status"));
-	$("#next_bzs_title").text(_("Next BZ (in your timezone):"));
+	$("#bz-next-title").text(_("Next BZ (in your timezone):"));
 	insert_notification_link();
 	feed_bz();
 });
