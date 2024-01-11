@@ -318,20 +318,18 @@ h1 {
 	min-width: 25em;
 	min-height: 20em;
 }
-#wz-alsius, #wz-ignis, #wz-syrtis {
+.wz-realm-header {
 	display: grid;
 	grid-template-areas:
 		"realm forts"
 		"gems forts"
 		"relics forts";
 	gap: 0 2em;
-	min-height: 5em;
+	min-height: 3em;
+	align-items: center;
 }
 #wz-alsius, #wz-ignis {
 	margin-bottom: 3em;
-}
-#wz-alsius span, #wz-ignis span, #wz-syrtis span {
-	display: block;
 }
 #wz-container .realmname {
 	grid-area: realm;
@@ -348,7 +346,8 @@ h1 {
 }
 #wz-container .forts {
 	grid-area: forts;
-	margin-top: auto;
+	font-size: initial;
+	font-weight: initial;
 }
 
 

@@ -151,12 +151,12 @@ async function display_wz(init=false) {
 			}
 		}
 		$(`#wz-${realm.toLowerCase()}`).html(`
-				<span class="wz-realm-header">
+				<div class="wz-realm-header">
 				<span class="realmname ${realm_colors[realm]}">${realm}</span>
 				<span class="gems">${gems.splice(0, 6).join("")}</span>
 				<span class="relics">${relics}</span>
-				</span>
 				<span class="forts">${forts.splice(0, 4).join("")}</span>
+				</div>
 		`)
 	}
 	let events_list = humanise_events(data["events_log"], true, wz_lastupdate);
