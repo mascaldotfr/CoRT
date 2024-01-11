@@ -55,15 +55,15 @@ function get_next_respawns(boss) {
 }
 
 function display_next_respawn(boss) {
-	$(`#${boss} .lastspawn`).prepend(`<span class="faded"><i>${_("Last respawn")}:
+	$(`#boss-${boss}-lastspawn`).prepend(`<span class="faded"><i>${_("Last respawn")}:
 		${unixstamp2human(previous_respawns[boss])}</i></span>`);
 	for (let respawn in next_respawns[boss]) {
 		let color = respawn == 0 ? "green" : "faded";
-		$(`#${boss}_respawn`).append(`<p class="${color}"><b>
+		$(`#boss-${boss}-respawn`).append(`<p class="${color}"><b>
 			${unixstamp2human(next_respawns[boss][respawn])}</b></p>`);
 	}
 	let next_respawn_in = timestamp_ago(next_respawns[boss][0]);
-	$(`#${boss}_countdown`).text(`${_("Next respawn in")} ${next_respawn_in.human}`);
+	$(`#boss-${boss}-countdown`).text(`${_("Next respawn in")} ${next_respawn_in.human}`);
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
 		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] >= 1 &&
@@ -82,8 +82,8 @@ function display_next_respawn(boss) {
 function refresh_display() {
 	let bosses_unordered = new Map()
 	for (let boss in first_respawns) {
-		$(`#${boss}_respawn`).empty();
-		$(`#${boss} .lastspawn`).empty();
+		$(`#boss-${boss}-lastspawn`).empty();
+		$(`#boss-${boss}-respawn`).empty();
 		next_respawns[boss] = [];
 		get_next_respawns(boss);
 		display_next_respawn(boss);
@@ -96,14 +96,14 @@ function refresh_display() {
 	bosses_ordered = [...bosses_ordered.keys()];
 	// reorder the boss divs
 	for (let boss in bosses_ordered) {
-		$(`#${bosses_ordered[boss]}`).appendTo("#bosses_list");
+		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
 	}
 }
 
 $(document).ready(function() {
 	document.title = "CoRT - " + _("Bosses Countdown");
 	$("#title").text(_("Bosses Countdown"));
-	$("#bosses_info").text(_("The page refreshes itself every minute. Dates and times are in your timezone."));
+	$("#boss-info").text(_("The page refreshes itself every minute. Dates and times are in your timezone."));
 	insert_notification_link();
 	refresh_display();
 });

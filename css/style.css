@@ -255,7 +255,7 @@ h1 {
 
 /* BOSSES */
 
-#daen, #evendim, #thorkul, #server {
+#boss-daen, #boss-evendim, #boss-thorkul, #boss-server {
 	display: flex;
 	flex-wrap: wrap;
 	margin-bottom: 1em;
@@ -263,12 +263,12 @@ h1 {
 	padding: var(--default_margin_padding);
 	gap: .5em;
 }
-#bosses_list {
+#boss-list {
 	max-width: 600px;
 	margin: 0 auto;
 	margin-top: 2em;
 }
-#bosses_list .respawn {
+.boss-respawn {
 	flex: 1;
 	vertical-align: middle;
 	text-align: center;
