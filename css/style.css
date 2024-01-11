@@ -331,20 +331,20 @@ h1 {
 #wz-alsius, #wz-ignis {
 	margin-bottom: 3em;
 }
-#wz-container .realmname {
+.wz-realmname {
 	grid-area: realm;
 	text-align: right;
 }
-#wz-container .gems {
+.wz-gems {
 	grid-area: gems;
 	text-align: right;
 	min-width: max-content;
 }
-#wz-container .relics {
+.wz-relics {
 	grid-area: relics;
 	text-align: right;
 }
-#wz-container .forts {
+.wz-forts {
 	grid-area: forts;
 	font-size: initial;
 	font-weight: initial;
