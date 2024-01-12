@@ -23,8 +23,8 @@ function rebase_img(url) {
 	return "data/warstatus/" + url;
 }
 
-function display_map(forts) {
-	forts.unshift({icon: "base_map.jpg"});
+function display_map(fortsdata) {
+	forts = [{icon: "base_map.jpg"}].concat(fortsdata);
 
 	// Preload images beforehand
 	let forts_Image = [];
@@ -126,18 +126,19 @@ async function display_wz(init=false) {
 	if (init == false && data["events_log"][0]["date"] < wz_lastupdate)
 		return; // nothing new
 
+	display_map(data["forts"]);
+
 	if (!("gems" in failures)) {
 		for (let gem of data["gems"]) {
 				gems.push(`<img src="${rebase_img(gem)}" class="wz-icon">`);
 		}
 	}
+
 	for (let fort of data["forts"]) {
 		let icon = `<img src="${rebase_img(fort["icon"])}" class="wz-icon">`;
 		let name = translate_fort(fort["name"]);
 		forts.push(`${icon}&nbsp;${name}<br>`);
 	}
-
-	display_map(data["forts"]);
 
 	for (let realm of Object.keys(realm_colors)) {
 		let relics = "";
