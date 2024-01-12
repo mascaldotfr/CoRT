@@ -511,9 +511,6 @@ h1 {
 /* ADAPTATIVE VIEWS */
 
 @media (max-width: 799px) {
-	.p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10 {
-		margin-bottom: 1em;
-	}
 	#menu {
 		line-height: 2em;
 		text-align: left;
@@ -609,7 +606,6 @@ h1 {
 		background: var(--card_background);
 		color: var(--ahover);
 		box-shadow: 0 .1em .3em rgba(140, 140, 140, .4);
-		transition-duration: .5s;
 	}
 	#wz-map-map {
 		width: 500px
