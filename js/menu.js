@@ -1,9 +1,13 @@
+import {_} from "./i18n.js";
+import {__i18n__} from "../data/i18n_db.js";
+import {$} from "./lamaiquery.js";
+
 let __menu_external_link = `
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAvUlEQVQ4y7WTMQ4CIRBFH8bS0gPY2ngCLfYqkHCoTWavsjWXgFPYOjbLujFAWBN/Axnm/598ZgDuMUYtwXuvAN774ruIqFFVTSkxzzPfcM6dgCdwEZGU69baT1NWog9GRFZ3VdUD/TAi8rLWMk3TWuwW2JKdc2aXgIhoiQxw/JUcQiCE0A5xG1jVodbQQT4D16JAHpyWczYoZjCOowF0OZuo/kIPedcc/E3AxBgVKC5TC8MwrPdHbZ1bWIxvbxir8kTznLrSAAAAAElFTkSuQmCC" style="height: .90em">
 `;
 let __menu_content = `
 	<div id="hamburger">
-	<a href="javascript:toggle_menu('on')" id="menu_toggler">${_("☰  Menu")}</a>
+	<a href="#" id="menu-toggler">${_("☰  Menu")}</a>
 	</div>
 	<div id="menu-content">
 		<span class="menuitem"><b><a href="./">🏫${_("Trainer")}</a></b></span>
@@ -28,15 +32,24 @@ let __menu_footer = `
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
-		<!--VERSION-->Version: 20240112.184002
+		<!--VERSION-->Version: 20240113.121439
 		</i></p>
 `;
 
 let __menu_old_menu_width = 100000000;
+let __menu_toggle_state = false;
+
+function toggle_menu() {
+	__menu_toggle_state = !__menu_toggle_state;
+	let display = __menu_toggle_state ? "block" : "none";
+	let link_text = __menu_toggle_state ? _("╳ Hide Menu") : _("☰  Menu");
+	$("#menu-toggler").text(link_text);
+	$("#menu-content").css("display", display);
+}
 
 function menu_adapt() {
 	if (window.innerWidth >= 800) {
-		toggle_menu("off");
+		toggle_menu();
 		$("#hamburger").css("display", "none");
 		$("#menu-content").css("display", "flex");
 	}
@@ -49,16 +62,6 @@ function menu_adapt() {
 	__menu_old_menu_width = window.innerWidth;
 }
 
-function toggle_menu(state) {
-	next_state = state == "on" ? "off" : "on";
-	display = state == "on" ? "block" : "none";
-	link_text = next_state == "on" ? _("☰  Menu") : _("╳ Hide Menu");
-	$("#menu_toggler").attr("href", `javascript:toggle_menu("${next_state}")`);
-	$("#menu_toggler").text(link_text);
-	$("#menu-content").css("display", display);
-}
-
-
 $(document).ready(function() {
 
 	$("#menu").html(__menu_content);
@@ -70,6 +73,7 @@ $(document).ready(function() {
 		localStorage.setItem("lang", $("#lang").val());
 		location.reload();
 	});
+	$("#menu-toggler").on("click", toggle_menu);
 	menu_adapt();
 	window.addEventListener("resize", menu_adapt);
 

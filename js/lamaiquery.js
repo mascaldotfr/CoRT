@@ -13,7 +13,7 @@
  *
  * */
 
-const $ = (function (selector) {
+export const $ = (function (selector) {
 	return {
 		appendTo: function(target) {
 			let selector_node = document.querySelector(selector);

@@ -3,6 +3,7 @@
 function async_or_die() {
 	try {
 		eval("async () => {}");
+		new Function('import("")');
 	}
 	catch (_unused) {
 		document.body.innerHTML = "" +

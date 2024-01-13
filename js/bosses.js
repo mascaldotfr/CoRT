@@ -15,6 +15,11 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {$} from "./lamaiquery.js";
+import {_} from "./i18n.js";
+import {insert_notification_link, mynotify} from "./notify.js";
+import {timestamp_now, timestamp_ago} from "./wztools/time.js";
+
 // The last respawn timestamp in UTC time
 // You can update it by looking at your browser console and getting the last
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
@@ -38,6 +43,7 @@ function unixstamp2human(unixstamp) {
 function get_next_respawns(boss) {
 	let tried_respawn = first_respawns[boss];
 	let now = timestamp_now();
+	let respawn_time = 0;
 	while (true) {
 		if (boss == "server")
 			respawn_time = 168 * 3600; // 1 week

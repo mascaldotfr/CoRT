@@ -15,6 +15,11 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {__api__urls, __api__frontsite, __api__frontsite_dir, __api_create_prefetch} from "./api_url.js";
+import {$} from "./lamaiquery.js";
+import {_} from "./i18n.js";
+import {LZString} from "./lz-string.min.js";
+
 const minlevel = 10;
 const maxlevel = 60;
 const class_type_masks = {
@@ -321,7 +326,7 @@ function input_setup_from_url() {
 		if (item % 2 == 0) {
 			// discipline points
 			row++;
-			do_clicks = (saved_setup[item] - 1) / 2 ;
+			let do_clicks = (saved_setup[item] - 1) / 2 ;
 			for (let i = 0; i < do_clicks; i++) {
 				try {
 					$(`#t-trainer .t${row} .p0 .skillspinner .plus`).trigger("click");

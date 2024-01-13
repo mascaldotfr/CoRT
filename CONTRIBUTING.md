@@ -30,10 +30,9 @@ The oldest browser a valid bug was reported against was Chrome 80
 (`element.replaceChildren()` missing), so we've mostly up to date users, thanks
 to browser updating themselves. But the baseline is born from it.
 
-Actually the site works even with Firefox 52 (XP/Vista), minus the charts. As
-such, Firefox 60 (May 2018) was chosen because it was the closest ESR version
-to 52 supporting the charts, and any bug report for a browser older than that
-will be rejected.
+Firefox 60 (May 2018) was chosen because it was the minimal version of Firefox
+supporting all the site features, and any bug report for a browser older than
+that will be rejected.
 
 You can use an old [Debian Live image which has already that version
 preloaded](https://cdimage.debian.org/cdimage/archive/9.7.0-live/amd64/iso-hybrid/debian-live-9.7.0-amd64-xfce.iso)

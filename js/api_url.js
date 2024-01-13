@@ -5,26 +5,26 @@
 // the pull!
 
 // The root where all API files can be found
-const __api__base = "https://hail.thebus.top/CoRT";
+export const __api__base = "https://hail.thebus.top/CoRT";
 // Used by the trainer to filter setup submissions
-const __api__frontsite = "https://mascaldotfr.github.io";
+export const __api__frontsite = "https://mascaldotfr.github.io";
 // Subdirectory where the HTML/JS/CSS/etc. files are placed, relative to your
 // www root with the leading '/'
-const __api__frontsite_dir = "/CoRT";
+export const __api__frontsite_dir = "/CoRT";
 
-const __api__urls = {
+export const __api__urls = {
 	"submit_trainer": `${__api__base}/collect/submit.php`,
 	"events": `${__api__base}/warstatus/stats/allevents.json`,
 	"stats": `${__api__base}/warstatus/stats/statistics.json`,
 	"wstatus": `${__api__base}/warstatus/warstatus.json`
 };
-const __api__pages = {
+export const __api__pages = {
 	"wevents.html": __api__urls["events"],
 	"wz.html": __api__urls["wstatus"],
 	"wstats.html": __api__urls["stats"]
 };
 
-function __api_create_prefetch(url) {
+export function __api_create_prefetch(url) {
 		let l = document.createElement("link");
 		l.href = url;
 		l.rel = "preload";
@@ -33,10 +33,8 @@ function __api_create_prefetch(url) {
 		document.head.appendChild(l);
 }
 
-
-(function() {
-	const currpage = location.pathname.split("/").pop();
-	if (currpage in __api__pages) {
-		__api_create_prefetch(__api__pages[currpage]);
-	}
-}());
+const currpage = location.pathname.split("/").pop();
+if (currpage in __api__pages) {
+	console.log("creating prefetch for", currpage, "at", __api__pages[currpage]);
+	__api_create_prefetch(__api__pages[currpage]);
+}

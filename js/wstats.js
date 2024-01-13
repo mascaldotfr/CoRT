@@ -15,6 +15,15 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {__api__urls} from "./api_url.js";
+import {$} from "./lamaiquery.js";
+import {_} from "./i18n.js";
+import {get_realm_colors, get_realms} from "./wztools/constants.js";
+import {translate_fort} from "./wztools/translate_forts.js";
+import {timestamp_ago, timestamp_now} from "./wztools/time.js";
+import {$onlinemanager} from "./onlinemanager.js";
+import {__chartist_responsive} from "./chartist-1.3.0.min.js";
+
 // sync with statistics.json
 let report_days = [7, 30, 90];
 
@@ -130,7 +139,8 @@ async function display_stat() {
 	let realm_colors = get_realm_colors();
 
 	let infos = data.splice(0, 1)[0];
-	$("#ws-last-updated").text(timestamp_ago(infos["generated"], passed=true)["human"]);
+	let some_time_ago = timestamp_ago(infos["generated"], true);
+	$("#ws-last-updated").text(some_time_ago["human"]);
 	if (timestamp_now() - infos["generated"] > 3 * 3600) {
 		$("#ws-info-error").html(`<b>Nothing happened since the last 3 hours,
 			<a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
@@ -150,12 +160,12 @@ async function display_stat() {
 			if (report == 0) {
 				last_invasion = `<tr>
 					<td><b>${_("Last invasion")}</b></td>
-					<td>${naify(timestamp_ago(r["invasions"]["last"]["date"], passed=true).human, "N/A")}
+					<td>${naify(timestamp_ago(r["invasions"]["last"]["date"], true).human, "N/A")}
 					    (${naify(r["invasions"]["last"]["location"], "N/A")})</td>
 					</tr>`;
 				last_gem = `<tr>
 					<td><b>${_("Last gem stolen")}</b></td>
-					<td>${naify(timestamp_ago(r["gems"]["stolen"]["last"], passed=true).human, "N/A")}</td>
+					<td>${naify(timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}</td>
 					</tr>`;
 			}
 			let template = `
@@ -198,7 +208,7 @@ async function display_stat() {
 				</tr>
 				<tr>
 					<td><b>${_("Last dragon wish")}</b></td>
-					<td>${naify(timestamp_ago(r["wishes"]["last"], passed=true).human, "N/A")}</td>
+					<td>${naify(timestamp_ago(r["wishes"]["last"], true).human, "N/A")}</td>
 				</tr>
 				</table>
 			`;

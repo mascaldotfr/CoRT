@@ -15,6 +15,11 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {__api__urls} from "./api_url.js";
+import {$} from "./lamaiquery.js";
+import {_} from "./i18n.js";
+import {humanise_events} from "./wztools/events.js";
+
 let __wevents__filter = "none";
 let __wevents__dates = [];
 let data = null;
@@ -69,11 +74,6 @@ function display_events() {
 }
 
 async function get_data() {
-	if ($onlinemanager.online() === false) {
-		$("#we-info-error").html($onlinemanager.offlineMessage +
-					 " " + $onlinemanager.wontRetryMessage);
-		return;
-	}
 	try {
 		data = await $().getJSON(__api__urls["events"]);
 		$("#we-info-error").empty();
@@ -203,5 +203,3 @@ $(document).ready(async function() {
 		$("#we-filter").trigger("change");
 	}
 });
-
-$onlinemanager.whenBackOnline(display_events);

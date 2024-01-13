@@ -15,26 +15,29 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {$} from "./lamaiquery.js";
+import {_} from "./i18n.js";
+import {insert_notification_link, mynotify} from "./notify.js";
+
 // XXX ALL TIMES ARE UTC INTERNALLY
 // SUNDAY = 0 SATURDAY = 6
+let bz_begin = [ 	[13, 18],
+			[3, 13, 20],
+			[13, 18],
+			[13, 20],
+			[3, 13, 18],
+			[13, 20],
+			[3, 13, 20] 	];
 
-bz_begin = [ 	[13, 18],
-		[3, 13, 20],
-		[13, 18],
-		[13, 20],
-		[3, 13, 18],
-		[13, 20],
-		[3, 13, 20] 	];
+let bz_end = [		[16, 21],
+			[6, 16, 23],
+			[16, 21],
+			[16, 23],
+			[6, 16, 21],
+			[17, 23],
+			[6, 16, 23] 	];
 
-bz_end = [	[16, 21],
-		[6, 16, 23],
-		[16, 21],
-		[16, 23],
-		[6, 16, 21],
-		[17, 23],
-		[6, 16, 23] 	];
-
-notified_10m = false;
+let notified_10m = false;
 
 function future_date(in_day, at_hour) {
 	let d = new Date();

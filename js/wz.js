@@ -15,6 +15,15 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import {__api__urls} from "./api_url.js";
+import {$} from "./lamaiquery.js";
+import {_} from "./i18n.js";
+import {insert_notification_link, mynotify} from "./notify.js";
+import {get_realm_colors} from "./wztools/constants.js";
+import {translate_fort} from "./wztools/translate_forts.js";
+import {humanise_events} from "./wztools/events.js";
+import {$onlinemanager} from "./onlinemanager.js";
+
 // Unix timestamp of the last update
 let wz_lastupdate = Math.floor(new Date().getTime() / 1000);
 
@@ -24,7 +33,7 @@ function rebase_img(url) {
 }
 
 function display_map(fortsdata) {
-	forts = [{icon: "base_map.jpg"}].concat(fortsdata);
+	let forts = [{icon: "base_map.jpg"}].concat(fortsdata);
 
 	// Preload images beforehand
 	let forts_Image = [];

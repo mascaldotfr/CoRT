@@ -15,7 +15,9 @@
  * along with CoRT.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const $onlinemanager = {
+import {_} from "./i18n.js";
+
+export const $onlinemanager = {
 	"offlineMessage": `<b>${_("You are offline. Impossible to fetch the data.")}</b>`,
 	"willRetryMessage": `<b>${_("I will retry once you are online.")}</b>`,
 	"wontRetryMessage": `<b>${_("Please get back online and refresh this page.")}</b>`,

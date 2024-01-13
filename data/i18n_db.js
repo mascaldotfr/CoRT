@@ -1,4 +1,4 @@
-const __i18n__ = {
+export const __i18n__ = {
 	"supported_lang": ["en", "fr", "es", "de"],
 	"You are offline. Impossible to fetch the data.": {
 		"fr": "Vous êtes hors ligne. Impossible de récupérer les données.",
