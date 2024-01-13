@@ -50,8 +50,8 @@ If you want to make changes to CoRT or run it locally, you can use python to
    [Popper](https://github.com/floating-ui/floating-ui)
    and [LZstring](https://github.com/pieroxy/lz-string) are MIT licensed.
 
-   The [Noto Color Emoji font](https://github.com/googlefonts/noto-emoji) used
-   for Windows users is licensed under the Apache 2.0 license terms.
+   The [Twemoji icons](https://github.com/twitter/twemoji) are licensed
+   under the CC-BY 4.0 license terms.
 
 ## Credits
 
