@@ -67,11 +67,6 @@ export const __i18n__ = {
 		"es": "☰  Menú",
 		"de": "☰  Menü"
 	},
-	"╳ Hide Menu": {
-		"fr": "╳ Cacher le Menu",
-		"es": "╳ Ocultar el Menú",
-		"de": "╳ Menü ausblenden"
-	},
 	"The page refreshes itself every minute. Dates and times are in your timezone.":
 	{
 		"fr": "La page est rafraîchie automatiquement toutes les minutes. Les dates et heures indiquées sont locales.",

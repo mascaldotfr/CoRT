@@ -53,7 +53,7 @@ select, button, textarea {
 	background-color: var(--forms);
 	color: var(--foreground);
 	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
-	border-radius: 3px;
+	border-radius: 5px;
 	border: 0px;
 }
 select, button {
@@ -75,25 +75,45 @@ select {
 	background-color: var(--menu_background);
 	min-height: 3em;
 }
-#menu-content {
+header {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
+	justify-content: center;
 	align-items: center;
-	gap: var(--default_margin_padding);
-	line-height: 3em;
 }
-#menu a {
-	text-decoration: none;
-	border-radius: 5px;
-}
-#hamburger {
+#menu-click {
 	display: none;
-	font-weight: bold;
 }
-.menuitem {
-	white-space: nowrap;
+#menu-links {
+	padding-left:0px;
+	margin: 0px;
+}
+#menu-links > li {
+	list-style: none;
+	display: inline-block;
+	margin: .2em;
+	margin-bottom: .3em;
+}
+.menu-btn {
+	color: white;
+	display: none;
+	width: 100%;
+}
+.menuitem > a {
+	background: var(--tooltip_background);
+	text-decoration: none;
+	color: var(--foreground);
+	display: block;
+	padding: var(--default_margin_padding);
 	border-radius: 5px;
+	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
+}
+.menuitem > a:hover {
+	background: var(--dialog_background);
+	color: var(--ahover);
+	box-shadow: 0 .1em .3em rgba(200, 200, 200, .9);
+}
+#lang {
+	font-size: 100%;
 }
 #footer {
 	margin-top: 2em;
@@ -354,6 +374,7 @@ h1 {
 
 
 /* WZ EVENTS */
+
 #we-container {
 	width: fit-content;
 	margin: 0 auto;
@@ -520,27 +541,17 @@ h1 {
 	#menu, #footer {
 		box-shadow: 0px 0px 2px 2px rgba(200, 200, 200, .4);
 	}
-	#hamburger a {
-		display: inline-block;
+	#menu-links {
 		width: 100%;
+		transition: all 0.3s ease;
 	}
-	#lang, .menuitem {
+	#menu-click:not(:checked) ~ header { display: none; }
+	#menu-click:checked ~ header { display: block; }
+	#menu-links > li {
 		display: block;
-		font-size: 120%;
-		margin-bottom: var(--default_margin_padding);
 	}
-	#menu-content span:nth-child(even) {
-		background: var(--card_background);
-	}
-	#menu-content span:nth-child(odd) {
-		background: var(--background);
-	}
-	#menu-content span {
-		padding-left: var(--default_margin_padding);
-	}
-	.menuitem a {
+	.menu-btn {
 		display: inline-block;
-		width: calc(100vw - 6 * var(--default_margin_padding));
 	}
 	/* WAR STATUS */
 	#wz-container {
@@ -572,12 +583,6 @@ h1 {
 		min-width: 80vw;
 	}
 }
-@media (min-width: 800px) and (max-width: 1600px) {
-	#menu {
-		/* CLS fix on multiline menu */
-		min-height: 6em;
-	}
-}
 @media (min-width: 800px) and (max-width: 1400px) {
 	#ws-7d > div {
 		min-height: 32em;
@@ -589,24 +594,6 @@ h1 {
 	}
 }
 @media (min-width: 800px) {
-	#menu a {
-		/* Make menu items appear as buttons */
-		padding: var(--default_margin_padding);
-		background-color: var(--tooltip_background);
-		color: var(--foreground);
-		box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
-		border-radius: 3px;
-	}
-	#menu select {
-		padding: var(--default_margin_padding);
-		font-size: 1em;
-		text-align: center;
-	}
-	#menu a:hover {
-		background: var(--card_background);
-		color: var(--ahover);
-		box-shadow: 0 .1em .3em rgba(140, 140, 140, .4);
-	}
 	#wz-map-map {
 		width: 500px
 	}
