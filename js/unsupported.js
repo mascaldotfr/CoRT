@@ -1,9 +1,9 @@
 // needs to be separated from browserquirks.js because old IE would fail before
 // executing that code
-function async_or_die() {
+function modules_or_die() {
 	try {
-		eval("async () => {}");
-		new Function('import("")');
+		if (!("noModule" in HTMLScriptElement.prototype))
+			throw("No support for JS modules");
 	}
 	catch (_unused) {
 		document.body.innerHTML = "" +
@@ -11,10 +11,4 @@ function async_or_die() {
 			"Please <a href='http://browser-update.org/update-browser.html'>upgrade your browser</a>.</h1>";
 	}
 }
-
-try {
-	document.addEventListener("DOMContentLoaded", async_or_die);
-}
-catch (_unused) {
-	window.onload = async_or_die;
-}
+window.onload = modules_or_die;
