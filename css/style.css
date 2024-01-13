@@ -32,7 +32,7 @@ label, select, button, textarea, a:hover, a:active {
 body {
 	background-color: var(--background);
 	color: var(--foreground);
-	font-family: sans-serif, 'Noto Color Emoji';
+	font-family: sans-serif;
 	margin: 0 auto;
 	max-width: 1600px;
 	-webkit-max-logical-width: -webkit-fit-content;
@@ -93,8 +93,14 @@ header {
 	margin: .2em;
 	margin-bottom: .3em;
 }
-.menu-btn {
-	color: white;
+.menu-icon {
+	height: 1em;
+	width: 1em;
+	display: inline-block;
+	vertical-align: middle;
+}
+.menu-btn, #menu-lang-switch {
+	color: var(--foreground);
 	display: none;
 	width: 100%;
 }
@@ -112,8 +118,37 @@ header {
 	color: var(--ahover);
 	box-shadow: 0 .1em .3em rgba(200, 200, 200, .9);
 }
-#lang {
-	font-size: 100%;
+#menu-lang-switch:checked ~ #menu-lang-list { display: block; }
+#menu-lang-switch:not(:checked) ~ #menu-lang-list { display: none; }
+#menu-lang {
+	background: var(--tooltip_background);
+	padding: var(--default_margin_padding);
+	border-radius: 5px;
+	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
+	width: 8em;
+}
+#menu-lang-current {
+	display: block;
+}
+#menu-lang a {
+	text-decoration: none;
+	display:block;
+	text-align:left;
+	color: var(--foreground);
+	padding: var(--default_margin_padding);
+	border-radius: 5px;
+}
+#menu-lang-list {
+	margin-top: .75em;
+	display: none;
+	position: absolute;
+	background: var(--tooltip_background);
+	width: 8em;
+	border-radius: 5px;
+	border: 1px solid var(--foreground);
+}
+.langoption:hover {
+	background: var(--dialog_background);
 }
 #footer {
 	margin-top: 2em;
