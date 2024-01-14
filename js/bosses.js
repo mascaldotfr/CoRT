@@ -103,6 +103,7 @@ function refresh_display() {
 	// reorder the boss divs
 	for (let boss in bosses_ordered) {
 		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
+		$(`#boss-${bosses_ordered[boss]}`).show();
 	}
 }
 

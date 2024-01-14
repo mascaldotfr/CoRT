@@ -317,11 +317,15 @@ h1 {
 	align-items: center;
 	padding: var(--default_margin_padding);
 	gap: .5em;
+	visibility: hidden;
 }
 #boss-list {
 	max-width: 600px;
 	margin: 0 auto;
 	margin-top: 2em;
+}
+#boss-list img {
+	width: 150px;
 }
 .boss-respawn {
 	flex: 1;
@@ -636,6 +640,7 @@ h1 {
 }
 @media (min-width: 800px) {
 	#wz-map-map {
-		width: 500px
+		width: 500px;
+		height: 500px;
 	}
 }
