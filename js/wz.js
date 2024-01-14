@@ -22,6 +22,7 @@ import {insert_notification_link, mynotify} from "./notify.js";
 import {get_realm_colors} from "./wztools/constants.js";
 import {translate_fort} from "./wztools/translate_forts.js";
 import {humanise_events} from "./wztools/events.js";
+import {wzicons} from "./wztools/icons.js";
 import {$onlinemanager} from "./onlinemanager.js";
 
 // Unix timestamp of the last update
@@ -32,6 +33,12 @@ function rebase_img(url) {
 	return "data/warstatus/" + url;
 }
 
+// Create a svg blob for a given original icon filename
+function svg_to_blob(fname) {
+	let xml = wzicons[fname];
+	return "data:image/svg+xml;charset=UTF-8;base64," + btoa(xml);
+}
+
 function display_map(fortsdata) {
 	let forts = [{icon: "base_map.jpg"}].concat(fortsdata);
 
@@ -40,7 +47,10 @@ function display_map(fortsdata) {
 	let forts_Image_count = 0;
 	for (let i = 0; i < forts.length; i++) {
 		let imgbuffer = new Image();
-		imgbuffer.src = rebase_img(forts[i]["icon"]);
+		if (i == 0)  // base_map.jpg
+			imgbuffer.src = rebase_img(forts[i]["icon"]);
+		else  // forts icons as inline SVG 
+			imgbuffer.src = svg_to_blob(forts[i]["icon"]);
 		imgbuffer.onload = function () {
 			if (++forts_Image_count >= forts.length) {
 				let map = draw_map(forts_Image);
@@ -51,13 +61,14 @@ function display_map(fortsdata) {
 	}
 }
 
+
 function draw_map(images) {
 	// 0 = map, rest = site order In site order
 	// [x, y, text_x, text_y]
 	let forts_positions = [
 		[0, 0],
-		[215, 60, 221, 55],
-		[208, 165, 188, 185],
+		[212, 60, 221, 55],
+		[208, 175, 188, 195],
 		[120, 187, 100, 207],
 		[139, 140, 119, 165],
 		[260, 111, 240, 131],
@@ -67,7 +78,7 @@ function draw_map(images) {
 		[135, 230, 115, 250],
 		[220, 250, 190, 270],
 		[285, 360, 255, 380],
-		[178, 290, 153, 310]
+		[183, 310, 153, 330]
 	];
 	try {
 		let canvas = document.createElement("canvas");
@@ -77,10 +88,9 @@ function draw_map(images) {
 		ctx.font = "bold 14px sans-serif";
 		ctx.fillStyle = "#EED202";
 		for (let i = 0; i < images.length; i++) {
-			ctx.drawImage(images[i], forts_positions[i][0], forts_positions[i][1]);
-			if (i > 0)
-				ctx.fillText(`(${i})`, forts_positions[i][2],
-						       forts_positions[i][3]);
+			let size = i == 0 ? 500 : 36; // map : fort icons
+			ctx.drawImage(images[i], forts_positions[i][0], forts_positions[i][1], size, size);
+			ctx.fillText(`(${i})`, forts_positions[i][2], forts_positions[i][3]);
 		}
 		return canvas.toDataURL("image/png");
 	}
@@ -139,12 +149,12 @@ async function display_wz(init=false) {
 
 	if (!("gems" in failures)) {
 		for (let gem of data["gems"]) {
-				gems.push(`<img src="${rebase_img(gem)}" class="wz-icon">`);
+			gems.push(wzicons[gem]);
 		}
 	}
 
 	for (let fort of data["forts"]) {
-		let icon = `<img src="${rebase_img(fort["icon"])}" class="wz-icon">`;
+		let icon = wzicons[fort["icon"]];
 		let name = translate_fort(fort["name"]);
 		forts.push(`${icon}&nbsp;${name}<br>`);
 	}
@@ -156,7 +166,7 @@ async function display_wz(init=false) {
 			for (let relic of Object.keys(data["relics"][realm])) {
 				let url = data["relics"][realm][relic];
 				if (url !== null) {
-					relics += `<img src="${rebase_img(url)}" class="wz-icon">`;
+					relics += `<span title="${relic}">${wzicons[url]}</span>`;
 				}
 			}
 		}
