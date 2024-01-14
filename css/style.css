@@ -349,6 +349,9 @@ h1 {
 	text-align: center;
 	font-weight: bold;
 }
+#wz-info-info {
+	min-height: 1em;
+}
 #wz-map-map {
 	border-radius: 8px;
 	max-width: 100%;
