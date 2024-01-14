@@ -45,11 +45,15 @@ const mindlevel = 1;
 const maxdlevel = 19;
 const minplevel = 0;
 const maxplevel = 5;
+var dpointstotal = 0;
+var ppointstotal = 0;
+var dpointsleft = 0;
+var ppointsleft = 0;
 const classes = ["knight", "barbarian", "conjurer", "warlock", "hunter", "marksman"];
 var currlevel = 0;
 var currclass = null;
 var wmrow = 0;
-var powerpoints = 0;
+var powerpoints = 0; // actually it's for use in trainerdata.json
 // XXX beware it's just a buffer that is unexploitable once the setup is loaded
 var saved_setup;
 var automated_clicks = false;
@@ -154,6 +158,8 @@ $("#t-save").on("click", function() {
 		return;
 	}
 	let saved_url = save_setup_to_url();
+	if (saved_url == null)
+		return;
 	if (typeof HTMLDialogElement === "function") {
 		$("#t-dialog-url").val(saved_url);
 		$("#t-dialog").attr("inert", "true");
@@ -266,16 +272,33 @@ function convert_beta_to_live() {
 
 function save_setup_to_url(shared=true, beta2live=false) {
 	let setup = trainerdataversion + "+" + currclass + "+" + currlevel + "+";
+	let dpoints = 0;
+	let ppoints = 0;
 	// WM row is always the latest one
 	for (let row = 1; row <= wmrow; row++) {
 		// separate discipline skills from power skills
-		setup += $(`#t-trainer .t${row} .p0 .icon .skilllvl`).text() + "+";
+		let discipline = parseInt($(`#t-trainer .t${row} .p0 .icon .skilllvl`).text())
+		if (discipline > maxdlevel || discipline < mindlevel) {
+			bad_shared_link();
+			return;
+		}
+		dpoints += trainerdata["required"]["points"][discipline - 1];
+		setup += discipline + "+";
 		for (let col = 1; col < 11; col++) {
-			setup = setup.concat(parseInt($(`#t-trainer .t${row} .p${col} .icon .skilllvl`).text()) || 0);
+			let level = parseInt($(`#t-trainer .t${row} .p${col} .icon .skilllvl`).text());
+			if (level > maxplevel || level < minplevel) {
+				bad_shared_link(true);
+				return;
+			}
+			ppoints += isNaN(level) ? 0 : level;
+			setup += level;
 		}
 		if (row != wmrow)
 			setup += "+";
 	}
+	console.log(dpoints, dpointstotal, ppoints, ppointstotal);
+	if (dpoints > dpointstotal || ppoints > ppointstotal)
+		bad_shared_link(true);
 	if (shared)
 		collect_setup(setup);
 	let pathname = window.location.pathname;
@@ -285,9 +308,10 @@ function save_setup_to_url(shared=true, beta2live=false) {
 	return window.location.origin + pathname + "?t=" + compressor.compress(setup);
 }
 
-function bad_shared_link() {
+function bad_shared_link(nonfatal=false) {
 	window.alert(_("Your shared link is bad. Bailing out, sorry!"));
-	window.location.assign(window.location.origin + window.location.pathname);
+	if (nonfatal == false)
+		window.location.assign(window.location.origin + window.location.pathname);
 }
 
 // load_tree() being async, you need the tree to be loaded
@@ -452,10 +476,14 @@ async function load_tree() {
 	});
 	$("#t-trainer").append(trainerhtml);
 
-	$("#t-dpointsleft").text(trainerdata["points"]["discipline"][powerpoints][currlevel - 1]);
-	$("#t-dpointstotal").text(trainerdata["points"]["discipline"][powerpoints][currlevel - 1]);
-	$("#t-ppointsleft").text(trainerdata["points"]["power"][powerpoints][currlevel - 1]);
-	$("#t-ppointstotal").text(trainerdata["points"]["power"][powerpoints][currlevel - 1]);
+	dpointstotal = trainerdata["points"]["discipline"][powerpoints][currlevel - 1];
+	ppointstotal = trainerdata["points"]["power"][powerpoints][currlevel - 1];
+	dpointsleft = dpointstotal;
+	ppointsleft = ppointstotal;
+	$("#t-dpointsleft").text(dpointstotal);
+	$("#t-dpointstotal").text(dpointstotal);
+	$("#t-ppointsleft").text(ppointstotal);
+	$("#t-ppointstotal").text(ppointstotal);
 	$(".points").show();
 
 	for (let i = 1; i <= wmrow; i++)
@@ -566,7 +594,6 @@ function power_change(power) {
 		if (automated_clicks == true) bad_shared_link();
 		return;
 	}
-	let ppointsleft = parseInt($("#t-ppointsleft").text());
 	if (ppointsleft < wanted_level - skill_level) {
 		console.log("not enough power points");
 		if (automated_clicks == true) bad_shared_link();
@@ -602,15 +629,15 @@ function discipline_change(discipline) {
 	let discipline_points_balance = change_direction == "plus" ?
 		0 - ( trainerdata["required"]["points"][wanted_level - 1] -  trainerdata["required"]["points"][current_level - 1] ) :
 		trainerdata["required"]["points"][current_level - 1] - trainerdata["required"]["points"][wanted_level - 1];
-	let current_discipline_points = parseInt($("#t-dpointsleft").text());
 	if (	change_direction == "plus" &&
-		current_discipline_points + discipline_points_balance < 0 ) {
+		dpointsleft + discipline_points_balance < 0 ) {
 		console.log("not enough discipline points");
 		if (automated_clicks == true) bad_shared_link();
 		return;
 	}
 	// valid, do the change
-	$("#t-dpointsleft").text(current_discipline_points + discipline_points_balance);
+	dpointsleft += discipline_points_balance;
+	$("#t-dpointsleft").text(dpointsleft);
 	$(discipline_level).text(wanted_level);
 	let treepos = discipline.parentNode.parentNode.parentNode.getAttribute("treepos");
 	// deal with the possible skills changes
@@ -618,12 +645,8 @@ function discipline_change(discipline) {
 }
 
 function update_tree(treepos) {
-	let dpointsleft = parseInt($("#t-dpointsleft").text());
-	let dpointstotal = parseInt($("#t-dpointstotal").text());
-	let ppointsleft = parseInt($("#t-ppointsleft").text());
-	let ppointstotal = parseInt($("#t-ppointstotal").text());
 	let dlvl = parseInt($(`div[treepos="${treepos}"] .p0 .icon .skilllvl`).text());
-	let maxslvl = trainerdata.required.power[dlvl];
+	let maxslvl = trainerdata["required"]["power"][dlvl];
 
 	// XXX maybe there are better selector options to get all values for a
 	// tree but ...
@@ -645,7 +668,7 @@ function update_tree(treepos) {
 				// change to the max power level available
 				$(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text(maxslvl);
 				// update available power points
-				ppointsleft = ppointsleft + skilllvl - maxslvl;
+				ppointsleft += skilllvl - maxslvl;
 				$("#t-ppointsleft").text(ppointsleft);
 			}
 		}
