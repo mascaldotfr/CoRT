@@ -293,13 +293,14 @@ function save_setup_to_url(shared=true, beta2live=false) {
 				bad_shared_link(true);
 				return;
 			}
-			ppoints += isNaN(level) ? 0 : level;
+			// level is NaN on wmrow
+			level = isNaN(level) ? 0 : level;
+			ppoints += level;
 			setup += level;
 		}
 		if (row != wmrow)
 			setup += "+";
 	}
-	console.log(dpoints, dpointstotal, ppoints, ppointstotal);
 	if (dpoints > dpointstotal || ppoints > ppointstotal)
 		bad_shared_link(true);
 	if (shared)
