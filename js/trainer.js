@@ -228,7 +228,7 @@ function manage_dataset_versions() {
 					<p class="red"><b>
 					${_("This setup is being made with an older version (%s) of CoR, and may be out of date.",
 					trainerdataversion)}<p>
-					<p><a href="javascript:upgrade_setup_to_new_version()">${_("Click here")}</a>
+					<p><a href="#" id="upgrade-setup">${_("Click here")}</a>
 					${_("to upgrade this setup's discipline and power points to the latest version (%s).",
 					newest_dataset)}</p>
 					</div>
@@ -240,11 +240,14 @@ function manage_dataset_versions() {
 			${_("This is the beta trainer for versions on Amun. Things can change quickly.")}
 			<br> ${_("It's not recommended to permanently save setups in here.")}
 			<br>
-			<a href="javascript:convert_beta_to_live()">
+			<a href="#" id="beta-to-live">
 			${_("Instead you should click here to convert your setup to the latest live version.")}
 			</a></b></p>
 			</div>
 		`);
+	// needs to be here because these divs are dynamic
+	$("#beta-to-live").on("click", () => convert_beta_to_live());
+	$("#upgrade-setup").on("click", () => upgrade_setup_to_new_version());
 }
 
 async function collect_setup(setupstring) {
@@ -267,7 +270,7 @@ function convert_beta_to_live() {
 	trainerdataversion = live_datasets.slice(-1);
 	// Reassign live datasets for the compressor
 	trainerdatasets = live_datasets;
-	window.location.assign(save_setup_to_url(shared=false, beta2live=true));
+	window.location.assign(save_setup_to_url(false, true));
 }
 
 function save_setup_to_url(shared=true, beta2live=false) {
