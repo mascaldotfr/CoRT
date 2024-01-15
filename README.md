@@ -50,8 +50,8 @@ If you want to make changes to CoRT or run it locally, you can use python to
    [Popper](https://github.com/floating-ui/floating-ui)
    and [LZstring](https://github.com/pieroxy/lz-string) are MIT licensed.
 
-   The [Twemoji icons](https://github.com/twitter/twemoji) are licensed
-   under the CC-BY 4.0 license terms.
+   The [Game icons set](https://game-icons.net/) is licensed
+   under the CC-BY 3.0 license terms.
 
 ## Credits
 

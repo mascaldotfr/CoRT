@@ -33,6 +33,17 @@ function rebase_img(url) {
 	return "data/warstatus/" + url;
 }
 
+// Use different fort icons according to their type
+function dispatch_fort_icon(fort) {
+	if (fort["name"].includes("Castle"))
+		return "castle_" + fort["icon"];
+	else if (fort["name"].startsWith("Great Wall"))
+		return "wall_" + fort["icon"];
+	else
+		return fort["icon"];
+}
+
+
 // Create a svg blob for a given original icon filename
 function svg_to_blob(fname) {
 	let xml = wzicons[fname];
@@ -49,8 +60,9 @@ function display_map(fortsdata) {
 		let imgbuffer = new Image();
 		if (i == 0)  // base_map.jpg
 			imgbuffer.src = rebase_img(forts[i]["icon"]);
-		else  // forts icons as inline SVG 
-			imgbuffer.src = svg_to_blob(forts[i]["icon"]);
+		else { // forts icons as inline SVG 
+			imgbuffer.src = svg_to_blob(dispatch_fort_icon(forts[i]));
+		}
 		imgbuffer.onload = function () {
 			if (++forts_Image_count >= forts.length) {
 				let map = draw_map(forts_Image);
@@ -68,27 +80,30 @@ function draw_map(images) {
 	let forts_positions = [
 		[0, 0],
 		[212, 60, 221, 55],
-		[208, 175, 188, 195],
-		[120, 187, 100, 207],
+		[208, 175, 193, 195],
+		[120, 187, 105, 207],
 		[139, 140, 119, 165],
-		[260, 111, 240, 131],
-		[290, 180, 270, 200],
-		[365, 220, 345, 240],
-		[324, 140, 304, 160],
-		[135, 230, 115, 250],
-		[220, 250, 190, 270],
-		[285, 360, 255, 380],
-		[183, 310, 153, 330]
+		[260, 111, 245, 133],
+		[290, 180, 275, 200],
+		[365, 220, 345, 245],
+		[324, 140, 304, 165],
+		[135, 230, 118, 250],
+		[220, 250, 195, 270],
+		[285, 360, 255, 385],
+		[183, 310, 153, 335]
 	];
 	try {
 		let canvas = document.createElement("canvas");
-		canvas.setAttribute('width', 500);
-		canvas.setAttribute('height', 500);
+		// size * 2 to avoid blurry final result
+		canvas.setAttribute('width', 1000);
+		canvas.setAttribute('height', 1000);
 		let ctx = canvas.getContext('2d');
+		ctx.setTransform(2, 0, 0, 2, 0, 0);
 		ctx.font = "bold 14px sans-serif";
 		ctx.fillStyle = "#EED202";
 		for (let i = 0; i < images.length; i++) {
 			let size = i == 0 ? 500 : 36; // map : fort icons
+			ctx.filter = "drop-shadow(1px 5px 0px #000000)";
 			ctx.drawImage(images[i], forts_positions[i][0], forts_positions[i][1], size, size);
 			ctx.fillText(`(${i})`, forts_positions[i][2], forts_positions[i][3]);
 		}
@@ -154,7 +169,7 @@ async function display_wz(init=false) {
 	}
 
 	for (let fort of data["forts"]) {
-		let icon = wzicons[fort["icon"]];
+		let icon = wzicons[dispatch_fort_icon(fort)];
 		let name = translate_fort(fort["name"]);
 		forts.push(`${icon}&nbsp;${name}<br>`);
 	}
