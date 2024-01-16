@@ -176,7 +176,7 @@ export const __i18n__ = {
 	},
 	"Necro crystal": {
 		"fr": "Cristal nécromantique",
-		"de": "Nekromant-Kristall ",
+		"de": "Nekromant-Kristall",
 		"es": "Cristal del raptor"
 	},
 	"Knight":
