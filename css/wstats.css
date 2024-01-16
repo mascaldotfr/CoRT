@@ -1,0 +1,145 @@
+#ws-index-list a {
+	text-decoration: none;
+}
+#ws-container-text .ws-card {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: stretch;
+	gap: 1em;
+}
+#ws-forts { grid-area: forts }
+#ws-gems { grid-area: gems }
+#ws-invasions { grid-area: invasions }
+#ws-wishes { grid-area: wishes }
+#ws-fortsheld-count { grid-area: fortsheldcount }
+#ws-fortsheld-avg { grid-area: fortsheldavg }
+#ws-fortsheld-total { grid-area: fortsheldtotal }
+#ws-container-graphs {
+	display: grid;
+	gap: 1em;
+	grid-template-areas:
+		"forts invasions"
+		"gems wishes"
+		"fortsheldcount fortsheldavg"
+		"fortsheldtotal fortsheldtotal";
+	grid-auto-columns: minmax(0, 1fr);
+	grid-auto-flow: column;
+}
+#ws-container-graphs h3 {
+	text-align: center;
+	display: block;
+	height: 2em;
+	@media(max-width: 1300px) {
+		height: 3em;
+	}
+}
+#ws-container-text .statcard {
+	padding: .5em;
+	flex: 1;
+}
+#ws-7d, #ws-30d, #ws-90d {
+	min-width: 80vw;
+}
+#ws-7d {
+	min-height: 30em;
+}
+#ws-30d, #ws-90d {
+	min-height: 20em;
+}
+#ws-container-text h3 {
+	text-align: center;
+}
+#ws-container-text table {
+	 border-collapse: collapse;
+	 margin: 0 auto;
+ }
+#ws-container-text tr {
+	margin: 0px;
+	border-bottom: 1px solid #717171;
+}
+#ws-container-text tr:last-child {
+	border-bottom: unset;
+}
+#ws-container-text td {
+	padding: .5em;
+}
+#ws-container-text td:nth-child(even) {
+	padding-left: 1em;
+}
+.ws-chart .ct-chart-line {
+	min-height: 8em;
+}
+.ws-chart .ct-series-a * {
+	stroke: var(--blue);
+}
+.ws-chart .ct-series-b * {
+	stroke: var(--red);
+}
+.ws-chart .ct-series-c * {
+	stroke: var(--green);
+}
+.ws-chart .ct-label, .ws-chart .ct-axis {
+	color: var(--foreground);
+}
+.ws-chart-xhours .ct-label.ct-horizontal {
+	margin-left: -.4em;
+}
+.ws-chart-bartype .ct-label.ct-horizontal {
+	@media (max-width: 799px) {
+		margin-left: .2em;
+	}
+}
+.ws-chart .ct-label, .ws-chart .ct-grid {
+	stroke: var(--faded);
+}
+.ws-chart .ct-bar {
+	stroke-width: 15px;
+	@media (max-width: 1600px) {
+		stroke-width: 10px;
+	}
+}
+#ws-fortsheld-total-chart .ct-bar:nth-child(1) {
+	stroke: var(--blue);
+}
+#ws-fortsheld-total-chart .ct-bar:nth-child(2) {
+	stroke: var(--red);
+}
+#ws-fortsheld-total-chart .ct-bar:nth-child(3) {
+	stroke: var(--green);
+}
+#ws-fortsheld-total-chart .ct-label.ct-horizontal.ct-end {
+	margin-left: -.7em;
+}
+.ws-chart {
+	height: 15em;
+}
+@media (max-width: 799px) {
+	#ws-container-graphs {
+		grid-template-areas: "forts" "invasions" "gems" "wishes" "fortsheldcount" "fortsheldavg" "fortsheldtotal" "empty";
+		grid-template-columns: 1fr;
+	}
+	#ws-container .statcard {
+		width: 100%;
+	}
+	#ws-7d > div {
+		min-height: 30em;
+		min-width: 80vw;
+	}
+	#ws-30d > div, #ws-90d > div {
+		min-height: 25em;
+		min-width: 80vw;
+	}
+}
+@media (min-width: 800px) and (max-width: 1400px) {
+	#ws-7d > div {
+		min-height: 32em;
+		min-width: 20vw;
+	}
+	#ws-30d > div, #ws-90d > div {
+		min-height: 25em;
+		min-width: 20vw;
+	}
+}
+
+

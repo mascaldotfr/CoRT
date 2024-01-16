@@ -1,0 +1,22 @@
+#boss-daen, #boss-evendim, #boss-thorkul, #boss-server {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 1em;
+	align-items: center;
+	padding: var(--default_margin_padding);
+	gap: .5em;
+	visibility: hidden;
+}
+#boss-list {
+	max-width: 600px;
+	margin: 0 auto;
+	margin-top: 2em;
+}
+#boss-list img {
+	width: 150px;
+}
+.boss-respawn {
+	flex: 1;
+	vertical-align: middle;
+	text-align: center;
+}

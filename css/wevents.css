@@ -1,0 +1,33 @@
+#we-container {
+	width: fit-content;
+	margin: 0 auto;
+}
+#we-info {
+	text-align: center;
+}
+#we-select {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: stretch;
+}
+#we-select > div {
+	display: flex;
+	gap: 1em;
+	align-items: center;
+	flex-grow: 1;
+}
+#we-select label {
+	font-weight: bold;
+	min-width: 3em;
+}
+#we-select button, #we-select select {
+	min-width: 4em;
+	flex: 1;
+}
+#we-events {
+	min-height: 30vw;
+}
+#we-prev-day {
+	visibility: hidden;
+}

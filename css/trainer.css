@@ -1,0 +1,120 @@
+#t-container {
+	max-width: 1024px;
+	margin: 0 auto;
+}
+.setup {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+}
+.version, .class, .level, .load, .save {
+	display: flex;
+	flex: 1;
+}
+#t-version, #t-class, #t-level, #t-load, #t-save {
+	flex-grow: 1;
+}
+.points { text-align:center; visibility: hidden; }
+.t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+	padding: var(--default_margin_padding);
+	margin-bottom: var(--default_margin_padding);
+}
+.p0, .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10 {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	justify-content: space-around;
+	padding: var(--table_padding);
+}
+.p0 .icon { background-position: 0px 0px; }
+.p1 .icon { background-position: -48px 0px;  }
+.p2 .icon { background-position: -96px 0px;  }
+.p3 .icon { background-position: -144px 0px;  }
+.p4 .icon { background-position: -192px 0px;  }
+.p5 .icon { background-position: -240px 0px;  }
+.p6 .icon { background-position: -288px 0px;  }
+.p7 .icon { background-position: -336px 0px;  }
+.p8 .icon { background-position: -384px 0px;  }
+.p9 .icon { background-position: -432px 0px;  }
+.p10 .icon { background-position: -480px 0px; }
+.icon {
+	background-repeat: no-repeat;
+	width: 48px;
+	height: 48px;
+	border-radius: 3px;
+}
+.skillspinner { height: 48px; margin-top: 1px; }
+.icon .skilllvl { background-color: var(--foreground); color: var(--background); border-radius: 4px; }
+.minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px; padding: 2px; }
+.minus { margin-top: 6px; }
+.tippy-content {
+	background-color: var(--tooltip_background);
+	color: var(--foreground);
+	border-radius: 5px;
+	border: 1px solid var(--foreground);
+}
+.tippy-content .descriptionheader {
+	grid-template-columns: 64px auto;
+	justify-content: left;
+	align-items: center;
+}
+.tippy-content h2 {
+	margin: 0;
+}
+.tippy-content p.description {
+	margin: initial;
+	max-width: 30em;
+}
+.tippy-content > span {
+	margin: var(--default_margin_padding);
+}
+.tippy-content table {
+	margin: var(--default_margin_padding);
+	border-collapse: collapse;
+	table-layout: auto;
+	width: calc(100% - 2 * var(--default_margin_padding));
+}
+.tippy-content th {
+	text-align: left;
+	border: 1px solid white;
+	padding: var(--table_padding);
+}
+.tippy-content thead > tr > th:first-child {
+	visibility: hidden;
+	border: none;
+}
+.tippy-content thead {
+	background-color: #212121;
+}
+.tippy-content thead > tr > th, .tippy-content td {
+	text-align: center;
+	padding: var(--table_padding);
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+.tippy-content td {
+	border: 1px solid white;
+}
+#t-dialog {
+	position: absolute;
+	top: 0px;
+	background: var(--dialog_background);
+	box-shadow: 0px 0px 2px 2px #aaa;
+	border: 0px;
+}
+#t-dialog h3 {
+	margin: var(--default_margin_padding);
+	text-align: center;
+	color: white;
+}
+#t-dialog-url {
+	width: 100%;
+	margin: var(--default_margin_padding) 0;
+}
+#t-dialog-buttons {
+	text-align: right;
+	font-weight: bold;
+}
+
+
