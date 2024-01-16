@@ -111,10 +111,12 @@ $("#t-load").on("click", function() {
 	let clas = $("#t-class").val();
 	if ( (level >= minlevel && level <= maxlevel) ) {
 		currlevel = level;
+		extrappoints = 0;
+		necro_gem = false;
 	}
 	else if (level == 61) {
 		currlevel = maxlevel;
-		extrappoints += 5;
+		extrappoints = 5;
 		necro_gem = true;
 	}
 	else {
