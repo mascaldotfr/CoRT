@@ -81,6 +81,7 @@
 	grid-area: forts;
 	font-size: initial;
 	font-weight: initial;
+	min-width: 12em;
 }
 @media (max-width: 799px) {
 	#wz-container {
