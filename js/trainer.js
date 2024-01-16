@@ -32,6 +32,8 @@ var dpointstotal = 0;
 var ppointstotal = 0;
 var dpointsleft = 0;
 var ppointsleft = 0;
+var extrappoints = 0;
+var necro_gem = false; // Red Crystal of the necromancer
 const classes = ["knight", "barbarian", "conjurer", "warlock", "hunter", "marksman"];
 var currlevel = 0;
 var currclass = null;
@@ -72,6 +74,7 @@ $(document).ready(function() {
 	}
 
 	// generate characters levels options
+	$("#t-level").append(`<option value="61">60 (+${_("Necro crystal")})</option>`);
 	for (let i = maxlevel - 1; i >= minlevel; i--) {
 		$("#t-level").append(`<option value="${i}">${i}</option>`);
 	}
@@ -109,6 +112,11 @@ $("#t-load").on("click", function() {
 	if ( (level >= minlevel && level <= maxlevel) ) {
 		currlevel = level;
 	}
+	else if (level == 61) {
+		currlevel = maxlevel;
+		extrappoints += 5;
+		necro_gem = true;
+	}
 	else {
 		alert(_("Please select a level"));
 		return;
@@ -129,7 +137,8 @@ $("#t-level").on('change', function() {
 	let selectedllevel = $("#t-level").val();
 	// Upgrade does not work if no trees are loaded, you are level 60
 	// or if the requested level is lower than your current level
-	if (currlevel == 0 || currlevel == maxlevel || currlevel > selectedllevel)
+	// The +1 is because of the necro gem
+	if (currlevel == 0 || (currlevel == maxlevel + 1) || currlevel > selectedllevel)
 		return;
 	currlevel = selectedllevel;
 	window.location.assign(save_setup_to_url(false));
@@ -257,6 +266,8 @@ function convert_beta_to_live() {
 }
 
 function save_setup_to_url(shared=true, beta2live=false) {
+	if (necro_gem)
+		currlevel += 1;
 	let setup = trainerdataversion + "+" + currclass + "+" + currlevel + "+";
 	let dpoints = 0;
 	let ppoints = 0;
@@ -464,7 +475,7 @@ async function load_tree() {
 	$("#t-trainer").append(trainerhtml);
 
 	dpointstotal = trainerdata["points"]["discipline"][powerpoints][currlevel - 1];
-	ppointstotal = trainerdata["points"]["power"][powerpoints][currlevel - 1];
+	ppointstotal = trainerdata["points"]["power"][powerpoints][currlevel - 1] + extrappoints;
 	dpointsleft = dpointstotal;
 	ppointsleft = ppointstotal;
 	$("#t-dpointsleft").text(dpointstotal);

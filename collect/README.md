@@ -46,7 +46,7 @@ with spaces.
 
 - **0**: the trainerdata version used
 - **1**: the chosen class
-- **2**: the chosen level
+- **2**: the chosen level (level 61 is for the Red Necromantic Crystal)
 - **3 and later**: Trees order is the same as the website. trees are read
                    sequentially, in json order.
     - Odd indexes: skilltree level

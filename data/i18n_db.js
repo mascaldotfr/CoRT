@@ -174,6 +174,11 @@ export const __i18n__ = {
 		"es": "Seleccionar un nivel de personaje superior al actual transferirá su configuración a ese nivel.",
 		"de": "Wenn du ein höhes Level als das aktuelle auswählst, wird deine Konfiguration auf dieses Level übertragen."
 	},
+	"Necro crystal": {
+		"fr": "Cristal nécromantique",
+		"de": "Nekromant-Kristall ",
+		"es": "Cristal del raptor"
+	},
 	"Knight":
 	{
 		"fr": "Chevalier",
