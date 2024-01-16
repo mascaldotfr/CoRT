@@ -34,14 +34,14 @@ function svg_to_blob(fname) {
 }
 
 function display_map(fortsdata) {
-	let forts = [{icon: "base_map.jpg"}].concat(fortsdata);
+	let forts = [{icon: "base_map.png"}].concat(fortsdata);
 
 	// Preload images beforehand
 	let forts_Image = [];
 	let forts_Image_count = 0;
 	for (let i = 0; i < forts.length; i++) {
 		let imgbuffer = new Image();
-		if (i == 0)  // base_map.jpg
+		if (i == 0)  // base_map.png
 			imgbuffer.src = rebase_img(forts[i]["icon"]);
 		else { // forts icons as inline SVG 
 			imgbuffer.src = svg_to_blob(dispatch_fort_icon(forts[i]));
