@@ -1,8 +1,6 @@
 /*
  * Copyright (c) 2022-2024 mascal
- *
  * A tiny i18n system. Released under the MIT license.
- *
  */
 
 import {__i18n__} from "../data/i18n_db.js"
