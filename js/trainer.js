@@ -137,8 +137,10 @@ $("#t-level").on('change', function() {
 	let selectedllevel = $("#t-level").val();
 	// Upgrade does not work if no trees are loaded, you are level 60
 	// or if the requested level is lower than your current level
-	// The +1 is because of the necro gem
+	// The +1 is because of the necro gem (level 61)
 	if (currlevel == 0 || (currlevel == maxlevel + 1) || currlevel > selectedllevel)
+		return;
+	if (necro_gem) // don't downgrade from necro to normal 60!
 		return;
 	currlevel = selectedllevel;
 	window.location.assign(save_setup_to_url(false));
