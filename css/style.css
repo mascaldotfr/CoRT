@@ -178,7 +178,6 @@ h1 {
 	}
 	#menu-links {
 		width: 100%;
-		transition: all 0.3s ease;
 	}
 	#menu-click:not(:checked) ~ header { display: none; }
 	#menu-click:checked ~ header { display: block; }
@@ -187,6 +186,9 @@ h1 {
 	}
 	.menu-btn {
 		display: inline-block;
+	}
+	#menu-lang {
+		text-align: center;
 	}
 }
 
