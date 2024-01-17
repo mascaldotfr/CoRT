@@ -526,6 +526,10 @@ function tablify(rowname, columns, color = "") {
 
 }
 
+function itemify(name, value, clas) {
+	return `<span class="${clas}"><b>${name}</b>&nbsp;${value}</span><br/>`;
+}
+
 function make_spellinfo(spellinfo, iconposition, iconclass, iconurl) {
 	// don't duplicate css, redraw an icon
 	let spellhtml = `
@@ -535,25 +539,26 @@ function make_spellinfo(spellinfo, iconposition, iconclass, iconurl) {
 				<h2>${spellinfo["name"]}</h2>
 				<p class="description"><i>${spellinfo["description"]}</i></p>
 			</div>
-		</div>
-		<span><b>Type:</b> ${spellinfo["type"]}</span><br/>`;
+		</div>`;
 	let tabularhtml = ""
+	if ("type" in spellinfo)
+		spellhtml += itemify("Type:", spellinfo["type"]);
 	if ("cast" in spellinfo)
-		spellhtml += `<span><b>Cast:</b> ${spellinfo["cast"]}s</span><br/>`;
+		spellhtml += itemify("Cast:", spellinfo["cast"]);
 	if ("gcd" in spellinfo)
-		spellhtml += `<span><b>Global Cooldown:</b> ${spellinfo["gcd"]}</span><br/>`;
+		spellhtml += itemify("Global Cooldown:", spellinfo["gcd"]);
 	if ("range" in spellinfo)
-		spellhtml += `<span><b>Range:</b> ${spellinfo["range"]}</span><br/>`;
+		spellhtml += itemify("Range:", spellinfo["range"]);
 	if ("area" in spellinfo)
-		spellhtml += `<span><b>Area:</b> ${spellinfo["area"]}</span><br/>`;
+		spellhtml += itemify("Area:", spellinfo["area"]);
 	if ("cooldown" in spellinfo)
-		spellhtml += `<span><b>Cooldown:</b> ${spellinfo["cooldown"]}s</span><br/>`;
+		spellhtml += itemify("Cooldown:", spellinfo["cooldown"]);
 	if ("weapon_interval" in spellinfo)
-		spellhtml += `<span class="purple"><b>Affected by weapon interval</b></span><br/>`;
+		spellhtml += itemify("Affected by weapon interval", "", "purple");
 	if ("blockable_100" in spellinfo)
-		spellhtml += `<span class="purple"><b>Only blockable at 100%</b></span><br/>`;
+		spellhtml += itemify("Only blockable at 100%", "", "purple");
 	if ("resistible_100" in spellinfo)
-		spellhtml += `<span class="purple"><b>Only resistible at 100%</b></span><br/>`;
+		spellhtml += itemify("Only resistible at 100%", "", "purple");
 	if ("mana" in spellinfo)
 		tabularhtml += tablify("Mana", spellinfo["mana"]);
 	if ("duration" in spellinfo)
