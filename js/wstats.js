@@ -103,6 +103,12 @@ function show_graphs_fortsheld_byrealm(data, selector) {
 	new Chartist.BarChart(selector, dataset, options);
 }
 
+function row_factory(title, text) {
+	if (title == null || text == null)
+		return "";
+	return `<tr><td class="bold">${_(title)}</td><td>${text}</td></tr>`;
+}
+
 async function display_stat() {
 
 	if ($onlinemanager.online() === false) {
@@ -138,65 +144,36 @@ async function display_stat() {
 			let r = data[report][realm];
 			// Hide "last" entries except for the first 7 days
 			// report and excepted Dragon wishes.
-			let last_invasion = "";
-			let last_gem = "";
+			let last_invasion = [null, null];
+			let last_gem = [null, null];
 			if (report == 0) {
-				last_invasion = `<tr>
-					<td><b>${_("Last invasion")}</b></td>
-					<td>${naify(timestamp_ago(r["invasions"]["last"]["date"], true).human, "N/A")}
-					    (${naify(r["invasions"]["last"]["location"], "N/A")})</td>
-					</tr>`;
-				last_gem = `<tr>
-					<td><b>${_("Last gem stolen")}</b></td>
-					<td>${naify(timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}</td>
-					</tr>`;
+				last_invasion = ["Last invasion",
+					`${naify(timestamp_ago(r["invasions"]["last"]["date"], true).human, "N/A")}
+					    (${naify(r["invasions"]["last"]["location"], "N/A")})`];
+				last_gem = ["Last gem stolen",
+					`${naify(timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}`];
 			}
-			let template = `
-				<h3 class="${realm_colors[realm]}">${realm}</h3>
-				<table>
-				<tr>
-					<td><b>${_("Forts captured")} (total)</b></td>
-					<td>${naify(r["forts"]["total"])}</td>
-				</tr>
-				<tr>
-					<td><b>${_("Forts captured")}</b></td>
-					<td>${naify(r["forts"]["captured"])}</td>
-				</tr>
-				<tr>
-					<td><b>${_("Most captured fort")}</b></td>
-					<td>${translate_fort(r["forts"]["most_captured"]["name"], false)}
-					    (${naify(r["forts"]["most_captured"]["count"], "N/A")})</td>
-				</tr>
-				<tr>
-					<td><b>${_("Forts recovered")}</b></td>
-					<td>${naify(r["forts"]["recovered"])}</td>
-				</tr>
-				<tr>
-					<td><b>${_("Has invaded")}</b></td>
-					<td>${naify(r["invasions"]["count"])}</td>
-				</tr>
-				${last_invasion}
-				<tr>
-					<td><b>${_("Has been invaded")}</b></td>
-					<td>${naify(r["invasions"]["invaded"]["count"])}</td>
-				</tr>
-				<tr>
-					<td><b>${_("Stolen gems")}</b></td>
-					<td>${naify(r["gems"]["stolen"]["count"])}</td>
-				</tr>
-				${last_gem}
-				<tr>
-					<td><b>${_("Dragon wishes")}</b></td>
-					<td>${naify(r["wishes"]["count"])}</td>
-				</tr>
-				<tr>
-					<td><b>${_("Last dragon wish")}</b></td>
-					<td>${naify(timestamp_ago(r["wishes"]["last"], true).human, "N/A")}</td>
-				</tr>
-				</table>
-			`;
+			let rows = [
+				["Forts captured (total)", naify(r["forts"]["total"])],
+				["Forts captured", naify(r["forts"]["captured"])],
+				["Most captured fort",
+					`${translate_fort(r["forts"]["most_captured"]["name"], false)}
+					    (${naify(r["forts"]["most_captured"]["count"], "N/A")})`],
+				["Forts recovered", naify(r["forts"]["recovered"])],
+				["Has invaded", naify(r["invasions"]["count"])],
+				last_invasion,
+				["Has been invaded", naify(r["invasions"]["invaded"]["count"])],
+				["Stolen gems", naify(r["gems"]["stolen"]["count"])],
+				last_gem,
+				["Dragon wishes", naify(r["wishes"]["count"])],
+				["Last dragon wish", naify(timestamp_ago(r["wishes"]["last"], true).human, "N/A")]
+			];
+			let table = `<h3 class="${realm_colors[realm]}">${realm}</h3><table>`;
+			for (let row of rows)
+				table += row_factory(row[0], row[1]);
+			table += "</table>";
 			$(`#ws-${days}d-${realm.toLowerCase()}`).empty();
-			$(`#ws-${days}d-${realm.toLowerCase()}`).append(template);
+			$(`#ws-${days}d-${realm.toLowerCase()}`).append(table);
 		}
 	}
 	show_graphs_hourly(infos["activity"], "#ws-forts-chart");

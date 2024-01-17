@@ -435,6 +435,11 @@ export const __i18n__ = {
 		"es": "Fuertes capturados",
 		"de": "Forts erobert"
 	},
+	"Forts captured (total)": {
+		"fr": "Forts capturés (total)",
+		"es": "Fuertes capturados (total)",
+		"de": "Forts erobert (total)"
+	},
 	"Most captured fort": {
 		"fr": "Fort le plus capturé",
 		"es": "Fuerte más capturado",
