@@ -552,7 +552,7 @@ function make_spellinfo(spellinfo, iconposition, iconclass, iconurl) {
 	if ("area" in spellinfo)
 		spellhtml += itemify("Area:", spellinfo["area"]);
 	if ("cooldown" in spellinfo)
-		spellhtml += itemify("Cooldown:", spellinfo["cooldown"]);
+		spellhtml += itemify("Cooldown:", spellinfo["cooldown"] + "s");
 	if ("weapon_interval" in spellinfo)
 		spellhtml += itemify("Affected by weapon interval", "", "purple");
 	if ("blockable_100" in spellinfo)
