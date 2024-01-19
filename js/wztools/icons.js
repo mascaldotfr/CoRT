@@ -27,7 +27,7 @@ function generate_relic(realm, shade) {
 	return relic;
 }
 
-let realm_colors = {"alsius": "#6CACE4", "ignis": "#FF4444", "syrtis": "#30d98e"};
+let realm_colors = {"alsius": "#8CCCF4", "ignis": "#FF4444", "syrtis": "#30d98e"};
 export var wzicons = {
 	"gem_0.png": generate_gem("#444444"),
 	"gem_1.png": generate_gem(realm_colors["ignis"]),
