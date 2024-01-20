@@ -14,9 +14,11 @@
 }
 #boss-list img {
 	width: 150px;
+	margin-left: calc(4 * var(--default_margin_padding));
 }
 .boss-respawn {
 	flex: 1;
 	vertical-align: middle;
+	margin-left: -2em;
 	text-align: center;
 }
