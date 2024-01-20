@@ -20,6 +20,11 @@
 	max-width: 100%;
 	padding: 0;
 	margin: 0;
+	background-image: url(../data/warstatus/base_map_pixels.png);
+	animation: bg 15s;
+}
+@keyframes bg {
+	0% { opacity: 0.1; }
 }
 .wz-icon {
 	padding: 0;
@@ -95,6 +100,12 @@
 	}
 	#wz-events, #wz-map, #wz-realms-info {
 		min-width: auto;
+	}
+	.wz-realm-header {
+		gap: 0 1em;
+	}
+	#wz-events {
+		margin-left: var(--default_margin_padding);
 	}
 }
 @media (min-width: 800px) {

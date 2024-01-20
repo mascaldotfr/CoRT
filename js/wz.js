@@ -33,19 +33,13 @@ function svg_to_blob(fname) {
 	return "data:image/svg+xml;charset=UTF-8;base64," + btoa(xml);
 }
 
-function display_map(fortsdata) {
-	let forts = [{icon: "base_map.png"}].concat(fortsdata);
-
+function display_map(forts) {
 	// Preload images beforehand
 	let forts_Image = [];
 	let forts_Image_count = 0;
 	for (let i = 0; i < forts.length; i++) {
 		let imgbuffer = new Image();
-		if (i == 0)  // base_map.png
-			imgbuffer.src = rebase_img(forts[i]["icon"]);
-		else { // forts icons as inline SVG 
-			imgbuffer.src = svg_to_blob(dispatch_fort_icon(forts[i]));
-		}
+		imgbuffer.src = svg_to_blob(dispatch_fort_icon(forts[i]));
 		imgbuffer.onload = function () {
 			if (++forts_Image_count >= forts.length) {
 				let map = draw_map(forts_Image);
@@ -58,10 +52,8 @@ function display_map(fortsdata) {
 
 
 function draw_map(images) {
-	// 0 = map, rest = site order In site order
-	// [x, y, text_x, text_y]
+	// In site order, [x, y, text_x, text_y]
 	let forts_positions = [
-		[0, 0],
 		[212, 60, 221, 55],
 		[208, 175, 193, 195],
 		[120, 187, 105, 207],
@@ -85,10 +77,9 @@ function draw_map(images) {
 		ctx.font = "bold 14px sans-serif";
 		ctx.fillStyle = "#EED202";
 		for (let i = 0; i < images.length; i++) {
-			let size = i == 0 ? 500 : 36; // map : fort icons
 			ctx.filter = "drop-shadow(1px 5px 0px #000000)";
-			ctx.drawImage(images[i], forts_positions[i][0], forts_positions[i][1], size, size);
-			ctx.fillText(`(${i})`, forts_positions[i][2], forts_positions[i][3]);
+			ctx.drawImage(images[i], forts_positions[i][0], forts_positions[i][1], 36, 36);
+			ctx.fillText(`(${i+1})`, forts_positions[i][2], forts_positions[i][3]);
 		}
 		return canvas.toDataURL("image/png");
 	}
@@ -144,6 +135,14 @@ async function display_wz(init=false) {
 		return; // nothing new
 
 	display_map(data["forts"]);
+	// Lazy load map background
+	let bg = new Image()
+	bg.src = "data/warstatus/base_map.jpg";
+	bg.onload = function () {
+		$("#wz-map-map").css("background-image", `url(${bg.src})`);
+		$("#wz-map-map").css("background-size", "cover");
+		$("#wz-map-map").css("animation", "unset");
+	};
 
 	if (!("gems" in failures)) {
 		for (let gem of data["gems"]) {
