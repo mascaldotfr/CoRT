@@ -60,7 +60,6 @@ select {
 	-webkit-appearance: none;
 }
 .card {
-	box-shadow: 0 .1em .2em rgba(140, 140, 140, .4);
 	background: var(--card_background);
 	border-radius: 5px;
 	padding: var(--default_margin_padding);
