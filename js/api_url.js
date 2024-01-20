@@ -18,23 +18,3 @@ export const __api__urls = {
 	"stats": `${__api__base}/warstatus/stats/statistics.json`,
 	"wstatus": `${__api__base}/warstatus/warstatus.json`
 };
-export const __api__pages = {
-	"wevents.html": __api__urls["events"],
-	"wz.html": __api__urls["wstatus"],
-	"wstats.html": __api__urls["stats"]
-};
-
-export function __api_create_prefetch(url) {
-		let l = document.createElement("link");
-		l.href = url;
-		l.rel = "preload";
-		l.as = "fetch";
-		l.setAttribute("crossorigin", "anonymous");
-		document.head.appendChild(l);
-}
-
-const currpage = location.pathname.split("/").pop();
-if (currpage in __api__pages) {
-	console.log("creating prefetch for", currpage, "at", __api__pages[currpage]);
-	__api_create_prefetch(__api__pages[currpage]);
-}

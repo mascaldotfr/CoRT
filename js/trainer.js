@@ -1,4 +1,4 @@
-import {__api__urls, __api__frontsite, __api__frontsite_dir, __api_create_prefetch} from "./api_url.js";
+import {__api__urls, __api__frontsite, __api__frontsite_dir} from "./api_url.js";
 import {$} from "./lamaiquery.js";
 import {_} from "./i18n.js";
 import {LZString} from "./lz-string.min.js";
@@ -102,8 +102,6 @@ $(document).ready(function() {
 		// Hide setup options while loading
 		$(".setup").hide();
 	}
-	// Preload latest dataset as it's likely the one to be chosen
-	__api_create_prefetch(`data/trainer/${newest_dataset}/trainerdata.json`);
 });
 
 $("#t-load").on("click", function() {
