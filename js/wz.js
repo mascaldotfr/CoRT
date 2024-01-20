@@ -76,8 +76,8 @@ function draw_map(images) {
 		ctx.setTransform(2, 0, 0, 2, 0, 0);
 		ctx.font = "bold 14px sans-serif";
 		ctx.fillStyle = "#EED202";
+		ctx.filter = "drop-shadow(1px 5px 0px #000000)";
 		for (let i = 0; i < images.length; i++) {
-			ctx.filter = "drop-shadow(1px 5px 0px #000000)";
 			ctx.drawImage(images[i], forts_positions[i][0], forts_positions[i][1], 36, 36);
 			ctx.fillText(`(${i+1})`, forts_positions[i][2], forts_positions[i][3]);
 		}

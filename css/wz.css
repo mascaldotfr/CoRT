@@ -95,14 +95,14 @@
 	}
 	#wz-map {
 		text-align: center;
-		width: 90vw;
 		min-height: 65vw;
+		margin: var(--default_margin_padding);
 	}
 	#wz-events, #wz-map, #wz-realms-info {
 		min-width: auto;
 	}
-	.wz-realm-header {
-		gap: 0 1em;
+	.wz-forts, .wz-realm-header {
+		min-width: unset
 	}
 	#wz-events {
 		margin-left: var(--default_margin_padding);
