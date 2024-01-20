@@ -1,3 +1,6 @@
+h2, h3 {
+	margin-left: var(--default_margin_padding);
+}
 #ws-index-list a {
 	text-decoration: none;
 }
