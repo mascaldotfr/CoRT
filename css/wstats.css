@@ -1,8 +1,11 @@
 h2, h3 {
 	margin-left: var(--default_margin_padding);
 }
-#ws-index-list a {
+h2 a, h3 a, #ws-index-list a {
 	text-decoration: none;
+}
+h2 a, h3 a {
+	color: var(--foreground);
 }
 #ws-container-text .ws-card {
 	display: flex;
