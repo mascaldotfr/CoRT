@@ -542,7 +542,7 @@ function make_spellinfo(spellinfo, iconposition, iconclass, iconurl) {
 	if ("type" in spellinfo)
 		spellhtml += itemify("Type:", spellinfo["type"]);
 	if ("cast" in spellinfo)
-		spellhtml += itemify("Cast:", spellinfo["cast"]);
+		spellhtml += itemify("Cast:", spellinfo["cast"] + "s");
 	if ("gcd" in spellinfo)
 		spellhtml += itemify("Global Cooldown:", spellinfo["gcd"]);
 	if ("range" in spellinfo)
