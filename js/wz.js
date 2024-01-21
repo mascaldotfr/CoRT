@@ -137,7 +137,7 @@ async function display_wz(init=false) {
 	display_map(data["forts"]);
 	// Lazy load map background
 	let bg = new Image()
-	bg.src = "data/warstatus/base_map.jpg";
+	bg.src = "data/warstatus/base_map.png";
 	bg.onload = function () {
 		$("#wz-map-map").css("background-image", `url(${bg.src})`);
 		$("#wz-map-map").css("background-size", "cover");
