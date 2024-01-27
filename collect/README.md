@@ -27,9 +27,6 @@ it's easier to deploy for people having a standard PHP enabled webhosting.
 
 ## Data exploitation
 
-A simple python exploit code can be found at [exploit.py](exploit.py) in this
-directory. It is supposedly simple enough to understand.
-
 Note that this requires accessing the trainerdata sets on this repository,
 because your exploitation code will require to sideload them.
 
@@ -51,4 +48,21 @@ with spaces.
                    sequentially, in json order.
     - Odd indexes: skilltree level
     - Even indexes: concatenation of each skill powerpoints on 1 digit
+
+## Implementations
+
+### Python
+
+A simple python exploit code can be found at [exploit.py](exploit.py) in this
+directory. It is supposedly simple enough to understand.
+
+### Javascript
+
+A faster and leaner version of [Halvdan's trainer stat
+page](https://poludnica.shinyapps.io/configs/) is available in this repository,
+see [tstats.js](../js/tstats.js). You can check it out at https://mascaldotfr.github.io/CoRT/tstats.html.
+
+Halv's page is still used by default because it has stats older than CoRT and
+has more features, but i wanted to do an open source implementation of it.
+
 

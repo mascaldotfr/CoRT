@@ -45,6 +45,12 @@ export const $ = (function (selector) {
 				document.querySelector(selector).innerHTML = "";
 			}
 		},
+		get: async function(url) {
+			const reply = await fetch(url)
+					    .then(reply => reply.text())
+					    .catch(error => { throw(error); });
+			return reply;
+		},
 		getJSON: async function(url) {
 			const reply = await fetch(url)
 					    .then(reply => reply.json())

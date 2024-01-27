@@ -163,6 +163,7 @@ h1 {
 .faded { color: var(--faded); }
 .center { text-align:center; }
 .bold { font-weight: bold; }
+.italic { font-style: italic; }
 .nodeco { text-decoration: none; }
 
 @media (max-width: 799px) {
