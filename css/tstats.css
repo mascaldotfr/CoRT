@@ -4,7 +4,9 @@
 }
 #ts-side {
 	display: grid;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 6fr;
+	grid-template-rows: auto 1fr;
+	gap: var(--default_margin_padding);
+	height: max-content;
 }
 #ts-center {
 	display: grid;
@@ -18,15 +20,16 @@
 	text-align: center;
 	background: var(--menu_background);
 	margin-bottom: 0;
-	padding-top: var(--default_margin_padding);
-	margin-top: calc(4 * var(--default_margin_padding));
 }
 #ts-center h2 {
 	text-align: center;
 }
-#ts-powergraph-graph svg {
+#ts-powergraph {
+	margin-top: var(--default_margin_padding);
+}
+#ts-powergraph-graph svg, #ts-powergraph {
 	background: var(--menu_background);
-	min-height: 400px;
+	min-height: 300px;
 }
 #ts-powergraph-graph .ct-bar {
 	stroke-width: 25px;
@@ -38,7 +41,7 @@
 	margin-bottom: calc(var(--default_margin_padding) * 3);
 }
 #ts-maingraph svg {
-	min-height: 800px;
+	min-height: 1200px;
 }
 .ct-label, .ct-axis {
 	color: var(--foreground);

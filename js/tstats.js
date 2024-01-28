@@ -61,14 +61,25 @@ async function make_stats() {
 		let clas = setup.shift();
 		let level = setup.shift();
 
-		// skip empty setups, non lvl 60
-		let checksum = 0;
-		for (let i = 1; i < setup.length / 2; i += 2)
-			checksum += setup[i].split("").reduce((a,b) => a + b, 0);
-		if (checksum == 0 || level < 60)
+		// skip empty setups, non lvl 60, and incomplete ones
+		if (level < 60)
 			continue;
-		if (level > 60)
-			level = 60; // Soul monger crystal case
+		else
+			level = 60; // lvl 61 is raptor gem
+		let checksum = 0; // total power points used
+		for (let i = 1; i < setup.length; i += 2) {
+			let values = setup[i].split("");
+			let sum = values.reduce((a,b) => parseInt(a) + parseInt(b), 0);
+			checksum += sum;
+		}
+		// see trainer.js
+		let powerpoints = 32;
+		if ((class_type_masks[clas] & 0xF0) != 32)
+			powerpoints = 80;
+		let ppoints = trainerdatasets[version]["points"]["power"][powerpoints][level - 1];
+		if (checksum != ppoints)
+			continue;
+		console.log(checksum);
 
 		let base_skills = class_type_masks[clas] & 0xF0;
 		let class_skills = class_type_masks[clas];
@@ -134,7 +145,8 @@ function draw_maingraph() {
 	};
 	let options = {
 		horizontalBars: true,
-		axisY: { offset: 200 }
+		axisY: { offset: 200 },
+		axisX: { onlyInteger: true }
 	};
 	new Chartist.BarChart("#ts-maingraph", dataset, options);
 }
