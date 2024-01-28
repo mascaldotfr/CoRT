@@ -579,5 +579,45 @@ export const __i18n__ = {
 		"fr": "Forts",
 		"es": "Fuertes",
 		"de": "Forts"
+	},
+	"No setups for that combo, bailing out!": {
+		"fr": "Aucune configuration disponible pour cette combinaison, j'abandonne !",
+		"es": "No hay configuración disponible para esta combinación, ¡me rindo!",
+		"de": "Für diese Kombination ist keine Konfiguration verfügbar, ich gebe auf!"
+	},
+	"Version:": {
+		"fr": "Version :",
+		"es": "Versión:",
+		"de": "Version:"
+	},
+	"Power:": {
+		"fr": "Pouvoir :",
+		"es": "Habilidad:",
+		"de": "Skill:"
+	},
+	"Class:": {
+		"fr": "Classe :",
+		"es": "Clase:",
+		"de": "Klass:"
+	},
+	"Skill level (frequency)": {
+		"fr": "Niveau de pouvoir (fréquence)",
+		"es": "Nivel de habilidad (frecuencia)",
+		"de": "Skillslevel (Häufigkeit)"
+	},
+	"Downloading": {
+		"fr": "Téléchargement de",
+		"es": "Descargando",
+		"de": "Heruntergeladen"
+	},
+	"Crunching numbers": {
+		"fr": "Calcul des statistiques",
+		"es": "Cálculo de estadísticas",
+		"de": "Berechnung von Statistiken"
+	},
+	"Percentual use": {
+		"fr": "Pourcentage d'utilisation",
+		"es": "Uso porcentual",
+		"de": "Prozentuale Nutzung"
 	}
 };

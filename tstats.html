@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta property="og:image" content="/CoRT/favicon_512.png">
+		<title>Champions of Regnum - Trainer Statistics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="keywords" content="regnumsentinel champions regnum online trainer entrenador bosses war warzone guerra status">
+		<meta name="description" content="Champions of Regnum trainer, war status, bosses respawn and bz countdowns">
+		<link rel="stylesheet" href="css/style.css">
+		<script type="module" src="js/menu.js"></script>
+		<script type="module" src="js/tstats.js"></script>
+		<link rel="stylesheet" href="css/chartist-1.3.0.min.css">
+		<link rel="stylesheet" href="css/tstats.css">
+		<script type="module" src="js/chartist-1.3.0.min.js"></script>
+		<link rel="icon" type="image/png" href="favicon.png">
+		<link rel="apple-touch-icon" href="favicon.png" sizes="192x192">
+	</head>
+	<body>
+	<div id="main-container">
+		<div id="menu" class="card"></div>
+		<div class="bugnum but on your side">
+			<noscript>
+				For full functionality of this site it is necessary to enable JavaScript.
+				Here are the <a href="https://www.enable-javascript.com/">
+					instructions how to enable JavaScript in your web browser</a>.
+			</noscript>
+		</div>
+		<h1 id="title">Trainer statistics</h1>
+		<div id="ts-error" class="red bold"></div>
+		<div id="ts-content">
+			<div class="card" id="ts-side">
+				<label for="ts-version" class="bold" id="ts-version-label">Version:</label>
+				<select id="ts-version"></select>
+				<label for="ts-class" class="bold" id="ts-class-label">Class:</label>
+				<select id="ts-class"></select>
+				<label for="ts-power" class="bold" id="ts-power-label">Power:</label>
+				<select id="ts-power">
+					<option value="Accurate swings">Accurate swings</option>
+				</select>
+				<h3 id="ts-powername">Accurate swings</h3>
+				<div id="ts-powergraph-graph"></div>
+				<div id="ts-powergraph-x" class="italic center">Skill level (frequency)</div>
+			</div>
+			<div class="card" id="ts-center">
+				<h2 id="ts-center-title">Percentual use</h2>
+				<div id="ts-maingraph"></div>
+			</div>
+		</div>
+	</div>
+	<div id="footer" class="card"></div>
+	</body>
+</html>

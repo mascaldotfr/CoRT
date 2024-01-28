@@ -31,6 +31,14 @@ skipped.
 If you want to make changes to CoRT or run it locally, you can use python to
 [create a temporary local webserver](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Tools_and_setup/set_up_a_local_testing_server#using_python).
 
+## Hidden pages
+
+* **[tstats.html](https://mascaldotfr.github.io/CoRT/tstats.html)** is CoRT's own
+  Trainer statistics page. For more infos on why it's not the default, see
+  [the collect README](collect/README.md#Javascript).
+* **[beta.html](https://mascaldotfr.github.io/CoRT/beta.html)** is a part of the
+  [upgrade cycle process](UPDATING.md).
+
 ## License
 
    This repo is released under the terms of the GNU Affero General Public
