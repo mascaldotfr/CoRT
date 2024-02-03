@@ -102,6 +102,9 @@ $(document).ready(function() {
 		// Hide setup options while loading
 		$(".setup").hide();
 	}
+	else {
+		$("#t-load").trigger("click");
+	}
 });
 
 $("#t-load").on("click", function() {
