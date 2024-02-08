@@ -3754,7 +3754,8 @@
           "cast":0.0,
           "gcd":"Short",
           "buffs":{
-            "Damage Bonus":[ "+20%", "+28%", "+36%", "+42%", "+50%" ]
+            "Damage Bonus":[ "+20%", "+28%", "+36%", "+42%", "+50%" ],
+            "Attack Speed bonus (dual handed weapons only)":["-", "-", "-", "-", "+10%"]
           },
           "debuffs":{
             "Evade chance":"-100%"
