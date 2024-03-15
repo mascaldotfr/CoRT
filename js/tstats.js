@@ -55,24 +55,23 @@ async function make_stats() {
 		let level = setup.shift();
 
 		// skip empty setups, non lvl 60, and incomplete ones
-		if (level < 60)
+		if (level < maxlevel)
 			continue;
 		else
-			level = 60; // lvl 61 is raptor gem
+			level = maxlevel; // lvl 61 is raptor gem
 		let checksum = 0; // total power points used
 		for (let i = 1; i < setup.length; i += 2) {
 			let values = setup[i].split("");
 			let sum = values.reduce((a,b) => parseInt(a) + parseInt(b), 0);
 			checksum += sum;
 		}
-		// see trainer.js
+		// see trainer.js (determine if mage or the rest when it comes to pp)
 		let powerpoints = 32;
 		if ((class_type_masks[clas] & 0xF0) != 32)
 			powerpoints = 80;
 		let ppoints = trainerdatasets[version]["points"]["power"][powerpoints][level - 1];
 		if (checksum != ppoints)
-			continue;
-		console.log(checksum);
+			continue; // incomplete
 
 		let base_skills = class_type_masks[clas] & 0xF0;
 		let class_skills = class_type_masks[clas];
@@ -100,6 +99,7 @@ async function make_stats() {
 					stats[version][clas][currspell] = {};
 					stats[version][clas][currspell]["frequency"] = [0, 0, 0, 0, 0, 0];
 				}
+				// one more user of this spell at this level
 				stats[version][clas][currspell]["frequency"][points] += 1;
 			}
 		}
@@ -128,6 +128,7 @@ function get_filters() {
 function draw_maingraph() {
 	let f = get_filters();
 	let labels = Object.keys(stats[f["version"]][f["class"]]);
+	// sort skills by usage
 	labels.sort((a, b) => stats[f["version"]][f["class"]][a]["percentage"] - stats[f["version"]][f["class"]][b]["percentage"]);
 	let series = [];
 	for (let power of labels)
