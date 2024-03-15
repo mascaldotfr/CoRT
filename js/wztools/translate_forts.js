@@ -1,4 +1,4 @@
-import {_} from "../i18n.js";
+import {_} from "../libs/i18n.js";
 
 // Create translatable strings according to english order of words
 // id is the (x) thing at the end of each fortification,

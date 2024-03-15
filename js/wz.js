@@ -1,12 +1,12 @@
 import {__api__urls} from "./api_url.js";
-import {$} from "./lamaiquery.js";
-import {_} from "./i18n.js";
-import {insert_notification_link, mynotify} from "./notify.js";
+import {$} from "./libs/lamaiquery.js";
+import {_} from "./libs/i18n.js";
+import {insert_notification_link, mynotify} from "./libs/notify.js";
 import {get_realm_colors} from "./wztools/constants.js";
 import {translate_fort} from "./wztools/translate_forts.js";
 import {humanise_events} from "./wztools/events.js";
 import {wzicons} from "./wztools/icons.js";
-import {$onlinemanager} from "./onlinemanager.js";
+import {$onlinemanager} from "./libs/onlinemanager.js";
 
 // Unix timestamp of the last update
 let wz_lastupdate = Math.floor(new Date().getTime() / 1000);

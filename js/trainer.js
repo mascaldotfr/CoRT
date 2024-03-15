@@ -1,17 +1,11 @@
 import {__api__urls, __api__frontsite, __api__frontsite_dir} from "./api_url.js";
-import {$} from "./lamaiquery.js";
-import {_} from "./i18n.js";
-import {LZString} from "./lz-string.min.js";
+import {$} from "./libs/lamaiquery.js";
+import {_} from "./libs/i18n.js";
+import {LZString} from "./libs/lz-string.min.js";
+import {minlevel, maxlevel, class_type_masks, datasets, classes, mindlevel,
+	maxdlevel, minplevel, maxplevel} from "./trainertools/constants.js";
 
-const minlevel = 10;
-const maxlevel = 60;
-const class_type_masks = {
-	'archer':0x10, 'hunter':0x11, 'marksman':0x12,
-	'mage':0x20, 'conjurer':0x21, 'warlock':0x22,
-	'warrior':0x40, 'barbarian':0x41, 'knight':0x42
-};
-
-var trainerdatasets = ["1.33.2", "1.33.3", "1.33.6", "1.33.12"];
+var trainerdatasets = datasets;
 const is_beta = location.pathname.split("/").pop() == "beta.html";
 if (is_beta) {
 	var live_datasets = trainerdatasets;
@@ -24,17 +18,12 @@ var trainerdataversion = null;
 // 1: trainerdataset on 2 digits (?t=)
 var skillset_urlformat = 0;
 
-const mindlevel = 1;
-const maxdlevel = 19;
-const minplevel = 0;
-const maxplevel = 5;
 var dpointstotal = 0;
 var ppointstotal = 0;
 var dpointsleft = 0;
 var ppointsleft = 0;
 var extrappoints = 0;
 var necro_gem = false; // Red Crystal of the necromancer
-const classes = ["knight", "barbarian", "conjurer", "warlock", "hunter", "marksman"];
 var currlevel = 0;
 var currclass = null;
 var wmrow = 0;

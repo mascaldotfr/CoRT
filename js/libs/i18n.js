@@ -3,7 +3,7 @@
  * A tiny i18n system. Released under the MIT license.
  */
 
-import {__i18n__} from "../data/i18n_db.js"
+import {__i18n__} from "../../data/i18n_db.js"
 
 // automatic language detection if none is defined
 if (localStorage.getItem("lang") == null) {

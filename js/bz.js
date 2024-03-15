@@ -1,6 +1,6 @@
-import {$} from "./lamaiquery.js";
-import {_} from "./i18n.js";
-import {insert_notification_link, mynotify} from "./notify.js";
+import {$} from "./libs/lamaiquery.js";
+import {_} from "./libs/i18n.js";
+import {insert_notification_link, mynotify} from "./libs/notify.js";
 
 // XXX ALL TIMES ARE UTC INTERNALLY
 // SUNDAY = 0 SATURDAY = 6

@@ -1,6 +1,6 @@
-import {$} from "./lamaiquery.js";
-import {_} from "./i18n.js";
-import {insert_notification_link, mynotify} from "./notify.js";
+import {$} from "./libs/lamaiquery.js";
+import {_} from "./libs/i18n.js";
+import {insert_notification_link, mynotify} from "./libs/notify.js";
 import {timestamp_now, timestamp_ago} from "./wztools/time.js";
 
 // The last respawn timestamp in UTC time

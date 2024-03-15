@@ -1,6 +1,6 @@
 import {__api__urls} from "./api_url.js";
-import {$} from "./lamaiquery.js";
-import {_} from "./i18n.js";
+import {$} from "./libs/lamaiquery.js";
+import {_} from "./libs/i18n.js";
 import {humanise_events} from "./wztools/events.js";
 
 let __wevents__filter = "none";

@@ -1,4 +1,4 @@
-import {_} from "../i18n.js";
+import {_} from "../libs/i18n.js";
 import {get_realm_colors} from "./constants.js";
 import {translate_fort} from "./translate_forts.js";
 

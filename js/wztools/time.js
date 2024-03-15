@@ -1,4 +1,4 @@
-import {_} from "../i18n.js";
+import {_} from "../libs/i18n.js";
 
 // Return the current time as a Unix timestamp
 export function timestamp_now() {

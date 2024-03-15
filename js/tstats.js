@@ -1,16 +1,9 @@
 import {__api__frontsite, __api__frontsite_dir, __api__urls} from "./api_url.js";
-import {$} from "./lamaiquery.js";
-import {_} from "./i18n.js";
+import {$} from "./libs/lamaiquery.js";
+import {_} from "./libs/i18n.js";
+import {maxlevel, class_type_masks, datasets, classes} from "./trainertools/constants.js";
 
-// source it from trainer.js
-var valid_trainerdatasets = ["1.33.2", "1.33.3", "1.33.6", "1.33.12"];
-const classes = ["knight", "barbarian", "conjurer", "warlock", "hunter", "marksman"];
-const class_type_masks = {
-	'archer':0x10, 'hunter':0x11, 'marksman':0x12,
-	'mage':0x20, 'conjurer':0x21, 'warlock':0x22,
-	'warrior':0x40, 'barbarian':0x41, 'knight':0x42
-};
-
+var valid_trainerdatasets = datasets;
 var trainerdatasets = {};
 var stats = {};
 var data_txt = null;
