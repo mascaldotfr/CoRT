@@ -34,7 +34,7 @@ body {
 	-webkit-max-logical-width: -webkit-fit-content;
 	min-height: 100dvh;
 	display: grid;
-	grid-template-rows: 1fr auto;
+	grid-template-rows: auto 1fr auto; /* menu main footer */
 }
 a {
 	color: var(--links);
