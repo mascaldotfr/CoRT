@@ -20,6 +20,21 @@ function naify(value, failover="0") {
 		return value;
 }
 
+// convert UTC stats to local time for hourly graphs
+function localize_timelines(utclines) {
+	let localizedlines = new Array();
+	let date = new Date();
+	for (let realm in utclines) {
+		let localline = [];
+		for (let hour in utclines[realm]) {
+			date.setUTCHours(hour, 0, 0, 0);
+			localline[date.getHours()] = utclines[realm][hour];
+		}
+		localizedlines.push(localline);
+	}
+	return localizedlines;
+}
+
 function show_graphs_hourly(data, selector, onlyinteger=true) {
 	let realms = get_realms();
 	// skip 00:00 and 23:00 as it overflows
@@ -28,11 +43,7 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 		hours.push(String(i).padStart(2, "0"));
 	let dataset = {
 		labels: hours,
-		series: [
-			  data[realms[0]],
-			  data[realms[1]],
-			  data[realms[2]]
-		]
+		series: localize_timelines([ data[realms[0]], data[realms[1]], data[realms[2]] ])
 	};
 	let options = {
 		fullWidth: true,
@@ -190,7 +201,7 @@ async function display_stat() {
 $(document).ready(function() {
 	document.title = "CoRT - " + _("WZ statistics")
 	$("#title").text(_("WZ statistics"));
-	$("#ws-info-info").text(_("The page will update itself every minute.") +
+	$("#ws-info-info").text(_("The page refreshes itself every minute. Dates and times are in your timezone.") +
 		                " " + _("Last event:"));
 	let ilinks = [];
 	for (let day of report_days) {
@@ -199,16 +210,16 @@ $(document).ready(function() {
 	}
 	let max_report_days = Math.max(...report_days);
 	ilinks.push({"id": "#ws-forts-title", "txt":
-		_("Net average of fortifications captured per hour (UTC) on the last %s days",
+		_("Net average of fortifications captured per hour on the last %s days",
 		  max_report_days)});
 	ilinks.push({"id": "#ws-invasions-title", "txt":
-		_("Net average of invasions per hour (UTC) on the last %s days",
+		_("Net average of invasions per hour on the last %s days",
 		   max_report_days)});
 	ilinks.push({"id": "#ws-gems-title", "txt":
-		_("Total stolen gems per hour (UTC) on the last %s days",
+		_("Total stolen gems per hour on the last %s days",
 		   max_report_days)});
 	ilinks.push({"id": "#ws-wishes-title", "txt":
-		_("Total dragon wishes per hour (UTC) on the last %s days",
+		_("Total dragon wishes per hour on the last %s days",
 		   max_report_days)});
 	ilinks.push({"id": "#ws-fortsheld-count-title", "txt":
 		_("Total count of captured enemy forts on the last %s days",

@@ -485,25 +485,25 @@ export const __i18n__ = {
 		"es": "hace %s",
 		"de": "vor %s"
 	},
-	"Net average of fortifications captured per hour (UTC) on the last %s days": {
-		"fr": "Moyenne nette des fortifications capturées par heure (UTC) les %s derniers jours",
-		"es": "Promedio neto de las fortificaciones capturadas por hora (UTC) en los últimos %s días",
-		"de": "Nettodurchschnitt der in den letzten %s Tagen pro Stunde (UTC-Zeit) eroberten Befestigungen"
+	"Net average of fortifications captured per hour on the last %s days": {
+		"fr": "Moyenne nette des fortifications capturées par heure les %s derniers jours",
+		"es": "Promedio neto de las fortificaciones capturadas por hora en los últimos %s días",
+		"de": "Nettodurchschnitt der in den letzten %s Tagen pro Stunde eroberten Befestigungen"
 	},
-	"Net average of invasions per hour (UTC) on the last %s days": {
-		"fr": "Moyenne nette des invasions par heure (UTC) les %s derniers jours",
-		"es": "Promedio neto de las invasiónes por hora (UTC) en los últimos %s días",
-		"de": "Nettodurchschnitt der Invasionen pro Stunde (UTC) an den letzten %s Tagen"
+	"Net average of invasions per hour on the last %s days": {
+		"fr": "Moyenne nette des invasions par heure les %s derniers jours",
+		"es": "Promedio neto de las invasiónes por hora en los últimos %s días",
+		"de": "Nettodurchschnitt der Invasionen pro Stunde an den letzten %s Tagen"
 	},
-	"Total stolen gems per hour (UTC) on the last %s days": {
-		"fr": "Nombre total de gemmes volées par heure (UTC) les %s derniers jours",
-		"es": "Total de gemas robadas por hora (UTC) en los últimos %s días",
-		"de": "Insgesamt gestohlene Edelsteine pro Stunde (UTC) an den letzten %s Tagen"
+	"Total stolen gems per hour on the last %s days": {
+		"fr": "Nombre total de gemmes volées par heure les %s derniers jours",
+		"es": "Total de gemas robadas por hora en los últimos %s días",
+		"de": "Insgesamt gestohlene Edelsteine pro Stunde an den letzten %s Tagen"
 	},
-	"Total dragon wishes per hour (UTC) on the last %s days": {
-		"fr": "Nombre total de voeux du dragon par heure (UTC) les %s derniers jours",
-		"es": "Total de deseos de dragón por hora (UTC) en los últimos %s días",
-		"de": "Gesamtzahl der Drachenwünsche pro Stunde (UTC) an den letzten %s Tagen"
+	"Total dragon wishes per hour on the last %s days": {
+		"fr": "Nombre total de voeux du dragon par heure les %s derniers jours",
+		"es": "Total de deseos de dragón por hora en los últimos %s días",
+		"de": "Gesamtzahl der Drachenwünsche pro Stunde an den letzten %s Tagen"
 	},
 	"Average fort holding time on the last %s days (in minutes)": {
 		"fr": "Temps moyen de possession d'un fort les %s derniers jours (en minutes)",
