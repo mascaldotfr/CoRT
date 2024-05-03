@@ -20,15 +20,20 @@ function naify(value, failover="0") {
 		return value;
 }
 
-// convert UTC stats to local time for hourly graphs
+// convert UTC stats to "local" time for hourly graphs
 function localize_timelines(utclines) {
 	let localizedlines = new Array();
 	let date = new Date();
+	let tz = localStorage.getItem("tz");
 	for (let realm in utclines) {
 		let localline = [];
 		for (let hour in utclines[realm]) {
 			date.setUTCHours(hour, 0, 0, 0);
-			localline[date.getHours()] = utclines[realm][hour];
+			let date_options = {hour12: false, hour: 'numeric', minute: 'numeric', timeZone: tz};
+			let localhour = date.toLocaleTimeString(undefined, date_options);
+			localhour = localhour.replace(/:\d+.+$/, "");
+			localhour = localhour.replace(/^0/, "");
+			localline[localhour] = utclines[realm][hour];
 		}
 		localizedlines.push(localline);
 	}
@@ -201,7 +206,7 @@ async function display_stat() {
 $(document).ready(function() {
 	document.title = "CoRT - " + _("WZ statistics")
 	$("#title").text(_("WZ statistics"));
-	$("#ws-info-info").text(_("The page refreshes itself every minute. Dates and times are in your timezone.") +
+	$("#ws-info-info").text(_("The page refreshes itself every minute.") +
 		                " " + _("Last event:"));
 	let ilinks = [];
 	for (let day of report_days) {

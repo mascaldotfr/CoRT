@@ -28,6 +28,8 @@
 #we-events {
 	min-height: 30vw;
 }
-#we-prev-day {
-	visibility: hidden;
+#we-nextprev {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
 }

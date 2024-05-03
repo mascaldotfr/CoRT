@@ -18,9 +18,11 @@ let notified_10m = false;
 
 function unixstamp2human(unixstamp) {
 	let dt = new Date(unixstamp * 1000);
-	return dt.toLocaleDateString(localStorage.getItem("lang"), {
+	let lang = localStorage.getItem("lang");
+	let tz = localStorage.getItem("tz");
+	return dt.toLocaleDateString(lang, {
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
-		hour: 'numeric', minute: 'numeric'});
+		hour: 'numeric', minute: 'numeric', timeZone: tz});
 }
 
 function get_next_respawns(boss) {
@@ -93,7 +95,7 @@ function refresh_display() {
 $(document).ready(function() {
 	document.title = "CoRT - " + _("Bosses Countdown");
 	$("#title").text(_("Bosses Countdown"));
-	$("#boss-info").text(_("The page refreshes itself every minute. Dates and times are in your timezone."));
+	$("#boss-info").text(_("The page refreshes itself every minute."));
 	insert_notification_link();
 	refresh_display();
 });

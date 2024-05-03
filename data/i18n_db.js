@@ -67,11 +67,16 @@ export const __i18n__ = {
 		"es": "☰  Menú",
 		"de": "☰  Menü"
 	},
-	"The page refreshes itself every minute. Dates and times are in your timezone.":
+	"Timezone:": {
+		"fr": "Fuseau horaire :",
+		"es": "Zona horaria:",
+		"de": "Zeitzone:"
+	},
+	"The page refreshes itself every minute.":
 	{
-		"fr": "La page est rafraîchie automatiquement toutes les minutes. Les dates et heures indiquées sont locales.",
-		"es": "La página se actualiza automáticamente cada minuto. Las fechas y horas mostradas son locales.",
-		"de": "Die Seite wird automatisch jede Minute aktualisiert. Die angezeigten Daten und Zeiten sind lokal."
+		"fr": "La page est rafraîchie automatiquement toutes les minutes.",
+		"es": "La página se actualiza automáticamente cada minuto.",
+		"de": "Die Seite wird automatisch jede Minute aktualisiert."
 	},
 	"Last respawn":
 	{
@@ -114,9 +119,9 @@ export const __i18n__ = {
 	},
 	"Next BZ (in your timezone):":
 	{
-		"fr": "Prochaines BZ (heure locale) :",
-		"es": "Próximas BZ (hora local):",
-		"de": "Nächste BZ (Ortszeit):"
+		"fr": "Prochaines BZ :",
+		"es": "Próximas BZ:",
+		"de": "Nächste BZ:"
 	},
 	"Ends in":
 	{
@@ -366,9 +371,9 @@ export const __i18n__ = {
 		"de": "hat %s zurückerobert"
 	},
 	"Last server events (in your timezone):": {
-		"fr": "Derniers événements (heure locale) :",
-		"es": "Últimos eventos (hora local):",
-		"de": "Neueste Serverereignisse (Ortszeit):"
+		"fr": "Derniers événements :",
+		"es": "Últimos eventos:",
+		"de": "Neueste Serverereignisse:"
 	},
 	"More events": {
 		"fr": "Plus d'événements",
@@ -405,10 +410,10 @@ export const __i18n__ = {
 		"es": "Último evento:",
 		"de": "Letzter Eintrag:"
 	},
-	"All events over the last 30 days.": {
-		"fr": "Tous les événements sur les derniers 30 jours.",
-		"es": "Todos los eventos durante los últimos 30 días.",
-		"de": "Alle Ereignisse der letzten 30 Tage."
+	"All events over the last 3 days.": {
+		"fr": "Tous les événements sur les derniers 3 jours.",
+		"es": "Todos los eventos durante los últimos 3 días.",
+		"de": "Alle Ereignisse der letzten 3 Tage."
 	},
 	"Index": {
 		"fr": "Index",

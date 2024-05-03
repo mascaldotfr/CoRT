@@ -53,10 +53,11 @@ function feed_bz() {
 	let next_bzs_end = [];
 	let bz_on = false;
 	let bz_ends_at = 0;
+	let tz = localStorage.getItem("tz");
 	let date_options = {
 		weekday: 'long', month: '2-digit', day: 'numeric',
-		hour: '2-digit', minute: '2-digit'};
-	let time_options = {hour: '2-digit', minute: '2-digit'};
+		hour: '2-digit', minute: '2-digit', timeZone: tz};
+	let time_options = {hour: '2-digit', minute: '2-digit', timeZone: tz};
 	let lang = localStorage.getItem("lang");
 	$("#bz-countdown-status").empty();
 	$("#bz-countdown-countdown").empty();
@@ -133,7 +134,7 @@ function feed_bz() {
 $(document).ready(function() {
 	document.title = "CoRT - " + _("BZ status");
 	$("#title").text(_("BZ status"));
-	$("#bz-next-title").text(_("Next BZ (in your timezone):"));
+	$("#bz-next-title").text(_("Next BZ:"));
 	insert_notification_link();
 	feed_bz();
 });

@@ -11,9 +11,10 @@ export function humanise_events(events, has_id=true, notify=0)  {
 	let realm_colors = get_realm_colors();
 	for (let anevent of events) {
 		let dt = new Date(anevent["date"] * 1000);
+		let tz = localStorage.getItem("tz");
 		let date_options = {
 			month: 'numeric', day: 'numeric',
-			hour: '2-digit', minute: '2-digit' };
+			hour: '2-digit', minute: '2-digit', timeZone: tz };
 		let datetime = dt.toLocaleDateString(undefined, date_options);
 		let owner = anevent["owner"];
 		let owner_color = realm_colors[owner];

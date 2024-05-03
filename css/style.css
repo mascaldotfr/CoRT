@@ -148,6 +148,16 @@ header {
 #footer {
 	margin-top: 2em;
 }
+#tz {
+	display: inline-grid;
+	width: 50%;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+}
+#tztitle {
+	text-align: right;
+	font-weight: bold;
+}
 h1 {
 	text-align: center;
 }
@@ -189,6 +199,13 @@ h1 {
 	}
 	#menu-lang {
 		text-align: center;
+	}
+	#tz {
+		grid-template-columns: 1fr 1fr;
+		width: 100%;
+	}
+	#tztitle {
+		text-align: left;
 	}
 }
 
