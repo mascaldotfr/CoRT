@@ -1,5 +1,5 @@
 #we-container {
-	width: fit-content;
+	width: 50vh;
 	margin: 0 auto;
 }
 #we-info {
@@ -32,4 +32,9 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	justify-items: center;
+}
+@media (max-width: 799px) {
+	#we-container {
+		width: 100%;
+	}
 }
