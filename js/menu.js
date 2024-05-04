@@ -2,6 +2,7 @@ import {_} from "./libs/i18n.js";
 import {__i18n__} from "../data/i18n_db.js";
 import {$} from "./libs/lamaiquery.js";
 import {create_tz_list} from "./libs/tz.js";
+import {__api__frontsite, __api__base} from "./api_url.js";
 
 let __menu_external_link = `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24"><path stroke="#CCC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5H8.2c-1.12 0-1.681 0-2.108.218a2 2 0 0 0-.874.874C5 6.52 5 7.08 5 8.2v7.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.427.218.987.218 2.105.218h7.606c1.118 0 1.677 0 2.104-.218.376-.192.683-.498.875-.875.218-.427.218-.987.218-2.104V14m1-5V4m0 0h-5m5 0-7 7"/></svg>`;
 let __menu_flags = {
@@ -55,7 +56,7 @@ let __menu_footer = `
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
-		<!--VERSION-->Version: 20240504.083518
+		<!--VERSION-->Version: 20240504.085118
 		</i></p>
 `;
 
@@ -98,6 +99,7 @@ $(document).ready(function() {
 
 });
 
+
 // get basic hit statistics
 function get_hits() {
 	let head = document.getElementsByTagName("head")[0];
@@ -109,4 +111,4 @@ function get_hits() {
 	head.appendChild(script);
 }
 if (window.location.origin == __api__frontsite)
-	setTimeout(2000, get_hits);
+	setTimeout(get_hits, 2000);
