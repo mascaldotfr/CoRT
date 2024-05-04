@@ -55,7 +55,7 @@ let __menu_footer = `
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
-		<!--VERSION-->Version: 20240504.075634
+		<!--VERSION-->Version: 20240504.083518
 		</i></p>
 `;
 
@@ -97,3 +97,16 @@ $(document).ready(function() {
 	create_tz_list("#tzchooser");
 
 });
+
+// get basic hit statistics
+function get_hits() {
+	let head = document.getElementsByTagName("head")[0];
+	let script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src = __api__base + "/ping.js?p=/" +
+		     window.location.pathname.split("/").pop();
+	script.setAttribute("defer", "");
+	head.appendChild(script);
+}
+if (window.location.origin == __api__frontsite)
+	setTimeout(2000, get_hits);
