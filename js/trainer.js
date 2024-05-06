@@ -621,6 +621,7 @@ function discipline_change(discipline) {
 	let current_level = parseInt($(discipline_level).text());
 	let wanted_level = change_direction == "plus" ? current_level + 2 : current_level - 2;
 	if (wanted_level < mindlevel) {
+		// Try to set up the max discipline level
 		let max_avail_dlvl = 0;
 		change_direction = "plus";
 		// XXX Is there a less naive way ?
