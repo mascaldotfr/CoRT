@@ -585,7 +585,15 @@ function power_change(power) {
 	let skill_level = parseInt($(skill_level_html).text());
 	let discipline_level = parseInt($(power.parentNode.parentNode.parentNode.getElementsByClassName("skilllvl")[0]).text());
 	let wanted_level = change_direction == "plus" ? skill_level + 1 : skill_level - 1;
-	let maxslvl = trainerdata["required"]["power"][discipline_level];
+	let diffpoints = 0;
+	let maxslvl = trainerdata["required"]["power"][discipline_level - 1];
+	if (wanted_level < minplevel) {
+		wanted_level = maxslvl; // Loop from -1 to maxslvl
+		diffpoints = 0 - maxslvl;
+	}
+	else {
+		diffpoints = change_direction == "plus" ? -1 : 1;
+	}
 	if (wanted_level > maxplevel || wanted_level < minplevel) {
 		console.log("bad power level", wanted_level);
 		if (automated_clicks == true) bad_shared_link();
@@ -602,7 +610,7 @@ function power_change(power) {
 		return;
 	}
 	// valid, change it
-	$("#t-ppointsleft").text(ppointsleft += change_direction == "plus" ? -1 : 1);
+	$("#t-ppointsleft").text(ppointsleft += diffpoints);
 	$(skill_level_html).text(wanted_level);
 	$(power.parentNode.parentNode.childNodes[1]).css('filter', wanted_level == 0 ? 'brightness(.25)' : 'brightness(1)');
 }
@@ -612,6 +620,19 @@ function discipline_change(discipline) {
 	let discipline_level = discipline.parentNode.parentNode.getElementsByClassName("skilllvl")[0];
 	let current_level = parseInt($(discipline_level).text());
 	let wanted_level = change_direction == "plus" ? current_level + 2 : current_level - 2;
+	if (wanted_level < mindlevel) {
+		let max_avail_dlvl = 0;
+		change_direction = "plus";
+		// XXX Is there a less naive way ?
+		for (let lvl in trainerdata["required"]["level"]) {
+			if (trainerdata["required"]["level"][lvl] <= currlevel)
+				max_avail_dlvl = trainerdata["required"]["level"][lvl];
+		}
+		wanted_level = Math.floor(max_avail_dlvl / 2 + 1);
+		// round to odd discipline value
+		if (wanted_level % 2 == 0)
+			wanted_level--;
+	}
 	if (wanted_level > maxdlevel || wanted_level < mindlevel) {
 		console.log("bad discipline level", wanted_level);
 		if (automated_clicks == true) bad_shared_link();
@@ -624,7 +645,7 @@ function discipline_change(discipline) {
 	}
 	// check if we have enough discipline points left
 	let discipline_points_balance = change_direction == "plus" ?
-		0 - ( trainerdata["required"]["points"][wanted_level - 1] -  trainerdata["required"]["points"][current_level - 1] ) :
+		0 - ( trainerdata["required"]["points"][wanted_level - 1] - trainerdata["required"]["points"][current_level - 1] ) :
 		trainerdata["required"]["points"][current_level - 1] - trainerdata["required"]["points"][wanted_level - 1];
 	if (	change_direction == "plus" &&
 		dpointsleft + discipline_points_balance < 0 ) {
