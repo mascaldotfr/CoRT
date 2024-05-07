@@ -587,6 +587,9 @@ function power_change(power) {
 	let wanted_level = change_direction == "plus" ? skill_level + 1 : skill_level - 1;
 	let diffpoints = 0;
 	let maxslvl = trainerdata["required"]["power"][discipline_level - 1];
+	// The first skill of each tree can be level 2 even if discipline level is 1
+	if (discipline_level == 1)
+		maxslvl++;
 	if (wanted_level < minplevel) {
 		wanted_level = maxslvl; // Loop from -1 to maxslvl
 		diffpoints = 0 - maxslvl;
