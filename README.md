@@ -38,6 +38,8 @@ If you want to make changes to CoRT or run it locally, you can use python to
   [the collect README](collect/README.md#Javascript).
 * **[beta.html](https://mascaldotfr.github.io/CoRT/beta.html)** is a part of the
   [upgrade cycle process](UPDATING.md).
+* **[tests.html](https://mascaldotfr.github.io/CoRT/tests.html)** includes
+  various tests to check if we don't (re)introduce well known bugs.
 
 ## License
 
