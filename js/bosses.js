@@ -1,6 +1,7 @@
 import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
 import {insert_notification_link, mynotify} from "./libs/notify.js";
+import {generate_calendar} from "./libs/calendar.js";
 import {timestamp_now, timestamp_ago} from "./wztools/time.js";
 
 // The last respawn timestamp in UTC time
@@ -49,9 +50,10 @@ function display_next_respawn(boss) {
 	$(`#boss-${boss}-lastspawn`).prepend(`<span class="faded"><i>${_("Last respawn")}:
 		${unixstamp2human(previous_respawns[boss])}</i></span>`);
 	for (let respawn in next_respawns[boss]) {
+		let calendar = generate_calendar(next_respawns[boss][respawn], boss, 900);
 		let color = respawn == 0 ? "green" : "faded";
 		$(`#boss-${boss}-respawn`).append(`<p class="${color}"><b>
-			${unixstamp2human(next_respawns[boss][respawn])}</b></p>`);
+			${unixstamp2human(next_respawns[boss][respawn])}</b>${calendar}</p>`);
 	}
 	let next_respawn_in = timestamp_ago(next_respawns[boss][0]);
 	$(`#boss-${boss}-countdown`).text(`${_("Next respawn in")} ${next_respawn_in.human}`);

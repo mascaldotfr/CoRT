@@ -1,6 +1,7 @@
 import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
 import {insert_notification_link, mynotify} from "./libs/notify.js";
+import {generate_calendar} from "./libs/calendar.js";
 
 // XXX ALL TIMES ARE UTC INTERNALLY
 // SUNDAY = 0 SATURDAY = 6
@@ -92,7 +93,7 @@ function feed_bz() {
 
 	if (bz_on) {
 		$("#bz-countdown-status").html(`<span class="green"><b>${_("ON")}</b></span>`);
-		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["hours"]}:${bz_ends_at["minutes"]}:${bz_ends_at["seconds"]}`);
+		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["hours"]}:${bz_ends_at["minutes"]}:00`);
 		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] <= 10 && bz_ends_at["minutes"] >= 1 &&
 			notified_10m === false) {
 			notified_10m = true;
@@ -124,7 +125,9 @@ function feed_bz() {
 		let bz_end_date = new Date(next_bzs_end[next_bz]);
 		let bz_begin_datetime = bz_begin_date.toLocaleDateString(lang, date_options);
 		let bz_end_time = bz_end_date.toLocaleTimeString(lang, time_options);
-		let interval = `<li>${bz_begin_datetime} - ${bz_end_time}</li>`;
+		let duration = (bz_end_date.getTime() - bz_begin_date.getTime()) / 1000;
+		let calendar = generate_calendar(bz_begin_date.getTime() / 1000, "Battlezone", duration);
+		let interval = `<li>${bz_begin_datetime} - ${bz_end_time} ${calendar}</li>`;
 		$("#bz-next-future").append(interval);
 	}
 
@@ -139,4 +142,4 @@ $(document).ready(function() {
 	feed_bz();
 });
 
-setInterval(feed_bz, 1000)
+setInterval(feed_bz, 1000 * 60)

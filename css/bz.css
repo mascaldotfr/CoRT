@@ -12,3 +12,6 @@
 #bz-container li {
 	list-style: none;
 }
+add-to-calendar-button {
+	display: inline-block;
+}

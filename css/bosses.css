@@ -22,6 +22,9 @@
 	margin-left: -2em;
 	text-align: center;
 }
+add-to-calendar-button {
+	display: inline-block;
+}
 @media (max-width:799px) {
 	#boss-list img {
 		width: 96px;
