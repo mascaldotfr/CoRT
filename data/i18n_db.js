@@ -117,7 +117,7 @@ export const __i18n__ = {
 		"es": "m",
 		"de": "min"
 	},
-	"Next BZ (in your timezone):":
+	"Next BZ:":
 	{
 		"fr": "Prochaines BZ :",
 		"es": "Próximas BZ:",
