@@ -7,7 +7,14 @@
 
 
 function get_system_tz() {
-	return Intl.DateTimeFormat().resolvedOptions().timeZone;
+	let tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+	if (tz === undefined) {
+		let offset = new Date().getTimezoneOffset() / 60;
+		let sign = offset < 0 ? "+" : "-";
+		offset = Math.abs(offset);//.toString().padStart(2, "0");
+		tz = `Etc/GMT${sign}${offset}`;
+	}
+	return tz;
 }
 
 export function create_tz_list(selector) {
