@@ -21,13 +21,13 @@ export const __i18n__ = {
 		"de": "Skilltrainer"
 	},
 	"Bosses status": {
-		"fr": "Etat des boss",
+		"fr": "Epiques",
 		"es": "Épicos",
 		"de": "Bosse"
 	},
 	"BZ status": {
-		"fr": "Etat des BZ",
-		"es": "Estado de las BZ",
+		"fr": "Battlezone",
+		"es": "Battlezone",
 		"de": "Battle Zones"
 	},
 	"WZ status": {
@@ -47,19 +47,19 @@ export const __i18n__ = {
 		"de": "Boss-Countdown"
 	},
 	"WZ statistics": {
-		"fr": "Statistiques de la WZ",
-		"es": "Estadísticas de la ZG",
+		"fr": "Stats de la WZ",
+		"es": "Stats de la ZG",
 		"de": "WZ-Statistik"
 	},
 	"Trainer statistics": {
-		"fr": "Statistiques de l'entraîneur",
-		"es": "Estadísticas del entrenador",
+		"fr": "Stats de l'entraîneur",
+		"es": "Stats del entrenador",
 		"de": "Skilltrainer-Statistik"
 	},
 	"Armor calculator":
 	{
-		"fr": "Calculateur d'armure",
-		"es": "Calculadora de armadura",
+		"fr": "Calcul d'armure",
+		"es": "Cálculo de armadura",
 		"de": "Rüstungsrechner"
 	},
 	"☰  Menu": {
