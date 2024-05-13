@@ -43,7 +43,7 @@
 	overflow-y: scroll;
 	max-height: 30em;
 	min-width: 25em;
-	min-height: calc(500px - 2 * var(--default_margin_padding));
+	min-height: calc(600px - 2 * var(--default_margin_padding));
 	margin-left: 0px;
 }
 #wz-realms-info {
@@ -113,5 +113,27 @@
 	#wz-map-map {
 		width: 500px;
 		height: 500px;
+	}
+}
+@media (min-height: 1081px) {
+	#wz-map-map {
+		width: 60vh;
+		height: 60vh;
+	}
+	#wz-events {
+		min-height: calc(60vh - 2 * var(--default_margin_padding));
+	}
+	#wz-alsius, #wz-ignis, #wz-syrtis {
+		display: flex;
+		align-items: center;
+	}
+	.wz-realm-header {
+		grid-template-areas:
+			"realm"
+			"gems"
+			"relics"
+			"forts";
+		justify-items: center;
+		min-height: calc(60vh / 3 - 4 * var(--default_margin_padding));
 	}
 }
