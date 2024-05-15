@@ -12,6 +12,10 @@ let to_the_top = `&nbsp;<svg style="height:1.5em; margin-bottom:0px;" xmlns="htt
 // sync with statistics.json
 let report_days = [7, 30, 90];
 
+let tz = localStorage.getItem("tz");
+let realm_colors = get_realm_colors();
+let realms = get_realms();
+
 // undefined / null => N/A or 0
 function naify(value, failover="0") {
 	if (value === null || value === undefined)
@@ -24,7 +28,6 @@ function naify(value, failover="0") {
 function localize_timelines(utclines) {
 	let localizedlines = new Array();
 	let date = new Date();
-	let tz = localStorage.getItem("tz");
 	for (let realm in utclines) {
 		let localline = [];
 		for (let hour in utclines[realm]) {
@@ -41,7 +44,6 @@ function localize_timelines(utclines) {
 }
 
 function show_graphs_hourly(data, selector, onlyinteger=true) {
-	let realms = get_realms();
 	// skip 00:00 and 23:00 as it overflows
 	let hours = [""];
 	for (let i = 1; i < 23; i++)
@@ -79,7 +81,6 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 }
 
 function show_graphs_fortsheld_byfort(data, selector) {
-	let realms = get_realms();
 	// same order as generate.py get_fortsheld()
 	let forts = ["Aggersborg", "Trelleborg", "Imperia",
 		     "Samal", "Menirah", "Shaanarid",
@@ -104,7 +105,6 @@ function show_graphs_fortsheld_byfort(data, selector) {
 }
 
 function show_graphs_fortsheld_byrealm(data, selector) {
-	let realms = get_realms();
 	let series = realms.map(f => data[f]);
 	let dataset = {
 		labels: realms,
@@ -121,10 +121,16 @@ function show_graphs_fortsheld_byrealm(data, selector) {
 	new Chartist.BarChart(selector, dataset, options);
 }
 
-function row_factory(title, text) {
-	if (title == null || text == null)
-		return "";
-	return `<tr><td class="bold">${_(title)}</td><td>${text}</td></tr>`;
+function table_factory(rows, selector, realm) {
+	let table = `<h3 class="${realm_colors[realm]}">${realm}</h3><table>`;
+	for (let row of rows) {
+		if (row[0] == null || row[1] == null)
+			continue;
+		table += `<tr><td class="bold">${_(row[0])}</td><td>${row[1]}</td></tr>`;
+	}
+	table += "</table>";
+	$(selector).empty();
+	$(selector).append(table);
 }
 
 async function display_stat() {
@@ -143,8 +149,6 @@ async function display_stat() {
 		return;
 	}
 
-	let realm_colors = get_realm_colors();
-
 	let infos = data.splice(0, 1)[0];
 	let some_time_ago = timestamp_ago(infos["generated"], true);
 	$("#ws-last-updated").text(some_time_ago["human"]);
@@ -154,23 +158,11 @@ async function display_stat() {
 			NGE's page</a> is probably not working.</b>`);
 	}
 
-
 	for (let report = 0; report < data.length; report++) {
 		let days = report_days[report];
 
 		for (let realm in data[report]) {
 			let r = data[report][realm];
-			// Hide "last" entries except for the first 7 days
-			// report and excepted Dragon wishes.
-			let last_invasion = [null, null];
-			let last_gem = [null, null];
-			if (report == 0) {
-				last_invasion = ["Last invasion",
-					`${naify(timestamp_ago(r["invasions"]["last"]["date"], true).human, "N/A")}
-					    (${naify(r["invasions"]["last"]["location"], "N/A")})`];
-				last_gem = ["Last gem stolen",
-					`${naify(timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}`];
-			}
 			let rows = [
 				["Forts captured (total)", naify(r["forts"]["total"])],
 				["Forts captured", naify(r["forts"]["captured"])],
@@ -179,21 +171,24 @@ async function display_stat() {
 					    (${naify(r["forts"]["most_captured"]["count"], "N/A")})`],
 				["Forts recovered", naify(r["forts"]["recovered"])],
 				["Has invaded", naify(r["invasions"]["count"])],
-				last_invasion,
 				["Has been invaded", naify(r["invasions"]["invaded"]["count"])],
 				["Stolen gems", naify(r["gems"]["stolen"]["count"])],
-				last_gem,
 				["Dragon wishes", naify(r["wishes"]["count"])],
-				["Last dragon wish", naify(timestamp_ago(r["wishes"]["last"], true).human, "N/A")]
 			];
-			let table = `<h3 class="${realm_colors[realm]}">${realm}</h3><table>`;
-			for (let row of rows)
-				table += row_factory(row[0], row[1]);
-			table += "</table>";
-			$(`#ws-${days}d-${realm.toLowerCase()}`).empty();
-			$(`#ws-${days}d-${realm.toLowerCase()}`).append(table);
+			table_factory(rows, `#ws-${days}d-${realm.toLowerCase()}`, realm);
+			if (report == data.length - 1) {
+				let rows = [
+					["Invasion", `${naify(timestamp_ago(r["invasions"]["last"]["date"], true).human, "N/A")}
+							    (${naify(r["invasions"]["last"]["location"], "N/A")})`],
+					["Gem stolen",
+							`${naify(timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}`],
+					["Dragon wish",
+							`${naify(timestamp_ago(r["wishes"]["last"], true).human, "N/A")}`]];
+				table_factory(rows, `#ws-last-${realm.toLowerCase()}`, realm);
+			}
 		}
 	}
+
 	show_graphs_hourly(infos["activity"], "#ws-forts-chart");
 	show_graphs_hourly(infos["invasions"], "#ws-invasions-chart", false);
 	show_graphs_hourly(infos["gems"], "#ws-gems-chart");
@@ -209,6 +204,7 @@ $(document).ready(function() {
 	$("#ws-info-info").text(_("The page refreshes itself every minute.") +
 		                " " + _("Last event:"));
 	let ilinks = [];
+	ilinks.push({"id": "#ws-last", txt: _("Latest key events")});
 	for (let day of report_days) {
 		let txt = _("Last %s days", day)
 		ilinks.push({ "id": `#ws-${day}d-title`, "txt": txt});

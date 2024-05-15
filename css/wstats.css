@@ -47,11 +47,8 @@ h2 a, h3 a {
 #ws-7d, #ws-30d, #ws-90d {
 	min-width: 80vw;
 }
-#ws-7d {
-	min-height: 30em;
-}
-#ws-30d, #ws-90d {
-	min-height: 20em;
+#ws-7d, #ws-30d, #ws-90d {
+	min-height: 15em;
 }
 #ws-container-text h3 {
 	text-align: center;
@@ -128,22 +125,14 @@ h2 a, h3 a {
 	#ws-container .statcard {
 		width: 100%;
 	}
-	#ws-7d > div {
-		min-height: 30em;
-		min-width: 80vw;
-	}
-	#ws-30d > div, #ws-90d > div {
-		min-height: 25em;
+	#ws-7d > div, #ws-30d > div, #ws-90d > div {
+		min-height: 20em;
 		min-width: 80vw;
 	}
 }
 @media (min-width: 800px) and (max-width: 1400px) {
-	#ws-7d > div {
-		min-height: 32em;
-		min-width: 20vw;
-	}
-	#ws-30d > div, #ws-90d > div {
-		min-height: 25em;
+	#ws-7d > div, #ws-30d > div, #ws-90d > div {
+		min-height: 20em;
 		min-width: 20vw;
 	}
 }

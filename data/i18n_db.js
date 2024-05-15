@@ -420,20 +420,25 @@ export const __i18n__ = {
 		"es": "Índice",
 		"de": "Index"
 	},
+	"Latest key events": {
+		"fr": "Derniers événements clés",
+		"es": "Últimos eventos clave",
+		"de": "Neueste wichtige Ereignisse",
+	},
 	"Last %s days": {
 		"fr": "Les %s derniers jours",
 		"es": "Últimos %s días",
 		"de": "Letzte %s Tage"
 	},
-	"Last invasion": {
-		"fr": "Dernière invasion",
-		"es": "Última invasión",
-		"de": "Letzte Invasion"
+	"Invasion": {
+		"fr": "Invasion",
+		"es": "Invasión",
+		"de": "Invasion"
 	},
-	"Last gem stolen": {
-		"fr": "Dernière gemme volée",
-		"es": "Última gema robada",
-		"de": "Letztes Juwel gestohlen"
+	"Gem stolen": {
+		"fr": "Gemme volée",
+		"es": "Gema robada",
+		"de": "Juwel gestohlen"
 	},
 	"Forts captured": {
 		"fr": "Forts capturés",
@@ -480,10 +485,10 @@ export const __i18n__ = {
 		"es": "Deseos del dragón",
 		"de": "Drachenwünsche"
 	},
-	"Last dragon wish": {
-		"fr": "Dernier voeu du dragon",
-		"es": "Último deseo del dragón",
-		"de": "Letzter Drachenwunsch"
+	"Dragon wish": {
+		"fr": "Voeu du dragon",
+		"es": "Deseo del dragón",
+		"de": "Drachenwunsch"
 	},
 	"%s ago": {
 		"fr": "il y a %s",
