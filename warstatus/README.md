@@ -76,16 +76,17 @@ Note that the API is [static](https://www.seancdavis.com/posts/lets-talk-about-s
             "icon filename",
             [...17 other gems...]
     ],
-    "events_log": [ // The last 25 server events (fort, gem and relics captures)
+    "events_log": [ // The last 100 server events (fort, gem and relic captures, wish)
         {
             "date": "Unix timestamp",
-            "name": "forts: fortification name | gem: gem number | relic: relic name",
-            "location": "Capitalised original realm of the fort/gem/relic (ex: Syrtis)",
+            "name": "forts: fortification name | gem: gem number | relic: relic name | wish: empty",
+            "location": "Capitalised original realm of the fort/gem/relic (ex: Syrtis), name of the wisher otherwise",
             "owner": "gem/fort: Capitalised current owner realm of the gem/fort (ex: Alsius)
-                      relic: either 'transit' or 'altar'",
-            "type": "It's either 'fort' or 'gem' or 'relic' depending on what is captured"
+                      relic: either 'transit' or 'altar'
+                      wish: empty",
+            "type": "It's either 'fort' or 'gem' or 'relic' or 'wish' depending on what is captured"
         },
-        [...24 other events...]
+        [...99 other events...]
     ],
     "relics": [ // The current relic status
         "Alsius": {

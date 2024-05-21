@@ -27,7 +27,7 @@ Using static gzip compression in your web server is recommended, especially for
 `events.json` which weights 500kb uncompressed but only a 25kb compressed.
 
 - The "API endpoint" for statistics URL is: https://hail.thebus.top/CoRT/warstatus/stats/statistics.json
-- The "API endpoint" for events URL is: https://hail.thebus.top/CoRT/warstatus/stats/events.json
+- The "API endpoint" for events URL is: https://hail.thebus.top/CoRT/warstatus/stats/allevents.json
 - The full database is publicly available at: https://hail.thebus.top/CoRT/warstatus/stats/events.sqlite
 
 Unless you prepopulate your installation with the downloadable `events.sqlite`
