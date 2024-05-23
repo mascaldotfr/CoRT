@@ -55,11 +55,11 @@ That's it.
 
 ## Response Format
 
-It's advised to read `/js/wz.js` as well for exploitation. Clearly the format has
-been optimized for display on the site and try to play well with NGE inconsistent
-website code, sacrificing a bit of the consistency.
-
 Note that the API is [static](https://www.seancdavis.com/posts/lets-talk-about-static-apis/).
+
+Clearly the format has been optimized for display on the site and try to play
+well with NGE inconsistent website code, sacrificing a bit of the consistency.
+
 
 ```
 {
@@ -103,6 +103,18 @@ Note that the API is [static](https://www.seancdavis.com/posts/lets-talk-about-s
                This contains the debug infos."
 }
 ```
+
+## EXPLOITATION EXAMPLES
+
+### Javascript
+
+* See `../js/wz.js`
+
+### Python
+
+* See `./demos/ro_status.py`. It requires the "blessed" module to be installed. It
+  displays all elements that you can find on the website but the map in a
+  terminal in barely 100 lines of code.
 
 ## BUGS
 
