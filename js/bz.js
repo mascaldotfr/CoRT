@@ -49,7 +49,7 @@ function date_difference_from_now(future_date) {
 	return mstohhmmss((future_date.getTime() - current_date.getTime()));
 }
 
-function feed_bz() {
+function feed_bz(init=false) {
 	let next_bzs_begin = [];
 	let next_bzs_end = [];
 	let bz_on = false;
@@ -62,7 +62,6 @@ function feed_bz() {
 	let lang = localStorage.getItem("lang");
 	$("#bz-countdown-status").empty();
 	$("#bz-countdown-countdown").empty();
-	$("#bz-next-future").empty();
 
 	let current_date = new Date();
 	let current_day = parseInt(current_date.getUTCDay());
@@ -93,7 +92,7 @@ function feed_bz() {
 
 	if (bz_on) {
 		$("#bz-countdown-status").html(`<span class="green"><b>${_("ON")}</b></span>`);
-		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["hours"]}:${bz_ends_at["minutes"]}:00`);
+		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["hours"]}:${bz_ends_at["minutes"]}:${bz_ends_at["seconds"]}`);
 		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] <= 10 && bz_ends_at["minutes"] >= 1 &&
 			notified_10m === false) {
 			notified_10m = true;
@@ -119,7 +118,12 @@ function feed_bz() {
 		}
 
 	}
+
+	// refresh future BZs only hourly
+	if (current_date.getMinutes() + current_date.getSeconds() != 0 && init == false)
+		return;
 	// display future BZs
+	let bz_next_future = "";
 	for (let next_bz in next_bzs_begin) {
 		let bz_begin_date = new Date(next_bzs_begin[next_bz]);
 		let bz_end_date = new Date(next_bzs_end[next_bz]);
@@ -127,9 +131,10 @@ function feed_bz() {
 		let bz_end_time = bz_end_date.toLocaleTimeString(lang, time_options);
 		let duration = (bz_end_date.getTime() - bz_begin_date.getTime()) / 1000;
 		let calendar = generate_calendar(bz_begin_date.getTime() / 1000, "Battlezone", duration);
-		let interval = `<li>${bz_begin_datetime} - ${bz_end_time} ${calendar}</li>`;
-		$("#bz-next-future").append(interval);
+		bz_next_future += `<li>${bz_begin_datetime} - ${bz_end_time} ${calendar}</li>`;
 	}
+	$("#bz-next-future").empty();
+	$("#bz-next-future").append(bz_next_future);
 
 	//console.log("bz is on?", bz_on, "bz_ends_at?", bz_ends_at, "next bz in", next_bz_in);
 }
@@ -139,7 +144,7 @@ $(document).ready(function() {
 	$("#title").text(_("BZ status"));
 	$("#bz-next-title").text(_("Next BZ:"));
 	insert_notification_link();
-	feed_bz();
+	feed_bz(true);
 });
 
-setInterval(feed_bz, 1000 * 60)
+setInterval(feed_bz, 1000)
