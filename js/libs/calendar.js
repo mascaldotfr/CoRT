@@ -40,6 +40,8 @@ export function generate_calendar(tstamp, title, duration) {
 	let starttime = [sdate.getUTCHours(), sdate.getUTCMinutes()];
 	starttime = zeropad(starttime);
 	let edate = new Date(tstamp * 1000 + duration * 1000);
+	let enddate = [edate.getUTCFullYear(), edate.getUTCMonth() + 1, edate.getUTCDate()];
+	enddate = zeropad(enddate);
 	let endtime = [edate.getUTCHours(), edate.getUTCMinutes()];
 	endtime = zeropad(endtime);
 	return `
@@ -48,6 +50,7 @@ export function generate_calendar(tstamp, title, duration) {
 		  name="[CoR] ${title.toUpperCase()}"
 		  startDate="${startdate.join("-")}"
 		  startTime="${starttime.join(":")}"
+		  endDate="${enddate.join("-")}"
 		  endTime="${endtime.join(":")}"
 		  timeZone="UTC"
 		  options="'Apple','Google','iCal','Outlook.com','Yahoo','Microsoft365'"
