@@ -96,6 +96,20 @@ export const __i18n__ = {
 		"es": "debería aparecer muy pronto!",
 		"de": "sollte sehr bald erscheinen!"
 	},
+	"I've seen Aquaman in...":
+	{
+		"comment": "XXX AQUAMAN",
+		"fr": "J'ai vu Aquaman sur ...",
+		"es": "Vi a Aquaman en...",
+		"de": "Ich habe Aquaman gesehen in..."
+	},
+	"Thank you for telling me you've seen Aquaman in %s!":
+	{
+		"comment": "XXX AQUAMAN",
+		"fr": "Merci de m'avoir indiqué que tu as vu Aquaman sur %s !",
+		"es": "¡Gracias por hacerme saber que viste Aquaman en %s!",
+		"de": "Vielen Dank, dass Sie mich wissen lassen, dass Sie Aquaman auf %s gesehen haben!"
+	},
 	"d":
 	{
 		"comment": "short for days",

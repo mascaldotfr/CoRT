@@ -1,4 +1,4 @@
-#boss-daen, #boss-evendim, #boss-thorkul, #boss-server {
+#boss-daen, #boss-evendim, #boss-thorkul, #boss-server, #boss-aquaman {
 	display: flex;
 	flex-wrap: wrap;
 	margin-bottom: 1em;
@@ -27,4 +27,8 @@
 		width: 96px;
 		margin-left: initial;
 	}
+}
+/* XXX AQUAMAN */
+button[id^="aquaman_"] {
+	min-width: 8em;
 }

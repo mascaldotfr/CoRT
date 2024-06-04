@@ -3,6 +3,7 @@ import {_} from "./libs/i18n.js";
 import {insert_notification_link, mynotify} from "./libs/notify.js";
 import {generate_calendar} from "./libs/calendar.js";
 import {timestamp_now, timestamp_ago} from "./wztools/time.js";
+import {__api__base} from "./api_url.js"; // XXX AQUAMAN
 
 // The last respawn timestamp in UTC time
 // You can update it by looking at your browser console and getting the last
@@ -92,12 +93,26 @@ function refresh_display() {
 		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
 		$(`#boss-${bosses_ordered[boss]}`).show();
 	}
+	$(`#boss-aquaman`).appendTo("#boss-list"); // XXX AQUAMAN
+	$(`#boss-aquaman`).show();
 }
 
 $(document).ready(function() {
 	document.title = "CoRT - " + _("Bosses Countdown");
 	$("#title").text(_("Bosses Countdown"));
 	$("#boss-info").text(_("The page refreshes itself every minute."));
+
+	// XXX AQUAMAN
+	$("#boss-aquaman-countdown").text(_("I've seen Aquaman in..."));
+	for (let realm of ["Alsius", "Ignis", "Syrtis"]) {
+		$("#boss-aquaman-respawn").append(`<p><button id="aquaman_${realm}">${realm}</button></p>`);
+		$(`#aquaman_${realm}`).on("click", (event) => {
+			let realm = event.target.innerText;
+			let dummy = $().get(__api__base + "/aquaman/" + realm);
+			window.alert(_("Thank you for telling me you've seen Aquaman in %s!", realm));
+		});
+	}
+
 	insert_notification_link();
 	refresh_display();
 });
