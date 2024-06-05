@@ -103,7 +103,7 @@ $(document).ready(function() {
 	$("#boss-info").text(_("The page refreshes itself every minute."));
 
 	// XXX AQUAMAN
-	$("#boss-aquaman-countdown").text(_("I've seen Aquaman in..."));
+	$("#boss-aquaman-countdown").text(_("I've just seen Aquaman in..."));
 	for (let realm of ["Alsius", "Ignis", "Syrtis"]) {
 		$("#boss-aquaman-respawn").append(`<p><button id="aquaman_${realm}">${realm}</button></p>`);
 		$(`#aquaman_${realm}`).on("click", (event) => {
