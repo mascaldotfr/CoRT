@@ -84,6 +84,10 @@ def statistics(events, db_file, force_rewrite = False):
                 full_report[0]["gems"] = reporter.get_gems()
                 full_report[0]["wishes"] = reporter.get_wishes()
                 full_report[0]["fortsheld"] = reporter.get_fortsheld()
+                for realm in ("Alsius", "Ignis", "Syrtis"):
+                    # No wish the last 90 days?
+                    if full_report[-1][realm]["wishes"]["last"] == None:
+                        full_report[-1][realm]["wishes"]["last"] = reporter.get_last_wish_further(realm)
         end_time = timer()
         full_report[0]["generation_time"] = end_time - start_time;
 
@@ -175,6 +179,15 @@ class Reporter(object):
             wishes[r["location"]][int(r["time"])] = r["count"]
 
         return wishes
+
+    def get_last_wish_further(self, realm):
+        self.sql.execute(f"""select location, date
+                             from events
+                             where type="wish"
+                             and location = "{realm}"
+                             order by date desc limit 1""")
+        r = self.sql.fetchone()
+        return r["date"]
 
     def get_fortsheld(self):
         forts_held = {
