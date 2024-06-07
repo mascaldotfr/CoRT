@@ -68,10 +68,16 @@ def statistics(events, db_file, force_rewrite = False):
         now = datetime.now()
         days = [7, 30, 90]
 
-        # Optimise queries by using only the needed subset of the table
+        # Optimise queries by using only the needed subsets of the table
         report_mints = int(now.timestamp()) - (max(days) * 24 * 3600)
         sql.execute(f"""create temporary table report as
-                      select * from events where date >= {report_mints};""")
+                      select * from events where date >= {report_mints} and type != "relic";""")
+        sql.execute(f"""create temporary table reportforts as
+                      select * from report where type = "fort";""")
+        sql.execute(f"""create temporary table reportwalls as
+                      select * from reportforts where name like "Great Wall of %";""")
+        sql.execute(f"""create temporary table reportgems as
+                      select * from report where type = "gem" and location != owner;""")
 
         full_report = [{"generated": int(now.timestamp())}]
         for day in days:
@@ -120,8 +126,8 @@ class Reporter(object):
         def query(condition, sign=""):
             return f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
                        {sign} cast(count (rowid) as float) / {self.sample_days} as average
-                       from report
-                       where type = "fort" and owner {condition} location
+                       from reportforts
+                       where owner {condition} location
                        group by owner, time
                        order by time;"""
 
@@ -141,9 +147,8 @@ class Reporter(object):
         def query(condition, sign=""):
             return f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
                        {sign} cast(count(rowid) as float) / {self.sample_days} as average
-                       from report
-                       where type = "fort" and owner {condition} location
-                       and name like "Great Wall of %"
+                       from reportwalls
+                       where owner {condition} location
                        group by owner, time
                        order by time;"""
 
@@ -160,8 +165,7 @@ class Reporter(object):
         gems = {"Alsius": [0] * 24, "Ignis": [0] * 24, "Syrtis": [0] * 24}
         self.sql.execute(f"""select owner, strftime("%H", time(date, 'unixepoch')) as time,
                              count(rowid) as count
-                             from report
-                             where type="gem" and location != owner
+                             from reportgems
                              group by owner, time;""")
         for r in self.sql.fetchall():
             gems[r["owner"]][int(r["time"])] = r["count"]
@@ -197,13 +201,13 @@ class Reporter(object):
         total_forts = {"Alsius": 0, "Ignis": 0, "Syrtis": 0}
         average_forts = {"Alsius":[], "Ignis":[], "Syrtis":[]}
         count_forts = {"Alsius":[], "Ignis":[], "Syrtis":[]}
+
         for fort in forts_held:
             for realm in total_forts: # Ensure 1st run is ok
                 forts_held[fort][realm] = {"time": 0, "count": 0}
             self.sql.execute(f"""select date, owner, location
-                            from report
-                            where name like "%{fort}%"
-                            and type = "fort"
+                            from reportforts
+                            where name = "Fort {fort}" or name = "{fort} Castle"
                             order by date asc;""")
             events = self.sql.fetchall()
             for i in range(0, len(events) - 1):
@@ -273,8 +277,8 @@ class Reporter(object):
 
         def query_fort_events(condition):
             return f"""select owner as realm, count(rowid) as count
-                       from report
-                       where type = "fort" and owner {condition} location
+                       from reportforts
+                       where owner {condition} location
                        and date >= {self.startfrom}
                        group by owner;"""
 
@@ -291,8 +295,8 @@ class Reporter(object):
 
         # Get most captured forts by realm
         self.sql.execute(f"""select  owner as realm, name, count(name) as count
-                             from report
-                             where type="fort" and owner != location
+                             from reportforts
+                             where owner != location
                              and date >= {self.startfrom}
                              group by owner, name
                              order by count asc;""")
@@ -304,9 +308,8 @@ class Reporter(object):
 
         # Get count of invasions and last invasion by realm
         self.sql.execute(f"""select owner as realm, location, max(date) as date, count(name) as count
-                             from report
-                             where type = "fort" and owner != location
-                             and name like "Great Wall of %"
+                             from reportwalls
+                             where owner != location
                              and date >= {self.startfrom}
                              group by owner;""")
         for r in self.sql.fetchall():
@@ -316,9 +319,8 @@ class Reporter(object):
 
         # Get the number of times a realm got invaded
         self.sql.execute(f"""select owner as realm, count(name) as count
-                             from report
-                             where type = "fort" and owner = location
-                             and name like "Great Wall of %"
+                             from reportwalls
+                             where owner = location
                              and date >= {self.startfrom}
                              group by location;""")
         for r in self.sql.fetchall():
@@ -326,9 +328,8 @@ class Reporter(object):
 
         # Get last gem stolen date and total count
         self.sql.execute(f"""select owner as realm, max(date) as date, count(date) as count
-                             from report
-                             where type = "gem" and location != owner
-                             and date >= {self.startfrom}
+                             from reportgems
+                             where date >= {self.startfrom}
                              group by owner;""")
         for r in self.sql.fetchall():
             self.stats[r["realm"]]["gems"]["stolen"]["last"] = r["date"]
