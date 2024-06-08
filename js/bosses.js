@@ -13,6 +13,7 @@ import {__api__base} from "./api_url.js"; // XXX AQUAMAN
 const first_respawns = { "thorkul": 1715403300,
 			 "evendim": 1715462390,
 			 "daen": 1715156280,
+			"aquaman": 1717858800,
 			 "server": 1715162400 + 37 * 60 };
 let next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
 let previous_respawns = first_respawns;
@@ -34,6 +35,8 @@ function get_next_respawns(boss) {
 	while (true) {
 		if (boss == "server")
 			respawn_time = 168 * 3600; // 1 week
+		else if (boss == "aquaman")
+			respawn_time = 13 * 3600;
 		else
 			respawn_time = 109 * 3600; // 109 hours
 		tried_respawn += respawn_time;
@@ -78,6 +81,7 @@ function refresh_display() {
 	for (let boss in first_respawns) {
 		$(`#boss-${boss}-lastspawn`).empty();
 		$(`#boss-${boss}-respawn`).empty();
+		$("#boss-aquaman-ask").empty(); // XXX AQUAMAN
 		next_respawns[boss] = [];
 		get_next_respawns(boss);
 		display_next_respawn(boss);
@@ -93,25 +97,24 @@ function refresh_display() {
 		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
 		$(`#boss-${bosses_ordered[boss]}`).show();
 	}
-	$(`#boss-aquaman`).appendTo("#boss-list"); // XXX AQUAMAN
-	$(`#boss-aquaman`).show();
-}
-
-$(document).ready(function() {
-	document.title = "CoRT - " + _("Bosses Countdown");
-	$("#title").text(_("Bosses Countdown"));
-	$("#boss-info").text(_("The page refreshes itself every minute."));
-
 	// XXX AQUAMAN
-	$("#boss-aquaman-countdown").text(_("I've just seen Aquaman in..."));
+	$("#boss-aquaman-ask").append(`
+		<p class="faded italic">${_("All times are estimates for now, help me improve it!")}</p>
+		<p><b class="red"> ${_("I've just seen Aquaman in...")}</b></p>`);
 	for (let realm of ["Alsius", "Ignis", "Syrtis"]) {
-		$("#boss-aquaman-respawn").append(`<p><button id="aquaman_${realm}">${realm}</button></p>`);
+		$("#boss-aquaman-ask").append(`<p><button id="aquaman_${realm}">${realm}</button></p>`);
 		$(`#aquaman_${realm}`).on("click", (event) => {
 			let realm = event.target.innerText;
 			let dummy = $().get(__api__base + "/aquaman/" + realm);
 			window.alert(_("Thank you for telling me you've seen Aquaman in %s!", realm));
 		});
 	}
+}
+
+$(document).ready(function() {
+	document.title = "CoRT - " + _("Bosses Countdown");
+	$("#title").text(_("Bosses Countdown"));
+	$("#boss-info").text(_("The page refreshes itself every minute."));
 
 	insert_notification_link();
 	refresh_display();
