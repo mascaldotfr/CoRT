@@ -115,7 +115,7 @@ function show_graphs_fortsheld_byrealm(data, selector) {
 		axisX: { onlyInteger: true },
 		horizontalBars: true,
 		seriesBarDistance: 30,
-		low: Math.min(...series) * 0.95,
+		low: Math.min(...series) * 0,
 		high: Math.max(...series) * 1.05
 	};
 	new Chartist.BarChart(selector, dataset, options);
