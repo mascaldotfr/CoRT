@@ -7,6 +7,12 @@ h2 a, h3 a, #ws-index-list a {
 h2 a, h3 a {
 	color: var(--foreground);
 }
+.blink {
+	animation: blinking 1.5s infinite;
+}
+@keyframes blinking {
+	50% { color: red; background: black; }
+}
 #ws-container-text .ws-card {
 	display: flex;
 	flex-wrap: wrap;

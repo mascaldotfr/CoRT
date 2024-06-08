@@ -184,6 +184,10 @@ async function display_stat() {
 							`${naify(timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}`],
 					["Dragon wish",
 							`${naify(timestamp_ago(r["wishes"]["last"], true).human, "N/A")}`]];
+				let now = new Date();
+				let earliest_date = (now.getTime() / 1000) - (days * 3600 * 24);
+				if (r["wishes"]["last"] <= earliest_date) // out of bound wish
+					rows[2][1] = `<span class="blink">☠${rows[2][1]}☠</span>`;
 				table_factory(rows, `#ws-last-${realm.toLowerCase()}`, realm);
 			}
 		}
