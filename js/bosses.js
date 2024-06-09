@@ -36,7 +36,7 @@ function get_next_respawns(boss) {
 		if (boss == "server")
 			respawn_time = 168 * 3600; // 1 week
 		else if (boss == "aquaman")
-			respawn_time = 13 * 3600;
+			respawn_time = 23 * 3600;
 		else
 			respawn_time = 109 * 3600; // 109 hours
 		tried_respawn += respawn_time;
