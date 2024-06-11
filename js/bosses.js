@@ -10,6 +10,7 @@ import {__api__base} from "./api_url.js"; // XXX AQUAMAN
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
 // will run ~ 80 times/boss after all that time.
 // Last checked: Eve: 2024-05-11, Daen: 2024-05-11, TK: 2024-05-11, Server: 2024-05-11 (+37m)
+// XXX AQUAMAN TBD
 const first_respawns = { "thorkul": 1715403300,
 			 "evendim": 1715462390,
 			 "daen": 1715156280,
@@ -36,7 +37,7 @@ function get_next_respawns(boss) {
 		if (boss == "server")
 			respawn_time = 168 * 3600; // 1 week
 		else if (boss == "aquaman")
-			respawn_time = 23 * 3600;
+			respawn_time = 22 * 3600;
 		else
 			respawn_time = 109 * 3600; // 109 hours
 		tried_respawn += respawn_time;
@@ -48,6 +49,12 @@ function get_next_respawns(boss) {
 	previous_respawns[boss] = next_respawns[boss][0] - respawn_time;
 	console.log(boss, "previous respawn (to put in js file) is",
 		previous_respawns[boss]);
+	if (boss != "aquaman")
+		return;
+	for (let i of [2, 3, 4]) {
+		let prevprevprev = new Date((previous_respawns["aquaman"] - respawn_time * i) * 1000);
+		console.log("[DEBUG]", "prevprevprev respawn: ", prevprevprev);
+	}
 }
 
 function display_next_respawn(boss) {
