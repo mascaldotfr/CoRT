@@ -51,7 +51,7 @@ function get_next_respawns(boss) {
 		previous_respawns[boss]);
 	if (boss != "aquaman")
 		return;
-	for (let i of [2, 3, 4]) {
+	for (let i of [1, 2, 3, 4]) {
 		let prevprevprev = new Date((previous_respawns["aquaman"] - respawn_time * i) * 1000);
 		console.log("[DEBUG]", "prevprevprev respawn: ", prevprevprev);
 	}
