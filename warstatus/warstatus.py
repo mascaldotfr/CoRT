@@ -31,7 +31,7 @@ outfile = "warstatus.json"
 stats_db_file = "stats/events.sqlite"
 stats_outfile = "stats/statistics.json"
 stats_outfile_events = "stats/allevents.json"
-base_url = "https://championsofregnum.com/"
+base_url = "https://www.championsofregnum.com/"
 # Use True to allow unconditional successful runtime for debugging
 # It propagates to stats.generate as well
 debug_mode = False
@@ -41,7 +41,7 @@ def filename(url):
 	return url.split('/').pop();
 
 def main():
-    with urlopen("https://championsofregnum.com/index.php?l=1&sec=3") as response:
+    with urlopen(base_url + "/index.php?l=1&sec=3") as response:
         failure = {}
         status = {"forts": [], "gems": []}
         status["relics"] = {
