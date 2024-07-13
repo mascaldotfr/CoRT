@@ -14,7 +14,7 @@ import {__api__base} from "./api_url.js"; // XXX AQUAMAN
 const first_respawns = { "thorkul": 1715403300,
 			 "evendim": 1715462390,
 			 "daen": 1715156280,
-			"aquaman": 1720499400,
+			"aquaman": 1720794600,
 			 "server": 1715162400 + 37 * 60 };
 let next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
 let previous_respawns = first_respawns;
@@ -37,7 +37,7 @@ function get_next_respawns(boss) {
 		if (boss == "server")
 			respawn_time = 168 * 3600; // 1 week
 		else if (boss == "aquaman")
-			respawn_time = 7.5 * 3600;
+			respawn_time = 23.5 * 3600;
 		else
 			respawn_time = 109 * 3600; // 109 hours
 		tried_respawn += respawn_time;
