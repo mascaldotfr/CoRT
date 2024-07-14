@@ -112,7 +112,7 @@ async function display_wz(init=false) {
 			console.error(data["failed"]);
 			failures = JSON.parse(data["failed"]["debug"]);
 			let whatfailed = Object.keys(failures).join(" ");
-			let checkout = `Check out <a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
+			let checkout = `Check out <a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 				  NGE's page</a>!`;
 			if (data["failed"]["status"] == "fatal") {
 				$("#wz-info-error").html(`<p>

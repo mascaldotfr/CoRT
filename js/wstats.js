@@ -154,7 +154,7 @@ async function display_stat() {
 	$("#ws-last-updated").text(some_time_ago["human"]);
 	if (timestamp_now() - infos["generated"] > 3 * 3600) {
 		$("#ws-info-error").html(`<b>Nothing happened since the last 3 hours,
-			<a href="https://championsofregnum.com/index.php?l=1&sec=3" target="_blank">
+			<a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 			NGE's page</a> is probably not working.</b>`);
 	}
 
