@@ -96,27 +96,6 @@ export const __i18n__ = {
 		"es": "debería aparecer muy pronto!",
 		"de": "sollte sehr bald erscheinen!"
 	},
-	"I've just seen Aquaman in...":
-	{
-		"comment": "XXX AQUAMAN",
-		"fr": "Je viens de voir Aquaman sur ...",
-		"es": "Acabo de ver Aquaman en...",
-		"de": "Ich habe gerade Aquaman gesehen in..."
-	},
-	"All times are estimates for now, help me improve it!":
-	{
-		"comment": "XXX AQUAMAN",
-		"fr": "Toutes les heures sont des estimations pour l'instant, aidez-moi à les améliorer !",
-		"es": "Todos los tiempos son estimados por ahora, ¡ayúdame a mejorarlo!",
-		"de": "Alle Zeiten sind derzeit Schätzungen. Helfen Sie mir, sie zu verbessern!"
-	},
-	"Thank you for telling me you've seen Aquaman in %s!":
-	{
-		"comment": "XXX AQUAMAN",
-		"fr": "Merci de m'avoir indiqué que tu as vu Aquaman sur %s !",
-		"es": "¡Gracias por hacerme saber que viste Aquaman en %s!",
-		"de": "Vielen Dank, dass Sie mich wissen lassen, dass Sie Aquaman auf %s gesehen haben!"
-	},
 	"d":
 	{
 		"comment": "short for days",

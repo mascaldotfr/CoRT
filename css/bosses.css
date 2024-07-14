@@ -1,4 +1,4 @@
-#boss-daen, #boss-evendim, #boss-thorkul, #boss-server, #boss-aquaman {
+#boss-daen, #boss-evendim, #boss-thorkul, #boss-server {
 	display: flex;
 	flex-wrap: wrap;
 	margin-bottom: 1em;
@@ -28,11 +28,4 @@
 		margin-left: initial;
 	}
 }
-/* XXX AQUAMAN */
-button[id^="aquaman_"] {
-	min-width: 8em;
-}
-#boss-aquaman-ask {
-	background: rgba(0, 0, 0, .2);
-	box-shadow: 0 0 .5em rgba(255, 128, 128, .25);
-}
+
