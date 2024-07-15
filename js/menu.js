@@ -58,7 +58,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a> and
 		<a href="irc://irc.quakenet.org/regnum-online">IRC channel</a>!</i></p>
-		<p> <!--VERSION-->Version: 20240715.074023
+		<p> <!--VERSION-->Version: 20240715.163115
 `;
 
 $(document).ready(function() {
@@ -99,17 +99,3 @@ $(document).ready(function() {
 	create_tz_list("#tzchooser");
 
 });
-
-
-// get basic hit statistics
-function get_hits() {
-	let head = document.getElementsByTagName("head")[0];
-	let script = document.createElement("script");
-	script.type = "text/javascript";
-	script.src = __api__base + "/ping.js?p=/" +
-		     window.location.pathname.split("/").pop();
-	script.setAttribute("defer", "");
-	head.appendChild(script);
-}
-if (window.location.origin == __api__frontsite)
-	setTimeout(get_hits, 2000);
