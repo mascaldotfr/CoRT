@@ -2932,6 +2932,7 @@
           "cast":3.0,
           "gcd":"Normal",
           "range":25.0,
+          "area": 6,
           "debuffs":{
             "Immobilize":true
           },
@@ -3035,6 +3036,7 @@
           "gcd":"Short",
           "cooldown":90.0,
           "duration":5.0,
+          "area": 10,
           "damage":{
             "Piercing":"+750"
           },
