@@ -179,9 +179,10 @@
           "cast":1.5,
           "gcd":"Normal",
           "cooldown":180.0,
+          "area":10,
           "damage":{
-            "Attack":"+100%",
-            "Piercing":[300,400,500,600,700]
+            "Attack (75° arc)":"+100%",
+            "Piercing (75° arc)":[300,400,500,600,700]
           }
         }
       ]
@@ -707,8 +708,9 @@
           "cooldown":20,
           "duration":[15, 20, 25, 35, 50],
           "weapon_interval": true,
+          "area":25,
           "buffs":{
-            "Reveal": true
+            "Reveal (45° arc)":true
           }
         },
         {
@@ -1056,6 +1058,7 @@
           "gcd":"Short",
           "cooldown":20.0,
           "duration":[3,4,5,6,7],
+          "area":20,
           "damage":{
             "Fire (instant, 40° arc)":["80-120","190-240","300-360","410-480","520-600"]
           },
