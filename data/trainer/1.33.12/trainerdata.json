@@ -1681,6 +1681,9 @@
           "area":10,
           "buffs":{
             "Magic barrier":[ "+25", "+30", "+35", "+40", "+50" ]
+          },
+          "debuffs":{
+            "Caster is not affected":true
           }
         }
       ]
