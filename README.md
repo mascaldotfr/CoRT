@@ -1,3 +1,9 @@
+
+> [!IMPORTANT]
+> **CoRT is in maintenance mode: no new features will be added, only minor fixes or data updates. The site will stay up though.**
+>
+> **If you want to bring further developments to CoRT, see https://github.com/CoR-Forum/CoRT.**
+
 # Champions of Regnum trainer (and more)
 
 Since the famous regnumsentinel trainer is dead, all is left are operating
