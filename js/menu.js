@@ -58,7 +58,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a> and
 		<a href="irc://irc.quakenet.org/regnum-online">IRC channel</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250207.170050
+		<p> <!--VERSION-->Version: 20250214.165433
 `;
 
 $(document).ready(function() {
