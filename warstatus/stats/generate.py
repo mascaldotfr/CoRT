@@ -31,12 +31,15 @@ create table if not exists events (
 );
 """
 
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
 def statistics(events, db_file, force_rewrite = False):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
     except Exception as e:
-        print("Failed to create a database connection to", db_file, ":", e)
+        eprint("Failed to create a database connection to", db_file, ":", e)
         sys.exit(1)
 
     conn.row_factory = sqlite3.Row
@@ -44,7 +47,7 @@ def statistics(events, db_file, force_rewrite = False):
     try:
         sql.executescript(db_schema)
     except Exception as e:
-        print("Failed to create db: ", e)
+        eprint("Failed to create db: ", e)
         sys.exit(1)
 
     insert_queries = []
