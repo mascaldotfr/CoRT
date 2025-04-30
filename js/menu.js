@@ -56,8 +56,7 @@ let __menu_footer = `
 		<p><i>CoRT is a free and open source website, feel free to check out its
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
-		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a> and
-		<a href="irc://irc.quakenet.org/regnum-online">IRC channel</a>!</i></p>
+		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</i></p>
 		<p> <!--VERSION-->Version: 20250302.174203
 `;
 
