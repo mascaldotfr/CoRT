@@ -45,7 +45,7 @@ def filename(url):
 
 def main():
     try:
-        with urlopen(base_url + "/index.php?l=1&sec=3") as response:
+        with urlopen(base_url + "/index.php?l=1&sec=3", timeout=10) as response:
             upstream_html = response.read()
     except Exception as e:
         eprint("Failed to fetch the page ! " + traceback.format_exc())
