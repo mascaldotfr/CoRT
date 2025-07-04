@@ -11,4 +11,4 @@ export const class_type_masks = {
 };
 export const classes = ["knight", "barbarian", "conjurer", "warlock", "hunter", "marksman"];
 
-export const datasets = ["1.33.2", "1.33.3", "1.33.6", "1.33.12"];
+export const datasets = ["1.33.2", "1.33.3", "1.33.6", "1.33.12", "1.35.19"];
