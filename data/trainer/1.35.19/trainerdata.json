@@ -1802,6 +1802,9 @@
           "cooldown":100,
           "cast":1.0,
           "gcd":"Very Short",
+          "debuffs": {
+            "Protection":"-25%"
+          },
           "buffs":{
             "Spell damage":[ "+5%", "+10%", "+15%", "+20%", "+30%"]
           }
