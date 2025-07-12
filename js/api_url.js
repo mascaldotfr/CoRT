@@ -4,6 +4,10 @@
 // don't forget to copy this file in a temp directory and copying it back after
 // the pull!
 
+// You will also need to change the preload directives in some
+// wz/wevents/wstats/tstats, or remove them if the API server and the server
+// you serve the pages is the same.
+
 // The root where all API files can be found
 export const __api__base = "https://hail.thebus.top/CoRT";
 // Used by the trainer to filter setup submissions
