@@ -1751,7 +1751,7 @@
           "cooldown":60,
           "cast":0.5,
           "gcd":"Very Short",
-          "area":6,
+          "area":10,
           "debuffs":{
             "Movement speed":[ "-10%", "-15%", "-20%", "-25%", "-30%" ]
           },
