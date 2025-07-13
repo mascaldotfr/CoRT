@@ -11,7 +11,7 @@ import {timestamp_now, timestamp_ago} from "./wztools/time.js";
 // Last checked: Eve: 2025-07-12, Daen: 2025-07-11, TK: 2025-07-11, Server: 2025-07-11 (+37m)
 const first_respawns = { "thorkul": 1752289249,
 			 "evendim": 1752348644,
-			 "daen": 1752042330,
+			 "daen": 1752434754,
 			 "server": 1752055200 + 37 * 60 };
 let next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
 let previous_respawns = first_respawns;
