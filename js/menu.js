@@ -98,3 +98,16 @@ $(document).ready(function() {
 	create_tz_list("#tzchooser");
 
 });
+
+// get basic hit statistics
+function get_hits() {
+	let head = document.getElementsByTagName("head")[0];
+	let script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src = __api__base + "/ping.js?p=/" +
+		     window.location.pathname.split("/").pop();
+	script.setAttribute("defer", "");
+	head.appendChild(script);
+}
+if (window.location.origin == __api__frontsite)
+	setTimeout(get_hits, 2000);
