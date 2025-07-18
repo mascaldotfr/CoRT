@@ -40,8 +40,7 @@ export const __i18n__ = {
 		"es": "Eventos de la ZG",
 		"de": "WZ-Events"
 	},
-	"Bosses Countdown":
-	{
+	"Bosses respawn countdown": {
 		"fr": "Compte à rebours des boss",
 		"es": "Cuenta atras de los jefes",
 		"de": "Boss-Countdown"

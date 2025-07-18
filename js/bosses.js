@@ -95,8 +95,8 @@ function refresh_display() {
 }
 
 $(document).ready(function() {
-	document.title = "CoRT - " + _("Bosses Countdown");
-	$("#title").text(_("Bosses Countdown"));
+	document.title = "CoRT - " + _("Bosses respawn countdown");
+	$("#title").text(_("Bosses respawn countdown"));
 	$("#boss-info").text(_("The page refreshes itself every minute."));
 
 	insert_notification_link();
