@@ -65,12 +65,12 @@ def main():
 
     page = BeautifulSoup(upstream_html, "html.parser")
 
-    headers = page.findAll("div", {"class" : "war-status-realm"})
+    headers = page.find_all("div", {"class" : "war-status-realm"})
     i = 0
     for realm in headers:
-        for gem in realm.findAll("img"):
+        for gem in realm.find_all("img"):
             status["gems"].append(filename(gem.attrs["src"]))
-        for relic in realm.next_sibling.next_sibling.findAll("img"):
+        for relic in realm.next_sibling.next_sibling.find_all("img"):
             relic_name = relic.attrs["title"].split(" relic")[0]
             status["relics"][realms[i]][relic_name] = filename(relic.attrs["src"])
         i += 1
@@ -78,12 +78,12 @@ def main():
     if len(status["gems"]) != 18:
         failure["gems"] =  f'Fetching gems failed: {status["gems"]}'
 
-    icons = page.findAll("div", {"class" : "war-status-bulding-icons"})
+    icons = page.find_all("div", {"class" : "war-status-bulding-icons"})
     for icon_block in icons:
-        for icon in icon_block.findAll("img"):
+        for icon in icon_block.find_all("img"):
             forts_icons.append(filename(icon.attrs["src"]))
 
-    names = page.findAll("div", {"class" : "war-status-bulding-name"})
+    names = page.find_all("div", {"class" : "war-status-bulding-name"})
     for name in names:
         forts_names.append(name.text)
 
