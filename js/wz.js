@@ -141,7 +141,6 @@ async function display_wz(init=false) {
 	bg.onload = function () {
 		$("#wz-map-map").css("background-image", `url(${bg.src})`);
 		$("#wz-map-map").css("background-size", "cover");
-		$("#wz-map-map").css("animation", "unset");
 	};
 
 	if (!("gems" in failures)) {
