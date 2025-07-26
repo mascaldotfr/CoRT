@@ -97,6 +97,13 @@ $(document).ready(function() {
 
 	create_tz_list("#tzchooser");
 
+	$("body").prepend(`
+		<div class="card" style="background-color:#ff3333; font-weight: bold; text-align:center;">
+		&#9888;&#65039; I'm doing heavy maintenance tasks on the server this weekend. There
+		may be some disruptions.
+		</div>
+	`);
+
 });
 
 // get basic hit statistics
