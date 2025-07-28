@@ -67,7 +67,7 @@ $(document).ready(async function() {
 	document.title = "CoRT - " + _("WZ events");
 	$("#title").text(_("WZ events"));
 	$("#we-info-info").text(
-		_("All events over the last 3 days.") +
+		_("All events over the last 14 days.") +
 		" " + _("Last updated:") + " ");
 	$("#we-filter-label").text(_("Filter:"));
 	let options = { "Global": [

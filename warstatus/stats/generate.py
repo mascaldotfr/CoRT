@@ -356,7 +356,7 @@ class Reporter(object):
         # use 3 days max for the events
         self.sql.execute(f"""select *
                              from report
-                             where date > unixepoch() - 3 * 24 * 3600
+                             where date > unixepoch() - 14 * 24 * 3600
                              order by date desc""")
         output = [{"generated": int(datetime.now().timestamp())}]
         for r in self.sql.fetchall():

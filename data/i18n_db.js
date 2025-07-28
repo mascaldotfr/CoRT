@@ -409,10 +409,10 @@ export const __i18n__ = {
 		"es": "Último evento:",
 		"de": "Letzter Eintrag:"
 	},
-	"All events over the last 3 days.": {
-		"fr": "Tous les événements sur les derniers 3 jours.",
-		"es": "Todos los eventos durante los últimos 3 días.",
-		"de": "Alle Ereignisse der letzten 3 Tage."
+	"All events over the last 14 days.": {
+		"fr": "Tous les événements sur les derniers 14 jours.",
+		"es": "Todos los eventos durante los últimos 14 días.",
+		"de": "Alle Ereignisse der letzten 14 Tage."
 	},
 	"Index": {
 		"fr": "Index",
