@@ -380,8 +380,8 @@ export const __i18n__ = {
 		"de": "Weitere Events"
 	},
 	"is back to its altar.": {
-		"fr": "est de retour sur son autel.",
-		"es": "está de vuelta en su altar.",
+		"fr": "est revenue à son autel.",
+		"es": "ha regresado a su altar.",
 		"de": "ist zurück an seinem Altar."
 	},
 	"is in transit.": {
@@ -390,8 +390,8 @@ export const __i18n__ = {
 		"de": "ist unterwegs."
 	},
 	"%s's relic": {
-		"fr": "La relique de %s",
-		"es": "La reliquia de %s",
+		"fr": "Relique de %s",
+		"es": "Reliquia de %s",
 		"de": "%s' Relikt"
 	},
 	"%s made a dragon wish!": {
