@@ -74,7 +74,7 @@ def statistics(events, db_file, force_rewrite = False):
         # Optimise queries by using only the needed subsets of the table
         report_mints = int(now.timestamp()) - (max(days) * 24 * 3600)
         sql.execute(f"""create temporary table report as
-                      select * from events where date >= {report_mints} and type != "relic";""")
+                      select * from events where date >= {report_mints};""")
         sql.execute(f"""create temporary table reportforts as
                       select * from report where type = "fort";""")
         sql.execute(f"""create temporary table reportwalls as
