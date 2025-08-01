@@ -414,6 +414,11 @@ export const __i18n__ = {
 		"es": "Todos los eventos durante los últimos 14 días.",
 		"de": "Alle Ereignisse der letzten 14 Tage."
 	},
+	"Download all events data": {
+		"fr": "Télécharger toutes les données des évènements",
+		"es": "Descargar todos los datos de eventos",
+		"de": "Alle Veranstaltungsdaten herunterladen"
+	},
 	"Index": {
 		"fr": "Index",
 		"es": "Índice",

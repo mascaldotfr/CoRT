@@ -1,4 +1,4 @@
-import {__api__urls} from "./api_url.js";
+import {__api__urls, __api__base} from "./api_url.js";
 import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
 import {humanise_events} from "./wztools/events.js";
@@ -69,6 +69,9 @@ $(document).ready(async function() {
 	$("#we-info-info").text(
 		_("All events over the last 14 days.") +
 		" " + _("Last updated:") + " ");
+	$("#we-data-dump").html(`
+		<a href="${__api__base}/warstatus/stats/dumps" target="blank">
+		${_("Download all events data")}</a>`);
 	$("#we-filter-label").text(_("Filter:"));
 	let options = { "Global": [
 				["none", _("None")],

@@ -5,6 +5,9 @@
 #we-info {
 	text-align: center;
 }
+#we-data-dump {
+	font-style: italic;
+}
 #we-select {
 	display: flex;
 	gap: 1em;
