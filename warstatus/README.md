@@ -48,7 +48,6 @@ sensitive content (credentials etc.).
 3. Add the following line:
 	```
 	* * * * * /where/is/warstatus.py
-    0 6 * * * /where/is/warstatus/stats/dump_generator
 	```
 4. Modify `js/api_url.js` with your own urls
 

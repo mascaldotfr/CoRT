@@ -29,9 +29,21 @@ Using static gzip compression in your web server is recommended, especially for
 - The "API endpoint" for statistics URL is: https://hail.thebus.top/CoRT/warstatus/stats/statistics.json
 - The "API endpoint" for events URL is: https://hail.thebus.top/CoRT/warstatus/stats/allevents.json
 - The full database is publicly available at: https://hail.thebus.top/CoRT/warstatus/stats/events.sqlite
+- CSV dumps for use in Excel etc. can be found at: https://hail.thebus.top/CoRT/warstatus/stats/dumps/
 
 Unless you prepopulate your installation with the downloadable `events.sqlite`
 above, it will need a few days to get meaningful graphs for the statistics.
+
+### Dump generator
+
+There is a way to generate a CSV dump with all historical events and a
+(current) yearly one. It requires the `sqlite3` program to be installed.
+
+Like you did in `warstatus` you can modify the crontab to include the following line:
+
+```
+    0 6 * * * cd /where/is/warstatus/stats && ./dump_generator
+```
 
 ## Database format
 
