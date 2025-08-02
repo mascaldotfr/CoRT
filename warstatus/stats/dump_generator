@@ -3,6 +3,7 @@
 out_yearly="dumps/`date +%Y`_events.csv"
 out_history="dumps/all_events.csv"
 
+mkdir -p dumps
 sqlite3 -header -csv events.sqlite 'select datetime(date, "unixepoch") as date_utc, name, location as original_location, owner as current_owner, type from events where date_utc >= datetime(strftime("%Y") || "-01-01 00:00:00")' > $out_yearly
 sqlite3 -header -csv events.sqlite 'select datetime(date, "unixepoch") as date_utc, name, location as original_location, owner as current_owner, type from events;' > $out_history
 gzip -9fk $out_yearly $out_history
