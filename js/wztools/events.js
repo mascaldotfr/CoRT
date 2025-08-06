@@ -57,9 +57,9 @@ export function humanise_events(events, has_id=true, notify=0)  {
 			let relic = `<span class="${location_color} bold">${_("%s's relic", captured)}</span>`;
 			let relic_notify = `${_("%s's relic", captured)}`;
 			if (anevent["location"] == "altar") {
-				events_html += `${relic} ${_("is back to its altar.")}`;
+				events_html += `${relic} ${_("is back.")}`;
 				if (notify > 0 && anevent["date"] >= notify)
-					events_notify += `${relic_notify} ${_("is back to its altar.")}\n`;
+					events_notify += `${relic_notify} ${_("is back.")}\n`;
 			}
 			else {
 				events_html += `${relic} ${_("is in transit.")}`;

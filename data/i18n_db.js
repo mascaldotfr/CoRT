@@ -379,10 +379,10 @@ export const __i18n__ = {
 		"es": "Más eventos",
 		"de": "Weitere Events"
 	},
-	"is back to its altar.": {
-		"fr": "est revenue à son autel.",
-		"es": "ha regresado a su altar.",
-		"de": "ist zurück an seinem Altar."
+	"is back.": {
+		"fr": "est de retour.",
+		"es": "ha retornado.",
+		"de": "ist zurück."
 	},
 	"is in transit.": {
 		"fr": "est en transit.",
