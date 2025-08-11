@@ -1,11 +1,11 @@
 :root {
-	--background: #212121;
-	--card_background: #313131;
-	--menu_background: #414141;
-	--tooltip_background: #515151;
-	--dialog_background: #3F3F3F;
+	--background: linear-gradient(.75turn, #000006 0%, #000018 100%);
+	--card_background: #1a1a29;
+	--menu_background: #333349;
+	--tooltip_background: #515169;
+	--dialog_background: #2f2f4f;
 	--foreground: white;
-	--forms: #515151;
+	--forms: #5f5f6f;
 	--red: #ffa1a7;
 	--blue: #9ccdf9;
 	--green: #7de384;
@@ -26,7 +26,7 @@ label, select, button, textarea, a:hover, a:active {
 }
 
 body {
-	background-color: var(--background);
+	background: var(--background);
 	color: var(--foreground);
 	font-family: sans-serif;
 	margin: 0 auto;
