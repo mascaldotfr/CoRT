@@ -1,8 +1,8 @@
 :root {
-	--background: linear-gradient(.75turn, #000006 0%, #000018 100%);
-	--card_background: #1a1a29;
+	--background: linear-gradient(.75turn, #000017 0%, #000040 100%);
+	--card_background: #2f2f49;
 	--menu_background: #333349;
-	--tooltip_background: #515169;
+	--tooltip_background: #616179;
 	--dialog_background: #2f2f4f;
 	--foreground: white;
 	--forms: #5f5f6f;
