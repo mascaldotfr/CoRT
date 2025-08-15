@@ -107,18 +107,15 @@ function show_graphs_fortsheld_byfort(data, selector) {
 function show_graphs_fortsheld_byrealm(data, selector) {
 	let series = realms.map(f => data[f]);
 	let dataset = {
-		labels: realms,
-		series: [ series ]
+		series: series
 	};
 	let options = {
-		chartPadding: {left: 30, top: 30, bottom: 0},
-		axisX: { onlyInteger: true },
-		horizontalBars: true,
-		seriesBarDistance: 30,
-		low: Math.min(...series) * 0.95,
-		high: Math.max(...series) * 1.05
+		donut: true,
+		donutWidth: 60,
+		startAngle: 270,
+		showLabel: true
 	};
-	new Chartist.BarChart(selector, dataset, options);
+	new Chartist.PieChart(selector, dataset, options);
 }
 
 function table_factory(rows, selector, realm) {

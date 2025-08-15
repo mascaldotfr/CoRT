@@ -111,6 +111,10 @@ h2 a, h3 a {
 		stroke-width: 10px;
 	}
 }
+#ws-fortsheld-total-chart {
+	width: fit-content;
+	margin: 0 auto;
+}
 #ws-fortsheld-total-chart .ct-bar:nth-child(1) {
 	stroke: var(--blue);
 }
@@ -122,6 +126,9 @@ h2 a, h3 a {
 }
 #ws-fortsheld-total-chart .ct-label.ct-horizontal.ct-end {
 	margin-left: -.7em;
+}
+svg.ct-chart-donut g text.ct-label {
+	stroke: #000000 !important;
 }
 .ws-chart {
 	height: 15em;
