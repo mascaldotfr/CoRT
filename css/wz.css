@@ -41,7 +41,7 @@
 }
 #wz-realms-info {
 	align-self: center;
-	min-width: 25em;
+	min-width: 26em;
 	min-height: 20em;
 }
 .wz-realm-header {
@@ -62,7 +62,7 @@
 }
 #wz-alsius, #wz-ignis, #wz-syrtis {
 	min-height: 5.5em;
-	min-width: 26em;
+	min-width: 25em;
 }
 .wz-realmname {
 	grid-area: realm;
@@ -93,7 +93,7 @@
 		min-height: 65vw;
 		margin: var(--default_margin_padding);
 	}
-	#wz-events, #wz-map, #wz-realms-info {
+	#wz-events, #wz-map, #wz-realms-info, #wz-alsius, #wz-ignis, #wz-syrtis {
 		min-width: auto;
 	}
 	.wz-forts, .wz-realm-header {
