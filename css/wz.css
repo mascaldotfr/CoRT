@@ -61,7 +61,8 @@
 	margin-bottom: 3em;
 }
 #wz-alsius, #wz-ignis, #wz-syrtis {
-	min-height: 5em;
+	min-height: 5.5em;
+	min-width: 26em;
 }
 .wz-realmname {
 	grid-area: realm;

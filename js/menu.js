@@ -57,7 +57,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250816.141006
+		<p> <!--VERSION-->Version: 20250816.143951
 `;
 
 $(document).ready(function() {
@@ -66,10 +66,10 @@ $(document).ready(function() {
 	$("#footer").append(__menu_footer);
 
 	let langs = {
-		"en": "English",
-		"de": "Deutsch",
-		"es": "Español",
-		"fr": "Français"
+		"en": "EN",
+		"de": "DE",
+		"es": "ES",
+		"fr": "FR"
 	};
 	for (let l in langs) {
 		$("#menu-lang-list").append(`
