@@ -70,7 +70,7 @@ $(document).ready(async function() {
 		_("All events over the last 14 days.") +
 		" " + _("Last updated:") + " ");
 	$("#we-data-dump").html(`
-		<a href="${__api__base}/warstatus/stats/dumps" target="blank">
+		<a href="${__api__base}/var/dumps" target="blank">
 		${_("Download all events data")}</a>`);
 	$("#we-filter-label").text(_("Filter:"));
 	let options = { "Global": [

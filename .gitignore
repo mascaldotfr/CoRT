@@ -1,11 +1,8 @@
 collect/data.*
 ping.js
-warstatus/*.json
-warstatus/*.json.gz
-warstatus/stats/dumps
-warstatus/stats/*.json
-warstatus/stats/*.json.gz
-*.sqlite
+var/*.json*
+var/*.sqlite
+var/dumps/*
 __pycache__**
 
 # for macOS users

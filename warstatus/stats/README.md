@@ -6,7 +6,7 @@ This directory includes the necessary code used to generate statistics.
 database `events.sqlite`. It generates a small JSON report called
 `statistics.json` and big JSON one `allevents.json` containing a dump of the events
 the last 3 days if any change happened since the last run. The default output
-directory is this very directory and can be modified in `../warstatus.py`.
+directory is `../../var` and can be modified in `../warstatus.py`.
 
 On top of the generated files, pre compressed gzip files are generated. Please
 see you web server documentation if you don't know how to activate the serving
@@ -26,10 +26,10 @@ it work.
 Using static gzip compression in your web server is recommended, especially for
 `events.json` which weights 500kb uncompressed but only a 25kb compressed.
 
-- The "API endpoint" for statistics URL is: https://hail.thebus.top/CoRT/warstatus/stats/statistics.json
-- The "API endpoint" for events URL is: https://hail.thebus.top/CoRT/warstatus/stats/allevents.json
-- The full database is publicly available at: https://hail.thebus.top/CoRT/warstatus/stats/events.sqlite
-- CSV dumps for use in Excel etc. can be found at: https://hail.thebus.top/CoRT/warstatus/stats/dumps/
+- The "API endpoint" for statistics URL is: https://hail.thebus.top/CoRT/var/statistics.json
+- The "API endpoint" for events URL is: https://hail.thebus.top/CoRT/var/allevents.json
+- The full database is publicly available at: https://hail.thebus.top/CoRT/var/events.sqlite
+- CSV dumps for use in Excel etc. can be found at: https://hail.thebus.top/CoRT/var/dumps/
 
 Unless you prepopulate your installation with the downloadable `events.sqlite`
 above, it will need a few days to get meaningful graphs for the statistics.
