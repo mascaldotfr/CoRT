@@ -11,4 +11,8 @@
 }
 #bz-container li {
 	list-style: none;
+	min-height: 1.5em;
+}
+#bz-next {
+	min-height: 15em;
 }

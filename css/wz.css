@@ -11,16 +11,14 @@
 #wz-info {
 	text-align: center;
 	font-weight: bold;
-}
-#wz-info-info {
-	min-height: 1em;
+	min-height: 4em;
 }
 #wz-map-map {
 	border-radius: 8px;
 	max-width: 100%;
 	padding: 0;
 	margin: 0;
-	background-image: url(../data/warstatus/base_map.png);
+	/*background-image: url(../data/warstatus/base_map.png);*/
 }
 .wz-icon {
 	padding: 0;

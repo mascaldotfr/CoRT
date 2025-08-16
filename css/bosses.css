@@ -6,6 +6,7 @@
 	padding: var(--default_margin_padding);
 	gap: .5em;
 	visibility: hidden;
+	min-height: 14em;
 }
 #boss-list {
 	max-width: 600px;
@@ -21,6 +22,10 @@
 	vertical-align: middle;
 	margin-left: -2em;
 	text-align: center;
+	min-height: 12em;
+}
+#boss-thorkul-respawn p, #boss-evendim-respawn p, #boss-daen-respawn p, #boss-server-respawn p {
+	min-height: 2em;
 }
 @media (max-width:799px) {
 	#boss-list img {

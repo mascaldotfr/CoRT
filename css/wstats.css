@@ -13,6 +13,9 @@ h2 a, h3 a {
 @keyframes blinking {
 	50% { color: red; background: black; }
 }
+#ws-info {
+	min-height: 4em;
+}
 #ws-container-text .ws-card {
 	display: flex;
 	flex-wrap: wrap;
@@ -22,6 +25,9 @@ h2 a, h3 a {
 }
 #ws-last-alsius, #ws-last-ignis, #ws-last-syrtis {
 	min-width: 15em;
+}
+#ws-index {
+	min-height: 18em;
 }
 #ws-forts { grid-area: forts }
 #ws-gems { grid-area: gems }
@@ -78,6 +84,12 @@ h2 a, h3 a {
 }
 #ws-container-text td:nth-child(even) {
 	padding-left: 1em;
+}
+#ws-last-alsius, #ws-last-ignis, #ws-last-syrtis {
+	min-height: 10em;
+}
+#ws-7d, #ws-30d, #ws-30d {
+	min-height: 20em;
 }
 .ws-chart .ct-chart-line {
 	min-height: 8em;

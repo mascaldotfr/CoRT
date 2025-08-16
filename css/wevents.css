@@ -4,6 +4,7 @@
 }
 #we-info {
 	text-align: center;
+	min-height: 3em;
 }
 #we-data-dump {
 	font-style: italic;

@@ -31,6 +31,7 @@ body {
 	font-family: sans-serif;
 	margin: 0 auto;
 	max-width: 1600px;
+	min-width: 90%;
 	-webkit-max-logical-width: -webkit-fit-content;
 	min-height: 100dvh;
 	display: grid;
@@ -69,6 +70,7 @@ select {
 	text-align: center;
 	background-color: var(--menu_background);
 	min-height: 3em;
+	min-width: 90%;
 }
 header {
 	display: flex;
@@ -165,6 +167,7 @@ h1 {
 	text-align: center;
 	margin-top: 1em;
 	margin-bottom: 1em;
+	min-height: 3em;
 }
 .red { color: var(--red); }
 .blue { color: var(--blue); }
