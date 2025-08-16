@@ -18,7 +18,7 @@ export const __api__frontsite_dir = "/CoRT";
 
 export const __api__urls = {
 	"submit_trainer": `${__api__base}/collect/submit.php`,
-	"trainer_data": `${__api__base}/collect/data.txt`,
+	"trainer_data": `${__api__base}/var/trainer_saved_setups.txt`,
 	"events": `${__api__base}/var/allevents.json`,
 	"stats": `${__api__base}/var/statistics.json`,
 	"wstatus": `${__api__base}/var/warstatus.json`

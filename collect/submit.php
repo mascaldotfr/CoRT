@@ -33,9 +33,9 @@ for ($i = 2; $i < $setup_array_length; $i++) {
 	}
 }
 
-file_put_contents("data.txt", implode(" ", $setup_array) . "\n", FILE_APPEND | LOCK_EX);
-$gz = gzopen("data.txt.gz","w9");
-gzwrite($gz, file_get_contents("data.txt"));
+file_put_contents("../var/trainer_saved_setups.txt", implode(" ", $setup_array) . "\n", FILE_APPEND | LOCK_EX);
+$gz = gzopen("../var/trainer_saved_setups.txt.gz","w9");
+gzwrite($gz, file_get_contents("../var/trainer_saved_setups.txt"));
 gzclose($gz);
 ?>
 

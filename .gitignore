@@ -2,6 +2,7 @@ collect/data.*
 ping.js
 var/*.json*
 var/*.sqlite
+var/*.txt*
 var/dumps/*
 __pycache__**
 
