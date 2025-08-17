@@ -1,5 +1,6 @@
 h2 {
 	margin-left: var(--default_margin_padding);
+	height: 1em;
 }
 h2 a, h3 a, #ws-index-list a {
 	text-decoration: none;
@@ -15,6 +16,7 @@ h2 a, h3 a {
 }
 #ws-info {
 	min-height: 2em;
+	min-width: 10em;
 }
 #ws-container-text .ws-card {
 	display: flex;
@@ -30,7 +32,7 @@ h2 a, h3 a {
 	min-width: 15em;
 }
 #ws-index {
-	min-height: 15em;
+	min-height: 17em;
 }
 #ws-forts { grid-area: forts }
 #ws-gems { grid-area: gems }
@@ -89,7 +91,7 @@ h2 a, h3 a {
 	padding-left: 1em;
 }
 #ws-last-alsius, #ws-last-ignis, #ws-last-syrtis {
-	min-height: 8em;
+	min-height: 10em;
 }
 #ws-7d, #ws-30d, #ws-30d {
 	min-height: 20em;

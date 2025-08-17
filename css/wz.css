@@ -15,7 +15,6 @@
 }
 #wz-map-map {
 	border-radius: 8px;
-	max-width: 100%;
 	padding: 0;
 	margin: 0;
 	/*background-image: url(../data/warstatus/base_map.png);*/
@@ -34,9 +33,9 @@
 #wz-events {
 	align-self: center;
 	overflow-y: scroll;
-	max-height: 30em;
-	min-width: 25em;
 	min-height: calc(500px - 2 * var(--default_margin_padding));
+	max-height: 30em;
+	min-width: 28em;
 	margin-left: 0px;
 }
 #wz-realms-info {
@@ -62,7 +61,7 @@
 }
 #wz-alsius, #wz-ignis, #wz-syrtis {
 	min-height: 5.5em;
-	min-width: 25em;
+	min-width: 27em;
 }
 .wz-realmname {
 	grid-area: realm;
@@ -88,6 +87,9 @@
 		grid-template-areas: "map" "alsius" "ignis" "syrtis" "events";
 		grid-template-columns: 1fr;
 		gap: 0;
+	}
+	#wz-map-map {
+		max-width: 100%;
 	}
 	#wz-map {
 		text-align: center;
