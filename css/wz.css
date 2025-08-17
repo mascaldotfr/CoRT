@@ -11,7 +11,7 @@
 #wz-info {
 	text-align: center;
 	font-weight: bold;
-	min-height: 4em;
+	min-height: 2em;
 }
 #wz-map-map {
 	border-radius: 8px;
@@ -87,6 +87,7 @@
 	#wz-container {
 		grid-template-areas: "map" "alsius" "ignis" "syrtis" "events";
 		grid-template-columns: 1fr;
+		gap: 1em;
 	}
 	#wz-map {
 		text-align: center;
@@ -94,10 +95,11 @@
 		margin: var(--default_margin_padding);
 	}
 	#wz-events, #wz-map, #wz-realms-info, #wz-alsius, #wz-ignis, #wz-syrtis {
-		min-width: auto;
+		min-width: calc(100% - 4 * var(--default_margin_padding));
 	}
 	.wz-forts, .wz-realm-header {
-		min-width: unset
+		min-width: unset;
+		gap: 1em;
 	}
 	#wz-events {
 		margin-left: var(--default_margin_padding);

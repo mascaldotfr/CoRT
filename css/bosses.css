@@ -1,17 +1,20 @@
+ul {
+	margin-bottom: 0;
+}
+li {
+	list-style-type: none;
+}
 #boss-daen, #boss-evendim, #boss-thorkul, #boss-server {
 	display: flex;
 	flex-wrap: wrap;
-	margin-bottom: 1em;
 	align-items: center;
-	padding: var(--default_margin_padding);
 	gap: .5em;
 	visibility: hidden;
-	min-height: 14em;
+	min-height: 8em;
 }
 #boss-list {
 	max-width: 600px;
 	margin: 0 auto;
-	margin-top: 2em;
 }
 #boss-list img {
 	width: 125px;
@@ -20,16 +23,12 @@
 .boss-respawn {
 	flex: 1;
 	vertical-align: middle;
-	margin-left: -2em;
+	margin-left: -4em;
 	text-align: center;
-	min-height: 12em;
-}
-#boss-thorkul-respawn p, #boss-evendim-respawn p, #boss-daen-respawn p, #boss-server-respawn p {
-	min-height: 2em;
 }
 @media (max-width:799px) {
 	#boss-list img {
-		width: 96px;
+		width: 64px;
 		margin-left: initial;
 	}
 }
