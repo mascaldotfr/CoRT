@@ -1,4 +1,4 @@
-h2, h3 {
+h2 {
 	margin-left: var(--default_margin_padding);
 }
 h2 a, h3 a, #ws-index-list a {
@@ -6,9 +6,6 @@ h2 a, h3 a, #ws-index-list a {
 }
 h2 a, h3 a {
 	color: var(--foreground);
-}
-h3 {
-	margin-bottom: 0;
 }
 .blink {
 	animation: blinking 1.5s infinite;
@@ -25,6 +22,9 @@ h3 {
 	justify-content: space-between;
 	align-content: stretch;
 	gap: 1em;
+}
+#ws-container-text {
+	margin-bottom: 1em;
 }
 #ws-last-alsius, #ws-last-ignis, #ws-last-syrtis {
 	min-width: 15em;
@@ -89,7 +89,7 @@ h3 {
 	padding-left: 1em;
 }
 #ws-last-alsius, #ws-last-ignis, #ws-last-syrtis {
-	min-height: 10em;
+	min-height: 8em;
 }
 #ws-7d, #ws-30d, #ws-30d {
 	min-height: 20em;
