@@ -61,6 +61,7 @@ export function generate_calendar(tstamp, title, duration) {
 		  lightMode="dark"
 		  inline
 		  hideBackground
+		  buttonStyle="simple"
 		  title="Add to calendar"
 		></add-to-calendar-button>
 	`;
