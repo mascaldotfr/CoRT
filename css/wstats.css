@@ -7,6 +7,9 @@ h2 a, h3 a, #ws-index-list a {
 h2 a, h3 a {
 	color: var(--foreground);
 }
+h3 {
+	margin-bottom: 0;
+}
 .blink {
 	animation: blinking 1.5s infinite;
 }
@@ -14,7 +17,7 @@ h2 a, h3 a {
 	50% { color: red; background: black; }
 }
 #ws-info {
-	min-height: 4em;
+	min-height: 2em;
 }
 #ws-container-text .ws-card {
 	display: flex;
@@ -27,7 +30,7 @@ h2 a, h3 a {
 	min-width: 15em;
 }
 #ws-index {
-	min-height: 18em;
+	min-height: 15em;
 }
 #ws-forts { grid-area: forts }
 #ws-gems { grid-area: gems }
@@ -156,6 +159,12 @@ svg.ct-chart-donut g text.ct-label {
 	#ws-7d > div, #ws-30d > div, #ws-90d > div {
 		min-height: 20em;
 		min-width: 80vw;
+	}
+	#ws-index {
+		min-height: 20em;
+	}
+	#ws-container-text .ws-card {
+		gap: 0;
 	}
 }
 @media (min-width: 800px) and (max-width: 1400px) {
