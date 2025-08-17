@@ -10,7 +10,7 @@ li {
 	align-items: center;
 	gap: .5em;
 	visibility: hidden;
-	min-height: 8em;
+	min-height: 10em;
 }
 #boss-list {
 	max-width: 600px;
