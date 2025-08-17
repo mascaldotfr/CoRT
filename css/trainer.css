@@ -1,7 +1,9 @@
 #t-container {
 	max-width: 1024px;
-	min-height: 75dvh;
 	margin: 0 auto;
+}
+#t-trainer {
+	min-height: calc(3em * 10);
 }
 .setup {
 	display: flex;
