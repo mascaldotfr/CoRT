@@ -50,13 +50,14 @@ function display_next_respawn(boss) {
 	$(`#boss-${boss}-lastspawn`).prepend(`<i>${_("Last respawn")}:
 		${unixstamp2human(previous_respawns[boss])}</i>`);
 	let next_respawn_in = timestamp_ago(next_respawns[boss][0]);
-	$(`#boss-${boss}-respawn`).append(`<li class="red bold">${_("Next respawn in")} ${next_respawn_in.human}</li>`);
+	let next_respawns_html = `<li class="red bold">${_("Next respawn in")} ${next_respawn_in.human}</li>`;
 	for (let respawn in next_respawns[boss]) {
 		let calendar = generate_calendar(next_respawns[boss][respawn], boss, 900);
 		let color = respawn == 0 ? "green" : "faded";
-		$(`#boss-${boss}-respawn`).append(`<li class="${color}"><b>
-			${unixstamp2human(next_respawns[boss][respawn])}</b>${calendar}</li>`);
+		next_respawns_html += `<li class="${color}"><b>
+			${unixstamp2human(next_respawns[boss][respawn])}</b>${calendar}</li>`;
 	}
+	$(`#boss-${boss}-respawn`).append(next_respawns_html);
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
 		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] >= 1 &&

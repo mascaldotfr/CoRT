@@ -1,8 +1,10 @@
-ul {
+.boss-respawn ul {
 	margin-bottom: 0;
+	min-height: 5em;
 }
-li {
+.boss-respawn li {
 	list-style-type: none;
+	line-height: 1.8em;
 }
 #boss-daen, #boss-evendim, #boss-thorkul, #boss-server {
 	display: flex;
