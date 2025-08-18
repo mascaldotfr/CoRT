@@ -3,16 +3,21 @@
 	margin: 0 auto;
 }
 #t-trainer {
-	min-height: calc(3em * 10);
+	min-height: calc(3em * 11);
 }
 .setup {
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
 	min-height: 3em;
+	justify-content: space-around;
 }
-#t-version, #t-class, #t-level, #t-load, #t-save {
+#t-version, #t-load, #t-save, #t-class, #t-level {
 	flex-grow: 1;
+	text-align: center;
+}
+#t-load, #t-save {
+	font-weight: bold;
 }
 .points { text-align:center; visibility: hidden; min-height: 2em;}
 .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
