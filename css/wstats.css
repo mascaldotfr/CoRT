@@ -158,12 +158,15 @@ svg.ct-chart-donut g text.ct-label {
 	#ws-container .statcard {
 		width: 100%;
 	}
+	#ws-info {
+		min-height: 3em;
+	}
 	#ws-7d > div, #ws-30d > div, #ws-90d > div {
 		min-height: 20em;
 		min-width: 80vw;
 	}
 	#ws-index {
-		min-height: 20em;
+		min-height: 24em;
 	}
 	#ws-container-text .ws-card {
 		gap: 0;

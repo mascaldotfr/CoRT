@@ -121,6 +121,10 @@
 	font-weight: bold;
 }
 @media (max-width: 799px) {
+	#titleinfo {
+		min-height: calc(4 * 1.25em);
+		margin: .25em;
+	}
 	.setup {
 		min-height: 6em;
 	}
