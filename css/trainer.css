@@ -11,10 +11,6 @@
 	flex-wrap: wrap;
 	min-height: 3em;
 }
-.version, .class, .level, .load, .save {
-	display: flex;
-	flex: 1;
-}
 #t-version, #t-class, #t-level, #t-load, #t-save {
 	flex-grow: 1;
 }
