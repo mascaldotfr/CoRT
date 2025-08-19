@@ -1,5 +1,5 @@
 #we-container {
-	width: 50vh;
+	width: 40vw;
 	margin: 0 auto;
 }
 #we-info {
@@ -30,7 +30,8 @@
 	flex: 1;
 }
 #we-events {
-	min-height: 30vw;
+	height: 50vh;
+	overflow-y: scroll;
 }
 #we-nextprev {
 	display: grid;
