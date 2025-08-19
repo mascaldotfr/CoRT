@@ -31,16 +31,36 @@
 		<h1 id="title">Trainer</h1>
 		<div id="titleinfo">&nbsp;</div>
 		<div class="setup card">
-			<select id="t-version"></select>
-			<select id="t-class"></select>
+			<select id="t-version">
+				<option>Current game version (1.XX.XX)</option>
+			</select>
+			<select id="t-class">
+				<option>Knight</option>
+			</select>
 			<select id="t-level">
 				<option value="60" default selected>60</option>
 			</select>
-			<button id="t-load">&nbsp;</button>
-			<button id="t-save">&nbsp;</button>
+			<button id="t-load">Load / Reset</button>
+			<button id="t-save">Save / Share</button>
 		</div>
-		<div class="points" id="t-points"><p>&nbsp;</p></div>
-		<div id="t-trainer" class="trainer"></div>
+		<div class="points" id="t-points">
+			<p>
+				<b id="t-dpoints-label">Discipline points:</b>
+				<span id="t-dpointsleft">9999</span>/<span id="t-dpointstotal">9999</span>
+				<b id="t-ppoints-label">Power points:</b>
+				<span id="t-ppointsleft">99</span>/<span id="t-ppointstotal">99</span>
+			<p>
+		</div>
+		<div id="t-trainer" class="trainer">
+			<!-- placeholders -->
+			<div class="card t-placeholder-card"></div>
+			<div class="card t-placeholder-card"></div>
+			<div class="card t-placeholder-card"></div>
+			<div class="card t-placeholder-card"></div>
+			<div class="card t-placeholder-card"></div>
+			<div class="card t-placeholder-card"></div>
+			<div class="card t-placeholder-card"></div>
+		</div>
 		<dialog id="t-dialog">
 			<h3></h3>
 			<textarea id="t-dialog-url" readonly rows="5" cols="50"></textarea>

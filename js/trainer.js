@@ -42,17 +42,15 @@ $(document).ready(function() {
 		_("Selecting an higher character level will upgrade your current setup to that level."));
 	if (is_beta)
 		$("#title").append(`&nbsp;<span class="red">(AMUN/BETA)</span>`);
+	let html_class_options = "";
 	for (let clas of classes) {
-		$("#t-class").append(`
-			<option value="${clas}">${_(capitalize(clas))}</option>`);
+		html_class_options += `<option value="${clas}">${_(capitalize(clas))}</option>`;
 	}
+	$("#t-class").html(html_class_options);
 	$("#t-load").text(_("Load / Reset"));
 	$("#t-save").text(_("Share / Save"));
-	$("#t-points p").html(`
-		<b>${_("Discipline points:")}</b>
-			<span id="t-dpointsleft">x</span>/<span id="t-dpointstotal">x</span>
-		<b>${_("Power points:")}</b>
-			<span id="t-ppointsleft">x</span>/<span id="t-ppointstotal">x</span>`);
+	$("#t-dpoints-label").text(_("Discipline points:"));
+	$("#t-ppoints-label").text(_("Power points:"));
 	if (typeof HTMLDialogElement === "function") {
 		$("#t-dialog h3").text(_("Here is the link to your setup:"));
 		$("#t-dialog-copy").text(_("Copy link"));
@@ -63,16 +61,18 @@ $(document).ready(function() {
 	}
 
 	// generate characters levels options
-	$("#t-level").append(`<option value="61">60 (+${_("Necro crystal")})</option>`);
+	let html_level_options = `<option value="61">60 (+${_("Necro crystal")})</option>`;
 	for (let i = maxlevel - 1; i >= minlevel; i--) {
-		$("#t-level").append(`<option value="${i}">${i}</option>`);
+		html_level_options += `<option value="${i}">${i}</option>`;
 	}
+	$("#t-level").append(html_level_options);
 	// generate datasets version
-	$("#t-version").append(`<option value="${newest_dataset}" default selected>
-		${_("Current game version")} (${newest_dataset})</option>`);
+	let html_dataset_options  = `<option value="${newest_dataset}" default selected>
+		${_("Current game version")} (${newest_dataset})</option>`;
 	for (let i = trainerdatasets.length - 2; i >= 0; i--) {
-		$("#t-version").append(`<option value="${trainerdatasets[i]}">${trainerdatasets[i]}</option>`);
+		html_dataset_options += `<option value="${trainerdatasets[i]}">${trainerdatasets[i]}</option>`;
 	}
+	$("#t-version").html(html_dataset_options);
 	// Drop "index.html" from the URL bar if you are coming from search engines
 	if (window.location.pathname == `${__api__frontsite_dir}/index.html`)
 		window.location.pathname = __api__frontsite_dir;
@@ -88,8 +88,6 @@ $(document).ready(function() {
 	trainerdataversion = urlsearch.get("d");
 	if (skillset) {
 		load_setup_from_url(skillset);
-		// Hide setup options while loading
-		$(".setup").hide();
 	}
 	else {
 		$("#t-load").trigger("click");
@@ -334,6 +332,7 @@ function load_setup_from_url(skillset) {
 
 // ... and this is after (called by load_tree())
 function input_setup_from_url() {
+	/* while slower, generating clicks allows to assert that the setup is correct */
 	if (saved_setup === undefined)
 		return;
 	automated_clicks = true;
@@ -390,7 +389,7 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 	if (treepos != wmrow || (treepos == wmrow && spellpos == 0))
 		icon += `<span class="skilllvl">${skilllvl}</span>`;
 	icon += "</div>";
-	// WM tree has no skill points
+	// WM tree has no skill points, we don't generate + and - buttons
 	if (treepos != wmrow || (treepos == wmrow && spellpos == 0 && currlevel == 60)) {
 		icon += ` <div class="skillspinner">
 					<button class="plus">+</button><button class="minus">-</button>
@@ -419,8 +418,6 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 }
 
 async function load_tree() {
-	// Hide setup options while loading
-	$(".setup").hide();
 	let base_skills = class_type_masks[currclass] & 0xF0;
 	let class_skills = class_type_masks[currclass];
 	// adjust code to get base power and discipline points, as well as WM tree location.
@@ -433,14 +430,12 @@ async function load_tree() {
 		wmrow = 7;
 		powerpoints = 80;
 	}
-	$("#t-trainer").empty();
 	try {
 		trainerdata = await $().getJSON("data/trainer/" + trainerdataversion + "/trainerdata.json");
 	}
 	catch (error) {
 		// Should never happen as the data is local...
 		alert(`Unable to fetch trainer data: ${error}`);
-		$(".setup").show();
 		return;
 	}
 	let alltrees = trainerdata["class_disciplines"][base_skills];
@@ -466,7 +461,12 @@ async function load_tree() {
 		});
 		trainerhtml += "</div>";
 	});
-	$("#t-trainer").append(trainerhtml);
+	// disable all animation
+	$("#t-trainer").css("animation", "none");
+	// "reset" changes due to animation
+	document.getElementById("t-trainer").offsetHeight;
+	$("#t-trainer").css("animation", "1s fadein");
+	$("#t-trainer").html(trainerhtml);
 
 	dpointstotal = trainerdata["points"]["discipline"][powerpoints][currlevel - 1];
 	ppointstotal = trainerdata["points"]["power"][powerpoints][currlevel - 1] + extrappoints;
@@ -476,7 +476,6 @@ async function load_tree() {
 	$("#t-dpointstotal").text(dpointstotal);
 	$("#t-ppointsleft").text(ppointstotal);
 	$("#t-ppointstotal").text(ppointstotal);
-	$(".points").show();
 
 	for (let i = 1; i <= wmrow; i++)
 		update_tree(i);
@@ -491,7 +490,6 @@ async function load_tree() {
 		}
 	});
 	input_setup_from_url();
-	$(".setup").show();
 	while (tooltips.length) {
 		tooltips.shift().call();
 	}

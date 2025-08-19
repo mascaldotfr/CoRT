@@ -2,9 +2,6 @@
 	max-width: 1024px;
 	margin: 0 auto;
 }
-#t-trainer {
-	min-height: calc(3em * 11);
-}
 .setup {
 	display: flex;
 	gap: 1em;
@@ -19,7 +16,13 @@
 #t-load, #t-save {
 	font-weight: bold;
 }
-.points { text-align:center; visibility: hidden; min-height: 2em;}
+#t-level {
+	min-width: 6em;
+}
+.points { text-align:center; min-height: 2em;}
+.t-placeholder-card {
+	height: 3.5em;
+}
 .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -127,8 +130,15 @@
 		margin: .25em;
 	}
 	.setup {
-		min-height: 6em;
+		min-height: 7em;
+	}
+	.t-placeholder-card {
+		height: 12em;
 	}
 }
 
+@keyframes fadein {
+	from { opacity: .7 }
+	to   { opacity: 1 }
+}
 
