@@ -99,6 +99,15 @@ async function display_wz(init=false) {
 	let forts = [];
 	let failures = {};
 
+	// Lazy load map background
+	let bg = new Image()
+	bg.src = "data/warstatus/base_map.png";
+	bg.onload = function () {
+		$("#wz-map-map").css("background-image", `url(${bg.src})`);
+		$("#wz-map-map").css("background-size", "cover");
+		$("#wz-map-map").css("transition", "background-image 1s linear");
+	};
+
 	if ($onlinemanager.online() === false) {
 		$("#wz-info-error").html($onlinemanager.offlineMessage +
 					 " " + $onlinemanager.willRetryMessage);
@@ -138,13 +147,8 @@ async function display_wz(init=false) {
 		return; // nothing new
 
 	display_map(data["forts"]);
-	// Lazy load map background
-	let bg = new Image()
-	bg.src = "data/warstatus/base_map.png";
-	bg.onload = function () {
-		$("#wz-map-map").css("background-image", `url(${bg.src})`);
-		$("#wz-map-map").css("background-size", "cover");
-	};
+
+	// Middle part
 
 	if (!("gems" in failures)) {
 		for (let gem of data["gems"]) {
@@ -178,6 +182,9 @@ async function display_wz(init=false) {
 				</div>
 		`)
 	}
+
+	// Events
+
 	let events_list = humanise_events(data["events_log"], true, wz_lastupdate);
 	$("#wz-events").html(`<h2 id="wz-events-header">
 		<span class="purple">${_("Last server events (in your timezone):")} </span>
@@ -187,6 +194,9 @@ async function display_wz(init=false) {
 		<br>
 		<a href="wevents.html?f=none">${_("More events")}...</a>
 		</span>`);
+
+	// Last update
+
 	wz_lastupdate = Math.floor(new Date().getTime() / 1000);
 	if (events_list[1].length > 0)
 		mynotify(_("WZ status"), events_list[1], "wz");
