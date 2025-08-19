@@ -57,13 +57,13 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250819.213425
+		<p> <!--VERSION-->Version: 20250819.215715
 `;
 
 $(document).ready(function() {
 
 	$("#menu").html(__menu_content);
-	$("#footer").append(__menu_footer);
+	$("#footer").html(__menu_footer);
 
 	let langs = {
 		"en": "EN",
