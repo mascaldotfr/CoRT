@@ -4076,7 +4076,7 @@
           "description":"The Warmaster athletic capabilities increase due to long years of training.",
           "type":"Passive",
           "buffs":{
-            "Health":"+700"
+            "Health":"+300"
           }
         }
       ]
