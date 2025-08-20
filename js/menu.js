@@ -58,7 +58,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250820.193953
+		<p> <!--VERSION-->Version: 20250820.202040
 `;
 
 $(document).ready(function() {

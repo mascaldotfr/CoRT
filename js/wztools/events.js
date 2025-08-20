@@ -6,15 +6,15 @@ import {translate_fort} from "./translate_forts.js";
 // notify allows to return an array with the events without coloration if > 0
 // (unix timestamp from the last event) for use in a desktop notification
 export function humanise_events(events, has_id=true, notify=0)  {
+	let tz = localStorage.getItem("tz");
+	let date_options = {
+		month: 'numeric', day: 'numeric',
+		hour: '2-digit', minute: '2-digit', timeZone: tz };
 	let events_html = "";
 	let events_notify = "";
 	let realm_colors = get_realm_colors();
 	for (let anevent of events) {
 		let dt = new Date(anevent["date"] * 1000);
-		let tz = localStorage.getItem("tz");
-		let date_options = {
-			month: 'numeric', day: 'numeric',
-			hour: '2-digit', minute: '2-digit', timeZone: tz };
 		let datetime = dt.toLocaleDateString(undefined, date_options);
 		let owner = anevent["owner"];
 		let owner_color = realm_colors[owner];
