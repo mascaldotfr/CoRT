@@ -2,7 +2,8 @@ import {_} from "./libs/i18n.js";
 import {__i18n__} from "../data/i18n_db.js";
 import {$} from "./libs/lamaiquery.js";
 import {create_tz_list} from "./libs/tz.js";
-import {__api__frontsite, __api__base} from "./api_url.js";
+// Only used if ping stats are on
+// import {__api__frontsite, __api__base} from "./api_url.js";
 
 let __menu_external_link = `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24"><path stroke="#CCC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5H8.2c-1.12 0-1.681 0-2.108.218a2 2 0 0 0-.874.874C5 6.52 5 7.08 5 8.2v7.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.427.218.987.218 2.105.218h7.606c1.118 0 1.677 0 2.104-.218.376-.192.683-.498.875-.875.218-.427.218-.987.218-2.104V14m1-5V4m0 0h-5m5 0-7 7"/></svg>`;
 let __menu_flags = {
@@ -57,7 +58,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250820.174519
+		<p> <!--VERSION-->Version: 20250820.191232
 `;
 
 $(document).ready(function() {
