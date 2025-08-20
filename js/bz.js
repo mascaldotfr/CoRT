@@ -60,8 +60,6 @@ function feed_bz(init=false) {
 		hour: '2-digit', minute: '2-digit', timeZone: tz};
 	let time_options = {hour: '2-digit', minute: '2-digit', timeZone: tz};
 	let lang = localStorage.getItem("lang");
-	$("#bz-countdown-status").empty();
-	$("#bz-countdown-countdown").empty();
 
 	let current_date = new Date();
 	let current_day = parseInt(current_date.getUTCDay());
@@ -133,8 +131,7 @@ function feed_bz(init=false) {
 		let calendar = generate_calendar(bz_begin_date.getTime() / 1000, "Battlezone", duration);
 		bz_next_future += `<li>${bz_begin_datetime} - ${bz_end_time} ${calendar}</li>`;
 	}
-	$("#bz-next-future").empty();
-	$("#bz-next-future").append(bz_next_future);
+	$("#bz-next-future").html(bz_next_future);
 
 	//console.log("bz is on?", bz_on, "bz_ends_at?", bz_ends_at, "next bz in", next_bz_in);
 }
