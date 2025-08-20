@@ -47,15 +47,16 @@ function get_next_respawns(boss) {
 }
 
 function display_next_respawn(boss) {
-	$(`#boss-${boss}-lastspawn`).prepend(`<i>${_("Last respawn")}:
-		${unixstamp2human(previous_respawns[boss])}</i>`);
+	$(`#boss-${boss}-lastspawn`).text(`${_("Last respawn")}:
+		${unixstamp2human(previous_respawns[boss])}`);
 	let next_respawn_in = timestamp_ago(next_respawns[boss][0]);
 	let next_respawns_html = `<li class="red bold">${_("Next respawn in")} ${next_respawn_in.human}</li>`;
 	for (let respawn in next_respawns[boss]) {
 		let calendar = generate_calendar(next_respawns[boss][respawn], boss, 900);
 		let color = respawn == 0 ? "green" : "faded";
-		next_respawns_html += `<li class="${color}"><b>
-			${unixstamp2human(next_respawns[boss][respawn])}</b>${calendar}</li>`;
+		next_respawns_html += `<li class="${color} bold">
+			${unixstamp2human(next_respawns[boss][respawn])}
+			<span class="addtocalendar">${calendar}</span></li>`;
 	}
 	$(`#boss-${boss}-respawn`).append(next_respawns_html);
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);

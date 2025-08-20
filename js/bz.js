@@ -129,7 +129,8 @@ function feed_bz(init=false) {
 		let bz_end_time = bz_end_date.toLocaleTimeString(lang, time_options);
 		let duration = (bz_end_date.getTime() - bz_begin_date.getTime()) / 1000;
 		let calendar = generate_calendar(bz_begin_date.getTime() / 1000, "Battlezone", duration);
-		bz_next_future += `<li>${bz_begin_datetime} - ${bz_end_time} ${calendar}</li>`;
+		bz_next_future += `<li>${bz_begin_datetime} - ${bz_end_time}
+				   <span class="addtocalendar">${calendar}</span></li>`;
 	}
 	$("#bz-next-future").html(bz_next_future);
 

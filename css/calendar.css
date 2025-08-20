@@ -9,3 +9,8 @@ add-to-calendar-button.calendar::part(atcb-button) {
 	padding: 0px;
 }
 
+.addtocalendar {
+	display: inline-block;
+	width: 2em;
+}
+
