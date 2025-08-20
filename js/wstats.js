@@ -124,8 +124,7 @@ function table_factory(rows, selector, realm) {
 		table += `<tr><td class="bold">${_(row[0])}</td><td>${row[1]}</td></tr>`;
 	}
 	table += "</table>";
-	$(selector).empty();
-	$(selector).append(table);
+	$(selector).html(table);
 }
 
 async function display_stat() {
