@@ -14,8 +14,8 @@
 	visibility: hidden;
 	min-height: 10em;
 }
-#boss-list {
-	max-width: 600px;
+#boss-container {
+	max-width: 35em;
 	margin: 0 auto;
 }
 #boss-list img {
