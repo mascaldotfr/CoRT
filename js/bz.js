@@ -89,7 +89,7 @@ function feed_bz(init=false) {
 	}
 
 	if (bz_on) {
-		$("#bz-countdown-status").html(`<span class="green"><b>${_("ON")}</b></span>`);
+		$("#bz-countdown-status").html(`<span class="green bold">${_("ON")}</span>`);
 		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["hours"]}:${bz_ends_at["minutes"]}:${bz_ends_at["seconds"]}`);
 		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] <= 10 && bz_ends_at["minutes"] >= 1 &&
 			notified_10m === false) {
@@ -102,7 +102,7 @@ function feed_bz(init=false) {
 		}
 	}
 	else {
-		$("#bz-countdown-status").html(`<span class="red"><b>${_("OFF")}</b></span>`);
+		$("#bz-countdown-status").html(`<span class="red bold">${_("OFF")}</span>`);
 		var next_bz_in = date_difference_from_now(next_bzs_begin[0]);
 		$("#bz-countdown-countdown").text(`${_("Next BZ in")} ${next_bz_in["hours"]}:${next_bz_in["minutes"]}:${next_bz_in["seconds"]}`);
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] >= 1 &&
