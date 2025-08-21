@@ -22,12 +22,11 @@ export function humanise_events(events, has_id=true, notify=0)  {
 		let captured = anevent["name"];
 		let captured_notify = anevent["name"];
 		let dt_color = anevent["type"] == "wish" ? location_color: "";
-		events_html += `<b class="${dt_color}">${datetime}</b>&nbsp;`;
+		events_html += `<span class="${dt_color} bold">${datetime}</span>&nbsp;`;
 		if (anevent["type"] == "fort" || anevent["type"] == "gem") {
 			let location_color = realm_colors[anevent["location"]];
 			if (anevent["type"] == "fort") {
 				captured = translate_fort(captured, has_id);
-				captured_notify = captured;
 				if (has_id === true) {
 					captured = captured.substring(0, captured.lastIndexOf(" "));
 					captured_notify = captured;
