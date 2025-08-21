@@ -73,7 +73,7 @@ function draw_map(images) {
 		canvas.setAttribute('width', 1000);
 		canvas.setAttribute('height', 1000);
 		let ctx = canvas.getContext('2d');
-		ctx.setTransform(2, 0, 0, 2, 0, 0);
+		ctx.scale(2, 2);
 		ctx.font = "bold 14px sans-serif";
 		ctx.fillStyle = "#EED202";
 		// Put shadows on forts
