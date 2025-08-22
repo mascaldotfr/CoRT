@@ -8,11 +8,11 @@ import {timestamp_now, timestamp_ago} from "./wztools/time.js";
 // You can update it by looking at your browser console and getting the last
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
 // will run ~ 80 times/boss after all that time.
-// Last checked: Eve: 2025-07-12, Daen: 2025-07-11, TK: 2025-07-16, Server: 2025-07-11 (+37m)
-const first_respawns = { "thorkul": 1752681666,
-			 "evendim": 1752348644,
-			 "daen": 1752434754,
-			 "server": 1752055200 + 37 * 60 };
+// Last checked: Eve: 2025-08-22, Daen: 2025-08-22, TK: 2025-08-22, Server: 2025-08-22 (+37m)
+const first_respawns = { "thorkul": 1752681731,
+			 "evendim": 1755880309,
+			 "daen": 1752434809,
+			 "server": 1755684000 + 37 * 60 };
 let next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
 let previous_respawns = first_respawns;
 let notified_10m = false;
