@@ -3,6 +3,7 @@ ping.js
 var/*.json*
 var/*.sqlite
 var/*.txt*
+var/*.php
 var/dumps/*
 __pycache__**
 
