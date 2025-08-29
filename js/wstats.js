@@ -233,8 +233,9 @@ $(document).ready(function() {
 	$("#ws-index-title").text(_("Index"));
 	for (let link in ilinks) {
 		let l = ilinks[link];
-		$(l["id"]).text(`<a href="#ws-index-list">${l["txt"]}</a>`);
-		$(l["id"]).append(`<a id="${l["id"]}"></a>`);
+		// Add link to each graph / stat title
+		$(l["id"]).html(`<a href="#ws-index-list">${l["txt"]}</a>`);
+		// Add to index card
 		$("#ws-index-list").append(`<li><a href="${l["id"]}">${l["txt"]}</a></li>`);
 	}
 
