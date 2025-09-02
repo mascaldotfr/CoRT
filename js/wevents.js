@@ -1,6 +1,6 @@
 import {__api__urls, __api__base} from "./api_url.js";
+import {_} from "../data/i18n.js";
 import {$} from "./libs/lamaiquery.js";
-import {_} from "./libs/i18n.js";
 import {HumaniseEvents} from "./wztools/wztools.js";
 
 let data = null;

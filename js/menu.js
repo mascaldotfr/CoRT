@@ -1,5 +1,4 @@
-import {_} from "./libs/i18n.js";
-import {__i18n__} from "../data/i18n_db.js";
+import {__i18n__, _} from "../data/i18n.js";
 import {$} from "./libs/lamaiquery.js";
 import {create_tz_list} from "./libs/tz.js";
 // Only used if ping stats are on
@@ -58,7 +57,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250902.202153
+		<p> <!--VERSION-->Version: 20250902.204424
 `;
 
 $(document).ready(function() {

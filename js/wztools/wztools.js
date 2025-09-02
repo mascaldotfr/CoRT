@@ -1,4 +1,4 @@
-import {_} from "../libs/i18n.js";
+import {_} from "../../data/i18n.js";
 
 export class Constants {
 	// Same order as the website

@@ -1,4 +1,4 @@
-import {_} from "./i18n.js";
+import {_} from "../../data/i18n.js";
 
 export const $onlinemanager = {
 	"offlineMessage": `<b>${_("You are offline. Impossible to fetch the data.")}</b>`,

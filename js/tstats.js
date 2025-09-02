@@ -1,6 +1,6 @@
 import {__api__frontsite, __api__frontsite_dir, __api__urls} from "./api_url.js";
 import {$} from "./libs/lamaiquery.js";
-import {_} from "./libs/i18n.js";
+import {_} from "../data/i18n.js";
 import {maxlevel, class_type_masks, datasets, classes} from "./trainertools/constants.js";
 
 var valid_trainerdatasets = datasets;
