@@ -57,7 +57,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250902.211306
+		<p> <!--VERSION-->Version: 20250902.212832
 `;
 
 $(document).ready(function() {
@@ -96,6 +96,21 @@ $(document).ready(function() {
 	});
 
 	create_tz_list("#tzchooser");
+
+	// Cursors lazy loading
+
+	const mediaQuery = window.matchMedia("(min-width: 800px)");
+	if (!mediaQuery.matches) return;
+	const loadCursors = () => {
+		const style = document.createElement("style");
+		style.textContent = `
+			html, body, label, button { cursor: url("data/cursor/normal.png"), default; }
+			label, select, button, textarea, a:hover, a:active { cursor: url("data/cursor/links.png"), default; }
+		`;
+		document.head.appendChild(style);
+		document.removeEventListener("mousemove", loadCursors);
+	};
+	document.addEventListener("mousemove", loadCursors, { once: true });
 
 	/*
 	$("body").prepend(`

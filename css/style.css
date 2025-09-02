@@ -211,13 +211,4 @@ h3 {
 	}
 }
 
-@media (min-width: 800px) {
-	html, body, label, button {
-		cursor: url('../data/cursor/normal.png'), default;
-	}
-
-	label, select, button, textarea, a:hover, a:active {
-		cursor: url('../data/cursor/links.png'), default;
-	}
-}
 
