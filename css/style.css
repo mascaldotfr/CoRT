@@ -17,14 +17,6 @@
 	--table_padding: .25em .5em;
 }
 
-html, body, label, button {
-	cursor: url('../data/cursor/normal.png'), default;
-}
-
-label, select, button, textarea, a:hover, a:active {
-	cursor: url('../data/cursor/links.png'), default;
-}
-
 body {
 	background: var(--background);
 	color: var(--foreground);
@@ -216,6 +208,16 @@ h3 {
 	}
 	#tztitle {
 		text-align: left;
+	}
+}
+
+@media (min-width: 800px) {
+	html, body, label, button {
+		cursor: url('../data/cursor/normal.png'), default;
+	}
+
+	label, select, button, textarea, a:hover, a:active {
+		cursor: url('../data/cursor/links.png'), default;
 	}
 }
 
