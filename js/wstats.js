@@ -1,18 +1,21 @@
 import {__api__urls} from "./api_url.js";
 import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
-import {get_realm_colors, get_realms} from "./wztools/constants.js";
-import {translate_fort} from "./wztools/translate_forts.js";
-import {timestamp_ago, timestamp_now} from "./wztools/time.js";
-import {$onlinemanager} from "./libs/onlinemanager.js";
+import {Constants, TranslateForts, Time} from "./wztools/wztools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
+import {$onlinemanager} from "./libs/onlinemanager.js";
 
 // sync with statistics.json
 let report_days = [7, 30, 90];
 
+// wztools
+let constants = new Constants();
+let xlator = new TranslateForts();
+let time = new Time();
+
 let tz = localStorage.getItem("tz");
-let realm_colors = get_realm_colors();
-let realms = get_realms();
+let realm_colors = constants.realm_colors;
+let realms = constants.realm_names;
 
 // undefined / null => N/A or 0
 function naify(value, failover="0") {
@@ -144,9 +147,9 @@ async function display_stat() {
 	}
 
 	let infos = data.splice(0, 1)[0];
-	let some_time_ago = timestamp_ago(infos["generated"], true);
+	let some_time_ago = time.timestamp_ago(infos["generated"], true);
 	$("#ws-last-updated").text(some_time_ago["human"]);
-	if (timestamp_now() - infos["generated"] > 3 * 3600) {
+	if (time.timestamp_now() - infos["generated"] > 3 * 3600) {
 		$("#ws-info-error").html(`<b>Nothing happened since the last 3 hours,
 			<a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 			NGE's page</a> is probably not working.</b>`);
@@ -161,7 +164,7 @@ async function display_stat() {
 				["Forts captured (total)", naify(r["forts"]["total"])],
 				["Forts captured", naify(r["forts"]["captured"])],
 				["Most captured fort",
-					`${translate_fort(r["forts"]["most_captured"]["name"], false)}
+					`${xlator.translate_fort(r["forts"]["most_captured"]["name"], false)}
 					    (${naify(r["forts"]["most_captured"]["count"], "N/A")})`],
 				["Forts recovered", naify(r["forts"]["recovered"])],
 				["Has invaded", naify(r["invasions"]["count"])],
@@ -172,12 +175,12 @@ async function display_stat() {
 			table_factory(rows, `#ws-${days}d-${realm.toLowerCase()}`, realm);
 			if (report == data.length - 1) {
 				let rows = [
-					["Invasion", `${naify(timestamp_ago(r["invasions"]["last"]["date"], true).human, "N/A")}
+					["Invasion", `${naify(time.timestamp_ago(r["invasions"]["last"]["date"], true).human, "N/A")}
 							    (${naify(r["invasions"]["last"]["location"], "N/A")})`],
 					["Gem stolen",
-							`${naify(timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}`],
+							`${naify(time.timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}`],
 					["Dragon wish",
-							`${naify(timestamp_ago(r["wishes"]["last"], true).human, "N/A")}`]];
+							`${naify(time.timestamp_ago(r["wishes"]["last"], true).human, "N/A")}`]];
 				let now = new Date();
 				let earliest_date = (now.getTime() / 1000) - (days * 3600 * 24);
 				if (r["wishes"]["last"] <= earliest_date) // out of bound wish

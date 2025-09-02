@@ -2,7 +2,10 @@ import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
 import {insert_notification_link, mynotify} from "./libs/notify.js";
 import {generate_calendar} from "./libs/calendar.js";
-import {timestamp_now, timestamp_ago} from "./wztools/time.js";
+import {Time} from "./wztools/wztools.js";
+
+// wztools
+let time = new Time();
 
 // The last respawn timestamp in UTC time
 // You can update it by looking at your browser console and getting the last
@@ -28,7 +31,7 @@ function unixstamp2human(unixstamp) {
 
 function get_next_respawns(boss) {
 	let tried_respawn = first_respawns[boss];
-	let now = timestamp_now();
+	let now = time.timestamp_now();
 	let respawn_time = 0;
 	while (true) {
 		if (boss == "server")
@@ -49,7 +52,7 @@ function get_next_respawns(boss) {
 function display_next_respawn(boss) {
 	$(`#boss-${boss}-lastspawn`).text(`${_("Last respawn")}:
 		${unixstamp2human(previous_respawns[boss])}`);
-	let next_respawn_in = timestamp_ago(next_respawns[boss][0]);
+	let next_respawn_in = time.timestamp_ago(next_respawns[boss][0]);
 	let next_respawns_html = `<li class="red bold">${_("Next respawn in")} ${next_respawn_in.human}</li>`;
 	for (let respawn in next_respawns[boss]) {
 		let calendar = generate_calendar(next_respawns[boss][respawn], boss, 900);

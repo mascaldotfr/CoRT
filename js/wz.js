@@ -2,14 +2,19 @@ import {__api__urls} from "./api_url.js";
 import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
 import {insert_notification_link, mynotify} from "./libs/notify.js";
-import {get_realm_colors} from "./wztools/constants.js";
-import {translate_fort} from "./wztools/translate_forts.js";
-import {humanise_events} from "./wztools/events.js";
-import {wzicons} from "./wztools/icons.js";
+import {Constants, TranslateForts, HumaniseEvents, Icons} from "./wztools/wztools.js";
 import {$onlinemanager} from "./libs/onlinemanager.js";
 
 // Unix timestamp of the last update
 let wz_lastupdate = Math.floor(new Date().getTime() / 1000);
+
+// wztools
+let constants = new Constants();
+let icons = new Icons();
+let xlator = new TranslateForts();
+let humaniser = new HumaniseEvents();
+let realm_colors = constants.realm_colors;
+let wzicons = icons.get_all_icons();
 
 // Use local versions of images because NGE's site is slow
 function rebase_img(url) {
@@ -93,8 +98,6 @@ function draw_map(images) {
 }
 
 async function display_wz(init=false) {
-	// Same order as the website
-	let realm_colors = get_realm_colors();
 	let gems = [];
 	let forts = [];
 	let failures = {};
@@ -158,7 +161,7 @@ async function display_wz(init=false) {
 
 	for (let fort of data["forts"]) {
 		let icon = wzicons[dispatch_fort_icon(fort)];
-		let name = translate_fort(fort["name"]);
+		let name = xlator.translate_fort(fort["name"]);
 		forts.push(`${icon}&nbsp;${name}<br>`);
 	}
 
@@ -185,7 +188,7 @@ async function display_wz(init=false) {
 
 	// Events
 
-	let events_list = humanise_events(data["events_log"], true, wz_lastupdate);
+	let events_list = humaniser.humanise_events(data["events_log"], true, wz_lastupdate);
 	$("#wz-events").html(`<h2 id="wz-events-header">
 		<span class="purple">${_("Last server events (in your timezone):")} </span>
 		</h2>

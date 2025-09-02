@@ -1,9 +1,10 @@
 import {__api__urls, __api__base} from "./api_url.js";
 import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
-import {humanise_events} from "./wztools/events.js";
+import {HumaniseEvents} from "./wztools/wztools.js";
 
 let data = null;
+let humaniser = new HumaniseEvents();
 
 function resolve_filter() {
 	let storedfilter = localStorage.getItem("wevents_filter");
@@ -45,7 +46,7 @@ function display_events() {
 		let name = storedfilter.split(":")[1];
 		filtered = data.filter(i => i["name"].indexOf(name) != -1);
 	}
-	let html = humanise_events(filtered, false);
+	let html = humaniser.humanise_events(filtered, false);
 	if (html.length == 0)
 		html = _("No matching event found!");
 	$("#we-events").empty();
