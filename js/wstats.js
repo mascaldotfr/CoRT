@@ -1,9 +1,8 @@
-import {__api__urls} from "./api_url.js";
+import {__api__urls, $onlinemanager} from "./api_url.js";
 import {$} from "./libs/lamaiquery.js";
 import {_} from "../data/i18n.js";
 import {Constants, TranslateForts, Time} from "./wztools/wztools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
-import {$onlinemanager} from "./libs/onlinemanager.js";
 
 // sync with statistics.json
 let report_days = [7, 30, 90];

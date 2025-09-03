@@ -1,9 +1,8 @@
-import {__api__urls} from "./api_url.js";
+import {__api__urls, $onlinemanager} from "./api_url.js";
 import {$} from "./libs/lamaiquery.js";
 import {_} from "../data/i18n.js";
 import {insert_notification_link, mynotify} from "./libs/notify.js";
 import {Constants, TranslateForts, HumaniseEvents, Icons} from "./wztools/wztools.js";
-import {$onlinemanager} from "./libs/onlinemanager.js";
 
 // Unix timestamp of the last update
 let wz_lastupdate = Math.floor(new Date().getTime() / 1000);
