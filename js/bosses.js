@@ -1,7 +1,5 @@
-import {$} from "./libs/lamaiquery.js";
+import {$, generate_calendar, insert_notification_link, mynotify} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
-import {insert_notification_link, mynotify} from "./libs/notify.js";
-import {generate_calendar} from "./libs/calendar.js";
 import {Time} from "./wztools/wztools.js";
 
 // wztools

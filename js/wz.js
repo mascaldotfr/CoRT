@@ -1,7 +1,6 @@
 import {__api__urls, $onlinemanager} from "./api_url.js";
-import {$} from "./libs/lamaiquery.js";
+import {$, insert_notification_link, mynotify} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
-import {insert_notification_link, mynotify} from "./libs/notify.js";
 import {Constants, TranslateForts, HumaniseEvents, Icons} from "./wztools/wztools.js";
 
 // Unix timestamp of the last update

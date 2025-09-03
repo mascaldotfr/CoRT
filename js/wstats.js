@@ -1,5 +1,5 @@
 import {__api__urls, $onlinemanager} from "./api_url.js";
-import {$} from "./libs/lamaiquery.js";
+import {$} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Constants, TranslateForts, Time} from "./wztools/wztools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
