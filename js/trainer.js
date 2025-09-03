@@ -1,7 +1,6 @@
 import {__api__urls, __api__frontsite, __api__frontsite_dir} from "./api_url.js";
-import {$} from "./libs/lamaiquery.js";
+import {$} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
-import {LZString} from "./libs/lz-string.min.js";
 import {minlevel, maxlevel, class_type_masks, datasets, classes, mindlevel,
 	maxdlevel, minplevel, maxplevel} from "./trainertools/constants.js";
 
@@ -14,8 +13,8 @@ if (is_beta) {
 const newest_dataset = trainerdatasets.slice(-1);
 var trainerdata = null;
 var trainerdataversion = null;
-// 0: trainerdataset on 1 digit (?s=)
-// 1: trainerdataset on 2 digits (?t=)
+// 0: trainerdataset version on 1 digit (?s=)
+// 1: trainerdataset on 2 version digits (?t=)
 var skillset_urlformat = 0;
 
 var dpointstotal = 0;
@@ -306,11 +305,13 @@ function bad_shared_link(nonfatal=false) {
 
 // load_tree() being async, you need the tree to be loaded
 // in order to click stuff so this is before loading the tree ...
-function load_setup_from_url(skillset) {
+async function load_setup_from_url(skillset) {
 	saved_setup = null;
 	if (trainerdataversion !== null) {
 		// Old LZstring URL, redirect to new url format
-		saved_setup = LZString.decompressFromEncodedURIComponent(skillset);
+		let lz = await import("./libs/lz-string.min.js");
+		console.log(lz)
+		saved_setup = lz.LZString.decompressFromEncodedURIComponent(skillset);
 		saved_setup = trainerdataversion + "+" + saved_setup;
 		window.location.assign(window.location.origin + window.location.pathname +
 				       "?t=" + compressor.compress(saved_setup));

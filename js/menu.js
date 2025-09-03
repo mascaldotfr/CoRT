@@ -1,6 +1,5 @@
 import {__i18n__, _} from "../data/i18n.js";
-import {$} from "./libs/lamaiquery.js";
-import {create_tz_list} from "./libs/tz.js";
+import {$, create_tz_list} from "./libs/cortlibs.js";
 // Only used if ping stats are on
 // import {__api__frontsite, __api__base} from "./api_url.js";
 
@@ -57,7 +56,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250903.184329
+		<p> <!--VERSION-->Version: 20250903.192804
 `;
 
 $(document).ready(function() {
