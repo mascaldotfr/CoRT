@@ -32,67 +32,106 @@ function dispatch_fort_icon(fort) {
 
 // Create a svg blob for a given original icon filename
 function svg_to_blob(fname) {
-	let xml = wzicons[fname];
-	return "data:image/svg+xml;charset=UTF-8;base64," + btoa(xml);
+    let xml = wzicons[fname];
+    if (!xml) {
+        console.warn("Missing icon:", fname);
+        return "";
+    }
+    // Properly encode UTF-8 characters for btoa
+    return "data:image/svg+xml;charset=UTF-8;base64," + btoa(unescape(encodeURIComponent(xml)));
 }
 
 function display_map(forts) {
-	// Preload images beforehand
-	let forts_Image = [];
-	let forts_Image_count = 0;
-	for (let i = 0; i < forts.length; i++) {
-		let imgbuffer = new Image();
-		imgbuffer.src = svg_to_blob(dispatch_fort_icon(forts[i]));
-		imgbuffer.onload = function () {
-			if (++forts_Image_count >= forts.length) {
-				let map = draw_map(forts_Image);
-				document.getElementById("wz-map-map").src = map;
-			}
-		};
-		forts_Image.push(imgbuffer);
-	}
+    // In site order, [x, y, text_x, text_y]
+    let forts_positions = [
+        [212, 60, 221, 55],
+        [208, 175, 193, 195],
+        [120, 187, 105, 207],
+        [139, 140, 119, 165],
+        [260, 111, 245, 133],
+        [290, 180, 275, 200],
+        [365, 220, 345, 245],
+        [324, 140, 304, 165],
+        [135, 230, 118, 250],
+        [220, 250, 195, 270],
+        [285, 360, 255, 385],
+        [183, 310, 153, 335]
+    ];
+
+    // Preload all images in parallel using Promises
+    let imagePromises = forts.map(fort => {
+        return new Promise(resolve => {
+            let img = new Image();
+            img.src = svg_to_blob(dispatch_fort_icon(fort));
+            img.onload = () => resolve(img);
+            img.onerror = () => resolve(null); // Gracefully handle missing icons
+        });
+    });
+
+    // Wait for all images to load
+    Promise.all(imagePromises)
+        .then(images => {
+            // Filter out any failed images
+            let validImages = images.filter(img => img !== null);
+            // Draw the map once all are ready
+            return draw_map(validImages, forts_positions);
+        })
+        .then(mapUrl => {
+            document.getElementById("wz-map-map").src = mapUrl;
+        })
+        .catch(error => {
+            console.error("Map generation failed:", error);
+            document.getElementById("wz-map-map").src = "https://www.championsofregnum.com/ranking/data/ra/gen_map.jpg";
+        });
 }
 
+async function draw_map(images, forts_positions) {
+    try {
+        let canvas = document.createElement("canvas");
+        canvas.width = 1000;
+        canvas.height = 1000;
+        let ctx = canvas.getContext('2d');
 
-function draw_map(images) {
-	// In site order, [x, y, text_x, text_y]
-	let forts_positions = [
-		[212, 60, 221, 55],
-		[208, 175, 193, 195],
-		[120, 187, 105, 207],
-		[139, 140, 119, 165],
-		[260, 111, 245, 133],
-		[290, 180, 275, 200],
-		[365, 220, 345, 245],
-		[324, 140, 304, 165],
-		[135, 230, 118, 250],
-		[220, 250, 195, 270],
-		[285, 360, 255, 385],
-		[183, 310, 153, 335]
-	];
-	try {
-		let canvas = document.createElement("canvas");
-		// size * 2 to avoid blurry final result
-		canvas.setAttribute('width', 1000);
-		canvas.setAttribute('height', 1000);
-		let ctx = canvas.getContext('2d');
-		ctx.scale(2, 2);
-		ctx.font = "bold 14px sans-serif";
-		ctx.fillStyle = "#EED202";
-		// Put shadows on forts
-		ctx.shadowOffsetX = 1;
-		ctx.shadowOffsetY = 5;
-		ctx.shadowColor = "#000000";
-		for (let i = 0; i < images.length; i++) {
-			ctx.drawImage(images[i], forts_positions[i][0], forts_positions[i][1], 36, 36);
-			ctx.fillText(`(${i+1})`, forts_positions[i][2], forts_positions[i][3]);
-		}
-		return canvas.toDataURL("image/png");
-	}
-	catch (_unused) {
-		console.log("canvas failed, using NGE's map");
-		return "https://www.championsofregnum.com/ranking/data/ra/gen_map.jpg";
-	}
+        // High-DPI rendering
+        ctx.scale(2, 2);
+
+        // Text style
+        ctx.font = "bold 14px sans-serif";
+        ctx.fillStyle = "#EED202";
+
+        // Drop shadow under icons
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 3;
+        ctx.shadowColor = "#000000";
+
+        // Draw each fort icon and label
+        for (let i = 0; i < images.length; i++) {
+            let pos = forts_positions[i];
+            if (pos && images[i]) {
+                ctx.drawImage(images[i], pos[0], pos[1], 36, 36);
+                ctx.fillText(`(${i + 1})`, pos[2], pos[3]);
+            }
+        }
+
+        // Reset shadow to avoid affecting other drawings
+        ctx.shadowColor = "transparent";
+
+        // Convert to blob URL
+        return await new Promise(resolve => {
+            canvas.toBlob(blob => {
+                if (blob) {
+                    resolve(URL.createObjectURL(blob));
+                } else {
+                    // Fallback if blob creation fails
+                    resolve("https://www.championsofregnum.com/ranking/data/ra/gen_map.jpg");
+                }
+            }, "image/png", 0.9);
+        });
+    }
+    catch (err) {
+        console.log("Canvas failed, using NGE's map:", err);
+        return "https://www.championsofregnum.com/ranking/data/ra/gen_map.jpg";
+    }
 }
 
 async function display_wz(init=false) {
