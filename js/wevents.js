@@ -46,22 +46,12 @@ function display_events() {
 		let name = storedfilter.split(":")[1];
 		filtered = data.filter(i => i["name"].indexOf(name) != -1);
 	}
-	let html = "";
 	let we_events = $("#we-events");
 	if (filtered.length == 0) {
 		we_events.html(_("No matching event found!"));
 	}
-	else if (storedfilter != "none") {
-		we_events.html(humaniser.humanise_events(filtered, false));
-	}
 	else {
-		// for all events, add 100 by 100 so we have a quick reply on top
-		// on slow devices.
-		we_events.empty();
-		for (let i = 0; i < filtered.length; i += 100) {
-			let part_of_events = filtered.slice(i, i + 100);
-			we_events.append(humaniser.humanise_events(part_of_events, false));
-		}
+		we_events.html(humaniser.humanise_events(filtered, false));
 	}
 }
 
