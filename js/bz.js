@@ -1,6 +1,17 @@
 import {$, insert_notification_link, mynotify, generate_calendar} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 
+let tz = localStorage.getItem("tz");
+let lang = localStorage.getItem("lang");
+let dformatter = new Intl.DateTimeFormat(lang, {
+	weekday: 'long', month: '2-digit', day: 'numeric',
+	hour: '2-digit', minute: '2-digit', timeZone: tz
+});
+let tformatter = new Intl.DateTimeFormat(lang, {
+	hour: '2-digit', minute: '2-digit', timeZone: tz
+});
+
+
 // XXX ALL TIMES ARE UTC INTERNALLY
 // SUNDAY = 0 SATURDAY = 6
 let bz_begin = [ 	[13, 18],
@@ -52,12 +63,6 @@ function feed_bz(init=false) {
 	let next_bzs_end = [];
 	let bz_on = false;
 	let bz_ends_at = 0;
-	let tz = localStorage.getItem("tz");
-	let date_options = {
-		weekday: 'long', month: '2-digit', day: 'numeric',
-		hour: '2-digit', minute: '2-digit', timeZone: tz};
-	let time_options = {hour: '2-digit', minute: '2-digit', timeZone: tz};
-	let lang = localStorage.getItem("lang");
 
 	let current_date = new Date();
 	let current_day = parseInt(current_date.getUTCDay());
@@ -123,8 +128,8 @@ function feed_bz(init=false) {
 	for (let next_bz in next_bzs_begin) {
 		let bz_begin_date = new Date(next_bzs_begin[next_bz]);
 		let bz_end_date = new Date(next_bzs_end[next_bz]);
-		let bz_begin_datetime = bz_begin_date.toLocaleDateString(lang, date_options);
-		let bz_end_time = bz_end_date.toLocaleTimeString(lang, time_options);
+		let bz_begin_datetime = dformatter.format(bz_begin_date);
+		let bz_end_time = tformatter.format(bz_end_date);
 		let duration = (bz_end_date.getTime() - bz_begin_date.getTime()) / 1000;
 		let calendar = generate_calendar(bz_begin_date.getTime() / 1000, "Battlezone", duration);
 		bz_next_future += `<li>${bz_begin_datetime} - ${bz_end_time}

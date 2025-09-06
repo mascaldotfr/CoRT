@@ -4,6 +4,8 @@ import {_} from "../data/i18n.js";
 import {Constants, TranslateForts, Time} from "./wztools/wztools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
+
+
 // sync with statistics.json
 let report_days = [7, 30, 90];
 
@@ -12,9 +14,12 @@ let constants = new Constants();
 let xlator = new TranslateForts();
 let time = new Time();
 
-let tz = localStorage.getItem("tz");
 let realm_colors = constants.realm_colors;
 let realms = constants.realm_names;
+
+let tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+	hour12: false, hour: 'numeric', minute: 'numeric', timeZone: localStorage.getItem("tz")
+});
 
 // undefined / null => N/A or 0
 function naify(value, failover="0") {
@@ -32,8 +37,7 @@ function localize_timelines(utclines) {
 		let localline = [];
 		for (let hour in utclines[realm]) {
 			date.setUTCHours(hour, 0, 0, 0);
-			let date_options = {hour12: false, hour: 'numeric', minute: 'numeric', timeZone: tz};
-			let localhour = date.toLocaleTimeString(undefined, date_options);
+			let localhour = tformatter.format(date);
 			localhour = localhour.replace(/:\d+.+$/, "");
 			localhour = localhour.replace(/^0/, "");
 			localline[localhour] = utclines[realm][hour];

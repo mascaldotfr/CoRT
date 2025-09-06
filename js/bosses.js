@@ -5,6 +5,11 @@ import {Time} from "./wztools/wztools.js";
 // wztools
 let time = new Time();
 
+let dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
+		hour: 'numeric', minute: 'numeric', timeZone: localStorage.getItem("tz")
+});
+
 // The last respawn timestamp in UTC time
 // You can update it by looking at your browser console and getting the last
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
@@ -19,12 +24,7 @@ let previous_respawns = first_respawns;
 let notified_10m = false;
 
 function unixstamp2human(unixstamp) {
-	let dt = new Date(unixstamp * 1000);
-	let lang = localStorage.getItem("lang");
-	let tz = localStorage.getItem("tz");
-	return dt.toLocaleDateString(lang, {
-		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
-		hour: 'numeric', minute: 'numeric', timeZone: tz});
+	return dformatter.format(new Date(unixstamp * 1000));
 }
 
 function get_next_respawns(boss) {

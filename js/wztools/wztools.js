@@ -14,7 +14,7 @@ export class HumaniseEvents {
 	humanise_events(events, has_id=true, notify=0)  {
 		// datetime
 		let tz = localStorage.getItem("tz");
-		const dformatter = new Intl.DateTimeFormat(undefined, {
+		let dformatter = new Intl.DateTimeFormat(undefined, {
 			month: 'numeric', day: 'numeric',
 			hour: '2-digit', minute: '2-digit', timeZone: tz
 		});
