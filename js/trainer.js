@@ -388,21 +388,22 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 	// discipline points are always > 1, but skill points must be 0 to simplify code later.
 	let skilllvl = spellpos == 0 ? 1 : 0;
 	let clean_spellname = "trainerskill_" + spellname.replace(/[^a-z0-9]/gi, "");
-	let icon = ` 	<div class="p${spellpos}">
+	let icon = [
+		` 	<div class="p${spellpos}">
 				<div class="icon" style="background-image:url(${iconsrc});"
 				     id="${clean_spellname}" >
-		`;
+		`];
 	// WM tree; don't show skill points
 	if (treepos != wmrow || (treepos == wmrow && spellpos == 0))
-		icon += `<span class="skilllvl">${skilllvl}</span>`;
-	icon += "</div>";
+		icon.push(`<span class="skilllvl">${skilllvl}</span>`);
+	icon.push("</div>");
 	// WM tree has no skill points, we don't generate + and - buttons
 	if (treepos != wmrow || (treepos == wmrow && spellpos == 0 && currlevel == 60)) {
-		icon += ` <div class="skillspinner">
+		icon.push(` <div class="skillspinner">
 					<button class="plus">+</button><button class="minus">-</button>
-				</div>`;
+				</div>`);
 	}
-	icon += `</div>`;
+	icon.push("</div>");
 
 	function tooltip_factory(content) {
 		tooltips.push(function () {
@@ -421,7 +422,7 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 	else { // disciplines
 		tooltip_factory(spellname);
 	}
-	return icon;
+	return icon.join("");
 }
 
 async function load_tree() {
@@ -447,33 +448,33 @@ async function load_tree() {
 	}
 	let alltrees = trainerdata["class_disciplines"][base_skills];
 	alltrees = alltrees.concat(trainerdata["class_disciplines"][class_skills]);
-	let trainerhtml = "";
+	let trainerhtml = [];
 	let treepos = 0;
 	alltrees.forEach( (tree) => {
 		treepos++;
 		let spellpos = 0;
 		let iconsrc = "data/trainer/" + trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".jpg";
-		trainerhtml += `<div treepos="${treepos}" class="t${treepos} card">`;
-		trainerhtml += icon_factory(spellpos, iconsrc, treepos, tree, "");
+		trainerhtml.push(`<div treepos="${treepos}" class="t${treepos} card">`);
+		trainerhtml.push(icon_factory(spellpos, iconsrc, treepos, tree, ""));
 		trainerdata["disciplines"][tree]["spells"].forEach( (spell) => {
 			spellpos++;
 			if (treepos == wmrow && spellpos % 2 == 1) {
 				// WM tree; don't display empty skills, put a placeholder instead.
-				trainerhtml += `<div class="p${spellpos}"><div class="icon"></div></div>`;
+				trainerhtml.push(`<div class="p${spellpos}"><div class="icon"></div></div>`);
 			}
 			else {
 				let spellname = spell["name"];
-				trainerhtml += icon_factory(spellpos, iconsrc, treepos, spellname, tree);
+				trainerhtml.push(icon_factory(spellpos, iconsrc, treepos, spellname, tree));
 			}
 		});
-		trainerhtml += "</div>";
+		trainerhtml.push("</div>");
 	});
 	// disable all animation
 	$("#t-trainer").css("animation", "none");
 	// "reset" changes due to animation
 	document.getElementById("t-trainer").offsetHeight;
 	$("#t-trainer").css("animation", "1s fadein");
-	$("#t-trainer").html(trainerhtml);
+	$("#t-trainer").html(trainerhtml.join(""));
 
 	dpointstotal = trainerdata["points"]["discipline"][powerpoints][currlevel - 1];
 	ppointstotal = trainerdata["points"]["power"][powerpoints][currlevel - 1] + extrappoints;
@@ -527,60 +528,60 @@ function itemify(name, value, clas) {
 
 function make_spellinfo(spellinfo, iconposition, iconclass, iconurl) {
 	// don't duplicate css, redraw an icon
-	let spellhtml = `
+	let spellhtml = [`
 		<div class="p${iconposition} descriptionheader">
 			<div class="${iconclass}" style="background-image:url(${iconurl});"></div>
 			<div>
 				<h2>${spellinfo["name"]}</h2>
 				<p class="description"><i>${spellinfo["description"]}</i></p>
 			</div>
-		</div>`;
-	let tabularhtml = ""
+		</div>`];
+	let tabularhtml = [];
 	if ("type" in spellinfo)
-		spellhtml += itemify("Type:", spellinfo["type"]);
+		spellhtml.push(itemify("Type:", spellinfo["type"]));
 	if ("cast" in spellinfo)
-		spellhtml += itemify("Cast:", spellinfo["cast"] + "s");
+		spellhtml.push(itemify("Cast:", spellinfo["cast"] + "s"));
 	if ("gcd" in spellinfo)
-		spellhtml += itemify("Global Cooldown:", spellinfo["gcd"]);
+		spellhtml.push(itemify("Global Cooldown:", spellinfo["gcd"]));
 	if ("range" in spellinfo)
-		spellhtml += itemify("Range:", spellinfo["range"]);
+		spellhtml.push(itemify("Range:", spellinfo["range"]));
 	if ("area" in spellinfo)
-		spellhtml += itemify("Area:", spellinfo["area"]);
+		spellhtml.push(itemify("Area:", spellinfo["area"]));
 	if ("cooldown" in spellinfo)
-		spellhtml += itemify("Cooldown:", spellinfo["cooldown"] + "s");
+		spellhtml.push(itemify("Cooldown:", spellinfo["cooldown"] + "s"));
 	if ("weapon_interval" in spellinfo)
-		spellhtml += itemify("Affected by weapon interval", "", "purple");
+		spellhtml.push(itemify("Affected by weapon interval", "", "purple"));
 	if ("blockable_100" in spellinfo)
-		spellhtml += itemify("Only blockable at 100%", "", "purple");
+		spellhtml.push(itemify("Only blockable at 100%", "", "purple"));
 	if ("resistible_100" in spellinfo)
-		spellhtml += itemify("Only resistible at 100%", "", "purple");
+		spellhtml.push(itemify("Only resistible at 100%", "", "purple"));
 	if ("mana" in spellinfo)
-		tabularhtml += tablify("Mana", spellinfo["mana"]);
+		tabularhtml.push(tablify("Mana", spellinfo["mana"]));
 	if ("duration" in spellinfo)
-		tabularhtml += tablify("Duration (s)", spellinfo["duration"]);
+		tabularhtml.push(tablify("Duration (s)", spellinfo["duration"]));
 	if ("damage" in spellinfo) {
 		for (let type in spellinfo["damage"]) {
-			tabularhtml += tablify(`${type} damage`, spellinfo["damage"][type], "red");
+			tabularhtml.push(tablify(`${type} damage`, spellinfo["damage"][type], "red"));
 		}
 	}
 	if ("debuffs" in spellinfo) {
 		for (let type in spellinfo["debuffs"]) {
-			tabularhtml += tablify(`${type}`, spellinfo["debuffs"][type], "red");
+			tabularhtml.push(tablify(`${type}`, spellinfo["debuffs"][type], "red"));
 		}
 	}
 	if ("buffs" in spellinfo) {
 		for (let type in spellinfo["buffs"]) {
-			tabularhtml += tablify(`${type}`, spellinfo["buffs"][type], "blue");
+			tabularhtml.push(tablify(`${type}`, spellinfo["buffs"][type], "blue"));
 		}
 	}
 	if (tabularhtml.length != 0) {
-		let theader = `<div style="overflow-x:auto"><table><thead><tr>
+		spellhtml.push(`<div style="overflow-x:auto"><table><thead><tr>
 			   <th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
-			  </tr></thead>`;
-		let tfooter = "</table></div>";
-		spellhtml = spellhtml + theader + tabularhtml + tfooter;
+			  </tr></thead>`);
+		spellhtml.push(tabularhtml.join(""));
+		spellhtml.push("</table></div>");
 	}
-	return spellhtml;
+	return spellhtml.join("");
 }
 
 
