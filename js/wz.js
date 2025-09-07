@@ -235,8 +235,9 @@ async function display_wz(init=false) {
 		<a href="wevents.html?f=none">${_("More events")}...</a>
 		</span>`);
 
-	// Last update
-
+	// Last update -- ensure notifications are displayed once only and map
+	// not redrawn for nothing
+	wz_lastupdate = Math.floor(new Date().getTime() / 1000);
 	if (events_list[1].length > 0)
 		mynotify(_("WZ status"), events_list[1], "wz");
 }
