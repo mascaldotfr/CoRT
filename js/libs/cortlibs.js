@@ -14,11 +14,20 @@
  *   synchronous as the UI drawing needs the trainer dataset for example
  *   when loading a setup from an url.
  * - $.post({all_parameters}) => $().post(url, params={key: value, [...]})
+ * - addClass and removeClass => you need to call classes names as arguments,
+ *   not as a single string
  *
  * */
 
 export const $ = (function (selector) {
 	return {
+		addClass: function(...classes) {
+			try {
+				selector = document.querySelector(selector);
+			}
+			catch (_unused) { } // it's already a node
+			selector.classList.add(...classes);
+		},
 		appendTo: function(target) {
 			let selector_node = document.querySelector(selector);
 			document.querySelector(target).appendChild(selector_node);
@@ -97,6 +106,13 @@ export const $ = (function (selector) {
 		},
 		removeAttr: function(attribute) {
 			document.querySelector(selector).removeAttribute(attribute);
+		},
+		removeClass: function(...classes) {
+			try {
+				selector = document.querySelector(selector);
+			}
+			catch (_unused) { } // it's already a node
+			selector.classList.remove(...classes);
 		},
 		show: function() {
 			document.querySelector(selector).style.visibility = "visible";
