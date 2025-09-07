@@ -310,7 +310,6 @@ async function load_setup_from_url(skillset) {
 	if (trainerdataversion !== null) {
 		// Old LZstring URL, redirect to new url format
 		let lz = await import("./libs/lz-string.min.js");
-		console.log(lz)
 		saved_setup = lz.LZString.decompressFromEncodedURIComponent(skillset);
 		saved_setup = trainerdataversion + "+" + saved_setup;
 		window.location.assign(window.location.origin + window.location.pathname +
@@ -634,10 +633,11 @@ function discipline_change(discipline) {
 		// Try to set up the max discipline level
 		let max_avail_dlvl = 0;
 		change_direction = "plus";
-		// XXX Is there a less naive way ?
-		for (let lvl in trainerdata["required"]["level"]) {
-			if (trainerdata["required"]["level"][lvl] <= currlevel)
-				max_avail_dlvl = trainerdata["required"]["level"][lvl];
+		const levels = trainerdata["required"]["level"];
+		for (let i = 0; i < levels.length; i++) {
+			if (levels[i] <= currlevel && levels[i] > max_avail_dlvl) {
+				max_avail_dlvl = levels[i];
+			}
 		}
 		wanted_level = Math.floor(max_avail_dlvl / 2 + 1);
 		// round to odd discipline value
