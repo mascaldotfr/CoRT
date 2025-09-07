@@ -378,6 +378,13 @@ function input_setup_from_url() {
 	automated_clicks = false;
 }
 
+function icon_visiblity(icon, clas) {
+	// change the lamaiquery selector "icon" to "class", allowing it to
+	// make it disabled, active or available
+	icon.removeClass("skill-disabled", "skill-active", "skill-available");
+       	icon.addClass(clas);
+}
+
 function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 	// discipline points are always > 1, but skill points must be 0 to simplify code later.
 	let skilllvl = spellpos == 0 ? 1 : 0;
@@ -614,7 +621,8 @@ function power_change(power) {
 	// valid, change it
 	$("#t-ppointsleft").text(ppointsleft += diffpoints);
 	$(skill_level_html).text(wanted_level);
-	$(power.parentNode.parentNode.childNodes[1]).css('filter', wanted_level == 0 ? 'brightness(.25)' : 'brightness(1)');
+	icon_visiblity($(power.parentNode.parentNode.childNodes[1]),
+			 wanted_level == 0 ? "skill-disabled" : "skill-active");
 }
 
 function discipline_change(discipline) {
@@ -668,12 +676,13 @@ function discipline_change(discipline) {
 function update_tree(treepos) {
 	let dlvl = parseInt($(`div[treepos="${treepos}"] .p0 .icon .skilllvl`).text());
 	let maxslvl = trainerdata["required"]["power"][dlvl];
+	const is_wmrow = treepos == wmrow;
 
 	// XXX maybe there are better selector options to get all values for a
 	// tree but ...
 	for (let i = 1; i <= 10; i++) {
 		let sel_icon = $(`div[treepos="${treepos}"] .p${i} .icon`);
-		if (treepos != wmrow) {
+		if (!is_wmrow) {
 			var sel_plus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`);
 			var sel_minus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`);
 		}
@@ -683,23 +692,22 @@ function update_tree(treepos) {
 			maxslvl = 0;
 		}
 		// reduce powerpoints when discipline level is lowered
-		if (treepos != wmrow) {
+		if (!is_wmrow) {
 			let skilllvl = parseInt($(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text());
 			if (skilllvl > maxslvl) {
 				// change to the max power level available
 				$(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text(maxslvl);
 				// update available power points
 				ppointsleft += skilllvl - maxslvl;
-				$("#t-ppointsleft").text(ppointsleft);
 			}
 		}
 		if ( 	(currlevel > trainerdata["required"]["level"][dlvl - 1] && i != 1) ||
-			(currlevel != maxlevel && treepos == wmrow) ) {
+			(currlevel != maxlevel && is_wmrow) ) {
 			// reduce strongly brightness and disable buttons on
 			// unavailable skills due to player or discpline tree
 			// level. also forbid WM tree for non level 60.
-			sel_icon.css('filter','grayscale(1) brightness(.5)');
-			if (treepos != wmrow) {
+			icon_visiblity(sel_icon, "skill-disabled");
+			if (!is_wmrow) {
 				sel_plus.hide();
 				sel_minus.hide();
 			}
@@ -707,24 +715,26 @@ function update_tree(treepos) {
 		// if discipline tree level allows the skill to be interacted
 		// with, reenable the skill
 		if ( i <= trainerdata["required"]["available"][dlvl - 1] ) {
-			if (treepos == wmrow) {
+			if (is_wmrow) {
 				// WM tree requires no skills points, just make
 				// it fully visible
-				sel_icon.css('filter','brightness(1)');
+				icon_visiblity(sel_icon, "skill-active");
 			}
 			else {
-				sel_icon.css('filter','brightness(.25)');
+				icon_visiblity(sel_icon, "skill-available");
 				sel_plus.show();
 				sel_minus.show();
 			}
 		}
 		// ensure brightness is kept when a tree level is decreasing in
 		// the beginning of that loop
-		if (treepos != wmrow && $(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text() > 0) {
-			sel_icon.css('filter','brightness(1)');
+		if (!is_wmrow && $(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text() > 0) {
+			icon_visiblity(sel_icon, "skill-active");
 		}
 	}
-	return;
+
+	// display the new amount of powerpoints left
+	$("#t-ppointsleft").text(ppointsleft);
 }
 
 class SetupCompressor {

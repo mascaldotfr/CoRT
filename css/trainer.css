@@ -56,6 +56,9 @@
 .icon .skilllvl { background-color: var(--foreground); color: black; border-radius: 4px; }
 .minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px; padding: 2px; }
 .minus { margin-top: 6px; }
+.skill-disabled { filter: grayscale(1) brightness(.5); }
+.skill-available { filter: brightness(.25); }
+.skill-active { filter: brightness(1); }
 .tippy-content {
 	background-color: var(--tooltip_background);
 	color: var(--foreground);
