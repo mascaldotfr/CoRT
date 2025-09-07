@@ -675,7 +675,8 @@ function discipline_change(discipline) {
 
 function update_tree(treepos) {
 	let dlvl = parseInt($(`div[treepos="${treepos}"] .p0 .icon .skilllvl`).text());
-	let maxslvl = trainerdata["required"]["power"][dlvl];
+	let requirements = trainerdata["required"];
+	let maxslvl = requirements["power"][dlvl];
 	const is_wmrow = treepos == wmrow;
 
 	// XXX maybe there are better selector options to get all values for a
@@ -685,23 +686,24 @@ function update_tree(treepos) {
 		if (!is_wmrow) {
 			var sel_plus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`);
 			var sel_minus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`);
+			var sel_skilllvl = $(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`);
 		}
 		// if tree has been lowered and the skill is no more available,
 		// make it visually disabled
-		if (i > trainerdata["required"]["available"][dlvl - 1]) {
+		if (i > requirements["available"][dlvl - 1]) {
 			maxslvl = 0;
 		}
 		// reduce powerpoints when discipline level is lowered
 		if (!is_wmrow) {
-			let skilllvl = parseInt($(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text());
+			let skilllvl = parseInt(sel_skilllvl.text());
 			if (skilllvl > maxslvl) {
 				// change to the max power level available
-				$(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text(maxslvl);
+				sel_skilllvl.text(maxslvl);
 				// update available power points
 				ppointsleft += skilllvl - maxslvl;
 			}
 		}
-		if ( 	(currlevel > trainerdata["required"]["level"][dlvl - 1] && i != 1) ||
+		if ( 	(currlevel > requirements["level"][dlvl - 1] && i != 1) ||
 			(currlevel != maxlevel && is_wmrow) ) {
 			// reduce strongly brightness and disable buttons on
 			// unavailable skills due to player or discpline tree
@@ -714,7 +716,7 @@ function update_tree(treepos) {
 		}
 		// if discipline tree level allows the skill to be interacted
 		// with, reenable the skill
-		if ( i <= trainerdata["required"]["available"][dlvl - 1] ) {
+		if ( i <= requirements["available"][dlvl - 1] ) {
 			if (is_wmrow) {
 				// WM tree requires no skills points, just make
 				// it fully visible
@@ -728,7 +730,7 @@ function update_tree(treepos) {
 		}
 		// ensure brightness is kept when a tree level is decreasing in
 		// the beginning of that loop
-		if (!is_wmrow && $(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`).text() > 0) {
+		if (!is_wmrow && sel_skilllvl.text() > 0) {
 			icon_visiblity(sel_icon, "skill-active");
 		}
 	}
