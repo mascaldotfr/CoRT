@@ -1,9 +1,8 @@
 import {_} from "../../data/i18n.js";
 
-export class Constants {
-	// Same order as the website
-	realm_colors = {"Alsius": "blue", "Ignis": "red", "Syrtis": "green"};
-	realm_names = ["Alsius", "Ignis", "Syrtis"];
+export function Constants() {
+	this.realm_colors = { "Alsius": "blue", "Ignis": "red", "Syrtis": "green" };
+	this.realm_names = ["Alsius", "Ignis", "Syrtis"];
 }
 
 export class HumaniseEvents {
