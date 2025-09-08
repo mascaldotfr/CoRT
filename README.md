@@ -1,8 +1,6 @@
 
 > [!IMPORTANT]
 > **CoRT is in maintenance mode: no new features will be added, only minor fixes or data updates. The site will stay up though.**
->
-> **If you want to bring further developments to CoRT, see https://github.com/CoR-Forum/CoRT.**
 
 # Champions of Regnum trainer (and more)
 
@@ -21,6 +19,9 @@ is run client side, with the exception of the WZ status and statistics (see the
 page, and anonymous setup collection (see the `collect` directory) which by
 default only works for https://mascaldotfr.github.io and can be completely
 skipped.
+
+There is also a [wiki](https://github.com/mascaldotfr/CoRT/wiki) containing
+extra infos about using and deploying CoRT.
 
 ## Known issues
 
@@ -76,6 +77,6 @@ If you want to make changes to CoRT or run it locally, you can use python to
   [Anpu](https://github.com/Anpu) did a thing or two about it as well iirc.
 * [Joshua2504](https://github.com/Joshua2504) and
   [Shaiko](https://github.com/Shaiko35) from https://cor-forum.de/ for keeping
-  the spell database updated
+  the spell database updated before I took over
 * Slartibartfast, the regnumsentinel.com creator, site that gave me big hints about
   the UI should be done.
