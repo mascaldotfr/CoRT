@@ -17,7 +17,7 @@ let dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 // Last checked: Eve: 2025-08-22, Daen: 2025-09-01, TK: 2025-08-22, Server: 2025-08-22 (+37m)
 const first_respawns = { "thorkul": 1752681724,
 			 "evendim": 1755880309,
-			 "daen": 1756751202,
+			 "daen": 1757536010,
 			 "server": 1755684000 + 37 * 60 };
 let next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
 let previous_respawns = first_respawns;
