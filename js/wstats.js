@@ -4,8 +4,6 @@ import {_} from "../data/i18n.js";
 import {Constants, TranslateForts, Time} from "./wztools/wztools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
-
-
 // sync with statistics.json
 let report_days = [7, 30, 90];
 
@@ -123,14 +121,14 @@ function show_graphs_fortsheld_byrealm(data, selector) {
 }
 
 function table_factory(rows, selector, realm) {
-	let table = `<h3 class="${realm_colors[realm]}">${realm}</h3><table>`;
+	let table = [`<h3 class="${realm_colors[realm]}">${realm}</h3><table>`];
 	for (let row of rows) {
 		if (row[0] == null || row[1] == null)
 			continue;
-		table += `<tr><td class="bold">${_(row[0])}</td><td>${row[1]}</td></tr>`;
+		table.push(`<tr><td class="bold">${_(row[0])}</td><td>${row[1]}</td></tr>`);
 	}
-	table += "</table>";
-	$(selector).html(table);
+	table.push("</table>");
+	$(selector).html(table.join(""));
 }
 
 async function display_stat() {
