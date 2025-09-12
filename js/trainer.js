@@ -697,7 +697,7 @@ function discipline_change(discipline) {
 }
 
 function update_tree(treepos) {
-	let dlvl = $(`div[treepos="${treepos}"] .p0 .icon`).attr("data-value");
+	let dlvl = parseInt($(`div[treepos="${treepos}"] .p0 .icon`).attr("data-value"));
 	let requirements = trainerdata["required"];
 	let maxslvl = requirements["power"][dlvl];
 	const is_wmrow = treepos == wmrow;
