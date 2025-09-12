@@ -36,10 +36,14 @@ export const $ = (function (selector) {
 			document.querySelector(selector).insertAdjacentHTML("beforeend", html);
 		},
 		attr: function(attribute, value) {
+			try {
+				selector = document.querySelector(selector);
+			}
+			catch (_unused) { } // it's already a node
 			if (value !== undefined)
-				document.querySelector(selector).setAttribute(attribute, value);
+				selector.setAttribute(attribute, value);
 			else
-				return document.querySelector(selector).getAttribute(attribute);
+				return selector.getAttribute(attribute);
 		},
 		css: function(key, value) {
 			let jscss = new Array();
