@@ -599,6 +599,11 @@ export const __i18n__ = {
 		"es": "Fuertes",
 		"de": "Forts"
 	},
+	"For stats on older versions of Regnum <a id='ts-oldstats-link'>check this site</a>.": {
+		"fr": "Les statistiques sur des versions plus anciennes de Regnum sont <a id='ts-oldstats-link'>sur ce site</a>.",
+		"es": "Para estadísticas de versiones anteriores de Regnum <a id='ts-oldstats-link'>consulte este sitio</a>.",
+		"de": "Für Statistiken zu älteren Versionen von Regnum <a id='ts-oldstats-link'>prüfen Sie diese Website</a>."
+	},
 	"No setups for that combo, bailing out!": {
 		"fr": "Aucune configuration disponible pour cette combinaison, j'abandonne !",
 		"es": "No hay configuración disponible para esta combinación, ¡me rindo!",

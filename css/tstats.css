@@ -2,6 +2,11 @@
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 }
+#ts-oldstats {
+	min-height: 3em;
+	margin: 0 auto;
+	text-align: center;
+}
 #ts-side {
 	display: grid;
 	grid-template-rows: auto 1fr;
