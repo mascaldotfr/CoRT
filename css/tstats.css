@@ -11,6 +11,7 @@
 #ts-center {
 	display: grid;
 	grid-template-rows: auto 1fr;
+	min-height: 1200px;
 }
 #ts-side label {
 	display: flex;
