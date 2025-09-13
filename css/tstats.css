@@ -48,9 +48,11 @@
 }
 #ts-maingraph svg {
 	min-height: 1200px;
+	margin-left: -1em;
 }
 .ct-label, .ct-axis {
 	color: var(--foreground);
+	font-size: 12px !important;
 }
 .ct-start {
 	font-size: 12px;

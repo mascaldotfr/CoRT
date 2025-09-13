@@ -151,7 +151,7 @@ function draw_maingraph() {
 	let options = {
 		horizontalBars: true,
 		axisY: { offset: 200 },
-		axisX: { onlyInteger: true }
+		axisX: { showLabel: false }
 	};
 	new Chartist.BarChart("#ts-maingraph", dataset, options);
 }
