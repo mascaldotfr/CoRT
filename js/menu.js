@@ -34,9 +34,7 @@ let __menu_content = `
 		<li class="menuitem bold"><a href="bz.html">${__menu_icons["bz"]} ${_("BZ status")}</a></li>
 		<li class="menuitem bold"><a href="wevents.html">${__menu_icons["wevents"]} ${_("WZ events")}</a></li>
 		<li class="menuitem bold"><a href="wstats.html">${__menu_icons["wstats"]} ${_("WZ statistics")}</a></li>
-		<li class="menuitem"><a href="https://poludnica.shinyapps.io/configs/" target="_blank">
-			${__menu_icons["tstats"]} ${_("Trainer statistics")}
-			${__menu_external_link}</a></li>
+		<li class="menuitem"><a href="tstats.html"> ${__menu_icons["tstats"]} ${_("Trainer statistics")}</a></li>
 		<li class="menuitem"><a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">
 		${__menu_icons["armor"]} ${_("Armor calculator")}
 		${__menu_external_link}</a></li>
@@ -57,7 +55,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>,
 		and the <a href="https://hail.thebus.top/CoRT/">faster website</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250913.093631
+		<p> <!--VERSION-->Version: 20250913.095614
 `;
 
 $(document).ready(function() {

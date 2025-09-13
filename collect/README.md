@@ -58,11 +58,4 @@ directory. It is supposedly simple enough to understand.
 
 ### Javascript
 
-A faster and leaner version of [Halvdan's trainer stat
-page](https://poludnica.shinyapps.io/configs/) is available in this repository,
-see [tstats.js](../js/tstats.js). You can check it out at https://mascaldotfr.github.io/CoRT/tstats.html.
-
-Halv's page is still used by default because it has stats older than CoRT and
-has more features, but i wanted to do an open source implementation of it.
-
-
+[tstats.js](../js/tstats.js). You can check it out at https://mascaldotfr.github.io/CoRT/tstats.html.

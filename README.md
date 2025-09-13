@@ -40,7 +40,7 @@ If you want to make changes to CoRT or run it locally, you can use python to
 
 ## Hidden pages
 
-* **[tstats.html](https://mascaldotfr.github.io/CoRT/tstats.html)** is CoRT's own
+* **** is CoRT's own
   Trainer statistics page. For more infos on why it's not the default, see
   [the collect README](collect/README.md#Javascript).
 * **[beta.html](https://mascaldotfr.github.io/CoRT/beta.html)** is a part of the
@@ -80,3 +80,5 @@ If you want to make changes to CoRT or run it locally, you can use python to
   the spell database updated before I took over
 * Slartibartfast, the regnumsentinel.com creator, site that gave me big hints about
   the UI should be done.
+* Halvdan. His own trainer stats page has been a major influence on
+  [tstats.html](https://mascaldotfr.github.io/CoRT/tstats.html)
