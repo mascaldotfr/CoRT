@@ -20,46 +20,43 @@
  * */
 
 export const $ = (function (selector) {
+
+	// resolve selector to get a node, so it works like jQuery.
+	// in some cases like .on() we still need the original selector
+	// so we don't overwrite it.
+	let r_selector = selector;
+	try {
+		r_selector = document.querySelector(r_selector);
+	}
+	catch (_unused) { } // it's already a node
+
 	return {
 		addClass: function(...classes) {
-			try {
-				selector = document.querySelector(selector);
-			}
-			catch (_unused) { } // it's already a node
-			selector.classList.add(...classes);
+			r_selector.classList.add(...classes);
 		},
 		appendTo: function(target) {
-			let selector_node = document.querySelector(selector);
-			document.querySelector(target).appendChild(selector_node);
+			document.querySelector(target).appendChild(r_selector);
 		},
 		append: function(html) {
-			document.querySelector(selector).insertAdjacentHTML("beforeend", html);
+			r_selector.insertAdjacentHTML("beforeend", html);
 		},
 		attr: function(attribute, value) {
-			try {
-				selector = document.querySelector(selector);
-			}
-			catch (_unused) { } // it's already a node
 			if (value !== undefined)
-				selector.setAttribute(attribute, value);
+				r_selector.setAttribute(attribute, value);
 			else
-				return selector.getAttribute(attribute);
+				return r_selector.getAttribute(attribute);
 		},
 		css: function(key, value) {
 			let jscss = new Array();
 			jscss[key] = value;
-			try {
-				selector = document.querySelector(selector);
-			}
-			catch (_unused) { } // it's already a node
-			Object.assign(selector.style, jscss);
+			Object.assign(r_selector.style, jscss);
 		},
 		empty: function() {
 			try {
-				document.querySelector(selector).replaceChildren();
+				r_selector.replaceChildren();
 			}
 			catch (_unused) { // old browsers
-				document.querySelector(selector).innerHTML = "";
+				r_selector.innerHTML = "";
 			}
 		},
 		get: async function(url) {
@@ -75,22 +72,17 @@ export const $ = (function (selector) {
 			return reply;
 		},
 		hide: function() {
-			document.querySelector(selector).style.visibility = "hidden";
+			r_selector.style.visibility = "hidden";
 		},
 		html: function(html) {
-			document.querySelector(selector).innerHTML = html;
+			r_selector.innerHTML = html;
 		},
 		on: function(anevent, callable) {
-			try { // real selector
-				document.querySelectorAll(selector).forEach( (elm) =>
-					elm.addEventListener(anevent, callable) );
-			}
-			catch (_unused) {
-				selector.addEventListener(anevent, callable);
-			}
+			document.querySelectorAll(selector).forEach( (elm) =>
+				elm.addEventListener(anevent, callable) );
 		},
 		prepend: function(html) {
-			document.querySelector(selector).insertAdjacentHTML("afterbegin", html);
+			r_selector.insertAdjacentHTML("afterbegin", html);
 		},
 		post: async function(url, params) {
 			let urlparams = new FormData();
@@ -101,69 +93,38 @@ export const $ = (function (selector) {
 				.catch(error => { throw(error); });
 		},
 		ready: function(callable) {
-			selector.addEventListener("DOMContentLoaded", callable);
+			r_selector.addEventListener("DOMContentLoaded", callable);
 		},
 		remove: function() {
-			let selector_node = document.querySelector(selector);
-			if (selector_node)
-				selector_node.remove();
+			if (r_selector)
+				r_selector.remove();
 		},
 		removeAttr: function(attribute) {
-			document.querySelector(selector).removeAttribute(attribute);
+			r_selector.removeAttribute(attribute);
 		},
 		removeClass: function(...classes) {
-			try {
-				selector = document.querySelector(selector);
-			}
-			catch (_unused) { } // it's already a node
-			selector.classList.remove(...classes);
+			r_selector.classList.remove(...classes);
 		},
 		show: function() {
-			document.querySelector(selector).style.visibility = "visible";
+			r_selector.style.visibility = "visible";
 		},
 		text: function(text) {
 			if (text !== undefined) { // PUT
-				// Allow to remove newlines without doing anything,
-				// will correct if needed
-				try {
-					document.querySelector(selector).innerHTML = text;
-				}
-				catch (_unused) {
-					selector.innerHTML = text;
-				}
+				r_selector.innerHTML = text;
 			}
 			else { // GET
-				try {
-					// real selector
-					return document.querySelector(selector).innerText;
-				}
-				catch (_unused) {
-					// selector is actually a node
-					return selector.innerText;
-				}
+				return r_selector.innerText;
 			}
 		},
 		trigger: function(anevent) {
-			document.querySelector(selector).dispatchEvent(new Event(anevent));
+			r_selector.dispatchEvent(new Event(anevent));
 		},
 		val: function(value) {
 			if (value !== undefined) { // PUT
-				try {
-					document.querySelector(selector).value = value;
-				}
-				catch (_unused) {
-					selector.value = value;
-				}
+				r_selector.value = value;
 			}
 			else { // GET
-				try {
-					// real selector
-					return document.querySelector(selector).value;
-				}
-				catch (_unused) {
-					// selector is actually a node
-					return selector.value;
-				}
+				return r_selector.value;
 			}
 		}
 	}
