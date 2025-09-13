@@ -5,6 +5,8 @@ import {maxlevel, class_type_masks, datasets, classes} from "./trainertools/cons
 import {__chartist_responsive} from "./libs/chartist.js";
 
 var valid_trainerdatasets = datasets;
+// remove 1.33.2 and 1.33.3, setup collection wasn't a thing back then
+valid_trainerdatasets.splice(0,2);
 var trainerdatasets = {};
 var stats = {};
 var data_txt = null;
@@ -60,6 +62,9 @@ async function make_stats() {
 		let clas = setup.shift();
 		let level = setup.shift();
 
+		// skip the few versions when setup collection wasn't a thing
+		if (!valid_trainerdatasets.includes(version))
+			continue;
 		// skip empty setups, non lvl 60, and incomplete ones
 		if (level < maxlevel)
 			continue;
