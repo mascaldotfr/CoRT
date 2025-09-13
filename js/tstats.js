@@ -2,6 +2,7 @@ import {__api__frontsite, __api__frontsite_dir, __api__urls} from "./api_url.js"
 import {$} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {maxlevel, class_type_masks, datasets, classes} from "./trainertools/constants.js";
+import {__chartist_responsive} from "./libs/chartist.js";
 
 var valid_trainerdatasets = datasets;
 var trainerdatasets = {};
@@ -22,23 +23,28 @@ function loading(txt) {
 }
 
 async function make_stats() {
-	let fetch_failed = "";
-	try {
-		for (let dset of valid_trainerdatasets) {
-			let url = __api__frontsite + __api__frontsite_dir +
-				  `/data/trainer/${dset}/trainerdata.json`;
+	await Promise.all(
+		valid_trainerdatasets.map(dset => {
+			let url = `./data/trainer/${dset}/trainerdata.json`;
 			loading(url);
-			trainerdatasets[dset] = await $().getJSON(url);
-		}
+			return $().getJSON(url).then(data => {
+				trainerdatasets[dset] = data;
+			});
+		})
+	)
+	.then(() => {
 		loading(__api__urls["trainer_data"]);
-		data_txt = await $().get(__api__urls["trainer_data"]);
-		data_txt = data_txt.split("\n");
+		return $().get(__api__urls["trainer_data"]);
+	})
+	.then(data => {
+		data_txt = data.split("\n");
 		data_txt.pop(); // remove last empty line
-	}
-	catch(error) {
-		$("#ts-error").html(`Failed to make the stats: <code>${error} ${fetch_failed}</code>`);
-		return false;
-	}
+	})
+	.catch(err => {
+		$("#ts-maingraph").html(`Failed to make the stats: <code>${err}</code> (check console)`);
+		$("#ts-maingraph").addClass("red", "bold");
+		throw err;
+	})
 
 	loading(`<b>${_("Crunching numbers")}</b>`);
 	// Prefill arrays
