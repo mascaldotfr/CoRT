@@ -148,4 +148,4 @@ $(document).ready(function() {
 	feed_bz(true);
 });
 
-setInterval(feed_bz, 1000)
+setInterval(feed_bz, 1000);
