@@ -40,9 +40,9 @@ export const $onlinemanager = {
 		if ("ontouchstart" in document.documentElement) {
 			window.addEventListener("visibilitychange", (e) => {
 				if (document.visibilityState == "visible")
-					func;
+					func();
 			});
 		}
 	},
-	"online": () => { return navigator.onLine }
+	"online": () => { return navigator.onLine; }
 };
