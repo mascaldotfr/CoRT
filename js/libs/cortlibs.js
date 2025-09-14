@@ -47,7 +47,7 @@ export const $ = (function (selector) {
 				return r_selector.getAttribute(attribute);
 		},
 		css: function(key, value) {
-			let jscss = new Array();
+			let jscss = [];
 			jscss[key] = value;
 			Object.assign(r_selector.style, jscss);
 		},
@@ -127,7 +127,7 @@ export const $ = (function (selector) {
 				return r_selector.value;
 			}
 		}
-	}
+	};
 });
 
 
@@ -203,7 +203,7 @@ export function create_tz_list(selector) {
 
 	display_tz_list(selector, options, storedtz);
 
-	localStorage.setItem("tzlisthtml", options)
+	localStorage.setItem("tzlisthtml", options);
 }
 
 
@@ -214,7 +214,7 @@ let __calendar_imported = false;
 function import_calendar() {
 	try {
 		let addtocalendar = import("./addtocalendarv2.js")
-			.catch(() => { throw "addtocalendar is not supported" }); // display error on MacOS too
+			.catch(() => { throw "addtocalendar is not supported"; }); // display error on MacOS too
 	}
 	catch(_unused) {
 		console.err("addtocalendar failed to load");
@@ -294,7 +294,7 @@ export function mynotify(title, text, tag) {
 	};
 	if ( __notifications_swsupport && Notification.permission === "granted") {
 		navigator.serviceWorker.ready.then( reg => {
-			reg.showNotification(title, options)
+			reg.showNotification(title, options);
 		});
 	}
 }
@@ -309,6 +309,6 @@ try {
 			};
 		});
 }
-catch(_unused) { /* Unsupported by safari */ };
+catch(_unused) { /* Unsupported by safari */ }
 if (__notifications_swsupport)
 	navigator.serviceWorker.register("sw.js");
