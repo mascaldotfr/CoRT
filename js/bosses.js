@@ -76,7 +76,7 @@ function display_next_respawn(boss) {
 }
 
 function refresh_display() {
-	let bosses_unordered = new Map()
+	let bosses_unordered = new Map();
 	for (let boss in first_respawns) {
 		$(`#boss-${boss}-lastspawn`).empty();
 		$(`#boss-${boss}-respawn`).empty();
@@ -106,4 +106,4 @@ $(document).ready(function() {
 	refresh_display();
 });
 
-setInterval(refresh_display, 60 * 1000)
+setInterval(refresh_display, 60 * 1000);
