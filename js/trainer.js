@@ -265,7 +265,7 @@ function save_setup_to_url(shared=true, beta2live=false) {
 	// WM row is always the latest one
 	for (let row = 1; row <= wmrow; row++) {
 		// separate discipline skills from power skills
-		let discipline = parseInt($(`#t-trainer .t${row} .p0 .icon`).attr("data-value"))
+		let discipline = parseInt($(`#t-trainer .t${row} .p0 .icon`).attr("data-value"));
 		if (discipline > maxdlevel || discipline < mindlevel) {
 			bad_shared_link();
 			return;
@@ -414,7 +414,7 @@ function icon_factory(spellpos, iconsrc, treepos, spellname, treename) {
 				allowHTML: true,
 				placement: "bottom",
 				maxWidth: "fit-content"
-			})
+			});
 		});
 	}
 	if (treename != "") { // skills
@@ -473,8 +473,8 @@ async function load_tree() {
 	});
 	// disable all animation
 	$("#t-trainer").css("animation", "none");
-	// "reset" changes due to animation
-	document.getElementById("t-trainer").offsetHeight;
+	// "reset" changes due to animation by causing a reflow
+	const _ = document.getElementById("t-trainer").offsetHeight;
 	$("#t-trainer").css("animation", "1s fadein");
 	$("#t-trainer").html(trainerhtml.join(""));
 
@@ -520,7 +520,7 @@ async function load_tree() {
 function tablify(rowname, columns, color = "") {
 	if (typeof columns == "string" || typeof columns == "boolean" || typeof columns == "number") {
 		if (columns.length == 0 || columns == true)
-			columns = "yes"
+			columns = "yes";
 		return `<tr><th class="${color}">${rowname}</th><td colspan=5>${columns}</td></tr>`;
 	}
 	else {
@@ -706,10 +706,13 @@ function update_tree(treepos) {
 	// tree but ...
 	for (let i = 1; i <= 10; i++) {
 		let sel_icon = $(`div[treepos="${treepos}"] .p${i} .icon`);
+		let sel_plus = null;
+		let sel_minus = null;
+		let sel_skilllvl = null;
 		if (!is_wmrow) {
-			var sel_plus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`);
-			var sel_minus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`);
-			var sel_skilllvl = $(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`);
+			sel_plus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`);
+			sel_minus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`);
+			sel_skilllvl = $(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`);
 		}
 		// if tree has been lowered and the skill is no more available,
 		// make it visually disabled
@@ -810,7 +813,7 @@ class SetupCompressor {
 				}
 			}
 		}
-		return output
+		return output;
 	}
 
 	decompress_version1(string) {
