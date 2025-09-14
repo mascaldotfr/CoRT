@@ -40,9 +40,6 @@ If you want to make changes to CoRT or run it locally, you can use python to
 
 ## Hidden pages
 
-* **** is CoRT's own
-  Trainer statistics page. For more infos on why it's not the default, see
-  [the collect README](collect/README.md#Javascript).
 * **[beta.html](https://mascaldotfr.github.io/CoRT/beta.html)** is a part of the
   [upgrade cycle process](UPDATING.md).
 * **[tests.html](https://mascaldotfr.github.io/CoRT/tests.html)** includes
