@@ -11,16 +11,13 @@ If you plan to bring code improvements:
    maintaining.
 2. Keep the style consistent, even if sometimes it's gross like not using dot
    notation for hashes.
-3. The javascript used in CoRT must follow ECMAScript <= 8, please use
-   [JSHint](https://jshint.com/) to check this out, or mention
-   you didn't. Linux usage:
+3. Optionally use [JSHint](https://jshint.com/). Linux usage:
    ```shell
    cd /tmp
    npm install jshint
    cd node_modules/jshint
-   echo '{ "esversion"     : 8 }' > jshintrc
-   ./jshint -c jshintrc /where/is/CoRT/js/*.js | grep esversion
-   # Should return nothing out of chartist.js which is not considered essential
+   echo '{ "esversion": 11, "sub": true }' > jshintrc
+   ./bin/jshint -c jshintrc /where/is/CoRT/js/*.js
    ```
 4. If you touch the python code, try to not adding extra modules as a dependency.
 
