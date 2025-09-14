@@ -14,11 +14,11 @@ let dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 // You can update it by looking at your browser console and getting the last
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
 // will run ~ 80 times/boss after all that time.
-// Last checked: Eve: 2025-08-22, Daen: 2025-09-01, TK: 2025-08-22, Server: 2025-08-22 (+37m)
+// Last checked: Eve: 2025-09-14, Daen: 2025-09-10, TK: 2025-09-13, Server: 2025-09-14 (+37m)
 const first_respawns = { "thorkul": 1752681724,
-			 "evendim": 1755880309,
+			 "evendim": 1757842340,
 			 "daen": 1757536010,
-			 "server": 1755684000 + 37 * 60 };
+			 "server": 1757498400 + 37 * 60 };
 let next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
 let previous_respawns = first_respawns;
 let notified_10m = false;
