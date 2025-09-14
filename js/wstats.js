@@ -29,7 +29,7 @@ function naify(value, failover="0") {
 
 // convert UTC stats to "local" time for hourly graphs
 function localize_timelines(utclines) {
-	let localizedlines = new Array();
+	let localizedlines = [];
 	let date = new Date();
 	for (let realm in utclines) {
 		let localline = [];
@@ -79,7 +79,7 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 				}
 			}]
 		];
-	new Chartist.LineChart(selector, dataset, options, responsive)
+	new Chartist.LineChart(selector, dataset, options, responsive);
 }
 
 function show_graphs_fortsheld_byfort(data, selector) {
@@ -132,6 +132,7 @@ function table_factory(rows, selector, realm) {
 }
 
 async function display_stat() {
+	let data = null;
 
 	if ($onlinemanager.online() === false) {
 		$("#ws-info-error").html($onlinemanager.offlineMessage +
@@ -139,7 +140,7 @@ async function display_stat() {
 		return;
 	}
 	try {
-		var data = await $().getJSON(__api__urls["stats"]);
+		data = await $().getJSON(__api__urls["stats"]);
 		$("#ws-info-error").empty();
 	}
 	catch (error) {
@@ -201,14 +202,14 @@ async function display_stat() {
 }
 
 $(document).ready(function() {
-	document.title = "CoRT - " + _("WZ statistics")
+	document.title = "CoRT - " + _("WZ statistics");
 	$("#title").text(_("WZ statistics"));
 	$("#ws-info-info").text(_("The page refreshes itself every minute.") +
 		                " " + _("Last event:"));
 	let ilinks = [];
 	ilinks.push({"id": "#ws-last", txt: _("Latest key events")});
 	for (let day of report_days) {
-		let txt = _("Last %s days", day)
+		let txt = _("Last %s days", day);
 		ilinks.push({ "id": `#ws-${day}d-title`, "txt": txt});
 	}
 	let max_report_days = Math.max(...report_days);
