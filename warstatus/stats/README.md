@@ -24,7 +24,7 @@ any extra step to perform, as `../warstatus.py` will do the necessary to make
 it work.
 
 Using static gzip compression in your web server is recommended, especially for
-`events.json` which weights 500kb uncompressed but only a 25kb compressed.
+`events.json` which weights 500kb uncompressed but only 25kb compressed.
 
 - The "API endpoint" for statistics URL is: https://hail.thebus.top/CoRT/var/statistics.json
 - The "API endpoint" for events URL is: https://hail.thebus.top/CoRT/var/allevents.json
@@ -39,10 +39,11 @@ above, it will need a few days to get meaningful graphs for the statistics.
 There is a way to generate a CSV dump with all historical events and a
 (current) yearly one. It requires the `sqlite3` program to be installed.
 
-Like you did in `warstatus` you can modify the crontab to include the following line:
+Like you did in `warstatus` you can modify the crontab to include the following
+line to make it run daily at 6:
 
 ```
-    0 6 * * * cd /where/is/warstatus/stats && ./dump_generator
+    0 6 * * * cd /where/is/CoRT/var && ./dump_generator
 ```
 
 ## Database format
@@ -50,10 +51,10 @@ Like you did in `warstatus` you can modify the crontab to include the following 
 This is a carbon copy of the warstatus events array. Please see `/warstatus/README.md`.
 
 While the database could be optimized, according to benchmarks, each year of
-events (~100000 events) is leading to an additional 8ms execution time, and a
-database size increase of 4MB. That's about 250ms in 2033 for example. Which is
-more than acceptable, given that the script has at worst 1 minute to finish.
-All this on a cheap single core non NVME SSD VPS with 512MB of RAM, by the way.
+events (~100000 events) is leading to almost no increase in execution time, and
+a database size increase of 4MB. Which is more than acceptable, given that the
+script has at worst 1 minute to finish. All this on a cheap single core non
+NVME SSD VPS with 512MB of RAM, by the way.
 
 Events are never deleted, since anyway statistics are made from a temporary
 table containing only the events needed, and as mentioned above using the
