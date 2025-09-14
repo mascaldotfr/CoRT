@@ -5,10 +5,8 @@ import {Time} from "./wztools/wztools.js";
 // wztools
 let time = new Time();
 
-let dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
-		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
-		hour: 'numeric', minute: 'numeric', timeZone: localStorage.getItem("tz")
-});
+// date formatter
+let dformatter = null;
 
 // The last respawn timestamp in UTC time
 // You can update it by looking at your browser console and getting the last
@@ -101,6 +99,10 @@ $(document).ready(function() {
 	document.title = "CoRT - " + _("Bosses respawn countdown");
 	$("#title").text(_("Bosses respawn countdown"));
 	$("#boss-info").text(_("The page refreshes itself every minute."));
+	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
+		hour: 'numeric', minute: 'numeric', timeZone: localStorage.getItem("tz")
+	});
 
 	insert_notification_link();
 	refresh_display();

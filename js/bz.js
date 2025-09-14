@@ -1,16 +1,9 @@
 import {$, insert_notification_link, mynotify, generate_calendar} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 
-let tz = localStorage.getItem("tz");
-let lang = localStorage.getItem("lang");
-let dformatter = new Intl.DateTimeFormat(lang, {
-	weekday: 'long', month: '2-digit', day: 'numeric',
-	hour: '2-digit', minute: '2-digit', timeZone: tz
-});
-let tformatter = new Intl.DateTimeFormat(lang, {
-	hour: '2-digit', minute: '2-digit', timeZone: tz
-});
-
+// time and date formatters
+let dformatter = null;
+let tformatter = null;
 
 // XXX ALL TIMES ARE UTC INTERNALLY
 // SUNDAY = 0 SATURDAY = 6
@@ -144,6 +137,17 @@ $(document).ready(function() {
 	document.title = "CoRT - " + _("BZ status");
 	$("#title").text(_("BZ status"));
 	$("#bz-next-title").text(_("Next BZ:"));
+
+	let tz = localStorage.getItem("tz");
+	let lang = localStorage.getItem("lang");
+	dformatter = new Intl.DateTimeFormat(lang, {
+		weekday: 'long', month: '2-digit', day: 'numeric',
+		hour: '2-digit', minute: '2-digit', timeZone: tz
+	});
+	tformatter = new Intl.DateTimeFormat(lang, {
+		hour: '2-digit', minute: '2-digit', timeZone: tz
+	});
+
 	insert_notification_link();
 	feed_bz(true);
 });
