@@ -58,9 +58,9 @@ function setup_canvas() {
 		height: canvas.height,
 		ctx: ctx,
 		dpr: dpr
-	}
+	};
 
-};
+}
 const canvas = setup_canvas();
 
 // Use local versions of images because NGE's site is slow
@@ -131,6 +131,7 @@ async function draw_map(images) {
 }
 
 async function display_wz(init=false) {
+	let data = null;
 	let gems = [];
 	let forts = [];
 	let failures = {};
@@ -142,7 +143,7 @@ async function display_wz(init=false) {
 		return;
 	}
 	try {
-		var data = await $().getJSON(__api__urls["wstatus"]);
+		data = await $().getJSON(__api__urls["wstatus"]);
 		$("#wz-info-error").empty();
 		let dt = new Date();
 		let datetime = dt.toLocaleTimeString(undefined,
@@ -208,7 +209,7 @@ async function display_wz(init=false) {
 				<span class="wz-relics">${relics}</span>
 				<span class="wz-forts">${forts.splice(0, 4).join("")}</span>
 				</div>
-		`)
+		`);
 	}
 
 	// Events
@@ -243,4 +244,4 @@ $(document).ready(function() {
 
 $onlinemanager.whenBackOnline(() => display_wz(true));
 
-setInterval(display_wz, 30 * 1000)
+setInterval(display_wz, 30 * 1000);
