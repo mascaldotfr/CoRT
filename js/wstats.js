@@ -15,9 +15,7 @@ let time = new Time();
 let realm_colors = constants.realm_colors;
 let realms = constants.realm_names;
 
-let tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
-	hour12: false, hour: 'numeric', minute: 'numeric', timeZone: localStorage.getItem("tz")
-});
+let tformatter = null;
 
 // undefined / null => N/A or 0
 function naify(value, failover="0") {
@@ -206,6 +204,12 @@ $(document).ready(function() {
 	$("#title").text(_("WZ statistics"));
 	$("#ws-info-info").text(_("The page refreshes itself every minute.") +
 		                " " + _("Last event:"));
+
+	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		hour12: false, hour: 'numeric', minute: 'numeric',
+		timeZone: localStorage.getItem("tz")
+	});
+
 	let ilinks = [];
 	ilinks.push({"id": "#ws-last", txt: _("Latest key events")});
 	for (let day of report_days) {
