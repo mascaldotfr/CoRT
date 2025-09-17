@@ -1,10 +1,10 @@
 import {__api__frontsite, __api__frontsite_dir, __api__urls} from "./api_url.js";
 import {$} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
-import {maxlevel, class_type_masks, datasets, classes} from "./trainertools/constants.js";
+import {constants} from "./trainertools/constants.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
-var valid_trainerdatasets = datasets;
+var valid_trainerdatasets = constants.datasets;
 // remove 1.33.2 and 1.33.3, setup collection wasn't a thing back then
 valid_trainerdatasets.splice(0,2);
 var trainerdatasets = {};
@@ -52,7 +52,7 @@ async function make_stats() {
 	// Prefill arrays
 	for (let version of valid_trainerdatasets) {
 		stats[version] = {};
-		for (let clas of classes)
+		for (let clas of constants.classes)
 			stats[version][clas] = {};
 	}
 
@@ -66,10 +66,10 @@ async function make_stats() {
 		if (!valid_trainerdatasets.includes(version))
 			continue;
 		// skip empty setups, non lvl 60, and incomplete ones
-		if (level < maxlevel)
+		if (level < constants.maxlevel)
 			continue;
 		else
-			level = maxlevel; // lvl 61 is raptor gem
+			level = constants.maxlevel; // lvl 61 is raptor gem
 		let checksum = 0; // total power points used
 		for (let i = 1; i < setup.length; i += 2) {
 			let values = setup[i].split("");
@@ -78,14 +78,14 @@ async function make_stats() {
 		}
 		// see trainer.js (determine if mage or the rest when it comes to pp)
 		let powerpoints = 32;
-		if ((class_type_masks[clas] & 0xF0) != 32)
+		if ((constants.class_type_masks[clas] & 0xF0) != 32)
 			powerpoints = 80;
 		let ppoints = trainerdatasets[version]["points"]["power"][powerpoints][level - 1];
 		if (checksum != ppoints)
 			continue; // incomplete
 
-		let base_skills = class_type_masks[clas] & 0xF0;
-		let class_skills = class_type_masks[clas];
+		let base_skills = constants.class_type_masks[clas] & 0xF0;
+		let class_skills = constants.class_type_masks[clas];
 		let alltrees = trainerdatasets[version]["class_disciplines"][base_skills];
 		alltrees = alltrees.concat(trainerdatasets[version]["class_disciplines"][class_skills]);
 
@@ -118,7 +118,7 @@ async function make_stats() {
 
 	// Do global maths
 	for (let version of valid_trainerdatasets) {
-		for (let clas of classes) {
+		for (let clas of constants.classes) {
 			for (let spell of Object.keys(stats[version][clas])) {
 				let freqsum = stats[version][clas][spell]["frequency"].reduce((a,b) => a + b, 0);
 				let notusing = stats[version][clas][spell]["frequency"][0];
@@ -219,7 +219,7 @@ $(document).ready(async function() {
 
 	for (let version of valid_trainerdatasets.reverse())
 		$("#ts-version").append(`<option value="${version}">${version}</option>`);
-	for (let clas of classes)
+	for (let clas of constants.classes)
 		$("#ts-class").append(`<option value="${clas}">${_(capitalize(clas))}</option>`);
 
 	if (await make_stats() != false)
