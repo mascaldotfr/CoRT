@@ -321,6 +321,12 @@ export const __i18n__ = {
 		"es": "Este enlace compartido es malo. ¡Me doy por vencido, lo siento!",
 		"de": "Der geteilte Link ist ungültig. Ich gebe auf, sorry!"
 	},
+	"Redirecting to the trainer page in":
+	{
+		"fr": "Redirection vers l'entraîneur dans",
+		"es": "Redireccionando a la página del entrenador en",
+		"de": "Weiterleitung zur Trainerseite in"
+	},
 	"Copy link":
 	{
 		"fr": "Copier le lien",

@@ -378,9 +378,23 @@ class SetupManager {
 		this.trainerdataversion = null;
 	}
 
-	bad_shared_link(nonfatal=false) {
-		window.alert(_("Your shared link is bad. Bailing out, sorry!"));
-		window.location.assign(window.location.origin + window.location.pathname);
+	bad_shared_link() {
+		$("#t-container").html(`
+			 <div class="card">
+				 <h1 class="red">${_("Your shared link is bad. Bailing out, sorry!")}</h1>
+				 <p class="center">${_("Redirecting to the trainer page in")}
+				 <span id="redirect-counter" class="bold">10</span>${_("s")}</p>
+			 </div>
+		`);
+		const countdownElement = document.getElementById("redirect-counter");
+		let count = 10;
+		const interval = setInterval(() => {
+			count--;
+			countdownElement.textContent = String(count).padStart(2, "0");
+			if (count <= 0)
+				clearInterval(interval);
+		}, 1000);
+		setTimeout(() => window.location.replace(window.location.origin + window.location.pathname), 10000);
 	}
 
 	// load_tree() being async, you need the tree to be loaded
@@ -582,7 +596,7 @@ class SetupManager {
 			for (let col = 1; col < 11; col++) {
 				let level = parseInt($(`#t-trainer .t${row} .p${col} .icon`).attr("data-value"));
 				if (level > constants.maxplevel || level < constants.minplevel) {
-					this.bad_shared_link(true);
+					this.bad_shared_link();
 					return;
 				}
 				// level is NaN on wmrow
@@ -593,8 +607,10 @@ class SetupManager {
 			if (row != this.wmrow)
 				setup += "+";
 		}
-		if (dpoints > this.dpointstotal || ppoints > this.ppointstotal)
-			bad_shared_link(true);
+		if (dpoints > this.dpointstotal || ppoints > this.ppointstotal) {
+			this.bad_shared_link();
+			return;
+		}
 		if (shared)
 			this.collect_setup(setup);
 		let pathname = window.location.pathname;
