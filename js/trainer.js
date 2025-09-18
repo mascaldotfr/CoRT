@@ -23,14 +23,6 @@ $(document).ready(function() {
 	$("#t-save").text(_("Share / Save"));
 	$("#t-dpoints-label").text(_("Discipline points:"));
 	$("#t-ppoints-label").text(_("Power points:"));
-	if (typeof HTMLDialogElement === "function") {
-		$("#t-dialog h3").text(_("Here is the link to your setup:"));
-		$("#t-dialog-copy").text(_("Copy link"));
-		$("#t-dialog-close").text(_("Close") + " (Esc)");
-	}
-	else { // browser with no <dialog> support
-		$("#t-dialog").hide();
-	}
 
 	// generate characters levels options
 	let html_level_options = `<option value="61">60 (+${_("Necro crystal")})</option>`;
@@ -116,46 +108,48 @@ $("#t-save").on("click", function() {
 		window.alert(_(`You need first to load trees by clicking on "%s"!`, _("Load / Reset")));
 		return;
 	}
+
 	let saved_url = setup.save_to_url();
 	if (saved_url == null)
 		return;
-	if (typeof HTMLDialogElement === "function") {
-		$("#t-dialog-url").val(saved_url);
-		$("#t-dialog").attr("inert", "true");
-		document.getElementById("t-dialog").showModal();
-		$("#t-dialog").removeAttr("inert");
-		$("body").css("filter", "blur(10px)");
-	}
-	else { // <dialog> unsupported
-		window.prompt(_("Here is the link to your setup:"), saved_url);
-		window.location.href = saved_url;
-	}
+
+	// populate the fake modal
+	$("#t-sharedlink h3").text(_("Here is the link to your setup:"));
+	$("#t-sharedlink-copy").text(_("Copy link"));
+	$("#t-sharedlink-close").text(_("Close") + " (Esc)");
+	$("#t-sharedlink-url").val(saved_url);
+
+	// allow pressing echap
+	$("body").on("keydown", function(event) {
+		if (event.key === "Escape" || event.keyCode === 27) {
+			event.preventDefault();
+			window.location.href = $("#t-sharedlink-url").val();
+		}
+	});
+
+	// disable the trainer
+	$("#t-container").css("pointer-events", "none");
+	$("#t-container").css("filter", "blur(8px)");
+	// show our fake modal
+	$("#t-sharedlink").prependTo("#t-container");
+	$("#t-sharedlink").css("display", "block");
 });
 
-$("#t-dialog").on("cancel", function(e) {
-	e.preventDefault();
-	document.getElementById("t-dialog").close();
-	// Don't get a blurred page if people press 2 times ESC
-	$("body").css("filter", "");
-	window.location.href = $("#t-dialog-url").val();
+$("#t-sharedlink-close").on("click", function() {
+       window.location.href = $("#t-sharedlink-url").val();
 });
 
-$("#t-dialog-close").on("click", function() {
-	window.location.href = $("#t-dialog-url").val();
-});
-
-
-$("#t-dialog-copy").on("click", function() {
+$("#t-sharedlink-copy").on("click", function() {
 	function failure_message(error) {
 		console.error("Failed to copy text: ", error);
-		$("#t-dialog-copy").text("Copy failed!");
+		$("#t-sharedlink-copy").text("Copy failed!");
 	}
 	try {
-		navigator.clipboard.writeText($("#t-dialog-url").val())
+		navigator.clipboard.writeText($("#t-sharedlink-url").val())
 			.then(() => {
-				$("#t-dialog-copy").text(_("Link copied!"));
+				$("#t-sharedlink-copy").text(_("Link copied!"));
 				let timer = setInterval(() => {
-					$("#t-dialog-copy").text(_("Copy link"));
+					$("#t-sharedlink-copy").text(_("Copy link"));
 					clearInterval(timer);
 					}, 3000);
 			})

@@ -3,6 +3,7 @@
 	--card_background: #2f2f49;
 	--menu_background: #333349;
 	--tooltip_background: #616179;
+	/* no more used for <dialog> in the trainer */
 	--dialog_background: #2f2f4f;
 	--foreground: white;
 	--forms: #5f5f6f;

@@ -107,23 +107,30 @@
 .tippy-content td {
 	border: 1px solid white;
 }
-#t-dialog {
-	position: absolute;
-	top: 0px;
-	background: var(--dialog_background);
-	box-shadow: 0px 0px 2px 2px #aaa;
-	border: 0px;
+#t-sharedlink {
+	border: 1px solid white;
+	display: none;
+	width: 90%;
+	max-width: 512px;
+	height: fit-content;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+	/* drop .card margins */
+	margin: 0 !important;
 }
-#t-dialog h3 {
+#t-sharedlink h3 {
 	margin: var(--default_margin_padding);
 	text-align: center;
 	color: white;
 }
-#t-dialog-url {
+#t-sharedlink-url {
 	width: 100%;
 	margin: var(--default_margin_padding) 0;
 }
-#t-dialog-buttons {
+#t-sharedlink-buttons {
 	text-align: right;
 	font-weight: bold;
 }
