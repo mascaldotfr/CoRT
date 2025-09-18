@@ -81,6 +81,9 @@ export const $ = (function (selector) {
 			document.querySelectorAll(selector).forEach( (elm) =>
 				elm.addEventListener(anevent, callable) );
 		},
+		prependTo: function(target) {
+			document.querySelector(target).insertAdjacentElement("beforebegin", r_selector);
+		},
 		prepend: function(html) {
 			r_selector.insertAdjacentHTML("afterbegin", html);
 		},
