@@ -446,7 +446,7 @@ class SetupManager {
 		alltrees.forEach( (tree) => {
 			treepos++;
 			let spellpos = 0;
-			let iconsrc = "data/trainer/" + this.trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".jpg";
+			let iconsrc = "data/trainer/" + this.trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".webp";
 			trainerhtml.push(`<div treepos="${treepos}" class="t${treepos} card">`);
 			trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, tree, ""));
 			this.trainerdata["disciplines"][tree]["spells"].forEach( (spell) => {
