@@ -55,7 +55,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>,
 		and the <a href="https://hail.thebus.top/CoRT/">faster website</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250919.170716
+		<p> <!--VERSION-->Version: 20250919.172647
 `;
 
 $(document).ready(function() {
@@ -103,8 +103,8 @@ $(document).ready(function() {
 	const loadCursors = () => {
 		const style = document.createElement("style");
 		style.textContent = `
-			html, body, label, button { cursor: url("data/cursor/normal.png"), default; }
-			label, select, button, textarea, a:hover, a:active { cursor: url("data/cursor/links.png"), default; }
+			html, body, label, button { cursor: url("data/cursor/normal.webp"), default; }
+			label, select, button, textarea, a:hover, a:active { cursor: url("data/cursor/links.webp"), default; }
 		`;
 		document.head.appendChild(style);
 		document.removeEventListener("mousemove", loadCursors);
