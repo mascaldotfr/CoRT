@@ -52,13 +52,15 @@
 	height: 48px;
 	border-radius: 3px;
 }
-.skillspinner { height: 48px; margin-top: 1px; }
 .icon .skilllvl { background-color: var(--foreground); color: black; border-radius: 4px; }
+.icon[data-status="available"] { filter: brightness(.25); }
+.icon[data-status="active"] { filter: brightness(1); }
+.icon[data-status="disabled"] { filter: grayscale(1) brightness(.5); }
+.skillspinner { height: 48px; margin-top: 1px; }
 .minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px; padding: 2px; }
 .minus { margin-top: 6px; }
-.skill-disabled { filter: grayscale(1) brightness(.5); }
-.skill-available { filter: brightness(.25); }
-.skill-active { filter: brightness(1); }
+.minus[data-status="visible"], .plus[data-status="visible"] { visibility: visible; }
+.minus[data-status="hidden"], .plus[data-status="hidden"] { visibility: hidden; }
 .tippy-content {
 	background-color: var(--tooltip_background);
 	color: var(--foreground);

@@ -205,8 +205,8 @@ function power_change(power) {
 	$("#t-ppointsleft").attr("data-value", setup.ppointsleft);
 	$(skill_level_html).text(wanted_level);
 	$(skill_level_attr).attr("data-value", wanted_level);
-	icons.visiblity($(power.parentNode.parentNode.childNodes[1]),
-			 wanted_level == 0 ? "skill-disabled" : "skill-active");
+
+	power.parentNode.parentNode.childNodes[1].dataset.status = wanted_level == 0 ? "disabled" : "active";
 }
 
 function discipline_change(discipline) {
@@ -303,10 +303,10 @@ function update_tree(treepos) {
 			// reduce strongly brightness and disable buttons on
 			// unavailable skills due to player or discpline tree
 			// level. also forbid WM tree for non level 60.
-			icons.visiblity(sel_icon, "skill-disabled");
+			sel_icon.attr("data-status", "disabled");
 			if (!is_wmrow) {
-				sel_plus.hide();
-				sel_minus.hide();
+				sel_plus.attr("data-status", "hidden");
+				sel_minus.attr("data-status", "hidden");
 			}
 		}
 		// if discipline tree level allows the skill to be interacted
@@ -315,18 +315,18 @@ function update_tree(treepos) {
 			if (is_wmrow) {
 				// WM tree requires no skills points, just make
 				// it fully visible
-				icons.visiblity(sel_icon, "skill-active");
+				sel_icon.attr("data-status", "active");
 			}
 			else {
-				icons.visiblity(sel_icon, "skill-available");
-				sel_plus.show();
-				sel_minus.show();
+				sel_icon.attr("data-status", "available");
+				sel_plus.attr("data-status", "visible");
+				sel_minus.attr("data-status", "visible");
 			}
 		}
 		// ensure brightness is kept when a tree level is decreasing in
 		// the beginning of that loop
 		if (!is_wmrow && parseInt(sel_icon.attr("data-value")) > 0) {
-			icons.visiblity(sel_icon, "skill-active");
+			sel_icon.attr("data-status", "active");
 		}
 	}
 
@@ -629,13 +629,6 @@ class SetupManager {
 class Icons {
 	constructor() {
 		this.tooltips = [];
-	}
-
-	visiblity(icon, clas) {
-		// change the lamaiquery selector "icon" to "class", allowing it to
-		// make it disabled, active or available
-		icon.removeClass("skill-disabled", "skill-active", "skill-available");
-		icon.addClass(clas);
 	}
 
 	tooltip_factory(content, clean_spellname) {
