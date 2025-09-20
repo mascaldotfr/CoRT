@@ -458,8 +458,7 @@ class SetupManager {
 					trainerhtml.push(`<div class="p${spellpos}"><div class="icon"></div></div>`);
 				}
 				else {
-					let spellname = spell["name"];
-					trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, spellname, tree));
+					trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, spell["name"], tree));
 				}
 			});
 			trainerhtml.push("</div>");
@@ -467,7 +466,7 @@ class SetupManager {
 		// disable all animation
 		$("#t-trainer").css("animation", "none");
 		// "reset" changes due to animation by causing a reflow
-		const _ = document.getElementById("t-trainer").offsetHeight;
+		const _unused = document.getElementById("t-trainer").offsetHeight;
 		$("#t-trainer").css("animation", "1s fadein");
 		$("#t-trainer").html(trainerhtml.join(""));
 
