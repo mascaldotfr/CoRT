@@ -505,8 +505,6 @@ class SetupManager {
 			}
 		}, 1);
 
-		if (this.is_beta)
-			$("#title").append(" - " + this.trainerdata["version"]);
 	}
 
 
@@ -759,7 +757,7 @@ class DatasetsManager {
 	constructor() {
 		// all available datasets
 		this.trainerdatasets = constants.datasets;
-		// beta is a special mode when only the dataset at `/data/trainerdata/beta` is used
+		// beta is a special mode where the only dataset at `/data/trainerdata/beta` is used
 		this.is_beta = location.pathname.split("/").pop() === "beta.html";
 		if (this.is_beta) {
 			this.live_datasets = this.trainerdatasets;
