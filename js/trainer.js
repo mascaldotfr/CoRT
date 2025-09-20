@@ -165,12 +165,14 @@ $("#t-sharedlink-copy").on("click", function() {
 
 function power_change(power) {
 	let change_direction = power.className;
+	// Whole skill html node `<div id="pN">`
+	let ancestor = power.parentNode.parentNode;
 	// for display
-	let skill_level_html = power.parentNode.parentNode.getElementsByClassName("skilllvl")[0];
+	let skill_level_html = ancestor.querySelector(".skilllvl");
 	// internal
-	let skill_level_attr = power.parentNode.parentNode.getElementsByClassName("icon")[0];
-	let skill_level = parseInt(skill_level_attr.getAttribute("data-value"));
-	let discipline_level = parseInt(power.parentNode.parentNode.parentNode.getElementsByClassName("icon")[0].getAttribute("data-value"));
+	let skill_level_attr = ancestor.querySelector(".icon");
+	let skill_level = parseInt(skill_level_attr.dataset.value);
+	let discipline_level = parseInt(ancestor.parentNode.querySelector(".icon").dataset.value);
 	let wanted_level = change_direction == "plus" ? skill_level + 1 : skill_level - 1;
 	let diffpoints = 0;
 	let maxslvl = setup.trainerdata["required"]["power"][discipline_level - 1];
@@ -201,11 +203,13 @@ function power_change(power) {
 	}
 	// valid, change it
 	setup.ppointsleft += diffpoints;
-	$("#t-ppointsleft").text(setup.ppointsleft);
-	$("#t-ppointsleft").attr("data-value", setup.ppointsleft);
 	$(skill_level_html).text(wanted_level);
 	$(skill_level_attr).attr("data-value", wanted_level);
 
+	// input_from_url() will deal with everything under this line
+	if (setup.automated_clicks === true) return;
+
+	$("#t-ppointsleft").text(setup.ppointsleft);
 	power.parentNode.parentNode.childNodes[1].dataset.status = wanted_level == 0 ? "disabled" : "active";
 }
 
@@ -254,13 +258,16 @@ function discipline_change(discipline) {
 	}
 	// valid, do the change
 	setup.dpointsleft += discipline_points_balance;
-	$("#t-dpointsleft").text(setup.dpointsleft);
-	$("#t-dpointsleft").attr("data-value", setup.dpointsleft);
 	$(discipline_level_html).text(wanted_level);
 	$(discipline_level).attr("data-value", wanted_level);
 	let treepos = discipline.parentNode.parentNode.parentNode.getAttribute("treepos");
-	// deal with the possible skills changes
-	update_tree(treepos);
+	// deal with the possible skills changes when clicks are manual
+	// when inputting a setup, input_from_url() will deal with that
+	// once for all
+	if (setup.automated_clicks === false) { 
+		update_tree(treepos);
+		$("#t-dpointsleft").text(setup.dpointsleft);
+	}
 }
 
 function update_tree(treepos) {
@@ -273,12 +280,10 @@ function update_tree(treepos) {
 	// tree but ...
 	for (let i = 1; i <= 10; i++) {
 		let sel_icon = $(`div[treepos="${treepos}"] .p${i} .icon`);
-		let sel_plus = null;
-		let sel_minus = null;
+		let sel_skillspinner = null;
 		let sel_skilllvl = null;
 		if (!is_wmrow) {
-			sel_plus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .plus`);
-			sel_minus = $(`div[treepos="${treepos}"] .p${i} .skillspinner .minus`);
+			sel_skillspinner = $(`div[treepos="${treepos}"] .p${i} .skillspinner`);
 			sel_skilllvl = $(`div[treepos="${treepos}"] .p${i} .icon .skilllvl`);
 		}
 		// if tree has been lowered and the skill is no more available,
@@ -305,8 +310,7 @@ function update_tree(treepos) {
 			// level. also forbid WM tree for non level 60.
 			sel_icon.attr("data-status", "disabled");
 			if (!is_wmrow) {
-				sel_plus.attr("data-status", "hidden");
-				sel_minus.attr("data-status", "hidden");
+				sel_skillspinner.attr("data-status", "hidden");
 			}
 		}
 		// if discipline tree level allows the skill to be interacted
@@ -319,8 +323,7 @@ function update_tree(treepos) {
 			}
 			else {
 				sel_icon.attr("data-status", "available");
-				sel_plus.attr("data-status", "visible");
-				sel_minus.attr("data-status", "visible");
+				sel_skillspinner.attr("data-status", "visible");
 			}
 		}
 		// ensure brightness is kept when a tree level is decreasing in
@@ -332,7 +335,6 @@ function update_tree(treepos) {
 
 	// display the new amount of powerpoints left
 	$("#t-ppointsleft").text(setup.ppointsleft);
-	$("#t-ppointsleft").attr("data-value", setup.ppointsleft);
 }
 
 class SetupManager {
@@ -474,13 +476,9 @@ class SetupManager {
 		this.dpointsleft = this.dpointstotal;
 		this.ppointsleft = this.ppointstotal;
 		$("#t-dpointsleft").text(this.dpointstotal);
-		$("#t-dpointsleft").attr("data-value", this.dpointstotal);
 		$("#t-dpointstotal").text(this.dpointstotal);
-		$("#t-dpointstotal").attr("data-value", this.dpointstotal);
 		$("#t-ppointsleft").text(this.ppointstotal);
-		$("#t-ppointsleft").attr("data-value", this.ppointstotal);
 		$("#t-ppointstotal").text(this.ppointstotal);
-		$("#t-ppointstotal").attr("data-value", this.ppointstotal);
 
 		// Don't need to checkout trees if we load a saved setup
 		if (this.saved_setup === null) {
@@ -499,10 +497,13 @@ class SetupManager {
 
 		this.input_from_url();
 
-		// Insert tooltips asynchronously
-		while (icons.tooltips.length) {
-			icons.tooltips.shift().call();
-		}
+		// Trick to defer toolstips binding, allowing
+		// skillbars to be displayed sooner
+		setTimeout(() => {
+			while (icons.tooltips.length) {
+				icons.tooltips.shift().call();
+			}
+		}, 1);
 
 		if (this.is_beta)
 			$("#title").append(" - " + this.trainerdata["version"]);
@@ -521,9 +522,10 @@ class SetupManager {
 				// discipline points
 				row++;
 				let do_clicks = (this.saved_setup[item] - 1) / 2 ;
+				let selector = document.querySelector(`#t-trainer .t${row} .p0 .skillspinner .plus`);
 				for (let i = 0; i < do_clicks; i++) {
 					try {
-						$(`#t-trainer .t${row} .p0 .skillspinner .plus`).trigger("click");
+						discipline_change(selector);
 					}
 					catch (_unused) {
 						this.bad_shared_link();
@@ -531,9 +533,6 @@ class SetupManager {
 						return;
 					}
 				}
-				// If no discipline change, ensure all unused skills are greyed out
-				if (this.saved_setup[item] == 1)
-					update_tree(row);
 			}
 			else {
 				// power points
@@ -542,9 +541,10 @@ class SetupManager {
 					continue; // no pp for the wm row
 				for (let power in powers) {
 					power = parseInt(power);
+					let selector = document.querySelector(`div[treepos="${row}"] .p${power + 1} .skillspinner .plus`);
 					for (let i = 0; i < powers[power]; i++) {
 						try {
-							$(`div[treepos="${row}"] .p${power + 1} .skillspinner .plus`).trigger("click");
+							power_change(selector);
 						}
 						catch (_unused) {
 							this.automated_clicks = false;
@@ -554,7 +554,12 @@ class SetupManager {
 					}
 				}
 			}
+			// update the tree icons only once per tree, not
+			// at every discipline click!
+			update_tree(row);
 		}
+		$("#t-dpointsleft").text(setup.dpointsleft);
+		$("#t-ppointsleft").text(setup.ppointsleft);
 		this.saved_setup = undefined;
 		this.automated_clicks = false;
 	}

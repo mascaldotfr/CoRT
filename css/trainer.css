@@ -57,10 +57,10 @@
 .icon[data-status="active"] { filter: brightness(1); }
 .icon[data-status="disabled"] { filter: grayscale(1) brightness(.5); }
 .skillspinner { height: 48px; margin-top: 1px; }
+.skillspinner[data-status="visible"] { visibility: visible; }
+.skillspinner[data-status="hidden"] { visibility: hidden; }
 .minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px; padding: 2px; }
 .minus { margin-top: 6px; }
-.minus[data-status="visible"], .plus[data-status="visible"] { visibility: visible; }
-.minus[data-status="hidden"], .plus[data-status="hidden"] { visibility: hidden; }
 .tippy-content {
 	background-color: var(--tooltip_background);
 	color: var(--foreground);
