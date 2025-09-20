@@ -14,29 +14,29 @@ $(document).ready(function() {
 		_("Selecting an higher character level will upgrade your current setup to that level."));
 	if (datasets.is_beta)
 		$("#title").append(`&nbsp;<span class="red">(AMUN/BETA)</span>`);
-	let html_class_options = "";
+	let html_class_options = [];
 	for (let clas of constants.classes) {
-		html_class_options += `<option value="${clas}">${_(clas[0].toUpperCase() + clas.slice(1))}</option>`;
+		html_class_options.push(`<option value="${clas}">${_(clas[0].toUpperCase() + clas.slice(1))}</option>`);
 	}
-	$("#t-class").html(html_class_options);
+	$("#t-class").html(html_class_options.join(""));
 	$("#t-load").text(_("Load / Reset"));
 	$("#t-save").text(_("Share / Save"));
 	$("#t-dpoints-label").text(_("Discipline points:"));
 	$("#t-ppoints-label").text(_("Power points:"));
 
 	// generate characters levels options
-	let html_level_options = `<option value="61">60 (+${_("Necro crystal")})</option>`;
+	let html_level_options = [`<option value="61">60 (+${_("Necro crystal")})</option>`];
 	for (let i = constants.maxlevel - 1; i >= constants.minlevel; i--) {
-		html_level_options += `<option value="${i}">${i}</option>`;
+		html_level_options.push(`<option value="${i}">${i}</option>`);
 	}
-	$("#t-level").append(html_level_options);
+	$("#t-level").append(html_level_options.join(""));
 	// generate datasets version
-	let html_dataset_options  = `<option value="${datasets.newest_dataset}" default selected>
-		${_("Current game version")} (${datasets.newest_dataset})</option>`;
+	let html_dataset_options = [`<option value="${datasets.newest_dataset}" default selected>
+		${_("Current game version")} (${datasets.newest_dataset})</option>`];
 	for (let i = datasets.trainerdatasets.length - 2; i >= 0; i--) {
-		html_dataset_options += `<option value="${datasets.trainerdatasets[i]}">${datasets.trainerdatasets[i]}</option>`;
+		html_dataset_options.push(`<option value="${datasets.trainerdatasets[i]}">${datasets.trainerdatasets[i]}</option>`);
 	}
-	$("#t-version").html(html_dataset_options);
+	$("#t-version").html(html_dataset_options.join(""));
 	// Drop "index.html" from the URL bar if you are coming from search engines
 	if (window.location.pathname == `${__api__frontsite_dir}/index.html`)
 		window.location.pathname = __api__frontsite_dir;
