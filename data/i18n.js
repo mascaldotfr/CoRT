@@ -47,7 +47,7 @@ export const __i18n__ = {
 	},
 	"Bosses respawn countdown": {
 		"fr": "Compte à rebours des boss",
-		"es": "Cuenta atras de los jefes",
+		"es": "Cuenta atras de los epicos",
 		"de": "Boss-Countdown"
 	},
 	"WZ statistics": {
@@ -147,7 +147,7 @@ export const __i18n__ = {
 	},
 	"OFF":
 	{
-		"fr": "Fermé",
+		"fr": "Fermée",
 		"es": "Cerrada",
 		"de": "Geschlossen"
 	},
