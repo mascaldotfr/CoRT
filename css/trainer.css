@@ -6,7 +6,6 @@
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
-	min-height: 3em;
 	justify-content: space-around;
 }
 #t-version, #t-load, #t-save, #t-class, #t-level {
@@ -21,7 +20,7 @@
 }
 .points { text-align:center; min-height: 2em;}
 .t-placeholder-card {
-	height: 3.5em;
+	height: 4em;
 }
 .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
 	display: grid;
@@ -136,13 +135,21 @@
 	text-align: right;
 	font-weight: bold;
 }
+@media (min-width: 800px) {
+	.setup {
+		min-height: 3em;
+	}
+	#titleinfo {
+		min-height: 2.5em;
+	}
+}
 @media (max-width: 799px) {
 	#titleinfo {
-		min-height: calc(4 * 1.25em);
+		min-height: 5em;
 		margin: .25em;
 	}
 	.setup {
-		min-height: 7em;
+		min-height: 8em;
 	}
 	.t-placeholder-card {
 		height: 12em;
