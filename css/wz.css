@@ -1,7 +1,6 @@
 #wz-container {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 3em 1em;
 	align-items: center;
 	justify-content: space-evenly;
 }
@@ -11,14 +10,12 @@
 #wz-info {
 	text-align: center;
 	font-weight: bold;
-	min-height: 2em;
+	min-height: 3em;
 }
 #wz-map-map {
 	border-radius: 8px;
 	padding: 0;
 	margin: 0;
-	background-image: url("../data/warstatus/base_map.png");
-	background-size: cover;
 	image-rendering: pixelated;
 	image-rendering: crisp-edges;
 }
@@ -36,15 +33,9 @@
 #wz-events {
 	align-self: center;
 	overflow-y: scroll;
-	min-height: calc(500px - 2 * var(--default_margin_padding));
-	height: 500px;
-	width: 30em;
-	margin-left: 0px;
 }
 #wz-realms-info {
 	align-self: center;
-	min-width: 26em;
-	min-height: 20em;
 }
 .wz-realm-header {
 	display: grid;
@@ -57,13 +48,6 @@
 	align-items: center;
 	font-size: 150%;
 	font-weight: bold;
-}
-#wz-alsius, #wz-ignis {
-	margin-bottom: 3em;
-}
-#wz-alsius, #wz-ignis, #wz-syrtis {
-	min-height: 5.5em;
-	min-width: 28em;
 }
 .wz-realmname {
 	grid-area: realm;
@@ -82,41 +66,74 @@
 	grid-area: forts;
 	font-size: initial;
 	font-weight: initial;
-	min-width: 12em;
 }
-@media (max-width: 799px) {
+
+@media (min-width: 513px) {
 	#wz-container {
-		grid-template-areas: "map" "alsius" "ignis" "syrtis" "events";
-		grid-template-columns: 1fr;
-		gap: 0;
-	}
-	#wz-map-map {
-		max-width: 100%;
-		min-height: 42vh;
+		gap: 3em 1em;
 	}
 	#wz-map {
-		text-align: center;
-		margin: var(--default_margin_padding);
-		margin-bottom: .5em;
+		padding: 0px;
+		/* XXX hide some margin issue leaving 4 px left at the bottom */
+		background-color: unset;
 	}
-	#wz-events, #wz-map, #wz-realms-info, #wz-alsius, #wz-ignis, #wz-syrtis {
-		min-width: calc(100% - 4 * var(--default_margin_padding));
+	#wz-map-map {
+		height: 500px;
+		width: 500px;
+	}
+	#wz-events {
+		height: 500px;
+		width: 30em;
+	}
+	#wz-realms-info {
+		min-width: 26em;
+		min-height: 20em;
+	}
+	#wz-alsius, #wz-ignis {
+		margin-bottom: 3em;
+	}
+	#wz-alsius, #wz-ignis, #wz-syrtis {
+		min-height: 5.5em;
+		min-width: 28em;
+	}
+	.wz-forts {
+		min-width: 12em;
+	}
+}
+
+@media(max-width: 1024px) {
+	/* Give a chance to have the map and central area visible on screen at 1024x768 */
+	#wz-map-map {
+		width: 400px;
+		height: 400px;
+	}
+}
+
+@media(max-width: 512px) {
+	#wz-map {
+		text-align: center;
+		width: calc(100% - 2 * var(--default_margin_padding));
+		box-sizing: border-box;
+		margin-bottom: 1em;
+	}
+	#wz-map-map {
+		height: 40vh;
+		width: 40vh;
+	}
+	#wz-events {
+		height: 50vh;
+		margin-top: 1em;
+	}
+	#wz-realms-info {
+		width: 100%;
+	}
+	#wz-alsius, #wz-ignis, #wz-syrtis {
+		min-height: 7.5em;
 	}
 	#wz-alsius, #wz-ignis {
 		margin-bottom: 1em;
 	}
 	.wz-forts, .wz-realm-header {
-		min-width: unset;
 		gap: .5em;
-	}
-	#wz-events {
-		margin-left: var(--default_margin_padding);
-		width: auto;
-	}
-}
-@media (min-width: 800px) {
-	#wz-map-map {
-		width: 500px;
-		height: 500px;
 	}
 }
