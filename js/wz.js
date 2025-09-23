@@ -176,7 +176,7 @@ async function display_wz(init=false) {
 		return; // nothing new
 
 	display_map(data["forts"]);
-	$("#wz-map-map").css('background-image', 'url("../data/warstatus/base_map.png")');
+	$("#wz-map-map").css('background-image', 'url("data/warstatus/base_map.png")');
 	$("#wz-map-map").css("background-size", "cover");
 
 	// Middle part
