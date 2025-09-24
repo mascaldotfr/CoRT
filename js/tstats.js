@@ -16,26 +16,25 @@ function capitalize(string) {
 }
 
 function loading(txt) {
-	$("#ts-maingraph").empty();
-	if (txt == "")
+	if (txt == "") {
+		$("#ts-maingraph").empty();
 		return;
-	if (txt.startsWith("http"))
-		txt = `<b>${_("Downloading")}</b> ${txt}`;
-	$("#ts-maingraph").append(txt + "<br>");
+	}
+	$("#ts-maingraph").html(txt + "<br>");
 }
 
 async function make_stats() {
 	await Promise.all(
 		valid_trainerdatasets.map(dset => {
 			let url = `./data/trainer/${dset}/trainerdata.json`;
-			loading(url);
+			loading("Downloading...");
 			return $().getJSON(url).then(data => {
 				trainerdatasets[dset] = data;
 			});
 		})
 	)
 	.then(() => {
-		loading(__api__urls["trainer_data"]);
+		loading("Downloading...");
 		return $().get(__api__urls["trainer_data"]);
 	})
 	.then(data => {

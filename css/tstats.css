@@ -1,3 +1,8 @@
+select {
+	width: 100%;
+	margin: .5em auto .5em auto;
+}
+
 #ts-content {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
@@ -8,19 +13,12 @@
 	text-align: center;
 }
 #ts-side {
-	display: grid;
-	grid-template-rows: auto 1fr;
-	gap: var(--default_margin_padding);
-	height: max-content;
+	height: 35em;
 }
 #ts-center {
 	display: grid;
 	grid-template-rows: auto 1fr;
 	min-height: 1200px;
-}
-#ts-side label {
-	display: flex;
-	align-items: center;
 }
 #ts-side h3 {
 	text-align: center;
@@ -33,9 +31,11 @@
 #ts-powergraph {
 	margin-top: var(--default_margin_padding);
 }
+#ts-powergraph-graph {
+	height: 300px;
+}
 #ts-powergraph-graph svg, #ts-powergraph {
 	background: var(--menu_background);
-	min-height: 300px;
 }
 #ts-powergraph-graph .ct-bar {
 	stroke-width: 25px;
