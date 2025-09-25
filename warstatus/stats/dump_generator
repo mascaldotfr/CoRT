@@ -1,14 +1,17 @@
 #!/bin/sh
 
-out_yearly="dumps/`date +%Y`_events.csv"
-out_history="dumps/all_events.csv"
+output_dir="../../var/dumps"
+sqlite_db="../../var/events.sqlite"
+
+out_yearly="${output_dir}/`date +%Y`_events.csv"
+out_history="${output_dir}/all_events.csv"
 
 mkdir -p dumps
-sqlite3 -header -csv events.sqlite 'select datetime(date, "unixepoch") as date_utc, name, location as original_location, owner as current_owner, type from events where date_utc >= datetime(strftime("%Y") || "-01-01 00:00:00")' > $out_yearly
-sqlite3 -header -csv events.sqlite 'select datetime(date, "unixepoch") as date_utc, name, location as original_location, owner as current_owner, type from events;' > $out_history
+sqlite3 -header -csv "$sqlite_db" 'select datetime(date, "unixepoch") as date_utc, name, location as original_location, owner as current_owner, type from events where date_utc >= datetime(strftime("%Y") || "-01-01 00:00:00")' > $out_yearly
+sqlite3 -header -csv "$sqlite_db" 'select datetime(date, "unixepoch") as date_utc, name, location as original_location, owner as current_owner, type from events;' > $out_history
 gzip -9fk $out_yearly $out_history
 
-cat <<EOF > dumps/index.html
+cat <<EOF > "${output_dir}/index.html"
 <!doctype html>
 <html>
 	<head>
@@ -38,7 +41,7 @@ cat <<EOF > dumps/index.html
 		<p><i><b>Last update</b>: `date -R`</i></p>
 		<ul>
 		`
-		for csv in dumps/*.csv; do
+		for csv in "${output_dir}"/*.csv; do
 			f=$(basename $csv)
 			echo "<li><a href=\"$f\">$f</a> (~ $(wc -l < $csv) events)</li>"
 		done | sort -r

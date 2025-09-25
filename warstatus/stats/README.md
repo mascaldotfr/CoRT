@@ -43,7 +43,7 @@ Like you did in `warstatus` you can modify the crontab to include the following
 line to make it run daily at 6:
 
 ```
-    0 6 * * * cd /where/is/CoRT/var && ./dump_generator
+    0 6 * * * cd /where/is/CoRT/warstatus/stats && ./dump_generator
 ```
 
 ## Database format
