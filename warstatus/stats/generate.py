@@ -194,6 +194,8 @@ class Reporter(object):
                              and location = "{realm}"
                              order by date desc limit 1""")
         r = self.sql.fetchone()
+        if r is None:
+            return None
         return r["date"]
 
     def get_fortsheld(self):
