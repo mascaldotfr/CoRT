@@ -7,126 +7,20 @@ import {__chartist_responsive} from "./libs/chartist.js";
 var valid_trainerdatasets = constants.datasets;
 // remove 1.33.2 and 1.33.3, setup collection wasn't a thing back then
 valid_trainerdatasets.splice(0,2);
-var trainerdatasets = {};
 var stats = {};
-var data_txt = null;
 
 function capitalize(string) {
 	return string[0].toUpperCase() + string.slice(1);
 }
 
-function loading(txt) {
-	if (txt == "") {
-		$("#ts-maingraph").empty();
-		return;
+async function download_stats() {
+	try {
+		stats = await $().getJSON(__api__urls["trainer_data_stats"]);
 	}
-	$("#ts-maingraph").html(txt + "<br>");
-}
-
-async function make_stats() {
-	await Promise.all(
-		valid_trainerdatasets.map(dset => {
-			let url = `./data/trainer/${dset}/trainerdata.json`;
-			loading("Downloading...");
-			return $().getJSON(url).then(data => {
-				trainerdatasets[dset] = data;
-			});
-		})
-	)
-	.then(() => {
-		loading("Downloading...");
-		return $().get(__api__urls["trainer_data"]);
-	})
-	.then(data => {
-		data_txt = data.split("\n");
-		data_txt.pop(); // remove last empty line
-	})
-	.catch(err => {
+	catch(err) {
 		$("#ts-maingraph").html(`Failed to make the stats: <code>${err}</code> (check console)`);
 		$("#ts-maingraph").addClass("red", "bold");
-		throw err;
-	});
-
-	loading(`<b>${_("Crunching numbers")}</b>`);
-	// Prefill arrays
-	for (let version of valid_trainerdatasets) {
-		stats[version] = {};
-		for (let clas of constants.classes)
-			stats[version][clas] = {};
 	}
-
-	for (let s of data_txt) {
-		let setup = s.split(" ");
-		let version = setup.shift();
-		let clas = setup.shift();
-		let level = setup.shift();
-
-		// skip the few versions when setup collection wasn't a thing
-		if (!valid_trainerdatasets.includes(version))
-			continue;
-		// skip empty setups, non lvl 60, and incomplete ones
-		if (level < constants.maxlevel)
-			continue;
-		else
-			level = constants.maxlevel; // lvl 61 is raptor gem
-		let checksum = 0; // total power points used
-		for (let i = 1; i < setup.length; i += 2) {
-			let values = setup[i].split("");
-			let sum = values.reduce((a,b) => parseInt(a) + parseInt(b), 0);
-			checksum += sum;
-		}
-		// see trainer.js (determine if mage or the rest when it comes to pp)
-		let powerpoints = 32;
-		if ((constants.class_type_masks[clas] & 0xF0) != 32)
-			powerpoints = 80;
-		let ppoints = trainerdatasets[version]["points"]["power"][powerpoints][level - 1];
-		if (checksum != ppoints)
-			continue; // incomplete
-
-		let base_skills = constants.class_type_masks[clas] & 0xF0;
-		let class_skills = constants.class_type_masks[clas];
-		let alltrees = trainerdatasets[version]["class_disciplines"][base_skills];
-		alltrees = alltrees.concat(trainerdatasets[version]["class_disciplines"][class_skills]);
-
-		// Parse everything and gather necessary infos
-		for (let tree of alltrees) {
-			let disc_points = setup.shift();
-			let spell_points = setup.shift().split("");
-			let counter = 0;
-
-			for (let spell of trainerdatasets[version]["disciplines"][tree]["spells"]) {
-				counter++;
-				let points = parseInt(spell_points.shift());
-				let currspell = spell["name"];
-				if (tree.endsWith("WM")) {
-					if (currspell.startsWith("undefined"))
-						continue; // skip unused WM slots
-					// Determine if the power is available
-					if (counter * 2 - 1 <= disc_points)
-						points = 5;
-				}
-				if (!(currspell in stats[version][clas])) {
-					stats[version][clas][currspell] = {};
-					stats[version][clas][currspell]["frequency"] = [0, 0, 0, 0, 0, 0];
-				}
-				// one more user of this spell at this level
-				stats[version][clas][currspell]["frequency"][points] += 1;
-			}
-		}
-	}
-
-	// Do global maths
-	for (let version of valid_trainerdatasets) {
-		for (let clas of constants.classes) {
-			for (let spell of Object.keys(stats[version][clas])) {
-				let freqsum = stats[version][clas][spell]["frequency"].reduce((a,b) => a + b, 0);
-				let notusing = stats[version][clas][spell]["frequency"][0];
-				let percentage = 100 - (notusing * 100) / freqsum;
-				stats[version][clas][spell]["percentage"] = percentage.toFixed(2);
-			}
-		}
-	}
-	loading("");
 }
 
 function get_filters() {
@@ -221,8 +115,8 @@ $(document).ready(async function() {
 	for (let clas of constants.classes)
 		$("#ts-class").append(`<option value="${clas}">${_(capitalize(clas))}</option>`);
 
-	if (await make_stats() != false)
-		redraw_all();
+	await download_stats();
+	redraw_all();
 
 	$("#ts-version").on("change", redraw_version);
 	$("#ts-class").on("change", redraw_all);

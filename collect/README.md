@@ -18,12 +18,32 @@ it's easier to deploy for people having a standard PHP enabled webhosting.
 
 ## Deployment
 
+### Collector
+
 - You need a PHP capable webserver and that's it. Put `submit.php` in some place on your server.
 - The file is compressed to `../var/trainer_saved_setups.txt.gz` at every run.
   This is for people having static gzip compression enabled on their server (i
   let you google that as it's not mandatory but heavily recommended).
 - In case you get a weird/hardened setup, don't forget to ensure that the user running
   php is allowed to write files in `../var/`.
+
+### API
+
+In order to display the trainer stats, you need to setup the API. It only
+requires `python3`, without further modules. The default output is to
+`../var/trainerstats.json`. To make it run:
+
+1. Log in as the user running CoRT things, then edit their crontab:
+	```
+	crontab -e
+	```
+2. Add the following line to make it run every 3 hours for exemple:
+	```
+	0 */3 * * * cd /where/is/CoRT/collect && python3 /where/is/trainer_stats.py
+	```
+3. Modify `js/api_url.js` with your own url
+
+Official URL: https://hail.thebus.top/CoRT/var/trainerstats.json
 
 ## Data exploitation
 
@@ -54,8 +74,9 @@ with spaces.
 ### Python
 
 A simple python exploit code can be found at [exploit.py](exploit.py) in this
-directory. It is supposedly simple enough to understand.
+directory. It is supposedly simple enough to understand. See also
+[trainer_stats.py](trainer_stats.py) for the API code.
 
 ### Javascript
 
-[tstats.js](../js/tstats.js). You can check it out at https://mascaldotfr.github.io/CoRT/tstats.html.
+Pre-API [tstats.js](https://github.com/mascaldotfr/CoRT/blob/154b8cf8aea81fe9b3dc2c9a44c3fdc6b5fa2741/js/tstats.js).
