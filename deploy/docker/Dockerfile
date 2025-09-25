@@ -1,0 +1,54 @@
+FROM debian:trixie
+
+RUN apt-get update && \
+	    apt-get install -y --no-install-recommends \
+	    ca-certificates \
+	    caddy \
+	    cron \
+	    vim \
+	    procps \
+	    sudo \
+	    git \
+	    python3 \
+	    python3-bs4 \
+	    sqlite3 \
+	    php8.4-fpm
+
+RUN groupadd -r cort && \
+    useradd -r -g cort -s /usr/sbin/nologin cort
+
+# Copy caddy and php conf
+COPY Caddyfile /etc/caddy/Caddyfile
+#COPY php.conf /etc/php/8.4/fpm/pool.d/www.conf
+
+# Configure caddy root
+RUN mkdir -p /var/www/html/CoRT && \
+	chown -R caddy:caddy /var/www && \
+	chown cort:cort /var/www/html/CoRT
+
+# git clone
+# then change api url to your own installation
+# and remove preload linking to the official API
+RUN sudo -u cort git clone https://github.com/mascaldotfr/CoRT.git /var/www/html/CoRT && \
+	sudo -u cort sed -i 's|https://hail\.thebus\.top/CoRT\s*|http://localhost:2810/CoRT|; s|https://mascaldotfr\.github\.io|http://localhost:2810|' /var/www/html/CoRT/js/api_url.js && \
+	sudo -u cort sed -i '/<link rel="preload"/d' /var/www/html/CoRT/*.html
+# XXX Note that you can't git pull or it will overwrite some or even all the
+# above changes Best strategy is to keep the branch "main" for getting updates
+# from github, and use a "local" branch for local changes with fine grained
+# merge policy that you put as the main branch
+
+# Configure the trainer saved setup db (must be writeable by php running as
+# www-data)
+RUN touch /var/www/html/CoRT/var/trainer_saved_setups.txt
+RUN touch /var/www/html/CoRT/var/trainer_saved_setups.txt.gz
+RUN chown www-data /var/www/html/CoRT/var/trainer_saved_setups.txt*
+
+# Copy cron job script (will be run by cort user)
+COPY cort-cron /etc/cron.d/cort-cron
+RUN chmod 0644 /etc/cron.d/cort-cron
+
+# Open port 80
+EXPOSE 80
+
+# Start cron, php-fpm and caddy
+CMD ["sh", "-c", "service cron start; service php8.4-fpm start; exec sudo -u caddy caddy run --config /etc/caddy/Caddyfile"]

@@ -1,0 +1,6 @@
+services:
+  cort:
+    build: .
+    ports:
+      - "2810:80"
+    restart: unless-stopped

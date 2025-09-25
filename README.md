@@ -20,6 +20,8 @@ page, and anonymous setup collection (see the `collect` directory) which by
 default only works for https://mascaldotfr.github.io and can be completely
 skipped.
 
+Deployment is explained [there](deploy/README.md)
+
 There is also a [wiki](https://github.com/mascaldotfr/CoRT/wiki) containing
 extra infos about using and deploying CoRT.
 

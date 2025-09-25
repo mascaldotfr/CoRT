@@ -1,0 +1,29 @@
+# If you serve the API files and the website itself on different hosts you'll
+# need to active CORS on your server
+:80 {
+	# log stuff to see if means things happen
+	log {
+		output file /var/log/caddy/access.log
+	}
+
+	root * /var/www/html
+	file_server
+
+	# Enable gzip compression on the fly. Unlike nginx, caddy can
+	# automatically use precompressed .gz files which are heavily used in
+	# CoRT's API
+	encode gzip
+
+	# Make PHP run for the collector
+	php_fastcgi unix//run/php/php8.4-fpm.sock
+
+	# default cache control value
+	header Cache-Control "max-age=3600, public, stale-while-revalidate=86400"
+	# exception for the API
+	@dynamic {
+		path /CoRT/var*
+	}
+	handle @dynamic {
+		header Cache-Control "no-cache, must-revalidate"
+	}
+}
