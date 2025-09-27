@@ -55,7 +55,7 @@ let __menu_footer = `
 		<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
 		See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>,
 		and the <a href="https://cort.thebus.top">faster website</a>!</i></p>
-		<p> <!--VERSION-->Version: 20250927.093300
+		<p> <!--VERSION-->Version: 20250927.104510
 `;
 
 $(document).ready(function() {
@@ -96,6 +96,13 @@ $(document).ready(function() {
 
 	create_tz_list("#tzchooser");
 
+	$("body").prepend(`
+		<div class="card" style="background-color:#ff3333; font-weight: bold; text-align:center;">
+		&#9888;&#65039; I'm doing heavy maintenance tasks on the server this weekend. There
+		may be some disruptions.
+		</div>
+	`);
+
 	// Cursors lazy loading
 
 	const mediaQuery = window.matchMedia("(min-width: 800px)");
@@ -111,12 +118,6 @@ $(document).ready(function() {
 	};
 	document.addEventListener("mousemove", loadCursors, { once: true });
 
-	$("body").prepend(`
-		<div class="card" style="background-color:#ff3333; font-weight: bold; text-align:center;">
-		&#9888;&#65039; I'm doing heavy maintenance tasks on the server this weekend. There
-		may be some disruptions.
-		</div>
-	`);
 
 });
 
