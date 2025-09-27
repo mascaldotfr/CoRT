@@ -26,10 +26,10 @@ it work.
 Using static gzip compression in your web server is recommended, especially for
 `events.json` which weights 500kb uncompressed but only 25kb compressed.
 
-- The "API endpoint" for statistics URL is: https://hail.thebus.top/CoRT/var/statistics.json
-- The "API endpoint" for events URL is: https://hail.thebus.top/CoRT/var/allevents.json
-- The full database is publicly available at: https://hail.thebus.top/CoRT/var/events.sqlite
-- CSV dumps for use in Excel etc. can be found at: https://hail.thebus.top/CoRT/var/dumps/
+- The "API endpoint" for statistics URL is: https://cort.thebus.top/var/statistics.json
+- The "API endpoint" for events URL is: https://cort.thebus.top/var/allevents.json
+- The full database is publicly available at: https://cort.thebus.top/var/events.sqlite
+- CSV dumps for use in Excel etc. can be found at: https://cort.thebus.top/var/dumps/
 
 Unless you prepopulate your installation with the downloadable `events.sqlite`
 above, it will need a few days to get meaningful graphs for the statistics.

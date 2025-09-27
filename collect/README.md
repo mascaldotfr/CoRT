@@ -11,7 +11,7 @@ source code (`submit.php` and `../js/api_url.js`)
 
 The client code [can be found here](https://github.com/mascaldotfr/CoRT/commit/677a0c6cac5f265a5cf7719857bf2db9a1b483e1).
 
-The dataset is available [there](https://hail.thebus.top/var/trainer_saved_setups.txt)
+The dataset is available [there](https://cort.thebus.top/var/trainer_saved_setups.txt)
 
 Unlike `/warstatus` written in python, the collector is written in PHP, because
 it's easier to deploy for people having a standard PHP enabled webhosting.
@@ -43,7 +43,7 @@ requires `python3`, without further modules. The default output is to
 	```
 3. Modify `js/api_url.js` with your own url
 
-Official URL: https://hail.thebus.top/CoRT/var/trainerstats.json
+Official URL: https://cort.thebus.top/var/trainerstats.json
 
 ## Data exploitation
 
