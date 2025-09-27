@@ -62,7 +62,7 @@ We need to be sure that the _local_ branch will used whatever happens, or the
 original CoRT will be displayed instead. Hence the awkward line:
 
 ```shell
-(git checkout upstream && git pull origin main || git checkout local) && git checkout local && git merge upstream --strategy-option ours
+(git checkout upstream && git pull origin main || git checkout local) && git checkout local && git merge upstream --strategy-option ours --no-edit
 ```
 See the merge strategy options at https://git-scm.com/docs/git-merge#Documentation/git-merge.txt-ours
 
