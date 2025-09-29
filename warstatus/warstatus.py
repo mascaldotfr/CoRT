@@ -254,7 +254,7 @@ def main():
 def writer(data, fname):
     with open(fname, "w") as f:
         f.write(data)
-    with gzip.open(fname + ".gz", "wb") as f:
+    with gzip.open(fname + ".gz", "wb", compresslevel=2) as f:
         f.write(data.encode())
 
 
