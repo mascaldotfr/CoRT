@@ -12,8 +12,8 @@ let dformatter = null;
 // You can update it by looking at your browser console and getting the last
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
 // will run ~ 80 times/boss after all that time.
-// Last checked: Eve: 2025-09-14, Daen: 2025-09-10, TK: 2025-09-13, Server: 2025-09-14 (+37m)
-const first_respawns = { "thorkul": 1752681724,
+// Last checked: Eve: 2025-09-14, Daen: 2025-09-10, TK: 2025-10-01, Server: 2025-09-14 (+37m)
+const first_respawns = { "thorkul": 1759352531,
 			 "evendim": 1757842340,
 			 "daen": 1757536010,
 			 "server": 1757498400 + 37 * 60 };
