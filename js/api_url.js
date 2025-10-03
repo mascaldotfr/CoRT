@@ -10,7 +10,7 @@ import {_} from "../data/i18n.js";
 // you serve the pages is the same.
 
 // The root where all API files can be found
-export const __api__base = "https://cort.thebus.top";
+export const __api__base = "https://cort.thebus.top/api";
 // Used by the trainer to filter setup submissions
 export const __api__frontsite = "https://mascaldotfr.github.io";
 // Subdirectory where the HTML/JS/CSS/etc. files are placed, relative to your

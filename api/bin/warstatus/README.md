@@ -9,7 +9,7 @@ status in a file as JSON (see `outfile` in `warstatus.py`). The official map
 isn't fetched, because it has a static URL and CoRT actually draws one using
 HTML5 canvas for speed and bandwidth economy (NGE's site is slow).
 
-You can see it in action at https://cort.thebus.top/var/warstatus.json --
+You can see it in action at https://cort.thebus.top/api/var/warstatus.json --
 informations are refreshed every minute.
 
 The `stats` directory includes the code used to generate the WZ statistics, and

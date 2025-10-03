@@ -32,7 +32,7 @@ def main():
         print(t.clear())
         with t.cbreak(), t.hidden_cursor(), t.fullscreen():
             while True:
-                with urlopen("https://cort.thebus.top/CoRT/warstatus/warstatus.json") as response:
+                with urlopen("https://cort.thebus.top/api/var/warstatus.json") as response:
                     messages = []
                     data = json.loads(response.read())
 

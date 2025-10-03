@@ -1,10 +1,9 @@
-collect/data.*
 ping.js
-var/*.json*
-var/*.sqlite
-var/*.txt*
-var/*.php
-var/dumps/*
+api/var/*.json*
+api/var/*.sqlite
+api/var/*.txt*
+api/var/*.php
+api/var/dumps/*
 __pycache__**
 
 # for macOS users

@@ -15,8 +15,8 @@ that, there are countdown pages for bosses and BZ, WZ status and statistics.
 
 The website just requires a webserver serving static files to run, everything
 is run client side, with the exception of the WZ status and statistics (see the
-`warstatus` directory) that can partly be replaced by a link to NGE's official
-page, and anonymous setup collection (see the `collect` directory) which by
+`api/warstatus` directory) that can partly be replaced by a link to NGE's official
+page, and anonymous setup collection (see the `api/collect` directory) which by
 default only works for https://mascaldotfr.github.io and can be completely
 skipped.
 

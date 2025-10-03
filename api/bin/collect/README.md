@@ -7,13 +7,13 @@ is invalid, then a HTTP 417 code is returned.
 
 This is fully anonymized and only triggerred when using
 https://mascaldotfr.github.io, unless you do the appropriate changes in the
-source code (`submit.php` and `../js/api_url.js`)
+source code (`submit.php` and `../../js/api_url.js`)
 
 The client code [can be found here](https://github.com/mascaldotfr/CoRT/commit/677a0c6cac5f265a5cf7719857bf2db9a1b483e1).
 
-The dataset is available [there](https://cort.thebus.top/var/trainer_saved_setups.txt)
+The dataset is available [there](https://cort.thebus.top/api/var/trainer_saved_setups.txt)
 
-Unlike `/warstatus` written in python, the collector is written in PHP, because
+Unlike `/api/warstatus` written in python, the collector is written in PHP, because
 it's easier to deploy for people having a standard PHP enabled webhosting.
 
 ## Deployment
@@ -39,11 +39,11 @@ requires `python3`, without further modules. The default output is to
 	```
 2. Add the following line to make it run every 3 hours for exemple:
 	```
-	0 */3 * * * cd /where/is/CoRT/collect && python3 /where/is/trainer_stats.py
+	0 */3 * * * cd /where/is/CoRT/api/collect && python3 trainer_stats.py
 	```
-3. Modify `js/api_url.js` with your own url
+3. Modify `../../js/api_url.js` with your own url
 
-Official URL: https://cort.thebus.top/var/trainerstats.json
+Official URL: https://cort.thebus.top/api/var/trainerstats.json
 
 ## Data exploitation
 
