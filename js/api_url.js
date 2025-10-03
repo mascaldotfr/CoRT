@@ -18,7 +18,7 @@ export const __api__frontsite = "https://mascaldotfr.github.io";
 export const __api__frontsite_dir = "/CoRT";
 
 export const __api__urls = {
-	"submit_trainer": `${__api__base}/collect/submit.php`,
+	"submit_trainer": `${__api__base}/bin/collect/submit.php`,
 	"trainer_data": `${__api__base}/var/trainer_saved_setups.txt`,
 	"trainer_data_stats": `${__api__base}/var/trainerstats.json`,
 	"events": `${__api__base}/var/allevents.json`,
