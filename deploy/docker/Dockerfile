@@ -14,6 +14,7 @@ RUN apt-get update && \
 	    sqlite3 \
 	    php8.4-fpm
 
+# Create a dedicated user
 RUN groupadd -r cort && \
     useradd -r -g cort -s /usr/sbin/nologin cort
 
@@ -30,7 +31,7 @@ RUN mkdir -p /var/www/html/CoRT && \
 # then change api url to your own installation
 # and remove preload linking to the official API
 RUN sudo -u cort git clone https://github.com/mascaldotfr/CoRT.git /var/www/html/CoRT && \
-	sudo -u cort sed -i 's|https://hail\.thebus\.top/CoRT\s*|http://localhost:2810/CoRT|; s|https://mascaldotfr\.github\.io|http://localhost:2810|' /var/www/html/CoRT/js/api_url.js && \
+	sudo -u cort sed -i 's|https://cort\.thebus\.top/api|http://localhost:2810/CoRT/api|; s|https://mascaldotfr\.github\.io|http://localhost:2810|' /var/www/html/CoRT/js/api_url.js && \
 	sudo -u cort sed -i '/<link rel="preload"/d' /var/www/html/CoRT/*.html
 # XXX Note that you can't git pull or it will overwrite some or even all the
 # above changes Best strategy is to keep the branch "main" for getting updates
@@ -39,9 +40,9 @@ RUN sudo -u cort git clone https://github.com/mascaldotfr/CoRT.git /var/www/html
 
 # Configure the trainer saved setup db (must be writeable by php running as
 # www-data)
-RUN touch /var/www/html/CoRT/var/trainer_saved_setups.txt
-RUN touch /var/www/html/CoRT/var/trainer_saved_setups.txt.gz
-RUN chown www-data /var/www/html/CoRT/var/trainer_saved_setups.txt*
+RUN touch /var/www/html/CoRT/api/var/trainer_saved_setups.txt
+RUN touch /var/www/html/CoRT/api/var/trainer_saved_setups.txt.gz
+RUN chown www-data /var/www/html/CoRT/api/var/trainer_saved_setups.txt*
 
 # Copy cron job script (will be run by cort user)
 COPY cort-cron /etc/cron.d/cort-cron

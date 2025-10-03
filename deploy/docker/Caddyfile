@@ -21,7 +21,7 @@
 	# default cache control value
 	header Cache-Control "max-age=3600, public, stale-while-revalidate=86400"
 	# exception for the API
-	handle /CoRT/var/* {
+	handle /CoRT/api/var/* {
 		header Cache-Control "no-cache, must-revalidate"
 		header Access-Control-Allow-Origin *
 		file_server {

@@ -16,10 +16,10 @@ If you don't use the `CoRT` subdirectory, you may want to modify
 Same thing as "No API", but on top of that, see the respective deployment
 docs:
 
-- [warstatus](../warstatus/README.md)
-- [stats and events](../warstatus/stats/README.md) -- I recommend you to fetch
+- [warstatus](../api/bin/warstatus/README.md)
+- [stats and events](../api/bin/warstatus/stats/README.md) -- I recommend you to fetch
   my own database and not starting from scratch.
-- [trainer setups stats](../collect/README.md)
+- [trainer setups stats](..api/bin/collect/README.md)
 
 ### Git stuff
 
@@ -87,3 +87,6 @@ directory :
 - the necessary crontab magic
 
 You can access it at http://localhost:2810/CoRT
+
+Some features like trainer stats or WZ data dumps will require you to run the
+container until at least 6am the next day.

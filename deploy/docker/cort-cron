@@ -1,3 +1,3 @@
-0 */3 * * *	cort sleep 20 && cd /var/www/html/CoRT/collect && python3 trainer_stats.py
-* * * * * 	cort cd /var/www/html/CoRT/warstatus && python3 warstatus.py
-0 6 * * *	cort cd /var/www/html/CoRT/warstatus/stats && ./dump_generator
+0 */3 * * *	cort sleep 20 && cd /var/www/html/CoRT/api/bin/collect && python3 trainer_stats.py
+* * * * * 	cort cd /var/www/html/CoRT/api/bin/warstatus && python3 warstatus.py
+0 6 * * *	cort cd /var/www/html/CoRT/api/bin/warstatus/stats && ./dump_generator
