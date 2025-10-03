@@ -27,10 +27,10 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 # File where to dump the status
-outfile = "../var/warstatus.json"
-stats_db_file = "../var/events.sqlite"
-stats_outfile = "../var/statistics.json"
-stats_outfile_events = "../var/allevents.json"
+outfile = "../../var/warstatus.json"
+stats_db_file = "../../var/events.sqlite"
+stats_outfile = "../../var/statistics.json"
+stats_outfile_events = "../../var/allevents.json"
 base_url = "https://www.championsofregnum.com/"
 # Use True to allow unconditional successful runtime for debugging
 # It propagates to stats.generate as well
