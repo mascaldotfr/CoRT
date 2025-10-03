@@ -51,7 +51,7 @@ sensitive content (credentials etc.).
 	```
 4. Modify `js/api_url.js` with your own urls
 
-That's it.
+That's it. You just gonna wait for the next WZ event.
 
 ## Response Format
 
