@@ -5,13 +5,13 @@ import json
 from pathlib import Path
 
 # data file location and content
-data_file = Path("../var/trainer_saved_setups.txt")
+data_file = Path("../../var/trainer_saved_setups.txt")
 data_txt = []
 # trainer data location and content
-trainer_datadir = Path("../data/trainer")
+trainer_datadir = Path("../../../data/trainer")
 trainer_data = {}
 # output directory and base filename (a .gz will be added for the compressed version)
-output_dir = Path("../var")
+output_dir = Path("../../var")
 output_file = "trainerstats.json"
 # END of setup
 
