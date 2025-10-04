@@ -4,7 +4,7 @@ This page documents the bosses API, used by CoRT and CoRT-dc.
 
 ## URL
 
-https://cort.thebus.top/api/var/bosses.php
+https://cort.thebus.top/api/bin/bosses/bosses.php
 
 ## Deployment
 
