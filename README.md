@@ -13,14 +13,10 @@ This is a (simpler) knockoff of the regnumsentinel website trainer, this one
 will be alive as long as GitHub exists and is open source software. On top of
 that, there are countdown pages for bosses and BZ, WZ status and statistics.
 
-The website just requires a webserver serving static files to run, everything
-is run client side, with the exception of the WZ status and statistics (see the
-`api/warstatus` directory) that can partly be replaced by a link to NGE's official
-page, and anonymous setup collection (see the `api/collect` directory) which by
-default only works for https://mascaldotfr.github.io and can be completely
-skipped.
+The trainer just requires a webserver serving static files to run, everything
+is run client side. All the rest depends on an API server.
 
-Deployment is explained [there](deploy/README.md)
+Deployment (with or without the API) is explained [there](deploy/README.md)
 
 There is also a [wiki](https://github.com/mascaldotfr/CoRT/wiki) containing
 extra infos about using and deploying CoRT.
@@ -34,11 +30,6 @@ extra infos about using and deploying CoRT.
   free plans may be quickly limit rated and they're not permanent. I don't want
   to have a database server, since it then would require a separate server and
   a domain for such a feature, that could go down like regnumsentinel.
-
-## Setting a local webserver
-
-If you want to make changes to CoRT or run it locally, you can use python to
-[create a temporary local webserver](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Tools_and_setup/set_up_a_local_testing_server#using_python).
 
 ## Hidden pages
 

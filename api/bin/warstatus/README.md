@@ -47,9 +47,9 @@ sensitive content (credentials etc.).
 	```
 3. Add the following line:
 	```
-	* * * * * /where/is/warstatus.py
+	* * * * * cd /where/is/warstatus && python3 warstatus.py
 	```
-4. Modify `js/api_url.js` with your own urls
+4. Modify `/js/api_url.js` with your own urls
 
 That's it. You just gonna wait for the next WZ event.
 

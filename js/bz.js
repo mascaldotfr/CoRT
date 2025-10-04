@@ -1,3 +1,4 @@
+import {__api__urls} from "./api_url.js";
 import {$, insert_notification_link, mynotify, generate_calendar} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 
@@ -5,23 +6,19 @@ import {_} from "../data/i18n.js";
 let dformatter = null;
 let tformatter = null;
 
-// XXX ALL TIMES ARE UTC INTERNALLY
-// SUNDAY = 0 SATURDAY = 6
-let bz_begin = [ 	[13, 18],
-			[3, 13, 20],
-			[13, 18],
-			[13, 20],
-			[3, 13, 18],
-			[13, 20],
-			[3, 13, 20] 	];
+// API data
+let data = null;
 
-let bz_end = [		[16, 21],
-			[6, 16, 23],
-			[16, 21],
-			[16, 23],
-			[6, 16, 21],
-			[17, 23],
-			[6, 16, 23] 	];
+async function get_data() {
+	try {
+		data = await $().getJSON(__api__urls["bz"]);
+	}
+	catch (error) {
+		$("#boss-error").html("Failed to get the next bosses spawns: " + error)
+		return;
+	}
+}
+
 
 let notified_10m = false;
 
@@ -51,40 +48,20 @@ function date_difference_from_now(future_date) {
 	return mstohhmmss((future_date.getTime() - current_date.getTime()));
 }
 
-function feed_bz(init=false) {
-	let next_bzs_begin = [];
-	let next_bzs_end = [];
-	let bz_on = false;
-	let bz_ends_at = 0;
+async function feed_bz(init=false) {
 
-	let current_date = new Date();
-	let current_day = parseInt(current_date.getUTCDay());
-	let current_hour = parseInt(current_date.getUTCHours());
-	let tomorrow = current_day + 1 <= 6 ? current_day + 1 : 0;
-	let aftertomorrow = tomorrow + 1 <= 6 ? tomorrow + 1 : 0;
-	// is bz on ?
-	for (let hour in bz_begin[current_day]) {
-		if (current_hour >= bz_begin[current_day][hour] &&
-		    current_hour < bz_end[current_day][hour] ) {
-			bz_on = true;
-			bz_ends_at = date_difference_from_now(future_date(0, bz_end[current_day][hour]));
-			break;
-		}
-	}
-	// compute future bzs
-	let future_bz_days = [current_day, tomorrow, aftertomorrow];
-	for (let day of future_bz_days) {
-		for (let hour in bz_begin[day]) {
-			if (day == current_day && parseInt(bz_begin[day][hour]) <= current_hour) {
-				// skip passed or current bz of the day
-				continue;
-			}
-			next_bzs_begin.push(future_date(future_bz_days.indexOf(day), bz_begin[day][hour]));
-			next_bzs_end.push(future_date(future_bz_days.indexOf(day), bz_end[day][hour]));
-		}
-	}
+	let now = new Date();
+	let now_ts = now.getTime() / 1000;
+	// Fetch API data only if needed
+	if ( data === null || (data["bzendsat"] != 0 && now_ts > data["bzendsat"]) || now_ts > data["bzbegin"][0] )
+		await get_data();
+
+	let next_bzs_begin = data["bzbegin"];
+	let next_bzs_end = data["bzend"];
+	let bz_on = data["bzon"];
 
 	if (bz_on) {
+		let bz_ends_at = date_difference_from_now(data["bzendsat"] * 1000)
 		$("#bz-countdown-status").html(`<span class="green bold">${_("ON")}</span>`);
 		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["hours"]}:${bz_ends_at["minutes"]}:${bz_ends_at["seconds"]}`);
 		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] <= 10 && bz_ends_at["minutes"] >= 1 &&
@@ -99,7 +76,7 @@ function feed_bz(init=false) {
 	}
 	else {
 		$("#bz-countdown-status").html(`<span class="red bold">${_("OFF")}</span>`);
-		var next_bz_in = date_difference_from_now(next_bzs_begin[0]);
+		let next_bz_in = date_difference_from_now(next_bzs_begin[0] * 1000);
 		$("#bz-countdown-countdown").text(`${_("Next BZ in")} ${next_bz_in["hours"]}:${next_bz_in["minutes"]}:${next_bz_in["seconds"]}`);
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] >= 1 &&
 		    notified_10m === false) {
@@ -114,13 +91,13 @@ function feed_bz(init=false) {
 	}
 
 	// refresh future BZs only hourly
-	if (current_date.getMinutes() + current_date.getSeconds() != 0 && init == false)
+	if (now.getMinutes() + now.getSeconds() != 0 && init == false)
 		return;
 	// display future BZs
 	let bz_next_future = "";
 	for (let next_bz in next_bzs_begin) {
-		let bz_begin_date = new Date(next_bzs_begin[next_bz]);
-		let bz_end_date = new Date(next_bzs_end[next_bz]);
+		let bz_begin_date = new Date(next_bzs_begin[next_bz] * 1000);
+		let bz_end_date = new Date(next_bzs_end[next_bz] * 1000);
 		let bz_begin_datetime = dformatter.format(bz_begin_date);
 		let bz_end_time = tformatter.format(bz_end_date);
 		let duration = (bz_end_date.getTime() - bz_begin_date.getTime()) / 1000;
@@ -130,7 +107,6 @@ function feed_bz(init=false) {
 	}
 	$("#bz-next-future").html(bz_next_future);
 
-	//console.log("bz is on?", bz_on, "bz_ends_at?", bz_ends_at, "next bz in", next_bz_in);
 }
 
 $(document).ready(function() {

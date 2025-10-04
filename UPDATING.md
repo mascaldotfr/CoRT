@@ -56,8 +56,8 @@ That's it.
 It's very important to check out bosses respawns at least every 3 months, as
 the respawn time is slowly drifting in the future.
 
-Updating the bosses requires to change `js\bosses.js` with a Unix timestamp
-corresponding to the observated boss respawn.
+Updating the bosses requires to change `api/bin/bosses/bosses.php` with a Unix
+timestamp corresponding to the observated boss respawn.
 
 If you run MacOS or Linux, run this in a Terminal while waiting for the boss
 and press `Ctrl-C` when you see it. The last number is the good Unix timestamp:

@@ -1,3 +1,4 @@
+import {__api__urls} from "./api_url.js";
 import {$, generate_calendar, insert_notification_link, mynotify} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Time} from "./wztools/wztools.js";
@@ -8,41 +9,27 @@ let time = new Time();
 // date formatter
 let dformatter = null;
 
-// The last respawn timestamp in UTC time
-// You can update it by looking at your browser console and getting the last
-// respawn timestamps. At least yearly, since the get_next_respawns() loop
-// will run ~ 80 times/boss after all that time.
-// Last checked: Eve: 2025-09-14, Daen: 2025-09-10, TK: 2025-10-01, Server: 2025-09-14 (+37m)
-const first_respawns = { "thorkul": 1759352531,
-			 "evendim": 1757842340,
-			 "daen": 1757536010,
-			 "server": 1757498400 + 37 * 60 };
-let next_respawns = { "evendim": [], "daen": [], "thorkul": [], "server": [] };
-let previous_respawns = first_respawns;
+let next_respawns = null;
+let previous_respawns = null;
+let nextboss_ts = 0;
 let notified_10m = false;
 
 function unixstamp2human(unixstamp) {
 	return dformatter.format(new Date(unixstamp * 1000));
 }
 
-function get_next_respawns(boss) {
-	let tried_respawn = first_respawns[boss];
-	let now = time.timestamp_now();
-	let respawn_time = 0;
-	while (true) {
-		if (boss == "server")
-			respawn_time = 168 * 3600; // 1 week
-		else
-			respawn_time = 109 * 3600; // 109 hours
-		tried_respawn += respawn_time;
-		if (tried_respawn >= now)
-			next_respawns[boss].push(tried_respawn);
-		if (next_respawns[boss].length == 3)
-			break;
+async function get_next_respawns() {
+	try {
+		let data = await $().getJSON(__api__urls["bosses"]);
+		next_respawns = data["next_spawns"];
+		previous_respawns = data["prev_spawns"];
+		nextboss_ts = data["next_boss_ts"];
+		$("#boss-error").empty();
 	}
-	previous_respawns[boss] = next_respawns[boss][0] - respawn_time;
-	console.log(boss, "previous respawn (to put in js file) is",
-		previous_respawns[boss]);
+	catch (error) {
+		$("#boss-error").html("Failed to get the next bosses spawns: " + error)
+		return;
+	}
 }
 
 function display_next_respawn(boss) {
@@ -73,13 +60,16 @@ function display_next_respawn(boss) {
 	}
 }
 
-function refresh_display() {
+async function refresh_display() {
 	let bosses_unordered = new Map();
-	for (let boss in first_respawns) {
+	let now = new Date();
+	// Fetch API data only if needed
+	if (now.getTime() / 1000 > nextboss_ts)
+		await get_next_respawns();
+
+	for (let boss in next_respawns) {
 		$(`#boss-${boss}-lastspawn`).empty();
 		$(`#boss-${boss}-respawn`).empty();
-		next_respawns[boss] = [];
-		get_next_respawns(boss);
 		display_next_respawn(boss);
 		// fetch all next respawns
 		bosses_unordered.set(boss, next_respawns[boss][0]);

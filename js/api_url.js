@@ -23,7 +23,9 @@ export const __api__urls = {
 	"trainer_data_stats": `${__api__base}/var/trainerstats.json`,
 	"events": `${__api__base}/var/allevents.json`,
 	"stats": `${__api__base}/var/statistics.json`,
-	"wstatus": `${__api__base}/var/warstatus.json`
+	"wstatus": `${__api__base}/var/warstatus.json`,
+	"bosses": `${__api__base}/bin/bosses/bosses.php`,
+	"bz": `${__api__base}/bin/bz/bz.php`
 };
 
 // XXX API adjascent code here

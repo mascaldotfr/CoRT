@@ -5,9 +5,6 @@
 If you don't want to host the API just copy or `git clone` CoRT in a
 preexisting webserver directory. You're done.
 
-If you don't use the `CoRT` subdirectory, you may want to modify
-`js/api_url.js`'s `__api__frontsite_dir` variable.
-
 ## With your own API stuff (you know what you're doing)
 
 > [!NOTE]
@@ -20,6 +17,8 @@ docs:
 - [stats and events](../api/bin/warstatus/stats/README.md) -- I recommend you to fetch
   my own database and not starting from scratch.
 - [trainer setups stats](..api/bin/collect/README.md)
+
+Also ensure PHP is activated on your server.
 
 ### Git stuff
 
