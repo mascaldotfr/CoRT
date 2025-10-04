@@ -16,3 +16,8 @@
 #bz-next {
 	min-height: 15em;
 }
+@media(max-width:799px) {
+	#bz-countdown {
+		min-height: 6.5em;
+	}
+}

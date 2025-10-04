@@ -12,13 +12,13 @@ let data = null;
 async function get_data() {
 	try {
 		data = await $().getJSON(__api__urls["bz"]);
+		$("#bz-error").empty();
 	}
 	catch (error) {
-		$("#boss-error").html("Failed to get the next bosses spawns: " + error)
+		$("#bz-error").html("Failed to get the BZ status: " + error);
 		return;
 	}
 }
-
 
 let notified_10m = false;
 
