@@ -38,7 +38,6 @@ in a virtual machine to test.
 Note that this requirement will change over time, for example if TLS technology
 changes and makes this version unable to connect to https sites.
 
-
 ### Commit hook for versioning in the footer
 
 This is mostly a note to myself.
@@ -56,5 +55,5 @@ git add "${GIT_WORK_TREE}/js/menu.js"
 echo "Updated last commit date"
 ```
 
-Don't forget to make it executable. This will update the versoin for each
+Don't forget to make it executable. This will update the version for each
 commit, including non user facing changes.

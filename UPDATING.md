@@ -68,14 +68,3 @@ while :; do date +%s; sleep 1; done
 
 Alternatively, you can check out [this website](https://time.is/Unix_time) but
 you can't stop the counter.
-
-### Speculative time fixing
-
-> [!CAUTION]
-> This assumes that respawn times drifting is linear, something that I can't
-> confirm.
-
-You can try to compensate the drifting with a single boss respawn by adding the
-difference between the real respawn and estimated respawn to the 2 other
-bosses. Press F12 in your browser on the CoRT bosses pages to get the estimated
-respawn timestamp.
