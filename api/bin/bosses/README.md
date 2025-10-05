@@ -2,19 +2,19 @@
 
 This page documents the bosses API, used by CoRT and CoRT-dc.
 
-## URL
+## URL
 
 https://cort.thebus.top/api/bin/bosses/bosses.php
 
 ## Deployment
 
-Make sur you enabled PHP on your web server
+Make sure you enabled PHP on your web server
 
 ## Response format
 
 In JSON:
 
-```json
+```
 {
   "prev_spawn": {
     "evendim": "int. Unix timestamp of previous respawn",

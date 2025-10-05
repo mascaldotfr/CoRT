@@ -3,7 +3,7 @@
 This directory includes the necessary code used to generate statistics.
 
 `generate.py` is called by `../warstatus.py`. It writes new events in a sqlite3
-database `events.sqlite`. It generates a small JSON report called
+database `../../var/events.sqlite`. It generates a small JSON report called
 `statistics.json` and big JSON one `allevents.json` containing a dump of the events
 the last 3 days if any change happened since the last run. The default output
 directory is `../../var` and can be modified in `../warstatus.py`.
@@ -24,7 +24,8 @@ any extra step to perform, as `../warstatus.py` will do the necessary to make
 it work.
 
 Using static gzip compression in your web server is recommended, especially for
-`events.json` which weights 500kb uncompressed but only 25kb compressed.
+`../../var/allevents.json` which weights 500kb uncompressed but only 25kb
+compressed.
 
 - The "API endpoint" for statistics URL is: https://cort.thebus.top/api/var/statistics.json
 - The "API endpoint" for events URL is: https://cort.thebus.top/api/var/allevents.json

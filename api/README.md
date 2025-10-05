@@ -14,7 +14,7 @@ It's written in 3 languages:
 
 PHP is called dynamically at each API call. Shell and Python are called through
 task scheduling. If you think it's a mess it has run reliably for more than 2
-years as I'm written this.
+years as I've written this ;)
 
 See the [deploy docs](../deploy/README.md) as well.
 

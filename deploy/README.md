@@ -18,7 +18,7 @@ docs:
   my own database and not starting from scratch.
 - [trainer setups stats](..api/bin/collect/README.md)
 
-Also ensure PHP is activated on your server.
+Also ensure PHP is activated on your server, so bosses and BZ are populated.
 
 ### Git stuff
 
@@ -85,7 +85,7 @@ directory :
 - a working configuration for caddy
 - the necessary crontab magic
 
-You can access it at http://localhost:2810/CoRT
+Once set up, you can access it at http://localhost:2810/CoRT
 
 Some features like trainer stats or WZ data dumps will require you to run the
 container until at least 6am the next day.
