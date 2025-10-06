@@ -1,7 +1,7 @@
 #!/bin/sh
 
-output_dir="../../var/dumps"
-sqlite_db="../../var/events.sqlite"
+output_dir="../../../var/dumps"
+sqlite_db="../../../var/events.sqlite"
 
 out_yearly="${output_dir}/`date +%Y`_events.csv"
 out_history="${output_dir}/all_events.csv"
