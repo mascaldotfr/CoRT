@@ -7,22 +7,23 @@ run.
 
 It's written in 3 languages:
 
-- PHP for simple and fast code with no overhead
-- Python for queries that would be slow as well with PHP, because it has all
-  batteries included. It's by far the most used language.
-- Shell when it's the most practical
-
-PHP is called dynamically at each API call. Shell and Python are called through
-task scheduling. If you think it's a mess it has run reliably for more than 2
-years as I've written this ;)
+- Python or Shell for all WZ-related things. It's by far the most used
+  languages. They're used strictly through cronjobs.
+- PHP for the rest. When the overhead is low, it's run on demand. For heavier
+  tasks it's called through cronjobs.
 
 See the [deploy docs](../deploy/README.md) as well.
 
 ## READMEs list
 
+### PHP
+
 - [bosses](bin/bosses/README.md)
 - [bz](bin/bz/README.md)
 - [setups collector and trainer stats](bin/collect/README.md)
+
+### Python
+
 - [warstatus](bin/warstatus/README.md)
 - [warzone stats and events](bin/warstatus/stats/README.md)
 

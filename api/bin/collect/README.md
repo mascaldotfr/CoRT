@@ -30,7 +30,7 @@ it's easier to deploy for people having a standard PHP enabled webhosting.
 ### API
 
 In order to display the trainer stats, you need to setup the API. It only
-requires `python3`, without further modules. The default output is to
+requires php, without further modules. The default output is to
 `../var/trainerstats.json`. To make it run:
 
 1. Log in as the user running CoRT things, then edit their crontab:
@@ -39,7 +39,7 @@ requires `python3`, without further modules. The default output is to
 	```
 2. Add the following line to make it run every 3 hours for exemple:
 	```
-	0 */3 * * * cd /where/is/CoRT/api/collect && python3 trainer_stats.py
+	0 */3 * * * cd /where/is/CoRT/api/bin/collect && php trainer_stats.php
 	```
 3. Modify `../../js/api_url.js` with your own url
 
