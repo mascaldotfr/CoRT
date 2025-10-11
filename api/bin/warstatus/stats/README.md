@@ -17,7 +17,7 @@ of such files.
 There is a way to generate a CSV dump with all historical events. It requires
 the sqlite3 module for PHP to be installed (Debian: php-sqlite3).
 
-URL: https://cort.thebus.top/api/var/events_dump.csv
+URL: https://cort.thebus.top/api/bin/warstatus/stats/dump_generator.php
 
 The output is in the same format than the warstatus events list, see
 `../warstatus/README.md` for more details.
