@@ -60,7 +60,6 @@ function draw_powergraph() {
 		catch(error) {
 			console.error(error);
 			alert(_("No setups for that combo, bailing out!"));
-			window.location.reload();
 			return;
 		}
 	}
