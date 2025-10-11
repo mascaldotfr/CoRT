@@ -14,7 +14,7 @@ of such files.
 
 ## Deployment
 
-**You must have a working warstatus (see `/warstatus/README.md`) for statistics
+**You must have a working warstatus (see `/api/bin/warstatus/README.md`) for statistics
 to be generated.** You can disable statistics just by renaming `generate.py`.
 
 It does not require extra installation of packages, excepted if your operating
@@ -44,7 +44,7 @@ Like you did in `warstatus` you can modify the crontab to include the following
 line to make it run daily at 6:
 
 ```
-    0 6 * * * cd /where/is/CoRT/warstatus/stats && ./dump_generator
+    0 6 * * * /bin/sh /where/is/CoRT/warstatus/stats/dump_generator
 ```
 
 ## Database format

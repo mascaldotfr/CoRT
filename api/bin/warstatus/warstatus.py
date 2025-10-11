@@ -26,7 +26,9 @@ from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
 
-# File where to dump the status
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+# File where to dump the status, relative to this script
 outfile = "../../var/warstatus.json"
 stats_db_file = "../../var/events.sqlite"
 stats_outfile = "../../var/statistics.json"

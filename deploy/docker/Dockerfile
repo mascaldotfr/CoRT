@@ -12,15 +12,15 @@ RUN apt-get update && \
 	    python3 \
 	    python3-bs4 \
 	    sqlite3 \
-	    php8.4-fpm
+	    php8.4-fpm \
+	    php8.4-cli
 
 # Create a dedicated user
 RUN groupadd -r cort && \
     useradd -r -g cort -s /usr/sbin/nologin cort
 
-# Copy caddy and php conf
+# Copy caddy
 COPY Caddyfile /etc/caddy/Caddyfile
-#COPY php.conf /etc/php/8.4/fpm/pool.d/www.conf
 
 # Configure caddy root
 RUN mkdir -p /var/www/html/CoRT && \

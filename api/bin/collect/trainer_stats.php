@@ -6,13 +6,15 @@ if (php_sapi_name() !== 'cli') {
 	exit;
 }
 
+chdir(__DIR__);
+
 // data file location and content
-$data_file = __DIR__ . '/../../var/trainer_saved_setups.txt';
+$data_file = '../../var/trainer_saved_setups.txt';
 // trainer data location and content
-$trainer_datadir = __DIR__ . '/../../../data/trainer';
+$trainer_datadir = '../../../data/trainer';
 $trainer_data = [];
 // output directory and base filename (a .gz will be added for the compressed version)
-$output_dir = __DIR__ . '/../../var';
+$output_dir = '../../var';
 $output_file = "trainerstats.json";
 // END of setup
 

@@ -46,7 +46,7 @@ sensitive content (credentials etc.).
 	```
 3. Add the following line:
 	```
-	* * * * * cd /where/is/warstatus && python3 warstatus.py
+	* * * * * python3 /where/is/CoRT/api/bin/warstatus/warstatus.py
 	```
 4. Modify `/js/api_url.js` with your own urls
 
