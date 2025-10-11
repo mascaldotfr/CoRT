@@ -20,7 +20,7 @@ export const __api__frontsite_dir = "/CoRT";
 export const __api__urls = {
 	"submit_trainer": `${__api__base}/bin/collect/submit.php`,
 	"trainer_data": `${__api__base}/var/trainer_saved_setups.txt`,
-	"trainer_data_stats": `${__api__base}/var/trainerstats.json`,
+	"trainer_data_stats": `${__api__base}/bin/collect/trainer_stats.php`,
 	"events": `${__api__base}/var/allevents.json`,
 	"events_dump": `${__api__base}/bin/warstatus/stats/dump_generator.php`,
 	"stats": `${__api__base}/var/statistics.json`,

@@ -42,6 +42,10 @@ the sqlite3 module for PHP to be installed (Debian: php-sqlite3).
 
 URL: https://cort.thebus.top/api/var/events_dump.csv
 
+In non managed setup (your own VPS for example), you may need to chown the
+`events_dumps.csv` file to the user running PHP (`www-data` for Debian for
+example).
+
 The output is in the same format than the warstatus events list, see
 `../warstatus/README.md` for more details.
 

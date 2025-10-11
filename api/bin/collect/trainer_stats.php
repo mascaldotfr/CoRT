@@ -1,22 +1,26 @@
 <?php
 
-// Allow it to run only on cli, return 403 otherwise.
-if (php_sapi_name() !== 'cli') {
-	http_response_code(403);
-	exit;
-}
-
 chdir(__DIR__);
 
 // data file location and content
-$data_file = '../../var/trainer_saved_setups.txt';
+$data_file = "../../var/trainer_saved_setups.txt";
 // trainer data location and content
-$trainer_datadir = '../../../data/trainer';
+$trainer_datadir = "../../../data/trainer";
 $trainer_data = [];
 // output directory and base filename (a .gz will be added for the compressed version)
-$output_dir = '../../var';
-$output_file = "trainerstats.json";
+$output_file = "../../var/trainerstats.json";
 // END of setup
+
+// Check if output file exists and is less than 3 hours old
+// Redirect to the cached page if that's the case
+if (file_exists($output_file) && (time() - filemtime($output_file)) < 3 * 3600) {
+    header("Location: " . $output_file);
+    exit;
+}
+
+
+// Ensure completion if client close the connection
+ignore_user_abort(true);
 
 // some constants taken from the js trainer
 $constants = [
@@ -34,23 +38,29 @@ $constants = [
 // dict output for API
 $api_dict = [];
 // full output file
-$baseout = $output_dir . '/' . $output_file;
 // trainer "db" content
 $data = file($data_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
+
 // Preload the existing stats
-if (file_exists($baseout)) {
-	$prev_json_content = file_get_contents($baseout);
+if (file_exists($output_file)) {
+	$prev_json_content = file_get_contents($output_file);
 	$api_dict = json_decode($prev_json_content, true);
-	$lineno = $api_dict["lineno"];
-	if ($lineno == count($data))
+	$lineno = $api_dict["lineno"] ?? 0;
+	if ($lineno != 0 && $lineno == count($data)) {
+		header("Location: " . $output_file);
 		exit(); // Quit if there is no new setup
+	}
 	$api_dict["lineno"] = count($data);
 	$data = array_slice($data, $lineno);
 }
 else {
+	// It's most likely to fail since deplying it mention creating empty
+	// files.
 	$api_dict["lineno"] = count($data);
 }
+
+
 
 // Load the trainerdata sets
 // get all trainer versions but < 1.33.6 (there was no data collection back
@@ -186,10 +196,14 @@ foreach ($versions as $version) {
 
 // Time to write our stats!
 $api_json = json_encode($api_dict);
-file_put_contents($baseout, $api_json);
+file_put_contents($output_file, $api_json);
+
+header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+echo $api_json;
 
 // Write gzipped version
-$gzFile = $baseout . '.gz';
+$gzFile = $output_file . '.gz';
 $gz = gzopen($gzFile, 'w2');
 gzwrite($gz, $api_json);
 gzclose($gz);

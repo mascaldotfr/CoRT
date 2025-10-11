@@ -33,15 +33,22 @@ In order to display the trainer stats, you need to setup the API. It only
 requires php, without further modules. The default output is to
 `../var/trainerstats.json`. To make it run:
 
-1. Log in as the user running CoRT things, then edit their crontab:
+1. If needed, create empty files and make the user running PHP (usually
+   `www-data`) the owner of the files:
+    ```
+    cd /where/is/CoRT/var
+    touch trainerstats.json
+    touch trainerstats.json.gz
+    chown www-data trainerstats.json*
+2. Log in as the user running CoRT things, then edit their crontab:
 	```
 	crontab -e
 	```
-2. Add the following line to make it run every 3 hours for exemple:
+3. Add the following line to make it run every 3 hours for exemple:
 	```
 	0 */3 * * * php /where/is/CoRT/api/bin/collect/trainer_stats.php
 	```
-3. Modify `../../js/api_url.js` with your own url
+4. Modify `../../js/api_url.js` with your own url
 
 Official URL: https://cort.thebus.top/api/var/trainerstats.json
 
