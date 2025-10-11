@@ -5,7 +5,6 @@ RUN apt-get update && \
 	    ca-certificates \
 	    caddy \
 	    cron \
-	    vim \
 	    procps \
 	    sudo \
 	    git \

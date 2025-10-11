@@ -15,8 +15,9 @@
 		gzip 4
 	}
 
-	# Make PHP run for the collector
 	php_fastcgi unix//run/php/php8.4-fpm.sock
+	# On a normal Debian install:
+	#php_fastcgi unix//run/php/php-fpm.sock
 
 	# default cache control value
 	header Cache-Control "max-age=3600, public, stale-while-revalidate=86400"
