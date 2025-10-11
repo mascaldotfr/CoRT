@@ -16,42 +16,6 @@ The `stats` directory includes the code used to generate the WZ statistics, and
 has its own README, but also needs `warstatus.py` to work in order to generate
 statistics.
 
-## Requirements
-
-- Python 3 (with beautifulsoup4; `python3-bs4` in debian packages). Unlike
-  `/collect` written in PHP, I chose python because `warstatus.py` needs to run
-  every minute, something that is rarely proposed by standard webhosting offers
-  and is a call for using a VPS.
-- A server running Linux (it will work on Windows through different means but I
-  don't use it), performance and storage doesn't matter (it currently runs on
-  1CPU/512MB RAM/10G SSD VPS!)
-- A web server that is able to serve static files and where CORS is enabled
-  (see https://enable-cors.org/server.html), **unless** you serve CoRT and this
-  "API endpoint" (*ahem*) on the same domain
-
-## Deployment
-
-While it's very flexible, if you serve the API and the website in the same
-place it's recommended to put the whole repository in a place accessible by
-your webserver. It's easier to update and anyway the API doesn't deal with
-sensitive content (credentials etc.).
-
-1. Put this directory in some place on your server. Ensure that place can be
-   written by the user that will execute `warstatus.py` and can be accessed by
-   your webserver. You can change the various `outfile` variables in
-   `warstatus.py` to make it a different place.
-2. Log in as this user, then edit their crontab:
-	```
-	crontab -e
-	```
-3. Add the following line:
-	```
-	* * * * * python3 /where/is/CoRT/api/bin/warstatus/warstatus.py
-	```
-4. Modify `/js/api_url.js` with your own urls
-
-That's it. You just gonna wait for the next WZ event.
-
 ## Response Format
 
 Note that the API is [static](https://www.seancdavis.com/posts/lets-talk-about-static-apis/).

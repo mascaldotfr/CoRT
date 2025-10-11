@@ -6,10 +6,6 @@ This page documents the bosses API, used by CoRT and CoRT-dc.
 
 https://cort.thebus.top/api/bin/bosses/bosses.php
 
-## Deployment
-
-Make sure you enabled PHP on your web server
-
 ## Response format
 
 In JSON:

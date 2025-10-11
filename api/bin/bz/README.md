@@ -2,18 +2,13 @@
 
 This page documents the BZ API.
 
-## URL
+## URL
 
 https://cort.thebus.top/api/bin/bz/bz.php
-
-## Deployment
-
-Ensure PHP is enabled on your webserver
 
 ## Response format
 
 See `/js/bz.js` for an example.
-
 
 ```
 {

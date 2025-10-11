@@ -14,9 +14,9 @@ will be alive as long as GitHub exists and is open source software. On top of
 that, there are countdown pages for bosses and BZ, WZ status and statistics.
 
 The trainer just requires a webserver serving static files to run, everything
-is run client side. All the rest depends on an API server.
+is run client side. All the rest depends on an API server though.
 
-Deployment (with or without the API) is explained [there](deploy/README.md)
+Deploying CoRT (with or without the API) is explained [there](deploy/README.md)
 
 There is also a [wiki](https://github.com/mascaldotfr/CoRT/wiki) containing
 extra infos about using and deploying CoRT.

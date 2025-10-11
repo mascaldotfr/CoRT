@@ -2,23 +2,31 @@
 
 ## No API
 
-If you don't want to host the API just copy or `git clone` CoRT in a
+If you don't want to host the API just copy or `git clone` CoRT in a
 preexisting webserver directory. You're done.
 
-## With your own API stuff (you know what you're doing)
+## With your own API stuff
 
 > [!NOTE]
-> Warzone stuff will take time to populate, especially the stats parts!
+> Warzone and trainer stuff will take time to populate, especially the stats parts!
 
-Same thing as "No API", but on top of that, see the respective deployment
-docs:
+### Docker example (to be used for non Docker install too)
 
-- [warstatus](../api/bin/warstatus/README.md)
-- [stats and events](../api/bin/warstatus/stats/README.md) -- I recommend you to fetch
-  my own database and not starting from scratch.
-- [trainer setups stats](..api/bin/collect/README.md)
+> [!CAUTION]
+> This example docker configuration is not recommended in production, but
+> explains how to setup CoRT. It doesn't update itself automatically with new
+> changes made to CoRT.
 
-Also ensure PHP is activated on your server, so bosses and BZ are populated.
+I have set up a basic docker container with everything needed in the `docker`
+directory :
+
+- a [Dockerfile](docker/Dockerfile) for all install related stuff from scratch.
+  **It's also the best guide on how to setup CoRT without Docker.**
+- a working configuration for caddy, including CORS stuff if the website and
+  the API aren't on the same site.
+- the necessary crontab magic
+
+Once set up, you can access it at http://localhost:2810/CoRT
 
 ### Git stuff
 
@@ -71,21 +79,3 @@ See the merge strategy options at https://git-scm.com/docs/git-merge#Documentati
 > such manual fixing will be required. Don't forget to use
 > `/bin/sh -c '(git checkout ....)'` as well!
 
-### Docker example (you need a little more help after all...)
-
-> [!CAUTION]
-> This example docker configuration is not recommended in production, but gives
-> many little details about CoRT's configuration. It doesn't update itself
-> automatically with new changes made to CoRT.
-
-I have set up a basic docker container with everything needed in the `docker`
-directory :
-
-- a Dockerfile for all install related stuff from scratch
-- a working configuration for caddy
-- the necessary crontab magic
-
-Once set up, you can access it at http://localhost:2810/CoRT
-
-Some features like trainer stats or WZ data dumps will require you to run the
-container until at least 6am the next day.

@@ -12,39 +12,12 @@ On top of the generated files, pre compressed gzip files are generated. Please
 see you web server documentation if you don't know how to activate the serving
 of such files.
 
-## Deployment
-
-**You must have a working warstatus (see `/api/bin/warstatus/README.md`) for statistics
-to be generated.** You can disable statistics just by renaming `generate.py`.
-
-It does not require extra installation of packages, excepted if your operating
-system split sqlite3 from the main python distribution; in such case you'll
-need the `python3-sqlite3` (or whatever it is called) package. You don't have
-any extra step to perform, as `../warstatus.py` will do the necessary to make
-it work.
-
-Using static gzip compression in your web server is recommended, especially for
-`../../var/allevents.json` which weights 500kb uncompressed but only 25kb
-compressed.
-
-- The "API endpoint" for statistics URL is: https://cort.thebus.top/api/var/statistics.json
-- The "API endpoint" for events URL is: https://cort.thebus.top/api/var/allevents.json
-- The full database is publicly available at: https://cort.thebus.top/api/var/events.sqlite
-- CSV dumps for use in Excel etc. can be found at: https://cort.thebus.top/api/var/dumps/
-
-Unless you prepopulate your installation with the downloadable `events.sqlite`
-above, it will need a few days to get meaningful graphs for the statistics.
-
 ### Dump generator
 
 There is a way to generate a CSV dump with all historical events. It requires
 the sqlite3 module for PHP to be installed (Debian: php-sqlite3).
 
 URL: https://cort.thebus.top/api/var/events_dump.csv
-
-In non managed setup (your own VPS for example), you may need to chown the
-`events_dumps.csv` file to the user running PHP (`www-data` for Debian for
-example).
 
 The output is in the same format than the warstatus events list, see
 `../warstatus/README.md` for more details.

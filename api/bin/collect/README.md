@@ -9,48 +9,11 @@ This is fully anonymized and only triggerred when using
 https://mascaldotfr.github.io, unless you do the appropriate changes in the
 source code (`submit.php` and `../../js/api_url.js`)
 
-The client code [can be found here](https://github.com/mascaldotfr/CoRT/commit/677a0c6cac5f265a5cf7719857bf2db9a1b483e1).
+The dataset is available
+[there](https://cort.thebus.top/api/var/trainer_saved_setups.txt)
 
-The dataset is available [there](https://cort.thebus.top/api/var/trainer_saved_setups.txt)
-
-Unlike `/api/warstatus` written in python, the collector is written in PHP, because
-it's easier to deploy for people having a standard PHP enabled webhosting.
-
-## Deployment
-
-### Collector
-
-- You need a PHP capable webserver and that's it. Put `submit.php` in some place on your server.
-- The file is compressed to `../var/trainer_saved_setups.txt.gz` at every run.
-  This is for people having static gzip compression enabled on their server (i
-  let you google that as it's not mandatory but heavily recommended).
-- In case you get a weird/hardened setup, don't forget to ensure that the user running
-  php is allowed to write files in `../var/`.
-
-### API
-
-In order to display the trainer stats, you need to setup the API. It only
-requires php, without further modules. The default output is to
-`../var/trainerstats.json`. To make it run:
-
-1. If needed, create empty files and make the user running PHP (usually
-   `www-data`) the owner of the files:
-    ```
-    cd /where/is/CoRT/var
-    touch trainerstats.json
-    touch trainerstats.json.gz
-    chown www-data trainerstats.json*
-2. Log in as the user running CoRT things, then edit their crontab:
-	```
-	crontab -e
-	```
-3. Add the following line to make it run every 3 hours for exemple:
-	```
-	0 */3 * * * php /where/is/CoRT/api/bin/collect/trainer_stats.php
-	```
-4. Modify `../../js/api_url.js` with your own url
-
-Official URL: https://cort.thebus.top/api/var/trainerstats.json
+Statistics are already generated for use by CoRT and are publicly available at
+https://cort.thebus.top/api/bin/collect/trainer_stats.php
 
 ## Data exploitation
 
