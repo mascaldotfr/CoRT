@@ -3,7 +3,7 @@ api/var/*.json*
 api/var/*.sqlite
 api/var/*.txt*
 api/var/*.php
-api/var/dumps/*
+api/var/*.csv*
 __pycache__**
 
 # for macOS users

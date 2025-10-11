@@ -22,6 +22,7 @@ export const __api__urls = {
 	"trainer_data": `${__api__base}/var/trainer_saved_setups.txt`,
 	"trainer_data_stats": `${__api__base}/var/trainerstats.json`,
 	"events": `${__api__base}/var/allevents.json`,
+	"events_dump": `${__api__base}/bin/warstatus/stats/dump_generator.php`,
 	"stats": `${__api__base}/var/statistics.json`,
 	"wstatus": `${__api__base}/var/warstatus.json`,
 	"bosses": `${__api__base}/bin/bosses/bosses.php`,

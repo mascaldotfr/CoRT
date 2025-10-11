@@ -11,9 +11,9 @@ RUN apt-get update && \
 	    git \
 	    python3 \
 	    python3-bs4 \
-	    sqlite3 \
-	    php8.4-fpm \
-	    php8.4-cli
+	    php-fpm \
+	    php-cli \
+	    php-sqlite3
 
 # Create a dedicated user
 RUN groupadd -r cort && \

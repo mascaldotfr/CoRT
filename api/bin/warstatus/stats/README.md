@@ -37,25 +37,22 @@ above, it will need a few days to get meaningful graphs for the statistics.
 
 ### Dump generator
 
-There is a way to generate a CSV dump with all historical events and a
-(current) yearly one. It requires the `sqlite3` program to be installed.
+There is a way to generate a CSV dump with all historical events. It requires
+the sqlite3 module for PHP to be installed (Debian: php-sqlite3).
 
-Like you did in `warstatus` you can modify the crontab to include the following
-line to make it run daily at 6:
+URL: https://cort.thebus.top/api/var/events_dump.csv
 
-```
-    0 6 * * * /bin/sh /where/is/CoRT/warstatus/stats/dump_generator
-```
+The output is in the same format than the warstatus events list, see
+`../warstatus/README.md` for more details.
 
 ## Database format
 
-This is a carbon copy of the warstatus events array. Please see `/warstatus/README.md`.
+This is a carbon copy of the warstatus events array. Please see
+`../warstatus/README.md`.
 
 While the database could be optimized, according to benchmarks, each year of
-events (~100000 events) is leading to almost no increase in execution time, and
-a database size increase of 4MB. Which is more than acceptable, given that the
-script has at worst 1 minute to finish. All this on a cheap single core non
-NVME SSD VPS with 512MB of RAM, by the way.
+events (~60000 events) is leading to almost no increase in execution time, and
+a database size increase of 4MB.
 
 Events are never deleted, since anyway statistics are made from a temporary
 table containing only the events needed, and as mentioned above using the

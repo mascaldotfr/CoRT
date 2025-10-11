@@ -7,8 +7,8 @@ run.
 
 It's written in 3 languages:
 
-- Python or Shell for all WZ-related things. It's by far the most used
-  languages. They're used strictly through cronjobs.
+- Python for all WZ-related things. It's by far the most used
+  language. It's strictly through cronjobs.
 - PHP for the rest. When the overhead is low, it's run on demand. For heavier
   tasks it's called through cronjobs.
 
