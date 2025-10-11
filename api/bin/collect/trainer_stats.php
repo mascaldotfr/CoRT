@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
 
 chdir(__DIR__);
 
@@ -198,8 +200,7 @@ foreach ($versions as $version) {
 $api_json = json_encode($api_dict);
 file_put_contents($output_file, $api_json);
 
-header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
+// Meanwhile output the same json so we don't redirect
 echo $api_json;
 
 // Write gzipped version
