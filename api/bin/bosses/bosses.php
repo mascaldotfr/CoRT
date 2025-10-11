@@ -10,7 +10,7 @@ header("Content-Type: application/json");
 // Last checked: Eve: 2025-09-14, Daen: 2025-09-10, TK: 2025-10-01, Server: 2025-09-14 (+37m)
 $first_respawns = array(
 	"thorkul" => 	1759352531,
-	"evendim" => 	1757842340,
+	"evendim" => 	1760196780,
 	"daen" => 	1757536010,
 	"server" => 	1757498400 + 37 * 60
 );
