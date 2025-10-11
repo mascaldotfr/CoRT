@@ -42,7 +42,9 @@ RUN sudo -u cort git clone https://github.com/mascaldotfr/CoRT.git /var/www/html
 # www-data)
 RUN touch /var/www/html/CoRT/api/var/trainer_saved_setups.txt
 RUN touch /var/www/html/CoRT/api/var/trainer_saved_setups.txt.gz
-RUN chown www-data /var/www/html/CoRT/api/var/trainer_saved_setups.txt*
+RUN touch /var/www/html/CoRT/api/var/trainerstats.json
+RUN touch /var/www/html/CoRT/api/var/trainerstats.json.gz
+RUN chown www-data /var/www/html/CoRT/api/var/trainer_saved_setups.txt* /var/www/html/CoRT/api/var/trainerstats.json*
 
 # Copy cron job script (will be run by cort user)
 COPY cort-cron /etc/cron.d/cort-cron

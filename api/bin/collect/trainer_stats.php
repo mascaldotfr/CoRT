@@ -15,7 +15,7 @@ $output_file = "../../var/trainerstats.json";
 
 // Check if output file exists and is less than 3 hours old
 // Redirect to the cached page if that's the case
-if (file_exists($output_file) && (time() - filemtime($output_file)) < 3 * 3600) {
+if (filesize($output_file) != 0 && file_exists($output_file) && (time() - filemtime($output_file)) < 3 * 3600) {
     header("Location: " . $output_file);
     exit;
 }

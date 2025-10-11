@@ -10,7 +10,7 @@ $out_history = $output_dir . "/events_dump.csv";
 
 // Check if output file exists and is less than 24 hours old
 // Redirect to the cached page if that's the case
-if (file_exists($out_history) && (time() - filemtime($out_history)) < 86400) {
+if (filesize($out_history) != 0 && file_exists($out_history) && (time() - filemtime($out_history)) < 86400) {
     header("Location: " . $out_history);
     exit;
 }
