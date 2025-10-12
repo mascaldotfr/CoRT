@@ -9,13 +9,37 @@ import {_} from "../data/i18n.js";
 // wz/wevents/wstats/tstats, or remove them if the API server and the server
 // you serve the pages is the same.
 
-// The root where all API files can be found
-export const __api__base = "https://cort.thebus.top/api";
-// Used by the trainer to filter setup submissions
-export const __api__frontsite = "https://mascaldotfr.github.io";
-// Subdirectory where the HTML/JS/CSS/etc. files are placed, relative to your
-// www root with the leading '/'
-export const __api__frontsite_dir = "/CoRT";
+function get_paths() {
+	// https://mascaldotfr.github.io/CoRT uses an external API server as an exception
+	if (window.location.hostname === "mascaldotfr.github.io") {
+		let api = {};
+		// The root where all API files can be found
+		api["base"] = "https://cort.thebus.top/api";
+		// Used by the trainer to filter setup submissions
+		api["frontsite"] = "https://mascaldotfr.github.io";
+		// Subdirectory where the HTML/JS/CSS/etc. files are placed, relative to your
+		// www root with the leading '/'
+		api["frontsite_dir"] = "/CoRT";
+		return api;
+	}
+	else {
+		// If you keep everything under the same directory and
+		// domain, things are done magically
+		const path = window.location.pathname;
+		const base_path = path.substring(0, path.lastIndexOf('/') + 1);
+		const base_url = window.location.origin + base_path;
+		let api = {};
+		api["base"] = base_url + "api";
+		api["frontsite"] = window.location.origin;
+		api["frontsite_dir"] = base_path;
+		return api;
+	}
+}
+
+let paths = get_paths();
+export const __api__base = paths["base"];
+export const __api__frontsite = paths["frontsite"];
+export const __api__frontsite_dir = paths["frontsite_dir"];
 
 export const __api__urls = {
 	"submit_trainer": `${__api__base}/bin/collect/submit.php`,

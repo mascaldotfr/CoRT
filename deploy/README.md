@@ -31,7 +31,7 @@ Once set up, you can access it at http://localhost:2810/CoRT
 ### Git stuff
 
 Because all `*.html` file contains preload instructions for the official
-server, you'll need to remove them. Same thing for `../js/api_url.js`.
+server, you'll need to remove them.
 
 As such, keep the `main` branch for upstream updates, and adapt them in your
 `local` branch that will be *your* main branch.
