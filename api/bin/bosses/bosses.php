@@ -7,22 +7,13 @@ header("Content-Type: application/json");
 // You can update it by looking at your browser console and getting the last
 // respawn timestamps. At least yearly, since the get_next_respawns() loop
 // will run ~ 80 times/boss after all that time.
-// Last checked: Eve: 2025-09-14, Daen: 2025-09-10, TK: 2025-10-01, Server: 2025-09-14 (+37m)
+// Last checked: Eve: 2025-10-11, Daen: 2025-10-12, TK: 2025-10-01, Server: 2025-10-12 (+37m)
 $first_respawns = array(
 	"thorkul" => 	1759352531,
 	"evendim" => 	1760196780,
-	"daen" => 	1757536010,
-	"server" => 	1757498400 + 37 * 60
+	"daen" => 	1760282847,
+	"server" => 	1759917600 + 37 * 60
 );
-
-/* Test
-$first_respawns = array(
-	"thorkul" => 	0,
-	"evendim" => 	3000,
-	"daen" => 	9000,
-	"server" => 	12000
-);
-*/
 
 $next_respawns = [
 	"evendim" => [],
