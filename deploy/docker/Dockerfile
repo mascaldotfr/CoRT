@@ -33,9 +33,9 @@ RUN sudo -u cort git clone https://github.com/mascaldotfr/CoRT.git /var/www/html
 	sudo -u cort sed -i 's|https://cort\.thebus\.top/api|http://localhost:2810/CoRT/api|; s|https://mascaldotfr\.github\.io|http://localhost:2810|' /var/www/html/CoRT/js/api_url.js && \
 	sudo -u cort sed -i '/<link rel="preload"/d' /var/www/html/CoRT/*.html
 # XXX Note that you can't git pull or it will overwrite some or even all the
-# above changes Best strategy is to keep the branch "main" for getting updates
-# from github, and use a "local" branch for local changes with fine grained
-# merge policy that you put as the main branch
+# above changes. See ̀ /deploy/README.md`. Also you will need to modify
+# `api/bin/collect/submit.php` if the website and the API aren't on the same
+# domain.
 
 # Configure the trainer saved setup db (must be writeable by php running as
 # www-data) and stats.
