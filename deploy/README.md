@@ -73,9 +73,5 @@ original CoRT will be displayed instead. Hence the awkward line:
 ```
 See the merge strategy options at https://git-scm.com/docs/git-merge#Documentation/git-merge.txt-ours
 
-> [!CAUTION]
-> If you automate it through `cron` or `systemd` timers, you may have a garbled
-> website from time to time, depending how big are your local changes, and as
-> such manual fixing will be required. Don't forget to use
-> `/bin/sh -c '(git checkout ....)'` as well!
-
+I don't recommend to merge automatically through cron or systemd timers, since
+you may need to do manual changes from time to time.
