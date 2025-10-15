@@ -28,6 +28,7 @@ function get_paths() {
 		// If you keep everything under the same directory and
 		// domain, things are done magically
 		const path = window.location.pathname;
+		const base_path = path.substring(0, path.lastIndexOf('/') + 1);
 		const base_url = window.location.origin + base_path;
 		let api = {};
 		api["base"] = base_url + "api";
