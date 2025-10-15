@@ -237,14 +237,16 @@ class Reporter {
 		$stmt = $this->sql->prepare("SELECT location, date
 			FROM events
 			WHERE type='wish'
-			AND location = :realm
-			ORDER BY date DESC LIMIT 1");
-		$stmt->bindValue(':realm', $realm, PDO::PARAM_STR);
-		$result = $stmt->execute();
-		$r = $result->fetch(PDO::FETCH_ASSOC);
-		if ($r === false) {
+			AND location = $realm
+			ORDER BY date DESC
+			LIMIT 1");
+		$stmt->execute();
+		// This is the only thing that's not prepopulated on first run,
+		// until the 3 realms made a wish, so we don't check execute()
+		// and call fetch directly since execute() would return a boolean.
+		$r = $stmt->fetch(PDO::FETCH_ASSOC);
+		if ($r === false)
 			return null;
-		}
 		return $r["date"];
 	}
 
