@@ -1,4 +1,4 @@
-import {__api__urls, $onlinemanager} from "./api_url.js";
+import {__api__urls} from "./api_url.js";
 import {$} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Constants, TranslateForts, Time} from "./wztools/wztools.js";
@@ -132,11 +132,6 @@ function table_factory(rows, selector, realm) {
 async function display_stat() {
 	let data = null;
 
-	if ($onlinemanager.online() === false) {
-		$("#ws-info-error").html($onlinemanager.offlineMessage +
-					 " " + $onlinemanager.willRetryMessage);
-		return;
-	}
 	try {
 		data = await $().getJSON(__api__urls["stats"]);
 		$("#ws-info-error").empty();
@@ -250,7 +245,5 @@ $(document).ready(function() {
 
 	display_stat();
 });
-
-$onlinemanager.whenBackOnline(display_stat);
 
 setInterval(display_stat, 60 * 1000);

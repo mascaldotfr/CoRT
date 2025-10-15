@@ -1,4 +1,4 @@
-import {__api__urls, $onlinemanager} from "./api_url.js";
+import {__api__urls} from "./api_url.js";
 import {$, insert_notification_link, mynotify} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Constants, TranslateForts, HumaniseEvents, Icons} from "./wztools/wztools.js";
@@ -136,12 +136,6 @@ async function display_wz(init=false) {
 	let forts = [];
 	let failures = {};
 
-
-	if ($onlinemanager.online() === false) {
-		$("#wz-info-error").html($onlinemanager.offlineMessage +
-					 " " + $onlinemanager.willRetryMessage);
-		return;
-	}
 	try {
 		data = await $().getJSON(__api__urls["wstatus"]);
 		$("#wz-info-error").empty();
@@ -243,7 +237,5 @@ $(document).ready(function() {
 
 	display_wz(true);
 });
-
-$onlinemanager.whenBackOnline(() => display_wz(true));
 
 setInterval(display_wz, 30 * 1000);
