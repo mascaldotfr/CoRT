@@ -42,11 +42,16 @@ RUN sudo -u cort composer install
 
 # Configure the trainer saved setup db (must be writeable by php running as
 # www-data) and stats.
-RUN touch -d "1 week ago" /var/www/html/CoRT/api/var/trainer_saved_setups.txt
-RUN touch -d "1 week ago" /var/www/html/CoRT/api/var/trainer_saved_setups.txt.gz
-RUN touch -d "1 week ago" /var/www/html/CoRT/api/var/trainerstats.json
-RUN touch -d "1 week ago" /var/www/html/CoRT/api/var/trainerstats.json.gz
-RUN chown www-data /var/www/html/CoRT/api/var/trainer_saved_setups.txt* /var/www/html/CoRT/api/var/trainerstats.json*
+RUN touch -d "1 week ago" 	api/var/trainer_saved_setups.txt \
+				api/var/trainer_saved_setups.txt.gz \
+				api/var/trainerstats.json \
+				api/var/trainerstats.json.gz \
+				api/var/events_dump.csv \
+				api/var/events_dump.csv.gz
+RUN chown www-data 	api/var/trainer_saved_setups.txt* \
+			api/var/trainerstats.json* \
+			api/var/events_dump.csv*
+
 
 # Copy cron job script (will be run by cort user)
 COPY cort-cron /etc/cron.d/cort-cron
