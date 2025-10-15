@@ -172,6 +172,9 @@ function main() {
 			$gem_location = str_replace(".png", "", $gem_location);
 			$gem_location = $realms_gem[intval($gem_location) - 1];
 			$gem_owner = $realms[intval($i / 6)];
+			// On first run, avoid null location and just use gems' starting locations
+			if (!isset($old_status["gems"]) && $gem_location === null)
+				$gem_location = $gem_owner;
 			// Example with i=17 (Syrtis #2 gem owned by Syrtis)
 			// 17 (global) - 12 (realm offset) = 5
 			$gem_number = ( ($i - (intval($i / 6) * 6)) <= 2 ) ? "1" : "2";
