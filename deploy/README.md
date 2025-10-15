@@ -7,8 +7,24 @@ preexisting webserver directory. You're done.
 
 ## With your own API stuff
 
-> [!NOTE]
-> Warzone and trainer stuff will take time to populate, especially the stats parts!
+### At first, be patient
+
+- WZ-related things should load within a minute with dummy events. That's
+  normal.
+- WZ stats will require a few days to even starting to be meaningful
+- WZ full events logs are refreshed only after 24h if you made the mistake to
+  not wait for the WZ status to be active and clicked the link!
+- Trainer stats will require at least a full lvl 60 setup per class for the
+  latest game version, and is refreshed only every 3 hours
+
+If you want to test with really populated stuff and already installed CoRT,
+download the following files and put them in `/api/var`:
+
+- the WZ events db @ https://cort.thebus.top/api/var/events.sqlite and ensure
+  it belongs to the `cort` user
+- the trainer saved setups @
+  https://cort.thebus.top/api/var/trainer_saved_setups.txt and ensure it
+  belongs to the user running php (Debian: `www-data`)
 
 ### Docker example (to be used for non Docker install too)
 
