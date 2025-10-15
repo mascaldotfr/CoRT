@@ -8,9 +8,11 @@ RUN apt-get update && \
 	    procps \
 	    sudo \
 	    git \
-	    php-fpm \
 	    php-cli \
+	    php-curl \
+	    php-fpm \
 	    php-sqlite3 \
+	    php-zip \
 	    composer
 
 # Create a dedicated user
