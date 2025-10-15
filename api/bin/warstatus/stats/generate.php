@@ -237,7 +237,7 @@ class Reporter {
 		$stmt = $this->sql->prepare("SELECT location, date
 			FROM events
 			WHERE type='wish'
-			AND location = $realm
+			AND location = '$realm'
 			ORDER BY date DESC
 			LIMIT 1");
 		$stmt->execute();
