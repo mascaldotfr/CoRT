@@ -2,8 +2,20 @@
 
 ## No API
 
+> ⚠️  Due to recent changes to make the API deployable more easily it's more
+> painful than it used to be. Stable releases may come once deployment on
+> managed webhosters is done and documented; probably faster than the leveling
+> update.
+
 If you don't want to host the API just copy or `git clone` CoRT in a
-preexisting webserver directory. You're done.
+preexisting webserver directory.
+
+Since you won't serve the API you'll need to add your host in
+`/js/api_url.js` by adding yourself to that list:
+
+```
+let frontend_with_no_api = ["localhost", "mascaldotfr.github.io"];
+```
 
 ## With your own API stuff
 
