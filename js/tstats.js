@@ -1,4 +1,4 @@
-import {__api__frontsite, __api__frontsite_dir, __api__urls} from "./api_url.js";
+import {__api__frontsite, __api__urls} from "./api_url.js";
 import {$} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {constants} from "./trainertools/constants.js";

@@ -10,8 +10,9 @@ import {_} from "../data/i18n.js";
 // you serve the pages is the same.
 
 function get_paths() {
-	// https://mascaldotfr.github.io/CoRT uses an external API server as an exception
-	// Also allow local testing to use the official API
+	// https://mascaldotfr.github.io/CoRT uses an external API server as an
+	// exception. Also allow local testing to use the official API, with the
+	// exception of submitting trainer setups
 	let frontend_with_no_api = ["localhost", "mascaldotfr.github.io"];
 	if (frontend_with_no_api.includes(window.location.hostname)) {
 		let api = {};
@@ -21,19 +22,16 @@ function get_paths() {
 		api["frontsite"] = "https://mascaldotfr.github.io";
 		// Subdirectory where the HTML/JS/CSS/etc. files are placed, relative to your
 		// www root with the leading '/'
-		api["frontsite_dir"] = "/CoRT";
 		return api;
 	}
 	else {
 		// If you keep everything under the same directory and
 		// domain, things are done magically
 		const path = window.location.pathname;
-		const base_path = path.substring(0, path.lastIndexOf('/') + 1);
 		const base_url = window.location.origin + base_path;
 		let api = {};
 		api["base"] = base_url + "api";
 		api["frontsite"] = window.location.origin;
-		api["frontsite_dir"] = base_path;
 		return api;
 	}
 }
@@ -41,7 +39,6 @@ function get_paths() {
 let paths = get_paths();
 export const __api__base = paths["base"];
 export const __api__frontsite = paths["frontsite"];
-export const __api__frontsite_dir = paths["frontsite_dir"];
 
 export const __api__urls = {
 	"submit_trainer": `${__api__base}/bin/collect/submit.php`,

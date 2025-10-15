@@ -1,4 +1,4 @@
-import {__api__urls, __api__frontsite, __api__frontsite_dir} from "./api_url.js";
+import {__api__urls, __api__frontsite} from "./api_url.js";
 import {$} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {constants} from "./trainertools/constants.js";
@@ -38,8 +38,11 @@ $(document).ready(function() {
 	}
 	$("#t-version").html(html_dataset_options.join(""));
 	// Drop "index.html" from the URL bar if you are coming from search engines
-	if (window.location.pathname == `${__api__frontsite_dir}/index.html`)
-		window.location.pathname = __api__frontsite_dir;
+	if (window.location.pathname.endsWith("index.html")) {
+		const path = window.location.pathname;
+		const dirname = path.endsWith("/") ? path : path.substring(0, path.lastIndexOf("/"));
+		window.location.pathname = dirname + "/";
+	}
 	// search for a given trainer dataset in url, and skillset then
 	// set the version accordingly. See also manage_versions.
 	let urlsearch = new URLSearchParams(window.location.search);
