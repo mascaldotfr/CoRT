@@ -4,12 +4,7 @@
 
 Each API has a README.md explaining what they do.
 
-It's written in 3 languages:
-
-- Python for all WZ-related things. It's by far the most used
-  language. It's strictly through cronjobs.
-- PHP for the rest. When the overhead is low, it's run on demand. For heavier
-  tasks it's called through cronjobs.
+The whole API is written in PHP.
 
 See the [deploy docs](../deploy/README.md) as well if you want to deploy it.
 

@@ -4,6 +4,8 @@ api/var/*.sqlite
 api/var/*.txt*
 api/var/*.php
 api/var/*.csv*
+
+vendor
 __pycache__**
 
 # for macOS users

@@ -8,11 +8,10 @@ RUN apt-get update && \
 	    procps \
 	    sudo \
 	    git \
-	    python3 \
-	    python3-bs4 \
 	    php-fpm \
 	    php-cli \
-	    php-sqlite3
+	    php-sqlite3 \
+	    composer
 
 # Create a dedicated user
 RUN groupadd -r cort && \
@@ -34,6 +33,10 @@ RUN sudo -u cort git clone https://github.com/mascaldotfr/CoRT.git /var/www/html
 # above changes. See ̀ /deploy/README.md`. Also you will need to modify
 # `api/bin/collect/submit.php` if the website and the API aren't on the same
 # domain.
+
+# Install required php dependencies (only needed for warstatus)
+WORKDIR /var/www/html/CoRT/
+RUN sudo -u cort composer install
 
 # Configure the trainer saved setup db (must be writeable by php running as
 # www-data) and stats.

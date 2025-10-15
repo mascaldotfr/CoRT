@@ -4,16 +4,15 @@ There is no such things as a public API for the war status, so that part has to
 be run server side for CoRT, due to NGE not allowing cross origin request
 ([CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)).
 
-`warstatus.py` fetches the official war status page and dump the gems/forts
-status in a file as JSON (see `outfile` in `warstatus.py`). The official map
-isn't fetched, because it has a static URL and CoRT actually draws one using
-HTML5 canvas for speed and bandwidth economy (NGE's site is slow).
+`warstatus.php` fetches the official war status page and dump the gems/forts
+status in a file as JSON (see `outfile` in `warstatus.php`). It's used only
+through the PHP CLI, it will return HTTP 403 if called through a browser.
 
 You can see it in action at https://cort.thebus.top/api/var/warstatus.json --
 informations are refreshed every minute.
 
 The `stats` directory includes the code used to generate the WZ statistics, and
-has its own README, but also needs `warstatus.py` to work in order to generate
+has its own README, but also needs `warstatus.php` to work in order to generate
 statistics.
 
 ## Response Format

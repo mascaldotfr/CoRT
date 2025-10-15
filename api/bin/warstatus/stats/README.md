@@ -2,11 +2,11 @@
 
 This directory includes the necessary code used to generate statistics.
 
-`generate.py` is called by `../warstatus.py`. It writes new events in a sqlite3
+`generate.php` is called by `../warstatus.php`. It add new events in a sqlite3
 database `../../var/events.sqlite`. It generates a small JSON report called
-`statistics.json` and big JSON one `allevents.json` containing a dump of the events
-the last 3 days if any change happened since the last run. The default output
-directory is `../../var` and can be modified in `../warstatus.py`.
+`statistics.json` and big JSON one `allevents.json`, containing a dump of the
+events the last 14 days if any change happened since the last run.  The default
+output directory is `../../var` and can be modified in `../warstatus.php`.
 
 On top of the generated files, pre compressed gzip files are generated. Please
 see you web server documentation if you don't know how to activate the serving
@@ -14,13 +14,13 @@ of such files.
 
 ### Dump generator
 
-There is a way to generate a CSV dump with all historical events. It requires
-the sqlite3 module for PHP to be installed (Debian: php-sqlite3).
+There is a way to generate a CSV dump with all historical events.
 
 URL: https://cort.thebus.top/api/bin/warstatus/stats/dump_generator.php
 
 The output is in the same format than the warstatus events list, see
-`../warstatus/README.md` for more details.
+`../warstatus/README.md` for more details. It's refreshed every 24 hours,
+on-demand.
 
 ## Database format
 
