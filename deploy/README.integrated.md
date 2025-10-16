@@ -36,7 +36,7 @@ wget https://cort.thebus.top/api/var/statistics.json
 wget https://cort.thebus.top/api/var/allevents.json
 
 sudo mv /tmp/CoRT-${V} /var/www/html/CoRT
-sudo chown www-data:www-data /var/www/html/CoRT
+sudo chown -R www-data:www-data /var/www/html/CoRT
 ```
 
 ## Crontab
