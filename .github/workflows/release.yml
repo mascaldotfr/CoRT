@@ -19,6 +19,9 @@ jobs:
         run: |
           # Remove all preload statements
           sed -i '/<link rel="preload"/d' *.html
+
+          # Put a fixed version
+          sed -i -E 's/(<!--VERSION-->Version: ).+/\1'"${{ github.ref_name }}"'/' js/menu.js
       
       - name: Create custom tarball
         run: |
@@ -33,11 +36,11 @@ jobs:
         run: |
           {
             echo "body<<EOF"
-            echo "Releases are for people wanting to host CoRT on managed webhosters"
+            echo "This is an automated release"
             echo
-            echo 'Do not download the source but **CoRT-${{ github.ref_name }}.tar.gz** instead.'
+            echo "See https://github.com/mascaldotfr/CoRT/tree/main/deploy/README.md to deploy it"
             echo
-            echo "See https://github.com/mascaldotfr/CoRT/tree/main/deploy#no-api to deploy it"
+            echo 'To setup CoRT on managed webhosting, use **CoRT-${{ github.ref_name }}.tar.gz** instead of the source code.'
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
 
