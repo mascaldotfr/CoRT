@@ -58,9 +58,3 @@ In that *noapi* setup, it's pretty easy:
 4. Rename the updated `CoRT-<version>` to `CoRT`
 
 That's it.
-
-
-
-
-
-

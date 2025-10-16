@@ -21,8 +21,8 @@ example.com.
 
 While CoRT fetches PHP modules with composer, versioned release tarballs
 already include dependencies, so you don't need composer. You also don't need
-to tweak CoRT further, various things that only to the official CoRT have been
-expurged.
+to tweak CoRT further, various things that only the official CoRT need have
+been expurged.
 
 ## Get the latest release version
 
@@ -79,7 +79,8 @@ There is more than a way to do it, so let's just assume your hoster have a file 
 Just upload the tarball and extract it in the web root directory of you website
 (most often in the `public_html` directory).
 
-You can now visit https://example.com/CoRT/ and check out if eveything is all right.
+You can now visit https://example.com/CoRT/ and check out if everything is all
+right.
 
 ## Setting a cronjob
 
@@ -95,8 +96,8 @@ php -q /home/my_username/public_html/CoRT/api/bin/warstatus/warstatus.php
 ```
 
 You can't call `warstatus.php` as-is from outside (wget or browser), so call
-directly php. Note that this behaviour is tweakable, but you gotta change the
-source code.
+directly php from the cli. Note that this behaviour is tweakable, but you gotta
+change the source code.
 
 ## It's running
 
