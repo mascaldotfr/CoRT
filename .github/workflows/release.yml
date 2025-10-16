@@ -1,0 +1,53 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Clean up files with sed
+        run: |
+          # Remove all preload statements
+          sed -i '/<link rel="preload"/d' *.html
+      
+      - name: Create custom tarball
+        run: |
+          sudo apt install composer &&
+          composer install &&
+          tar -czf ${{ runner.temp }}/CoRT-${{ github.ref_name }}.tar.gz \
+            --transform "s,^,CoRT-${{ github.ref_name }}/," \
+            *
+      
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          {
+            echo "body<<EOF"
+            echo "Releases are for people wanting to host CoRT on managed webhosters"
+            echo
+            echo 'Do not download the source but **CoRT-${{ github.ref_name }}.tar.gz** instead.'
+            echo
+            echo "See https://github.com/mascaldotfr/CoRT/tree/main/deploy#no-api to deploy it"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ github.ref_name }}
+          body: ${{ steps.release_notes.outputs.body }}
+          draft: false
+          prerelease: false
+          files: ${{ runner.temp }}/CoRT-${{ github.ref_name }}.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
