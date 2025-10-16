@@ -29,7 +29,7 @@ cd /tmp
 wget -qO- https://github.com/mascaldotfr/CoRT/archive/refs/tags/${V}.tar.gz | tar xvz
 
 # Make your site use CoRT's "official" API instead of a local one
-sed -i'' 's!\(.*\let frontend_with_no_api =\) .*!\1 ["'${D}'"];!' CoRT-${V}/js/api_url.js
+sed -i'' 's!\(.*let frontend_with_no_api =\) .*!\1 ["'${D}'"];!' CoRT-${V}/js/api_url.js
 ```
 
 ### Development version
