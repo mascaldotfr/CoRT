@@ -19,7 +19,6 @@ If you plan to bring code improvements:
    echo '{ "esversion": 11, "sub": true }' > jshintrc
    ./bin/jshint -c jshintrc /where/is/CoRT/js/*.js
    ```
-4. If you touch the python code, try to not adding extra modules as a dependency.
 
 ### Why using Firefox 78 as a baseline
 
