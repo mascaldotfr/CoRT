@@ -128,8 +128,10 @@ It's actually not a bad thing because you're self sufficient.
 
 1. Make a prepopulated tarball of CoRT, without the API data fetching
 2. Upload it to your hosting provider in the web root directory
-3. Make a backup of the current `/CoRT/api/var` with your hoster file manager outside of `/CoRT`
-4. Extract the tarball in the web root directory
-5. Replace the `/CoRT/api/var` directory by your backup one
-6. Don't forget to put your cronjob back to minutely!
+3. Put your cronjob on monthly
+4. Make a backup of the current `/CoRT/api/var` with your hoster file manager outside of `/CoRT`
+5. Delete the old CoRT directory
+6. Extract the tarball in the web root directory
+7. Replace the `/CoRT/api/var` directory by your backup one
+8. Don't forget to put your cronjob back to minutely!
 
