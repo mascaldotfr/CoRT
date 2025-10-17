@@ -90,8 +90,11 @@ export class HumaniseEvents {
 			}
 			events_html.push("<br>");
 		}
-		if (notify > 0)
+		if (notify > 0) {
+			// Don't display more than the 9 newest events for any notification
+			events_notify.splice(9);
 			return [events_html.join(""), events_notify.join("\n")];
+		}
 		return events_html.join("");
 	}
 }
