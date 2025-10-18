@@ -15,7 +15,8 @@ crontab part change.**
 
 ## Preparation and install
 
-1. Ensure all dependencies are installed. For that, check out the [Dockerfile](docker/Dockerfile).
+1. Ensure all PHP dependencies are installed. For that, check out the
+   [Dockerfile](docker/Dockerfile) for all `php` packages.
 2. Since we don't need a tarball, it's a tad simpler:
 
 ```shell
