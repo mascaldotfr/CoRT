@@ -30,27 +30,24 @@ jobs:
           tar -czf ${{ runner.temp }}/CoRT-${{ github.ref_name }}.tar.gz \
             --transform "s,^,CoRT-${{ github.ref_name }}/," \
             *
-      
-      - name: Generate release notes
-        id: release_notes
-        run: |
-          {
-            echo "body<<EOF"
-            echo "This is an automated release"
-            echo
-            echo "See https://github.com/mascaldotfr/CoRT/tree/main/deploy/README.md to deploy it"
-            echo
-            echo 'To setup CoRT on managed webhosting, use **CoRT-${{ github.ref_name }}.tar.gz** instead of the source code.'
-            echo "EOF"
-          } >> "$GITHUB_OUTPUT"
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           name: ${{ github.ref_name }}
-          body: ${{ steps.release_notes.outputs.body }}
+          body: |
+            ### About
+            
+            This is an automated release.
+
+            See https://github.com/mascaldotfr/CoRT/tree/main/deploy/README.md to deploy it
+
+            To setup CoRT on managed webhosting or integrating it on your own server, use **CoRT-${{ github.ref_name }}.tar.gz** instead of the source code.
+
+            ### Changelog
           draft: false
           prerelease: false
+          generate_release_notes: true
           files: ${{ runner.temp }}/CoRT-${{ github.ref_name }}.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
