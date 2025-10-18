@@ -11,8 +11,10 @@ import {_} from "../data/i18n.js";
 
 function get_paths() {
 	// https://mascaldotfr.github.io/CoRT uses an external API server as an
-	// exception. Also allow local testing to use the official API, with the
-	// exception of submitting trainer setups
+	// exception. Also allow local testing to use the official API, with
+	// the exception of submitting trainer setups. In case you're deploying
+	// the API locally as well, either tweak the line or reach your server
+	// through 127.0.0.1 instead of localhost.
 	let frontend_with_no_api = ["localhost", "mascaldotfr.github.io"];
 	if (frontend_with_no_api.includes(window.location.hostname)) {
 		let api = {};
