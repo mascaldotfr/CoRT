@@ -30,7 +30,8 @@ Check out https://github.com/mascaldotfr/CoRT/releases/latest and take note of t
 version tag.
 
 You can follow up releases with this ATOM feed:
-https://github.com/mascaldotfr/CoRT/releases.atom
+https://github.com/mascaldotfr/CoRT/releases.atom, or just check out CoRT's
+discord server (#cort-updates channel).
 
 ## Preparing CoRT
 
