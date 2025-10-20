@@ -68,3 +68,10 @@ while :; do date +%s; sleep 1; done
 
 Alternatively, you can check out [this website](https://time.is/Unix_time) but
 you can't stop the counter.
+
+
+## BZ
+
+Updating the BZ beginning and ending times requires to change
+`api/bin/bz/Battlezone.php` with their respective hours in UTC (currently, the
+ingame schedule shows UTC hours already), while keeping the ascending order.
