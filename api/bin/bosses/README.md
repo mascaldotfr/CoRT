@@ -1,6 +1,6 @@
 # BOSSES API
 
-This page documents the bosses API, used by CoRT and CoRT-dc.
+This page documents the bosses API endpoint, used by CoRT and CoRT-dc.
 
 ## URL
 

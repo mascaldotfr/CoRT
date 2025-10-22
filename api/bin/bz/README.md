@@ -1,6 +1,6 @@
 # BZ
 
-This page documents the BZ API.
+This page documents the BZ API endpoint.
 
 ## URL
 
