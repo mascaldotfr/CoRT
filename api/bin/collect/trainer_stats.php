@@ -16,8 +16,8 @@ $output_file = "../../var/trainerstats.json";
 // Check if output file exists and is less than 3 hours old
 // Redirect to the cached page if that's the case
 if (filesize($output_file) != 0 && file_exists($output_file) && (time() - filemtime($output_file)) < 3 * 3600) {
-    header("Location: " . $output_file);
-    exit;
+    readfile($output_file);
+    exit();
 }
 
 
@@ -50,7 +50,7 @@ if (file_exists($output_file)) {
 	$api_dict = json_decode($prev_json_content, true);
 	$lineno = $api_dict["lineno"] ?? 0;
 	if ($lineno != 0 && $lineno == count($data)) {
-		header("Location: " . $output_file);
+		readfile($output_file);
 		exit(); // Quit if there is no new setup
 	}
 	$api_dict["lineno"] = count($data);

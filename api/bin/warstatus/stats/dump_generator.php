@@ -1,5 +1,8 @@
 <?php
 
+header('Content-Type: text/csv; charset=utf-8');
+header('Content-Disposition: inline; filename="all_events.csv"');
+
 // All files are relative to that script directory
 chdir(__DIR__);
 
@@ -11,15 +14,12 @@ $out_history = $output_dir . "/events_dump.csv";
 // Check if output file exists and is less than 24 hours old
 // Redirect to the cached page if that's the case
 if (filesize($out_history) != 0 && file_exists($out_history) && (time() - filemtime($out_history)) < 86400) {
-    header("Location: " . $out_history);
-    exit;
+    readfile($out_history);
+    exit();
 }
 
 // Ensure completion if client close the connection
 ignore_user_abort(true);
-
-header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: inline; filename="all_events.csv"');
 
 $pdo = new PDO("sqlite:" . $sqlite_db);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
