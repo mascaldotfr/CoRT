@@ -1,7 +1,5 @@
 import {__i18n__, _} from "../data/i18n.js";
 import {$, create_tz_list} from "./libs/cortlibs.js";
-// Only used if ping stats are on
-// import {__api__frontsite, __api__base} from "./api_url.js";
 
 let __menu_external_link = `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24"><path stroke="#CCC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5H8.2c-1.12 0-1.681 0-2.108.218a2 2 0 0 0-.874.874C5 6.52 5 7.08 5 8.2v7.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.427.218.987.218 2.105.218h7.606c1.118 0 1.677 0 2.104-.218.376-.192.683-.498.875-.875.218-.427.218-.987.218-2.104V14m1-5V4m0 0h-5m5 0-7 7"/></svg>`;
 let __menu_flags = {
@@ -58,7 +56,7 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20251025.015457
+	<p> <!--VERSION-->Version: 20251025.212916
 `;
 
 $(document).ready(function() {
@@ -125,18 +123,3 @@ $(document).ready(function() {
 
 
 });
-
-/*
-// get basic hit statistics
-function get_hits() {
-	let head = document.getElementsByTagName("head")[0];
-	let script = document.createElement("script");
-	script.type = "text/javascript";
-	script.src = __api__base + "/ping.js?p=/" +
-		     window.location.pathname.split("/").pop();
-	script.setAttribute("defer", "");
-	head.appendChild(script);
-}
-if (window.location.origin == __api__frontsite)
-	setTimeout(get_hits, 2000);
-*/
