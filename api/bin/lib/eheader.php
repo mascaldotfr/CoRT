@@ -35,8 +35,9 @@ function eheader_api($mime_type, $allow = "*") {
 	header("Content-Type: " . EH_MIME_TYPES[$mime_type]);
 }
 
-// need to make the output downloadable ? That's it. Note that you can use such
-// output for a JS fetch() call. No CORS, so can't be mixed with eheader_api.
+// need to make the output downloadable ? That's it. Note that you CANNOT use
+// such output for a JS fetch() call.
+// Code-wise: No CORS, so can't be mixed with eheader_api.
 function eheader_download($mime_type, $target_filename = "download.bin") {
 	valid_mime_or_die($mime_type);
 	header("Content-Type: " . EH_MIME_TYPES[$mime_type]);
