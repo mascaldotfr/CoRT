@@ -33,8 +33,8 @@ RUN sudo -u cort git clone https://github.com/mascaldotfr/CoRT.git /var/www/html
 	sudo -u cort sed -i '/<link rel="preload"/d' /var/www/html/CoRT/*.html
 # XXX Note that you can't git pull or it will overwrite some or even all the
 # above changes. See ̀ /deploy/README.md`. Also you will need to modify
-# `api/bin/collect/submit.php` if the website and the API aren't on the same
-# domain.
+# `api/bin/lib/eaheader.php`'s FRONTSITE constant if the website and the API
+# aren't on the same domain.
 
 # Install required php dependencies (only needed for warstatus)
 WORKDIR /var/www/html/CoRT/

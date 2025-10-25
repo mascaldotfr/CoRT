@@ -1,13 +1,12 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
-
 const API_ROOT = "../..";
+
+require_once(__DIR__ . "/../lib/eheader.php");
+eheader_api("json");
 
 require_once API_ROOT . "/bin/bosses/BossesRespawns.php";
 require_once API_ROOT . "/bin/bz/Battlezone.php";
-
 
 $bosses = new BossesRespawns();
 $bosses_respawns = $bosses->getSchedule(1);

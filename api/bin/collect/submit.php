@@ -1,6 +1,7 @@
 <?php
-header("Access-Control-Allow-Origin: https://mascaldotfr.github.io");
-header("Access-Control-Allow-Methods: POST");
+require_once(__DIR__ . "/../lib/eheader.php");
+eheader_cors();
+
 function wontsavethis($reason) {
 	header("HTTP/1.0 417 Expectation Failed");
 	error_log("Failed to save: " . $reason);

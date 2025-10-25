@@ -1,7 +1,7 @@
 <?php
 
-header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: inline; filename="all_events.csv"');
+require_once(__DIR__ . "/../../lib/eheader.php");
+eheader_download("csv", "all_events.csv");
 
 // All files are relative to that script directory
 chdir(__DIR__);
