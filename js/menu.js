@@ -1,5 +1,6 @@
 import {__i18n__, _} from "../data/i18n.js";
 import {$, create_tz_list} from "./libs/cortlibs.js";
+import {__api__urls} from "./api_url.js";
 
 let __menu_external_link = `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24"><path stroke="#CCC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5H8.2c-1.12 0-1.681 0-2.108.218a2 2 0 0 0-.874.874C5 6.52 5 7.08 5 8.2v7.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.427.218.987.218 2.105.218h7.606c1.118 0 1.677 0 2.104-.218.376-.192.683-.498.875-.875.218-.427.218-.987.218-2.104V14m1-5V4m0 0h-5m5 0-7 7"/></svg>`;
 let __menu_flags = {
@@ -56,7 +57,7 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20251025.212916
+	<p> <!--VERSION-->Version: 20251025.232549
 `;
 
 $(document).ready(function() {
@@ -97,14 +98,30 @@ $(document).ready(function() {
 
 	create_tz_list("#tzchooser");
 
-	/*
-	$("body").prepend(`
-		<div class="card" style="background-color:#ff3333; font-weight: bold; text-align:center;">
-		&#9888;&#65039; I'm doing heavy maintenance tasks on the server this weekend. There
-		may be some disruptions.
-		</div>
-	`);
-	*/
+	// Put maintenance message (see /api/MAINTENANCE.md)
+	setTimeout(async () => {
+		try {
+			const msg = await $().get(__api__urls["maintenance"]);
+			// Bail out on empty message (404s fall here as well)
+			if (msg.length == 0)
+				return;
+			$("body").prepend(`
+				<div class="card bold center" style="background-color:#a9005d">
+					&#9888;&#65039; ${msg}
+				</div>
+			`);
+		}
+		catch (error) {
+			// Things go really bad, or we're rebooting...
+			console.error(error);
+			$("body").prepend(`
+				<div class="card bold center" style="background-color:#c44">
+					&#128163; The API server cannot be reached!
+					Check out the (slow) <a href="https://cort.go.yo.fr" target="_blank" style="color:gold"> backup site</a> if needed!
+				</div>
+			`);
+		}
+	}, 300);
 
 	// Cursors lazy loading
 

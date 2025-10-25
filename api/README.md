@@ -17,6 +17,10 @@ See the [deploy docs](../deploy/README.md) as well if you want to deploy it.
 - [warzone stats and events](bin/warstatus/stats/README.md)
 - [sentinel](bin/sentinel/README.md)
 
+Special stuff:
+
+- [put a maintenance message](MAINTENANCE.md)
+
 ## API endpoints
 
 To get the whole list:

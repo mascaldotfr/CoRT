@@ -1,4 +1,3 @@
-import {_} from "../data/i18n.js";
 // This file allows you to easily switch the data sources and urls if you
 // don't want use the github site and my data. You may need to fiddle with paths
 // since my api base has not the same structure than the repo. If you git pull,
@@ -52,5 +51,6 @@ export const __api__urls = {
 	"stats": `${__api__base}/var/statistics.json`,
 	"wstatus": `${__api__base}/var/warstatus.json`,
 	"bosses": `${__api__base}/bin/bosses/bosses.php`,
-	"bz": `${__api__base}/bin/bz/bz.php`
+	"bz": `${__api__base}/bin/bz/bz.php`,
+	"maintenance": `${__api__base}/var/maintenance.txt`,
 };
