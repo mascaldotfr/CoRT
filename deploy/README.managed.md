@@ -38,7 +38,8 @@ discord server (#cort-updates channel).
 We will prepopulate CoRT with the "official" server data, so you don't need to
 wait for days before getting some meaningful data.
 
-Run these commands:
+Run these commands, or alternatively checkout the [automated
+script](misc/managed_tarball).
 
 ```shell
 # Set this to the latest version

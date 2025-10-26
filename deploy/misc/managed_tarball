@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Automatically create a tarball for managed setups in /tmp
+# Since I use it a lot for CoRT's backup site.
+# Require curl, wget and jq
+
+printf "===> Searching for the last release... "
+V=`curl -s https://api.github.com/repos/mascaldotfr/CoRT/tags | jq -r '.[0].name'`
+echo "${V}"
+
+
+echo "===> Getting the tarball release"
+cd /tmp
+wget -qO- "https://github.com/mascaldotfr/CoRT/releases/download/${V}/CoRT-${V}.tar.gz" | tar xz
+
+echo "===> Prepopulating the API"
+cd CoRT-${V}/api/var
+wget -q https://cort.thebus.top/api/var/trainer_saved_setups.txt \
+        https://cort.thebus.top/api/var/events.sqlite \
+        https://cort.thebus.top/api/var/warstatus.json \
+        https://cort.thebus.top/api/var/statistics.json \
+        https://cort.thebus.top/api/var/allevents.json
+touch maintenance.txt
+
+echo "===> Creating tarball"
+cd /tmp/CoRT-${V}
+# Ensure we have a CoRT subdirectory in the final tarball. Quite obnoxious.
+mkdir CoRT
+mv * CoRT 2> /dev/null
+tar czf /tmp/CoRT.tar.gz CoRT/*
+
+echo "===> Cleaning up"
+cd /tmp
+rm -rf CoRT-${V}
+
+echo "OK! Tarball generated at: /tmp/CoRT.tar.gz"
