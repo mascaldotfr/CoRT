@@ -30,11 +30,12 @@ wget -qO- https://github.com/mascaldotfr/CoRT/releases/download/${V}/CoRT-${V}.t
 
 # Prepopulate with official API stuff
 cd CoRT-${V}/api/var
-wget https://cort.thebus.top/api/var/trainer_saved_setups.txt
-wget https://cort.thebus.top/api/var/events.sqlite
-wget https://cort.thebus.top/api/var/warstatus.json
-wget https://cort.thebus.top/api/var/statistics.json
-wget https://cort.thebus.top/api/var/allevents.json
+wget    https://cort.thebus.top/api/var/trainer_saved_setups.txt \
+        https://cort.thebus.top/api/var/events.sqlite \
+        https://cort.thebus.top/api/var/warstatus.json \
+        https://cort.thebus.top/api/var/statistics.json \
+        https://cort.thebus.top/api/var/allevents.json
+touch maintenance.txt
 
 sudo mv /tmp/CoRT-${V} /var/www/html/CoRT
 sudo chown -R www-data:www-data /var/www/html/CoRT

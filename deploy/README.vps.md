@@ -4,7 +4,10 @@ This one is targeted at people very comfy with hosting things. This is also
 roughly how https://cort.thebus.top works. Unlike the other hosting docs, we're
 here using the development version.
 
-## At first, be patient
+It's quite advanced, and it's recommended to read that file once before
+starting anything. You may want to follow [the *integrated* README](README.integrated.md) instead.
+
+## At first, be patient if you start from scratch
 
 - WZ-related things should load within a minute with dummy events. That's
   normal.
@@ -14,14 +17,8 @@ here using the development version.
 - Trainer stats will require at least a full lvl 60 setup per class for the
   latest game version, and is refreshed only every 3 hours
 
-If you want to test with really populated stuff and already installed CoRT,
-download the following files and put them in `/api/var`:
-
-- the WZ events db @ https://cort.thebus.top/api/var/events.sqlite and ensure
-  it belongs to the `cort` user
-- the trainer saved setups @
-  https://cort.thebus.top/api/var/trainer_saved_setups.txt and ensure it
-  belongs to the user running php (Debian: `www-data`)
+It's recommended to prepopulate with existing official API data. Read further
+about that.
 
 ## Docker example (to be used for non Docker install too)
 
@@ -39,7 +36,16 @@ directory :
   the API aren't on the same site.
 - the necessary crontab magic
 
-Once set up, you can access it at http://localhost:2810/CoRT
+Once set up, you can access it at http://127.0.0.1:2810/CoRT
+
+### API Prepopulation
+
+By default, the docker image prepopulates itself with data from the official
+API. If that behaviour isn't wanted, use instead:
+
+```shell
+PREPOPULATE=no docker compose up --build
+```
 
 ## Git stuff
 
@@ -48,9 +54,6 @@ server, you'll need to remove them.
 
 As such, keep the `main` branch for upstream updates, and adapt them in your
 `local` branch that will be *your* main branch.
-
-You'll need either a crontab or do manual merging as well. Here is how I do for
-https://cort.thebus.top.
 
 ### Initial setup
 

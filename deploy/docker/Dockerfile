@@ -1,5 +1,11 @@
 FROM debian:trixie
 
+# User running PHP and owning CoRT
+ENV PHP_USER="www-data"
+# If set to any other value than yes, don't prepopulate from official API
+# server
+ARG PREPOPULATE="yes"
+
 RUN apt-get update && \
 	    apt-get install -y --no-install-recommends \
 	    ca-certificates \
@@ -8,6 +14,7 @@ RUN apt-get update && \
 	    procps \
 	    sudo \
 	    git \
+	    wget \
 	    php-cli \
 	    php-curl \
 	    php-fpm \
@@ -15,22 +22,18 @@ RUN apt-get update && \
 	    php-zip \
 	    composer
 
-# Create a dedicated user
-RUN groupadd -r cort && \
-    useradd -r -g cort -s /usr/sbin/nologin cort
-
-# Copy caddy
+# Copy caddyfile
 COPY Caddyfile /etc/caddy/Caddyfile
 
 # Configure caddy root
 RUN mkdir -p /var/www/html/CoRT && \
 	chown -R caddy:caddy /var/www && \
-	chown cort:cort /var/www/html/CoRT
+	chown $PHP_USER:$PHP_USER /var/www/html/CoRT
 
 # git clone
 # and remove preload linking to the official API
-RUN sudo -u cort git clone https://github.com/mascaldotfr/CoRT.git /var/www/html/CoRT && \
-	sudo -u cort sed -i '/<link rel="preload"/d' /var/www/html/CoRT/*.html
+RUN sudo -u $PHP_USER git clone https://github.com/mascaldotfr/CoRT.git /var/www/html/CoRT && \
+	sudo -u $PHP_USER sed -i '/<link rel="preload"/d' /var/www/html/CoRT/*.html
 # XXX Note that you can't git pull or it will overwrite some or even all the
 # above changes. See ̀ /deploy/README.md`. Also you will need to modify
 # `api/bin/lib/eaheader.php`'s FRONTSITE constant if the website and the API
@@ -38,24 +41,40 @@ RUN sudo -u cort git clone https://github.com/mascaldotfr/CoRT.git /var/www/html
 
 # Install required php dependencies (only needed for warstatus)
 WORKDIR /var/www/html/CoRT/
-RUN sudo -u cort composer install
+RUN sudo -u $PHP_USER composer install
 
-# Configure the trainer saved setup db (must be writeable by php running as
-# www-data) and stats.
-RUN touch -d "1 week ago" 	api/var/trainer_saved_setups.txt \
-				api/var/trainer_saved_setups.txt.gz \
-				api/var/trainerstats.json \
-				api/var/trainerstats.json.gz \
-				api/var/events_dump.csv \
-				api/var/events_dump.csv.gz
-RUN chown www-data 	api/var/trainer_saved_setups.txt* \
-			api/var/trainerstats.json* \
-			api/var/events_dump.csv*
+# API pre configuration starting ...
+WORKDIR /var/www/html/CoRT/api/var
+
+RUN if test "$PREPOPULATE" != "yes"; then \
+	touch -d "1 week ago" 	trainer_saved_setups.txt \
+				trainer_saved_setups.txt.gz \
+				trainerstats.json \
+				trainerstats.json.gz \
+				events_dump.csv \
+				events_dump.csv.gz \
+				maintenance.txt \
+	; \
+	fi
+RUN if test "$PREPOPULATE" = "yes"; then \
+	wget 	https://cort.thebus.top/api/var/trainer_saved_setups.txt \
+		https://cort.thebus.top/api/var/events.sqlite \
+		https://cort.thebus.top/api/var/warstatus.json \
+		https://cort.thebus.top/api/var/statistics.json \
+		https://cort.thebus.top/api/var/allevents.json \
+	; \
+	fi
+
+# API post configuration; you're better off running everything as www-data,
+# it's easier
+RUN touch maintenance.txt
+RUN chown -R $PHP_USER:$PHP_USER /var/www/html/CoRT
 
 
-# Copy cron job script (will be run by cort user)
+# Copy cron job script
 COPY cort-cron /etc/cron.d/cort-cron
 RUN chmod 0644 /etc/cron.d/cort-cron
+RUN sed -i'' 's/CORT_USER/'$PHP_USER'/' /etc/cron.d/cort-cron
 
 # Open port 80
 EXPOSE 80

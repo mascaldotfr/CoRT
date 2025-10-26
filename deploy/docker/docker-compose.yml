@@ -1,6 +1,11 @@
 services:
   cort:
-    build: .
+    build:
+      context: .
+      args:
+        PREPOPULATE: "${PREPOPULATE:-yes}"
     ports:
-      - "2810:80"
+      - target: 80
+        published: ${PORT:-2810}
+        protocol: tcp
     restart: unless-stopped
