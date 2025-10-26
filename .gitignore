@@ -1,12 +1,9 @@
-ping.js
-api/var/*.json*
-api/var/*.sqlite
-api/var/*.txt*
-api/var/*.php
-api/var/*.csv*
+# dynamic API data
+api/var/*
+!api/var/README.md
 
+# Composer modules
 vendor
-__pycache__**
 
 # for macOS users
 .DS_Store

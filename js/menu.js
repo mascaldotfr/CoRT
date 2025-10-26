@@ -57,7 +57,7 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20251025.232549
+	<p> <!--VERSION-->Version: 20251026.102050
 `;
 
 $(document).ready(function() {
