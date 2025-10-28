@@ -236,6 +236,22 @@ $(document).ready(function() {
 	insert_notification_link();
 
 	display_wz(true);
-});
 
-setInterval(display_wz, 30 * 1000);
+	// Set minutely delay for update, fixed at every :10 with + 5s jitter
+
+	const now = new Date();
+	const next_run = new Date(now);
+
+	const fixed_second = 10 + Math.floor(Math.random() * 6);
+	next_run.setSeconds(fixed_second, 0);
+
+	// Target next minute if it's already passed this minute
+	if (now.getSeconds() >= fixed_second)
+		next_run.setMinutes(next_run.getMinutes() + 1);
+
+	const seconds_before_next_run = next_run.getTime() - now.getTime();
+	setTimeout(() => {
+		display_wz();
+		setInterval(display_wz, 60 * 1000);
+	}, seconds_before_next_run);
+});
