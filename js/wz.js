@@ -227,6 +227,62 @@ async function display_wz(init=false) {
 		mynotify(_("WZ status"), events_list[1], "wz");
 }
 
+class Scheduler {
+	// This class is dealing with properly fetching API data, and avoid 2
+	// issues:
+	// 1. setTimeout() totally lost due device going to sleep, and
+	// slowly drifting
+	// 2. setInterval() slowly drifting due to tab priority lowered over
+	// time.
+	// It fires between :10 and :15 every minute, and also requires the
+	// visibilitychange (see below) code.
+
+	constructor(callback) {
+		this.callback = callback;
+		this.last_run = null;
+		this.timer_id = null;
+		this.scheduleNext();
+	}
+
+	scheduleNext() {
+		// runtime timestamp, needed to fixate the run time
+		const now = Date.now()
+		const this_run = new Date(now);
+		const next_run = new Date(now);
+
+
+		// Always align to :10–:15 on first scheduled run OR if drifted above 60s
+		if ( !this.last_run || (this_run.getTime() - this.last_run > 60000) ) {
+			const fixed_second = 10 + Math.floor(Math.random() * 6);
+			next_run.setSeconds(fixed_second, 0);
+			if (this_run.getSeconds() >= fixed_second)
+				next_run.setMinutes(next_run.getMinutes() + 1);
+			// run the callback to avoid empty or stale content, in order
+			if (!this.last_run) {
+				this.callback(true);
+				this.last_run = Date.now();
+			}
+		}
+		else {
+			next_run.setTime(this.last_run + 60000);
+		}
+
+		let delay = next_run.getTime() - this_run.getTime();
+		this.timer_id = setTimeout(() => {
+			this.callback();
+			this.last_run = Date.now();
+			this.scheduleNext();
+		}, delay);
+	}
+
+	// XXX Don't forget to call it before reinstanciating or Timeouts will
+	// stack!
+	destroy() {
+		clearTimeout(this.timer_id);
+	}
+}
+
+
 $(document).ready(function() {
 	document.title = "CoRT - " + _("WZ status");
 	$("#title").text(_("WZ status"));
@@ -235,23 +291,13 @@ $(document).ready(function() {
 		" " + _("Last updated:"));
 	insert_notification_link();
 
-	display_wz(true);
+	let updater = new Scheduler(display_wz);
 
-	// Set minutely delay for update, fixed at every :10 with + 5s jitter
-
-	const now = new Date();
-	const next_run = new Date(now);
-
-	const fixed_second = 10 + Math.floor(Math.random() * 6);
-	next_run.setSeconds(fixed_second, 0);
-
-	// Target next minute if it's already passed this minute
-	if (now.getSeconds() >= fixed_second)
-		next_run.setMinutes(next_run.getMinutes() + 1);
-
-	const seconds_before_next_run = next_run.getTime() - now.getTime();
-	setTimeout(() => {
-		display_wz();
-		setInterval(display_wz, 60 * 1000);
-	}, seconds_before_next_run);
+	window.addEventListener("focus", () => {
+		// Device slept and missed next fetch, reschedule
+		if (Date.now() > updater.last_run + 60000) {
+			updater.destroy();
+			updater = new Scheduler(display_wz);
+		}
+	});
 });
