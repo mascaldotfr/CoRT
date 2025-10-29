@@ -234,10 +234,15 @@ class Scheduler {
 	// slowly drifting
 	// 2. setInterval() slowly drifting due to tab priority lowered over
 	// time.
-	// It fires between :10 and :15 every minute, and also requires the
-	// visibilitychange (see below) code.
+	// It fires between :<start> and :<start>+<jitter> every <timeout>
+	// minute(s), and also requires the focus (see below) code.
 
-	constructor(callback) {
+	constructor(callback, timeout, start, jitter) {
+		this.timeout_m = timeout;
+		// convert minutes in seconds
+		this.timeout_s = timeout * 60 * 1000;
+		this.start = start;
+		this.jitter = jitter;
 		this.callback = callback;
 		this.last_run = null;
 		this.timer_id = null;
@@ -251,20 +256,20 @@ class Scheduler {
 		const next_run = new Date(now);
 
 
-		// Always align to :10–:15 on first scheduled run OR if drifted above 60s
-		if ( !this.last_run || (this_run.getTime() - this.last_run > 60000) ) {
-			const fixed_second = 10 + Math.floor(Math.random() * 6);
+		// Always align to start+jitter on first scheduled run OR if drifted above timeout
+		if ( !this.last_run || (this_run.getTime() - this.last_run > this.timeout_s) ) {
+			const fixed_second = this.start + Math.floor(Math.random() * this.jitter + 1);
 			next_run.setSeconds(fixed_second, 0);
 			if (this_run.getSeconds() >= fixed_second)
-				next_run.setMinutes(next_run.getMinutes() + 1);
-			// run the callback to avoid empty or stale content, in order
+				next_run.setMinutes(next_run.getMinutes() + this.timeout_m);
+			// run the callback to avoid empty content
 			if (!this.last_run) {
 				this.callback(true);
 				this.last_run = Date.now();
 			}
 		}
 		else {
-			next_run.setTime(this.last_run + 60000);
+			next_run.setTime(this.last_run + this.timeout_s);
 		}
 
 		let delay = next_run.getTime() - this_run.getTime();
@@ -291,13 +296,16 @@ $(document).ready(function() {
 		" " + _("Last updated:"));
 	insert_notification_link();
 
-	let updater = new Scheduler(display_wz);
+	const delay = 1;
+	const start = 10;
+	const jitter = 5;
+	let updater = new Scheduler(display_wz, delay, start, jitter);
 
 	window.addEventListener("focus", () => {
 		// Device slept and missed next fetch, reschedule
-		if (Date.now() > updater.last_run + 60000) {
+		if (Date.now() > updater.last_run + updater.timeout_s) {
 			updater.destroy();
-			updater = new Scheduler(display_wz);
+			updater = new Scheduler(display_wz, delay, start, jitter);
 		}
 	});
 });
