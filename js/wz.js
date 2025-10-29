@@ -227,65 +227,6 @@ async function display_wz(init=false) {
 		mynotify(_("WZ status"), events_list[1], "wz");
 }
 
-class Scheduler {
-	// This class is dealing with properly fetching API data, and avoid 2
-	// issues:
-	// 1. setTimeout() totally lost due device going to sleep, and
-	// slowly drifting
-	// 2. setInterval() slowly drifting due to tab priority lowered over
-	// time.
-	// It fires between :<start> and :<start>+<jitter> every <timeout>
-	// minute(s), and also requires the focus (see below) code.
-
-	constructor(callback, timeout, start, jitter) {
-		this.timeout_m = timeout;
-		// convert minutes in seconds
-		this.timeout_s = timeout * 60 * 1000;
-		this.start = start;
-		this.jitter = jitter;
-		this.callback = callback;
-		this.last_run = null;
-		this.timer_id = null;
-		this.scheduleNext();
-	}
-
-	scheduleNext() {
-		// runtime timestamp, needed to fixate the run time
-		const now = Date.now()
-		const this_run = new Date(now);
-		const next_run = new Date(now);
-
-
-		// Always align to start+jitter on first scheduled run OR if drifted above timeout
-		if ( !this.last_run || (this_run.getTime() - this.last_run > this.timeout_s) ) {
-			const fixed_second = this.start + Math.floor(Math.random() * this.jitter + 1);
-			next_run.setSeconds(fixed_second, 0);
-			if (this_run.getSeconds() >= fixed_second)
-				next_run.setMinutes(next_run.getMinutes() + this.timeout_m);
-			// run the callback to avoid empty content
-			if (!this.last_run) {
-				this.callback(true);
-				this.last_run = Date.now();
-			}
-		}
-		else {
-			next_run.setTime(this.last_run + this.timeout_s);
-		}
-
-		let delay = next_run.getTime() - this_run.getTime();
-		this.timer_id = setTimeout(() => {
-			this.callback();
-			this.last_run = Date.now();
-			this.scheduleNext();
-		}, delay);
-	}
-
-	// XXX Don't forget to call it before reinstanciating or Timeouts will
-	// stack!
-	destroy() {
-		clearTimeout(this.timer_id);
-	}
-}
 
 
 $(document).ready(function() {
@@ -296,16 +237,19 @@ $(document).ready(function() {
 		" " + _("Last updated:"));
 	insert_notification_link();
 
-	const delay = 1;
-	const start = 10;
-	const jitter = 5;
-	let updater = new Scheduler(display_wz, delay, start, jitter);
 
+	// initial display
+	const worker = new Worker("./js/libs/ticker.js");
+	worker.postMessage({"init": {"start": 10, "end": 15}});
+	display_wz(true);
+	// On manual run, always update the last run timestamp!!!
+	worker.postMessage({"update_last_run": {"ts": Date.now()}});
+	// If it ticks, run this
+	worker.onmessage = display_wz;
+
+	// Always ensure we have fresh data, particulary on mobile
 	window.addEventListener("focus", () => {
-		// Device slept and missed next fetch, reschedule
-		if (Date.now() > updater.last_run + updater.timeout_s) {
-			updater.destroy();
-			updater = new Scheduler(display_wz, delay, start, jitter);
-		}
+		display_wz()
+		worker.postMessage({"update_last_run": {"ts": Date.now()}});
 	});
 });
