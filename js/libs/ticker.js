@@ -17,6 +17,10 @@ let end_second = 10;
 self.onmessage = (e) => {
 	const data = e["data"];
 	if ("init" in data) {
+		if ((data["init"]["end"] - data["init"]["start"]) <= 0) {
+			throw("Bad start and/or end seconds specified, using defaults.");
+			return;
+		}
 		start_second = data["init"]["start"];
 		end_second = data["init"]["end"];
 	}
