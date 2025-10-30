@@ -24,8 +24,10 @@ self.onmessage = (e) => {
 		start_second = data["init"]["start"];
 		end_second = data["init"]["end"];
 	}
-	if ("update_last_run" in data)
+	if ("update_last_run" in data) {
 		last_run = data["update_last_run"]["ts"];
+		return;
+	}
 
 	let delay = 1000 * (end_second - start_second);
 
