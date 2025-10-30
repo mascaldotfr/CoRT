@@ -240,6 +240,7 @@ $(document).ready(function() {
 
 	// initial display
 	const worker = new Worker("./js/libs/ticker.js");
+	// Warstatus is updated between :00 and :08, so fetch after that.
 	worker.postMessage({"init": {"start": 10, "end": 15}});
 	display_wz(true);
 	// On manual run, always update the last run timestamp!!!
