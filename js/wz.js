@@ -247,9 +247,16 @@ $(document).ready(function() {
 	// If it ticks, run this
 	worker.onmessage = display_wz;
 
-	// Always ensure we have fresh data, particulary on mobile
+	// Always ensure we have fresh data, particulary on mobile, with a 5s
+	// debounce
+	let last_focus = Date.now();
 	window.addEventListener("focus", () => {
-		display_wz()
-		worker.postMessage({"update_last_run": {"ts": Date.now()}});
+		const ts = Date.now();
+		if (ts - last_focus > 5000) {
+			display_wz();
+			last_focus = ts;
+			// We gotta tell the worker as well
+			worker.postMessage({"update_last_run": {"ts": ts}});
+		}
 	});
 });
