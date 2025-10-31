@@ -17,10 +17,11 @@ class BossesRespawns {
 		);
 
 		if ($fake) {
+			$epoch = new DateTime("1 hour ago")->getTimestamp();
 			$first_respawns = array(
-				"thorkul" => 	180,
-				"evendim" => 	120,
-				"daen" => 	60,
+				"thorkul" => 	$epoch + 180,
+				"evendim" => 	$epoch + 120,
+				"daen" => 	$epoch + 60,
 				"server" => 	1761732000 + 37 * 60
 			);
 		}
