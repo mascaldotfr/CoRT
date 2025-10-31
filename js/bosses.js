@@ -61,12 +61,11 @@ function display_next_respawn(boss) {
 }
 
 async function refresh_display() {
-	let bosses_unordered = new Map();
-	let now = new Date();
 	// Fetch API data only if needed
-	if (now.getTime() / 1000 > nextboss_ts)
+	if (Date.now() / 1000 > nextboss_ts)
 		await get_next_respawns();
 
+	let bosses_unordered = new Map();
 	for (let boss in next_respawns) {
 		$(`#boss-${boss}-lastspawn`).empty();
 		$(`#boss-${boss}-respawn`).empty();
@@ -96,6 +95,10 @@ $(document).ready(function() {
 
 	insert_notification_link();
 	refresh_display();
+
+	// Always ensure we have fresh countdown values, especially on mobile.
+	// refresh_display decide if we also need to call the API.
+	window.addEventListener("focus", refresh_display);
 });
 
 setInterval(refresh_display, 60 * 1000);
