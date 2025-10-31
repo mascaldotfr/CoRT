@@ -5,6 +5,11 @@ require_once(__DIR__ . '/BossesRespawns.php');
 eheader_api("json");
 
 $bosses = new BossesRespawns();
-echo json_encode($bosses->getSchedule());
+
+if (isset($_GET["fake"]))
+	$schedule = $bosses->getSchedule(3, true);
+else
+	$schedule = $bosses->getSchedule();
+echo json_encode($schedule);
 
 ?>
