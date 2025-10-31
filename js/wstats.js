@@ -129,7 +129,12 @@ function table_factory(rows, selector, realm) {
 	$(selector).html(table.join(""));
 }
 
-async function display_stat() {
+async function display_stat(force = false) {
+	// The page is hidden, just do nothing; the focus event listener will
+	// update when needed
+	if (!force && document.hidden)
+		return;
+
 	let data = null;
 
 	try {
@@ -243,7 +248,17 @@ $(document).ready(function() {
 		$("#ws-index-list").append(`<li><a href="${l["id"]}">${l["txt"]}</a></li>`);
 	}
 
-	display_stat();
+	display_stat(true);
+	// Always ensure we have fresh data, particulary on mobile, with a 5s
+	// debounce
+	let last_focus = Date.now();
+	window.addEventListener("focus", () => {
+		const ts = Date.now();
+		if (ts - last_focus > 5000) {
+			display_stat(true);
+			last_focus = ts;
+		}
+	});
 });
 
 setInterval(display_stat, 60 * 1000);
