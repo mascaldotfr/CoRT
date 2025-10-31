@@ -237,7 +237,6 @@ $(document).ready(function() {
 		" " + _("Last updated:"));
 	insert_notification_link();
 
-
 	// initial display
 	const worker = new Worker("./js/libs/ticker.js");
 	// Warstatus is updated between :00 and :08, so fetch after that.
