@@ -99,6 +99,11 @@ $(document).ready(function() {
 	// Always ensure we have fresh countdown values, especially on mobile.
 	// refresh_display decide if we also need to call the API.
 	window.addEventListener("focus", refresh_display);
+	window.addEventListener("visibilitychange", () => {
+		// In case the page is not focused, but another UI element of it
+		if (!document.hidden)
+			refresh_display();
+	});
 });
 
 setInterval(refresh_display, 60 * 1000);

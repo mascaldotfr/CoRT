@@ -248,17 +248,21 @@ $(document).ready(function() {
 		$("#ws-index-list").append(`<li><a href="${l["id"]}">${l["txt"]}</a></li>`);
 	}
 
+
 	display_stat(true);
 	// Always ensure we have fresh data, particulary on mobile, with a 5s
 	// debounce
 	let last_focus = Date.now();
-	window.addEventListener("focus", () => {
+	function force_refresh() {
 		const ts = Date.now();
-		if (ts - last_focus > 5000) {
+		if (ts - last_focus > 5000 && !document.hidden) {
 			display_stat(true);
 			last_focus = ts;
 		}
-	});
+	}
+	window.addEventListener("focus", force_refresh);
+	// In case the page is not focused, but another UI element of it
+	window.addEventListener("visibilitychange", force_refresh);
 });
 
 setInterval(display_stat, 60 * 1000);
