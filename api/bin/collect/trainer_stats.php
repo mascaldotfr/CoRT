@@ -20,7 +20,6 @@ if (filesize($output_file) != 0 && file_exists($output_file) && (time() - filemt
     exit();
 }
 
-
 // Ensure completion if client close the connection
 ignore_user_abort(true);
 
@@ -191,7 +190,7 @@ foreach ($versions as $version) {
 				$notusing = $freq[0];
 				$percentage = 100 - ($notusing * 100) / $freqsum;
 			}
-			$api_dict[$version][$clas][$spell]["percentage"] = sprintf("%.2f", $percentage);
+			$api_dict[$version][$clas][$spell]["percentage"] = round($percentage, 2);
 		}
 	}
 }
