@@ -256,8 +256,8 @@ $(document).ready(function() {
 	function force_refresh() {
 		const ts = Date.now();
 		if (ts - last_focus > 5000 && !document.hidden) {
-			display_stat(true);
 			last_focus = ts;
+			display_stat(true);
 		}
 	}
 	window.addEventListener("focus", force_refresh);

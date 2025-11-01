@@ -253,10 +253,10 @@ $(document).ready(function() {
 	window.addEventListener("focus", () => {
 		const ts = Date.now();
 		if (ts - last_focus > 5000) {
-			display_wz();
 			last_focus = ts;
 			// We gotta tell the worker as well
 			worker.postMessage({"update_last_run": {"ts": ts}});
+			display_wz();
 		}
 	});
 });

@@ -8,6 +8,7 @@ let tformatter = null;
 
 // API data
 let data = null;
+let last_run = 0;
 
 async function get_data() {
 	try {
@@ -51,8 +52,15 @@ function date_difference_from_now(future_date) {
 async function feed_bz(init=false) {
 
 	let now = new Date();
-	let now_ts = now.getTime() / 1000;
+
+	// Prevent repeated execution if focus fires multiple times on wake-up
+	if (now.getTime() < last_run + 1000)
+		return;
+	else
+		last_run = now.getTime();
+
 	// Fetch API data only if needed
+	let now_ts = now.getTime() / 1000;
 	if ( data === null || (data["bzendsat"] != 0 && now_ts > data["bzendsat"]) || now_ts > data["bzbegin"][0] )
 		await get_data();
 

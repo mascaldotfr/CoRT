@@ -13,6 +13,7 @@ let next_respawns = null;
 let previous_respawns = null;
 let nextboss_ts = 0;
 let notified_10m = false;
+let last_run = 0;
 
 function unixstamp2human(unixstamp) {
 	return dformatter.format(new Date(unixstamp * 1000));
@@ -61,6 +62,14 @@ function display_next_respawn(boss) {
 }
 
 async function refresh_display() {
+
+	// Prevent repeated execution if focus fires multiple times on wake-up
+	let ts = Date.now();
+	if (ts < last_run + 1000)
+		return;
+	else
+		last_run = ts;
+
 	// Fetch API data only if needed
 	if (Date.now() / 1000 > nextboss_ts)
 		await get_next_respawns();
