@@ -1,5 +1,5 @@
 import {__api__urls} from "./api_url.js";
-import {$, insert_notification_link, mynotify} from "./libs/cortlibs.js";
+import {$, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Constants, TranslateForts, HumaniseEvents, Icons} from "./wztools/wztools.js";
 
@@ -237,26 +237,8 @@ $(document).ready(function() {
 		" " + _("Last updated:"));
 	insert_notification_link();
 
-	// initial display
-	const worker = new Worker("./js/libs/ticker.js");
-	// Warstatus is updated between :00 and :08, so fetch after that.
-	worker.postMessage({"init": {"start": 10, "end": 15}});
-	display_wz(true);
-	// On manual run, always update the last run timestamp!!!
-	worker.postMessage({"update_last_run": {"ts": Date.now()}});
-	// If it ticks, run this
-	worker.onmessage = display_wz;
+	const scheduler = new MyScheduler(10, 15, display_wz);
+	scheduler.force_run(true);
+	scheduler.start_scheduling();
 
-	// Always ensure we have fresh data, particulary on mobile, with a 5s
-	// debounce
-	let last_focus = Date.now();
-	window.addEventListener("focus", () => {
-		const ts = Date.now();
-		if (ts - last_focus > 5000) {
-			last_focus = ts;
-			// We gotta tell the worker as well
-			worker.postMessage({"update_last_run": {"ts": ts}});
-			display_wz();
-		}
-	});
 });

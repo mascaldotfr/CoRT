@@ -315,3 +315,37 @@ try {
 catch(_unused) { /* Unsupported by safari */ }
 if (__notifications_swsupport)
 	navigator.serviceWorker.register("sw.js");
+
+// Schedule minutely things. See /js/libs/ticker.js for code, and WZ/BZ/BOSSES for usage
+export class MyScheduler {
+	constructor(start, end, callback) {
+		this.start = start;
+		this.end = end;
+		this.callback = callback;
+		this.last_focus = Date.now();
+
+		// initial display
+		this.worker = new Worker("./js/libs/ticker.js");
+		this.worker.postMessage({"init": {"start": this.start, "end": this.end}});
+		// If it ticks, run this
+		this.worker.onmessage = this.callback;
+	}
+
+	start_scheduling() {
+		// Always ensure we have fresh data, particulary on mobile, with a 5s
+		// debounce
+		window.addEventListener("focus", () => {
+			const ts = Date.now();
+			if (ts - this.last_focus > 5000) {
+				this.last_focus = ts;
+				this.force_run();
+			}
+		});
+	}
+
+	force_run(...args) {
+		// On manual run, always update the last run timestamp before calling the callback
+		this.worker.postMessage({"update_last_run": {"ts": this.last_focus}});
+		this.callback(...args);
+	}
+}

@@ -1,14 +1,15 @@
 import {__api__urls} from "./api_url.js";
-import {$, insert_notification_link, mynotify, generate_calendar} from "./libs/cortlibs.js";
+import {$, insert_notification_link, mynotify, generate_calendar, MyScheduler} from "./libs/cortlibs.js";
+import {Time} from "./wztools/wztools.js";
 import {_} from "../data/i18n.js";
 
 // time and date formatters
 let dformatter = null;
 let tformatter = null;
+let time = new Time();
 
 // API data
 let data = null;
-let last_run = 0;
 
 async function get_data() {
 	try {
@@ -23,43 +24,10 @@ async function get_data() {
 
 let notified_10m = false;
 
-function future_date(in_day, at_hour) {
-	let d = new Date();
-	return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), parseInt(d.getUTCDate()) + parseInt(in_day),
-		        at_hour, 0, 0);
-}
-
-function mstohhmmss(ms) {
-	let hms = { "hours": 0, "minutes": 0, "seconds": 0 };
-	let seconds = ms / 1000;
-	hms.hours = Math.floor(seconds / 3600);
-	seconds -= hms.hours * 3600;
-	hms.minutes = Math.floor(seconds / 60);
-	seconds -= hms.minutes * 60;
-	hms.seconds = Math.floor(seconds);
-	for (let hms_element in hms) {
-		hms[hms_element] = String(hms[hms_element]).padStart(2, "0");
-	}
-	return hms;
-}
-
-function date_difference_from_now(future_date) {
-	let current_date = new Date();
-	future_date = new Date(future_date);
-	return mstohhmmss((future_date.getTime() - current_date.getTime()));
-}
-
-async function feed_bz(init=false) {
-
-	let now = new Date();
-
-	// Prevent repeated execution if focus fires multiple times on wake-up
-	if (now.getTime() < last_run + 1000)
-		return;
-	else
-		last_run = now.getTime();
+async function feed_bz() {
 
 	// Fetch API data only if needed
+	let now = new Date();
 	let now_ts = now.getTime() / 1000;
 	if ( data === null || (data["bzendsat"] != 0 && now_ts > data["bzendsat"]) || now_ts > data["bzbegin"][0] )
 		await get_data();
@@ -68,39 +36,37 @@ async function feed_bz(init=false) {
 	let next_bzs_end = data["bzend"];
 	let bz_on = data["bzon"];
 
+	// 1 minute offset due to minutely update, so actually 1 means 0
 	if (bz_on) {
-		let bz_ends_at = date_difference_from_now(data["bzendsat"] * 1000)
+		let bz_ends_at = time.timestamp_ago(60 + data["bzendsat"]);
 		$("#bz-countdown-status").html(`<span class="green bold">${_("ON")}</span>`);
-		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["hours"]}:${bz_ends_at["minutes"]}:${bz_ends_at["seconds"]}`);
-		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] <= 10 && bz_ends_at["minutes"] >= 1 &&
+		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["human"]}`);
+		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] <= 10 && bz_ends_at["minutes"] > 1 &&
 			notified_10m === false) {
 			notified_10m = true;
-			mynotify(_("BZ status"), `${_("BZ ending in")} ${bz_ends_at["minutes"]}${_("m")}`, "bz");
+			mynotify(_("BZ status"), `${_("BZ ending in")} ${bz_ends_at["human"]}`, "bz");
 		}
-		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] == 0 && bz_ends_at["seconds"] == 0) {
+		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] == 1) {
 			notified_10m = false;
-			mynotify(_("BZ status"), _("BZ is closed!"), "bz");
+			mynotify(_("BZ status"), _("BZ is about to end!"), "bz");
 		}
 	}
 	else {
 		$("#bz-countdown-status").html(`<span class="red bold">${_("OFF")}</span>`);
-		let next_bz_in = date_difference_from_now(next_bzs_begin[0] * 1000);
-		$("#bz-countdown-countdown").text(`${_("Next BZ in")} ${next_bz_in["hours"]}:${next_bz_in["minutes"]}:${next_bz_in["seconds"]}`);
-		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] >= 1 &&
+		let next_bz_in = time.timestamp_ago(60 + next_bzs_begin[0]);
+		$("#bz-countdown-countdown").text(`${_("Next BZ in")} ${next_bz_in["human"]}`);
+		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] > 1 &&
 		    notified_10m === false) {
 			notified_10m = true;
-			mynotify(_("BZ status"), `${_("BZ starting in")} ${next_bz_in["minutes"]}${_("m")}`, "bz");
+			mynotify(_("BZ status"), `${_("BZ starting in")} ${next_bz_in["human"]}`, "bz");
 		}
-		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] == 0 && next_bz_in["seconds"] == 0) {
+		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] == 1) {
 			notified_10m = false;
-			mynotify(_("BZ status"), _("BZ started!"), "bz");
+			mynotify(_("BZ status"), _("BZ is about to start!"), "bz");
 		}
 
 	}
 
-	// refresh future BZs only hourly
-	if (now.getMinutes() + now.getSeconds() != 0 && init == false)
-		return;
 	// display future BZs
 	let bz_next_future = "";
 	for (let next_bz in next_bzs_begin) {
@@ -133,7 +99,8 @@ $(document).ready(function() {
 	});
 
 	insert_notification_link();
-	feed_bz(true);
+	const scheduler = new MyScheduler(1, 5, feed_bz);
+	scheduler.force_run();
+	scheduler.start_scheduling();
 });
 
-setInterval(feed_bz, 1000);

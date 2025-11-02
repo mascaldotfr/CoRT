@@ -141,20 +141,20 @@ export const __i18n__ = {
 		"es": "La BZ comienza en",
 		"de": "Die BZ beggint in"
 	},
-	"BZ started!": {
-		"fr": "La BZ a commencé !",
-		"es": "La BZ ha comenzado!",
-		"de": "Die BZ hat begonnen!"
+	"BZ is about to start!": {
+		"fr": "La BZ va bientôt commencer !",
+		"es": "La BZ esta a punto de comenzar!",
+		"de": "Die BZ beginnt gleich!"
 	},
 	"BZ ending in": {
 		"fr": "La BZ se termine dans",
 		"es": "La BZ termina en",
 		"de": "Die BZ endet in"
 	},
-	"BZ is closed!": {
-		"fr": "La BZ est terminée",
-		"es": "La BZ ha terminado",
-		"de": "Die BZ ist vorbei"
+	"BZ is about to end!": {
+		"fr": "La BZ est sur le point de se terminer !",
+		"es": "La BZ esta a punto de terminar!",
+		"de": "Die BZ ist kurz vor dem Ende!"
 	},
 	"Hovering your mouse or clicking (on mobile) on a skill icon will show its description.":
 	{

@@ -1,5 +1,5 @@
 import {__api__urls} from "./api_url.js";
-import {$, generate_calendar, insert_notification_link, mynotify} from "./libs/cortlibs.js";
+import {$, generate_calendar, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Time} from "./wztools/wztools.js";
 
@@ -13,18 +13,40 @@ let next_respawns = null;
 let previous_respawns = null;
 let nextboss_ts = 0;
 let notified_10m = false;
-let last_run = 0;
 
 function unixstamp2human(unixstamp) {
 	return dformatter.format(new Date(unixstamp * 1000));
 }
 
+function minute_floor(v) {
+	if (Array.isArray(v)) {
+		return v.map(function(ts) {
+			return Math.floor(ts / 60) * 60;
+		});
+	}
+	if (typeof v === "number") {
+		return Math.floor(v / 60) * 60;
+	}
+	if (typeof v === "object" && v !== null && !Array.isArray(v)) {
+		const result = {};
+		for (var key in v) {
+			if (v.hasOwnProperty(key) && typeof v[key] === "number")
+				result[key] = Math.floor(v[key] / 60) * 60;
+			else
+				 // keep non-numbers as-is
+				result[key] = v[key];
+		}
+		return result;
+	}
+	throw new TypeError("minute_floor: expected number, array, or plain object");
+}
+
 async function get_next_respawns() {
 	try {
 		let data = await $().getJSON(__api__urls["bosses"]);
-		next_respawns = data["next_spawns"];
-		previous_respawns = data["prev_spawns"];
-		nextboss_ts = data["next_boss_ts"];
+		next_respawns = minute_floor(data["next_spawns"]);
+		previous_respawns = minute_floor(data["prev_spawns"]);
+		nextboss_ts = minute_floor(data["next_boss_ts"]);
 		$("#boss-error").empty();
 	}
 	catch (error) {
@@ -33,10 +55,11 @@ async function get_next_respawns() {
 	}
 }
 
+// 1 minute offset due to minutely update, so actually 1 means 0
 function display_next_respawn(boss) {
 	$(`#boss-${boss}-lastspawn`).text(`${_("Last respawn")}:
 		${unixstamp2human(previous_respawns[boss])}`);
-	let next_respawn_in = time.timestamp_ago(next_respawns[boss][0]);
+	let next_respawn_in = time.timestamp_ago(60 + next_respawns[boss][0]);
 	let next_respawns_html = `<li class="red bold">${_("Next respawn in")} ${next_respawn_in.human}</li>`;
 	for (let respawn in next_respawns[boss]) {
 		let calendar = generate_calendar(next_respawns[boss][respawn], boss, 900);
@@ -48,13 +71,13 @@ function display_next_respawn(boss) {
 	$(`#boss-${boss}-respawn`).append(next_respawns_html);
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
-		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] >= 1 &&
+		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] > 1 &&
 		    notified_10m === false) {
 			mynotify(_("Bosses status"), `${bossname}: ${_("Next respawn in")} ` +
 				 `${next_respawn_in["minutes"]}${_("m")}`, "bosses");
 			notified_10m = true;
 		}
-		else if (next_respawn_in["minutes"] == 0) {
+		else if (next_respawn_in["minutes"] == 1 ) {
 			mynotify(_("Bosses status"),`${bossname} ${_("should appear very soon!")}`, "bosses");
 			notified_10m = false;
 		}
@@ -62,13 +85,6 @@ function display_next_respawn(boss) {
 }
 
 async function refresh_display() {
-
-	// Prevent repeated execution if focus fires multiple times on wake-up
-	let ts = Date.now();
-	if (ts < last_run + 1000)
-		return;
-	else
-		last_run = ts;
 
 	// Fetch API data only if needed
 	if (Date.now() / 1000 > nextboss_ts)
@@ -103,16 +119,7 @@ $(document).ready(function() {
 	});
 
 	insert_notification_link();
-	refresh_display();
-
-	// Always ensure we have fresh countdown values, especially on mobile.
-	// refresh_display decide if we also need to call the API.
-	window.addEventListener("focus", refresh_display);
-	window.addEventListener("visibilitychange", () => {
-		// In case the page is not focused, but another UI element of it
-		if (!document.hidden)
-			refresh_display();
-	});
+	const scheduler = new MyScheduler(1, 5, refresh_display);
+	scheduler.force_run(true);
+	scheduler.start_scheduling();
 });
-
-setInterval(refresh_display, 60 * 1000);
