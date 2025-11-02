@@ -59,7 +59,7 @@ async function get_next_respawns() {
 function display_next_respawn(boss) {
 	$(`#boss-${boss}-lastspawn`).text(`${_("Last respawn")}:
 		${unixstamp2human(previous_respawns[boss])}`);
-	let next_respawn_in = time.timestamp_ago(60 + next_respawns[boss][0]);
+	let next_respawn_in = time.timestamp_ago(next_respawns[boss][0], false, true);
 	let next_respawns_html = `<li class="red bold">${_("Next respawn in")} ${next_respawn_in.human}</li>`;
 	for (let respawn in next_respawns[boss]) {
 		let calendar = generate_calendar(next_respawns[boss][respawn], boss, 900);
