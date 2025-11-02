@@ -15,7 +15,7 @@ discord server (#cort-updates channel).
 
 ## Prepare CoRT
 
-Run these commands (you can also checkout [misc/noapi_auto](this script) if you
+Run these commands (you can also checkout [this script](misc/noapi_auto) if you
 want to automate it):
 
 ```shell
