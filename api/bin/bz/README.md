@@ -6,6 +6,16 @@ This page documents the BZ API endpoint.
 
 https://cort.thebus.top/api/bin/bz/bz.php
 
+## Parameters
+
+### `fake`
+
+https://cort.thebus.top/api/bin/bz/bz.php?fake
+
+If a `fake` parameter is provided, then BZ will be ON then OFF for 15 minutes
+respectively. TK and server won't be available. It's meant for testing and
+development.
+
 ## Response format
 
 See `/js/bz.js` for an example.
