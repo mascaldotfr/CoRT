@@ -17,12 +17,9 @@ class BossesRespawns {
 		);
 
 		if ($fake) {
-			$epoch = new DateTime("1 hour ago")->getTimestamp();
 			$first_respawns = array(
-				"thorkul" => 	$epoch + 180,
-				"evendim" => 	$epoch + 120,
-				"daen" => 	$epoch + 60,
-				"server" => 	1761732000 + 37 * 60
+				"evendim" => 	900,
+				"daen" => 	1800,
 			);
 		}
 
@@ -43,8 +40,8 @@ class BossesRespawns {
 		$now = time();
 
 		// calculate future respawns
-		// let standard bosses respawn minutely if we want fake respawns
-		$respawn_offset = $fake ? .05 : 109;
+		// let standard bosses respawn every 30 minutes if we want fake respawns
+		$respawn_offset = $fake ? .5 : 109;
 		foreach ($first_respawns as $boss => $tried_respawn_ts) {
 			if ($boss === "server")
 				$respawn_time = 7 * 24 * 3600; // 1 week

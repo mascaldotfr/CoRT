@@ -12,9 +12,9 @@ https://cort.thebus.top/api/bin/bosses/bosses.php
 
 https://cort.thebus.top/api/bin/bosses/bosses.php?fake
 
-If a `fake` parameter is provided, then the 3 standard bosses will respawn
-every 3 minutes, at 1 minute from each others. It's meant for testing and
-development.
+If a `fake` parameter is provided, then Daen and Evendim will respawn every 30
+minutes, at 15 minutes from each other. TK and server won't be available. It's
+meant for testing and development.
 
 ## Response format
 
