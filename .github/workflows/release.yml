@@ -45,7 +45,7 @@ jobs:
             To setup CoRT on managed webhosting or integrating it on your own server, use **CoRT-${{ github.ref_name }}.tar.gz** instead of the source code.
 
             ### Changelog
-          draft: false
+          draft: true
           prerelease: false
           generate_release_notes: true
           files: ${{ runner.temp }}/CoRT-${{ github.ref_name }}.tar.gz
