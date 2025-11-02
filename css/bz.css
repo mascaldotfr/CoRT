@@ -14,10 +14,14 @@
 	line-height: 1.8em;
 }
 #bz-next {
-	min-height: 15em;
+	min-height: 12em;
+	display: grid;
+	place-items: center;
 }
 @media(max-width:799px) {
 	#bz-countdown {
-		min-height: 6.5em;
+		min-height: 5em;
+		display: grid;
+		place-items: center;
 	}
 }
