@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Deploys CORT using the official API to a given directory
+# Requires wget, curl and jq
+
+set -e
+
+# --- CONFIGURATION STARTS HERE
+
+# Where CoRT should be
+TARGET="/dev/shm/CoRT"
+# The domain name you'll use to serve CoRT. By default http://localhost, note
+# that it means 127.0.0.1 won't have access to the API.
+DOMAIN="localhost"
+
+# --- CONFIGURATION ENDS HERE
+
+printf "===> Searching for the last release... "
+V=`curl -s https://api.github.com/repos/mascaldotfr/CoRT/tags | jq -r '.[0].name'`
+echo "${V}"
+
+
+echo "===> Getting the tarball release"
+cd /tmp
+wget -qO- "https://github.com/mascaldotfr/CoRT/releases/download/${V}/CoRT-${V}.tar.gz" | tar xz
+
+if test "${DOMAIN}" != "localhost"; then
+	echo "===> Make your CoRT use the official API"
+	sed -i'' 's!\(.*let frontend_with_no_api =\) .*!\1 ["'${DOMAIN}'"];!' CoRT-${V}/js/api_url.js
+fi
+
+
+echo "===> Overwriting the current CoRT"
+rm -rf "${TARGET}"
+mv /tmp/CoRT-${V} "${TARGET}"
