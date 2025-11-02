@@ -87,6 +87,7 @@ $(document).ready(function() {
 	document.title = "CoRT - " + _("BZ status");
 	$("#title").text(_("BZ status"));
 	$("#bz-next-title").text(_("Next BZ:"));
+	$("#bz-info").text(_("The page refreshes itself every minute."));
 
 	let tz = localStorage.getItem("tz");
 	let lang = localStorage.getItem("lang");
