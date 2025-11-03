@@ -28,7 +28,7 @@
 	margin-left: -4em;
 	text-align: center;
 }
-@media (max-width:799px) {
+@media (max-width:512px) {
 	#boss-list img {
 		width: 64px;
 		margin-left: initial;
