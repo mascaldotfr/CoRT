@@ -13,6 +13,7 @@ let next_respawns = null;
 let previous_respawns = null;
 let nextboss_ts = 0;
 let notified_10m = false;
+let last_notification_ts = 0;
 
 function unixstamp2human(unixstamp) {
 	return dformatter.format(new Date(unixstamp * 1000));
@@ -75,10 +76,16 @@ function display_next_respawn(boss) {
 		    notified_10m === false) {
 			mynotify(_("Bosses status"), `${bossname}: ${_("Next respawn in")} ` +
 				 `${next_respawn_in["minutes"]}${_("m")}`, "bosses");
+			last_notification_ts = Date.now();
 			notified_10m = true;
 		}
-		else if (next_respawn_in["minutes"] == 1 ) {
-			mynotify(_("Bosses status"),`${bossname} ${_("should appear very soon!")}`, "bosses");
+		else if (next_respawn_in["minutes"] == 1) {
+			// Avoid notification spam on focus during the last minute
+			const now = Date.now();
+			if (now > last_notification_ts + 60000) {
+				mynotify(_("Bosses status"),`${bossname} ${_("should appear very soon!")}`, "bosses");
+				last_notification_ts = now;
+			}
 			notified_10m = false;
 		}
 	}
