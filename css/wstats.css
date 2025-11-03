@@ -165,11 +165,13 @@ svg.ct-chart-donut g text.ct-label {
 		min-height: 20em;
 		min-width: 80vw;
 	}
-	#ws-index {
-		min-height: 24em;
-	}
 	#ws-container-text .ws-card {
 		gap: 0;
+	}
+}
+@media (max-width: 512px) {
+	#ws-index {
+		min-height: 24em;
 	}
 }
 @media (min-width: 800px) and (max-width: 1400px) {
