@@ -57,6 +57,12 @@ select {
 	/* let us style <select> on webkit browsers */
 	-webkit-appearance: none;
 }
+summary {
+	  list-style: none;
+}
+summary::-webkit-details-marker {
+    display: none;
+}
 .card {
 	background: var(--card_background);
 	border-radius: 5px;
@@ -95,12 +101,12 @@ header {
 	display: inline-block;
 	vertical-align: middle;
 }
-.menu-btn, #menu-lang-switch, #menu-external-switch {
+.menu-btn {
 	color: var(--foreground);
 	display: none;
 	width: 100%;
 }
-.menuitem > a {
+.menuitem > a, .menudetails {
 	background: var(--tooltip_background);
 	text-decoration: none;
 	color: var(--foreground);
@@ -108,54 +114,23 @@ header {
 	padding: var(--default_margin_padding);
 	border-radius: 5px;
 	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
+}
+.menudetails ul {
+	margin-top: .75em;
+	position: absolute;
+	background: var(--dialog_background);
+	border: 1px solid var(--foreground);
+	box-shadow: none;
+}
+.menudetails li, .menudetails ul {
+	list-style-type: none;
+	padding: .5em;
+	margin-left: -.5em;
 }
 .menuitem > a:hover {
 	background: var(--dialog_background);
 	color: var(--ahover);
 	box-shadow: 0 .1em .3em rgba(200, 200, 200, .9);
-}
-#menu-lang-switch:checked ~ #menu-lang-list,
-#menu-external-switch:checked ~ #menu-external-list {
-	display: block;
-}
-#menu-external-switch:not(:checked) ~ #menu-external-list,
-#menu-lang-switch:not(:checked) ~ #menu-lang-list {
-	display: none;
-}
-#menu-lang, #menu-external {
-	background: var(--tooltip_background);
-	padding: var(--default_margin_padding);
-	border-radius: 5px;
-	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
-}
-#menu-lang-current, #menu-external-current {
-	display: block;
-}
-#menu-lang a, #menu-external a {
-	text-decoration: none;
-	display:block;
-	text-align:left;
-	color: var(--foreground);
-	padding: var(--default_margin_padding);
-	border-radius: 5px;
-}
-#menu-lang-list, #menu-external-list {
-	margin-top: .75em;
-	display: none;
-	position: absolute;
-	background: var(--tooltip_background);
-	width: 8em;
-	border-radius: 5px;
-	border: 1px solid var(--foreground);
-}
-#menu-external-list a:hover {
-	font-weight: bold;
-}
-#menu-external-list {
-	width: auto;
-}
-.langoption:hover {
-	background: var(--dialog_background);
 }
 #footer {
 	margin-top: 2em;
@@ -216,14 +191,15 @@ h3 {
 	.menu-btn {
 		display: inline-block;
 	}
-	#menu-lang {
-		text-align: center;
-	}
 	#tz {
 		width: 100%;
 	}
 	#tztitle {
 		text-align: left;
+	}
+	.menudetails ul {
+		position: relative;
+		margin-left: 0;
 	}
 }
 

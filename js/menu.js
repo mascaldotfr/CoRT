@@ -35,21 +35,18 @@ let __menu_content = `
 		<li class="menuitem bold"><a href="wevents.html">${__menu_icons["wevents"]} ${_("WZ events")}</a></li>
 		<li class="menuitem bold"><a href="wstats.html">${__menu_icons["wstats"]} ${_("WZ statistics")}</a></li>
 		<li class="menuitem bold"><a href="tstats.html"> ${__menu_icons["tstats"]} ${_("Trainer statistics")}</a></li>
-		<li class="menuitem">
-		<div id="menu-external">
-			<input type="checkbox" id="menu-external-switch">
-			<label for="menu-external-switch" id="menu-external-current" class="menuitem">${__menu_icons["external"]} ${_("External Tools")}</label>
-			<div id="menu-external-list" class="menu-external-list">
-				 <a href="https://poludnica.shinyapps.io/rcalc/" target="_blank" style="color:#d2e2ff">${__menu_icons["armor"]} ${_("Armor calculator")}</a>
-			</div>
-		</div>
+		<li>
+			<details class="menudetails">
+				<summary>${__menu_icons["external"]} ${_("External Tools")}</summary>
+				<ul class="menudetails">
+					<li>${__menu_icons["armor"]}&nbsp;<a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">${_("Armor calculator")}</a>
+				</ul>
+			</details>
 		</li>
-		<li class="menuitem">
-		<div id="menu-lang">
-			<input type="checkbox" id="menu-lang-switch">
-			<label for="menu-lang-switch" id="menu-lang-current"></label>
-			<div id="menu-lang-list" class="menu-lang-list"></div>
-		</div>
+		<li>
+			<details class="menudetails">
+			<summary id="menu-lang-current"></summary>
+			<ul class="menudetails" id="menu-lang-list"></ul>
 		</li>
 		</ul>
 	</header>
@@ -64,7 +61,7 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20251104.205001
+	<p> <!--VERSION-->Version: 20251104.231241
 `;
 
 $(document).ready(function() {
@@ -78,31 +75,30 @@ $(document).ready(function() {
 		"es": "ES",
 		"fr": "FR"
 	};
-	// jshint -W083
-	for (let l in langs) {
-		$("#menu-lang-list").append(`
-			<a href="#" class="langoption" id="menu-lang-${l}">
-				${__menu_flags[l]} ${langs[l]}
-			</a>`);
-		$(`#menu-lang-${l}`).on("click", function () {
-			localStorage.setItem("lang", l);
-			window.location.reload();
-		});
-	}
 
 	let currentlang = "en";
 	let storedlang = localStorage.getItem("lang");
 	if (__i18n__.supported_lang.includes(storedlang))
 		currentlang = storedlang;
 	$("#menu-lang-current").text(__menu_flags[currentlang] + " " + langs[currentlang]);
-	// Make dropdowns works as dropdown
-	for (let d of ["menu-lang", "menu-external"]) {
-		$("body").on("click", function(event) {
-			let prevent_in = [d + "-list", d + "-current", d + "-switch"];
-			if (!prevent_in.includes(event.target.id))
-				$(`#${d}-list`).css("display", "none");
-			else
-				$(`#${d}-list`).css("display", "block");
+	// Make details dropdowns close on outside click
+	document.addEventListener("click", (e) => {
+		document.querySelectorAll("details.menudetails[open]").forEach((el) => {
+			if (!el.contains(e.target)) {
+				el.removeAttribute("open");
+			}
+		});
+	});
+	// jshint -W083
+	for (let l in langs) {
+		// Hide current language
+		if (l == currentlang)
+			continue;
+		$("#menu-lang-list").append(`
+			<li class="langoption" id="menu-lang-${l}">${__menu_flags[l]}&nbsp;<a href="#">${langs[l]}</a>`);
+		$(`#menu-lang-${l}`).on("click", function () {
+			localStorage.setItem("lang", l);
+			window.location.reload();
 		});
 	}
 
