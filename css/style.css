@@ -95,7 +95,7 @@ header {
 	display: inline-block;
 	vertical-align: middle;
 }
-.menu-btn, #menu-lang-switch {
+.menu-btn, #menu-lang-switch, #menu-external-switch {
 	color: var(--foreground);
 	display: none;
 	width: 100%;
@@ -114,18 +114,24 @@ header {
 	color: var(--ahover);
 	box-shadow: 0 .1em .3em rgba(200, 200, 200, .9);
 }
-#menu-lang-switch:checked ~ #menu-lang-list { display: block; }
-#menu-lang-switch:not(:checked) ~ #menu-lang-list { display: none; }
-#menu-lang {
+#menu-lang-switch:checked ~ #menu-lang-list,
+#menu-external-switch:checked ~ #menu-external-list {
+	display: block;
+}
+#menu-external-switch:not(:checked) ~ #menu-external-list,
+#menu-lang-switch:not(:checked) ~ #menu-lang-list {
+	display: none;
+}
+#menu-lang, #menu-external {
 	background: var(--tooltip_background);
 	padding: var(--default_margin_padding);
 	border-radius: 5px;
 	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
 }
-#menu-lang-current {
+#menu-lang-current, #menu-external-current {
 	display: block;
 }
-#menu-lang a {
+#menu-lang a, #menu-external a {
 	text-decoration: none;
 	display:block;
 	text-align:left;
@@ -133,7 +139,7 @@ header {
 	padding: var(--default_margin_padding);
 	border-radius: 5px;
 }
-#menu-lang-list {
+#menu-lang-list, #menu-external-list {
 	margin-top: .75em;
 	display: none;
 	position: absolute;
@@ -141,6 +147,12 @@ header {
 	width: 8em;
 	border-radius: 5px;
 	border: 1px solid var(--foreground);
+}
+#menu-external-list a:hover {
+	font-weight: bold;
+}
+#menu-external-list {
+	width: auto;
 }
 .langoption:hover {
 	background: var(--dialog_background);

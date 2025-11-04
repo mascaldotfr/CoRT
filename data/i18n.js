@@ -45,6 +45,11 @@ export const __i18n__ = {
 		"es": "Stats del entrenador",
 		"de": "Skilltrainer-Statistik"
 	},
+	"External Tools": {
+		"fr": "Outils externes",
+		"es": "Herramientas externas",
+		"de": "Externe Werkzeuge"
+	},
 	"Armor calculator":
 	{
 		"fr": "Calcul d'armure",

@@ -2,7 +2,7 @@ import {__i18n__, _} from "../data/i18n.js";
 import {$, create_tz_list} from "./libs/cortlibs.js";
 import {__api__urls} from "./api_url.js";
 
-let __menu_external_link = `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24"><path stroke="#CCC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5H8.2c-1.12 0-1.681 0-2.108.218a2 2 0 0 0-.874.874C5 6.52 5 7.08 5 8.2v7.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.427.218.987.218 2.105.218h7.606c1.118 0 1.677 0 2.104-.218.376-.192.683-.498.875-.875.218-.427.218-.987.218-2.104V14m1-5V4m0 0h-5m5 0-7 7"/></svg>`;
+let __menu_external_link = `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24"><path stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 5H8.2c-1.12 0-1.681 0-2.108.218a2 2 0 0 0-.874.874C5 6.52 5 7.08 5 8.2v7.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.427.218.987.218 2.105.218h7.606c1.118 0 1.677 0 2.104-.218.376-.192.683-.498.875-.875.218-.427.218-.987.218-2.104V14m1-5V4m0 0h-5m5 0-7 7"/></svg>`;
 let __menu_flags = {
 	"en": `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" viewBox="0 0 36 36"><path fill="#00247D" d="M0 9.059V13h5.628zM4.664 31H13v-5.837zM23 25.164V31h8.335zM0 23v3.941L5.63 23zM31.337 5H23v5.837zM36 26.942V23h-5.631zM36 13V9.059L30.371 13zM13 5H4.664L13 10.837z"/><path fill="#CF1B2B" d="M25.14 23l9.712 6.801c.471-.479.808-1.082.99-1.749L28.627 23H25.14zM13 23h-2.141l-9.711 6.8c.521.53 1.189.909 1.938 1.085L13 23.943V23zm10-10h2.141l9.711-6.8c-.521-.53-1.188-.909-1.937-1.085L23 12.057V13zm-12.141 0L1.148 6.2C.677 6.68.34 7.282.157 7.949L7.372 13h3.487z"/><path fill="#EEE" d="M36 21H21v10h2v-5.836L31.335 31H32c1.117 0 2.126-.461 2.852-1.199L25.14 23h3.487l7.215 5.052c.093-.337.158-.686.158-1.052v-.058L30.369 23H36v-2zM0 21v2h5.63L0 26.941V27c0 1.091.439 2.078 1.148 2.8l9.711-6.8H13v.943l-9.914 6.941c.294.07.598.116.914.116h.664L13 25.163V31h2V21H0zM36 9c0-1.091-.439-2.078-1.148-2.8L25.141 13H23v-.943l9.915-6.942C32.62 5.046 32.316 5 32 5h-.663L23 10.837V5h-2v10h15v-2h-5.629L36 9.059V9zM13 5v5.837L4.664 5H4c-1.118 0-2.126.461-2.852 1.2l9.711 6.8H7.372L.157 7.949C.065 8.286 0 8.634 0 9v.059L5.628 13H0v2h15V5h-2z"/><path fill="#CF1B2B" d="M21 15V5h-6v10H0v6h15v10h6V21h15v-6z"/></svg>`,
 	"de": `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" viewBox="0 0 36 36"><path fill="#FFCD05" d="M0 27c0 2.209 1.791 4 4 4h28c2.209 0 4-1.791 4-4v-4H0v4z"/><path fill="#ED1F24" d="M0 14h36v9H0z"/><path fill="#141414" d="M32 5H4C1.791 5 0 6.791 0 9v5h36V9c0-2.209-1.791-4-4-4z"/></svg>`,
@@ -19,6 +19,7 @@ let __menu_icons = {
 	"wstats": `
 <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" viewBox="0 0 36 36"><path fill="#CCD6DD" d="M31 2H5C3.343 2 2 3.343 2 5v26c0 1.657 1.343 3 3 3h26c1.657 0 3-1.343 3-3V5c0-1.657-1.343-3-3-3z"/><path fill="#E1E8ED" d="M31 1H5C2.791 1 1 2.791 1 5v26c0 2.209 1.791 4 4 4h26c2.209 0 4-1.791 4-4V5c0-2.209-1.791-4-4-4zm0 2c1.103 0 2 .897 2 2v4h-6V3h4zm-4 16h6v6h-6v-6zm0-2v-6h6v6h-6zM25 3v6h-6V3h6zm-6 8h6v6h-6v-6zm0 8h6v6h-6v-6zM17 3v6h-6V3h6zm-6 8h6v6h-6v-6zm0 8h6v6h-6v-6zM3 5c0-1.103.897-2 2-2h4v6H3V5zm0 6h6v6H3v-6zm0 8h6v6H3v-6zm2 14c-1.103 0-2-.897-2-2v-4h6v6H5zm6 0v-6h6v6h-6zm8 0v-6h6v6h-6zm12 0h-4v-6h6v4c0 1.103-.897 2-2 2z"/><path fill="#5C913B" d="M13 33H7V16c0-1.104.896-2 2-2h2c1.104 0 2 .896 2 2v17z"/><path fill="#3B94D9" d="M29 33h-6V9c0-1.104.896-2 2-2h2c1.104 0 2 .896 2 2v24z"/><path fill="#DD2E44" d="M21 33h-6V23c0-1.104.896-2 2-2h2c1.104 0 2 .896 2 2v10z"/></svg>`,
 	"tstats": `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" viewBox="0 0 36 36"><path fill="#CCD6DD" d="M31 2H5C3.343 2 2 3.343 2 5v26c0 1.657 1.343 3 3 3h26c1.657 0 3-1.343 3-3V5c0-1.657-1.343-3-3-3z"/><path fill="#E1E8ED" d="M31 1H5C2.791 1 1 2.791 1 5v26c0 2.209 1.791 4 4 4h26c2.209 0 4-1.791 4-4V5c0-2.209-1.791-4-4-4zm0 2c1.103 0 2 .897 2 2v4h-6V3h4zm-4 16h6v6h-6v-6zm0-2v-6h6v6h-6zM25 3v6h-6V3h6zm-6 8h6v6h-6v-6zm0 8h6v6h-6v-6zM17 3v6h-6V3h6zm-6 8h6v6h-6v-6zm0 8h6v6h-6v-6zM3 5c0-1.103.897-2 2-2h4v6H3V5zm0 6h6v6H3v-6zm0 8h6v6H3v-6zm2 14c-1.103 0-2-.897-2-2v-4h6v6H5zm6 0v-6h6v6h-6zm8 0v-6h6v6h-6zm12 0h-4v-6h6v4c0 1.103-.897 2-2 2z"/><path fill="#DD2E44" d="M4.998 33c-.32 0-.645-.076-.946-.239-.973-.523-1.336-1.736-.813-2.709l7-13c.299-.557.845-.939 1.47-1.031.626-.092 1.258.118 1.705.565l6.076 6.076 9.738-18.59c.512-.978 1.721-1.357 2.699-.843.979.512 1.356 1.721.844 2.7l-11 21c-.295.564-.841.953-1.47 1.05-.627.091-1.266-.113-1.716-.563l-6.1-6.099-5.724 10.631C6.4 32.619 5.71 33 4.998 33z"/></svg>`,
+	"external": `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" xml:space="preserve" width="800" height="800" version="1.0" viewBox="0 0 64 64"><path fill="#394240" d="M32 0C14.328 0 0 14.328 0 32s14.328 32 32 32 32-14.328 32-32S49.672 0 32 0m23.641 28h-7.84c-.668-6.676-3.004-12.848-6.551-18.148A24.02 24.02 0 0 1 55.641 28M32 53.043c-4.121-4.68-6.922-10.539-7.738-17.043h15.477c-.817 6.504-3.618 12.363-7.739 17.043M24.262 28c.816-6.504 3.617-12.363 7.738-17.043 4.121 4.68 6.922 10.539 7.738 17.043zM22.75 9.852c-3.547 5.3-5.883 11.472-6.551 18.148h-7.84A24.02 24.02 0 0 1 22.75 9.852M8.359 36h7.84c.668 6.676 3.004 12.848 6.551 18.148A24.02 24.02 0 0 1 8.359 36M41.25 54.148c3.547-5.301 5.883-11.473 6.551-18.148h7.84A24.02 24.02 0 0 1 41.25 54.148"/><g fill="#45AAB8"><path d="M55.641 28A24.02 24.02 0 0 0 41.25 9.852c3.547 5.301 5.883 11.473 6.551 18.148zM32 53.043c4.121-4.68 6.922-10.539 7.738-17.043H24.262c.816 6.504 3.617 12.363 7.738 17.043M24.262 28h15.477c-.817-6.504-3.618-12.363-7.739-17.043-4.121 4.68-6.922 10.539-7.738 17.043M8.359 28h7.84c.668-6.676 3.004-12.848 6.551-18.148A24.02 24.02 0 0 0 8.359 28M8.359 36A24.02 24.02 0 0 0 22.75 54.148c-3.547-5.3-5.883-11.472-6.551-18.148zM41.25 54.148A24.02 24.02 0 0 0 55.641 36h-7.84c-.668 6.676-3.004 12.848-6.551 18.148"/></g></svg>`,
 	"armor": `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" viewBox="0 0 36 36"><path fill="#CCD6DD" d="M33 3c-7-3-15-3-15-3S10 0 3 3C0 18 3 31 18 36c15-5 18-18 15-33z"/><path fill="#55ACEE" d="M18 33.884C6.412 29.729 1.961 19.831 4.76 4.444 11.063 2.029 17.928 2 18 2c.071 0 6.958.04 13.24 2.444 2.799 15.387-1.652 25.285-13.24 29.44z"/><path fill="#269" d="M31.24 4.444C24.958 2.04 18.071 2 18 2v31.884c11.588-4.155 16.039-14.053 13.24-29.44z"/></svg>`
 };
 
@@ -33,10 +34,16 @@ let __menu_content = `
 		<li class="menuitem bold"><a href="bz.html">${__menu_icons["bz"]} ${_("BZ status")}</a></li>
 		<li class="menuitem bold"><a href="wevents.html">${__menu_icons["wevents"]} ${_("WZ events")}</a></li>
 		<li class="menuitem bold"><a href="wstats.html">${__menu_icons["wstats"]} ${_("WZ statistics")}</a></li>
-		<li class="menuitem"><a href="tstats.html"> ${__menu_icons["tstats"]} ${_("Trainer statistics")}</a></li>
-		<li class="menuitem"><a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">
-		${__menu_icons["armor"]} ${_("Armor calculator")}
-		${__menu_external_link}</a></li>
+		<li class="menuitem bold"><a href="tstats.html"> ${__menu_icons["tstats"]} ${_("Trainer statistics")}</a></li>
+		<li class="menuitem">
+		<div id="menu-external">
+			<input type="checkbox" id="menu-external-switch">
+			<label for="menu-external-switch" id="menu-external-current" class="menuitem">${__menu_icons["external"]} ${_("External Tools")}</label>
+			<div id="menu-external-list" class="menu-external-list">
+				 <a href="https://poludnica.shinyapps.io/rcalc/" target="_blank" style="color:#d2e2ff">${__menu_icons["armor"]} ${_("Armor calculator")}</a>
+			</div>
+		</div>
+		</li>
 		<li class="menuitem">
 		<div id="menu-lang">
 			<input type="checkbox" id="menu-lang-switch">
@@ -57,7 +64,7 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20251103.214136
+	<p> <!--VERSION-->Version: 20251104.205001
 `;
 
 $(document).ready(function() {
@@ -88,13 +95,16 @@ $(document).ready(function() {
 	if (__i18n__.supported_lang.includes(storedlang))
 		currentlang = storedlang;
 	$("#menu-lang-current").text(__menu_flags[currentlang] + " " + langs[currentlang]);
-	$("body").on("click", function(event) {
-		let prevent_in = ["menu-lang-list", "menu-lang-current", "menu-lang-switch"];
-		if (!prevent_in.includes(event.target.id))
-			$("#menu-lang-list").css("display", "none");
-		else
-			$("#menu-lang-list").css("display", "block");
-	});
+	// Make dropdowns works as dropdown
+	for (let d of ["menu-lang", "menu-external"]) {
+		$("body").on("click", function(event) {
+			let prevent_in = [d + "-list", d + "-current", d + "-switch"];
+			if (!prevent_in.includes(event.target.id))
+				$(`#${d}-list`).css("display", "none");
+			else
+				$(`#${d}-list`).css("display", "block");
+		});
+	}
 
 	create_tz_list("#tzchooser");
 
