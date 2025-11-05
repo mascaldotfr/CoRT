@@ -126,6 +126,7 @@ header {
 	list-style-type: none;
 	padding: .5em;
 	margin-left: -.5em;
+	text-align: left;
 }
 .menuitem > a:hover {
 	background: var(--dialog_background);
