@@ -1,8 +1,4 @@
-
-> [!IMPORTANT]
-> **CoRT is in maintenance mode: no new features will be added, only minor fixes or data updates. The site will stay up though.**
-
-# Champions of Regnum trainer (and more)
+# Champions of Regnum trainer (and much more)
 
 Since the famous regnumsentinel trainer is dead, all is left are operating
 systems locked trainers, or the updated Inquisition trainer from the german
