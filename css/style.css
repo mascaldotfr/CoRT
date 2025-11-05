@@ -201,6 +201,10 @@ h3 {
 		position: relative;
 		margin-left: 0;
 	}
+	#menu-lang-list {
+		display: flex;
+		justify-content: space-around;
+	}
 }
 
 
