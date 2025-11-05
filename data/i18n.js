@@ -165,13 +165,13 @@ export const __i18n__ = {
 	{
 		"fr": "Passer la souris ou cliquer (sur mobile) sur l'îcone d'un sort montrera sa description.",
 		"es": "Pasar el mouse o hacer clic (en el móvil) en el ícono de un hechizo, se mostrará su descripción.",
-		"de": "Wenn du auf das Symbol eines Zaubers klickst (auf Mobilgeräten) oder mit der Maus darüber fahren, wird dessen Beschreibung angezeigt."
+		"de": "Wenn du auf das Symbol eines Zaubers klickst (auf Mobilgeräten) oder mit der Maus darüber fährst, wird dessen Beschreibung angezeigt."
 	},
 	"Selecting an higher character level will upgrade your current setup to that level.":
 	{
 		"fr": "Selectionner un niveau du personnage supérieur à l'actuel transférera votre configuration à ce niveau.",
 		"es": "Seleccionar un nivel de personaje superior al actual transferirá su configuración a ese nivel.",
-		"de": "Wenn du ein höhes Level als das aktuelle auswählst, wird deine Konfiguration auf dieses Level übertragen."
+		"de": "Wenn du ein höheres Level als das aktuelle auswählst, wird deine Konfiguration auf dieses Level übertragen."
 	},
 	"Necro crystal": {
 		"fr": "Cristal nécromantique",
