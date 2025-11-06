@@ -212,20 +212,6 @@ export function create_tz_list(selector) {
 
 /* XXX calendar.js: easy interface to add-to-calendar-button.js */
 
-let __calendar_imported = false;
-
-function import_calendar() {
-	try {
-		let addtocalendar = import("./addtocalendarv2.js")
-			.catch(() => { throw "addtocalendar is not supported"; }); // display error on MacOS too
-	}
-	catch(_unused) {
-		console.err("addtocalendar failed to load");
-	}
-	// in any case we consider the calendar imported
-	__calendar_imported = true;
-}
-
 
 function zeropad(arr) {
 	for (let i in arr)
@@ -235,9 +221,6 @@ function zeropad(arr) {
 
 // time stamp and duration are in seconds
 export function generate_calendar(tstamp, title, duration) {
-	// import addtocalendar if never imported yet
-	if (__calendar_imported === false)
-		import_calendar();
 	let sdate = new Date(tstamp * 1000);
 	let startdate = [sdate.getUTCFullYear(), sdate.getUTCMonth() + 1, sdate.getUTCDate()];
 	startdate = zeropad(startdate);

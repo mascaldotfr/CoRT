@@ -2,6 +2,12 @@ import {__api__urls} from "./api_url.js";
 import {$, generate_calendar, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Time} from "./wztools/wztools.js";
+try {
+	import("./libs/addtocalendarv2.js");
+}
+catch (_unused) {
+	console.info("Calendar not supported, upgrade your browser");
+}
 
 // wztools
 let time = new Time();
