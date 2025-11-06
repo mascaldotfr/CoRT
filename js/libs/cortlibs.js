@@ -267,6 +267,8 @@ export function generate_calendar(tstamp, title, duration) {
 		  hideBackground
 		  buttonStyle="simple"
 		  title="Add to calendar"
+		  hideBranding="true"
+		  iCalFileName="${title}_${startdate.join("-")}"
 		></add-to-calendar-button>
 	`;
 }
