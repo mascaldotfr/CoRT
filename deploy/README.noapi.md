@@ -25,13 +25,13 @@ V=1.35.19-2.0rc1
 # V=`curl -s https://api.github.com/repos/mascaldotfr/CoRT/tags | jq -r '.[0].name'`
 
 cd /tmp
-
 # Download and extract stuff
-wget -qO- https://github.com/mascaldotfr/CoRT/archive/refs/tags/${V}.tar.gz | tar xvz
+# Since it's *noapi* exclude API and PHP dependencies
+wget -qO- "https://github.com/mascaldotfr/CoRT/releases/download/${V}/CoRT-${V}.tar.gz" | tar xz \
+	--exclude "api" --exclude "vendor"
 
 # Make your site use CoRT's "official" API instead of a local one. If you plan
 to run CoRT on http://localhost, you don't need to do that.
-
 # Set your domain name
 D=example.com
 sed -i'' 's!\(.*let frontend_with_no_api =\) .*!\1 ["'${D}'"];!' CoRT-${V}/js/api_url.js

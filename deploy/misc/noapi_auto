@@ -22,7 +22,9 @@ echo "${V}"
 
 echo "===> Getting the tarball release"
 cd /tmp
-wget -qO- "https://github.com/mascaldotfr/CoRT/releases/download/${V}/CoRT-${V}.tar.gz" | tar xz
+# Since it's *noapi* exclude API and PHP dependencies
+wget -qO- "https://github.com/mascaldotfr/CoRT/releases/download/${V}/CoRT-${V}.tar.gz" | tar xz \
+	--exclude "api" --exclude "vendor"
 
 if test "${DOMAIN}" != "localhost"; then
 	echo "===> Make your CoRT use the official API"
