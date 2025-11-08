@@ -23,7 +23,7 @@ async function get_data() {
 		$("#bz-error").empty();
 	}
 	catch (error) {
-		$("#bz-error").html("Failed to get the BZ status: " + error);
+		$("#bz-error").text("Failed to get the BZ status: " + error);
 		return;
 	}
 }
@@ -45,7 +45,8 @@ async function feed_bz() {
 	// 1 minute offset due to minutely update, so actually 1 means 0
 	if (bz_on) {
 		let bz_ends_at = time.timestamp_ago(60 + data["bzendsat"]);
-		$("#bz-countdown-status").html(`<span class="green bold">${_("ON")}</span>`);
+		$("#bz-countdown-status").text(_("ON"));
+		$("#bz-countdown-status").attr("data-status", "on");
 		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["human"]}`);
 		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] <= 10 && bz_ends_at["minutes"] > 1 &&
 			notified_10m === false) {
@@ -58,7 +59,8 @@ async function feed_bz() {
 		}
 	}
 	else {
-		$("#bz-countdown-status").html(`<span class="red bold">${_("OFF")}</span>`);
+		$("#bz-countdown-status").text(_("OFF"));
+		$("#bz-countdown-status").attr("data-status", "off");
 		let next_bz_in = time.timestamp_ago(60 + next_bzs_begin[0]);
 		$("#bz-countdown-countdown").text(`${_("Next BZ in")} ${next_bz_in["human"]}`);
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] > 1 &&

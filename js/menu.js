@@ -63,7 +63,7 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20251107.213441
+	<p> <!--VERSION-->Version: 20251108.131828
 `;
 
 $(document).ready(function() {
@@ -82,7 +82,7 @@ $(document).ready(function() {
 	let storedlang = localStorage.getItem("lang");
 	if (__i18n__.supported_lang.includes(storedlang))
 		currentlang = storedlang;
-	$("#menu-lang-current").text(__menu_flags[currentlang] + " " + langs[currentlang]);
+	$("#menu-lang-current").html(__menu_flags[currentlang] + " " + langs[currentlang]);
 	// Make details dropdowns close on outside click
 	document.addEventListener("click", (e) => {
 		document.querySelectorAll("details.menudetails[open]").forEach((el) => {
@@ -138,7 +138,7 @@ $(document).ready(function() {
 				</div>
 			`);
 		}
-	}, 300);
+	}, 500);
 
 	// Cursors lazy loading
 

@@ -57,15 +57,22 @@
 	grid-area: gems;
 	text-align: right;
 	min-width: max-content;
+	display: flex;
+	justify-content: flex-end;
 }
 .wz-relics {
 	grid-area: relics;
 	text-align: right;
+	display: flex;
+	justify-content: flex-end;
 }
 .wz-forts {
 	grid-area: forts;
 	font-size: initial;
 	font-weight: initial;
+}
+span[id^="wz-forts-"] {
+	display: block;
 }
 
 @media (min-width: 513px) {

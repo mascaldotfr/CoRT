@@ -20,8 +20,8 @@
 		<link rel="manifest" href="manifest.json" />
 	</head>
 	<body>
-	<div id="menu" class="card"></div>
-	<div id="main-container">
+		<div id="menu" class="card">&nbsp;</div>
+		<div id="main-container">
 		<div class="bugnum but on your side">
 			<noscript>
 				For full functionality of this site it is necessary to enable JavaScript.
@@ -41,11 +41,84 @@
 				<canvas id="wz-map-map"></canvas>
 			</div>
 			<div id="wz-realms-info">
-				<div id="wz-alsius" class="card"></div>
-				<div id="wz-ignis" class="card"></div>
-				<div id="wz-syrtis" class="card"></div>
+				<div id="wz-alsius" class="card">
+					<div class="wz-realm-header">
+						<span class="wz-realmname blue" id="wz-alsius-name"></span>
+						<span class="wz-gems" id="wz-alsius-gems">
+							<span id="wz-gems-0"></span>
+							<span id="wz-gems-1"></span>
+							<span id="wz-gems-2"></span>
+							<span id="wz-gems-3"></span>
+							<span id="wz-gems-4"></span>
+							<span id="wz-gems-5"></span>
+						</span>
+						<span class="wz-relics" id="wz-alsius-relics">
+							<span id="wz-relics-alsius-0"></span>
+							<span id="wz-relics-alsius-1"></span>
+							<span id="wz-relics-alsius-2"></span>
+						</span>
+						<span class="wz-forts">
+							<span id="wz-forts-0"></span>
+							<span id="wz-forts-1"></span>
+							<span id="wz-forts-2"></span>
+							<span id="wz-forts-3"></span>
+						</span>
+					</div>
+				</div>
+				<div id="wz-ignis" class="card">
+					<div class="wz-realm-header">
+						<span class="wz-realmname red" id="wz-ignis-name"></span>
+						<span class="wz-gems" id="wz-ignis-gems">
+							<span id="wz-gems-6"></span>
+							<span id="wz-gems-7"></span>
+							<span id="wz-gems-8"></span>
+							<span id="wz-gems-9"></span>
+							<span id="wz-gems-10"></span>
+							<span id="wz-gems-11"></span>
+						</span>
+						<span class="wz-relics" id="wz-ignis-relics">
+							<span id="wz-relics-ignis-0"></span>
+							<span id="wz-relics-ignis-1"></span>
+							<span id="wz-relics-ignis-2"></span>
+						</span>
+						<span class="wz-forts">
+							<span id="wz-forts-4"></span>
+							<span id="wz-forts-5"></span>
+							<span id="wz-forts-6"></span>
+							<span id="wz-forts-7"></span>
+						</span>
+					</div>
+				</div>
+				<div id="wz-syrtis" class="card">
+					<div class="wz-realm-header">
+						<span class="wz-realmname green" id="wz-syrtis-name"></span>
+						<span class="wz-gems" id="wz-syrtis-gems">
+							<span id="wz-gems-12"></span>
+							<span id="wz-gems-13"></span>
+							<span id="wz-gems-14"></span>
+							<span id="wz-gems-15"></span>
+							<span id="wz-gems-16"></span>
+							<span id="wz-gems-17"></span>
+						</span>
+						<span class="wz-relics" id="wz-syrtis-relics">
+							<span id="wz-relics-syrtis-0"></span>
+							<span id="wz-relics-syrtis-1"></span>
+							<span id="wz-relics-syrtis-2"></span>
+						</span>
+						<span class="wz-forts">
+							<span id="wz-forts-8"></span>
+							<span id="wz-forts-9"></span>
+							<span id="wz-forts-10"></span>
+							<span id="wz-forts-11"></span>
+						</span>
+					</div>
+				</div>
 			</div>
-			<div id="wz-events" class="card">&nbsp;</div>
+			<div id="wz-events" class="card">
+				<h2 id="wz-events-header" class="purple">&nbsp;</h2>
+				<div id="wz-events-eventslist"></div>
+				<p><a href="wevents.html" id="wz-events-moreevents"></a></p>
+			</div>
 		</div>
 	</div>
 	<div id="footer" class="card"></div>

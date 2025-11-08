@@ -18,6 +18,8 @@
 	display: grid;
 	place-items: center;
 }
+#bz-countdown-status[data-status="on"] { color: var(--green); }
+#bz-countdown-status[data-status="off"] { color: var(--red) }
 @media(max-width:799px) {
 	#bz-countdown {
 		min-height: 5em;

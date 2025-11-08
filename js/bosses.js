@@ -57,25 +57,22 @@ async function get_next_respawns() {
 		$("#boss-error").empty();
 	}
 	catch (error) {
-		$("#boss-error").html("Failed to get the next bosses spawns: " + error)
+		$("#boss-error").text("Failed to get the next bosses spawns: " + error)
 		return;
 	}
 }
 
 // 1 minute offset due to minutely update, so actually 1 means 0
 function display_next_respawn(boss) {
-	$(`#boss-${boss}-lastspawn`).text(`${_("Last respawn")}:
-		${unixstamp2human(previous_respawns[boss])}`);
+	$(`#boss-${boss}-lastspawn`).text(`${_("Last respawn")}: ${unixstamp2human(previous_respawns[boss])}`);
 	let next_respawn_in = time.timestamp_ago(next_respawns[boss][0], false, true);
-	let next_respawns_html = `<li class="red bold">${_("Next respawn in")} ${next_respawn_in.human}</li>`;
-	for (let respawn in next_respawns[boss]) {
-		let calendar = generate_calendar(next_respawns[boss][respawn], boss, 900);
-		let color = respawn == 0 ? "green" : "faded";
-		next_respawns_html += `<li class="${color} bold">
-			${unixstamp2human(next_respawns[boss][respawn])}
-			<span class="addtocalendar">${calendar}</span></li>`;
+	$(`#boss-${boss}-nextspawn`).text(`${_("Next respawn in")} ${next_respawn_in.human}`);
+	for (let i = 0; i < next_respawns[boss].length; i++) {
+		const respawn_ts = next_respawns[boss][i];
+		let calendar = generate_calendar(respawn_ts, boss, 900);
+		$(`#boss-${boss}-nextspawn-${i}`).text(unixstamp2human(respawn_ts));
+		$(`#boss-${boss}-nextspawn-${i}-calendar`).html(calendar);
 	}
-	$(`#boss-${boss}-respawn`).append(next_respawns_html);
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
 		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] > 1 &&
@@ -105,8 +102,6 @@ async function refresh_display() {
 
 	let bosses_unordered = new Map();
 	for (let boss in next_respawns) {
-		$(`#boss-${boss}-lastspawn`).empty();
-		$(`#boss-${boss}-respawn`).empty();
 		display_next_respawn(boss);
 		// fetch all next respawns
 		bosses_unordered.set(boss, next_respawns[boss][0]);

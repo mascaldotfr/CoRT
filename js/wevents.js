@@ -72,9 +72,8 @@ $(document).ready(async function() {
 	$("#we-info-info").text(
 		_("All events over the last 14 days.") +
 		" " + _("Last updated:") + " ");
-	$("#we-data-dump").html(`
-		<a href="${__api__urls["events_dump"]}" target="blank">
-		${_("Download all events data")}</a>`);
+	$("#we-data-dump").attr("href", __api__urls["events_dump"]);
+	$("#we-data-dump").text(_("Download all events data"));
 	$("#we-filter-label").text(_("Filter:"));
 	let options = { "Global": [
 				["none", _("None")],

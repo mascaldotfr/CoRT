@@ -113,7 +113,7 @@ export const $ = (function (selector) {
 		},
 		text: function(text) {
 			if (text !== undefined) { // PUT
-				r_selector.innerHTML = text;
+				r_selector.innerText = text;
 			}
 			else { // GET
 				return r_selector.innerText;

@@ -8,7 +8,7 @@ import {constants} from "./trainertools/constants.js";
 $(document).ready(function() {
 	document.title = "CoRT - " + _("Trainer");
 	$("#title").text(_("Trainer"));
-	$("#titleinfo").text(
+	$("#titleinfo").html(
 		_("Hovering your mouse or clicking (on mobile) on a skill icon will show its description.") +
 		"<br>" +
 		_("Selecting an higher character level will upgrade your current setup to that level."));

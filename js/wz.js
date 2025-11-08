@@ -132,8 +132,6 @@ async function draw_map(images) {
 
 async function display_wz(init=false) {
 	let data = null;
-	let gems = [];
-	let forts = [];
 	let failures = {};
 
 	try {
@@ -176,49 +174,42 @@ async function display_wz(init=false) {
 	// Middle part
 
 	if (!("gems" in failures)) {
-		for (let gem of data["gems"]) {
-			gems.push(wzicons[gem]);
+		for (let i = 0; i < data["gems"].length; i++) {
+			const gem = data["gems"][i];
+			$(`#wz-gems-${i}`).html(wzicons[gem]);
 		}
 	}
 
-	for (let fort of data["forts"]) {
-		let icon = wzicons[dispatch_fort_icon(fort)];
-		let name = xlator.translate_fort(fort["name"]);
-		forts.push(`${icon}&nbsp;${name}<br>`);
+	for (let i = 0; i < data["forts"].length; i++) {
+		const fort = data["forts"][i];
+		const icon = wzicons[dispatch_fort_icon(fort)];
+		const name = xlator.translate_fort(fort["name"]);
+		$(`#wz-forts-${i}`).html(`${icon} ${name}`);
 	}
 
-	for (let realm of Object.keys(realm_colors)) {
-		let relics = "";
+	for (let realm in realm_colors) {
+		const realm_lc = realm.toLowerCase();
+		$(`#wz-${realm_lc}-name`).text(realm);
 		// XXX Currently relics fail if gems fail
 		if (!("gems" in failures)) {
-			for (let relic of Object.keys(data["relics"][realm])) {
-				let url = data["relics"][realm][relic];
+			let i = 0;
+			for (let relic in data["relics"][realm]) {
+				const url = data["relics"][realm][relic];
 				if (url !== null) {
-					relics += `<span title="${relic}">${wzicons[url]}</span>`;
+					$(`#wz-relics-${realm_lc}-${i}`).html(wzicons[url]);
+					$(`#wz-relics-${realm_lc}-${i}`).attr("title", relic);
 				}
+				i++;
 			}
 		}
-		$(`#wz-${realm.toLowerCase()}`).html(`
-				<div class="wz-realm-header">
-				<span class="wz-realmname ${realm_colors[realm]}">${realm}</span>
-				<span class="wz-gems">${gems.splice(0, 6).join("")}</span>
-				<span class="wz-relics">${relics}</span>
-				<span class="wz-forts">${forts.splice(0, 4).join("")}</span>
-				</div>
-		`);
 	}
 
 	// Events
 
-	let events_list = humaniser.humanise_events(data["events_log"], true, wz_lastupdate);
-	$("#wz-events").html(`<h2 id="wz-events-header">
-		<span class="purple">${_("Last server events (in your timezone):")} </span>
-		</h2>
-		<span>
-		${events_list[0]}
-		<br>
-		<a href="wevents.html?f=none">${_("More events")}...</a>
-		</span>`);
+	const events_list = humaniser.humanise_events(data["events_log"], true, wz_lastupdate);
+	$("#wz-events-header").text(_("Last server events (in your timezone):"));
+	$("#wz-events-eventslist").html(events_list[0]);
+	$("#wz-events-moreevents").text(_("More events") + "...");
 
 	// Last update -- ensure notifications are displayed once only and map
 	// not redrawn for nothing
