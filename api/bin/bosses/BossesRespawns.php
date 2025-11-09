@@ -46,7 +46,7 @@ class BossesRespawns {
 			if ($boss === "server")
 				$respawn_time = 7 * 24 * 3600; // 1 week
 			else
-				$respawn_time = $respawn_offset * 3600; // 109 hours
+				$respawn_time = $respawn_offset * 3600 + 10; // 109 hours + estimated drifting
 			while (true) {
 				$tried_respawn_ts += $respawn_time;
 				if ($tried_respawn_ts >= $now) {
