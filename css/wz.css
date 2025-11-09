@@ -75,7 +75,7 @@ span[id^="wz-forts-"] {
 	display: block;
 }
 
-@media (min-width: 1550px) {
+@media (min-width: 1549px) {
 	#wz-container {
 		gap: 3em 1em;
 	}
