@@ -75,7 +75,7 @@ span[id^="wz-forts-"] {
 	display: block;
 }
 
-@media (min-width: 513px) {
+@media (min-width: 1550px) {
 	#wz-container {
 		gap: 3em 1em;
 	}
@@ -108,11 +108,28 @@ span[id^="wz-forts-"] {
 	}
 }
 
-@media(max-width: 1024px) {
-	/* Give a chance to have the map and central area visible on screen at 1024x768 */
+@media (min-width: 513px) and  (max-width: 1549px) {
+	#wz-map {
+		padding: 0px;
+		/* XXX hide some margin issue leaving 4 px left at the bottom */
+		background-color: unset;
+	}
 	#wz-map-map {
 		width: 400px;
 		height: 400px;
+	}
+	#wz-events {
+		min-width: 400px;
+		height: 400px;
+		flex-grow: 1;
+		flex-basis: min-content;
+	}
+	#wz-container {
+		gap: 0;
+		justify-content: space-around;
+	}
+	.wz-forts, .wz-realm-header {
+		gap: .5em;
 	}
 }
 
