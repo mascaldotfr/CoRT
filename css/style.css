@@ -77,23 +77,23 @@ summary::-webkit-details-marker {
 #footer {
 	min-height: 7.5em;
 }
-header {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
 #menu-click {
 	display: none;
 }
 #menu-links {
 	padding-left:0px;
 	margin: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	flex-wrap: wrap;
 }
 #menu-links > li {
 	list-style: none;
 	display: inline-block;
 	margin: .2em;
 	margin-bottom: .3em;
+	flex-grow: 1;
 }
 .menu-icon {
 	height: 1em;
@@ -183,6 +183,7 @@ h3 {
 	}
 	#menu-links {
 		width: 100%;
+		display: block;
 	}
 	#menu-click:not(:checked) ~ header { display: none; }
 	#menu-click:checked ~ header { display: block; }
