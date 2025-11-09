@@ -108,7 +108,7 @@ span[id^="wz-forts-"] {
 	}
 }
 
-@media (min-width: 513px) and  (max-width: 1549px) {
+@media (min-width: 512px) and  (max-width: 1549px) {
 	#wz-map {
 		padding: 0px;
 		/* XXX hide some margin issue leaving 4 px left at the bottom */
@@ -131,6 +131,13 @@ span[id^="wz-forts-"] {
 	.wz-forts, .wz-realm-header {
 		gap: .5em;
 	}
+}
+
+@media (min-width: 512px) and (max-width: 1250px) {
+	#wz-realms-info {
+		flex-grow: 1;
+	}
+
 }
 
 @media(max-width: 512px) {
