@@ -8,12 +8,12 @@ class BossesRespawns {
 			throw new InvalidArgumentException("\$respawns must be a positive integer!");
 
 		// The first known respawns timestamp in UTC time
-		// Last checked: Eve: 2025-11-07, Daen: 2025-11-08, TK: 2025-11-02, Server: 2025-10-30 (+37m)
+		// Last checked: Eve: 2025-11-07, Daen: 2025-11-08, TK: 2025-11-11, Server: 2025-10-30 (+37m)
 		$first_respawns = array(
-			"thorkul" => 	1762099359,
+			"thorkul" => 	1762884168,
 			"evendim" => 	1762551223,
 			"daen" => 	1762637277,
-			"server" => 	1761732000 + 37 * 60
+			"server" => 	1762336800 + 37 * 60
 		);
 
 		if ($fake) {
