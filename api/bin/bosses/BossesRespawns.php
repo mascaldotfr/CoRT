@@ -25,8 +25,8 @@ class BossesRespawns {
 
 		if ($fake) {
 			$first_respawns = array(
-				"evendim" => 	900,
-				"daen" => 	1800,
+				"evendim" => 	0,
+				"daen" => 	1380,
 			);
 		}
 
