@@ -55,16 +55,16 @@ class BossesRespawns {
 				$respawn_time = 7 * 24 * 3600; // 1 week
 			else
 				$respawn_time = $respawn_offset * 3600 + $respawns_drift[$boss];
-			while (true) {
-				$tried_respawn_ts += $respawn_time;
-				if ($tried_respawn_ts >= $now) {
-					if ($previous_respawns[$boss] === 0)
-						$previous_respawns[$boss] = $tried_respawn_ts - $respawn_time;
-					$next_respawns[$boss][] = $tried_respawn_ts;
-					if (count($next_respawns[$boss]) === $respawns)
-						break;
-				}
-			}
+
+			// Elapsed time from now since the first respawn
+			$elapsed = $now - $first_respawns[$boss];
+			// Compute how many respawns there have been since then
+			$old_respawns = intval($elapsed / $respawn_time);
+			// Get the last respawn timestamp
+			$previous_respawns[$boss] = $first_respawns[$boss] + $old_respawns * $respawn_time;
+			// Then generate future respawns
+			for ($i = 1; $i <= $respawns; $i++)
+				$next_respawns[$boss][] = $previous_respawns[$boss] + $i * $respawn_time;
 		}
 
 		// get the next respawn timestamp and name
