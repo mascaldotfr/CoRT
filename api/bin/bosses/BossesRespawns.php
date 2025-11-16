@@ -16,6 +16,13 @@ class BossesRespawns {
 			"server" => 	1762336800 + 37 * 60
 		);
 
+		// Bosses drift by spawns, in seconds.
+		$respawns_drift = array(
+			"thorkul" =>	3,
+			"evendim" =>	7,
+			"daen"    =>	5
+		);
+
 		if ($fake) {
 			$first_respawns = array(
 				"evendim" => 	900,
@@ -41,12 +48,13 @@ class BossesRespawns {
 
 		// calculate future respawns
 		// let standard bosses respawn every 30 minutes if we want fake respawns
+		// else 109 hours
 		$respawn_offset = $fake ? .5 : 109;
 		foreach ($first_respawns as $boss => $tried_respawn_ts) {
 			if ($boss === "server")
 				$respawn_time = 7 * 24 * 3600; // 1 week
 			else
-				$respawn_time = $respawn_offset * 3600 + 10; // 109 hours + estimated drifting
+				$respawn_time = $respawn_offset * 3600 + $respawns_drift[$boss];
 			while (true) {
 				$tried_respawn_ts += $respawn_time;
 				if ($tried_respawn_ts >= $now) {
