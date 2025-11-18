@@ -3506,9 +3506,7 @@
           "gcd":"Normal",
           "weapon_interval": true,
           "damage":{
-            "Piercing":[120, 140, 160, 180, 200]
-          },
-          "damage":{
+            "Piercing":[120, 140, 160, 180, 200],
             "Attack":["+60%", "+75%", "+90%", "+105%", "+120%"]
           }
         },
