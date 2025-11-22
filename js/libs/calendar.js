@@ -1,6 +1,12 @@
 // A very simple calendar module generating .ics files.
 // License : MIT
 
+function generate_uid() {
+	const ts = Date.now().toString(36);
+	const random = Math.random().toString(36).substring(2, 10);
+	return `${ts}${random}@${window.location.hostname}`;
+}
+
 // Format a Unix timestamp (seconds) as iCalendar UTC date-time: YYYYMMDDTHHMMSSZ
 function format_utc_ics_datetime(unix_ts) {
 	const date = new Date(parseInt(unix_ts) * 1000); // Convert to milliseconds
@@ -23,7 +29,7 @@ function escape_text(text) {
 }
 
 /**
- * Generate iCalendar string (UTC) with 10m and 1h alarms
+ * Generate iCalendar string (UTC) with 10m and 1H reminders
  * title - title and description
  * start — Unix timestamp (seconds)
  * end — Unix timestamp (seconds)
@@ -32,12 +38,15 @@ function generate_ics(title, start, end ) {
 	const dt_start = format_utc_ics_datetime(start);
 	const dt_end = format_utc_ics_datetime(end);
 	const safe_title = "[CoR] " + escape_text(title);
+	const uid = generate_uid();
 
 	return [
 		"BEGIN:VCALENDAR",
 		"VERSION:2.0",
 		"CALSCALE:GREGORIAN",
+		"PRODID:-//CoRT//EN",
 		"BEGIN:VEVENT",
+		`UID:${uid}`,
 		`SUMMARY:${safe_title}`,
 		`DTSTART:${dt_start}`,
 		`DTEND:${dt_end}`,
@@ -47,15 +56,14 @@ function generate_ics(title, start, end ) {
 		`DESCRIPTION:${safe_title}`,
 		"ACTION:DISPLAY",
 		"END:VALARM",
-		"END:VEVENT",
-		"END:VCALENDAR",
 		// 1h alarm, only supported in a few clients
 		"BEGIN:VALARM",
 		"TRIGGER:-PT1H",
 		`DESCRIPTION:${safe_title}`,
 		"ACTION:DISPLAY",
 		"END:VALARM",
-		"END:VEVENT"
+		"END:VEVENT",
+		"END:VCALENDAR"
 	].join("\n");
 }
 
