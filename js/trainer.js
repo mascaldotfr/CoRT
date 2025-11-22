@@ -2,10 +2,7 @@ import {__api__urls, __api__frontsite} from "./api_url.js";
 import {$} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {constants} from "./trainertools/constants.js";
-import { computePosition as fu_computePosition,
-	 offset as fu_offset,
-	 flip as fu_flip,
-	 shift as fu_shift } from "./libs/floating-ui-tooltip.js";
+import { computePosition as fu_computePosition, offset as fu_offset, flip as fu_flip, shift as fu_shift } from "./libs/floating-ui-tooltip.js";
 
 // Classes are instanciated at the end
 
