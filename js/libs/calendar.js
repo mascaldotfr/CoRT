@@ -41,13 +41,6 @@ function generate_ics(title, start, end ) {
 		`SUMMARY:${safe_title}`,
 		`DTSTART:${dt_start}`,
 		`DTEND:${dt_end}`,
-		// 1h alarm
-		"BEGIN:VALARM",
-		"TRIGGER:-PT1H",
-		`DESCRIPTION:${safe_title}`,
-		"ACTION:DISPLAY",
-		"END:VALARM",
-		"END:VEVENT",
 		// 10m alarm
 		"BEGIN:VALARM",
 		"TRIGGER:-PT10M",
@@ -55,7 +48,14 @@ function generate_ics(title, start, end ) {
 		"ACTION:DISPLAY",
 		"END:VALARM",
 		"END:VEVENT",
-		"END:VCALENDAR"
+		"END:VCALENDAR",
+		// 1h alarm, only supported in a few clients
+		"BEGIN:VALARM",
+		"TRIGGER:-PT1H",
+		`DESCRIPTION:${safe_title}`,
+		"ACTION:DISPLAY",
+		"END:VALARM",
+		"END:VEVENT"
 	].join("\n");
 }
 
