@@ -1,13 +1,8 @@
 import {__api__urls} from "./api_url.js";
-import {$, insert_notification_link, mynotify, generate_calendar, MyScheduler} from "./libs/cortlibs.js";
+import {$, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
 import {Time} from "./wztools/wztools.js";
 import {_} from "../data/i18n.js";
-try {
-	import("./libs/addtocalendarv2.js");
-}
-catch (_unused) {
-	console.info("Calendar not supported, upgrade your browser");
-}
+import {create_calendar_link} from "./libs/calendar.js";
 
 // time and date formatters
 let dformatter = null;
@@ -82,10 +77,10 @@ async function feed_bz() {
 		let bz_end_date = new Date(next_bzs_end[next_bz] * 1000);
 		let bz_begin_datetime = dformatter.format(bz_begin_date);
 		let bz_end_time = tformatter.format(bz_end_date);
-		let duration = (bz_end_date.getTime() - bz_begin_date.getTime()) / 1000;
-		let calendar = generate_calendar(bz_begin_date.getTime() / 1000, "Battlezone", duration);
-		bz_next_future += `<li>${bz_begin_datetime} - ${bz_end_time}
-				   <span class="addtocalendar">${calendar}</span></li>`;
+		const calendar = create_calendar_link("Battlezone",
+			next_bzs_begin[next_bz], next_bzs_end[next_bz],
+			`bz_${bz_begin_date.toISOString()}`);
+		bz_next_future += `<li>${bz_begin_datetime} - ${bz_end_time} ${calendar}</li>`;
 	}
 	$("#bz-next-future").html(bz_next_future);
 

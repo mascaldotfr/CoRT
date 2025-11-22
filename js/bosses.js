@@ -2,12 +2,7 @@ import {__api__urls} from "./api_url.js";
 import {$, generate_calendar, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Time} from "./wztools/wztools.js";
-try {
-	import("./libs/addtocalendarv2.js");
-}
-catch (_unused) {
-	console.info("Calendar not supported, upgrade your browser");
-}
+import {create_calendar_link} from "./libs/calendar.js";
 
 // wztools
 let time = new Time();
@@ -69,7 +64,10 @@ function display_next_respawn(boss) {
 	$(`#boss-${boss}-nextspawn`).text(`${_("Next respawn in")} ${next_respawn_in.human}`);
 	for (let i = 0; i < next_respawns[boss].length; i++) {
 		const respawn_ts = next_respawns[boss][i];
-		let calendar = generate_calendar(respawn_ts, boss, 900);
+		const respawn_datetime = new Date(respawn_ts * 1000);
+		const uc_boss = boss[0].toUpperCase() + boss.slice(1);
+		const calendar = create_calendar_link(uc_boss, respawn_ts, respawn_ts + 900,
+			`${uc_boss}_${respawn_datetime.toISOString()}`);
 		$(`#boss-${boss}-nextspawn-${i}`).text(unixstamp2human(respawn_ts));
 		$(`#boss-${boss}-nextspawn-${i}-calendar`).html(calendar);
 	}
