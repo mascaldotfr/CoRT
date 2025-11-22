@@ -2,6 +2,10 @@ import {__api__urls, __api__frontsite} from "./api_url.js";
 import {$} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {constants} from "./trainertools/constants.js";
+import { computePosition as fu_computePosition,
+	 offset as fu_offset,
+	 flip as fu_flip,
+	 shift as fu_shift } from "./libs/floating-ui-tooltip.js";
 
 // Classes are instanciated at the end
 
@@ -637,12 +641,42 @@ class Icons {
 	}
 
 	tooltip_factory(content, clean_spellname) {
-		this.tooltips.push(function () {
-			tippy(`#${clean_spellname}`, {
-				content: content,
-				allowHTML: true,
-				placement: "bottom",
-				maxWidth: "fit-content"
+		this.tooltips.push(() => {
+			const ref = document.getElementById(clean_spellname);
+			if (!ref) return;
+
+			const tip = document.createElement("div");
+			tip.className = "tippy-content";
+			tip.innerHTML = content;
+			tip.style.display = "none";
+			document.body.appendChild(tip);
+
+			const update = () => {
+				fu_computePosition(ref, tip, {
+					placement: "top",
+					middleware: [
+						fu_offset(8),
+						fu_flip(),
+						fu_shift({ padding: 5 })
+					]
+				}).then(({ x, y }) => {
+					tip.style.left = `${x}px`;
+					tip.style.top = `${y}px`;
+				});
+			};
+
+			let show_timer;
+
+			ref.addEventListener("mouseenter", () => {
+				show_timer = setTimeout(() => {
+					update();
+					tip.style.display = "block";
+				}, 200);
+			});
+
+			ref.addEventListener("mouseleave", () => {
+				clearTimeout(show_timer);
+				tip.style.display = "none";
 			});
 		});
 	}

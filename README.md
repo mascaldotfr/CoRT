@@ -53,8 +53,7 @@ extra infos about using and deploying CoRT.
    [Chartist](https://github.com/chartist-js/chartist) is dual licensed under
    MIT/WTFPL licenses terms.
 
-   [Tippy](https://github.com/atomiks/tippyjs),
-   [Popper](https://github.com/floating-ui/floating-ui)
+   [Floating UI](https://github.com/floating-ui/floating-ui)
    and [LZstring](https://github.com/pieroxy/lz-string) are MIT licensed.
 
    The [Game icons set](https://game-icons.net/) is licensed

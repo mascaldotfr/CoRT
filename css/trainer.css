@@ -65,6 +65,8 @@
 	color: var(--foreground);
 	border-radius: 5px;
 	border: 1px solid var(--foreground);
+	position: absolute;
+	max-width: 95vw;
 }
 .tippy-content .descriptionheader {
 	grid-template-columns: 64px auto;
