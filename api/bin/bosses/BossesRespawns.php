@@ -12,7 +12,7 @@ class BossesRespawns {
 		$first_respawns = array(
 			"thorkul" => 	1762884170,
 			"evendim" => 	1762551223,
-			"daen" => 	1762637277,
+			"daen" => 	1762637275,
 			"server" => 	1762336800 + 37 * 60
 		);
 
