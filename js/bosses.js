@@ -1,5 +1,5 @@
 import {__api__urls} from "./api_url.js";
-import {$, generate_calendar, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
+import {$, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Time} from "./wztools/wztools.js";
 import {create_calendar_link} from "./libs/calendar.js";

@@ -209,53 +209,6 @@ export function create_tz_list(selector) {
 	localStorage.setItem("tzlisthtml", options);
 }
 
-
-/* XXX calendar.js: easy interface to add-to-calendar-button.js */
-
-
-function zeropad(arr) {
-	for (let i in arr)
-		arr[i] = arr[i].toString().padStart(2, "0");
-	return arr;
-}
-
-// time stamp and duration are in seconds
-export function generate_calendar(tstamp, title, duration) {
-	let sdate = new Date(tstamp * 1000);
-	let startdate = [sdate.getUTCFullYear(), sdate.getUTCMonth() + 1, sdate.getUTCDate()];
-	startdate = zeropad(startdate);
-	let starttime = [sdate.getUTCHours(), sdate.getUTCMinutes()];
-	starttime = zeropad(starttime);
-	let edate = new Date(tstamp * 1000 + duration * 1000);
-	let enddate = [edate.getUTCFullYear(), edate.getUTCMonth() + 1, edate.getUTCDate()];
-	enddate = zeropad(enddate);
-	let endtime = [edate.getUTCHours(), edate.getUTCMinutes()];
-	endtime = zeropad(endtime);
-	return `
-		<add-to-calendar-button
-		  class="calendar"
-		  name="[CoR] ${title.toUpperCase()}"
-		  startDate="${startdate.join("-")}"
-		  startTime="${starttime.join(":")}"
-		  endDate="${enddate.join("-")}"
-		  endTime="${endtime.join(":")}"
-		  timeZone="UTC"
-		  options="'Apple','Google','iCal','Outlook.com','Yahoo','Microsoft365'"
-		  trigger="click"
-		  hideTextLabelButton
-		  hideIconButton
-		  size="0"
-		  lightMode="dark"
-		  inline
-		  hideBackground
-		  buttonStyle="simple"
-		  title="Add to calendar"
-		  hideBranding="true"
-		  iCalFileName="${title}_${startdate.join("-")}"
-		></add-to-calendar-button>
-	`;
-}
-
 /* XXX notify.js : a simple javacript notification system */
 
 let __notifications_swsupport = ("Notification" in window && "serviceWorker" in navigator);
