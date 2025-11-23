@@ -16,9 +16,8 @@ DOMAIN="localhost"
 # --- CONFIGURATION ENDS HERE
 
 printf "===> Searching for the last release... "
-V=`curl -s https://api.github.com/repos/mascaldotfr/CoRT/tags | jq -r '.[0].name'`
+V=`curl -s https://api.github.com/repos/mascaldotfr/CoRT/tags | jq -r 'map(select(.name | test("^(?!.*(?:alpha|beta|rc)).*$"; "i")))[0].name'`
 echo "${V}"
-
 
 echo "===> Getting the tarball release"
 cd /tmp

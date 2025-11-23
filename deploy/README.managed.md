@@ -44,8 +44,8 @@ script](misc/managed_tarball).
 ```shell
 # Set this to the latest version
 V=1.35.19-2.0rc1
-# Or instead use this if you have `jq` installed
-# V=`curl -s https://api.github.com/repos/mascaldotfr/CoRT/tags | jq -r '.[0].name'`
+# Or instead use this if you have `jq` installed and want only stable releases
+# V=`curl -s https://api.github.com/repos/mascaldotfr/CoRT/tags | jq -r 'map(select(.name | test("^(?!.*(?:alpha|beta|rc)).*$"; "i")))[0].name'`
 
 cd /tmp
 
