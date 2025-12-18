@@ -119,6 +119,7 @@ $(document).ready(function() {
 	document.title = "CoRT - " + _("Bosses respawn countdown");
 	$("#title").text(_("Bosses respawn countdown"));
 	$("#boss-info").text(_("The page refreshes itself every minute."));
+	$("#boss-warning").text(_("Due to recent change in bosses respawn time (it's now 61 hours instead of 109 hours), the displayed bosses respawn times may be off. Please report to me if any issue arise."));
 	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
 		hour: 'numeric', minute: 'numeric', timeZone: localStorage.getItem("tz")

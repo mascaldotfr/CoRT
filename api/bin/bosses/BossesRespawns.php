@@ -48,8 +48,8 @@ class BossesRespawns {
 
 		// calculate future respawns
 		// let standard bosses respawn every 30 minutes if we want fake respawns
-		// else 109 hours
-		$respawn_offset = $fake ? .5 : 109;
+		// else 61 hours
+		$respawn_offset = $fake ? .5 : 61;
 		foreach ($first_respawns as $boss => $tried_respawn_ts) {
 			if ($boss === "server")
 				$respawn_time = 7 * 24 * 3600; // 1 week

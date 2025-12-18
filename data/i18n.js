@@ -639,6 +639,11 @@ export const __i18n__ = {
 		"fr": "Pourcentage d'utilisation",
 		"es": "Uso porcentual",
 		"de": "Prozentuale Nutzung"
+	},
+	"Due to recent change in bosses respawn time (it's now 61 hours instead of 109 hours), the displayed bosses respawn times may be off. Please report to me if any issue arise.": {
+		"fr": "En raison du récent changement du temps de réapparition des boss (61 heures au lieu de 109 heures), les temps de réapparition affichés pour les boss pourraient être inexacts. N'hésitez pas a le me signaler.",
+		"es": "Debido al reciente cambio en el tiempo de reaparición de los epicos (ahora es de 61 horas en lugar de 109 horas), los tiempos de reaparición de los épicos mostrados podrían ser incorrectos. Por favor, avísame si surge algún problema.",
+		"de": "Aufgrund der kürzlichen Änderung der Boss-Respawn-Zeit (61 Stunden statt 109 Stunden) könnten die angezeigten Respawn-Zeiten für die Bosse ungenau sein. Zögern Sie bitte nicht, es mir zu melden."
 	}
 };
 
