@@ -1,9 +1,9 @@
 <?php
 
 class BossesRespawns {
-	// $respawns: number of future respawns to calculate per boss; 3 by
+	// $respawns: number of future respawns to calculate per boss; 4 by
 	// default. Setting $fake to true generates fake respawns.
-	public function getSchedule(int $respawns = 3, bool $fake = false) {
+	public function getSchedule(int $respawns = 4, bool $fake = false) {
 		if ($respawns < 1)
 			throw new InvalidArgumentException("\$respawns must be a positive integer!");
 

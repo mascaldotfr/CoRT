@@ -28,8 +28,8 @@ In JSON:
   },
   "next_spawns": {
     "evendim": [
-      "int. Unix timestamp of the 3 next respawns for each boss",
-	  [... 2 other respawns]
+      "int. Unix timestamp of the 4 next respawns for each boss",
+	  [... 3 other respawns]
     ],
 	[... daen, tk, server]
   },
