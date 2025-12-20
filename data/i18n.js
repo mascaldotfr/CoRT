@@ -640,10 +640,10 @@ export const __i18n__ = {
 		"es": "Uso porcentual",
 		"de": "Prozentuale Nutzung"
 	},
-	"The displayed respawn time may be off for Daen. Give me the respawn time if you see it. Respawn times may lack precision until I double check with second accuracy this time.": {
-		"fr": "Le temps de réapparition affiché pour Daen peut être incorrect. Si vous le voyez réapparaître, merci de me communiquer l’heure exacte. La précision des temps de réapparition sera améliorée dès que j’aurai vérifié cela avec une exactitude à la seconde près.",
-		"es": "El tiempo de reaparición mostrado para Daen podría ser incorrecto. Si lo ves reaparecer, por favor indícame la hora exacta. Los tiempos de reaparición podrían carecer de precisión hasta que los verifique nuevamente con exactitud al segundo.",
- 		"de": "Die angezeigte Wiedererscheinungszeit für Daen könnte ungenau sein. Wenn du siehst, dass Daen erscheint, gib mir bitte den genauen Zeitpunkt an. Die Wiedererscheinungszeiten könnten so lange ungenau sein, bis ich sie diesmal mit Sekundengenauigkeit überprüft habe."
+	"Respawn times may lack precision until I double check with second accuracy this time.": {
+		"fr": "Les temps de réapparition peuvent manquer de précision jusqu'à ce que je les vérifie à nouveau avec une exactitude à la seconde près.",
+		"es": "Los tiempos de reaparición podrían carecer de precisión hasta que los verifique nuevamente con exactitud al segundo.",
+		"de": "Die Wiedererscheinungszeiten könnten ungenau sein, bis ich sie diesmal mit Sekundengenauigkeit nochmals überprüfe."
 	}
 };
 
