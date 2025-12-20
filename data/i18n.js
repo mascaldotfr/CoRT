@@ -111,11 +111,11 @@ export const __i18n__ = {
 		"es": "m",
 		"de": "min"
 	},
-	"Next BZ:":
+	"Schedule":
 	{
-		"fr": "Prochaines BZ :",
-		"es": "Próximas BZ:",
-		"de": "Nächste BZ:"
+		"fr": "Planning",
+		"es": "Calendario",
+		"de": "Terminplan"
 	},
 	"Ends in":
 	{

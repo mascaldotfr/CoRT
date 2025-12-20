@@ -2,7 +2,6 @@ import {__api__urls} from "./api_url.js";
 import {$, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
 import {Time} from "./wztools/wztools.js";
 import {_} from "../data/i18n.js";
-import {create_calendar_link} from "./libs/calendar.js";
 
 // time and date formatters
 let dformatter = null;
@@ -11,6 +10,41 @@ let time = new Time();
 
 // API data
 let data = null;
+
+// Highlight the next bz event (it's magic don't ask)
+function highlight_interval(container = document, clas = "highlight") {
+	const now = Date.now();
+	const items = Array.from(container.querySelectorAll('[data-begin][data-end]'));
+
+	const validItems = items
+		.map(item => {
+			const start = Number(item.dataset.begin);
+			const end = Number(item.dataset.end);
+			return { item, start, end, valid: !isNaN(start) && !isNaN(end) };
+		})
+		.filter(entry => entry.valid);
+
+	const activeItems = validItems.filter(({ start, end }) => start <= now && now <= end);
+
+	if (activeItems.length > 0) {
+		for (const { item } of validItems) {
+			item.classList.toggle(clas, activeItems.some(e => e.item === item));
+		}
+	}
+	else {
+		const upcomingItems = validItems.filter(({ start }) => start > now);
+		let nextItem = null;
+		if (upcomingItems.length > 0) {
+			nextItem = upcomingItems.reduce((earliest, current) =>
+				current.start < earliest.start ? current : earliest
+			).item;
+		}
+		for (const { item } of validItems) {
+			item.classList.toggle(clas, item === nextItem);
+		}
+	}
+}
+
 
 async function get_data() {
 	try {
@@ -21,6 +55,20 @@ async function get_data() {
 		$("#bz-error").text("Failed to get the BZ status: " + error);
 		return;
 	}
+}
+
+function reorder_schedule(bz_begin, bz_end) {
+	const today = new Date().getDay(); // 0 = Sunday
+	const orderedBegin = [];
+	const orderedEnd = [];
+
+	for (let i = 0; i < 7; i++) {
+		const dayIndex = (today + i) % 7;
+		orderedBegin.push([...bz_begin[dayIndex]]); // shallow copy of inner array
+		orderedEnd.push([...bz_end[dayIndex]]);
+	}
+
+	return [orderedBegin, orderedEnd];
 }
 
 let notified_10m = false;
@@ -70,36 +118,46 @@ async function feed_bz() {
 
 	}
 
-	// display future BZs
-	let bz_next_future = "";
-	for (let next_bz in next_bzs_begin) {
-		let bz_begin_date = new Date(next_bzs_begin[next_bz] * 1000);
-		let bz_end_date = new Date(next_bzs_end[next_bz] * 1000);
-		let bz_begin_datetime = dformatter.format(bz_begin_date);
-		let bz_end_time = tformatter.format(bz_end_date);
-		const calendar = create_calendar_link("Battlezone",
-			next_bzs_begin[next_bz], next_bzs_end[next_bz],
-			`bz_${bz_begin_date.toISOString()}`);
-		bz_next_future += `<li>${bz_begin_datetime} - ${bz_end_time} ${calendar}</li>`;
+	// display schedule
+	const [schbegin, schend] = reorder_schedule(data["schbegin"], data["schend"]);
+	let today = new Date();
+	for (let day = 0; day < 7; day++) {
+		let current_day = new Date(today);
+		current_day.setDate(today.getDate() + day);
+		$(`#bz-sch${day}-day`).text(dformatter.format(current_day));
+		// Display all the bz for that given day
+		// start from the right from a display pov, but left for the
+		// table
+		let offset = schbegin[day].length - 1;
+		for (let bzidx = 0; bzidx < schbegin[day].length; bzidx++) {
+			let current_begin_hour = new Date(current_day);
+			current_begin_hour.setUTCHours(schbegin[day][bzidx], 0, 0, 0);
+			let current_end_hour = new Date(current_day);
+			current_end_hour.setUTCHours(schend[day][bzidx], 0, 0, 0);
+			let selector = $(`#bz-sch${day}-bz${offset}`);
+			selector.html(`
+				${tformatter.format(current_begin_hour)}-${tformatter.format(current_end_hour)}`);
+			selector.attr("data-begin", current_begin_hour.getTime());
+			selector.attr("data-end", current_end_hour.getTime());
+			offset--;
+		}
 	}
-	$("#bz-next-future").html(bz_next_future);
-
+	highlight_interval();
 }
 
 $(document).ready(function() {
 	document.title = "CoRT - " + _("BZ status");
 	$("#title").text(_("BZ status"));
-	$("#bz-next-title").text(_("Next BZ:"));
+	$("#bz-schedule-title").text(_("Schedule"));
 	$("#bz-info").text(_("The page refreshes itself every minute."));
 
 	let tz = localStorage.getItem("tz");
 	let lang = localStorage.getItem("lang");
 	dformatter = new Intl.DateTimeFormat(lang, {
-		weekday: 'long', month: '2-digit', day: 'numeric',
-		hour: '2-digit', minute: '2-digit', timeZone: tz
+		weekday: 'short', timeZone: tz
 	});
-	tformatter = new Intl.DateTimeFormat(lang, {
-		hour: '2-digit', minute: '2-digit', timeZone: tz
+	tformatter = new Intl.DateTimeFormat("en", {
+		hour: 'numeric', timeZone: tz, hour12: false
 	});
 
 	insert_notification_link();

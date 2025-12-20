@@ -83,7 +83,9 @@ class Battlezone {
 			"bzbegin" => 	$next_bzs_begin,
 			"bzend" => 	$next_bzs_end,
 			"bzon" => 	$bz_on,
-			"bzendsat" => 	$bz_ends_at
+			"bzendsat" => 	$bz_ends_at,
+			"schbegin" => 	$bz_begin,
+			"schend" =>	$bz_end
 		];
 	}
 }

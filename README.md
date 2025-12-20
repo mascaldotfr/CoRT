@@ -71,3 +71,4 @@ extra infos about using and deploying CoRT.
   the UI should be done.
 * Halvdan. His own trainer stats page has been a major influence on
   [tstats.html](https://mascaldotfr.github.io/CoRT/tstats.html)
+* Regnum Tools, for UI hints about the BZ schedule

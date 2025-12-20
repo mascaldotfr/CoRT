@@ -3,23 +3,32 @@
 	max-width: 35em;
 	margin: 0 auto;
 }
-#bz-container ul {
-	display: inline-block;
-	text-align: left;
-	padding-left: 0px;
-	margin-top: 0;
+table {
+	 border-collapse: collapse;
+	 margin: 0 auto;
+ }
+#bz-schedule-table tr {
+	margin: .25em;
+	border-bottom: 1px solid #717171;
 }
-#bz-container li {
-	list-style: none;
-	line-height: 1.8em;
+#bz-schedule-table tr:last-child {
+	border-bottom: unset;
 }
-#bz-next {
-	min-height: 12em;
+#bz-schedule-table td {
+	padding: .5em;
+	min-width: 6ch;
+}
+#bz-schedule {
+	min-height: 16em;
 	display: grid;
 	place-items: center;
 }
 #bz-countdown-status[data-status="on"] { color: var(--green); }
 #bz-countdown-status[data-status="off"] { color: var(--red) }
+.highlight {
+	font-weight: bold;
+	color: var(--red);
+}
 @media(max-width:799px) {
 	#bz-countdown {
 		min-height: 5em;

@@ -2,6 +2,27 @@
 
 class Battlezone {
 	function getSchedule() {
+		// Used for compat with the official API endpoint
+		$bz_begin = [
+			[13, 18],        // Sunday
+			[3, 13, 20],     // Monday
+			[13, 18],        // Tuesday
+			[13, 20],        // Wednesday
+			[3, 13, 18],     // Thursday
+			[13, 20],        // Friday
+			[3, 13, 20]      // Saturday
+		];
+
+		$bz_end = [
+			[16, 21],        // Sunday
+			[6, 16, 23],     // Monday
+			[16, 21],        // Tuesday
+			[16, 23],        // Wednesday
+			[6, 16, 21],     // Thursday
+			[17, 23],        // Friday
+			[6, 16, 23]      // Saturday
+		];
+
 		// BZ cycle: 15 min ON, 15 min OFF
 		$cycle_seconds = 30 * 60;
 		$on_duration   = 15 * 60;
@@ -35,7 +56,9 @@ class Battlezone {
 			"bzbegin"  => $next_bzs_begin,
 			"bzend"    => $next_bzs_end,
 			"bzon"     => $bz_on,
-			"bzendsat" => $bz_ends_at
+			"bzendsat" => $bz_ends_at,
+			"schbegin" => 	$bz_begin,
+			"schend" =>	$bz_end
 		];
 	}
 }
