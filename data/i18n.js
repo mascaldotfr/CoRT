@@ -640,10 +640,10 @@ export const __i18n__ = {
 		"es": "Uso porcentual",
 		"de": "Prozentuale Nutzung"
 	},
-	"Respawn times may lack precision until I double check with second accuracy this time.": {
-		"fr": "Les temps de réapparition peuvent manquer de précision jusqu'à ce que je les vérifie à nouveau avec une exactitude à la seconde près.",
-		"es": "Los tiempos de reaparición podrían carecer de precisión hasta que los verifique nuevamente con exactitud al segundo.",
-		"de": "Die Wiedererscheinungszeiten könnten ungenau sein, bis ich sie diesmal mit Sekundengenauigkeit nochmals überprüfe."
+	"All respawn times have been updated. Respawn times may lack precision until I double check with second accuracy this time.": {
+		"fr": "Tous les temps de réapparition ont été mis à jour. Ils peuvent toutefois manquer de précision jusqu'à ce que je les vérifie à nouveau avec une exactitude à la seconde près.",
+		"es": "Todos los tiempos de reaparición han sido actualizados. Sin embargo, podrían carecer de precisión hasta que los verifique nuevamente con exactitud al segundo.",
+		"de": "Alle Wiedererscheinungszeiten wurden aktualisiert. Sie könnten dennoch ungenau sein, bis ich sie diesmal mit Sekundengenauigkeit nochmals überprüfe."
 	}
 };
 
