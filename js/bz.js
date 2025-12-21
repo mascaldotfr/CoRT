@@ -186,6 +186,13 @@ async function feed_bz() {
 	// display schedule
 	const localsch = utcScheduleToLocal(data["schbegin"], data["schend"], lang);
 
+	// clear the table
+	for (let day = 0; day < 7; day++) {
+		for (let bzidx = 0; bzidx < 3; bzidx++) {
+			$(`#bz-sch${day}-bz${bzidx}`).text(" ");
+		}
+	}
+
 	for (let day = 0; day < 7; day++) {
 		$(`#bz-sch${day}-day`).text(localsch[day][0]["weekday"]);
 		// Display all the bz for that given day
