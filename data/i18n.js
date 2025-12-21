@@ -117,6 +117,11 @@ export const __i18n__ = {
 		"es": "Calendario",
 		"de": "Terminplan"
 	},
+	"All hours are local": {
+		"fr": "Toutes les heures sont locales",
+		"es": "Todas las horas son locales",
+		"de": "Alle Uhrzeiten sind lokal"
+	},
 	"Ends in":
 	{
 		"fr": "Se termine dans",

@@ -3,9 +3,8 @@ import {$, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlib
 import {Time} from "./wztools/wztools.js";
 import {_} from "../data/i18n.js";
 
-// time and date formatters
-let dformatter = null;
-let tformatter = null;
+// formatters
+let lang = localStorage.getItem("lang");
 let time = new Time();
 
 // API data
@@ -49,20 +48,84 @@ function highlight_interval(container = document, clas = "highlight") {
 	}
 }
 
-function reorder_schedule(bz_begin, bz_end) {
-        const today = new Date().getDay();
-        const orderedBegin = [];
-        const orderedEnd = [];
 
-        for (let i = 0; i < 7; i++) {
-                const dayIndex = (today + i) % 7;
-                orderedBegin.push([...bz_begin[dayIndex]]);
-                orderedEnd.push([...bz_end[dayIndex]]);
-        }
+// more magic
+function utcScheduleToLocal(schbegin, schend, lang = "en") {
+	const now = new Date();
 
-        return [orderedBegin, orderedEnd];
+	// Define the local week we want to display: Sunday to Saturday containing "now" or next event
+	const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+	const dayOfWeek = today.getDay();
+	let displaySunday;
+
+	// On Saturday after 18h, show next week
+	if (dayOfWeek === 6 && now.getHours() >= 18) {
+		displaySunday = new Date(today);
+		displaySunday.setDate(today.getDate() + 1);
+	} else {
+		displaySunday = new Date(today);
+		displaySunday.setDate(today.getDate() - dayOfWeek);
+	}
+	displaySunday.setHours(0, 0, 0, 0);
+	const displayNextSunday = new Date(displaySunday);
+	displayNextSunday.setDate(displaySunday.getDate() + 7);
+
+	// Output buckets for this local week (Sun=0 ... Sat=6)
+	const result = [[], [], [], [], [], [], []];
+
+	// Generate UTC events for days that could fall into this local week
+	// UTC days from (displaySunday - 1 day) to (displayNextSunday + 1 day)
+	const utcStart = new Date(displaySunday);
+	utcStart.setDate(displaySunday.getDate() - 1);
+	utcStart.setUTCHours(0, 0, 0, 0);
+
+	// Generate 9 UTC days
+	for (let i = 0; i < 9; i++) {
+		const utcDate = new Date(utcStart);
+		utcDate.setUTCDate(utcStart.getUTCDate() + i);
+		const utcDay = utcDate.getUTCDay();
+
+		const begins = schbegin[utcDay] || [];
+		const ends   = schend[utcDay]   || [];
+
+		for (let j = 0; j < Math.min(begins.length, ends.length); j++) {
+			let begin_ts = Date.UTC(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate(), begins[j]);
+			let end_ts   = Date.UTC(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate(), ends[j]);
+
+			// Handle overnight in UTC
+			if (ends[j] <= begins[j]) {
+				end_ts = Date.UTC(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate() + 1, ends[j]);
+			}
+
+			const beginLocal = new Date(begin_ts);
+
+			// Only include if it falls in the display week
+			if (beginLocal < displaySunday || beginLocal >= displayNextSunday) {
+				continue;
+			}
+
+			const localDayIndex = beginLocal.getDay(); // 0 = Sunday
+			const endLocal = new Date(end_ts);
+
+			const display = `${String(beginLocal.getHours()).padStart(2, '0')}-${String(endLocal.getHours()).padStart(2, '0')}`;
+			const weekday = beginLocal.toLocaleDateString(lang, { weekday: 'short' });
+
+			result[localDayIndex].push({
+				begin_ts,
+				end_ts,
+				display,
+				weekday
+			});
+		}
+	}
+
+	// Sort each day
+	for (let i = 0; i < 7; i++) {
+		result[i].sort((a, b) => a.begin_ts - b.begin_ts);
+	}
+
+	return result;
 }
-
 
 async function get_data() {
 	try {
@@ -121,33 +184,20 @@ async function feed_bz() {
 	}
 
 	// display schedule
-	const [schbegin, schend] = reorder_schedule(data["schbegin"], data["schend"]);
-	let today = new Date();
-	let today_utc = Date.UTC(
-		today.getUTCFullYear(),
-		today.getUTCMonth(),
-		today.getUTCDate()
-	);
-	let base_day = new Date(today_utc);
+	const localsch = utcScheduleToLocal(data["schbegin"], data["schend"], lang);
 
 	for (let day = 0; day < 7; day++) {
-		let current_day = new Date(base_day);
-		current_day.setUTCDate(today.getUTCDate() + day);
-		$(`#bz-sch${day}-day`).text(dformatter.format(current_day));
+		$(`#bz-sch${day}-day`).text(localsch[day][0]["weekday"]);
 		// Display all the bz for that given day
 		// start from the right from a display pov, but left for the
 		// array
-		let offset = schbegin[day].length - 1;
-		for (let bzidx = 0; bzidx < schbegin[day].length; bzidx++) {
-			let current_begin_hour = new Date(current_day);
-			current_begin_hour.setUTCHours(schbegin[day][bzidx], 0, 0, 0);
-			let current_end_hour = new Date(current_day);
-			current_end_hour.setUTCHours(schend[day][bzidx], 0, 0, 0);
+		let offset = localsch[day].length - 1;
+		for (let bzidx = 0; bzidx < localsch[day].length; bzidx++) {
+			const that_bz = localsch[day][bzidx];
 			let selector = $(`#bz-sch${day}-bz${offset}`);
-			selector.html(`
-			${tformatter.format(current_begin_hour)}-${tformatter.format(current_end_hour)}`);
-			selector.attr("data-begin", current_begin_hour.getTime());
-			selector.attr("data-end", current_end_hour.getTime());
+			selector.text(that_bz["display"]);
+			selector.attr("data-begin", that_bz["begin_ts"]);
+			selector.attr("data-end", that_bz["end_ts"]);
 			offset--;
 		}
 	}
@@ -158,16 +208,11 @@ $(document).ready(function() {
 	document.title = "CoRT - " + _("BZ status");
 	$("#title").text(_("BZ status"));
 	$("#bz-schedule-title").text(_("Schedule"));
+	$("#bz-hours").text(_("All hours are local"));
 	$("#bz-info").text(_("The page refreshes itself every minute."));
 
-	let tz = localStorage.getItem("tz");
-	let lang = localStorage.getItem("lang");
-	dformatter = new Intl.DateTimeFormat(lang, {
-		weekday: 'short', timeZone: "UTC"
-	});
-	tformatter = new Intl.DateTimeFormat("en", {
-		hour: 'numeric', timeZone: tz, hour12: false
-	});
+	// TZ doesn't apply here
+	$("#tz").hide();
 
 	insert_notification_link();
 	const scheduler = new MyScheduler(1, 5, feed_bz);
