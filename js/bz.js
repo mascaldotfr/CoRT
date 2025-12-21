@@ -11,6 +11,10 @@ let time = new Time();
 // API data
 let data = null;
 
+// notification sent within 10 minutes?
+let notified_10m = false;
+
+
 // Highlight the next bz event (it's magic don't ask)
 function highlight_interval(container = document, clas = "highlight") {
 	const now = Date.now();
@@ -45,6 +49,20 @@ function highlight_interval(container = document, clas = "highlight") {
 	}
 }
 
+function reorder_schedule(bz_begin, bz_end) {
+        const today = new Date().getDay();
+        const orderedBegin = [];
+        const orderedEnd = [];
+
+        for (let i = 0; i < 7; i++) {
+                const dayIndex = (today + i) % 7;
+                orderedBegin.push([...bz_begin[dayIndex]]);
+                orderedEnd.push([...bz_end[dayIndex]]);
+        }
+
+        return [orderedBegin, orderedEnd];
+}
+
 
 async function get_data() {
 	try {
@@ -56,22 +74,6 @@ async function get_data() {
 		return;
 	}
 }
-
-function reorder_schedule(bz_begin, bz_end) {
-	const today = new Date().getDay(); // 0 = Sunday
-	const orderedBegin = [];
-	const orderedEnd = [];
-
-	for (let i = 0; i < 7; i++) {
-		const dayIndex = (today + i) % 7;
-		orderedBegin.push([...bz_begin[dayIndex]]); // shallow copy of inner array
-		orderedEnd.push([...bz_end[dayIndex]]);
-	}
-
-	return [orderedBegin, orderedEnd];
-}
-
-let notified_10m = false;
 
 async function feed_bz() {
 
@@ -121,13 +123,20 @@ async function feed_bz() {
 	// display schedule
 	const [schbegin, schend] = reorder_schedule(data["schbegin"], data["schend"]);
 	let today = new Date();
+	let today_utc = Date.UTC(
+		today.getUTCFullYear(),
+		today.getUTCMonth(),
+		today.getUTCDate()
+	);
+	let base_day = new Date(today_utc);
+
 	for (let day = 0; day < 7; day++) {
-		let current_day = new Date(today);
-		current_day.setDate(today.getDate() + day);
+		let current_day = new Date(base_day);
+		current_day.setUTCDate(today.getUTCDate() + day);
 		$(`#bz-sch${day}-day`).text(dformatter.format(current_day));
 		// Display all the bz for that given day
 		// start from the right from a display pov, but left for the
-		// table
+		// array
 		let offset = schbegin[day].length - 1;
 		for (let bzidx = 0; bzidx < schbegin[day].length; bzidx++) {
 			let current_begin_hour = new Date(current_day);
@@ -136,7 +145,7 @@ async function feed_bz() {
 			current_end_hour.setUTCHours(schend[day][bzidx], 0, 0, 0);
 			let selector = $(`#bz-sch${day}-bz${offset}`);
 			selector.html(`
-				${tformatter.format(current_begin_hour)}-${tformatter.format(current_end_hour)}`);
+			${tformatter.format(current_begin_hour)}-${tformatter.format(current_end_hour)}`);
 			selector.attr("data-begin", current_begin_hour.getTime());
 			selector.attr("data-end", current_end_hour.getTime());
 			offset--;
@@ -154,7 +163,7 @@ $(document).ready(function() {
 	let tz = localStorage.getItem("tz");
 	let lang = localStorage.getItem("lang");
 	dformatter = new Intl.DateTimeFormat(lang, {
-		weekday: 'short', timeZone: tz
+		weekday: 'short', timeZone: "UTC"
 	});
 	tformatter = new Intl.DateTimeFormat("en", {
 		hour: 'numeric', timeZone: tz, hour12: false
