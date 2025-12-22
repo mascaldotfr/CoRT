@@ -14,117 +14,75 @@ let data = null;
 let notified_10m = false;
 
 
-// Highlight the next bz event (it's magic don't ask)
-function highlight_interval(container = document, clas = "highlight") {
-	const now = Date.now();
-	const items = Array.from(container.querySelectorAll('[data-begin][data-end]'));
-
-	const validItems = items
-		.map(item => {
-			const start = Number(item.dataset.begin);
-			const end = Number(item.dataset.end);
-			return { item, start, end, valid: !isNaN(start) && !isNaN(end) };
-		})
-		.filter(entry => entry.valid);
-
-	const activeItems = validItems.filter(({ start, end }) => start <= now && now <= end);
-
-	if (activeItems.length > 0) {
-		for (const { item } of validItems) {
-			item.classList.toggle(clas, activeItems.some(e => e.item === item));
-		}
-	}
-	else {
-		const upcomingItems = validItems.filter(({ start }) => start > now);
-		let nextItem = null;
-		if (upcomingItems.length > 0) {
-			nextItem = upcomingItems.reduce((earliest, current) =>
-				current.start < earliest.start ? current : earliest
-			).item;
-		}
-		for (const { item } of validItems) {
-			item.classList.toggle(clas, item === nextItem);
-		}
-	}
-}
-
-
-// more magic
 function utcScheduleToLocal(schbegin, schend, lang = "en") {
-	const now = new Date();
+	const df = new Intl.DateTimeFormat(lang, {
+		weekday: 'short'
+	});
 
-	// Define the local week we want to display: Sunday to Saturday containing "now" or next event
-	const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-	const dayOfWeek = today.getDay();
-	let displaySunday;
-
-	// On Saturday after 18h, show next week
-	if (dayOfWeek === 6 && now.getHours() >= 18) {
-		displaySunday = new Date(today);
-		displaySunday.setDate(today.getDate() + 1);
-	} else {
-		displaySunday = new Date(today);
-		displaySunday.setDate(today.getDate() - dayOfWeek);
+	// get next ocurrence of day index (0=Sun, 6=Sat) as Date()
+	function nextDate(dayIndex) {
+		let now = new Date();
+		now.setUTCDate(now.getUTCDate() + (dayIndex + ( 7 - now.getUTCDay() )) % 7);
+		now.setUTCHours(0, 0, 0, 0);
+		return now;
 	}
-	displaySunday.setHours(0, 0, 0, 0);
-	const displayNextSunday = new Date(displaySunday);
-	displayNextSunday.setDate(displaySunday.getDate() + 7);
 
-	// Output buckets for this local week (Sun=0 ... Sat=6)
-	const result = [[], [], [], [], [], [], []];
-
-	// Generate UTC events for days that could fall into this local week
-	// UTC days from (displaySunday - 1 day) to (displayNextSunday + 1 day)
-	const utcStart = new Date(displaySunday);
-	utcStart.setDate(displaySunday.getDate() - 1);
-	utcStart.setUTCHours(0, 0, 0, 0);
-
-	// Generate 9 UTC days
-	for (let i = 0; i < 9; i++) {
-		const utcDate = new Date(utcStart);
-		utcDate.setUTCDate(utcStart.getUTCDate() + i);
-		const utcDay = utcDate.getUTCDay();
-
-		const begins = schbegin[utcDay] || [];
-		const ends   = schend[utcDay]   || [];
-
-		for (let j = 0; j < Math.min(begins.length, ends.length); j++) {
-			let begin_ts = Date.UTC(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate(), begins[j]);
-			let end_ts   = Date.UTC(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate(), ends[j]);
-
-			// Handle overnight in UTC
-			if (ends[j] <= begins[j]) {
-				end_ts = Date.UTC(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate() + 1, ends[j]);
-			}
-
-			const beginLocal = new Date(begin_ts);
-
-			// Only include if it falls in the display week
-			if (beginLocal < displaySunday || beginLocal >= displayNextSunday) {
-				continue;
-			}
-
-			const localDayIndex = beginLocal.getDay(); // 0 = Sunday
-			const endLocal = new Date(end_ts);
-
-			const display = `${String(beginLocal.getHours()).padStart(2, '0')}-${String(endLocal.getHours()).padStart(2, '0')}`;
-			const weekday = beginLocal.toLocaleDateString(lang, { weekday: 'short' });
-
-			result[localDayIndex].push({
-				begin_ts,
-				end_ts,
-				display,
-				weekday
+	// Step 1 : create & convert all utc timestamp to local display
+	// Place them by local days in buckets, which may differ from UTC day
+	// Array schbegin starts from Sun to stop in Sat
+	const localBZs = [ [], [], [], [], [], [], [] ];
+	for (let d = 0; d < schbegin.length; d++) {
+		for (let h = 0; h < schbegin[d].length; h++) {
+			let begin = nextDate(d);
+			begin.setUTCHours(schbegin[d][h]);
+			console.log(begin)
+			let end = nextDate(d);
+			end.setUTCHours(schend[d][h]);
+			// local conversion for display happens here:
+			let display = `${String(begin.getHours()).padStart(2,0)}-${String(end.getHours()).padStart(2,0)}`;
+			localBZs[begin.getDay()].push({
+				"begin_ts": begin.getTime(),
+				"end_ts": end.getTime(),
+				"display": display,
+				"highlight": false
 			});
 		}
 	}
 
-	// Sort each day
-	for (let i = 0; i < 7; i++) {
-		result[i].sort((a, b) => a.begin_ts - b.begin_ts);
+	// Step 2: order days with today first
+	let todayIndex = new Date().getDay();
+	const localOrderedBZs = [
+		    ...localBZs.slice(todayIndex),
+		    ...localBZs.slice(0, todayIndex)
+	];
+
+	// Step 3: find the right BZ interval for highlighting
+	let now = new Date().getTime();
+	let found = false;
+	for (let d = 0; d < localOrderedBZs.length; d++) {
+		if (found)
+			break;
+		for (let h = 0; h < localOrderedBZs[d].length; h++) {
+			let begin = localOrderedBZs[d][h]["begin_ts"];
+			let end = localOrderedBZs[d][h]["end_ts"];
+			if ((now >= begin && now < end) || (begin > now)) {
+				// ^ BZ is ON || OFF
+				localOrderedBZs[d][h]["highlight"] = true;
+				found = true;
+				break;
+			}
+		}
 	}
 
-	return result;
+	// Step 4: generate short day names in order
+	let daynamesOrdered = [];
+	for (let d = 0; d < 7; d++) {
+		let thisDay = new Date();
+		thisDay = thisDay.setDate(thisDay.getDate() + d);
+		daynamesOrdered[d] = df.format(thisDay);
+	}
+
+	return [ localOrderedBZs, daynamesOrdered ];
 }
 
 async function get_data() {
@@ -184,17 +142,17 @@ async function feed_bz() {
 	}
 
 	// display schedule
-	const localsch = utcScheduleToLocal(data["schbegin"], data["schend"], lang);
-
+	const [localsch, daynames] = utcScheduleToLocal(data["schbegin"], data["schend"], lang);
 	// clear the table
 	for (let day = 0; day < 7; day++) {
 		for (let bzidx = 0; bzidx < 3; bzidx++) {
 			$(`#bz-sch${day}-bz${bzidx}`).text(" ");
+			$(`#bz-sch${day}-bz${bzidx}`).removeClass("highlight");
+
 		}
 	}
-
 	for (let day = 0; day < 7; day++) {
-		$(`#bz-sch${day}-day`).text(localsch[day][0]["weekday"]);
+		$(`#bz-sch${day}-day`).text(daynames[day]);
 		// Display all the bz for that given day
 		// start from the right from a display pov, but left for the
 		// array
@@ -203,12 +161,11 @@ async function feed_bz() {
 			const that_bz = localsch[day][bzidx];
 			let selector = $(`#bz-sch${day}-bz${offset}`);
 			selector.text(that_bz["display"]);
-			selector.attr("data-begin", that_bz["begin_ts"]);
-			selector.attr("data-end", that_bz["end_ts"]);
+			if (that_bz["highlight"])
+				selector.addClass("highlight");
 			offset--;
 		}
 	}
-	highlight_interval();
 }
 
 $(document).ready(function() {
