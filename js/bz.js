@@ -60,17 +60,24 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 	// Sort daily schedules
 	// Then give all BZ days at least 3 BZ so they are properly aligned
 	let blankBZ = {"display": " ", "highlight": false};
+	let bzsPerDay = 3;
+	let utcOffset = Math.ceil(new Date().getTimezoneOffset() / 60);
+	// XXX Some countries have 1 to 4 BZ per day (UTC+4 and 5)
+	if (utcOffset == 4 || utcOffset == 5)
+		bzsPerDay = 4;
 	for (let d = 0; d < localOrderedBZs.length; d++) {
-		if (localOrderedBZs[d].length < 3) {
+		if (localOrderedBZs[d].length < bzsPerDay) {
 			// insert or add a blank BZ is TZ dependant
 			const first_bz_at = new Date(localOrderedBZs[d][0]["begin_ts"]);
 			let second_bz_at = null;
-			// Some countries have 1 BZ per day like Afghanistan
+			// XXX Some countries have 1 to 4 BZ per day (UTC+4 and 5)
 			try {
 				second_bz_at = new Date(localOrderedBZs[d][1]["begin_ts"]);
 			}
 			catch (_unused) {
-				second_bz_at = first_bz_at;
+				// Instead of trying to figure out, don't insert blanks
+				// for this exotic case for our user base
+				break;
 			}
 			if (first_bz_at.getHours() < 7) {
 				if (second_bz_at.getHours() <= 17) {
