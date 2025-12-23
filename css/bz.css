@@ -23,11 +23,14 @@ table {
 	display: grid;
 	place-items: center;
 }
-#bz-countdown-status[data-status="on"] { color: var(--green); }
-#bz-countdown-status[data-status="off"] { color: var(--red) }
-.highlight {
-	font-weight: bold;
+[data-status="on"] {
+	color: var(--green);
+}
+[data-status="off"] {
 	color: var(--red);
+}
+[data-status] {
+	font-weight: bold;
 }
 @media(max-width:799px) {
 	#bz-countdown {

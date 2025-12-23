@@ -7,6 +7,7 @@ import {_} from "../data/i18n.js";
 let lang = localStorage.getItem("lang");
 let time = new Time();
 
+
 // API data
 let data = null;
 
@@ -15,9 +16,6 @@ let notified_10m = false;
 
 
 function utcScheduleToLocal(schbegin, schend, lang = "en") {
-	const df = new Intl.DateTimeFormat(lang, {
-		weekday: 'short'
-	});
 
 	// get next ocurrence of day index (0=Sun, 6=Sat) as Date()
 	function nextDate(dayIndex) {
@@ -32,14 +30,13 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 	// Array schbegin starts from Sun to stop in Sat
 	const localBZs = [ [], [], [], [], [], [], [] ];
 	for (let d = 0; d < schbegin.length; d++) {
+		let begin = nextDate(d);
+		let end = nextDate(d);
 		for (let h = 0; h < schbegin[d].length; h++) {
-			let begin = nextDate(d);
 			begin.setUTCHours(schbegin[d][h]);
-			console.log(begin)
-			let end = nextDate(d);
 			end.setUTCHours(schend[d][h]);
 			// local conversion for display happens here:
-			let display = `${String(begin.getHours()).padStart(2,0)}-${String(end.getHours()).padStart(2,0)}`;
+			const display = `${String(begin.getHours()).padStart(2,0)}-${String(end.getHours()).padStart(2,0)}`;
 			localBZs[begin.getDay()].push({
 				"begin_ts": begin.getTime(),
 				"end_ts": end.getTime(),
@@ -56,15 +53,54 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 		    ...localBZs.slice(0, todayIndex)
 	];
 
+	// Step 2.5
+	// Sort daily schedules
+	// Then give all BZ days at least 3 BZ so they are properly aligned
+	let blankBZ = {"display": " ", "highlight": false};
+	for (let d = 0; d < localOrderedBZs.length; d++) {
+		if (localOrderedBZs[d].length < 3) {
+			// insert or add a blank BZ is TZ dependant
+			const first_bz_at = new Date(localOrderedBZs[d][0]["begin_ts"]);
+			let second_bz_at = null;
+			// Some countries have 1 BZ per day like Afghanistan
+			try {
+				second_bz_at = new Date(localOrderedBZs[d][1]["begin_ts"]);
+			}
+			catch (_unused) {
+				second_bz_at = first_bz_at;
+			}
+			if (first_bz_at.getHours() < 7) {
+				if (second_bz_at.getHours() <= 17) {
+					// LA, Sydney
+					localOrderedBZs[d].push(blankBZ);
+				}
+				else {
+					// Tokyo
+					localOrderedBZs[d].splice(1, 0, blankBZ);
+				}
+			}
+			else {
+				// BsAs, PAris
+				localOrderedBZs[d].unshift(blankBZ);
+			}
+		}
+	}
+
 	// Step 3: find the right BZ interval for highlighting
-	let now = new Date().getTime();
+	let now = new Date();
+	let in_24_hours = new Date(now);
+	in_24_hours.setHours(in_24_hours.getHours() + 24);
 	let found = false;
 	for (let d = 0; d < localOrderedBZs.length; d++) {
 		if (found)
 			break;
 		for (let h = 0; h < localOrderedBZs[d].length; h++) {
-			let begin = localOrderedBZs[d][h]["begin_ts"];
-			let end = localOrderedBZs[d][h]["end_ts"];
+			let begin = new Date(localOrderedBZs[d][h]["begin_ts"]);
+			let end = new Date(localOrderedBZs[d][h]["end_ts"]);
+			// The calendar is rolling, in some case the first line
+			// is in 6 days due to BZ going over midnight
+			if (begin > in_24_hours)
+				continue;
 			if ((now >= begin && now < end) || (begin > now)) {
 				// ^ BZ is ON || OFF
 				localOrderedBZs[d][h]["highlight"] = true;
@@ -76,9 +112,12 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 
 	// Step 4: generate short day names in order
 	let daynamesOrdered = [];
+	const df = new Intl.DateTimeFormat(lang, {
+		weekday: 'short'
+	});
 	for (let d = 0; d < 7; d++) {
 		let thisDay = new Date();
-		thisDay = thisDay.setDate(thisDay.getDate() + d);
+		thisDay.setDate(thisDay.getDate() + d);
 		daynamesOrdered[d] = df.format(thisDay);
 	}
 
@@ -144,27 +183,23 @@ async function feed_bz() {
 	// display schedule
 	const [localsch, daynames] = utcScheduleToLocal(data["schbegin"], data["schend"], lang);
 	// clear the table
-	for (let day = 0; day < 7; day++) {
-		for (let bzidx = 0; bzidx < 3; bzidx++) {
-			$(`#bz-sch${day}-bz${bzidx}`).text(" ");
-			$(`#bz-sch${day}-bz${bzidx}`).removeClass("highlight");
+	document.querySelectorAll(".clearme").forEach(el => el.remove());
 
-		}
-	}
 	for (let day = 0; day < 7; day++) {
+		let daily_schedule = [];
 		$(`#bz-sch${day}-day`).text(daynames[day]);
 		// Display all the bz for that given day
 		// start from the right from a display pov, but left for the
 		// array
-		let offset = localsch[day].length - 1;
 		for (let bzidx = 0; bzidx < localsch[day].length; bzidx++) {
 			const that_bz = localsch[day][bzidx];
-			let selector = $(`#bz-sch${day}-bz${offset}`);
-			selector.text(that_bz["display"]);
+			let highlight = "";
 			if (that_bz["highlight"])
-				selector.addClass("highlight");
-			offset--;
+				highlight = bz_on ? 'data-status="on"' : 'data-status="off"';
+			daily_schedule.push(`<td ${highlight} class="clearme">${that_bz["display"]}`);
+
 		}
+		$(`#bz-sch${day}`).append(daily_schedule.join(""));
 	}
 }
 
