@@ -30,6 +30,11 @@ export const __i18n__ = {
 		"es": "Eventos de la ZG",
 		"de": "WZ-Events"
 	},
+	"Quests": {
+		"fr": "Quêtes",
+		"es": "Misiones",
+		"de": "Quests"
+	},
 	"Bosses respawn countdown": {
 		"fr": "Epiques",
 		"es": "Epicos",
@@ -45,10 +50,10 @@ export const __i18n__ = {
 		"es": "Stats del entrenador",
 		"de": "Skilltrainer-Statistik"
 	},
-	"External Tools": {
-		"fr": "Outils externes",
-		"es": "Herramientas externas",
-		"de": "Externe Werkzeuge"
+	"More Tools...": {
+		"fr": "Plus d'outils ...",
+		"es": "Más herramientas...",
+		"de": "Mehr Werkzeuge..."
 	},
 	"Armor calculator":
 	{
@@ -644,6 +649,36 @@ export const __i18n__ = {
 		"fr": "Pourcentage d'utilisation",
 		"es": "Uso porcentual",
 		"de": "Prozentuale Nutzung"
+	},
+	"Quests Countdowns": {
+		"fr": "Compte à rebours des quêtes",
+		"es": "Cuentas regresivas de misiones",
+		"de": "Quest-Countdowns"
+	},
+	"Tickets Delivery": {
+		"fr": "Livraison de tickets",
+		"es": "Entrega de tickets",
+		"de": "Ticketzustellung"
+	},
+	"Warmaster Quests Reset": {
+		"fr": "Réinit. des quêtes WM",
+		"es": "Reinicio de misiones WM",
+		"de": "WM-Quests-Zurücksetzung"
+	},
+	"Xymerald Quest Reset": {
+		"fr": "Réinit. de la quête de Xymerald",
+		"es": "Reinicio de la misión de Xymerald",
+		"de": "Xymerald-Quest-Zurücksetzung"
+	},
+	"12 hours": {
+		"fr": "12 heures",
+		"es": "12 horas",
+		"de": "12 Stunden"
+	},
+	"after you completed the last one.": {
+		"fr": "après avoir terminé la précédente.",
+		"es": "después de completar la anterior.",
+		"de": "nach Abschluss der vorherigen."
 	},
 	"All respawn times have been updated. Respawn times may lack precision until I double check with second accuracy this time.": {
 		"fr": "Tous les temps de réapparition ont été mis à jour. Ils peuvent toutefois manquer de précision jusqu'à ce que je les vérifie à nouveau avec une exactitude à la seconde près.",

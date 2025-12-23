@@ -1,0 +1,11 @@
+#quests-container {
+	max-width: 35em;
+	margin: 0 auto;
+	text-align: center;
+}
+.card {
+	min-height: 6em;
+}
+#quests-wm, #quests-xym, #quests-tickets {
+	visibility: hidden;
+}
