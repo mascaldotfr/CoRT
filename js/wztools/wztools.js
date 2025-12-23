@@ -15,7 +15,8 @@ export class HumaniseEvents {
 		let tz = localStorage.getItem("tz");
 		let dformatter = new Intl.DateTimeFormat(undefined, {
 			month: 'numeric', day: 'numeric',
-			hour: '2-digit', minute: '2-digit', timeZone: tz
+			hour: '2-digit', minute: '2-digit', timeZone: tz,
+			hour12: false
 		});
 
 		// wztools
