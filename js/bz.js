@@ -28,11 +28,11 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 	// Step 1 : create & convert all utc timestamp to local display
 	// Place them by local days in buckets, which may differ from UTC day
 	// Array schbegin starts from Sun to stop in Sat
-	const localBZs = [ [], [], [], [], [], [], [] ];
+	let localBZs = [ [], [], [], [], [], [], [] ];
 	for (let d = 0; d < schbegin.length; d++) {
-		let begin = nextDate(d);
-		let end = nextDate(d);
 		for (let h = 0; h < schbegin[d].length; h++) {
+			let begin = nextDate(d);
+			let end = nextDate(d);
 			begin.setUTCHours(schbegin[d][h]);
 			end.setUTCHours(schend[d][h]);
 			// local conversion for display happens here:
@@ -45,10 +45,13 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 			});
 		}
 	}
+	// Fix out of order BZ on Sunday on Asian TZs that are wrapping as
+	// previous Saturday
+	localBZs[0] = localBZs[0].sort((a, b) => a.begin_ts - b.begin_ts);
 
 	// Step 2: order days with today first
 	let todayIndex = new Date().getDay();
-	const localOrderedBZs = [
+	let localOrderedBZs = [
 		    ...localBZs.slice(todayIndex),
 		    ...localBZs.slice(0, todayIndex)
 	];
