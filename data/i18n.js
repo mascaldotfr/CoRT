@@ -5,6 +5,46 @@
 
 export const __i18n__ = {
 	"supported_lang": ["en", "fr", "es", "de"],
+	"Champions of Regnum trainer, war status, bosses respawn and bz countdowns": {
+		"fr": "Trainer Champions of Regnum, statut de la guerre, réapparition des boss et compte à rebours des BZ",
+		"es": "Entrenador de Champions of Regnum, estado de la guerra, reaparición de epicos y cuentas regresivas de BZ",
+		"de": "Champions of Regnum Trainer, Kriegsstatus, Boss-Respawns und BZ-Countdowns"
+	},
+	"Champions of Regnum bosses countdown and respawns (Evendim, Daen, Thorkul)": {
+		"fr": "Compte à rebours et réapparitions des boss de Champions of Regnum (Evendim, Daen, Thorkul)",
+		"es": "Cuenta regresiva y reapariciones de los jefes de Champions of Regnum (Evendim, Daen, Thorkul)",
+		"de": "Countdown und Respawns der Champions of Regnum-Bosse (Evendim, Daen, Thorkul)"
+	},
+	"Champions of Regnum battlezone countdown, schedule and status": {
+		"fr": "Compte à rebours, planning et statut des BZ de Champions of Regnum",
+		"es": "Cuenta regresiva, horario y estado de las BZ de Champions of Regnum",
+		"de": "Countdown, Zeitplan und Status der BZ von Champions of Regnum"
+	},
+	"Quests reset time for Champions of Regnum": {
+		"fr": "Heure de réinitialisation des quêtes de Champions of Regnum",
+		"es": "Hora de reinicio de las misiones de Champions of Regnum",
+		"de": "Zurücksetzungszeit der Quests von Champions of Regnum"
+	},
+	"Champions of Regnum trainer statistics for all classes and versions": {
+		"fr": "Statistiques du trainer de Champions of Regnum pour toutes les classes et versions",
+		"es": "Estadísticas del entrenador de Champions of Regnum para todas las clases y versiones",
+		"de": "Trainer-Statistiken von Champions of Regnum für alle Klassen und Versionen"
+	},
+	"Champions of Regnum events log: last dragon wishes, invasions and more!": {
+		"fr": "Journal des événements de Champions of Regnum : derniers vœux du dragon, invasions et plus encore !",
+		"es": "Registro de eventos de Champions of Regnum: últimos deseos del dragón, invasiones y más",
+		"de": "Ereignisprotokoll von Champions of Regnum: letzte Drachenwünsche, Invasionen und mehr!"
+	},
+	"Champions of Regnum warzone statistics, last invasions, dragon wishes and gems steals!": {
+		"fr": "Statistiques des zones de guerre de Champions of Regnum, dernières invasions, vœux du dragon et vols de gemmes !",
+		"es": "Estadísticas de las zonas de guerra de Champions of Regnum, últimas invasiones, deseos del dragón y robos de gemas",
+		"de": "Kriegszonen-Statistiken von Champions of Regnum, letzte Invasionen, Drachenwünsche und Edelsteindiebstähle!"
+	},
+	"Champions of Regnum warzone status and latest events, straight from the frontline!": {
+		"fr": "Statut des zones de guerre de Champions of Regnum et derniers événements, directement depuis le front !",
+		"es": "Estado de las zonas de guerra de Champions of Regnum y últimos eventos, ¡directo desde el frente!",
+		"de": "Kriegszonen-Status und neueste Ereignisse von Champions of Regnum, direkt von der Frontlinie!"
+	},
 	"Trainer": {
 		"fr": "Entraîneur",
 		"es": "Entrenador",
