@@ -64,7 +64,7 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20251223.185158
+	<p> <!--VERSION-->Version: 20251228.163504
 `;
 
 $(document).ready(function() {
@@ -83,6 +83,14 @@ $(document).ready(function() {
 	let storedlang = localStorage.getItem("lang");
 	if (__i18n__.supported_lang.includes(storedlang))
 		currentlang = storedlang;
+
+	// Language override forced through URL parameter
+	let urlparm = new URLSearchParams(window.location.search);
+	if (urlparm.has("lang") && __i18n__.supported_lang.includes(urlparm.get("lang"))) {
+		currentlang = urlparm.get("lang");
+		localStorage.setItem("lang", currentlang);
+	}
+
 	$("#menu-lang-current").html(__menu_flags[currentlang] + " " + langs[currentlang]);
 	// Make details dropdowns close on outside click
 	document.addEventListener("click", (e) => {
@@ -98,12 +106,13 @@ $(document).ready(function() {
 		if (l == currentlang)
 			continue;
 		$("#menu-lang-list").append(`
-			<li class="langoption" id="menu-lang-${l}">${__menu_flags[l]}&nbsp;<a href="#">${langs[l]}</a>`);
+			<li class="langoption" id="menu-lang-${l}">${__menu_flags[l]}&nbsp;<a href="#" hreflang="${l}">${langs[l]}</a>`);
 		$(`#menu-lang-${l}`).on("click", function () {
 			localStorage.setItem("lang", l);
 			window.location.reload();
 		});
 	}
+
 	// SEO stuff
 	if (currentlang != "en")
 		$("html").attr("lang", currentlang);
