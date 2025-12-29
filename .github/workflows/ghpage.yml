@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-      
+
       - name: Fix version and cache bust
         run: |
           sed -i -E 's/(<!--VERSION-->Version: ).+/\1'"${{ github.ref_name }}"'/' js/menu.js
@@ -28,16 +28,7 @@ jobs:
 
           find . -name '*.html' -print0 | xargs -0 sed -E -i'' 's/\.(css|js)(\?[^"]*)?">/.\1?'$ESCAPED_VERSION'">/g'
           find . -name '*.js' -print0 | xargs -0 sed -E -i'' '/^[[:space:]]*import.*\.js"/s/(\.js)(\?[^"]*)?"/\.js?'$ESCAPED_VERSION'"/g'
-     
-      - name: Make international links for SEO
-        run: |
-          for i in en fr de es; do
-            mkdir $i
-            for p in *.html; do
-              echo '<meta http-equiv="refresh" content="0;URL=https://mascaldotfr.github.io/CoRT/'${p}'?lang='${i}'">'  > ${i}/${p}
-            done
-          done  
-          
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
