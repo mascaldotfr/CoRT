@@ -64,7 +64,7 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20251229.134704
+	<p> <!--VERSION-->Version: 20251229.144931
 `;
 
 $(document).ready(function() {
@@ -115,6 +115,12 @@ $(document).ready(function() {
 			localStorage.setItem("lang", l);
 			window.location.reload();
 		});
+		// Add alternate links
+		const link = document.createElement("link");
+		link.rel = "alternate";
+		link.hreflang = l;
+		link.href = window.location + `?lang=${l}`;
+		document.head.appendChild(link);
 	}
 
 	// SEO stuff
