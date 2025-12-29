@@ -43,6 +43,7 @@ $(document).ready(function() {
 		const path = window.location.pathname;
 		const dirname = path.endsWith("/") ? path : path.substring(0, path.lastIndexOf("/"));
 		window.location.pathname = dirname + "/";
+		return
 	}
 	// search for a given trainer dataset in url, and skillset then
 	// set the version accordingly. See also manage_versions.
@@ -442,7 +443,7 @@ class SetupManager {
 		}
 		catch (error) {
 			// Should never happen as the data is local...
-			alert(`Unable to fetch trainer data: ${error}`);
+			console.log(`Unable to fetch trainer data: ${error}`);
 			return;
 		}
 		let alltrees = this.trainerdata["class_disciplines"][base_skills];
