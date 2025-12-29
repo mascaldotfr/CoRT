@@ -64,7 +64,7 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20251228.173921
+	<p> <!--VERSION-->Version: 20251229.133200
 `;
 
 $(document).ready(function() {
@@ -107,10 +107,7 @@ $(document).ready(function() {
 		// Hide current language
 		if (l == currentlang)
 			continue;
-		// I18n names are only avaiable through GH pages tricks
-		let lang_href = `${l}/${pagename}`;
-		if (window.location.host !== "mascaldotfr.github.io")
-			lang_href = `?lang=${l}`;
+		let lang_href = `${pagename}?lang=${l}`;
 
 		$("#menu-lang-list").append(`
 			<li class="langoption" id="menu-lang-${l}">${__menu_flags[l]}&nbsp;<a href="${lang_href}" hreflang="${l}">${langs[l]}</a>`);
