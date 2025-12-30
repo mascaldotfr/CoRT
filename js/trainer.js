@@ -651,7 +651,7 @@ class Icons {
 
 			const update = () => {
 				fu_computePosition(ref, tip, {
-					placement: "top",
+					placement: "bottom",
 					middleware: [
 						fu_offset(8),
 						fu_flip(),
