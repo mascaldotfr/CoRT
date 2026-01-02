@@ -721,9 +721,13 @@ export const __i18n__ = {
 		"fr": "après avoir terminé la précédente.",
 		"es": "después de completar la anterior.",
 		"de": "nach Abschluss der vorherigen."
+	},
+	"There is a boss event going on. Bosses are not respawning at their usual hours.": {
+		"fr": "Un événement de boss est en cours. Les boss ne réapparaissent pas à leurs heures habituelles.",
+		"es": "Hay un evento de epicos en curso. Los epicos no están reapareciendo en sus horarios habituales.",
+		"de": "Ein Boss-Event findet gerade statt. Bosse erscheinen nicht zu ihren üblichen Zeiten."
 	}
 };
-
 
 // automatic language detection if none is defined
 if (localStorage.getItem("lang") == null) {
