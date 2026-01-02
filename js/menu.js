@@ -1,3 +1,5 @@
+// On top of the menu, this files contains some globals not really fitting
+// elsewhere, since this file is always executed
 import {__i18n__, _} from "../data/i18n.js";
 import {$, create_tz_list} from "./libs/cortlibs.js";
 import {__api__urls} from "./api_url.js";
@@ -64,8 +66,28 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20260102.105830
+	<p> <!--VERSION-->Version: 20260102.221553
 `;
+
+
+// XXX temporary message. This avoids touching 3 files for them.
+// colors are: green, blue, red (see style.css for variables)
+// example:
+// <div id="temporary-message" data-color="blue" data-en="message" data-es="mensaje"...></div>
+function temporary_message() {
+	// Using lamaiquery for this would cause more error handling
+	if (!document.getElementById("temporary-message"))
+		return;
+	const selector = $("#temporary-message");
+	const color = selector.attr("data-color");
+	selector.css("background", `var(--${color})`);
+	const lang = localStorage.getItem("lang");
+	const translated_msg = selector.attr("data-" + lang);
+	// blue = info, red = warning, green = ok
+	const icon = {"blue": "&#8505;&#65039;", "green": "&#9989;", "red": "&#9888;&#65039;"}
+	selector.html(icon[color] + "&nbsp;" + translated_msg);
+}
+
 
 $(document).ready(function() {
 
@@ -130,6 +152,8 @@ $(document).ready(function() {
 		const en_descr = descr.attr("content");
 		descr.attr("content", _(en_descr));
 	}
+
+	temporary_message();
 
 	create_tz_list("#tzchooser");
 

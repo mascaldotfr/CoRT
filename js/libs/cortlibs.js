@@ -254,7 +254,7 @@ catch(_unused) { /* Unsupported by safari */ }
 if (__notifications_swsupport)
 	navigator.serviceWorker.register("sw.js");
 
-// Schedule minutely things. See /js/libs/ticker.js for code, and WZ/BZ/BOSSES for usage
+// XXX Schedule minutely things. See /js/libs/ticker.js for code, and WZ/BZ/BOSSES for usage
 export class MyScheduler {
 	constructor(start, end, callback) {
 		this.start = start;
