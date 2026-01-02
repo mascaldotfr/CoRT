@@ -50,10 +50,17 @@ export const __i18n__ = {
 		"es": "Entrenador",
 		"de": "Skilltrainer"
 	},
-	"Bosses status": {
-		"fr": "Epiques",
+	"Bosses": {
+		"comment": "menu",
+		"fr": "Bosses",
 		"es": "Épicos",
 		"de": "Bosse"
+	},
+	"Bosses respawn times": {
+		"comment": "titles",
+		"fr": "Horaires de réapparition des bosses",
+		"es": "Horarios de reaparición de los epicos",
+		"de": "Boss-Respawn-Zeiten"
 	},
 	"BZ status": {
 		"fr": "Battlezone",
@@ -74,11 +81,6 @@ export const __i18n__ = {
 		"fr": "Quêtes",
 		"es": "Misiones",
 		"de": "Quests"
-	},
-	"Bosses respawn countdown": {
-		"fr": "Epiques",
-		"es": "Epicos",
-		"de": "Boss-Countdown"
 	},
 	"WZ statistics": {
 		"fr": "Stats de la WZ",

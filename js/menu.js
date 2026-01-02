@@ -31,7 +31,7 @@ let __menu_content = `
 		<ul id="menu-links">
 		<li class="menuitem bold"><a href="./">${__menu_icons["trainer"]} ${_("Trainer")}</a></li>
 		<li class="menuitem bold"><a href="wz.html">${__menu_icons["wz"]} ${_("WZ status")}</a></li>
-		<li class="menuitem bold"><a href="bosses.html">${__menu_icons["bosses"]} ${_("Bosses status")}</a></li>
+		<li class="menuitem bold"><a href="bosses.html">${__menu_icons["bosses"]} ${_("Bosses")}</a></li>
 		<li class="menuitem bold"><a href="bz.html">${__menu_icons["bz"]} ${_("BZ status")}</a></li>
 		<li class="menuitem bold"><a href="wevents.html">${__menu_icons["wevents"]} ${_("WZ events")}</a></li>
 		<li class="menuitem bold"><a href="wstats.html">${__menu_icons["wstats"]} ${_("WZ statistics")}</a></li>
@@ -64,7 +64,7 @@ let __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p>${__menu_github_stuff}
 	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20251230.234335
+	<p> <!--VERSION-->Version: 20260102.083343
 `;
 
 $(document).ready(function() {

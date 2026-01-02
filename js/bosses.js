@@ -116,8 +116,8 @@ async function refresh_display() {
 }
 
 $(document).ready(function() {
-	document.title = "CoRT - " + _("Bosses respawn countdown");
-	$("#title").text(_("Bosses respawn countdown"));
+	document.title = "CoRT - " + _("Bosses respawn times");
+	$("#title").text(_("Bosses respawn times"));
 	$("#boss-info").text(_("The page refreshes itself every minute."));
 	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
