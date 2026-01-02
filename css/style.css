@@ -63,7 +63,7 @@ summary {
 summary::-webkit-details-marker {
     display: none;
 }
-.card {
+#temporary-message, .card {
 	background: var(--card_background);
 	border-radius: 5px;
 	padding: var(--default_margin_padding);
@@ -161,6 +161,15 @@ h3 {
 	margin-bottom: 1em;
 	min-height: 3em;
 }
+#temporary-message {
+	text-align: center;
+	font-weight: bold;
+	color: black;
+}
+#temporary-message a {
+	color: white;
+}
+
 .red { color: var(--red); }
 .blue { color: var(--blue); }
 .green { color: var(--green); }
