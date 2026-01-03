@@ -57,18 +57,24 @@ let __menu_content = `
 	</header>
 `;
 
-let __menu_github_stuff = window.location.host !== "mascaldotfr.github.io" ? '' : `
-	<i>CoRT is a free and open source website, feel free to check out its
-	<a href="https://github.com/mascaldotfr/CoRT" target="_blank">source code</a>, and report
-	<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">bugs</a>.
-`;
-let __menu_footer = `
-	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
-	<p>${__menu_github_stuff}
-	See also the <a href="https://discord.gg/P5BJRtTx3R">Discord server</a>!</p>
-	<p> <!--VERSION-->Version: 20260103.105859
-`;
+const __menu_github_stuff = function () {
+	if (window.location.host !== "mascaldotfr.github.io")
+		return ""; // Not official!
+	const src = `<a href="https://github.com/mascaldotfr/CoRT" target="_blank">
+			${_("source code")}</a>`;
+	const bugs = `<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">
+			${_("report bugs")}</a>`;
+	const dc = `<a href="https://discord.gg/P5BJRtTx3R" target="_blank">
+			${_("Discord server")}</a>`;
+	return _("CoRT is a free and open source website, feel free to check out its %s, and %s. See also the %s!",
+		 src, bugs, dc)
+}
 
+const __menu_footer = `
+	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
+	<p class="italic">${__menu_github_stuff()}
+	<p> <!--VERSION-->Version: 20260103.122212
+`;
 
 // XXX temporary message. This avoids touching 3 files for them.
 // colors are: green, blue, red (see style.css for variables)
