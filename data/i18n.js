@@ -58,7 +58,7 @@ export const __i18n__ = {
 	},
 	"Bosses respawn times": {
 		"comment": "titles",
-		"fr": "Horaires de réapparition des bosses",
+		"fr": "Horaires de réapparition des boss",
 		"es": "Horarios de reaparición de los epicos",
 		"de": "Boss-Respawn-Zeiten"
 	},
