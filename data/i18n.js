@@ -56,8 +56,8 @@ export const __i18n__ = {
 		"de": "Quellcode"
 	},
 	"report bugs": {
-		"fr": "signaler des bogues",
-		"es": "informar errores",
+		"fr": "signaler les bugs",
+		"es": "reportar los errores",
 		"de": "Fehler melden"
 	},
 	"Discord server": {
