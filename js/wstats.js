@@ -34,8 +34,6 @@ function localize_timelines(utclines) {
 		for (let hour in utclines[realm]) {
 			date.setUTCHours(hour, 0, 0, 0);
 			let localhour = tformatter.format(date);
-			localhour = localhour.replace(/:\d+.+$/, "");
-			localhour = localhour.replace(/^0/, "");
 			localline[localhour] = utclines[realm][hour];
 		}
 		localizedlines.push(localline);
@@ -44,10 +42,9 @@ function localize_timelines(utclines) {
 }
 
 function show_graphs_hourly(data, selector, onlyinteger=true) {
-	// skip 00:00 and 23:00 as it overflows
-	let hours = [""];
-	for (let i = 1; i < 23; i++)
-		hours.push(String(i).padStart(2, "0"));
+	let hours = [];
+	for (let i = 0; i <= 23; i++)
+		hours.push(String(i));
 	let dataset = {
 		labels: hours,
 		series: localize_timelines([ data[realms[0]], data[realms[1]], data[realms[2]] ])
@@ -66,8 +63,8 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 			["screen and (max-width: 1600px)", {
 				axisX: {
 					labelInterpolationFnc: function (value) {
-						let hour = Number(value.substring(0,2));
-						if (hour % 2 == 0 && hour >= 1 && hour <= 22) {
+						const hour = Number(value);
+						if (hour % 2 == 0 && hour <= 22) {
 							return hour;
 						}
 						else {
@@ -206,7 +203,7 @@ $(document).ready(function() {
 		                " " + _("Last event:"));
 
 	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
-		hour12: false, hour: 'numeric', minute: 'numeric',
+		hour12: false, hour: 'numeric',
 		timeZone: localStorage.getItem("tz")
 	});
 
