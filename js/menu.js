@@ -26,7 +26,7 @@ let __menu_icons = {
 	"quests": `<svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" viewBox="0 0 36 36"><path fill="#FFD983" d="M32 0H10a4 4 0 0 0-4 4v24H4a4 4 0 0 0 0 8h24a4 4 0 0 0 4-4V8a4 4 0 0 0 0-8"/><path fill="#E39F3D" d="M8 10h24V8H10L8 7z"/><path fill="#FFE8B6" d="M10 0a4 4 0 0 0-4 4v24.555A3.96 3.96 0 0 0 4 28a4 4 0 1 0 4 4V7.445C8.59 7.789 9.268 8 10 8a4 4 0 0 0 0-8"/><path fill="#C1694F" d="M12 4a2 2 0 1 1-4.001-.001A2 2 0 0 1 12 4M6 32a2 2 0 1 1-4.001-.001A2 2 0 0 1 6 32m24-17a1 1 0 0 1-1 1H11a1 1 0 0 1 0-2h18a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H11a1 1 0 1 1 0-2h18a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H11a1 1 0 1 1 0-2h18a1 1 0 0 1 1 1m0 4a1 1 0 0 1-1 1H11a1 1 0 1 1 0-2h18a1 1 0 0 1 1 1"/></svg>`
 };
 
-let __menu_content = `
+let __menu_content = function () { return `
 	<input type="checkbox" id="menu-click">
 	<label for="menu-click" class="menu-btn"><span class="bold">${_("☰  Menu")}</span></label>
 	<header>
@@ -55,7 +55,7 @@ let __menu_content = `
 		</li>
 		</ul>
 	</header>
-`;
+`; };
 
 const __menu_github_stuff = function () {
 	if (window.location.host !== "mascaldotfr.github.io")
@@ -70,11 +70,12 @@ const __menu_github_stuff = function () {
 		 src, bugs, dc)
 }
 
-const __menu_footer = `
+const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260104.104741
-`;
+	<p> <!--VERSION-->Version: 20260104.142525
+`; };
+
 
 // XXX temporary message. This avoids touching 3 files for them.
 // colors are: green, blue, red (see style.css for variables)
@@ -97,9 +98,6 @@ function temporary_message() {
 
 $(document).ready(function() {
 
-	$("#menu").html(__menu_content);
-	$("#footer").html(__menu_footer);
-
 	let langs = {
 		"en": "EN",
 		"de": "DE",
@@ -119,6 +117,11 @@ $(document).ready(function() {
 		localStorage.setItem("lang", currentlang);
 	}
 
+	// XXX all language dependent stuff should come after this line
+
+	$("#menu").html(__menu_content());
+	$("#footer").html(__menu_footer());
+
 	$("#menu-lang-current").html(__menu_flags[currentlang] + " " + langs[currentlang]);
 	// Make details dropdowns close on outside click
 	document.addEventListener("click", (e) => {
@@ -128,6 +131,8 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	// generate languages list
 	// jshint -W083
 	const path = window.location.pathname;
 	const pagename = path.endsWith("/") ? "" : path.split("/").pop();
