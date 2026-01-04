@@ -33,7 +33,8 @@ function localize_timelines(utclines) {
 		let localline = [];
 		for (let hour in utclines[realm]) {
 			date.setUTCHours(hour, 0, 0, 0);
-			let localhour = tformatter.format(date);
+			// Number to remove leading zeroes
+			const localhour = Number(tformatter.format(date));
 			localline[localhour] = utclines[realm][hour];
 		}
 		localizedlines.push(localline);
@@ -202,8 +203,8 @@ $(document).ready(function() {
 	$("#ws-info-info").text(_("The page refreshes itself every minute.") +
 		                " " + _("Last event:"));
 
-	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
-		hour12: false, hour: 'numeric',
+	tformatter = new Intl.DateTimeFormat("en-GB", {
+		hour12: false, hour: '2-digit',
 		timeZone: localStorage.getItem("tz")
 	});
 

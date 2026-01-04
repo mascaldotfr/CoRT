@@ -73,7 +73,7 @@ const __menu_github_stuff = function () {
 const __menu_footer = `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260104.011234
+	<p> <!--VERSION-->Version: 20260104.015826
 `;
 
 // XXX temporary message. This avoids touching 3 files for them.
