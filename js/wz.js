@@ -221,7 +221,7 @@ async function display_wz(init=false) {
 
 
 $(document).ready(function() {
-	document.title = "CoRT - " + _("WZ status");
+	document.title = _("WZ status") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("WZ status"));
 	$("#wz-info-info").text(
 		_("The page will update itself every minute.") +

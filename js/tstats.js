@@ -97,7 +97,7 @@ function redraw_version() {
 }
 
 $(document).ready(async function() {
-	document.title = "CoRT - " + _("Trainer statistics");
+	document.title = _("Trainer statistics") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Trainer statistics"));
 	$("#ts-oldstats-text").html(_("For stats on older versions of Regnum <a id='ts-oldstats-link'>check this site</a>."));
 	$("#ts-oldstats-link").attr("href", "https://poludnica.shinyapps.io/configs/");

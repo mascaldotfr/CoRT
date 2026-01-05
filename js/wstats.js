@@ -198,7 +198,7 @@ async function display_stat(force = false) {
 }
 
 $(document).ready(function() {
-	document.title = "CoRT - " + _("WZ statistics");
+	document.title = _("WZ statistics") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("WZ statistics"));
 	$("#ws-info-info").text(_("The page refreshes itself every minute.") +
 		                " " + _("Last event:"));

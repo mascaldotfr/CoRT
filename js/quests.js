@@ -42,7 +42,7 @@ function display() {
 }
 
 $(document).ready(function() {
-	document.title = "CoRT - " + _("Quests Countdowns");
+	document.title = _("Quests Countdowns") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Quests Countdowns"));
 	$("#quests-tickets-title").text(_("Tickets Delivery"));
 	$("#quests-wm-title").text(_("Warmaster Quests Reset"));

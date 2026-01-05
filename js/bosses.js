@@ -116,7 +116,7 @@ async function refresh_display() {
 }
 
 $(document).ready(function() {
-	document.title = "CoRT - " + _("Bosses respawn times");
+	document.title = _("Bosses respawn times") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Bosses respawn times"));
 	$("#boss-info").text(_("The page refreshes itself every minute."));
 	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {

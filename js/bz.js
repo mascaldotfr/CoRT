@@ -214,7 +214,7 @@ async function feed_bz() {
 }
 
 $(document).ready(function() {
-	document.title = "CoRT - " + _("BZ status");
+	document.title = _("BZ status") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("BZ status"));
 	$("#bz-schedule-title").text(_("Schedule"));
 	$("#bz-hours").text(_("All hours are local"));

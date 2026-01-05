@@ -67,7 +67,7 @@ async function get_data() {
 }
 
 $(document).ready(async function() {
-	document.title = "CoRT - " + _("WZ events");
+	document.title = _("WZ events") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("WZ events"));
 	$("#we-info-info").text(
 		_("All events over the last 14 days.") +

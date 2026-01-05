@@ -5,6 +5,11 @@
 
 export const __i18n__ = {
 	"supported_lang": ["en", "fr", "es", "de"],
+	" - CoRT - Champions of Regnum tools": {
+		"fr": " - CoRT - outils pour Champions of Regnum",
+		"es": " - CoRT - Herramientas por Champions of Regnum",
+		"de": " - CoRT - Werkzeuge für Champions von Regnum"
+	},
 	"Champions of Regnum trainer, war status, bosses respawn and bz countdowns": {
 		"fr": "Trainer Champions of Regnum, statut de la WZ, réapparition des boss et compte à rebours des BZ",
 		"es": "Entrenador de Champions of Regnum, estado de la ZG, reaparición de epicos y cuentas regresivas de BZ",
