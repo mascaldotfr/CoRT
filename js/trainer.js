@@ -7,7 +7,7 @@ import { computePosition as fu_computePosition, offset as fu_offset, flip as fu_
 // Classes are instanciated at the end
 
 $(document).ready(function() {
-	document.title = "CoRT - " + _("Trainer");
+	document.title = _("Trainer") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Trainer"));
 	$("#titleinfo").html(
 		_("Hovering your mouse or clicking (on mobile) on a skill icon will show its description.") +
