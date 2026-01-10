@@ -1,7 +1,3 @@
-
-> [!IMPORTANT]
-> **CoRT is in maintenance mode: no new features will be added, only minor fixes or data updates. The site will stay up though.**
-
 # Champions of Regnum tools
 
 After the death of the regnumsentinel trainer, all was left were operating
