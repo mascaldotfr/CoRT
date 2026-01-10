@@ -2,16 +2,18 @@
 > [!IMPORTANT]
 > **CoRT is in maintenance mode: no new features will be added, only minor fixes or data updates. The site will stay up though.**
 
-# Champions of Regnum trainer (and more)
+# Champions of Regnum tools
 
-Since the famous regnumsentinel trainer is dead, all is left are operating
+After the death of the regnumsentinel trainer, all was left were operating
 systems locked trainers, or the updated Inquisition trainer from the german
-Regnum forum *(update: they ended up using this trainer instead)* but it has
+Regnum forum *(update: they ended up using this trainer instead)* but it had
 some outdated mechanics.
 
-This is a (simpler) knockoff of the regnumsentinel website trainer, this one
-will be alive as long as GitHub exists and is open source software. On top of
-that, there are countdown pages for bosses and BZ, WZ status and statistics.
+This website started as a (simpler) knockoff of the regnumsentinel website
+trainer, that will be alive as long as GitHub Page exists and is open source
+software. It grew up since then to surpass regnumsentinel, there are now
+countdown pages for bosses and BZ, live WZ status, various statistics and
+more...
 
 The trainer just requires a webserver serving static files to run, everything
 is run client side. All the rest depends on an API server though.
@@ -23,9 +25,6 @@ extra infos about using and deploying CoRT.
 
 ## Known issues
 
-* ~display on mobile devices is weird due to flex in the WM skill row. it's not
-  easy to fix, as even regnumsentinel had the issue. Use your device in
-  landscape mode if it really bothers you.~ *This is fixed on most devices.*
 * shared urls are long, this could be fixed by using an url shortener api, but
   free plans may be quickly limit rated and they're not permanent. I don't want
   to have a database server, since it then would require a separate server and
