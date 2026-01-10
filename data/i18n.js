@@ -6,7 +6,7 @@
 export const __i18n__ = {
 	"supported_lang": ["en", "fr", "es", "de"],
 	" - CoRT - Champions of Regnum tools": {
-		"fr": " - CoRT - outils pour Champions of Regnum",
+		"fr": " - CoRT - Outils pour Champions of Regnum",
 		"es": " - CoRT - Herramientas por Champions of Regnum",
 		"de": " - CoRT - Werkzeuge für Champions von Regnum"
 	},
