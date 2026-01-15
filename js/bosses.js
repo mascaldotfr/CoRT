@@ -20,18 +20,19 @@ function unixstamp2human(unixstamp) {
 	return dformatter.format(new Date(unixstamp * 1000));
 }
 
+// Floor to minute any Unix timestamp given for any non-null types
 function minute_floor(v) {
-	if (Array.isArray(v)) {
+	if (Array.isArray(v))
 		return v.map(function(ts) {
 			return Math.floor(ts / 60) * 60;
 		});
-	}
-	if (typeof v === "number") {
+
+	if (typeof v === "number")
 		return Math.floor(v / 60) * 60;
-	}
-	if (typeof v === "object" && v !== null && !Array.isArray(v)) {
-		const result = {};
-		for (var key in v) {
+
+	if (typeof v === "object" && v !== null) {
+		let result = {};
+		for (let key in v) {
 			if (v.hasOwnProperty(key) && typeof v[key] === "number")
 				result[key] = Math.floor(v[key] / 60) * 60;
 			else
