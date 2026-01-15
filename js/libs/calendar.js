@@ -28,7 +28,7 @@ function escape_text(text) {
 		.replace(/\n/g, "\\n");
 }
 
-/**
+/*
  * Generate iCalendar string (UTC) with 10m and 1H reminders
  * title - title and description
  * start — Unix timestamp (seconds)
@@ -80,10 +80,7 @@ export { create_calendar_link };
 
 // CSS
 
-if (document.readyState === "loading")
-	document.addEventListener("DOMContentLoaded", inject_addtocalendar_style);
-else
-	inject_addtocalendar_style();
+document.addEventListener("DOMContentLoaded", inject_addtocalendar_style);
 
 function inject_addtocalendar_style() {
 	const style = document.createElement("style");
