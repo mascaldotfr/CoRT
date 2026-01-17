@@ -215,7 +215,7 @@ function power_change(power) {
 	if (setup.automated_clicks === true) return;
 
 	$("#t-ppointsleft").text(setup.ppointsleft);
-	power.parentNode.parentNode.childNodes[1].dataset.status = wanted_level == 0 ? "disabled" : "active";
+	ancestor.childNodes[1].dataset.status = wanted_level == 0 ? "available" : "active";
 }
 
 function discipline_change(discipline) {
