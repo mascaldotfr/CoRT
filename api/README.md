@@ -33,9 +33,12 @@ To get the whole list:
 (await import("./js/api_url.js")).__api__urls
 ```
 
-## Rate limits and other rules
+## Rate limits and other rules on official server API
 
-### Rate limit
+*These limits are set at the webserver level, if you set your own API server,
+they won't apply.*
+
+### Rate limits
 
 The rate limits by host are:
 
@@ -43,7 +46,7 @@ The rate limits by host are:
 - 30 queries / minute for static queries (json, csv etc.)
 
 The rate limits for these 2 are separated, meaning that you can issue 30 dynamic
-and 30 static requests per minute per host.
+and 30 static requests per minute and per host.
 
 ### Other rules
 
