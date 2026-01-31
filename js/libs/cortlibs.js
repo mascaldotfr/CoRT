@@ -67,7 +67,12 @@ export const $ = (function (selector) {
 		},
 		getJSON: async function(url) {
 			const reply = await fetch(url)
-					    .then(reply => reply.json())
+					    .then(reply => {
+						    if (!reply.ok && reply.status !== 304) {
+							    throw new Error ("API query failed with HTTP code " + reply.status);
+						    }
+						    return reply.json()
+					    })
 					    .catch(error => { throw(error); });
 			return reply;
 		},
