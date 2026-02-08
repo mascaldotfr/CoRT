@@ -10,10 +10,10 @@ https://mascaldotfr.github.io, unless you do the appropriate changes in the
 source code (`submit.php` and `../../js/api_url.js`)
 
 The dataset is available
-[there](https://cort.thebus.top/api/var/trainer_saved_setups.txt)
+[there](https://cort.ovh/api/var/trainer_saved_setups.txt)
 
 Statistics are already generated for use by CoRT and are publicly available at
-https://cort.thebus.top/api/bin/collect/trainer_stats.php
+https://cort.ovh/api/bin/collect/trainer_stats.php
 
 ## Data exploitation
 

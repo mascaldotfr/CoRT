@@ -6,7 +6,7 @@ page, to warn for servers issues and potentially other stuff, if
 
 ## URL
 
-https://cort.thebus.top/api/var/maintenance.txt
+https://cort.ovh/api/var/maintenance.txt
 
 ## Usage
 

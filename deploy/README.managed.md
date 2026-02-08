@@ -54,11 +54,11 @@ wget -qO- https://github.com/mascaldotfr/CoRT/releases/download/${V}/CoRT-${V}.t
 
 # Prepopulate with official API stuff
 cd CoRT-${V}/api/var
-wget    https://cort.thebus.top/api/var/trainer_saved_setups.txt \
-        https://cort.thebus.top/api/var/events.sqlite \
-        https://cort.thebus.top/api/var/warstatus.json \
-        https://cort.thebus.top/api/var/statistics.json \
-        https://cort.thebus.top/api/var/allevents.json
+wget    https://cort.ovh/api/var/trainer_saved_setups.txt \
+        https://cort.ovh/api/var/events.sqlite \
+        https://cort.ovh/api/var/warstatus.json \
+        https://cort.ovh/api/var/statistics.json \
+        https://cort.ovh/api/var/allevents.json
 touch maintenance.txt
 
 # Create a tarball to upload to our webhoster, it's gonna be faster.

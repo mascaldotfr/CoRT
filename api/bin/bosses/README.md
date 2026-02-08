@@ -4,13 +4,13 @@ This page documents the bosses API endpoint, used by CoRT and CoRT-dc.
 
 ## URL
 
-https://cort.thebus.top/api/bin/bosses/bosses.php
+https://cort.ovh/api/bin/bosses/bosses.php
 
 ## Parameters
 
 ### `fake`
 
-https://cort.thebus.top/api/bin/bosses/bosses.php?fake
+https://cort.ovh/api/bin/bosses/bosses.php?fake
 
 If a `fake` parameter is provided, then Daen and Evendim will respawn every 30
 minutes, at 15 minutes from each other. TK and server won't be available. It's

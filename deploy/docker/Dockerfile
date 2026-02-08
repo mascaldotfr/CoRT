@@ -57,11 +57,11 @@ RUN if test "$PREPOPULATE" != "yes"; then \
 	; \
 	fi
 RUN if test "$PREPOPULATE" = "yes"; then \
-	wget 	https://cort.thebus.top/api/var/trainer_saved_setups.txt \
-		https://cort.thebus.top/api/var/events.sqlite \
-		https://cort.thebus.top/api/var/warstatus.json \
-		https://cort.thebus.top/api/var/statistics.json \
-		https://cort.thebus.top/api/var/allevents.json \
+	wget 	https://cort.ovh/api/var/trainer_saved_setups.txt \
+		https://cort.ovh/api/var/events.sqlite \
+		https://cort.ovh/api/var/warstatus.json \
+		https://cort.ovh/api/var/statistics.json \
+		https://cort.ovh/api/var/allevents.json \
 	; \
 	fi
 

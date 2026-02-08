@@ -4,13 +4,13 @@ This page documents the BZ API endpoint.
 
 ## URL
 
-https://cort.thebus.top/api/bin/bz/bz.php
+https://cort.ovh/api/bin/bz/bz.php
 
 ## Parameters
 
 ### `fake`
 
-https://cort.thebus.top/api/bin/bz/bz.php?fake
+https://cort.ovh/api/bin/bz/bz.php?fake
 
 If a `fake` parameter is provided, then BZ will be ON then OFF for 15 minutes
 respectively. It's meant for testing and development.

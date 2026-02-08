@@ -1,7 +1,7 @@
 # Deploying CoRT on a VPS
 
 This one is targeted at people very comfy with hosting things. This is also
-roughly how https://cort.thebus.top works. Unlike the other hosting docs, we're
+roughly how https://cort.ovh works. Unlike the other hosting docs, we're
 here using the development version.
 
 It's quite advanced, and it's recommended to read that file once before

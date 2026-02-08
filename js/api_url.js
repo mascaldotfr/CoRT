@@ -18,7 +18,7 @@ function get_paths() {
 	if (frontend_with_no_api.includes(window.location.hostname)) {
 		let api = {};
 		// The root where all API files can be found
-		api["base"] = "https://cort.thebus.top/api";
+		api["base"] = "https://cort.ovh/api";
 		// Used by the trainer to filter setup submissions
 		api["frontsite"] = "https://mascaldotfr.github.io";
 		// Subdirectory where the HTML/JS/CSS/etc. files are placed, relative to your

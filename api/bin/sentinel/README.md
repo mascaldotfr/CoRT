@@ -8,7 +8,7 @@ keep a small output response.
 
 ## URL
 
-https://cort.thebus.top/api/bin/sentinel/sentinel.php
+https://cort.ovh/api/bin/sentinel/sentinel.php
 
 ## Response format
 

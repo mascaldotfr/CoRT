@@ -16,7 +16,7 @@ of such files.
 
 There is a way to generate a CSV dump with all historical events.
 
-URL: https://cort.thebus.top/api/bin/warstatus/stats/dump_generator.php
+URL: https://cort.ovh/api/bin/warstatus/stats/dump_generator.php
 
 The output is in the same format than the warstatus events list, see
 `../warstatus/README.md` for more details. It's refreshed every 24 hours,
