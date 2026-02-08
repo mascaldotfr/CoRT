@@ -619,7 +619,7 @@ class SetupManager {
 			pathname = pathname.substring(0, pathname.lastIndexOf("/") + 1);
 
 		let origin = window.location.origin;
-		if (window.location.origin == "localhost")
+		if (window.location.origin == "https://mascaldorfr.github.io")
 			origin = "https://cort.ovh";
 
 		return origin + pathname + "?t=" + compressor.compress(setup);
