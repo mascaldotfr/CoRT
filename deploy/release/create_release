@@ -1,0 +1,72 @@
+#!/bin/sh
+
+# A script for generating release tarballs and template release notes
+# Just run it, the result will popup in /tmp and it'll tell you the files
+# BUG: in the release note, if you tag as a + you're screwed, but anyway
+# This script is meant for balance rcs and stable releases
+
+# Call it as sh ./create_release to avoid cd'ing elsewhere.
+
+which composer >/dev/null
+if test $? != 0; then
+	echo "COMPOSER not found, install php-composer!!!"
+	exit 1
+fi
+
+# Go to repo root
+cd "$(git rev-parse --show-toplevel)"
+
+TAG=$(git tag --sort=-creatordate | awk 'NR==1')
+PREVIOUS_TAG=$(git tag --sort=-creatordate | awk '/^[0-9]+\.[0-9]+\.[0-9]+$/{if (++count == 2) print}')
+echo "===> Found version ${TAG}. Previous one was ${PREVIOUS_TAG}."
+
+echo "===> Creating the necessary directories"
+TMPDIR=$(mktemp -d)
+TARGET="${TMPDIR}/CoRT-${TAG}"
+mkdir "${TARGET}"
+git ls-files -z | xargs -0 -I {} cp --parents {} "${TARGET}/"
+
+echo "===> Make source code change"
+cd "${TARGET}"
+# Remove all preload statements
+sed -i '/<link rel="preload"/d' *.html
+# Cache bust top js and css
+ESCAPED_VERSION=$(printf '%s' "${TAG}" | sha1sum | cut -c1-8)
+find . -name '*.html' -print0 | xargs -0 sed -E -i'' 's/\.(css|js)(\?[^"]*)?">/.\1?'$ESCAPED_VERSION'">/g'
+find . -name '*.js' -print0 | xargs -0 sed -E -i'' '/^[[:space:]]*import.*\.js"/s/(\.js)(\?[^"]*)?"/\.js?'$ESCAPED_VERSION'"/g'
+# Put a fixed version
+sed -i -E 's/(<!--VERSION-->Version: ).+/\1'"${TAG}"'/' js/menu.js
+
+echo "Generating tarball"
+TARBALL="/tmp/CoRT-${TAG}.tar.gz"
+composer install &&
+tar -czf "${TARBALL}" \
+	--transform "s,^,CoRT-${TAG}/," \
+	*
+
+echo "Generating release note template..."
+cat <<EOF > "${TARBALL}.release_notes.md"
+## Main highlights
+
+### Next release
+
+No schedule.
+
+## About
+
+See  https://codeberg.org/mascal/CoRT/src/branch/main/deploy to deploy it
+
+To setup CoRT on managed webhosting or integrating it on your own server, use **CoRT-${TAG}.tar.gz** instead of the source code.
+
+### Changelog
+
+
+**Full Changelog**: https://codeberg.org/mascal/CoRT/compare/${PREVIOUS_TAG}...${TAG}
+EOF
+
+echo "===> Cleaning up"
+rm -rf "${TMPDIR}"
+
+echo "===> Tarball generated at ${TARBALL}"
+echo "===> Template release notes generated at ${TARBALL}.release_notes.md"
+
