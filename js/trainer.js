@@ -620,9 +620,9 @@ class SetupManager {
 
 		let url_path = window.location.origin + pathname;
 		if (window.location.origin == "https://mascaldotfr.github.io")
-			origin = "https://cort.ovh/";
+			url_path = "https://cort.ovh/";
 
-		return origin + pathname + "?t=" + compressor.compress(setup);
+		return url_path + "?t=" + compressor.compress(setup);
 	}
 
 	async collect_setup(setupstring) {
