@@ -79,7 +79,7 @@ needed to serve the frontend and API.
 
 ## Uploading to your hosting provider
 
-There is more than a way to do it, so let's just assume your hoster have a file manager.
+There is more than a way to do it, so let's just assume your hoster has a file manager.
 
 Just upload the tarball and extract it in the web root directory of you website
 (most often in the `public_html` directory).
@@ -131,10 +131,10 @@ It's pretty straightforward:
 
 It's actually not a bad thing because you're self sufficient.
 
-1. Make a prepopulated tarball of CoRT, without the API data fetching
-2. Upload it to your hosting provider in the web root directory
-3. Put your cronjob on monthly
-4. Make a backup of the current `/CoRT/api/var` with your hoster file manager outside of `/CoRT`
+1. Get a CoRT tarball, don't prepopulate
+2. Make a backup of the current `/CoRT/api/var` with your hoster file manager outside of `/CoRT`
+3. Upload it to your hosting provider in the web root directory
+4. Put your cronjob on monthly
 5. Delete the old CoRT directory
 6. Extract the tarball in the web root directory
 7. Replace the `/CoRT/api/var` directory by your backup one

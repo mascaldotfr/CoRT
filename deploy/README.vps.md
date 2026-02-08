@@ -60,19 +60,17 @@ As such, keep the `main` branch for upstream updates, and adapt them in your
 ```shell
 git clone https://github.com/mascaldotfr/CoRT.git
 cd CoRT
-# Move the original main branch to upstream
-git branch -m main upstream
-# Ensure the upstream is properly set
-git branch --set-upstream-to=origin/main upstream
 # Create a local branch (this is where your changes go)
 git checkout -b local
+# Ensure the upstream is properly set
+git branch --set-upstream-to=origin/main local
 ```
 
 ### Do some changes
 
 > [!CAUTION]
 > You need to commit **any** change to the _local_ branch ASAP, or merging
-> changes from _upstream_ will fail:
+> changes from _main_ will fail:
 
 ```shell
 git checkout local
@@ -82,10 +80,10 @@ git add . && git commit -m "made a few local changes"
 ### Get updates from upstream
 
 We need to be sure that the _local_ branch will used whatever happens, or the
-original CoRT will be displayed instead. Hence the awkward line:
+original CoRT will be displayed instead.
 
 ```shell
-(git checkout upstream && git pull origin main || git checkout local) && git checkout local && git merge upstream --strategy-option ours --no-edit
+git fetch origin --tags --force; git checkout local; git merge origin/main --strategy-option ours --no-edit
 ```
 See the merge strategy options at https://git-scm.com/docs/git-merge#Documentation/git-merge.txt-ours
 

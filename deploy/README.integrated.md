@@ -7,7 +7,7 @@ Technically, this kind of installation is the [managed one](README.managed.md)
 with a dash of [VPS install](README.vps.md).
 
 Target system is Debian where php runs as `www-data`, and the web root is
-`/var/www/html`. sudo is installed. YMMV anyway depending on how much your
+`/var/www/html`. `sudo` is installed. YMMV anyway depending on how much your
 harden things.
 
 **You can follow the [managed one](README.managed.md), only the preparation and
@@ -40,6 +40,7 @@ wget    https://cort.thebus.top/api/var/trainer_saved_setups.txt \
 touch maintenance.txt
 
 sudo mv /tmp/CoRT-${V} /var/www/html/CoRT
+# Actually only /var/www/html/CoRT/api/var would need that but heh ...
 sudo chown -R www-data:www-data /var/www/html/CoRT
 ```
 
