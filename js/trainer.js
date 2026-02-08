@@ -618,9 +618,9 @@ class SetupManager {
 		if (beta2live)
 			pathname = pathname.substring(0, pathname.lastIndexOf("/") + 1);
 
-		let origin = window.location.origin;
+		let url_path = window.location.origin + pathname;
 		if (window.location.origin == "https://mascaldotfr.github.io")
-			origin = "https://cort.ovh";
+			origin = "https://cort.ovh/";
 
 		return origin + pathname + "?t=" + compressor.compress(setup);
 	}
