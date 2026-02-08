@@ -58,7 +58,8 @@ let __menu_content = function () { return `
 `; };
 
 const __menu_github_stuff = function () {
-	if (window.location.host !== "mascaldotfr.github.io")
+	const official = ["mascaldotfr.github.io", "cort.thebus.top"];
+	if (!official.includes(window.location.host))
 		return ""; // Not official!
 	const src = `<a href="https://github.com/mascaldotfr/CoRT" target="_blank">
 			${_("source code")}</a>`;
@@ -73,7 +74,7 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260208.100914
+	<p> <!--VERSION-->Version: 20260208.105235
 `; };
 
 
