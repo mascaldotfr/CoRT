@@ -21,14 +21,16 @@ crontab part change.**
 
 ```shell
 # Set this to the latest version
-V=1.35.19-2.0rc1
+V=3.2.0
 # Or instead use this if you have `jq` installed and want only stable releases
-# V=`curl -s https://api.github.com/repos/mascaldotfr/CoRT/tags | jq -r 'map(select(.name | test("^(?!.*(?:alpha|beta|rc)).*$"; "i")))[0].name'`
+# V=`curl -s -X 'GET' \
+#  'https://codeberg.org/api/v1/repos/mascal/CoRT/releases?draft=false&pre-release=false' \
+#  -H 'accept: application/json' | jq -r '.[0].tag_name'`
 
 cd /tmp
 
 # Download and extract stuff
-wget -qO- https://github.com/mascaldotfr/CoRT/releases/download/${V}/CoRT-${V}.tar.gz | tar xvz
+wget -qO- https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar.gz | tar xvz
 
 # Prepopulate with official API stuff
 cd CoRT-${V}/api/var

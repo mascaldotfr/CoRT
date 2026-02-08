@@ -16,13 +16,15 @@ DOMAIN="localhost"
 # --- CONFIGURATION ENDS HERE
 
 printf "===> Searching for the last release... "
-V=`curl -s https://api.github.com/repos/mascaldotfr/CoRT/tags | jq -r 'map(select(.name | test("^(?!.*(?:alpha|beta|rc)).*$"; "i")))[0].name'`
+V=`curl -s -X 'GET' \
+  'https://codeberg.org/api/v1/repos/mascal/CoRT/releases?draft=false&pre-release=false' \
+  -H 'accept: application/json' | jq -r '.[0].tag_name'`
 echo "${V}"
 
 echo "===> Getting the tarball release"
 cd /tmp
 # Since it's *noapi* exclude API and PHP dependencies
-wget -qO- "https://github.com/mascaldotfr/CoRT/releases/download/${V}/CoRT-${V}.tar.gz" | tar xz \
+wget -qO- "https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar.gz" | tar xz \
 	--exclude "api" --exclude "vendor"
 
 if test "${DOMAIN}" != "localhost"; then

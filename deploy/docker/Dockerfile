@@ -32,7 +32,7 @@ RUN mkdir -p /var/www/html/CoRT && \
 
 # git clone
 # and remove preload linking to the official API
-RUN sudo -u $PHP_USER git clone https://github.com/mascaldotfr/CoRT.git /var/www/html/CoRT && \
+RUN sudo -u $PHP_USER git clone https://codeberg.org/mascal/CoRT.git /var/www/html/CoRT && \
 	sudo -u $PHP_USER sed -i '/<link rel="preload"/d' /var/www/html/CoRT/*.html
 # XXX Note that you can't git pull or it will overwrite some or even all the
 # above changes. See ̀ /deploy/README.md`. Also you will need to modify

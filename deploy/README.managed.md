@@ -26,11 +26,11 @@ been expurged.
 
 ## Get the latest release version
 
-Check out https://github.com/mascaldotfr/CoRT/releases/latest and take note of the
+Check out https://codeberg.org/mascal/CoRT/releases and take note of the
 version tag.
 
 You can follow up releases with this ATOM feed:
-https://github.com/mascaldotfr/CoRT/releases.atom, or just check out CoRT's
+https://codeberg.org/mascal/CoRT.rss, or just check out CoRT's
 discord server (#cort-updates channel).
 
 ## Preparing CoRT
@@ -43,14 +43,16 @@ script](misc/managed_tarball).
 
 ```shell
 # Set this to the latest version
-V=1.35.19-2.0rc1
+V=3.2.0
 # Or instead use this if you have `jq` installed and want only stable releases
-# V=`curl -s https://api.github.com/repos/mascaldotfr/CoRT/tags | jq -r 'map(select(.name | test("^(?!.*(?:alpha|beta|rc)).*$"; "i")))[0].name'`
+# V=`curl -X 'GET' \
+#  'https://codeberg.org/api/v1/repos/mascal/CoRT/releases?draft=false&pre-release=false' \
+#  -H 'accept: application/json' | jq -r '.[0].tag_name'`
 
 cd /tmp
 
 # Download and extract stuff
-wget -qO- https://github.com/mascaldotfr/CoRT/releases/download/${V}/CoRT-${V}.tar.gz | tar xvz
+wget -qO- https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar.gz | tar xvz
 
 # Prepopulate with official API stuff
 cd CoRT-${V}/api/var
@@ -111,7 +113,7 @@ You have now your full stack CoRT, congrats!
 ## Updating CoRT
 
 Invest some time to read
-https://github.com/mascaldotfr/CoRT/wiki/CoRT-versioning to see wether it's
+https://codeberg.org/mascal/CoRT/wiki/CoRT-versioning to see wether it's
 worth to upgrade, especially if your lazy.
 
 There are 2 ways:
