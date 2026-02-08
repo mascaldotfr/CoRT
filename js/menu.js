@@ -42,7 +42,7 @@ let __menu_content = function () { return `
 			<details class="menudetails">
 				<summary>${__menu_icons["more"]} ${_("More Tools...")}</summary>
 				<ul class="menudetails">
-					<li>${__menu_icons["sentinel"]}&nbsp;<a href="https://mascaldotfr.github.io/sentinel" target="_blank">Sentinel</a>
+					<li>${__menu_icons["sentinel"]}&nbsp;<a href="https://sentinel.cort.ovh" target="_blank">Sentinel</a>
 					<li>${__menu_icons["quests"]}&nbsp;<a href="quests.html">${_("Quests")}</a>
 					<li>${__menu_icons["armor"]}&nbsp;<a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">${_("Armor calculator")}</a>
 				</ul>
@@ -61,9 +61,9 @@ const __menu_github_stuff = function () {
 	const official = ["mascaldotfr.github.io", "cort.thebus.top", "cort.ovh"];
 	if (!official.includes(window.location.host))
 		return ""; // Not official!
-	const src = `<a href="https://github.com/mascaldotfr/CoRT" target="_blank">
+	const src = `<a href="https://codeberg.org/mascal/CoRT" target="_blank">
 			${_("source code")}</a>`;
-	const bugs = `<a href="https://github.com/mascaldotfr/CoRT/wiki/Bug-reports" target="_blank">
+	const bugs = `<a href="https://codeberg.org/mascal/CoRT/wiki/Bug-reports" target="_blank">
 			${_("report bugs")}</a>`;
 	const dc = `<a href="https://discord.gg/P5BJRtTx3R" target="_blank">
 			${_("Discord server")}</a>`;
@@ -74,7 +74,7 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260208.192842
+	<p> <!--VERSION-->Version: 20260208.193602
 `; };
 
 
