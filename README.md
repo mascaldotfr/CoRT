@@ -16,7 +16,7 @@ is run client side. All the rest depends on an API server though.
 
 Deploying CoRT (with or without the API) is explained [there](deploy/README.md)
 
-There is also a [wiki](https://github.com/mascaldotfr/CoRT/wiki) containing
+There is also a [wiki](./wiki) containing
 extra infos about using and deploying CoRT.
 
 ## Known issues
@@ -65,5 +65,5 @@ extra infos about using and deploying CoRT.
 * Slartibartfast, the regnumsentinel.com creator, site that gave me big hints about
   the UI should be done.
 * Halvdan. His own trainer stats page has been a major influence on
-  [tstats.html](https://mascaldotfr.github.io/CoRT/tstats.html)
+  [tstats.html](https://cort.ovh/tstats.html)
 * Regnum Tools, for UI hints about the BZ schedule
