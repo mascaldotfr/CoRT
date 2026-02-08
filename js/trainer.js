@@ -618,7 +618,11 @@ class SetupManager {
 		if (beta2live)
 			pathname = pathname.substring(0, pathname.lastIndexOf("/") + 1);
 
-		return window.location.origin + pathname + "?t=" + compressor.compress(setup);
+		let origin = window.location.origin;
+		if (window.location.origin == "localhost")
+			origin = "https://cort.ovh";
+
+		return origin + pathname + "?t=" + compressor.compress(setup);
 	}
 
 	async collect_setup(setupstring) {
