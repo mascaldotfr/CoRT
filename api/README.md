@@ -25,7 +25,7 @@ Special stuff:
 
 To get the whole list:
 
-1. Open https://mascaldotfr.github.io/CoRT/
+1. Open https://cort.ovh
 2. Open the dev tools (F12)
 3. Paste this line in the console and press enter:
 

@@ -1,7 +1,7 @@
 # SENTINEL API
 
 This API endpoint has been tailor made for
-https://mascaldotfr.github.io/sentinel
+https://sentinel.cort.ovh
 
 It's an agregation of all other APIs, that have been quickly filtered so we
 keep a small output response.

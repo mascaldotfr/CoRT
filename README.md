@@ -1,3 +1,8 @@
+| :warning: Moving           |
+|:---------------------------|
+| CoRT main codebase is moving to https://codeberg.org/mascal/CoRT |
+
+
 # Champions of Regnum tools
 
 After the death of the regnumsentinel trainer, all was left were operating
@@ -16,7 +21,7 @@ is run client side. All the rest depends on an API server though.
 
 Deploying CoRT (with or without the API) is explained [there](deploy/README.md)
 
-There is also a [wiki](./wiki) containing
+There is also a [wiki](https://codeberg.org/mascal/CoRT/wiki) containing
 extra infos about using and deploying CoRT.
 
 ## Known issues
@@ -28,9 +33,9 @@ extra infos about using and deploying CoRT.
 
 ## Hidden pages
 
-* **[beta.html](https://mascaldotfr.github.io/CoRT/beta.html)** is a part of the
+* **[beta.html](https://cort.ovh/beta.html)** is a part of the
   [upgrade cycle process](UPDATING.md).
-* **[tests.html](https://mascaldotfr.github.io/CoRT/tests.html)** includes
+* **[tests.html](https://cort.ovh/tests.html)** includes
   various tests to check if we don't (re)introduce well known bugs.
 
 ## License
