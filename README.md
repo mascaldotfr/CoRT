@@ -37,6 +37,9 @@ extra infos about using and deploying CoRT.
   [upgrade cycle process](UPDATING.md).
 * **[tests.html](https://cort.ovh/tests.html)** includes
   various tests to check if we don't (re)introduce well known bugs.
+* **[converter.html](https://cort.ovh/converter.html)** can convert a setup
+  from a another CoRT instance to the current CoRT instance. If you need to take
+  over from me, you should add a link in the trainer for this.
 
 ## License
 

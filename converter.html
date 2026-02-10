@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>CoRT setup converter</title>
+		<style>
+			body {
+				background: #000020;
+			}
+			#container {
+				display: flex;
+				flex-direction: column;
+				max-width: 600px;
+				background: #2f2f49;
+				color: white;
+				font-family: sans-serif;
+				padding: 1em;
+				margin: 0 auto;
+				border-radius: 4px;
+			}
+			#url, #result {
+				margin-bottom: 1em;
+			}
+			h1 {
+				text-align: center;
+			}
+			a {
+				color: lightblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<h1>Import a setup from another CoRT instance</h1>
+			<label for="url"><b>Setup URL:</b></label>
+			<input id="url" type="url" placeholder="https://some.website/CoRT/?t=abcdabcd..." pattern="https://.*">
+			<div id="result"><b>New URL:&nbsp;</b><a id="result-link"></a></div>
+		</div>
+	</body>
+		<script>
+			const url = document.getElementById("url");
+			const result_link = document.getElementById("result-link");
+			url.addEventListener("input", function() {
+				const query = new URL(url.value);
+				const base_url = document.URL.split("/").slice(0, -1).join("/")
+				converted_url = base_url + "/" + query.search;
+				result_link.href = converted_url;
+				result_link.innerText = converted_url;
+			});
+		</script>
+</html>
