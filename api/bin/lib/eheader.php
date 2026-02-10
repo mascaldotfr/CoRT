@@ -21,7 +21,8 @@ function valid_mime_or_die($mime_type) {
 
 // Just CORS, by default we restrict to the frontsite; in case of CoRT,
 // remember that mascaldotfr.github.io requires an API server on another
-// domain, so it's needed.
+// domain, so it's needed. If the API and fronsite are on the same domaine,
+// this header is ignored and the API access allowed.
 function eheader_cors($allow = EH_FRONTSITE) {
 	header("Access-Control-Allow-Origin: " . $allow);
 }
