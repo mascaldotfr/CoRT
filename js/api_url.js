@@ -20,7 +20,7 @@ function get_paths() {
 		// The root where all API files can be found
 		api["base"] = "https://cort.ovh/api";
 		// Used by the trainer to filter setup submissions
-		api["frontsite"] = "https://mascaldotfr.github.io";
+		api["frontsite"] = "https://cort.ovh";
 		// Subdirectory where the HTML/JS/CSS/etc. files are placed, relative to your
 		// www root with the leading '/'
 		return api;
