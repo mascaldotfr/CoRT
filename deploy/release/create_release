@@ -5,13 +5,25 @@
 # BUG: in the release note, if you tag as a + you're screwed, but anyway
 # This script is meant for balance rcs and stable releases
 
-# Call it as sh ./create_release to avoid cd'ing elsewhere.
+# Call it as sh ./create_release to avoid cd'ing elsewhere.  If you use the
+# --keep-preload option, preloading to the official server is kept, which is
+# not the default.
 
 which composer >/dev/null
 if test $? != 0; then
 	echo "COMPOSER not found, install php-composer!!!"
 	exit 1
 fi
+
+KEEP_PRELOAD=
+for arg in "$@"; do
+	case "$arg" in
+		--keep-preload)
+			KEEP_PRELOAD=1
+			echo "===> Preload is kept!"
+			;;
+	esac
+done
 
 # Go to repo root
 cd "$(git rev-parse --show-toplevel)"
@@ -28,8 +40,10 @@ git ls-files -z | xargs -0 -I {} cp --parents {} "${TARGET}/"
 
 echo "===> Make source code change"
 cd "${TARGET}"
-# Remove all preload statements
-sed -i '/<link rel="preload"/d' *.html
+# Remove all preload statements unless --keep-preload has been provided
+if test -z $KEEP_PRELOAD; then
+	sed -i '/<link rel="preload"/d' *.html
+fi
 # Cache bust top js and css
 ESCAPED_VERSION=$(printf '%s' "${TAG}" | sha1sum | cut -c1-8)
 find . -name '*.html' -print0 | xargs -0 sed -E -i'' 's/\.(css|js)(\?[^"]*)?">/.\1?'$ESCAPED_VERSION'">/g'
