@@ -4,10 +4,6 @@
 // don't forget to copy this file in a temp directory and copying it back after
 // the pull!
 
-// You will also need to change the preload directives in some
-// wz/wevents/wstats/tstats, or remove them if the API server and the server
-// you serve the pages is the same.
-
 function get_paths() {
 	// https://mascaldotfr.github.io/CoRT uses an external API server as an
 	// exception. Also allow local testing to use the official API, with

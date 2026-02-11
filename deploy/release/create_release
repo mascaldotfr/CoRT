@@ -28,8 +28,6 @@ git ls-files -z | xargs -0 -I {} cp --parents {} "${TARGET}/"
 
 echo "===> Make source code change"
 cd "${TARGET}"
-# Remove all preload statements
-sed -i '/<link rel="preload"/d' *.html
 # Cache bust top js and css
 ESCAPED_VERSION=$(printf '%s' "${TAG}" | sha1sum | cut -c1-8)
 find . -name '*.html' -print0 | xargs -0 sed -E -i'' 's/\.(css|js)(\?[^"]*)?">/.\1?'$ESCAPED_VERSION'">/g'
