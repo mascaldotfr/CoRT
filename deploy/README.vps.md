@@ -49,7 +49,10 @@ PREPOPULATE=no docker compose up --build
 
 ## Git stuff
 
-Keep the `main` branch for upstream updates, and adapt them in your
+Because all `*.html` file contains preload instructions for the official
+server, you'll need to remove them.
+
+As such, keep the `main` branch for upstream updates, and adapt them in your
 `local` branch that will be *your* main branch.
 
 ### Initial setup
