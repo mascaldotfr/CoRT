@@ -7,12 +7,17 @@
 
 # Call it as sh ./create_release to avoid cd'ing elsewhere.
 
-# OPTIONS:
+# OPTIONS: (only for local deployment, use no options for releases)
 # --keep-preload
 # 	will keep the preloading directive in HTML files
 # --gzip
 # 	precompress all HTML/CSS/JS/JSON files as <file>.gz
 # 	Useful only if your server has precompression enabled
+# --minify
+# 	minifies everything. Requires a recent version of it.
+# 	Debian 13 version won't cut it.
+# --mascal
+# 	do the three of them
 
 which composer >/dev/null
 if test $? != 0; then
@@ -22,6 +27,7 @@ fi
 
 KEEP_PRELOAD=
 GZIP=
+MINIFY=
 for arg in "$@"; do
 	case "$arg" in
 		--keep-preload)
@@ -31,6 +37,21 @@ for arg in "$@"; do
 		--gzip)
 			GZIP=1
 			echo "===> All pages will have a precompressed GZIP archive!"
+			;;
+		--mascal)
+			KEEP_PRELOAD=1
+			GZIP=1
+			MINIFY=1
+			echo "===> Applying all cort.ovh optims!"
+			;;
+		--minify)
+			which minify >/dev/null
+			if test $? != 0; then
+				echo "minify not found, install it!"
+				exit 1
+			fi
+			MINIFY=1
+			echo "===> Minify activated"
 			;;
 	esac
 done
@@ -42,7 +63,7 @@ TAG=$(git tag --sort=-creatordate | awk 'NR==1')
 PREVIOUS_TAG=$(git tag --sort=-creatordate | awk '/^[0-9]+\.[0-9]+\.[0-9]+$/{if (++count == 2) print}')
 echo "===> Found version ${TAG}. Previous one was ${PREVIOUS_TAG}."
 
-echo "===> Creating the necessary directories"
+echo "===> Creating the necessary directories and put files"
 TMPDIR=$(mktemp -d)
 TARGET="${TMPDIR}/CoRT-${TAG}"
 mkdir "${TARGET}"
@@ -62,6 +83,11 @@ find . -name '*.html' -print0 | xargs -0 sed -E -i'' 's/\.(css|js)(\?[^"]*)?">/.
 find . -name '*.js' -print0 | xargs -0 sed -E -i'' '/^[[:space:]]*import.*\.js"/s/(\.js)(\?[^"]*)?"/\.js?'$ESCAPED_VERSION'"/g'
 # Put a fixed version
 sed -i -E 's/(<!--VERSION-->Version: ).+/\1'"${TAG}"'/' js/menu.js
+# gzip and minify
+if test -n "$MINIFY"; then
+	echo "Minifying assets (may be slow)"
+	find . -type f \( -name "*.css" -o -name "*.js" -o -name "*.html" -o -name "*.json" \) -exec minify -q -i {} \;
+fi
 if test -n "$GZIP"; then
 	echo "GZIPing assets (may be slow)"
 	find . -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.json" \) -exec gzip -9k {} \;
