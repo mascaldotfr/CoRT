@@ -5,9 +5,14 @@
 # BUG: in the release note, if you tag as a + you're screwed, but anyway
 # This script is meant for balance rcs and stable releases
 
-# Call it as sh ./create_release to avoid cd'ing elsewhere.  If you use the
-# --keep-preload option, preloading to the official server is kept, which is
-# not the default.
+# Call it as sh ./create_release to avoid cd'ing elsewhere.
+
+# OPTIONS:
+# --keep-preload
+# 	will keep the preloading directive in HTML files
+# --gzip
+# 	precompress all HTML/CSS/JS/JSON files as <file>.gz
+# 	Useful only if your server has precompression enabled
 
 which composer >/dev/null
 if test $? != 0; then
@@ -16,11 +21,16 @@ if test $? != 0; then
 fi
 
 KEEP_PRELOAD=
+GZIP=
 for arg in "$@"; do
 	case "$arg" in
 		--keep-preload)
 			KEEP_PRELOAD=1
 			echo "===> Preload is kept!"
+			;;
+		--gzip)
+			GZIP=1
+			echo "===> All pages will have a precompressed GZIP archive!"
 			;;
 	esac
 done
@@ -41,10 +51,16 @@ git ls-files -z | xargs -0 -I {} cp --parents {} "${TARGET}/"
 echo "===> Make source code change"
 cd "${TARGET}"
 # Remove all preload statements unless --keep-preload has been provided
-if test -z $KEEP_PRELOAD; then
+if test -z "$KEEP_PRELOAD"; then
+	echo "Removing preloading"
 	sed -i '/<link rel="preload"/d' *.html
 fi
+if test -n "$GZIP"; then
+	echo "GZIPing assets (may be slow)"
+	find . -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.json" \) -exec gzip -9k {} \;
+fi
 # Cache bust top js and css
+echo "Cache bust top js and css"
 ESCAPED_VERSION=$(printf '%s' "${TAG}" | sha1sum | cut -c1-8)
 find . -name '*.html' -print0 | xargs -0 sed -E -i'' 's/\.(css|js)(\?[^"]*)?">/.\1?'$ESCAPED_VERSION'">/g'
 find . -name '*.js' -print0 | xargs -0 sed -E -i'' '/^[[:space:]]*import.*\.js"/s/(\.js)(\?[^"]*)?"/\.js?'$ESCAPED_VERSION'"/g'
