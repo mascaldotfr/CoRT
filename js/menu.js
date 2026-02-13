@@ -65,7 +65,7 @@ const __menu_github_stuff = function () {
 			${_("source code")}</a>`;
 	const bugs = `<a href="https://codeberg.org/mascal/CoRT/wiki/Bug-reports" target="_blank">
 			${_("report bugs")}</a>`;
-	const dc = `<a href="https://discord.gg/P5BJRtTx3R" target="_blank">
+	const dc = `<a href="https://discord.cort.ovh" target="_blank">
 			${_("Discord server")}</a>`;
 	return _("CoRT is a free and open source website, feel free to check out its %s, and %s. See also the %s!",
 		 src, bugs, dc)
@@ -74,7 +74,7 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260213.170630
+	<p> <!--VERSION-->Version: 20260213.203349
 `; };
 
 
