@@ -13,11 +13,13 @@
 # --gzip
 # 	precompress all HTML/CSS/JS/JSON files as <file>.gz
 # 	Useful only if your server has precompression enabled
+# --one-css
+# 	fuse all CSS to a single css/style.css
 # --minify
 # 	minifies everything. Requires a recent version of it.
 # 	Debian 13 version won't cut it.
 # --mascal
-# 	do the three of them
+# 	do the all of them
 
 which composer >/dev/null
 if test $? != 0; then
@@ -28,6 +30,7 @@ fi
 KEEP_PRELOAD=
 GZIP=
 MINIFY=
+ONE_CSS=
 for arg in "$@"; do
 	case "$arg" in
 		--keep-preload)
@@ -42,6 +45,7 @@ for arg in "$@"; do
 			KEEP_PRELOAD=1
 			GZIP=1
 			MINIFY=1
+			ONE_CSS=1
 			echo "===> Applying all cort.ovh optims!"
 			;;
 		--minify)
@@ -53,6 +57,11 @@ for arg in "$@"; do
 			MINIFY=1
 			echo "===> Minify activated"
 			;;
+		--one-css)
+			ONE_CSS=1
+			echo "===> Using a single css for all the site"
+			;;
+
 	esac
 done
 
@@ -76,6 +85,16 @@ if test -z "$KEEP_PRELOAD"; then
 	echo "Removing preloading"
 	sed -i '/<link rel="preload"/d' *.html
 fi
+if test -n "$ONE_CSS"; then
+	echo "Fuse all CSS"
+	cp css/style.css .
+	rm css/style.css
+	cat `ls css/* | sort` >> style.css
+	rm css/*
+	mv style.css css
+	# Remove all <link> pointing to !css/style.css
+	find . -name '*.html' -print0 | xargs -0 sed -i '/<link.*rel="stylesheet"/ { /href="[^"]*css\/style\.css"/!d }'
+fi
 # Cache bust top js and css
 echo "Cache bust top js and css"
 ESCAPED_VERSION=$(printf '%s' "${TAG}" | sha1sum | cut -c1-8)
@@ -83,6 +102,9 @@ find . -name '*.html' -print0 | xargs -0 sed -E -i'' 's/\.(css|js)(\?[^"]*)?">/.
 find . -name '*.js' -print0 | xargs -0 sed -E -i'' '/^[[:space:]]*import.*\.js"/s/(\.js)(\?[^"]*)?"/\.js?'$ESCAPED_VERSION'"/g'
 # Put a fixed version
 sed -i -E 's/(<!--VERSION-->Version: ).+/\1'"${TAG}"'/' js/menu.js
+
+
+# XXX content manipulation ends here
 # gzip and minify
 if test -n "$MINIFY"; then
 	echo "Minifying assets (may be slow)"
