@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<script>
-			// redirect only if https://cort.ovh is available and
-			// it's not a trainer setup
-			if (window.location.host === "mascaldotfr.github.io" && window.location.search === "")  {
-				const curr_path = window.location.pathname;
-				const page_name = curr_path.split('/').pop();
-				async function check_cortovh() {
-					try {
-						await fetch('https://cort.ovh/api/var/maintenance.txt');
-						window.location.href = `https://cort.ovh/${page_name}`;
-					} catch (error) {
-						console.log("Not redirecting: " + error);
-					}
-				}
-				check_cortovh();
-
-			}
-		</script>
 		<meta charset="utf-8">
 		<meta property="og:image" content="https://cort.ovh/favicon_512.png">
 		<title>Champions of Regnum - Warzone Statistics</title>
