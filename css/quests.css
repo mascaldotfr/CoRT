@@ -3,7 +3,7 @@
 	margin: 0 auto;
 	text-align: center;
 }
-.card {
+.quests-card {
 	min-height: 6em;
 }
 #quests-wm, #quests-xym, #quests-tickets {
