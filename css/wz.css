@@ -71,7 +71,7 @@
 	font-size: initial;
 	font-weight: initial;
 }
-span[id^="wz-forts-"] {
+.wz-forts span[id^="wz-forts-"] {
 	display: block;
 }
 
