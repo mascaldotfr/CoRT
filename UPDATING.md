@@ -48,6 +48,8 @@ Copy the beta folder to `data/trainer/1.x.x` according to the new version number
 Update the array containing all available versions in
 `js/trainertools/constants.js` with the newest version last.
 
+Modify `index.html` by putting the new versions to preload.
+
 That's it.
 
 
