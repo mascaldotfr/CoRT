@@ -1,5 +1,5 @@
 import {__api__urls} from "./api_url.js";
-import {$, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
+import {$, MyNotify, MyScheduler} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Constants, TranslateForts, HumaniseEvents, Icons} from "./wztools/wztools.js";
 
@@ -13,6 +13,9 @@ let xlator = new TranslateForts();
 let humaniser = new HumaniseEvents();
 let realm_colors = constants.realm_colors;
 let wzicons = icons.get_all_icons();
+
+//cortlibs
+const notify = new MyNotify();
 
 // canvas
 function setup_canvas() {
@@ -215,7 +218,7 @@ async function display_wz(init=false) {
 	// not redrawn for nothing
 	wz_lastupdate = Math.floor(new Date().getTime() / 1000);
 	if (events_list[1].length > 0)
-		mynotify(_("WZ status"), events_list[1], "wz");
+		notify.emit(_("WZ status"), events_list[1], "wz");
 }
 
 
@@ -226,7 +229,7 @@ $(document).ready(function() {
 	$("#wz-info-info").text(
 		_("The page will update itself every minute.") +
 		" " + _("Last updated:"));
-	insert_notification_link();
+	notify.insert_notification_link();
 
 	const scheduler = new MyScheduler(10, 15, display_wz);
 	scheduler.force_run(true);

@@ -1,7 +1,7 @@
 // On top of the menu, this files contains some globals not really fitting
 // elsewhere, since this file is always executed
 import {__i18n__, _} from "../data/i18n.js";
-import {$, create_tz_list} from "./libs/cortlibs.js";
+import {$, myTz} from "./libs/cortlibs.js";
 import {__api__urls} from "./api_url.js";
 
 let __menu_flags = {
@@ -74,7 +74,7 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260215.113333
+	<p> <!--VERSION-->Version: 20260215.211127
 `; };
 
 
@@ -167,7 +167,8 @@ $(document).ready(function() {
 
 	temporary_message();
 
-	create_tz_list("#tzchooser");
+	const tz = new myTz()
+	tz.create_tz_list("#tzchooser");
 
 	// Put maintenance message (see /api/MAINTENANCE.md)
 	setTimeout(async () => {

@@ -1,11 +1,14 @@
 import {__api__urls} from "./api_url.js";
-import {$, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
+import {$, MyNotify, MyScheduler} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Time} from "./wztools/wztools.js";
 import {create_calendar_link} from "./libs/calendar.js";
 
 // wztools
 let time = new Time();
+
+//cortlibs
+const notify = new MyNotify();
 
 // date formatter
 let dformatter = null;
@@ -77,7 +80,7 @@ function display_next_respawn(boss) {
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
 		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] > 1 &&
 		    notified_10m === false) {
-			mynotify(_("Bosses status"), `${bossname}: ${_("Next respawn in")} ` +
+			notify.emit(_("Bosses status"), `${bossname}: ${_("Next respawn in")} ` +
 				 `${next_respawn_in["minutes"]}${_("m")}`, "bosses");
 			last_notification_ts = Date.now();
 			notified_10m = true;
@@ -86,7 +89,7 @@ function display_next_respawn(boss) {
 			// Avoid notification spam on focus during the last minute
 			const now = Date.now();
 			if (now > last_notification_ts + 60000) {
-				mynotify(_("Bosses status"),`${bossname} ${_("should appear very soon!")}`, "bosses");
+				notify.emit(_("Bosses status"),`${bossname} ${_("should appear very soon!")}`, "bosses");
 				last_notification_ts = now;
 			}
 			notified_10m = false;
@@ -133,7 +136,7 @@ $(document).ready(function() {
 		hour: 'numeric', minute: 'numeric', timeZone: localStorage.getItem("tz")
 	});
 
-	insert_notification_link();
+	notify.insert_notification_link();
 	const scheduler = new MyScheduler(1, 5, refresh_display);
 	scheduler.force_run(true);
 	scheduler.start_scheduling();

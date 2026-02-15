@@ -1,5 +1,5 @@
 import {__api__urls} from "./api_url.js";
-import {$, insert_notification_link, mynotify, MyScheduler} from "./libs/cortlibs.js";
+import {$, MyNotify, MyScheduler} from "./libs/cortlibs.js";
 import {Time} from "./wztools/wztools.js";
 import {_} from "../data/i18n.js";
 
@@ -7,6 +7,8 @@ import {_} from "../data/i18n.js";
 let lang = localStorage.getItem("lang");
 let time = new Time();
 
+// cortlibs
+const notify = new MyNotify();
 
 // API data
 let data = null;
@@ -166,11 +168,11 @@ async function feed_bz() {
 		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] <= 10 && bz_ends_at["minutes"] > 1 &&
 			notified_10m === false) {
 			notified_10m = true;
-			mynotify(_("BZ status"), `${_("BZ ending in")} ${bz_ends_at["human"]}`, "bz");
+			notify.emit(_("BZ status"), `${_("BZ ending in")} ${bz_ends_at["human"]}`, "bz");
 		}
 		if (bz_ends_at["hours"] == 0 && bz_ends_at["minutes"] == 1) {
 			notified_10m = false;
-			mynotify(_("BZ status"), _("BZ is about to end!"), "bz");
+			notify.emit(_("BZ status"), _("BZ is about to end!"), "bz");
 		}
 	}
 	else {
@@ -181,11 +183,11 @@ async function feed_bz() {
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] > 1 &&
 		    notified_10m === false) {
 			notified_10m = true;
-			mynotify(_("BZ status"), `${_("BZ starting in")} ${next_bz_in["human"]}`, "bz");
+			notify.emit(_("BZ status"), `${_("BZ starting in")} ${next_bz_in["human"]}`, "bz");
 		}
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] == 1) {
 			notified_10m = false;
-			mynotify(_("BZ status"), _("BZ is about to start!"), "bz");
+			notify.emit(_("BZ status"), _("BZ is about to start!"), "bz");
 		}
 
 	}
@@ -223,7 +225,7 @@ $(document).ready(function() {
 	// TZ doesn't apply here
 	$("#tz").hide();
 
-	insert_notification_link();
+	notify.insert_notification_link();
 	const scheduler = new MyScheduler(1, 5, feed_bz);
 	scheduler.force_run();
 	scheduler.start_scheduling();
