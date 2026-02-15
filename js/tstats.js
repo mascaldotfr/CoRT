@@ -1,10 +1,9 @@
 import {__api__urls} from "./api_url.js";
-import {$} from "./libs/cortlibs.js";
+import {$, TrainerConstants} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
-import {constants} from "./trainertools/constants.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
-var valid_trainerdatasets = constants.datasets;
+var valid_trainerdatasets = TrainerConstants.datasets;
 // remove 1.33.2 and 1.33.3, setup collection wasn't a thing back then
 valid_trainerdatasets.splice(0,2);
 var stats = {};
@@ -111,7 +110,7 @@ $(document).ready(async function() {
 
 	for (let version of valid_trainerdatasets.reverse())
 		$("#ts-version").append(`<option value="${version}">${version}</option>`);
-	for (let clas of constants.classes)
+	for (let clas of TrainerConstants.classes)
 		$("#ts-class").append(`<option value="${clas}">${_(capitalize(clas))}</option>`);
 
 	await download_stats();

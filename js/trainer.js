@@ -1,7 +1,6 @@
 import {__api__urls, __api__frontsite} from "./api_url.js";
-import {$} from "./libs/cortlibs.js";
+import {$, TrainerConstants} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
-import {constants} from "./trainertools/constants.js";
 import { computePosition as fu_computePosition, offset as fu_offset, flip as fu_flip, shift as fu_shift } from "./libs/floating-ui-tooltip.js";
 
 // Classes are instanciated at the end
@@ -16,7 +15,7 @@ $(document).ready(function() {
 	if (datasets.is_beta)
 		$("#title").append(`&nbsp;<span class="red">(AMUN/BETA)</span>`);
 	let html_class_options = [];
-	for (let clas of constants.classes) {
+	for (let clas of TrainerConstants.classes) {
 		html_class_options.push(`<option value="${clas}">${_(clas[0].toUpperCase() + clas.slice(1))}</option>`);
 	}
 	$("#t-class").html(html_class_options.join(""));
@@ -27,7 +26,7 @@ $(document).ready(function() {
 
 	// generate characters levels options
 	let html_level_options = [`<option value="61">60 (+${_("Necro crystal")})</option>`];
-	for (let i = constants.maxlevel - 1; i >= constants.minlevel; i--) {
+	for (let i = TrainerConstants.maxlevel - 1; i >= TrainerConstants.minlevel; i--) {
 		html_level_options.push(`<option value="${i}">${i}</option>`);
 	}
 	$("#t-level").append(html_level_options.join(""));
@@ -69,13 +68,13 @@ $("#t-load").on("click", function() {
 		setup = new SetupManager();
 	let level = $("#t-level").val();
 	let clas = $("#t-class").val();
-	if ( (level >= constants.minlevel && level <= constants.maxlevel) ) {
+	if ( (level >= TrainerConstants.minlevel && level <= TrainerConstants.maxlevel) ) {
 		setup.level = level;
 		setup.extrappoints = 0;
 		setup.has_necro_gem = false;
 	}
 	else if (level == 61) {
-		setup.level = constants.maxlevel;
+		setup.level = TrainerConstants.maxlevel;
 		setup.extrappoints = 5;
 		setup.has_necro_gem = true;
 	}
@@ -100,7 +99,7 @@ $("#t-level").on('change', function() {
 	// Upgrade does not work if no trees are loaded, you are level 60
 	// or if the requested level is lower than your current level
 	// The +1 is because of the necro gem (level 61)
-	if (setup.level == 0 || (setup.level == constants.maxlevel + 1) || setup.level > selectedllevel)
+	if (setup.level == 0 || (setup.level == TrainerConstants.maxlevel + 1) || setup.level > selectedllevel)
 		return;
 	if (setup.has_necro_gem) // don't downgrade from necro to normal 60!
 		return;
@@ -184,14 +183,14 @@ function power_change(power) {
 	// The first skill of each tree can be level 2 even if discipline level is 1
 	if (discipline_level == 1)
 		maxslvl++;
-	if (wanted_level < constants.minplevel) {
+	if (wanted_level < TrainerConstants.minplevel) {
 		wanted_level = maxslvl; // Loop from -1 to maxslvl
 		diffpoints = 0 - maxslvl;
 	}
 	else {
 		diffpoints = change_direction == "plus" ? -1 : 1;
 	}
-	if (wanted_level > constants.maxplevel || wanted_level < constants.minplevel) {
+	if (wanted_level > TrainerConstants.maxplevel || wanted_level < TrainerConstants.minplevel) {
 		console.log("bad power level", wanted_level);
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
@@ -226,7 +225,7 @@ function discipline_change(discipline) {
 	let discipline_level = discipline.parentNode.parentNode.getElementsByClassName("icon")[0];
 	let current_level = parseInt(discipline_level.getAttribute("data-value"));
 	let wanted_level = change_direction == "plus" ? current_level + 2 : current_level - 2;
-	if (wanted_level < constants.mindlevel) {
+	if (wanted_level < TrainerConstants.mindlevel) {
 		// Try to set up the max discipline level
 		let max_avail_dlvl = 0;
 		change_direction = "plus";
@@ -241,7 +240,7 @@ function discipline_change(discipline) {
 		if (wanted_level % 2 == 0)
 			wanted_level--;
 	}
-	if (wanted_level > constants.maxdlevel || wanted_level < constants.mindlevel) {
+	if (wanted_level > TrainerConstants.maxdlevel || wanted_level < TrainerConstants.mindlevel) {
 		console.log("bad discipline level", wanted_level);
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
@@ -309,7 +308,7 @@ function update_tree(treepos) {
 			}
 		}
 		if ( 	(setup.level > requirements["level"][dlvl - 1] && i != 1) ||
-			(setup.level != constants.maxlevel && is_wmrow) ) {
+			(setup.level != TrainerConstants.maxlevel && is_wmrow) ) {
 			// reduce strongly brightness and disable buttons on
 			// unavailable skills due to player or discpline tree
 			// level. also forbid WM tree for non level 60.
@@ -426,11 +425,10 @@ class SetupManager {
 	}
 
 	async load_tree() {
-		let base_skills = constants.class_type_masks[setup.clas] & 0xF0;
-		let class_skills = constants.class_type_masks[setup.clas];
+		let class_skills = TrainerConstants.class_type_masks[setup.clas];
 		// adjust code to get base power and discipline points, as well as WM tree location.
 		// needed because mages have 8 trees unlike 7 for warriors and archers
-		if ((constants.class_type_masks[this.clas] & 0xF0) == 32) {
+		if ((TrainerConstants.class_type_masks[this.clas] & 0xF0) == 32) {
 			this.wmrow = 8;
 			this.powerpoints = 32;
 		}
@@ -446,6 +444,7 @@ class SetupManager {
 			console.log(`Unable to fetch trainer data: ${error}`);
 			return;
 		}
+		let base_skills = TrainerConstants.class_type_masks[setup.clas] & 0xF0;
 		let alltrees = this.trainerdata["class_disciplines"][base_skills];
 		alltrees = alltrees.concat(this.trainerdata["class_disciplines"][class_skills]);
 		let trainerhtml = [];
@@ -588,7 +587,7 @@ class SetupManager {
 		for (let row = 1; row <= this.wmrow; row++) {
 			// separate discipline skills from power skills
 			let discipline = parseInt($(`#t-trainer .t${row} .p0 .icon`).attr("data-value"));
-			if (discipline > constants.maxdlevel || discipline < constants.mindlevel) {
+			if (discipline > TrainerConstants.maxdlevel || discipline < TrainerConstants.mindlevel) {
 				this.bad_shared_link();
 				return;
 			}
@@ -596,7 +595,7 @@ class SetupManager {
 			setup += discipline + "+";
 			for (let col = 1; col < 11; col++) {
 				let level = parseInt($(`#t-trainer .t${row} .p${col} .icon`).attr("data-value"));
-				if (level > constants.maxplevel || level < constants.minplevel) {
+				if (level > TrainerConstants.maxplevel || level < TrainerConstants.minplevel) {
 					this.bad_shared_link();
 					return;
 				}
@@ -794,7 +793,7 @@ class Icons {
 class DatasetsManager {
 	constructor() {
 		// all available datasets
-		this.trainerdatasets = constants.datasets;
+		this.trainerdatasets = TrainerConstants.datasets;
 		// beta is a special mode where the only dataset at `/data/trainerdata/beta` is used
 		this.is_beta = location.pathname.split("/").pop() === "beta.html";
 		if (this.is_beta) {
@@ -870,7 +869,7 @@ class SetupCompressor {
 		let output = "";
 		setup_string = setup_string.split("+");
 		output += this.compress_version1(datasets.trainerdatasets.indexOf(setup_string.shift()));
-		output += this.b66chars[constants.classes.indexOf(setup_string.shift())];
+		output += this.b66chars[TrainerConstants.classes.indexOf(setup_string.shift())];
 		output += this.b66chars[parseInt(setup_string.shift())]; // level
 		for (let i = 0; i < setup_string.length; i++) {
 			if (i % 2 == 0) { // discipline points
@@ -907,7 +906,7 @@ class SetupCompressor {
 			setup_string += this.decompress_version1(string.slice(0,2)) + "+";
 			offset = 1;
 		}
-		setup_string += constants.classes[this.b66chars.indexOf(string[offset + 1])] + "+";
+		setup_string += TrainerConstants.classes[this.b66chars.indexOf(string[offset + 1])] + "+";
 		setup_string += this.b66chars.indexOf(string[offset + 2]) + "+"; // level
 		string = string.substring(offset + 3);
 		for (let pos = 0; pos <= string.length -1; pos += 6) {

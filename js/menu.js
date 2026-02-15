@@ -74,7 +74,11 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
+<<<<<<< HEAD
 	<p> <!--VERSION-->Version: 20260215.211127
+=======
+	<p> <!--VERSION-->Version: 20260215.210558
+>>>>>>> c66e6ff (cortlibs: move trainer constants there.)
 `; };
 
 
