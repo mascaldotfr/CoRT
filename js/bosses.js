@@ -2,7 +2,95 @@ import {__api__urls} from "./api_url.js";
 import {$, MyNotify, MyScheduler} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
 import {Time} from "./wztools/wztools.js";
-import {create_calendar_link} from "./libs/calendar.js";
+
+class Calendar {
+	// A very simple calendar module generating .ics files.
+	// License : MIT
+
+	constructor() {
+		// CSS
+		document.addEventListener("DOMContentLoaded", function () {
+			const style = document.createElement("style");
+			style.textContent = ".addtocalendar { text-decoration: none; }";
+			document.head.appendChild(style);
+		});
+	}
+
+	#generate_uid() {
+		const ts = Date.now().toString(36);
+		const random = Math.random().toString(36).substring(2, 10);
+		return `${ts}${random}@${window.location.hostname}`;
+	}
+
+	// Format a Unix timestamp (seconds) as iCalendar UTC date-time: YYYYMMDDTHHMMSSZ
+	#format_utc_ics_datetime(unix_ts) {
+		const date = new Date(parseInt(unix_ts) * 1000); // Convert to milliseconds
+		const y = date.getUTCFullYear();
+		const m = String(date.getUTCMonth() + 1).padStart(2, "0");
+		const d = String(date.getUTCDate()).padStart(2, "0");
+		const h = String(date.getUTCHours()).padStart(2, "0");
+		const min = String(date.getUTCMinutes()).padStart(2, "0");
+		const s = String(date.getUTCSeconds()).padStart(2, "0");
+		return `${y}${m}${d}T${h}${min}${s}Z`;
+	}
+
+	// Escape text for iCalendar
+	#escape_text(text) {
+		return String(text)
+			.replace(/\\/g, "\\\\")
+			.replace(/;/g, "\\;")
+			.replace(/,/g, "\\,")
+			.replace(/\n/g, "\\n");
+	}
+
+	/*
+	 * Generate iCalendar string (UTC) with 10m and 1H reminders
+	 * title - title and description
+	 * start — Unix timestamp (seconds)
+	 * end — Unix timestamp (seconds)
+	 */
+	#generate_ics(title, start, end) {
+		const dt_start = this.#format_utc_ics_datetime(start);
+		const dt_end = this.#format_utc_ics_datetime(end);
+		const safe_title = "[CoR] " + this.#escape_text(title);
+		const uid = this.#generate_uid();
+
+		return [
+			"BEGIN:VCALENDAR",
+			"VERSION:2.0",
+			"CALSCALE:GREGORIAN",
+			"PRODID:-//CoRT//EN",
+			"BEGIN:VEVENT",
+			`UID:${uid}`,
+			`SUMMARY:${safe_title}`,
+			`DTSTART:${dt_start}`,
+			`DTEND:${dt_end}`,
+			// 10m alarm
+			"BEGIN:VALARM",
+			"TRIGGER:-PT10M",
+			`DESCRIPTION:${safe_title}`,
+			"ACTION:DISPLAY",
+			"END:VALARM",
+			// 1h alarm, only supported in a few clients
+			"BEGIN:VALARM",
+			"TRIGGER:-PT1H",
+			`DESCRIPTION:${safe_title}`,
+			"ACTION:DISPLAY",
+			"END:VALARM",
+			"END:VEVENT",
+			"END:VCALENDAR"
+		].join("\n");
+	}
+
+	create_link(title, start, end, filename = "event.ics" ) {
+		const ics = this.#generate_ics(title, start, end);
+		const encoded = encodeURIComponent(ics.trim().replace(/\r\n|\r/g, '\n'));
+		const href = `text/calendar;charset=utf-8,${encoded}`;
+		const safe_filename = filename.endsWith('.ics') ? filename : `${filename}.ics`;
+		return `<a href="data:${href}" class="addtocalendar" download="${safe_filename}"
+			title="Add to Calendar">📅</a>`;
+	}
+}
 
 // wztools
 let time = new Time();
@@ -10,6 +98,8 @@ let time = new Time();
 //cortlibs
 const notify = new MyNotify();
 
+// local
+const calendar = new Calendar();
 // date formatter
 let dformatter = null;
 
@@ -71,10 +161,10 @@ function display_next_respawn(boss) {
 		const respawn_ts = next_respawns[boss][i];
 		const respawn_datetime = new Date(respawn_ts * 1000);
 		const uc_boss = boss[0].toUpperCase() + boss.slice(1);
-		const calendar = create_calendar_link(uc_boss, respawn_ts, respawn_ts + 900,
+		const calhtml = calendar.create_link(uc_boss, respawn_ts, respawn_ts + 900,
 			`${uc_boss}_${respawn_datetime.toISOString()}`);
 		$(`#boss-${boss}-nextspawn-${i}`).text(unixstamp2human(respawn_ts));
-		$(`#boss-${boss}-nextspawn-${i}-calendar`).html(calendar);
+		$(`#boss-${boss}-nextspawn-${i}-calendar`).html(calhtml);
 	}
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
