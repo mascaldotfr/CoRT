@@ -1,7 +1,6 @@
 import {__api__urls} from "./api_url.js";
-import {$, MyNotify, MyScheduler} from "./libs/cortlibs.js";
+import {$, MyNotify, MyScheduler, Time} from "./libs/cortlibs.js";
 import {_} from "../data/i18n.js";
-import {Time} from "./wztools/wztools.js";
 
 class Calendar {
 	// A very simple calendar module generating .ics files.
