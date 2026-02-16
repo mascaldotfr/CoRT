@@ -105,7 +105,6 @@ let previous_respawns = null;
 let nextboss_ts = 0;
 let notified_10m = false;
 let last_notification_ts = 0;
-let bosses_img_loaded = false;
 
 function unixstamp2human(unixstamp) {
 	return dformatter.format(new Date(unixstamp * 1000));
@@ -189,13 +188,6 @@ async function refresh_display() {
 	// Fetch API data only if needed
 	if (Date.now() / 1000 > nextboss_ts)
 		await get_next_respawns();
-
-	// Lazy load bosses
-	if (!bosses_img_loaded) {
-		for (let boss in next_respawns)
-			$(`#boss-${boss}-img`).attr("src", `data/bosses/${boss}.webp`);
-		bosses_img_loaded = true;
-	}
 
 	let bosses_unordered = new Map();
 	for (let boss in next_respawns) {
