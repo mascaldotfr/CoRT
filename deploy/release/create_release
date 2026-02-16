@@ -100,6 +100,8 @@ echo "Cache bust top js and css"
 ESCAPED_VERSION=$(printf '%s' "${TAG}" | sha1sum | cut -c1-8)
 find . -name '*.html' -print0 | xargs -0 sed -E -i'' 's/\.(css|js)(\?[^"]*)?">/.\1?'$ESCAPED_VERSION'">/g'
 find . -name '*.js' -print0 | xargs -0 sed -E -i'' '/^[[:space:]]*import.*\.js"/s/(\.js)(\?[^"]*)?"/\.js?'$ESCAPED_VERSION'"/g'
+# This cache bust is for web workers
+find . -name '*.js' -print0 | xargs -0 sed -i '' -e "s/bundlereplaceme/$ESCAPED_VERSION/g"
 # Put a fixed version
 sed -i -E 's/(<!--VERSION-->Version: ).+/\1'"${TAG}"'/' js/menu.js
 

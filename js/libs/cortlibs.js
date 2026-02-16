@@ -329,7 +329,7 @@ export class MyScheduler {
 		this.last_focus = Date.now();
 
 		// initial display
-		this.worker = new Worker("./js/libs/ticker.js");
+		this.worker = new Worker("./js/libs/ticker.js?bundlereplaceme");
 		this.worker.postMessage({"init": {"start": this.start, "end": this.end}});
 		// If it ticks, run this
 		this.worker.onmessage = this.callback;
