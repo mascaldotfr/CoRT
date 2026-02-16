@@ -1,6 +1,4 @@
-import {__api__urls} from "./api_url.js";
-import {$, TrainerConstants} from "./libs/cortlibs.js";
-import {_} from "../data/i18n.js";
+import {$, _, TrainerConstants, api} from "./libs/cortlibs.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
 var valid_trainerdatasets = TrainerConstants.datasets;
@@ -14,7 +12,7 @@ function capitalize(string) {
 
 async function download_stats() {
 	try {
-		stats = await $().getJSON(__api__urls["trainer_data_stats"]);
+		stats = await $().getJSON(api.urls["trainer_data_stats"]);
 	}
 	catch(err) {
 		$("#ts-maingraph").html(`Failed to make the stats: <code>${err}</code> (check console)`);

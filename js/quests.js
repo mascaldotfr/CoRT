@@ -1,5 +1,4 @@
-import {$, Time} from "./libs/cortlibs.js";
-import {_} from "../data/i18n.js";
+import {$, _, Time} from "./libs/cortlibs.js";
 
 let time = new Time();
 const df = new Intl.DateTimeFormat(localStorage.getItem("lang"), {

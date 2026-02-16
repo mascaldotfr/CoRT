@@ -1,6 +1,4 @@
-import {__api__urls} from "./api_url.js";
-import {$, MyNotify, MyScheduler} from "./libs/cortlibs.js";
-import {_} from "../data/i18n.js";
+import {$, _, api, MyNotify, MyScheduler} from "./libs/cortlibs.js";
 import {Constants, TranslateForts, HumaniseEvents, Icons} from "./wztools/wztools.js";
 
 // Unix timestamp of the last update
@@ -138,7 +136,7 @@ async function display_wz(init=false) {
 	let failures = {};
 
 	try {
-		data = await $().getJSON(__api__urls["wstatus"]);
+		data = await $().getJSON(api.urls["wstatus"]);
 		$("#wz-info-error").empty();
 		let dt = new Date();
 		let datetime = dt.toLocaleTimeString(undefined,

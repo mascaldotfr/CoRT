@@ -30,7 +30,7 @@ To get the whole list:
 3. Paste this line in the console and press enter:
 
 ```js
-(await import("./js/api_url.js")).__api__urls
+(await import("./js/libs/cortlibs.js")).api.urls
 ```
 
 ## Rate limits and other rules on official server API

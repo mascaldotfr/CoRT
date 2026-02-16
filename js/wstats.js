@@ -1,6 +1,4 @@
-import {__api__urls} from "./api_url.js";
-import {$, Time} from "./libs/cortlibs.js";
-import {_} from "../data/i18n.js";
+import {$, _, api, Time} from "./libs/cortlibs.js";
 import {Constants, TranslateForts} from "./wztools/wztools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
@@ -136,7 +134,7 @@ async function display_stat(force = false) {
 	let data = null;
 
 	try {
-		data = await $().getJSON(__api__urls["stats"]);
+		data = await $().getJSON(api.urls["stats"]);
 		$("#ws-info-error").empty();
 	}
 	catch (error) {

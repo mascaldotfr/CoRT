@@ -36,7 +36,7 @@ wget -qO-  https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar
 to run CoRT on http://localhost, you don't need to do that.
 # Set your domain name
 D=example.com
-sed -i'' 's!\(.*let frontend_with_no_api =\) .*!\1 ["'${D}'"];!' CoRT-${V}/js/api_url.js
+sed -i'' 's!\(.*let frontend_with_no_api =\) .*!\1 ["'${D}'"];!' CoRT-${V}/js/libs/cortlibs.js
 ```
 
 ### Development version

@@ -1,6 +1,4 @@
-import {__api__urls, __api__frontsite} from "./api_url.js";
-import {$, TrainerConstants} from "./libs/cortlibs.js";
-import {_} from "../data/i18n.js";
+import {$, _, api, TrainerConstants} from "./libs/cortlibs.js";
 import { computePosition as fu_computePosition, offset as fu_offset, flip as fu_flip, shift as fu_shift } from "./libs/floating-ui-tooltip.js";
 
 // Classes are instanciated at the end
@@ -625,10 +623,10 @@ class SetupManager {
 	}
 
 	async collect_setup(setupstring) {
-		if (window.location.origin != __api__frontsite || datasets.is_beta)
+		if (window.location.origin != api.frontsite || datasets.is_beta)
 			return;
 		try {
-			await $().post(__api__urls["submit_trainer"], {"setup":setupstring});
+			await $().post(api.urls["submit_trainer"], {"setup":setupstring});
 		}
 		catch (error) {
 			console.error(`Failed to send setup: ${error}`);

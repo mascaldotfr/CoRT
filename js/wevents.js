@@ -1,6 +1,4 @@
-import {__api__urls, __api__base} from "./api_url.js";
-import {_} from "../data/i18n.js";
-import {$} from "./libs/cortlibs.js";
+import {$, _, api} from "./libs/cortlibs.js";
 import {HumaniseEvents} from "./wztools/wztools.js";
 
 let data = null;
@@ -57,7 +55,7 @@ function display_events() {
 
 async function get_data() {
 	try {
-		data = await $().getJSON(__api__urls["events"]);
+		data = await $().getJSON(api.urls["events"]);
 		$("#we-info-error").empty();
 	}
 	catch (error) {
@@ -72,7 +70,7 @@ $(document).ready(async function() {
 	$("#we-info-info").text(
 		_("All events over the last 14 days.") +
 		" " + _("Last updated:") + " ");
-	$("#we-data-dump").attr("href", __api__urls["events_dump"]);
+	$("#we-data-dump").attr("href", api.urls["events_dump"]);
 	$("#we-data-dump").text(_("Download all events data"));
 	$("#we-filter-label").text(_("Filter:"));
 	let options = { "Global": [

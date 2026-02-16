@@ -29,7 +29,7 @@ wget -qO- "https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar
 
 if test "${DOMAIN}" != "localhost"; then
 	echo "===> Make your CoRT use the official API"
-	sed -i'' 's!\(.*let frontend_with_no_api =\) .*!\1 ["'${DOMAIN}'"];!' CoRT-${V}/js/api_url.js
+	sed -i'' 's!\(.*let frontend_with_no_api =\) .*!\1 ["'${DOMAIN}'"];!' CoRT-${V}/js/libs/cortlibs.js
 fi
 
 

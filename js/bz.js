@@ -1,6 +1,4 @@
-import {__api__urls} from "./api_url.js";
-import {$, MyNotify, MyScheduler, Time} from "./libs/cortlibs.js";
-import {_} from "../data/i18n.js";
+import {$, _, api, MyNotify, MyScheduler, Time} from "./libs/cortlibs.js";
 
 // formatters
 let lang = localStorage.getItem("lang");
@@ -137,7 +135,7 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 
 async function get_data() {
 	try {
-		data = await $().getJSON(__api__urls["bz"]);
+		data = await $().getJSON(api.urls["bz"]);
 		$("#bz-error").empty();
 	}
 	catch (error) {

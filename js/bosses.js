@@ -1,6 +1,4 @@
-import {__api__urls} from "./api_url.js";
-import {$, MyNotify, MyScheduler, Time} from "./libs/cortlibs.js";
-import {_} from "../data/i18n.js";
+import {$, _, api, MyNotify, MyScheduler, Time} from "./libs/cortlibs.js";
 
 class Calendar {
 	// A very simple calendar module generating .ics files.
@@ -139,7 +137,7 @@ function minute_floor(v) {
 
 async function get_next_respawns() {
 	try {
-		let data = await $().getJSON(__api__urls["bosses"]);
+		let data = await $().getJSON(api.urls["bosses"]);
 		next_respawns = minute_floor(data["next_spawns"]);
 		previous_respawns = minute_floor(data["prev_spawns"]);
 		nextboss_ts = minute_floor(data["next_boss_ts"]);
