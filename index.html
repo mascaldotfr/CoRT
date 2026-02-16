@@ -11,9 +11,10 @@
 		<link rel="stylesheet" href="css/trainer.css">
 		<script type="module" src="js/menu.js"></script>
 		<script type="module" src="js/trainer.js"></script>
-		<link rel="modulepreload" href="js/libs/cortlibs.js">
-		<link rel="modulepreload" href="js/libs/floating-ui-tooltip.js">
+		<link rel="modulepreload" href="js/libs/cortlibs.js" fetchpriority="high">
+		<link rel="modulepreload" href="js/libs/floating-ui-tooltip.js" fetchpriority="high">
 		<link rel="preload" href="data/trainer/1.35.19/trainerdata.json" as="fetch" crossorigin="anonymous">
+		<link rel="preload" href="data/trainer/1.35.19/icons/SlashingWeapons.webp" as="image" fetchpriority="low">
 		<link rel="icon" type="image/png" href="favicon.png">
 		<link rel="apple-touch-icon" href="favicon.png" sizes="192x192">
 		<link rel="manifest" href="manifest.json" />
