@@ -6,11 +6,9 @@
 			const curr_path = window.location.pathname;
 			const page_name = curr_path.split('/').pop();
 			const query = window.location.search;
-			document.write(`<link rel="prefetch" href="https://cort.ovh/${page_name}${query}">`);
 			async function check_cortovh() {
 				try {
-					// requires CORS for html files server side
-					await fetch(`https://cort.ovh/${page_name}${query}`);
+					await fetch(`https://cort.ovh/api/var/maintenance.txt`);
 					window.location.href = `https://cort.ovh/${page_name}${query}`;
 				}
 				catch (error) {
