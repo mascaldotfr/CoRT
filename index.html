@@ -9,7 +9,7 @@
 				const query = window.location.search;
 				// Speculative loading of the page on cort.ovh
 				// while trying to get to the maintenance
-				try { fetch(`https://cort.ovh/${page_name}${query}`); } catch(_) {}
+				document.write(`<link rel="prefetch" href="https://cort.ovh/${page_name}${query}"/>`);
 				async function check_cortovh() {
 					try {
 						await fetch('https://cort.ovh/api/var/maintenance.txt');
