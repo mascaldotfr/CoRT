@@ -619,7 +619,15 @@ class SetupManager {
 		if (window.location.origin == "https://mascaldotfr.github.io")
 			url_path = "https://cort.ovh/";
 
-		return url_path + "?t=" + compressor.compress(setup);
+		const target_url = url_path + "?t=" + compressor.compress(setup);
+		// Fetch asynchronously before the user get moved to that page
+		// by clicking Close so the page will load instantly with a
+		// 304, instead of slow 200.
+		try {
+			$().get(target_url);
+		}
+		catch(_unused) { }
+		return target_url;
 	}
 
 	async collect_setup(setupstring) {
