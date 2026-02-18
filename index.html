@@ -2,21 +2,21 @@
 <html lang="en">
 	<head>
 		<script>
-			// redirect only if https://cort.ovh is available and
-			// it's not a trainer setup
-			if (window.location.host === "mascaldotfr.github.io" && window.location.search === "")  {
+			// redirect only if https://cort.ovh is available
+			if (window.location.host === "mascaldotfr.github.io")  {
 				const curr_path = window.location.pathname;
 				const page_name = curr_path.split('/').pop();
+				const query = window.location.search;
 				async function check_cortovh() {
 					try {
 						await fetch('https://cort.ovh/api/var/maintenance.txt');
-						window.location.href = `https://cort.ovh/${page_name}`;
-					} catch (error) {
+						window.location.href = `https://cort.ovh/${page_name}${query}`;
+					}
+					catch (error) {
 						console.log("Not redirecting: " + error);
 					}
 				}
 				check_cortovh();
-
 			}
 		</script>
 
