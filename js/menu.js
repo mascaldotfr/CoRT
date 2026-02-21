@@ -72,7 +72,7 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260219.175336
+	<p> <!--VERSION-->Version: 20260221.213311
 `; };
 
 
@@ -163,7 +163,6 @@ $(document).ready(function() {
 		descr.attr("content", _(en_descr));
 	}
 
-	temporary_message();
 
 	const tz = new myTz()
 	tz.create_tz_list("#tzchooser");
@@ -184,21 +183,27 @@ $(document).ready(function() {
 			// Bail out on empty message (404s fall here as well)
 			if (msg.length == 0)
 				return;
-			$("body").prepend(`
-				<div class="card bold center" style="background-color:#a9005d">
-					&#9888;&#65039; ${msg}
-				</div>
-			`);
+			$("body").prepend(msg);
 		}
 		catch (error) {
 			// Things go really bad, or we're rebooting...
 			console.error(error);
 			$("body").prepend(`
-				<div class="card bold center" style="background-color:#c44">
-					&#128163; The API server cannot be reached!
-					Check out the (slow) <a href="https://cort.go.yo.fr" target="_blank" style="color:gold"> backup site</a> if needed!
+				<div id="temporary-message" data-color="red"
+					     data-en="The API server cannot be reached!
+					     Check out the <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>backup site</a> if needed!"
+					     data-fr="Le serveur API est inaccessible !
+					     <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>Consultez le site de secours</a> si nécessaire !"
+					     data-es="¡No se puede alcanzar el servidor de la API!
+					     <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>Consulta el sitio de respaldo</a> si es necesario."
+					     data-de="Der API-Server ist nicht erreichbar!
+					     <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>Besuchen Sie die Backup-Seite</a> falls nötig!"
+				>
 				</div>
 			`);
+		}
+		finally {
+			temporary_message();
 		}
 	}, 500);
 
