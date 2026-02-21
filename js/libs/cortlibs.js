@@ -17,7 +17,7 @@ class ApiURL {
 		// through 127.0.0.1 instead of localhost.
 		this.base = "";
 		this.frontsite = "";
-		let frontend_with_no_api = ["localhost", "mascaldotfr.github.io"];
+		let frontend_with_no_api = ["localhost", "mascaldotfr.github.io", "beta.cort.ovh"];
 		if (frontend_with_no_api.includes(window.location.hostname)) {
 			// The root where all API files can be found
 			this.base = "https://cort.ovh/api";
