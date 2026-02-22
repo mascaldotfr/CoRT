@@ -12,7 +12,8 @@ https://cort.ovh/api/bin/sentinel/sentinel.php
 
 ## Response format
 
-In JSON; I recommend you to check out API documentation for each of them:
+In JSON; I recommend you to check out API documentation for each of them, here
+is a quick schema:
 
 ```
 {
