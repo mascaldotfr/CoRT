@@ -7,13 +7,15 @@ is invalid, then a HTTP 417 code is returned.
 
 This is fully anonymized and only triggerred when using
 https://mascaldotfr.github.io, unless you do the appropriate changes in the
-source code (`submit.php` and `../../js/api_url.js`)
+source code (`./submit.php` and `/js/cortlibs.js`)
 
 The dataset is available
 [there](https://cort.ovh/api/var/trainer_saved_setups.txt)
 
 Statistics are already generated for use by CoRT and are publicly available at
 https://cort.ovh/api/bin/collect/trainer_stats.php
+
+This endpoint content is cached, and at best regenerated every 3 hours.
 
 ## Data exploitation
 
@@ -45,8 +47,17 @@ with spaces.
 
 A simple python exploit code can be found at [exploit.py](exploit.py) in this
 directory. It is supposedly simple enough to understand. See also
-[trainer_stats.py](trainer_stats.py) for the API code.
+[trainer_stats.php](trainer_stats.php) for the API code.
 
 ### Javascript
 
 Pre-API [tstats.js](https://github.com/mascaldotfr/CoRT/blob/154b8cf8aea81fe9b3dc2c9a44c3fdc6b5fa2741/js/tstats.js).
+
+### BUGS
+
+This is the oldest CoRT API, and it's not much to say.
+
+The whole API code still uses a txt file as database; and the API endpoint JSON
+as a save point to avoid reparsing the whole file. In its defense a database
+would not make much sense, unless you're introducing a complex scheme and I'm
+not even sure it would be faster than the current solution.
