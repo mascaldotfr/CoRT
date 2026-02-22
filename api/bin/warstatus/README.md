@@ -19,8 +19,9 @@ statistics.
 
 Note that the API is [static](https://www.seancdavis.com/posts/lets-talk-about-static-apis/).
 
-Clearly the format has been optimized for display on the site and try to play
-well with NGE inconsistent website code, sacrificing a bit of the consistency.
+The API code is just here to translate html to a more structured json format,
+and provide an history of events. If you work with that API, it's recommended
+to have the official warstatus page opened.
 
 
 ```
@@ -29,7 +30,7 @@ well with NGE inconsistent website code, sacrificing a bit of the consistency.
             {
                 "name": "Fortication name (id) (ex: Castle Imperia (1))",
                 "location": "Capitalised realm (ex: Alsius)",
-                "owner": "Capitalised current owner of that for (ex: Syrtis)",
+                "owner": "Capitalised current owner of that fort (ex: Syrtis)",
                 "icon": "icon filename"
             },
             [...11 other forts...]
