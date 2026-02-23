@@ -23,6 +23,10 @@ The API code is just here to translate html to a more structured json format,
 and provide an history of events. If you work with that API, it's recommended
 to have the official warstatus page opened.
 
+> [!TIP]
+> It's useless to fetch it more than minutely. A fresh result is granted minutely
+> every :10 seconds.
+
 
 ```
 {
