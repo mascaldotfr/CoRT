@@ -55,7 +55,16 @@ function display_events() {
 
 async function get_data() {
 	try {
-		data = await $().getJSON(api.urls["events"]);
+		const last_fetch = JSON.parse(localStorage.getItem("wevents_api_result"));
+		// Refetch at best every minute
+		if (last_fetch !== null && (Date.now() - last_fetch["last_fetch"] ) <= 60_000) {
+			data = last_fetch["payload"];
+		}
+		else {
+			data = await $().getJSON(api.urls["events"]);
+			const to_store = {"last_fetch": Date.now(), "payload": data};
+			localStorage.setItem("wevents_api_result", JSON.stringify(to_store));
+		}
 		$("#we-info-error").empty();
 	}
 	catch (error) {
