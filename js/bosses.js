@@ -136,7 +136,16 @@ function minute_floor(v) {
 
 async function get_next_respawns() {
 	try {
-		let data = await $().getJSON(api.urls["bosses"]);
+		let data = null;
+		const last_fetch = JSON.parse(localStorage.getItem("bosses_api_result"));
+		// Fetch only if we're past the next boss respawn
+		if (last_fetch !== null && last_fetch["next_boss_ts"] * 1000 >= Date.now()) {
+			data = last_fetch;
+		}
+		else {
+			data = await $().getJSON(api.urls["bosses"]);
+			localStorage.setItem("bosses_api_result", JSON.stringify(data));
+		}
 		next_respawns = minute_floor(data["next_spawns"]);
 		previous_respawns = minute_floor(data["prev_spawns"]);
 		nextboss_ts = minute_floor(data["next_boss_ts"]);
@@ -185,9 +194,7 @@ function display_next_respawn(boss) {
 
 async function refresh_display() {
 
-	// Fetch API data only if needed
-	if (Date.now() / 1000 > nextboss_ts)
-		await get_next_respawns();
+	await get_next_respawns();
 
 	let bosses_unordered = new Map();
 	for (let boss in next_respawns) {
@@ -216,7 +223,7 @@ $(document).ready(function() {
 	});
 
 	notify.insert_notification_link();
+	refresh_display(true);
 	const scheduler = new MyScheduler(1, 5, refresh_display);
-	scheduler.force_run(true);
 	scheduler.start_scheduling();
 });

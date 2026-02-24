@@ -1,4 +1,4 @@
-import {$, _, api, Time} from "./libs/cortlibs.js";
+import {$, _, api, MyScheduler, Time} from "./libs/cortlibs.js";
 import {Constants, TranslateForts} from "./wztools/wztools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
@@ -77,7 +77,7 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 }
 
 function show_graphs_fortsheld_byfort(data, selector) {
-	// same order as generate.py get_fortsheld()
+	// same order as generate.php get_fortsheld()
 	let forts = ["Aggersborg", "Trelleborg", "Imperia",
 		     "Samal", "Menirah", "Shaanarid",
 		     "Herbred", "Algaros", "Eferias"];
@@ -126,15 +126,20 @@ function table_factory(rows, selector, realm) {
 }
 
 async function display_stat(force = false) {
-	// The page is hidden, just do nothing; the focus event listener will
-	// update when needed
-	if (!force && document.hidden)
-		return;
 
 	let data = null;
 
 	try {
-		data = await $().getJSON(api.urls["stats"]);
+		const last_fetch = JSON.parse(localStorage.getItem("wstats_api_result"));
+		// Limit to 2 fetch per minute
+		if (last_fetch !== null && (Date.now() - last_fetch["last_fetch"] ) <= 30_000) {
+			data = last_fetch["payload"];
+		}
+		else {
+			data = await $().getJSON(api.urls["stats"]);
+			const to_store = {"last_fetch": Date.now(), "payload": data};
+			localStorage.setItem("wstats_api_result", JSON.stringify(to_store));
+		}
 		$("#ws-info-error").empty();
 	}
 	catch (error) {
@@ -244,21 +249,8 @@ $(document).ready(function() {
 		$("#ws-index-list").append(`<li><a href="${l["id"]}">${l["txt"]}</a></li>`);
 	}
 
-
 	display_stat(true);
-	// Always ensure we have fresh data, particulary on mobile, with a 5s
-	// debounce
-	let last_focus = Date.now();
-	function force_refresh() {
-		const ts = Date.now();
-		if (ts - last_focus > 5000 && !document.hidden) {
-			last_focus = ts;
-			display_stat(true);
-		}
-	}
-	window.addEventListener("focus", force_refresh);
-	// In case the page is not focused, but another UI element of it
-	window.addEventListener("visibilitychange", force_refresh);
+	const scheduler = new MyScheduler(10, 15, display_stat);
+	scheduler.start_scheduling();
 });
 
-setInterval(display_stat, 60 * 1000);

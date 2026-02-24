@@ -12,7 +12,16 @@ function capitalize(string) {
 
 async function download_stats() {
 	try {
-		stats = await $().getJSON(api.urls["trainer_data_stats"]);
+		const last_fetch = JSON.parse(localStorage.getItem("tstats_api_result"));
+		// Refresh at best every hour (3hrs server side)
+		if (last_fetch !== null && (Date.now() - last_fetch["last_fetch"] ) <= 3_600_000) {
+			stats = last_fetch["payload"];
+		}
+		else {
+			stats = await $().getJSON(api.urls["trainer_data_stats"]);
+			const to_store = {"last_fetch": Date.now(), "payload": stats};
+			localStorage.setItem("tstats_api_result", JSON.stringify(to_store));
+		}
 	}
 	catch(err) {
 		$("#ts-maingraph").html(`Failed to make the stats: <code>${err}</code> (check console)`);

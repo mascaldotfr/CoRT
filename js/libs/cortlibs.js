@@ -320,38 +320,51 @@ export class MyNotify {
 }
 
 
-// XXX Schedule minutely things. See /js/libs/ticker.js for code, and WZ/BZ/BOSSES for usage
+// XXX Schedule minutely things. See WZ/BZ/BOSSES for usage
+// It's on main thread, so there may be some temporary drift if the tab is put
+// to sleep
 export class MyScheduler {
 	constructor(start, end, callback) {
-		this.start = start;
-		this.end = end;
 		this.callback = callback;
-		this.last_focus = Date.now();
+		window.addEventListener("focus", callback)
 
-		// initial display
-		this.worker = new Worker("./js/libs/ticker.js?bundlereplaceme");
-		this.worker.postMessage({"init": {"start": this.start, "end": this.end}});
-		// If it ticks, run this
+		const worker_code = `
+			let timer = null;
+			function when_to_respawn() {
+				const now = new Date();
+				const jitter = Math.floor(Math.random() * (${end} - ${start} + 1));
+				const target_second = ${start} + jitter;
+
+				const next = new Date(now);
+				next.setMilliseconds(0);
+				next.setSeconds(target_second);
+				if (next <= now)
+					next.setMinutes(next.getMinutes() + 1);
+				return next.getTime() - now.getTime();
+			}
+			function tick() {
+				postMessage("tick");
+				schedule();
+			}
+			function schedule() {
+				const delay = when_to_respawn();
+				timer = setTimeout(tick, delay);
+			}
+			onmessage = schedule;
+		`;
+		const blob = new Blob([worker_code], { type: "application/javascript" });
+		this.worker = new Worker(URL.createObjectURL(blob));
 		this.worker.onmessage = this.callback;
 	}
-
 	start_scheduling() {
-		// Always ensure we have fresh data, particulary on mobile, with a 5s
-		// debounce
-		window.addEventListener("focus", () => {
-			const ts = Date.now();
-			if (ts - this.last_focus > 5000) {
-				this.last_focus = ts;
-				this.force_run();
-			}
-		});
+		// Firefox mobile handles web workers badly and fires a lot of
+		// API calls when coming back from sleep, use a 30s dumb poll instead
+		if (navigator.userAgent.includes("Firefox") && navigator.userAgent.includes("Mobile"))
+			setInterval(this.callback, 30_000);
+		else
+			this.worker.postMessage("start");
 	}
 
-	force_run(...args) {
-		// On manual run, always update the last run timestamp before calling the callback
-		this.worker.postMessage({"update_last_run": {"ts": this.last_focus}});
-		this.callback(...args);
-	}
 }
 
 // XXX Time

@@ -131,14 +131,26 @@ async function draw_map(images) {
 
 }
 
-async function display_wz(init=false) {
+async function display_wz(force=false) {
 	let data = null;
 	let failures = {};
 
 	try {
-		data = await $().getJSON(api.urls["wstatus"]);
+		let last_fetch_ts = 0;
+		const last_fetch = JSON.parse(localStorage.getItem("wz_api_result"));
+		// Limit to 2 fetch per minute
+		if (last_fetch !== null && (Date.now() - last_fetch["last_fetch"] ) < 30_000) {
+			data = last_fetch["payload"];
+			last_fetch_ts = last_fetch["last_fetch"];
+		}
+		else {
+			data = await $().getJSON(api.urls["wstatus"]);
+			const to_store = {"last_fetch": Date.now(), "payload": data};
+			last_fetch_ts = to_store["last_fetch"];
+			localStorage.setItem("wz_api_result", JSON.stringify(to_store));
+		}
 		$("#wz-info-error").empty();
-		let dt = new Date();
+		let dt = new Date(last_fetch_ts);
 		let datetime = dt.toLocaleTimeString(undefined,
 			{hour: "2-digit", minute: "2-digit", second: "2-digit"});
 		$("#wz-info-updated").text(datetime);
@@ -165,7 +177,9 @@ async function display_wz(init=false) {
 		return;
 	}
 
-	if (init == false && data["events_log"][0]["date"] < wz_lastupdate)
+	// XXX force is overwritten by the web worker as a message event due to
+	// being asynchronous...
+	if (force instanceof MessageEvent && data["events_log"][0]["date"] < wz_lastupdate)
 		return; // nothing new
 
 	display_map(data["forts"]);
@@ -229,8 +243,7 @@ $(document).ready(function() {
 		" " + _("Last updated:"));
 	notify.insert_notification_link();
 
+	display_wz(true);
 	const scheduler = new MyScheduler(10, 15, display_wz);
-	scheduler.force_run(true);
 	scheduler.start_scheduling();
-
 });

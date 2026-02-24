@@ -135,7 +135,21 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 
 async function get_data() {
 	try {
-		data = await $().getJSON(api.urls["bz"]);
+		const last_fetch = JSON.parse(localStorage.getItem("bz_api_result"));
+		const now = Date.now() / 1000;
+		let bz_is_no_more_on = true;
+		let bz_just_started = true;
+		if (last_fetch !== null) {
+			bz_is_no_more_on = last_fetch["bzendsat"] != 0 && now > last_fetch["bzendsat"];
+			bz_just_started = now > last_fetch["bzbegin"][0];
+		}
+		if ( last_fetch === null || bz_is_no_more_on || bz_just_started ) {
+			data = await $().getJSON(api.urls["bz"]);
+			localStorage.setItem("bz_api_result", JSON.stringify(data));
+		}
+		else {
+			data = last_fetch;
+		}
 		$("#bz-error").empty();
 	}
 	catch (error) {
@@ -146,11 +160,7 @@ async function get_data() {
 
 async function feed_bz() {
 
-	// Fetch API data only if needed
-	let now = new Date();
-	let now_ts = now.getTime() / 1000;
-	if ( data === null || (data["bzendsat"] != 0 && now_ts > data["bzendsat"]) || now_ts > data["bzbegin"][0] )
-		await get_data();
+	await get_data();
 
 	let next_bzs_begin = data["bzbegin"];
 	let next_bzs_end = data["bzend"];
@@ -224,7 +234,7 @@ $(document).ready(function() {
 
 	notify.insert_notification_link();
 	const scheduler = new MyScheduler(1, 5, feed_bz);
-	scheduler.force_run();
+	feed_bz();
 	scheduler.start_scheduling();
 });
 
