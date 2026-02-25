@@ -36,6 +36,7 @@
 }
 #wz-realms-info {
 	align-self: center;
+	min-width: 16em;
 }
 .wz-realm-header {
 	display: grid;
@@ -44,7 +45,7 @@
 		"gems forts"
 		"relics forts";
 	gap: 0 2em;
-	min-height: 3em;
+	min-height: 4em;
 	align-items: center;
 	font-size: 150%;
 	font-weight: bold;
