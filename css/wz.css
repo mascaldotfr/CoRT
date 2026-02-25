@@ -18,6 +18,8 @@
 	margin: 0;
 	image-rendering: pixelated;
 	image-rendering: crisp-edges;
+	background-image: url("../data/warstatus/base_map.png");
+	background-size: cover;
 }
 .wz-icon {
 	padding: 0;
