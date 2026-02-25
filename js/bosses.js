@@ -13,14 +13,14 @@ class Calendar {
 		});
 	}
 
-	#generate_uid() {
+	generate_uid() {
 		const ts = Date.now().toString(36);
 		const random = Math.random().toString(36).substring(2, 10);
 		return `${ts}${random}@${window.location.hostname}`;
 	}
 
 	// Format a Unix timestamp (seconds) as iCalendar UTC date-time: YYYYMMDDTHHMMSSZ
-	#format_utc_ics_datetime(unix_ts) {
+	format_utc_ics_datetime(unix_ts) {
 		const date = new Date(parseInt(unix_ts) * 1000); // Convert to milliseconds
 		const y = date.getUTCFullYear();
 		const m = String(date.getUTCMonth() + 1).padStart(2, "0");
@@ -32,7 +32,7 @@ class Calendar {
 	}
 
 	// Escape text for iCalendar
-	#escape_text(text) {
+	escape_text(text) {
 		return String(text)
 			.replace(/\\/g, "\\\\")
 			.replace(/;/g, "\\;")
@@ -46,11 +46,11 @@ class Calendar {
 	 * start — Unix timestamp (seconds)
 	 * end — Unix timestamp (seconds)
 	 */
-	#generate_ics(title, start, end) {
-		const dt_start = this.#format_utc_ics_datetime(start);
-		const dt_end = this.#format_utc_ics_datetime(end);
-		const safe_title = "[CoR] " + this.#escape_text(title);
-		const uid = this.#generate_uid();
+	generate_ics(title, start, end) {
+		const dt_start = this.format_utc_ics_datetime(start);
+		const dt_end = this.format_utc_ics_datetime(end);
+		const safe_title = "[CoR] " + this.escape_text(title);
+		const uid = this.generate_uid();
 
 		return [
 			"BEGIN:VCALENDAR",
@@ -80,7 +80,7 @@ class Calendar {
 	}
 
 	create_link(title, start, end, filename = "event.ics" ) {
-		const ics = this.#generate_ics(title, start, end);
+		const ics = this.generate_ics(title, start, end);
 		const encoded = encodeURIComponent(ics.trim().replace(/\r\n|\r/g, '\n'));
 		const href = `text/calendar;charset=utf-8,${encoded}`;
 		const safe_filename = filename.endsWith('.ics') ? filename : `${filename}.ics`;

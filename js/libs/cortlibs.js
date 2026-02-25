@@ -199,7 +199,7 @@ export const $ = (function (selector) {
 
 
 export class myTz {
-	#get_system_tz() {
+	get_system_tz() {
 		let tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
 		if (tz === undefined) {
 			let offset = new Date().getTimezoneOffset() / 60;
@@ -210,7 +210,7 @@ export class myTz {
 		return tz;
 	}
 
-	#display_tz_list(selector, options, storedtz) {
+	display_tz_list(selector, options, storedtz) {
 		let target = document.querySelector(selector);
 		target.innerHTML = options;
 		target.addEventListener("change", function (x) {
@@ -231,7 +231,7 @@ export class myTz {
 		// Cache HIT
 		if (cached_tz_list != null && cached_tz_list_ts != null &&
 		    now - cached_tz_list_ts <= cache_duration) {
-			this.#display_tz_list(selector, cached_tz_list, storedtz);
+			this.display_tz_list(selector, cached_tz_list, storedtz);
 			return;
 		}
 
@@ -247,22 +247,22 @@ export class myTz {
 		}
 		catch (_unused) {
 			// compat with old browsers
-			let localtz = this.#get_system_tz();
+			let localtz = this.get_system_tz();
 			let shorttz = localtz.replace(/^[^\/]+\//, "");
 			human_tzs[shorttz] = localtz;
 		}
 		human_tzs["UTC"] = "UTC";
-		human_tzs["Local"] = this.#get_system_tz();
+		human_tzs["Local"] = this.get_system_tz();
 
 		let options = "";
 		for (let tz of Object.keys(human_tzs).sort())
 			options += `<option value="${human_tzs[tz]}">${tz}</option>`;
 
 		if (storedtz === undefined || Object.values(human_tzs).indexOf(storedtz) < 0)
-			storedtz = this.#get_system_tz();
+			storedtz = this.get_system_tz();
 		localStorage.setItem("tz", storedtz);
 
-		this.#display_tz_list(selector, options, storedtz);
+		this.display_tz_list(selector, options, storedtz);
 
 		localStorage.setItem("tzlisthtml", options);
 	}
@@ -273,9 +273,8 @@ export class myTz {
 
 
 export class MyNotify {
-	#swsupport;
 	constructor() {
-		this.#swsupport = ("Notification" in window && "serviceWorker" in navigator);
+		this.swsupport = ("Notification" in window && "serviceWorker" in navigator);
 		try {
 			navigator.permissions
 				.query({ name: "notifications" })
@@ -287,12 +286,12 @@ export class MyNotify {
 				});
 		}
 		catch(_unused) { /* Unsupported by safari */ }
-		if (this.#swsupport)
+		if (this.swsupport)
 			navigator.serviceWorker.register("sw.js");
 	}
 
 	insert_notification_link() {
-		if (!this.#swsupport || Notification.permission !== "default")
+		if (!this.swsupport || Notification.permission !== "default")
 			return;
 		$("#title").append(`
 			<a href="#" id="ask-notifications" class="nodeco" title="Notifications">&nbsp;🔔</a>
@@ -311,7 +310,7 @@ export class MyNotify {
 			renotify: true,
 			vibrate: [100, 50, 100]
 		};
-		if (this.#swsupport && Notification.permission === "granted") {
+		if (this.swsupport && Notification.permission === "granted") {
 			navigator.serviceWorker.ready.then( reg => {
 				reg.showNotification(title, options);
 			});
