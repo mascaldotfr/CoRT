@@ -325,7 +325,15 @@ export class MyNotify {
 export class MyScheduler {
 	constructor(start, end, callback) {
 		this.callback = callback;
-		window.addEventListener("focus", callback)
+
+		let callback_running = false;
+		window.addEventListener("visibilitychange", function(event) {
+			if (!document.hidden && !callback_running) {
+				callback_running = true;
+				callback();
+				callback_running = false;
+			}
+		});
 
 		const worker_code = `
 			let timer = null;
