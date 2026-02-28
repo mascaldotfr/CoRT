@@ -15,7 +15,7 @@ $output_file = "../../var/trainerstats.json";
 
 // Check if output file exists and is less than 3 hours old
 // Redirect to the cached page if that's the case
-if (filesize($output_file) != 0 && file_exists($output_file) && (time() - filemtime($output_file)) < 3 * 3600) {
+if (filesize($output_file) != 0 && file_exists($output_file) && (time() - filemtime($output_file)) < 3 * 3_600) {
     readfile($output_file);
     exit();
 }
@@ -37,7 +37,7 @@ $constants = [
 	"classes" => ["knight", "barbarian", "conjurer", "warlock", "hunter", "marksman"]
 ];
 // dict output for API
-$api_dict = [];
+$api_dict = ["skill_names" => []];
 // full output file
 // trainer "db" content
 $data = file($data_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -157,6 +157,11 @@ foreach ($data as $line) {
 			$points_char = array_shift($spell_points);
 			$points = (int)$points_char;
 			$currspell = $spell["name"];
+			$currspell_id = array_search($currspell, $api_dict["skill_names"]);
+			if ($currspell_id === false) {
+				array_push($api_dict["skill_names"], $currspell);
+				$currspell_id = count($api_dict["skill_names"]) - 1;
+			}
 
 			if (substr($tree, -2) === "WM") {
 				if (str_starts_with($currspell, "undefined"))
@@ -166,13 +171,13 @@ foreach ($data as $line) {
 					$points = 5;
 			}
 
-			if (!isset($api_dict[$version][$clas][$currspell]))
-				$api_dict[$version][$clas][$currspell] = [
-					"frequency" => [0, 0, 0, 0, 0, 0]
+			if (!isset($api_dict[$version][$clas][$currspell_id]))
+				$api_dict[$version][$clas][$currspell_id] = [
+					"f" => [0, 0, 0, 0, 0, 0]
 				];
 
 			// One more user of this spell at this level
-			$api_dict[$version][$clas][$currspell]["frequency"][$points]++;
+			$api_dict[$version][$clas][$currspell_id]["f"][$points]++;
 		}
 	}
 }
@@ -181,7 +186,7 @@ foreach ($data as $line) {
 foreach ($versions as $version) {
 	foreach ($constants["classes"] as $clas) {
 		foreach ($api_dict[$version][$clas] as $spell => $spellData) {
-			$freq = $spellData["frequency"];
+			$freq = $spellData["f"];
 			$freqsum = array_sum($freq);
 			if ($freqsum == 0) {
 				$percentage = 0.0;
@@ -190,7 +195,7 @@ foreach ($versions as $version) {
 				$notusing = $freq[0];
 				$percentage = 100 - ($notusing * 100) / $freqsum;
 			}
-			$api_dict[$version][$clas][$spell]["percentage"] = round($percentage, 2);
+			$api_dict[$version][$clas][$spell]["p"] = round($percentage, 2);
 		}
 	}
 }

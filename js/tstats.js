@@ -39,12 +39,12 @@ function draw_maingraph() {
 	let f = get_filters();
 	let labels = Object.keys(stats[f["version"]][f["class"]]);
 	// sort skills by usage
-	labels.sort((a, b) => stats[f["version"]][f["class"]][a]["percentage"] - stats[f["version"]][f["class"]][b]["percentage"]);
+	labels.sort((a, b) => stats[f["version"]][f["class"]][a]["p"] - stats[f["version"]][f["class"]][b]["p"]);
 	let series = [];
 	for (let power of labels)
-		series.push(stats[f["version"]][f["class"]][power]["percentage"]);
+		series.push(stats[f["version"]][f["class"]][power]["p"]);
 	let dataset = {
-		labels: labels.map(p => `${p} (${stats[f["version"]][f["class"]][p]["percentage"]}%)`),
+		labels: labels.map(p => `${stats["skill_names"][p]} (${stats[f["version"]][f["class"]][p]["p"]}%)`),
 		series:	[series]
 	};
 	let options = {
@@ -57,11 +57,12 @@ function draw_maingraph() {
 
 function draw_powergraph() {
 	let f = get_filters();
-	let power = f["power"];
+	const power = f["power"];
+	const power_id = stats["skill_names"].indexOf(power);
 	let labels = [];
 	for (let label of [0, 1, 2, 3, 4, 5]) {
 		try {
-			labels.push(label + " (" + stats[f["version"]][f["class"]][f["power"]]["frequency"][label] + ")");
+			labels.push(label + " (" + stats[f["version"]][f["class"]][power_id]["f"][label] + ")");
 		}
 		catch(error) {
 			console.error(error);
@@ -71,7 +72,7 @@ function draw_powergraph() {
 	}
 	let dataset = {
 		labels: labels,
-		series:	[stats[f["version"]][f["class"]][f["power"]]["frequency"]]
+		series:	[stats[f["version"]][f["class"]][power_id]["f"]]
 	};
 	let options = {
 		chartPadding: {left: 0, top: 30, bottom: 0},
@@ -85,10 +86,12 @@ function draw_powergraph() {
 function refresh_powers() {
 	let f = get_filters();
 	let powerlist = stats[f["version"]][f["class"]];
-	let options = "";
-	for (let p of Object.keys(powerlist).sort())
-		options += `<option value="${p}">${p}</option>`;
-	$("#ts-power").html(options);
+	let options = [];
+	for (let p of Object.keys(powerlist)) {
+		const skill_name = stats["skill_names"][p];
+		options.push(`<option value="${skill_name}">${skill_name}</option>`);
+	}
+	$("#ts-power").html(options.sort().join());
 }
 
 function redraw_all() {
