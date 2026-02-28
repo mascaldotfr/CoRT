@@ -448,7 +448,7 @@ class Reporter {
 	public function dump_events() {
 		$result = $this->sql->query("SELECT *
 			FROM report
-			WHERE date > strftime('%s','now') - 14 * 24 * 3600
+			WHERE date > strftime('%s','now') - 10 * 24 * 3600
 			ORDER BY date DESC");
 		$output = [["generated" => (new DateTime())->getTimestamp()]];
 		while ($r = $result->fetch(PDO::FETCH_ASSOC)) {

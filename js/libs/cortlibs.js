@@ -934,10 +934,10 @@ export const __i18n__ = {
 		"es": "Último evento:",
 		"de": "Letzter Eintrag:"
 	},
-	"All events over the last 14 days.": {
-		"fr": "Tous les événements sur les derniers 14 jours.",
-		"es": "Todos los eventos durante los últimos 14 días.",
-		"de": "Alle Ereignisse der letzten 14 Tage."
+	"All events over the last 10 days.": {
+		"fr": "Tous les événements sur les derniers 10 jours.",
+		"es": "Todos los eventos durante los últimos 10 días.",
+		"de": "Alle Ereignisse der letzten 10 Tage."
 	},
 	"Download all events data": {
 		"fr": "Télécharger toutes les données des évènements",
