@@ -37,7 +37,7 @@ $constants = [
 	"classes" => ["knight", "barbarian", "conjurer", "warlock", "hunter", "marksman"]
 ];
 // dict output for API
-$api_dict = ["skill_names" => []];
+$api_dict = [];
 // full output file
 // trainer "db" content
 $data = file($data_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -61,7 +61,8 @@ else {
 	$api_dict["lineno"] = count($data);
 }
 
-
+if (!in_array("skill_names", $api_dict))
+	$api_dict["skill_names"] = [];
 
 // Load the trainerdata sets
 // get all trainer versions but < 1.33.6 (there was no data collection back
@@ -156,6 +157,7 @@ foreach ($data as $line) {
 			$counter++;
 			$points_char = array_shift($spell_points);
 			$points = (int)$points_char;
+
 			$currspell = $spell["name"];
 			$currspell_id = array_search($currspell, $api_dict["skill_names"]);
 			if ($currspell_id === false) {
