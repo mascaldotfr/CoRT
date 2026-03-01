@@ -61,7 +61,7 @@ else {
 	$api_dict["lineno"] = count($data);
 }
 
-if (!in_array("skill_names", $api_dict))
+if (!array_key_exists("skill_names", $api_dict))
 	$api_dict["skill_names"] = [];
 
 // Load the trainerdata sets
