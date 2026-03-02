@@ -36,14 +36,22 @@ To get the whole list:
 
 ## Rate limits and other rules on official server API
 
-*These limits are set at the webserver level, if you set your own API server,
-they won't apply.*
 
 > [!WARNING]
+>
+> **TLDR; I owe you nothing, you can deploy your own API if you don't agree,
+> the source code is right here**
+>
 > If you plan to use the official API server in environments where asynchronous
 > user events (clicks and stuff in apps and website) trigger direct API calls,
 > you *should* implement a [debounce mechanism](https://developer.mozilla.org/en-US/docs/Glossary/Debounce) to
-> avoid rate limits.
+> avoid rate limits, or caching.
+>
+> I reserve myself the right to throttle further repeated offenders after some
+> talks. It's no idle threat: I can make CoRT works with only 2
+> queries/minute/endpoint/host, due to proper caching to ensure decent
+> reactivity on crappy connections some people have around the world (and the
+> traffic is too low for CDN use).
 
 ### Rate limits
 
@@ -54,11 +62,6 @@ The rate limits by host are:
 
 The rate limits for these 2 are separated, meaning that you can issue 30 dynamic
 and 30 static requests per minute and per host.
-
-> [!CAUTION]
-> Going over the rate limit will make the official webserver abort the
-> connection without any form of info if you're still calling further the API.
-> You're grounded until the next minute + a random jitter.
 
 ### Other rules
 

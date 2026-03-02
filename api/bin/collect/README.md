@@ -6,18 +6,24 @@ setup through a HTTP POST request, and if it is "valid", add a line in
 is invalid, then a HTTP 417 code is returned.
 
 This is fully anonymized and only triggerred when using
-https://mascaldotfr.github.io, unless you do the appropriate changes in the
-source code (`./submit.php` and `/js/cortlibs.js`)
+https://cort.ovh, unless you do the appropriate changes in the
+source code (`./submit.php` and `/js/libs/cortlibs.js`)
+
+### Dataset
 
 The dataset is available
 [there](https://cort.ovh/api/var/trainer_saved_setups.txt)
 
+### Precomputed stats
+
 Statistics are already generated for use by CoRT and are publicly available at
 https://cort.ovh/api/bin/collect/trainer_stats.php
 
+This endpoint is not documented, but it's pretty straight forward.
+
 This endpoint content is cached, and at best regenerated every 3 hours.
 
-## Data exploitation
+## Dataset exploitation
 
 Note that this requires accessing the trainerdata sets on this repository,
 because your exploitation code will require to sideload them.

@@ -2,6 +2,12 @@
 
 This page documents the bosses API endpoint, used by CoRT and CoRT-dc.
 
+> [!TIP]
+> I would recommend to take my code and reimplement it in whatever language you
+> are using. It's super simple, and ensure a better reactivity for your app.
+>
+> It's here because I don't want to repeat myself in CoRT and CoRT-dc.
+
 ## URL
 
 https://cort.ovh/api/bin/bosses/bosses.php

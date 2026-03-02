@@ -21,7 +21,7 @@ Note that the API is [static](https://www.seancdavis.com/posts/lets-talk-about-s
 
 The API code is just here to translate html to a more structured json format,
 and provide an history of events. If you work with that API, it's recommended
-to have the official warstatus page opened.
+to have the official warstatus page opened with devtools on.
 
 > [!TIP]
 > It's useless to fetch it more than minutely. A fresh result is granted minutely

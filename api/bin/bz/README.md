@@ -1,6 +1,13 @@
 # BZ
 
-This page documents the BZ API endpoint.
+This page documents the BZ API endpoint, used by CoRT and CoRT-dc.
+
+> [!TIP]
+> I would recommend to take my code and reimplement it in whatever language you
+> are using. It's super simple, and ensure a better reactivity for your app.
+>
+> It's here because I don't want to repeat myself in CoRT and CoRT-dc.
+
 
 ## URL
 
@@ -13,7 +20,8 @@ https://cort.ovh/api/bin/bz/bz.php
 https://cort.ovh/api/bin/bz/bz.php?fake
 
 If a `fake` parameter is provided, then BZ will be ON then OFF for 15 minutes
-respectively. It's meant for testing and development.
+respectively. Note that BZ time themselves won't be changed. It's meant for
+testing and development.
 
 ## Response format
 
