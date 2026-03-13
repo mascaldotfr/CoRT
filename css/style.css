@@ -31,8 +31,8 @@ body {
 	max-width: 1600px;
 	-webkit-max-logical-width: -webkit-fit-content;
 	min-height: 100dvh;
-	display: grid;
-	grid-template-rows: auto 1fr auto; /* menu main footer */
+	display: flex;
+	flex-direction: column;
 }
 a {
 	color: var(--links);
@@ -58,10 +58,13 @@ select {
 	-webkit-appearance: none;
 }
 summary {
-	  list-style: none;
+	list-style: none;
 }
 summary::-webkit-details-marker {
-    display: none;
+	display: none;
+}
+#main-container {
+	flex: 1;
 }
 #temporary-message, .card {
 	background: var(--card_background);
