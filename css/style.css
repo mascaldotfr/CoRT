@@ -182,6 +182,7 @@ h3 {
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
 .nodeco { text-decoration: none; }
+.small { font-size: 90% }
 
 @media (max-width: 799px) {
 	#menu {
