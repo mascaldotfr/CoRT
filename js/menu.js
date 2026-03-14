@@ -28,6 +28,7 @@ let __menu_icons = {
 let __menu_content = function () { return `
 	<input type="checkbox" id="menu-click">
 	<label for="menu-click" class="menu-btn"><span class="bold">${_("☰  Menu")}</span></label>
+		<header>
 		<ul id="menu-links">
 		<li class="menuitem bold"><a href="./">${__menu_icons["trainer"]} ${_("Trainer")}</a></li>
 		<li class="menuitem bold"><a href="wz.html">${__menu_icons["wz"]} ${_("WZ status")}</a></li>
@@ -53,6 +54,7 @@ let __menu_content = function () { return `
 			<ul class="menudetails" id="menu-lang-list"></ul>
 		</li>
 		</ul>
+		</header>
 `; };
 
 const __menu_github_stuff = function () {
@@ -72,7 +74,7 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260313.235009
+	<p> <!--VERSION-->Version: 20260314.000309
 	(<a href="reset_powers.html" title="Clear all CoRT data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
