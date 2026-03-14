@@ -3,19 +3,34 @@
 	margin: 0 auto;
 }
 .setup {
-	display: flex;
+	display: grid;
 	gap: 1em;
-	flex-wrap: wrap;
-	justify-content: space-around;
+	grid-template-areas: "version class level load save";
 }
-#t-version, #t-load, #t-save, #t-class, #t-level {
-	flex-grow: 1;
+#t-version, #t-class, #t-level {
 	text-align: center;
 }
+#t-version {
+	grid-area: version;
+}
+#t-class {
+	grid-area: class;
+}
+#t-level {
+	grid-area: level;
+}
+#t-load {
+	grid-area: load;
+}
+#t-save {
+	grid-area: save
+}
+
 #t-load, #t-save {
 	font-weight: bold;
 }
 #t-level {
+	grid-area: level;
 	min-width: 6em;
 }
 .points { text-align:center; min-height: 2em;}
@@ -152,6 +167,10 @@
 	}
 	.setup {
 		min-height: 8em;
+		grid-template-areas:
+			"version version"
+			"class level"
+			"load save";
 	}
 	.t-placeholder-card {
 		height: 12em;
