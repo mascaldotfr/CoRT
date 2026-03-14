@@ -11,8 +11,8 @@ Regnum forum *(update: they ended up using this trainer instead)* but it had
 some outdated mechanics.
 
 This website started as a (simpler) knockoff of the regnumsentinel website
-trainer, that will be alive as long as GitHub Page exists and is open source
-software. It grew up since then to surpass regnumsentinel, there are now
+trainer, that will be alive as long as Codeberg/Github exist and is open
+source software. It grew up since then to surpass regnumsentinel, there are now
 countdown pages for bosses and BZ, live WZ status, various statistics and
 more...
 
