@@ -1,3 +1,8 @@
+#main-container {
+	width: 100%;
+	max-width: 35em;
+	margin: 0 auto;
+}
 .boss-respawn ul {
 	margin-bottom: 0;
 	min-height: 5em;
@@ -14,10 +19,6 @@
 	gap: .5em;
 	visibility: hidden;
 	min-height: 10em;
-}
-#main-container {
-	max-width: 35em;
-	margin: 0 auto;
 }
 #boss-list img {
 	width: 125px;
