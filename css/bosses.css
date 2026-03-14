@@ -27,7 +27,7 @@
 .boss-respawn {
 	flex: 1;
 	vertical-align: middle;
-	margin-left: -4em;
+	margin-left: -1.5em;
 	text-align: center;
 }
 @media (max-width:512px) {
