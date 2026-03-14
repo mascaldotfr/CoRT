@@ -894,11 +894,6 @@ export const __i18n__ = {
 		"es": "ha recuperado %s",
 		"de": "hat %s zurückerobert"
 	},
-	"Last server events (in your timezone):": {
-		"fr": "Derniers événements :",
-		"es": "Últimos eventos:",
-		"de": "Neueste Serverereignisse:"
-	},
 	"More events": {
 		"fr": "Plus d'événements",
 		"es": "Más eventos",

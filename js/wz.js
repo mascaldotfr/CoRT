@@ -220,7 +220,6 @@ async function display_wz(force=false) {
 	// Events
 
 	const events_list = humaniser.humanise_events(data["events_log"], true, wz_lastupdate);
-	$("#wz-events-header").text(_("Last server events (in your timezone):"));
 	$("#wz-events-eventslist").html(events_list[0]);
 	$("#wz-events-moreevents").text(_("More events") + "...");
 
