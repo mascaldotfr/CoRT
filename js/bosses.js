@@ -84,8 +84,7 @@ class Calendar {
 		const encoded = encodeURIComponent(ics.trim().replace(/\r\n|\r/g, '\n'));
 		const href = `text/calendar;charset=utf-8,${encoded}`;
 		const safe_filename = filename.endsWith('.ics') ? filename : `${filename}.ics`;
-		return `<a href="data:${href}" class="addtocalendar" download="${safe_filename}"
-			title="Add to Calendar">📅</a>`;
+		return {"href": "data:" + href, filename: safe_filename};
 	}
 }
 
@@ -166,10 +165,12 @@ function display_next_respawn(boss) {
 		const respawn_ts = next_respawns[boss][i];
 		const respawn_datetime = new Date(respawn_ts * 1000);
 		const uc_boss = boss[0].toUpperCase() + boss.slice(1);
-		const calhtml = calendar.create_link(uc_boss, respawn_ts, respawn_ts + 900,
+		const cal = calendar.create_link(uc_boss, respawn_ts, respawn_ts + 900,
 			`${uc_boss}_${respawn_datetime.toISOString()}`);
 		$(`#boss-${boss}-nextspawn-${i}`).text(unixstamp2human(respawn_ts));
-		$(`#boss-${boss}-nextspawn-${i}-calendar`).html(calhtml);
+		const cal_sel = $(`#boss-${boss}-nextspawn-${i}-calendar`);
+		cal_sel.attr("href", cal["href"]);
+		cal_sel.attr("download", cal["filename"]);
 	}
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
