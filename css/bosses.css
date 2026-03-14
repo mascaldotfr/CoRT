@@ -3,6 +3,9 @@
 	max-width: 35em;
 	margin: 0 auto;
 }
+.card {
+	padding: calc(var(--default_margin_padding) / 2);
+}
 .boss-respawn li {
 	list-style-type: none;
 	line-height: 1.6em;
