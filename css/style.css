@@ -197,8 +197,8 @@ h3 {
 		width: 100%;
 		display: block;
 	}
-	#menu-click:not(:checked) ~ header { display: none; }
-	#menu-click:checked ~ header { display: block; }
+	#menu-click:not(:checked) ~ ul { display: none; }
+	#menu-click:checked ~ ul { display: block; }
 	#menu-links > li {
 		display: block;
 	}

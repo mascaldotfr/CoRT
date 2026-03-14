@@ -28,37 +28,35 @@ let __menu_icons = {
 let __menu_content = function () { return `
 	<input type="checkbox" id="menu-click">
 	<label for="menu-click" class="menu-btn"><span class="bold">${_("☰  Menu")}</span></label>
-		<header>
-		<ul id="menu-links">
-		<li class="menuitem bold"><a href="./">${__menu_icons["trainer"]} ${_("Trainer")}</a></li>
-		<li class="menuitem bold"><a href="wz.html">${__menu_icons["wz"]} ${_("WZ status")}</a></li>
-		<li class="menuitem bold"><a href="bosses.html">${__menu_icons["bosses"]} ${_("Bosses")}</a></li>
-		<li class="menuitem bold"><a href="bz.html">${__menu_icons["bz"]} ${_("BZ status")}</a></li>
-		<li class="menuitem bold"><a href="wevents.html">${__menu_icons["wevents"]} ${_("WZ events")}</a></li>
-		<li class="menuitem bold"><a href="wstats.html">${__menu_icons["wstats"]} ${_("WZ statistics")}</a></li>
-		<li class="menuitem bold"><a href="tstats.html"> ${__menu_icons["tstats"]} ${_("Trainer statistics")}</a></li>
-		<li>
-			<details class="menudetails">
-				<summary>${__menu_icons["more"]} ${_("More Tools...")}</summary>
-				<ul class="menudetails">
-					<li>${__menu_icons["sentinel"]}&nbsp;<a href="https://sentinel.cort.ovh" title="All Regnum at a glance" target="_blank">Sentinel</a>
-					<li>${__menu_icons["quests"]}&nbsp;<a href="quests.html" title="Quest reset times">${_("Quests")}</a>
-					<li>${__menu_icons["armor"]}&nbsp;<a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">${_("Armor calculator")}</a>
-					<li>${__menu_icons["tools4regnum"]}&nbsp;<a href="https://tools4regnum.de/" target="_blank" title="The Wiki for Champions of Regnum">Tools4Regnum</a>
-				</ul>
-			</details>
-		</li>
-		<li>
-			<details class="menudetails">
-			<summary id="menu-lang-current"></summary>
-			<ul class="menudetails" id="menu-lang-list"></ul>
-		</li>
-		</ul>
-		</header>
+	<ul id="menu-links">
+	<li class="menuitem bold"><a href="./">${__menu_icons["trainer"]} ${_("Trainer")}</a></li>
+	<li class="menuitem bold"><a href="wz.html">${__menu_icons["wz"]} ${_("WZ status")}</a></li>
+	<li class="menuitem bold"><a href="bosses.html">${__menu_icons["bosses"]} ${_("Bosses")}</a></li>
+	<li class="menuitem bold"><a href="bz.html">${__menu_icons["bz"]} ${_("BZ status")}</a></li>
+	<li class="menuitem bold"><a href="wevents.html">${__menu_icons["wevents"]} ${_("WZ events")}</a></li>
+	<li class="menuitem bold"><a href="wstats.html">${__menu_icons["wstats"]} ${_("WZ statistics")}</a></li>
+	<li class="menuitem bold"><a href="tstats.html"> ${__menu_icons["tstats"]} ${_("Trainer statistics")}</a></li>
+	<li>
+		<details class="menudetails">
+			<summary>${__menu_icons["more"]} ${_("More Tools...")}</summary>
+			<ul class="menudetails">
+				<li>${__menu_icons["sentinel"]}&nbsp;<a href="https://sentinel.cort.ovh" title="All Regnum at a glance" target="_blank">Sentinel</a>
+				<li>${__menu_icons["quests"]}&nbsp;<a href="quests.html" title="Quest reset times">${_("Quests")}</a>
+				<li>${__menu_icons["armor"]}&nbsp;<a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">${_("Armor calculator")}</a>
+				<li>${__menu_icons["tools4regnum"]}&nbsp;<a href="https://tools4regnum.de/" target="_blank" title="The Wiki for Champions of Regnum">Tools4Regnum</a>
+			</ul>
+		</details>
+	</li>
+	<li>
+		<details class="menudetails">
+		<summary id="menu-lang-current"></summary>
+		<ul class="menudetails" id="menu-lang-list"></ul>
+	</li>
+	</ul>
 `; };
 
 const __menu_github_stuff = function () {
-	const official = ["mascaldotfr.github.io", "cort.thebus.top", "cort.ovh"];
+	const official = ["cort.ovh", "cort.go.yo.fr"];
 	if (!official.includes(window.location.host))
 		return ""; // Not official!
 	const src = `<a href="https://codeberg.org/mascal/CoRT" target="_blank">
@@ -74,7 +72,7 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260314.011022
+	<p> <!--VERSION-->Version: 20260314.102347
 	(<a href="reset_powers.html" title="Clear all CoRT data. Use this in case of errors.">/reset_powers</a>)
 `; };
 

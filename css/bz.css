@@ -1,6 +1,7 @@
-#bz-container {
+#main-container {
 	text-align: center;
-	max-width: 35em;
+	max-width: 40em;
+	min-width: 35em;
 	margin: 0 auto;
 }
 #bz-schedule-table {
@@ -37,5 +38,8 @@
 		min-height: 5em;
 		display: grid;
 		place-items: center;
+	}
+	#main-container {
+		min-width: 100%;
 	}
 }

@@ -130,10 +130,10 @@ $("#t-save").on("click", function() {
 	});
 
 	// disable the trainer
-	$("#t-container").css("pointer-events", "none");
-	$("#t-container").css("filter", "blur(8px)");
+	$("#main-container").css("pointer-events", "none");
+	$("#main-container").css("filter", "blur(8px)");
 	// show our fake modal
-	$("#t-sharedlink").prependTo("#t-container");
+	$("#t-sharedlink").prependTo("#main-container");
 	$("#t-sharedlink").css("display", "block");
 });
 
@@ -377,7 +377,7 @@ class SetupManager {
 	}
 
 	bad_shared_link() {
-		$("#t-container").html(`
+		$("#main-container").html(`
 			 <div class="card">
 				 <h1 class="red">${_("Your shared link is bad. Bailing out, sorry!")}</h1>
 				 <p class="center">${_("Redirecting to the trainer page in")}

@@ -20,52 +20,50 @@
 		<link rel="manifest" href="manifest.json" />
 	</head>
 	<body>
-		<div id="menu" class="card"></div>
-		<div id="main-container">
-		<div id="t-container">
-		<h1 id="title">&nbsp;</h1>
-		<div id="titleinfo">&nbsp;</div>
-		<div class="setup card">
-			<select id="t-version">
-				<option>&nbsp;</option>
-			</select>
-			<select id="t-class">
-				<option>&nbsp;</option>
-			</select>
-			<select id="t-level">
-				<option value="60" default selected>60</option>
-			</select>
-			<button id="t-load">&nbsp;</button>
-			<button id="t-save">&nbsp;</button>
-		</div>
-		<div class="points" id="t-points">
-			<p>
-				<b id="t-dpoints-label">&nbsp;</b>
-				<span id="t-dpointsleft">&nbsp;</span>&nbsp;/&nbsp;<span id="t-dpointstotal">&nbsp;</span>
-				<b id="t-ppoints-label">&nbsp;</b>
-				<span id="t-ppointsleft">&nbsp;</span>&nbsp;/&nbsp;<span id="t-ppointstotal">&nbsp;</span>
-			<p>
-		</div>
-		<div id="t-trainer" class="trainer">
-			<!-- placeholders -->
-			<div class="card t-placeholder-card"></div>
-			<div class="card t-placeholder-card"></div>
-			<div class="card t-placeholder-card"></div>
-			<div class="card t-placeholder-card"></div>
-			<div class="card t-placeholder-card"></div>
-			<div class="card t-placeholder-card"></div>
-			<div class="card t-placeholder-card"></div>
-		</div>
-		</div>
-	</div>
-	<div id="footer" class="card"></div>
-	<div id="t-sharedlink" class="card">
-		<h3></h3>
-		<textarea id="t-sharedlink-url" readonly rows="5" cols="50"></textarea>
-		<div id="t-sharedlink-buttons">
-			<button id="t-sharedlink-copy"></button>
-			<button id="t-sharedlink-close"></button>
-		</div>
-	</div>
+		<nav id="menu" class="card"></nav>
+		<main id="main-container">
+			<h1 id="title">&nbsp;</h1>
+			<div id="titleinfo">&nbsp;</div>
+			<section class="setup card">
+				<select id="t-version">
+					<option>&nbsp;</option>
+				</select>
+				<select id="t-class">
+					<option>&nbsp;</option>
+				</select>
+				<select id="t-level">
+					<option value="60" default selected>60</option>
+				</select>
+				<button id="t-load">&nbsp;</button>
+				<button id="t-save">&nbsp;</button>
+			</section>
+			<section class="points" id="t-points">
+				<p>
+					<b id="t-dpoints-label">&nbsp;</b>
+					<span id="t-dpointsleft">&nbsp;</span>&nbsp;/&nbsp;<span id="t-dpointstotal">&nbsp;</span>
+					<b id="t-ppoints-label">&nbsp;</b>
+					<span id="t-ppointsleft">&nbsp;</span>&nbsp;/&nbsp;<span id="t-ppointstotal">&nbsp;</span>
+				<p>
+			</section>
+			<section id="t-trainer" class="trainer">
+				<!-- placeholders -->
+				<div class="card t-placeholder-card"></div>
+				<div class="card t-placeholder-card"></div>
+				<div class="card t-placeholder-card"></div>
+				<div class="card t-placeholder-card"></div>
+				<div class="card t-placeholder-card"></div>
+				<div class="card t-placeholder-card"></div>
+				<div class="card t-placeholder-card"></div>
+			</section>
+		</main>
+		<footer id="footer" class="card"></footer>
+		<section id="t-sharedlink" class="card">
+			<h3></h3>
+			<textarea id="t-sharedlink-url" readonly rows="5" cols="50"></textarea>
+			<div id="t-sharedlink-buttons">
+				<button id="t-sharedlink-copy"></button>
+				<button id="t-sharedlink-close"></button>
+			</div>
+		</section>
 	</body>
 </html>

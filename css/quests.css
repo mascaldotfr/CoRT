@@ -1,5 +1,5 @@
-#quests-container {
-	max-width: 35em;
+#main-container {
+	width: 35em;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -8,4 +8,9 @@
 }
 #quests-wm, #quests-xym, #quests-tickets {
 	visibility: hidden;
+}
+@media (max-width: 799px) {
+	#main-container {
+		width: 100%;
+	}
 }
