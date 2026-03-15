@@ -34,7 +34,21 @@
 	grid-area: level;
 	min-width: 6em;
 }
-.points { text-align:center; min-height: 2em;}
+.points {
+	text-align:center;
+	min-height: 2em;
+}
+#t-dpoints-label, #t-ppoints-label {
+	min-width: 12ch;
+}
+#t-dpointsleft, #t-dpointstotal,
+#t-ppointsleft, #t-ppointstotal {
+	display: inline-block;
+	width: 4ch;
+}
+#t-ppointsleft, #t-ppointstotal {
+	width: 2ch;
+}
 .t-placeholder-card {
 	height: 4em;
 }

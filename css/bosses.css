@@ -32,6 +32,7 @@
 @media (max-width:512px) {
 	#boss-list img {
 		width: 64px;
+		height: 64px;
 		margin-left: initial;
 	}
 	.boss-respawn {
