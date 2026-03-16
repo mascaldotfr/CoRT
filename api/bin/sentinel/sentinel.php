@@ -1,6 +1,6 @@
 <?php
 
-const API_ROOT = "../..";
+const API_ROOT = __DIR__ . "/../..";
 
 require_once(__DIR__ . "/../lib/eheader.php");
 eheader_api("json");
