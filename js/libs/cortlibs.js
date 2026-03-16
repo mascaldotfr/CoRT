@@ -10,15 +10,23 @@ class ApiURL {
 	// you serve the pages is the same.
 
 	constructor() {
-		// https://mascaldotfr.github.io/CoRT uses an external API server as an
-		// exception. Also allow local testing to use the official API, with
-		// the exception of submitting trainer setups. In case you're deploying
-		// the API locally as well, either tweak the line or reach your server
-		// through 127.0.0.1 instead of localhost.
 		this.base = "";
+		this.cdn_base = "";
 		this.frontsite = "";
-		let frontend_with_no_api = ["localhost", "beta.cort.ovh"];
-		if (frontend_with_no_api.includes(window.location.hostname)) {
+		let frontend_with_no_api = ["localhost"];
+		let we_have_cdn = ["cort.ovh", "beta.cort.ovh"];
+
+		// Define base_urls
+		if (we_have_cdn.includes(window.location.hostname)) {
+			this.base = "https://cort.ovh/api";
+			this.frontsite = "https://cort.ovh";
+			this.cdn_base = "https://cortapi.b-cdn.net/api";
+		}
+		else if (frontend_with_no_api.includes(window.location.hostname)) {
+			// allow local testing to use the official API, with
+			// the exception of submitting trainer setups. In case you're deploying
+			// the API locally as well, either tweak the line or reach your server
+			// through 127.0.0.1 instead of localhost.
 			// The root where all API files can be found
 			this.base = "https://cort.ovh/api";
 			// Used by the trainer to filter setup submissions
@@ -26,25 +34,46 @@ class ApiURL {
 		}
 		else {
 			// If you keep everything under the same directory and
-			// domain, things are done magically
+			// domain, things are done magically. Typical self hosting.
 			const path = window.location.pathname;
 			const base_path = path.substring(0, path.lastIndexOf('/') + 1);
 			const base_url = window.location.origin + base_path;
 			this.base = base_url + "api";
+			this.cdn_base = this.base;
 			this.frontsite = window.location.origin;
 		}
-		this.urls = {
-			"submit_trainer": `${this.base}/bin/collect/submit.php`,
-			"trainer_data": `${this.base}/var/trainer_saved_setups.txt`,
-			"trainer_data_stats": `${this.base}/bin/collect/trainer_stats.php`,
-			"events": `${this.base}/var/allevents.json`,
-			"events_dump": `${this.base}/bin/warstatus/stats/dump_generator.php`,
-			"stats": `${this.base}/var/statistics.json`,
-			"wstatus": `${this.base}/var/warstatus.json`,
-			"bosses": `${this.base}/bin/bosses/bosses.php`,
-			"bz": `${this.base}/bin/bz/bz.php`,
-			"maintenance": `${this.base}/var/maintenance.txt`,
-		};
+
+
+		if (!we_have_cdn.includes(window.location.hostname)) {
+			this.urls = {
+				"submit_trainer": `${this.base}/bin/collect/submit.php`,
+				"trainer_data": `${this.base}/var/trainer_saved_setups.txt`,
+
+				"trainer_data_stats": `${this.base}/bin/collect/trainer_stats.php`,
+				"events": `${this.base}/var/allevents.json`,
+				"stats": `${this.base}/var/statistics.json`,
+				"wstatus": `${this.base}/var/warstatus.json`,
+				"bosses": `${this.base}/bin/bosses/bosses.php`,
+				"bz": `${this.base}/bin/bz/bz.php`,
+				"events_dump": `${this.base}/bin/warstatus/stats/dump_generator.php`,
+				"maintenance": `${this.base}/var/maintenance.txt`,
+			};
+		}
+		else {
+			this.urls = {
+				"submit_trainer": `${this.base}/bin/collect/submit.php`,
+				"trainer_data": `${this.base}/var/trainer_saved_setups.txt`,
+
+				"trainer_data_stats": `${this.cdn_base}/trainer_data_stats.json`,
+				"events": `${this.cdn_base}/events.json`,
+				"stats": `${this.cdn_base}/stats.json`,
+				"wstatus": `${this.cdn_base}/wstatus.json`,
+				"bosses": `${this.cdn_base}/bosses.json`,
+				"bz": `${this.cdn_base}/bz.json`,
+				"events_dump": `${this.cdn_base}/events_dump.csv`,
+				"maintenance": `${this.cdn_base}/maintenance.txt`,
+			};
+		}
 	}
 }
 export const api = new ApiURL();
