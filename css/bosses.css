@@ -3,7 +3,7 @@
 	max-width: 35em;
 	margin: 0 auto;
 }
-.card {
+#boss-list .card {
 	padding: calc(var(--default_margin_padding) / 2);
 }
 .boss-respawn li {
