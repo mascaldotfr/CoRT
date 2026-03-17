@@ -11,13 +11,13 @@ This page documents the BZ API endpoint, used by CoRT and CoRT-dc.
 
 ## URL
 
-https://cort.ovh/api/bin/bz/bz.php
+https://cortapi.b-cdn.net/api/bz.json
 
 ## Parameters
 
 ### `fake`
 
-https://cort.ovh/api/bin/bz/bz.php?fake
+**LOCAL ONLY - you need your own API for this**
 
 If a `fake` parameter is provided, then BZ will be ON then OFF for 15 minutes
 respectively. Note that BZ time themselves won't be changed. It's meant for

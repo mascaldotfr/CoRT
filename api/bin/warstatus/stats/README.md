@@ -16,7 +16,7 @@ of such files.
 
 There is a way to generate a CSV dump with all historical events.
 
-URL: https://cort.ovh/api/bin/warstatus/stats/dump_generator.php
+URL: https://cortapi.b-cdn.net/api/events_dump.csv
 
 The output is in the same format than the warstatus events list, see
 `../warstatus/README.md` for more details. It's refreshed every 24 hours,
@@ -40,9 +40,13 @@ especially that the statistics API is [static](https://www.seancdavis.com/posts/
 
 ###  events.json
 
+URL: https://cortapi.b-cdn.net/api/events.json
+
 This is a carbon copy of the warstatus events array. Please see `../warstatus/README.md`.
 
 ### statistics.json
+
+URL: https://cortapi.b-cdn.net/api/stats.json
 
 A gem steal means that a realm (ex: Syrtis) has stolen a gem from another realm
 (ex: Ignis). If Ignis recovered its own gem from Syrtis, it's not counted.

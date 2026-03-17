@@ -8,7 +8,7 @@ keep a small output response.
 
 ## URL
 
-https://cort.ovh/api/bin/sentinel/sentinel.php
+https://cortapi.b-cdn.net/api/sentinel.json
 
 ## Response format
 

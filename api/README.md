@@ -22,52 +22,20 @@ Special stuff:
 - [put a maintenance message](MAINTENANCE.md)
 - `reset_powers/reset_powers.php` clears site data
 
-## API endpoints
-
-To get the whole list:
-
-1. Open https://cort.ovh
-2. Open the dev tools (F12)
-3. Paste this line in the console and press enter:
-
-```js
-(await import("./js/libs/cortlibs.js")).api.urls
-```
-
 ## Rate limits and other rules on official server API
-
 
 > [!WARNING]
 >
 > **TLDR; I owe you nothing, you can deploy your own API if you don't agree,
 > the source code is right here**
->
-> If you plan to use the official API server in environments where asynchronous
-> user events (clicks and stuff in apps and website) trigger direct API calls,
-> you *should* implement a [debounce mechanism](https://developer.mozilla.org/en-US/docs/Glossary/Debounce) to
-> avoid rate limits, or caching.
->
-> I reserve myself the right to throttle further repeated offenders after some
-> talks. It's no idle threat: I can make CoRT works with only 2
-> queries/minute/endpoint/host, due to proper caching to ensure decent
-> reactivity on crappy connections some people have around the world (and the
-> traffic is too low for CDN use).
 
-### Rate limits
+Endpoints are actually static and actualized minutely/hourly or more as needed,
+it's useless to hammer them more than minutely. I totally assume and accept
+long polling over websockets.
 
-The rate limits by host are:
+Use the API responsibly; planned sanction is a gentle "shadow" throttling most
+of the time after a warning, unless you are totally not understanding the
+big warning above.
 
-- 30 queries / minute for dynamic (php) queries
-- 30 queries / minute for static queries (json, csv etc.)
-
-The rate limits for these 2 are separated, meaning that you can issue 30 dynamic
-and 30 static requests per minute and per host.
-
-### Other rules
-
-**A user agent needs to be set to access the API**. This may be the name of
-your app, a non browser name (like `curl/1.2.3`) or whatever. This is for
-API statistics purpose.
-
-I don't want to overburden potential third parties users, so please use the API
-responsibly.
+Some old code using https://cort.ovh directly will still work, but you'll be
+redirected, so update them if you can.

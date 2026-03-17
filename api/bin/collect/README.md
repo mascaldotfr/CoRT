@@ -17,7 +17,7 @@ The dataset is available
 ### Precomputed stats
 
 Statistics are already generated for use by CoRT and are publicly available at
-https://cort.ovh/api/bin/collect/trainer_stats.php
+https://cortapi.b-cdn.net/api/stats.json
 
 This endpoint is not documented, but it's pretty straight forward.
 
