@@ -16,6 +16,7 @@
 	--ahover: #ccaaff;
 	--default_margin_padding: .5em;
 	--table_padding: .25em .5em;
+	scrollbar-color: var(--dialog_background) var(--tooltip_background);
 }
 
 html {
