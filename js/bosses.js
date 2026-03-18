@@ -176,7 +176,7 @@ function display_next_respawn(boss) {
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
 		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] > 1 &&
 		    notified_10m === false) {
-			notify.emit(_("Bosses status"), `${bossname}: ${_("Next respawn in")} ` +
+			notify.emit(_("Bosses"), `${bossname}: ${_("Next respawn in")} ` +
 				 `${next_respawn_in["minutes"]}${_("m")}`, "bosses");
 			last_notification_ts = Date.now();
 			notified_10m = true;
@@ -185,7 +185,7 @@ function display_next_respawn(boss) {
 			// Avoid notification spam on focus during the last minute
 			const now = Date.now();
 			if (now > last_notification_ts + 60000) {
-				notify.emit(_("Bosses status"),`${bossname} ${_("should appear very soon!")}`, "bosses");
+				notify.emit(_("Bosses"),`${bossname} ${_("should appear very soon!")}`, "bosses");
 				last_notification_ts = now;
 			}
 			notified_10m = false;
