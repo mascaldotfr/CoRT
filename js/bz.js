@@ -233,7 +233,7 @@ $(document).ready(function() {
 	$("#tz").hide();
 
 	notify.insert_notification_link();
-	const scheduler = new MyScheduler(1, 5, feed_bz);
+	const scheduler = new MyScheduler(3, 5, feed_bz);
 	feed_bz();
 	scheduler.start_scheduling();
 });

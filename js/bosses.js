@@ -225,6 +225,6 @@ $(document).ready(function() {
 
 	notify.insert_notification_link();
 	refresh_display(true);
-	const scheduler = new MyScheduler(1, 5, refresh_display);
+	const scheduler = new MyScheduler(3, 5, refresh_display);
 	scheduler.start_scheduling();
 });
