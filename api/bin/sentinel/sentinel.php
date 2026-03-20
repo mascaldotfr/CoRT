@@ -15,10 +15,10 @@ $bosses_respawns = array_intersect_key($bosses_respawns, array_flip(["next_boss"
 $bz = new Battlezone();
 $bz_schedule = $bz->getSchedule();
 
-$wz = json_decode(file_get_contents(API_ROOT . "/var/warstatus.json"), true);
+$wz = json_decode(file_get_contents(API_ROOT . "/var/wstatus.json"), true);
 $wz = array_intersect_key($wz, array_flip(["forts", "gems"]));
 
-$stats = json_decode(file_get_contents(API_ROOT . "/var/statistics.json"), true);
+$stats = json_decode(file_get_contents(API_ROOT . "/var/stats.json"), true);
 # Get only the max N days part
 $stats = $stats[count($stats) - 1];
 # And filter so we have only gems and wishes
