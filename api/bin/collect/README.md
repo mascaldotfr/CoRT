@@ -12,7 +12,7 @@ source code (`./submit.php` and `/js/libs/cortlibs.js`)
 ### Dataset
 
 The dataset is available
-[there](https://cort.ovh/api/var/trainer_saved_setups.txt)
+[there](https://cortapi.b-cdn.net/api/trainer_saved_setups.txt)
 
 ### Precomputed stats
 
