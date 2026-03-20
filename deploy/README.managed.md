@@ -56,11 +56,11 @@ wget -qO- https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar.
 
 # Prepopulate with official API stuff
 cd CoRT-${V}/api/var
-wget    https://cortapi.b-cdn.net/api/trainer_saved_setups.txt \
-        https://cortapi.b-cdn.net/api/events.sqlite \
-        https://cortapi.b-cdn.net/api/wstatus.json \
-        https://cortapi.b-cdn.net/api/stats.json \
-        https://cortapi.b-cdn.net/api/events.json
+wget    https://cdn.cort.ovh/api/trainer_saved_setups.txt \
+        https://cdn.cort.ovh/api/events.sqlite \
+        https://cdn.cort.ovh/api/wstatus.json \
+        https://cdn.cort.ovh/api/stats.json \
+        https://cdn.cort.ovh/api/events.json
 touch maintenance.txt
 
 # Create a tarball to upload to our webhoster, it's gonna be faster.

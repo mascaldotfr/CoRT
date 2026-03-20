@@ -13,28 +13,22 @@ class ApiURL {
 		this.base = "";
 		this.cdn_base = "";
 		this.frontsite = "";
-		let frontend_with_no_api = ["localhost"];
-		let we_have_cdn = ["cort.ovh", "beta.cort.ovh"];
+		// Use 127.0.0.1 for real local testing
+		let we_have_cdn = ["localhost", "cort.ovh", "beta.cort.ovh"];
 
 		// Define base_urls
 		if (we_have_cdn.includes(window.location.hostname)) {
-			this.base = "https://cort.ovh/api";
 			this.frontsite = "https://cort.ovh";
-			this.cdn_base = "https://cdn.cort.ovh/api";
-		}
-		else if (frontend_with_no_api.includes(window.location.hostname)) {
-			// allow local testing to use the official API, with
-			// the exception of submitting trainer setups. In case you're deploying
-			// the API locally as well, either tweak the line or reach your server
-			// through 127.0.0.1 instead of localhost.
-			// The root where all API files can be found
+			// For submitting setups only
 			this.base = "https://cort.ovh/api";
+			// All the rest
+			this.cdn_base = "https://cdn.cort.ovh/api";
 			// Used by the trainer to filter setup submissions
 			this.frontsite = "https://cort.ovh";
 		}
 		else {
 			// If you keep everything under the same directory and
-			// domain, things are done magically. Typical self hosting.
+			// domain, things are done magically. Typically self hosting.
 			const path = window.location.pathname;
 			const base_path = path.substring(0, path.lastIndexOf('/') + 1);
 			const base_url = window.location.origin + base_path;
@@ -62,8 +56,8 @@ class ApiURL {
 		else {
 			this.urls = {
 				"submit_trainer": `${this.base}/bin/collect/submit.php`,
-				"trainer_data": `${this.base}/var/trainer_saved_setups.txt`,
 
+				"trainer_data": `${this.cdn_base}/var/trainer_saved_setups.txt`,
 				"trainer_data_stats": `${this.cdn_base}/trainer_data_stats.json`,
 				"events": `${this.cdn_base}/events.json`,
 				"stats": `${this.cdn_base}/stats.json`,

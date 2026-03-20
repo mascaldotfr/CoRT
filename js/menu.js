@@ -72,7 +72,7 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260320.190241
+	<p> <!--VERSION-->Version: 20260320.191634
 	(<a href="reset_powers.html" title="Clear all CoRT data. Use this in case of errors.">/reset_powers</a>)
 `; };
 

@@ -11,7 +11,7 @@ This page documents the BZ API endpoint, used by CoRT and CoRT-dc.
 
 ## URL
 
-https://cortapi.b-cdn.net/api/bz.json
+https://cdn.cort.ovh/api/bz.json
 
 ## Parameters
 

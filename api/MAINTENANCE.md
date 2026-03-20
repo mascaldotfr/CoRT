@@ -8,7 +8,7 @@ It's checked every 15 minutes.
 
 ## URL
 
-https://cortapi.b-cdn.net/api/maintenance.txt
+https://cdn.cort.ovh/api/maintenance.txt
 
 ## Usage
 
