@@ -13,10 +13,10 @@ use PHPHtmlParser\Dom;
 chdir(__DIR__);
 
 // File where to dump the status, relative to this script
-$outfile = "../../var/warstatus.json";
+$outfile = "../../var/wstatus.json";
 $stats_db_file = "../../var/events.sqlite";
-$stats_outfile = "../../var/statistics.json";
-$stats_outfile_events = "../../var/allevents.json";
+$stats_outfile = "../../var/stats.json";
+$stats_outfile_events = "../../var/events.json";
 $base_url = "https://www.championsofregnum.com/";
 // Use True to allow unconditional successful runtime for debugging
 // It propagates to statistics() as well
