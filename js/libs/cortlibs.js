@@ -20,7 +20,7 @@ class ApiURL {
 		if (we_have_cdn.includes(window.location.hostname)) {
 			this.base = "https://cort.ovh/api";
 			this.frontsite = "https://cort.ovh";
-			this.cdn_base = "https://cortapi.b-cdn.net/api";
+			this.cdn_base = "https://cdn.cort.ovh/api";
 		}
 		else if (frontend_with_no_api.includes(window.location.hostname)) {
 			// allow local testing to use the official API, with
