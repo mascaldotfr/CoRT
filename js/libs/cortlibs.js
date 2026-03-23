@@ -33,7 +33,6 @@ class ApiURL {
 			const base_path = path.substring(0, path.lastIndexOf('/') + 1);
 			const base_url = window.location.origin + base_path;
 			this.base = base_url + "api";
-			this.cdn_base = this.base;
 			this.frontsite = window.location.origin;
 		}
 
