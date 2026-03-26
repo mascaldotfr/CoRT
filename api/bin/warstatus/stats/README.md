@@ -4,7 +4,7 @@ This directory includes the necessary code used to generate statistics.
 
 `generate.php` is called by `../warstatus.php`. It add new events in a sqlite3
 database `../../var/events.sqlite`. It generates a small JSON report called
-`statistics.json` and big JSON one `allevents.json`, containing a dump of the
+`stats.json` and big JSON one `events.json`, containing a dump of the
 events the last 10 days if any change happened since the last run.  The default
 output directory is `../../var` and can be modified in `../warstatus.php`.
 
@@ -43,8 +43,6 @@ especially that the statistics API is [static](https://www.seancdavis.com/posts/
 ## Response format
 
 ###  events.json
-
-### API URLs
 
 | Type                   | URL                                                |
 |------------------------|----------------------------------------------------|

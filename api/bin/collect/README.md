@@ -19,8 +19,6 @@ The dataset is available at:
 | Local                  | https://yourhost/api/var/trainer_saved_setups.txt  |
 
 
-[there](https://cdn.cort.ovh/api/trainer_saved_setups.txt)
-
 ### Precomputed stats
 
 Statistics are already generated for use by CoRT and are publicly available at:
