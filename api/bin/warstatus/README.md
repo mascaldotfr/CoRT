@@ -20,8 +20,8 @@ statistics.
 | Official (short\*)     | https://cdn.cort.ovh/api/wstatus_short.json        |
 | Local                  | https://yourhost/api/var/wstatus.json              |
 
-\* _The short version is CDN only, and only contains 10 events. If you probe
-very frequently and don't mind about getting 100 events, use this. I may
+\* _The short version is CDN only, and contains no events. If you probe
+very frequently and don't mind about getting the events, use this. I may
 redirect you there myself in "severe" cases to reduce bandwidth usage_
 
 ## Response Format
