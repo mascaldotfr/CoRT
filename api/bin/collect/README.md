@@ -11,13 +11,26 @@ source code (`./submit.php` and `/js/libs/cortlibs.js`)
 
 ### Dataset
 
-The dataset is available
+The dataset is available at:
+
+| Type                   | URL                                                |
+|------------------------|----------------------------------------------------|
+| Official               | https://cdn.cort.ovh/api/trainer_saved_setups.txt  |
+| Local                  | https://yourhost/api/var/trainer_saved_setups.txt  |
+
+
 [there](https://cdn.cort.ovh/api/trainer_saved_setups.txt)
 
 ### Precomputed stats
 
-Statistics are already generated for use by CoRT and are publicly available at
-https://cdn.cort.ovh/api/stats.json
+Statistics are already generated for use by CoRT and are publicly available at:
+
+
+| Type                   | URL                                                |
+|------------------------|----------------------------------------------------|
+| Official               | https://cdn.cort.ovh/api/trainer_data_stats.json   |
+| Local                  | https://yourhost/api/var/trainer_data_stats.json   |
+
 
 This endpoint is not documented, but it's pretty straight forward.
 

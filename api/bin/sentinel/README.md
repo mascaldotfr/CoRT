@@ -8,7 +8,10 @@ keep a small output response.
 
 ## URL
 
-https://cdn.cort.ovh/api/sentinel.json
+| Type                   | URL                                                |
+|------------------------|----------------------------------------------------|
+| Official               | https://cdn.cort.ovh/api/sentinel.json             |
+| Local                  | https://yourhost/api/bin/sentinel/sentinel.php     |
 
 ## Response format
 

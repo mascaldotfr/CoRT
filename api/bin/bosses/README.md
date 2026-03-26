@@ -10,7 +10,11 @@ This page documents the bosses API endpoint, used by CoRT and CoRT-dc.
 
 ## URL
 
-https://cdn.cort.ovh/api/bosses.json
+|Type                    | URL                                             |
+|------------------------|-------------------------------------------------|
+| Official               | https://cdn.cort.ovh/api/bosses.json            |
+| Local                  | https://yourhost/api/bin/bosses/bosses.php      |
+
 
 ## Parameters
 

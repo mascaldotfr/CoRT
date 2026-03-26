@@ -8,12 +8,21 @@ be run server side for CoRT, due to NGE not allowing cross origin request
 status in a file as JSON (see `outfile` in `warstatus.php`). It's used only
 through the PHP CLI, it will return HTTP 403 if called through a browser.
 
-You can see it in action at https://cdn.cort.ovh/api/wstatus.json -- 
-informations are refreshed every minute.
-
 The `stats` directory includes the code used to generate the WZ statistics, and
 has its own README, but also needs `warstatus.php` to work in order to generate
 statistics.
+
+### API URLs
+
+| Type                   | URL                                                |
+|------------------------|----------------------------------------------------|
+| Official               | https://cdn.cort.ovh/api/wstatus.json              |
+| Official (short\*)     | https://cdn.cort.ovh/api/wstatus_short.json        |
+| Local                  | https://yourhost/api/var/wstatus.json              |
+
+\* _The short version is CDN only, and only contains 10 events. If you probe
+very frequently and don't mind about getting 100 events, use this. I may
+redirect you there myself in "severe" cases to reduce bandwidth usage_
 
 ## Response Format
 

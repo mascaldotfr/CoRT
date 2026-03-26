@@ -5,7 +5,7 @@ This directory includes the necessary code used to generate statistics.
 `generate.php` is called by `../warstatus.php`. It add new events in a sqlite3
 database `../../var/events.sqlite`. It generates a small JSON report called
 `statistics.json` and big JSON one `allevents.json`, containing a dump of the
-events the last 14 days if any change happened since the last run.  The default
+events the last 10 days if any change happened since the last run.  The default
 output directory is `../../var` and can be modified in `../warstatus.php`.
 
 On top of the generated files, pre compressed gzip files are generated. Please
@@ -14,9 +14,13 @@ of such files.
 
 ### Dump generator
 
-There is a way to generate a CSV dump with all historical events.
+There is a way to generate a CSV dump with all historical events. You can find
+them there:
 
-URL: https://cdn.cort.ovh/api/events_dump.csv
+| Type                   | URL                                                |
+|------------------------|----------------------------------------------------|
+| Official               | https://cdn.cort.ovh/api/events_dump.csv           |
+| Local                  | https://yourhost/api/var/events_dump.csv           |
 
 The output is in the same format than the warstatus events list, see
 `../warstatus/README.md` for more details. It's refreshed every 24 hours,
@@ -40,13 +44,21 @@ especially that the statistics API is [static](https://www.seancdavis.com/posts/
 
 ###  events.json
 
-URL: https://cdn.cort.ovh/api/events.json
+### API URLs
+
+| Type                   | URL                                                |
+|------------------------|----------------------------------------------------|
+| Official               | https://cdn.cort.ovh/api/events.json               |
+| Local                  | https://yourhost/api/var/events.json               |
 
 This is a carbon copy of the warstatus events array. Please see `../warstatus/README.md`.
 
-### statistics.json
+### stats.json
 
-URL: https://cdn.cort.ovh/api/stats.json
+| Type                   | URL                                                |
+|------------------------|----------------------------------------------------|
+| Official               | https://cdn.cort.ovh/api/stats.json                |
+| Local                  | https://yourhost/api/var/stats.json                |
 
 A gem steal means that a realm (ex: Syrtis) has stolen a gem from another realm
 (ex: Ignis). If Ignis recovered its own gem from Syrtis, it's not counted.
