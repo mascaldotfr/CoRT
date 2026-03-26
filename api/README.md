@@ -33,9 +33,8 @@ Endpoints are actually static and actualized minutely/hourly or more as needed,
 it's useless to hammer them more than minutely. I totally assume and accept
 long polling over websockets.
 
-Use the API responsibly; planned sanction is a gentle "shadow" throttling most
-of the time after a warning, unless you are totally not understanding the
-big warning above.
+Use the API responsibly; if you don't, you'll be redirected to the slower,
+heavily rate limited "legacy" API server.
 
 Some old code using https://cort.ovh directly will still work, but you'll be
 redirected, so update them if you can.
