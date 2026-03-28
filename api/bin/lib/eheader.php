@@ -5,8 +5,8 @@
 // Beware. CORS is made for browser security, being restrictive here won't
 // prevent people from using the API out of browser through curl and company.
 
-// Where is actually the frontend
-const EH_FRONTSITE = "https://mascaldotfr.github.io";
+// Where is actually the frontend, needed for CORS only.
+const EH_FRONTSITE = "https://cort.ovh";
 // In case you have a weird server with non UTF8 encoding by default
 define('EH_ENCODING', mb_internal_encoding());
 const EH_MIME_TYPES = array(
@@ -20,8 +20,8 @@ function valid_mime_or_die($mime_type) {
 }
 
 // Just CORS, by default we restrict to the frontsite; in case of CoRT,
-// remember that mascaldotfr.github.io requires an API server on another
-// domain, so it's needed. If the API and fronsite are on the same domaine,
+// remember that cort.ovh requires an API server on another domain to submit
+// setups, so it's needed. If the API and fronsite are on the same domain,
 // this header is ignored and the API access allowed.
 function eheader_cors($allow = EH_FRONTSITE) {
 	header("Access-Control-Allow-Origin: " . $allow);
