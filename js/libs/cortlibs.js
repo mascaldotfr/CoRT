@@ -521,7 +521,7 @@ export const __i18n__ = {
 	},
 	"CoRT is a free and open source website, feel free to check out its %s, and %s. See also the %s!": {
 		"fr": "CoRT est un site web libre et open source, n'hésitez pas à consulter son %s, et %s. Voyez aussi le %s !",
-		"es": "CoRT es un sitio web libre y de código abierto, no dudes en consultar su %s, e %s. ¡Mira también el %s!",
+		"es": "CoRT es un sitio web libre y de código abierto, no dudes en consultar su %s, y %s. ¡Mira también el %s!",
 		"de": "CoRT ist eine freie und quelloffene Website, schau dir gerne ihren %s und %s an. Schau auch auf den %s!"
 	},
 	"source code": {
