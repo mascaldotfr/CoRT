@@ -136,14 +136,14 @@ function minute_floor(v) {
 async function get_next_respawns() {
 	try {
 		let data = null;
-		const last_fetch = JSON.parse(localStorage.getItem("bosses_api_result"));
+		const last_fetch = JSON.parse(localStorage.getItem("bosses_api_result_v2"));
 		// Fetch only if we're past the next boss respawn
 		if (last_fetch !== null && last_fetch["next_boss_ts"] * 1000 >= Date.now()) {
 			data = last_fetch;
 		}
 		else {
 			data = await $().getJSON(api.urls["bosses"]);
-			localStorage.setItem("bosses_api_result", JSON.stringify(data));
+			localStorage.setItem("bosses_api_result_v2", JSON.stringify(data));
 		}
 		next_respawns = minute_floor(data["next_spawns"]);
 		previous_respawns = minute_floor(data["prev_spawns"]);
