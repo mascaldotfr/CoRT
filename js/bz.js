@@ -135,7 +135,7 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 
 async function get_data() {
 	try {
-		const last_fetch = JSON.parse(localStorage.getItem("bz_api_result"));
+		const last_fetch = JSON.parse(localStorage.getItem("bz_api_result_v2"));
 		const now = Date.now() / 1000;
 		let bz_is_no_more_on = true;
 		let bz_just_started = true;
@@ -145,7 +145,7 @@ async function get_data() {
 		}
 		if ( last_fetch === null || bz_is_no_more_on || bz_just_started ) {
 			data = await $().getJSON(api.urls["bz"]);
-			localStorage.setItem("bz_api_result", JSON.stringify(data));
+			localStorage.setItem("bz_api_result_v2", JSON.stringify(data));
 		}
 		else {
 			data = last_fetch;
