@@ -72,8 +72,8 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260404.075857
-	(<a href="reset_powers.html" title="Clear all CoRT data. Use this in case of errors.">/reset_powers</a>)
+	<p> <!--VERSION-->Version: 20260405.144735
+	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
 
@@ -207,6 +207,19 @@ $(document).ready(function() {
 			temporary_message();
 		}
 	}, 1);
+
+	// localStorage cleanup + cache bust
+	$("#reset_powers").on("click", () => {
+		try {
+			localStorage.clear();
+			const url = new URL(window.location);
+			url.searchParams.set('nocache', Date.now());
+			window.location.href = url.toString();
+		}
+		catch(_unused) {
+			window.alert("Unable to clear localStorage. Tell this to mascal.");
+		}
+	});
 
 	// Cursors lazy loading
 
