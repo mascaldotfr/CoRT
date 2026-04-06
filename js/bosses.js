@@ -137,8 +137,6 @@ async function get_next_respawns() {
 	try {
 		let data = null;
 		let last_fetch = JSON.parse(localStorage.getItem("bosses_api_result_v2"));
-		// XXX Force clearance of localStorage
-		last_fetch = null;
 		// Fetch only if we're past the next boss respawn
 		if (last_fetch !== null && last_fetch["next_boss_ts"] * 1000 >= Date.now()) {
 			data = last_fetch;
