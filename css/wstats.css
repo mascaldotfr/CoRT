@@ -1,3 +1,7 @@
+.ws-main-container {
+	max-width: 1600px;
+	margin: 0 auto;
+}
 #ws-container-text h2, #ws-container-graphs h2 {
 	margin-left: var(--default_margin_padding);
 	height: 1em;
@@ -63,9 +67,6 @@
 #ws-container-text .statcard {
 	padding: .5em;
 	flex: 1;
-}
-#ws-7d, #ws-30d, #ws-90d {
-	min-width: 80vw;
 }
 #ws-7d, #ws-30d, #ws-90d {
 	min-height: 15em;
