@@ -32,7 +32,7 @@ def main():
         print(t.clear())
         with t.cbreak(), t.hidden_cursor(), t.fullscreen():
             while True:
-                with urlopen("https://cdn.cort.ovh/api/wstatus.json") as response:
+                with urlopen("https://cort.ovh/api/var/wstatus.json") as response:
                     messages = []
                     data = json.loads(response.read())
 

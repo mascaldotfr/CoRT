@@ -16,13 +16,8 @@ statistics.
 
 | Type                   | URL                                                |
 |------------------------|----------------------------------------------------|
-| Official               | https://cdn.cort.ovh/api/wstatus.json              |
-| Official (short\*)     | https://cdn.cort.ovh/api/wstatus_short.json        |
+| Official               | https://cort.ovh/api/var/wstatus.json              |
 | Local                  | https://yourhost/api/var/wstatus.json              |
-
-\* _The short version is CDN only, and contains no events. If you probe
-very frequently and don't mind about getting the events, use this. I may
-redirect you there myself in "severe" cases to reduce bandwidth usage_
 
 ## Response Format
 

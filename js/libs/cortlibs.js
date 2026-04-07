@@ -14,17 +14,13 @@ class ApiURL {
 		this.cdn_base = "";
 		this.frontsite = "";
 		// Use 127.0.0.1 for real local testing
-		let we_have_cdn = ["localhost", "cort.ovh", "beta.cort.ovh"];
+		let official = ["localhost", "cort.ovh", "beta.cort.ovh"];
 
 		// Define base_urls
-		if (we_have_cdn.includes(window.location.hostname)) {
+		if (official.includes(window.location.hostname)) {
 			this.frontsite = "https://cort.ovh";
 			// For submitting setups only
 			this.base = "https://cort.ovh/api";
-			// All the rest
-			this.cdn_base = "https://cdn.cort.ovh/api";
-			// Used by the trainer to filter setup submissions
-			this.frontsite = "https://cort.ovh";
 		}
 		else {
 			// If you keep everything under the same directory and
@@ -37,36 +33,19 @@ class ApiURL {
 		}
 
 
-		if (!we_have_cdn.includes(window.location.hostname)) {
-			this.urls = {
-				"submit_trainer": `${this.base}/bin/collect/submit.php`,
-				"trainer_data": `${this.base}/var/trainer_saved_setups.txt`,
+		this.urls = {
+			"submit_trainer": `${this.base}/bin/collect/submit.php`,
 
-				"trainer_data_stats": `${this.base}/bin/collect/trainer_stats.php`,
-				"events": `${this.base}/var/events.json`,
-				"stats": `${this.base}/var/stats.json`,
-				"wstatus": `${this.base}/var/wstatus.json`,
-				"bosses": `${this.base}/bin/bosses/bosses.php`,
-				"bz": `${this.base}/bin/bz/bz.php`,
-				"events_dump": `${this.base}/bin/warstatus/stats/dump_generator.php`,
-				"maintenance": `${this.base}/var/maintenance.txt`,
-			};
-		}
-		else {
-			this.urls = {
-				"submit_trainer": `${this.base}/bin/collect/submit.php`,
-
-				"trainer_data": `${this.cdn_base}/var/trainer_saved_setups.txt`,
-				"trainer_data_stats": `${this.cdn_base}/trainer_data_stats.json`,
-				"events": `${this.cdn_base}/events.json`,
-				"stats": `${this.cdn_base}/stats.json`,
-				"wstatus": `${this.cdn_base}/wstatus.json`,
-				"bosses": `${this.cdn_base}/bosses.json`,
-				"bz": `${this.cdn_base}/bz.json`,
-				"events_dump": `${this.cdn_base}/events_dump.csv`,
-				"maintenance": `${this.cdn_base}/maintenance.txt`,
-			};
-		}
+			"trainer_data": `${this.base}/var/trainer_saved_setups.txt`,
+			"trainer_data_stats": `${this.base}/var/trainerstats.json`,
+			"events": `${this.base}/var/events.json`,
+			"stats": `${this.base}/var/stats.json`,
+			"wstatus": `${this.base}/var/wstatus.json`,
+			"bosses": `${this.base}/bin/bosses/bosses.php`,
+			"bz": `${this.base}/bin/bz/bz.php`,
+			"events_dump": `${this.base}/var/events_dump.csv`,
+			"maintenance": `${this.base}/var/maintenance.txt`,
+		};
 	}
 }
 export const api = new ApiURL();

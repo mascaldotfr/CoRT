@@ -19,7 +19,7 @@ them there:
 
 | Type                   | URL                                                |
 |------------------------|----------------------------------------------------|
-| Official               | https://cdn.cort.ovh/api/events_dump.csv           |
+| Official               | https://cort.ovh/api/var/events_dump.csv           |
 | Local                  | https://yourhost/api/var/events_dump.csv           |
 
 The output is in the same format than the warstatus events list, see
@@ -46,7 +46,7 @@ especially that the statistics API is [static](https://www.seancdavis.com/posts/
 
 | Type                   | URL                                                |
 |------------------------|----------------------------------------------------|
-| Official               | https://cdn.cort.ovh/api/events.json               |
+| Official               | https://cort.ovh/api/var/events.json               |
 | Local                  | https://yourhost/api/var/events.json               |
 
 This is a carbon copy of the warstatus events array. Please see `../warstatus/README.md`.
@@ -55,7 +55,7 @@ This is a carbon copy of the warstatus events array. Please see `../warstatus/RE
 
 | Type                   | URL                                                |
 |------------------------|----------------------------------------------------|
-| Official               | https://cdn.cort.ovh/api/stats.json                |
+| Official               | https://cort.ovh/api/var/stats.json                |
 | Local                  | https://yourhost/api/var/stats.json                |
 
 A gem steal means that a realm (ex: Syrtis) has stolen a gem from another realm

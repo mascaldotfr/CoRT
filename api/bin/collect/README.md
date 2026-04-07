@@ -15,7 +15,7 @@ The dataset is available at:
 
 | Type                   | URL                                                |
 |------------------------|----------------------------------------------------|
-| Official               | https://cdn.cort.ovh/api/trainer_saved_setups.txt  |
+| Official               | https://cort.ovh/api/var/trainer_saved_setups.txt  |
 | Local                  | https://yourhost/api/var/trainer_saved_setups.txt  |
 
 
@@ -26,7 +26,7 @@ Statistics are already generated for use by CoRT and are publicly available at:
 
 | Type                   | URL                                                |
 |------------------------|----------------------------------------------------|
-| Official               | https://cdn.cort.ovh/api/trainer_data_stats.json   |
+| Official               | https://cort.ovh/api/var/trainer_data_stats.json   |
 | Local                  | https://yourhost/api/var/trainer_data_stats.json   |
 
 

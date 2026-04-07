@@ -13,7 +13,7 @@ This page documents the BZ API endpoint, used by CoRT and CoRT-dc.
 
 |Type                    | URL                                             |
 |------------------------|-------------------------------------------------|
-| Official               | https://cdn.cort.ovh/api/bz.json                |
+| Official               | https://cort.ovh/api/bin/bz/bz.php              |
 | Local                  | https://yourhost/api/bin/bz/bz.php              |
 
 ## Parameters
