@@ -36,7 +36,10 @@
 	min-width: 15em;
 }
 #ws-index {
-	min-height: 17em;
+	min-height: 8.5em;
+}
+#ws-index-list {
+	column-count: 2;
 }
 #ws-forts { grid-area: forts }
 #ws-gems { grid-area: gems }
@@ -150,6 +153,14 @@ svg.ct-chart-donut g text.ct-label {
 }
 .ws-chart {
 	height: 15em;
+}
+@media (max-width: 1300px) {
+	#ws-index-list {
+		column-count: auto;
+	}
+	#ws-index {
+		min-height: 17em;
+	}
 }
 @media (max-width: 799px) {
 	#ws-container-graphs {
