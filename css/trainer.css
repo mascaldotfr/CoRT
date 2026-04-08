@@ -43,9 +43,6 @@
 	justify-content: space-evenly;
 	text-align: center;
 }
-#t-dpoints-label, #t-ppoints-label {
-	width: 20ch;
-}
 .t-placeholder-card {
 	height: 4em;
 }
@@ -183,6 +180,9 @@
 			"version version"
 			"class level"
 			"load save";
+	}
+	#t-dpoints-label, #t-ppoints-label {
+		display: block;
 	}
 	.t-placeholder-card {
 		height: 12em;
