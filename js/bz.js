@@ -100,23 +100,40 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 	let in_24_hours = new Date(now);
 	in_24_hours.setHours(in_24_hours.getHours() + 24);
 	let found = false;
-	for (let d = 0; d < localOrderedBZs.length; d++) {
+	// The closest BZ if the next BZ isn't today
+	let best = null;
+	let min_diff = Infinity;
+	// Check days backwards, in case a BZ is spanning over midnight
+	for (let d = localOrderedBZs.length - 1; d >= 0; d--) {
 		if (found)
 			break;
 		for (let h = 0; h < localOrderedBZs[d].length; h++) {
 			let begin = new Date(localOrderedBZs[d][h]["begin_ts"]);
 			let end = new Date(localOrderedBZs[d][h]["end_ts"]);
-			// The calendar is rolling, in some case the first line
-			// is in 6 days due to BZ going over midnight
-			if (begin > in_24_hours)
-				continue;
-			if ((now >= begin && now < end) || (begin > now)) {
-				// ^ BZ is ON || OFF
+
+			// Skip intervals that start beyond the next 24 hours
+			if (begin > in_24_hours) continue;
+
+			// BZ is ON: Highlight if BZ is currently active
+			if (now >= begin && now < end) {
 				localOrderedBZs[d][h]["highlight"] = true;
 				found = true;
 				break;
 			}
+
+			// BZ is OFF: Track the closest upcoming BZ (smallest time difference)
+			if (begin > now) {
+				let diff = begin - now;
+				if (diff < min_diff) {
+					min_diff = diff;
+					best = { d, h };
+				}
+			}
 		}
+	}
+	// Highlight the closest upcoming BZ if no active BZ was found
+	if (best) {
+		localOrderedBZs[best.d][best.h]["highlight"] = true;
 	}
 
 	// Step 4: generate short day names in order
