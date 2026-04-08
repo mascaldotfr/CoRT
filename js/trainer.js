@@ -19,8 +19,8 @@ $(document).ready(function() {
 	$("#t-class").html(html_class_options.join(""));
 	$("#t-load").text(_("Load / Reset"));
 	$("#t-save").text(_("Share / Save"));
-	$("#t-dpoints-label").text(_("Discipline points:"));
-	$("#t-ppoints-label").text(_("Power points:"));
+	$("#t-dpoints-label").text(_("Discipline points"));
+	$("#t-ppoints-label").text(_("Power points"));
 
 	// generate characters levels options
 	let html_level_options = [`<option value="61">60 (+${_("Necro crystal")})</option>`];

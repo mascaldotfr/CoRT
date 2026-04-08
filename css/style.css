@@ -1,5 +1,5 @@
 :root {
-	--background: #000020;
+	--background: #11152d;
 	--card_background: #2f2f49;
 	--menu_background: #333349;
 	--tooltip_background: #616179;
@@ -152,8 +152,7 @@ summary::-webkit-details-marker {
 }
 h1 {
 	text-align: center;
-	margin-top: 0;
-	padding-top: 0;
+	font-size: 2rem;
 }
 h3 {
 	padding-top: 0;

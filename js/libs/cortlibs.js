@@ -751,17 +751,17 @@ export const __i18n__ = {
 		"es": "Compartir / Guardar",
 		"de": "Teilen / Sichern"
 	},
-	"Discipline points:":
+	"Discipline points":
 	{
-		"fr": "Points de discipline :",
-		"es": "Puntos de disciplina:",
-		"de": "Disziplinpunkte:"
+		"fr": "Points de discipline",
+		"es": "Puntos de disciplina",
+		"de": "Disziplinpunkte"
 	},
-	"Power points:":
+	"Power points":
 	{
-		"fr": "Points de pouvoir :",
-		"es": "Puntos de poder:",
-		"de": "Kraftpunkte:"
+		"fr": "Points de pouvoir",
+		"es": "Puntos de poder",
+		"de": "Kraftpunkte"
 	},
 	"Current game version":
 	{

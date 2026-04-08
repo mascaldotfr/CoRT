@@ -3,8 +3,7 @@
 	width: 35em;
 }
 #we-info {
-	text-align: center;
-	min-height: 3em;
+	min-height: 1em;
 }
 #we-data-dump {
 	font-style: italic;
@@ -33,11 +32,6 @@
 #we-events {
 	height: 50vh;
 	overflow-y: scroll;
-}
-#we-nextprev {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-items: center;
 }
 @media (max-width: 799px) {
 	#we-container {
