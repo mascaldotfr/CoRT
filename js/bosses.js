@@ -156,7 +156,6 @@ async function get_next_respawns() {
 	}
 }
 
-// 1 minute offset due to minutely update, so actually 1 means 0
 function display_next_respawn(boss) {
 	$(`#boss-${boss}-lastspawn`).text(`${_("Last respawn")}: ${unixstamp2human(previous_respawns[boss])}`);
 	let next_respawn_in = time.timestamp_ago(next_respawns[boss][0], false, true);

@@ -182,9 +182,8 @@ async function feed_bz() {
 	let next_bzs_end = data["bzend"];
 	let bz_on = data["bzon"];
 
-	// 1 minute offset due to minutely update, so actually 1 means 0
 	if (bz_on) {
-		let bz_ends_at = time.timestamp_ago(60 + data["bzendsat"]);
+		let bz_ends_at = time.timestamp_ago(data["bzendsat"]);
 		$("#bz-countdown-status").text(_("ON"));
 		$("#bz-countdown-status").attr("data-status", "on");
 		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["human"]}`);
@@ -201,7 +200,7 @@ async function feed_bz() {
 	else {
 		$("#bz-countdown-status").text(_("OFF"));
 		$("#bz-countdown-status").attr("data-status", "off");
-		let next_bz_in = time.timestamp_ago(60 + next_bzs_begin[0]);
+		let next_bz_in = time.timestamp_ago(next_bzs_begin[0]);
 		$("#bz-countdown-countdown").text(`${_("Next BZ in")} ${next_bz_in["human"]}`);
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] > 1 &&
 		    notified_10m === false) {
