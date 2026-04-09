@@ -3,6 +3,8 @@
 This API endpoint has been tailor made for
 https://sentinel.cort.ovh
 
+It's also used by `js/defer.js` in CoRT to show live status in menus.
+
 It's an agregation of all other APIs, that have been quickly filtered so we
 keep a small output response.
 

@@ -99,6 +99,20 @@ summary::-webkit-details-marker {
 	margin-bottom: .3em;
 	flex-grow: 1;
 }
+#menu-bosses[menu-status="true"] {
+	animation: bosseson 5s ease-in-out infinite;
+}
+@keyframes bosseson {
+	0%, 100% {
+		box-shadow: 0 .1em .3em red;
+	}
+	50% {
+		box-shadow: 0 .1em .3em darkred;
+	}
+}
+#menu-bz[menu-status="true"] {
+	box-shadow: 0 .1em .3em green;
+}
 .menu-icon {
 	height: 1em;
 	width: 1em;

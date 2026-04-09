@@ -37,6 +37,7 @@ class ApiURL {
 			"stats": `${this.base}/var/stats.json`,
 			"wstatus": `${this.base}/var/wstatus.json`,
 			"bosses": `${this.base}/bin/bosses/bosses.php`,
+			"sentinel": `${this.base}/bin/sentinel/sentinel.php`,
 			"bz": `${this.base}/bin/bz/bz.php`,
 			"events_dump": `${this.base}/var/events_dump.csv`,
 			"maintenance": `${this.base}/var/maintenance.txt`,

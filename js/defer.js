@@ -59,6 +59,7 @@ function temporary_message() {
 	selector.html(icon[color] + "&nbsp;" + translated_msg);
 }
 
+
 // Put maintenance message (see /api/MAINTENANCE.md)
 const maintenance_delay = 15  * 60 * 1000;
 async function maintenance() {
@@ -103,4 +104,40 @@ async function maintenance() {
 };
 maintenance();
 setInterval(maintenance, maintenance_delay);
+
+
+// BZ / BOSSES status in the menu
+// Check minutely
+const status_delay = 1 * 60 * 1000;
+// Warn if bosses respawn within that time frame
+const boss_delay = 30 * 60 * 1000;
+const lSkey = "sentinel_api_result";
+async function menu_status() {
+	try {
+		const now = new Date().getTime();
+		let last_fetch = JSON.parse(localStorage.getItem(lSkey));
+		if (last_fetch !== null) {
+			const bz_is_no_more_on = last_fetch["bz"]["bzon"] && now > last_fetch["bz"]["bzendsat"] * 1000;
+			const bz_just_started = !last_fetch["bz"]["bzon"] && now > last_fetch["bz"]["bzbegin"][0] * 1000;
+			const boss_has_spawned = now > last_fetch["bosses"]["next_boss_ts"] * 1000;
+			if (bz_is_no_more_on || bz_just_started || boss_has_spawned)
+				last_fetch = null;
+		}
+		if (last_fetch === null) {
+			last_fetch = await $().getJSON(api.urls["sentinel"]);
+			localStorage.setItem(lSkey, JSON.stringify(last_fetch));
+		}
+		$("#menu-bz").attr("menu-status", String(last_fetch["bz"]["bzon"]));
+		const boss_will_spawn = now + boss_delay >= last_fetch["bosses"]["next_boss_ts"] * 1000;
+		$("#menu-bosses").attr("menu-status", String(boss_will_spawn));
+
+	}
+	catch(_unused) { console.error(_unused) }
+}
+menu_status();
+setInterval(menu_status, status_delay);
+document.addEventListener("visibilitychange", () => {
+	if (!document.hidden)
+		menu_status();
+});
 
