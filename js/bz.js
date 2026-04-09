@@ -101,7 +101,7 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 	in_24_hours.setHours(in_24_hours.getHours() + 24);
 	let found = false;
 	// The closest BZ if the next BZ isn't today
-	let best = null;
+	let closest = null;
 	let min_diff = Infinity;
 	// Check days backwards, in case a BZ is spanning over midnight
 	for (let d = localOrderedBZs.length - 1; d >= 0; d--) {
@@ -126,15 +126,14 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 				let diff = begin - now;
 				if (diff < min_diff) {
 					min_diff = diff;
-					best = { d, h };
+					closest = { d, h };
 				}
 			}
 		}
 	}
 	// Highlight the closest upcoming BZ if no active BZ was found
-	if (best) {
-		localOrderedBZs[best.d][best.h]["highlight"] = true;
-	}
+	if (!found && closest)
+		localOrderedBZs[closest.d][closest.h]["highlight"] = true;
 
 	// Step 4: generate short day names in order
 	let daynamesOrdered = [];
