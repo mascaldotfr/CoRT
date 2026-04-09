@@ -217,9 +217,9 @@ def gzip_files(target: Path) -> None:
         for file in target.rglob(ext):
             gz_path = Path(str(file) + ".gz")
             with open(file, 'rb') as f_in:
-                with gzip.open(gz_path, 'wb', compresslevel=9) as f_out:
+                # mtime=0 ensures identical output across builds & avoids cache busting
+                with gzip.GzipFile(str(gz_path), 'wb', compresslevel=9, mtime=0) as f_out:
                     shutil.copyfileobj(f_in, f_out)
-
 
 def create_tarball(source: Path, version: str, output_path: Path) -> None:
     """Create the release tarball with composer dependencies."""
