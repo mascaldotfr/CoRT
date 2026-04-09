@@ -831,7 +831,7 @@ class DatasetsManager {
 		$("#oldversion").remove();
 		$("#betaversion").remove();
 		if (setup.trainerdataversion != this.newest_dataset)
-			$("#t-points").append(`	<div id="oldversion">
+			$("#t-old-version").append(`<div id="oldversion" class="card center">
 					<p class="red"><b>
 					${_("This setup is being made with an older version (%s) of CoR, and may be out of date.",
 						setup.trainerdataversion)}<p>
@@ -841,8 +841,8 @@ class DatasetsManager {
 					</div>
 					`);
 		if (this.is_beta)
-			$("#t-points").append(`
-			<div id="betaversion">
+			$("#t-old-version").append(`
+			<div id="betaversion" class="card center">
 			<p class="red"><b>
 			${_("This is the beta trainer for versions on Amun. Things can change quickly.")}
 			<br> ${_("It's not recommended to permanently save setups in here.")}
