@@ -1,13 +1,8 @@
 class ApiURL {
 	// This class allows you to easily switch the data sources and urls if you
-	// don't want use the github site and my data. You may need to fiddle with paths
-	// since my api base has not the same structure than the repo. If you git pull,
+	// don't want use cort.ovh  and my data. If you git pull,
 	// don't forget to copy this file in a temp directory and copying it back after
 	// the pull!
-
-	// You will also need to change the preload directives in some
-	// wz/wevents/wstats/tstats, or remove them if the API server and the server
-	// you serve the pages is the same.
 
 	constructor() {
 		this.base = "";
@@ -224,7 +219,7 @@ export class myTz {
 	create_tz_list(selector) {
 		let human_tzs = {};
 		let now = Date.now();
-		let cache_duration = 1000 * 3600 * 24 * 7; // 7-day cache
+		let cache_duration = 1000 * 3600 * 24 * 30; // 30-days cache
 		let storedtz = localStorage.getItem("tz");
 		let cached_tz_list = localStorage.getItem("tzlisthtml");
 		let cached_tz_list_ts = localStorage.getItem("tzlisthtmlts");
@@ -255,15 +250,15 @@ export class myTz {
 		human_tzs["UTC"] = "UTC";
 		human_tzs["Local"] = this.get_system_tz();
 
-		let options = "";
+		let options = [];
 		for (let tz of Object.keys(human_tzs).sort())
-			options += `<option value="${human_tzs[tz]}">${tz}</option>`;
+			options.push(`<option value="${human_tzs[tz]}">${tz}</option>`);
 
 		if (storedtz === undefined || Object.values(human_tzs).indexOf(storedtz) < 0)
 			storedtz = this.get_system_tz();
 		localStorage.setItem("tz", storedtz);
 
-		this.display_tz_list(selector, options, storedtz);
+		this.display_tz_list(selector, options.join(""), storedtz);
 
 		localStorage.setItem("tzlisthtml", options);
 	}

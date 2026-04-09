@@ -114,17 +114,21 @@ $(document).ready(async function() {
 	$("#we-filter").append(options_html);
 
 	await get_data();
-	let tz = localStorage.getItem("tz");
-	let generated = new Date(data.shift()["generated"] * 1000);
-	generated = generated.toLocaleTimeString(undefined,
-		{hour: "2-digit", minute: "2-digit", timeZone: tz});
-	$("#we-info-updated").text(generated);
+	if (data !== null) {
+		let tz = localStorage.getItem("tz");
+		let generated = new Date(data.shift()["generated"] * 1000);
+		generated = generated.toLocaleTimeString(undefined,
+			{hour: "2-digit", minute: "2-digit", timeZone: tz});
+		$("#we-info-updated").text(generated);
 
-	$("#we-filter").on("change", function () {
-		localStorage.setItem("wevents_filter", $("#we-filter").val());
+		$("#we-filter").on("change", function () {
+			localStorage.setItem("wevents_filter", $("#we-filter").val());
+			display_events();
+		});
+
+		resolve_filter();
 		display_events();
-	});
+	}
 
-	resolve_filter();
-	display_events();
+	import("./defer.js");
 });

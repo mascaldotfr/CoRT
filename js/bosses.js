@@ -227,4 +227,5 @@ $(document).ready(function() {
 	refresh_display(true);
 	const scheduler = new MyScheduler(3, 5, refresh_display);
 	scheduler.start_scheduling();
+	import("./defer.js");
 });

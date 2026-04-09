@@ -58,6 +58,7 @@ $(document).ready(function() {
 	else {
 		$("#t-load").trigger("click");
 	}
+	import("./defer.js");
 });
 
 $("#t-load").on("click", function() {

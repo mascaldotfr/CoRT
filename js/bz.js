@@ -253,5 +253,6 @@ $(document).ready(function() {
 	const scheduler = new MyScheduler(3, 5, feed_bz);
 	feed_bz();
 	scheduler.start_scheduling();
+	import("./defer.js");
 });
 

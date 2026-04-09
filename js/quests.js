@@ -54,5 +54,6 @@ $(document).ready(function() {
 		$(`#quests-${elem}`).show();
 
 	setInterval(display, 60 * 1000);
+	import("./defer.js");
 });
 

@@ -130,5 +130,6 @@ $(document).ready(async function() {
 	$("#ts-class").on("change", redraw_all);
 	$("#ts-power").on("change", draw_powergraph);
 
+	import("./defer.js");
 });
 

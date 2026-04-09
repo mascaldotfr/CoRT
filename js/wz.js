@@ -243,4 +243,6 @@ $(document).ready(function() {
 	display_wz(true);
 	const scheduler = new MyScheduler(10, 15, display_wz);
 	scheduler.start_scheduling();
+
+	import("./defer.js");
 });

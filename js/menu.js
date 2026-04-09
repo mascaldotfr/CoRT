@@ -31,8 +31,8 @@ let __menu_content = function () { return `
 	<ul id="menu-links">
 	<li class="menuitem bold"><a href="./">${__menu_icons["trainer"]} ${_("Trainer")}</a></li>
 	<li class="menuitem bold"><a href="wz.html">${__menu_icons["wz"]} ${_("WZ status")}</a></li>
-	<li class="menuitem bold"><a href="bosses.html">${__menu_icons["bosses"]} ${_("Bosses")}</a></li>
-	<li class="menuitem bold"><a href="bz.html">${__menu_icons["bz"]} ${_("BZ status")}</a></li>
+	<li class="menuitem bold"><a href="bosses.html" id="menu-bosses">${__menu_icons["bosses"]} ${_("Bosses")}</a></li>
+	<li class="menuitem bold"><a href="bz.html" id="menu-bz">${__menu_icons["bz"]} ${_("BZ status")}</a></li>
 	<li class="menuitem bold"><a href="wevents.html">${__menu_icons["wevents"]} ${_("WZ events")}</a></li>
 	<li class="menuitem bold"><a href="wstats.html">${__menu_icons["wstats"]} ${_("WZ statistics")}</a></li>
 	<li class="menuitem bold"><a href="tstats.html"> ${__menu_icons["tstats"]} ${_("Trainer statistics")}</a></li>
@@ -68,33 +68,12 @@ const __menu_github_stuff = function () {
 	return _("CoRT is a free and open source website, feel free to check out its %s, and %s. See also the %s!",
 		 src, bugs, dc)
 }
-
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260408.230202
+	<p> <!--VERSION-->Version: 20260409.131217
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
-
-
-// XXX temporary message. This avoids touching 3 files for them.
-// colors are: green, blue, red (see style.css for variables)
-// example:
-// <div id="temporary-message" data-color="blue" data-en="message" data-es="mensaje"...></div>
-function temporary_message() {
-	// Using lamaiquery for this would cause more error handling
-	if (!document.getElementById("temporary-message"))
-		return;
-	const selector = $("#temporary-message");
-	const color = selector.attr("data-color");
-	selector.css("background", `var(--${color})`);
-	const lang = localStorage.getItem("lang");
-	const translated_msg = selector.attr("data-" + lang);
-	// blue = info, red = warning, green = ok
-	const icon = {"blue": "&#8505;&#65039;", "green": "&#9989;", "red": "&#9888;&#65039;"}
-	selector.html(icon[color] + "&nbsp;" + translated_msg);
-}
-
 
 $(document).ready(function() {
 
@@ -156,85 +135,8 @@ $(document).ready(function() {
 		document.head.appendChild(link);
 	}
 
-	// SEO stuff
-	if (currentlang != "en") {
-		$("html").attr("lang", currentlang);
-		const descr = $('meta[name="description"]');
-		const en_descr = descr.attr("content");
-		descr.attr("content", _(en_descr));
-	}
-
-
 	const tz = new myTz()
 	tz.create_tz_list("#tzchooser");
-
-	// Put maintenance message (see /api/MAINTENANCE.md)
-	setTimeout(async () => {
-		const ts = Date.now();
-		const last_check = parseInt(localStorage.getItem("maint_last_check")) || 0;
-		let msg = localStorage.getItem("maint_msg") || "";
-		try {
-			// need to refresh the cache, either at start or if >=
-			// 5 minutes after last fetch
-			if (last_check == 0 ||  ts >= last_check + 5 * 60 * 1000) {
-				msg = await $().get(api.urls["maintenance"]);
-				localStorage.setItem("maint_msg", msg);
-				localStorage.setItem("maint_last_check", ts);
-			}
-			// Bail out on empty message (404s fall here as well)
-			if (msg.length == 0)
-				return;
-			$("body").prepend(msg);
-		}
-		catch (error) {
-			// Things go really bad, or we're rebooting...
-			console.error(error);
-			$("body").prepend(`
-				<div id="temporary-message" data-color="red"
-					     data-en="The API server cannot be reached!
-					     Check out the <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>backup site</a> if needed!"
-					     data-fr="Le serveur API est inaccessible !
-					     <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>Consultez le site de secours</a> si nécessaire !"
-					     data-es="¡No se puede alcanzar el servidor de la API!
-					     <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>Consulta el sitio de respaldo</a> si es necesario."
-					     data-de="Der API-Server ist nicht erreichbar!
-					     <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>Besuchen Sie die Backup-Seite</a> falls nötig!"
-				>
-				</div>
-			`);
-		}
-		finally {
-			temporary_message();
-		}
-	}, 1);
-
-	// localStorage cleanup + cache bust
-	$("#reset_powers").on("click", () => {
-		try {
-			localStorage.clear();
-			const url = new URL(window.location);
-			url.searchParams.set('nocache', Date.now());
-			window.location.href = url.toString();
-		}
-		catch(_unused) {
-			window.alert("Unable to clear localStorage. Tell this to mascal.");
-		}
-	});
-
-	// Cursors lazy loading
-
-	const mediaQuery = window.matchMedia("(min-width: 800px)");
-	if (!mediaQuery.matches) return;
-	const loadCursors = () => {
-		const style = document.createElement("style");
-		style.textContent = `
-			html, body, label, button { cursor: url("data/cursor/normal.webp"), default; }
-			label, select, button, textarea, a:hover, a:active { cursor: url("data/cursor/links.webp"), default; }
-		`;
-		document.head.appendChild(style);
-		document.removeEventListener("mousemove", loadCursors);
-	};
-	document.addEventListener("mousemove", loadCursors, { once: true });
 
 
 });
