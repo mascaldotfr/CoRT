@@ -449,6 +449,16 @@ class SetupManager {
 		let trainerhtml = [];
 		let treepos = 0;
 		alltrees.forEach( (tree) => {
+			// preload skill bars
+			let iconsrc = "data/trainer/" + this.trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".webp";
+			const link = document.createElement("link");
+			link.rel = "preload";
+			link.as = "image";
+			link.type = "image/webp";
+			link.href = iconsrc;
+			document.head.appendChild(link);
+		});
+		alltrees.forEach( (tree) => {
 			treepos++;
 			let spellpos = 0;
 			let iconsrc = "data/trainer/" + this.trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".webp";
