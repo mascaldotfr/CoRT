@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 filetype=python:
 """
 Script for generating release tarballs and template release notes.
 Meant for CoRT release candidates and stable releases.
@@ -131,6 +132,8 @@ def apply_per_file_cache_busting(target: Path) -> None:
             rel = file.relative_to(target).as_posix()
             asset_hashes[rel] = hashlib.sha256(file.read_bytes()).hexdigest()[:8]
 
+    apply_cache_busting_to_defer_prefetch(target, asset_hashes)
+
     # Patterns for HTML src/href attributes and JS import/require strings
     html_pattern = re.compile(
         r'(href|src)\s*=\s*(?P<quote>["\']?)(?P<path>[^"\'>\s]+\.(?:css|js))(?:\?[^"\'>\s]*)?(?P=quote)',
@@ -192,6 +195,52 @@ def apply_per_file_cache_busting(target: Path) -> None:
 
     print(f"===> Per-file cache busting applied: {updated_html} HTML, {updated_js} JS files updated.")
 
+def apply_cache_busting_to_defer_prefetch(target: Path, asset_hashes: dict[str, str]) -> None:
+    """
+    Add cache-busting hashes to .js URLs in js/defer.js prefetch array.
+    Handles both root-relative paths ("js/file.js") and defer-relative paths ("./file.js").
+    """
+    defer_file = target / "js" / "defer.js"
+    if not defer_file.exists():
+        return
+
+    target_resolved = target.resolve()
+    defer_dir = defer_file.parent.resolve()
+    content = defer_file.read_text(encoding="utf-8")
+    modified = False
+
+    def replace_js_url(match: re.Match) -> str:
+        nonlocal modified
+        quote = match.group(1)
+        path = match.group(2)  # e.g. "js/bosses.js" or "./utils.js"
+
+        # 1. Try direct lookup first (for root-relative paths like "js/bosses.js")
+        if path in asset_hashes:
+            modified = True
+            return f"{quote}{path}?{asset_hashes[path]}{quote}"
+
+        # 2. Try resolving relative to defer.js location (for "./utils.js" style)
+        try:
+            abs_path = (defer_dir / path).resolve()
+            rel_to_target = abs_path.relative_to(target_resolved).as_posix()
+            if rel_to_target in asset_hashes:
+                modified = True
+                return f"{quote}{path}?{asset_hashes[rel_to_target]}{quote}"
+        except ValueError:
+            pass  # Path outside build root, skip
+
+        return match.group(0)
+
+    # Match quoted strings ending in .js (handles "file.js" and 'file.js')
+    new_content = re.sub(
+        r'(["\'])([^"\']+?\.js)\1',
+        replace_js_url,
+        content
+    )
+
+    if modified:
+        defer_file.write_text(new_content, encoding="utf-8")
+        print("===> Cache busting applied to .js URLs in js/defer.js")
 
 def minify_files(target: Path) -> None:
     """Minify CSS, JS, HTML, and JSON files using the minify command."""

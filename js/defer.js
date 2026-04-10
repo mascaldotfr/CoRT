@@ -1,7 +1,7 @@
 // Non critical core JS stuff should be put here when applicable
 // It's usually called at the end of main JS code
 
-import { $, _, api } from "./libs/cortlibs.js";
+import { $, _, api, TrainerConstants } from "./libs/cortlibs.js";
 
 // SEO stuff
 const currentlang = localStorage.getItem("lang");
@@ -141,3 +141,28 @@ document.addEventListener("visibilitychange", () => {
 		menu_status();
 });
 
+// preloading on idle
+if ("requestIdleCallback" in window) {
+	const prefetch_stale = 10 * 60 * 1000;
+	const now = Date.now();
+	const last_prefetch = parseInt(localStorage.getItem("last_prefetch")) || 0;
+	if (now > last_prefetch + prefetch_stale) {
+		localStorage.setItem("last_prefetch", now);
+		const urls = [
+			"bosses.html", "js/bosses.js",
+			"wz.html", "js/wz.js", "js/wztools/wztools.js",
+			"data/warstatus/base_map.png",
+			"wevents.html", "js/wevents.js",
+			"wstats.html", "js/wstats.js", "js/libs/chartist.js",
+			"bz.html", "js/bz.js",
+			"tstats.html", "js/tstats.js",
+			"./", "js/trainer.js", "js/libs/floating-ui-tooltip.js",
+			`data/trainer/${TrainerConstants.datasets[TrainerConstants.datasets.length - 1]}/trainerdata.json`
+		];
+		requestIdleCallback(() => {
+			urls.forEach(url => {
+				fetch(url, { cache: "default" }).catch(() => {});
+			});
+		});
+	}
+}
