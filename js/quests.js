@@ -1,17 +1,7 @@
 import {$, _, Time} from "./libs/cortlibs.js";
 
 let time = new Time();
-const df = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
-	timeZone: localStorage.getItem("tz"),
-	weekday: 'short',
-	day: 'numeric',
-	month: 'numeric',
-	year: '2-digit',
-	hour: '2-digit',
-	minute: '2-digit',
-	hour12: false
-})
-
+let df = null;
 
 // compute next event for a given type (either ticket or wm)
 function next_event(type) {
@@ -40,6 +30,16 @@ function display() {
 }
 
 $(document).ready(function() {
+	df = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		timeZone: localStorage.getItem("tz"),
+		weekday: 'short',
+		day: 'numeric',
+		month: 'numeric',
+		year: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: false
+	})
 	document.title = _("Quests Countdowns") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Quests Countdowns"));
 	$("#quests-tickets-title").text(_("Tickets Delivery"));
