@@ -16,7 +16,7 @@
 	align-items: center;
 	gap: .5em;
 	visibility: hidden;
-	min-height: 8em;
+	min-height: 9.5em;
 }
 #boss-list img {
 	width: 125px;
