@@ -1,4 +1,5 @@
 .ts-main-container {
+	width: 100%;
 	max-width: 1600px;
 	margin: 0 auto;
 }
@@ -70,6 +71,8 @@
 .ct-label.ct-horizontal {
 	margin-left: -.3em;
 }
+
+
 @media(max-width: 799px) {
 	#ts-content {
 		grid-template-columns: 1fr;
