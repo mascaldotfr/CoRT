@@ -15,8 +15,9 @@
 	border-radius: 8px;
 	padding: 0;
 	margin: 0;
-	image-rendering: pixelated;
-	image-rendering: crisp-edges;
+	image-rendering: auto; /* Chrome */
+	image-rendering: smooth; /* FF-only */
+	image-rendering: optimizeQuality; /* FF + Safari, deprecated */
 	background-image: url("../data/warstatus/base_map.png");
 	background-size: cover;
 }
