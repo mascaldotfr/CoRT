@@ -30,7 +30,7 @@ let __menu_content = function () { return `
 	<input type="checkbox" id="menu-click">
 	<label for="menu-click" class="menu-btn" id="menu-mobile"><span id="menu-mobile-cortlogo">${__menu_icons["cortlogo"]}</span><span class="bold">${_("Menu")}</span></label>
 	<ul id="menu-links">
-	<li class="menu-desktop"><a href="." id="menu-desktop-cortlogo" title="CoRT Homepage">${__menu_icons["cortlogo"]}</a></li>
+	<li class="menu-desktop menuitem"><a href="." id="menu-desktop-cortlogo" title="CoRT Homepage">${__menu_icons["cortlogo"]}</a></li>
 	<li class="menuitem bold"><a href="./">${__menu_icons["trainer"]} ${_("Trainer")}</a></li>
 	<li class="menuitem bold"><a href="wz.html">${__menu_icons["wz"]} ${_("WZ status")}</a></li>
 	<li class="menuitem bold"><a href="bosses.html" id="menu-bosses">${__menu_icons["bosses"]} ${_("Bosses")}</a></li>
@@ -73,7 +73,7 @@ const __menu_github_stuff = function () {
 const __menu_footer = function() { return `
 	<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260411.162605
+	<p> <!--VERSION-->Version: 20260411.202625
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 

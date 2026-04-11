@@ -77,15 +77,22 @@ summary::-webkit-details-marker {
 	background-color: var(--menu_background);
 	min-height: 3.2em;
 }
+#menu {
+	/* override .card */
+	padding: 0 var(--default_margin_padding);
+}
 #menu-cortlogo-svg {
 	border-radius: 5px;
 	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
 }
 #menu-desktop-cortlogo {
 	display: inline-block;
-	height: 2.5em;
-	width: 2.5em;
+	height: 3em;
+	width: 3em;
 	border-radius: 5px;
+	/* disable inheritance from menuitem */
+	background: unset;
+	box-shadow: unset;
 }
 #footer {
 	min-height: 7.5em;
@@ -105,8 +112,7 @@ summary::-webkit-details-marker {
 #menu-links > li {
 	list-style: none;
 	display: inline-block;
-	margin: .2em;
-	margin-bottom: .3em;
+	margin: 0 .2em;
 	flex-grow: 1;
 }
 #menu-bosses[menu-status="true"] {
@@ -208,12 +214,26 @@ h3 {
 .nodeco { text-decoration: none; }
 .small { font-size: 90% }
 
+@media (min-width: 800px) and (max-width: 1200px) {
+	#menu-links {
+		padding-bottom: var(--default_margin_padding);
+	}
+	/* align with second row's first item */
+	.menu-desktop {
+		margin: 0 !important;
+	}
+	/* align with second row's first item */
+	#menu-desktop-cortlogo {
+		padding-left:0 !important;
+	}
+}
+
 @media (max-width: 799px) {
 	#menu {
 		line-height: 2em;
 		text-align: left;
-		padding: 1em;
 		min-height: 2em;
+		padding: var(--default_margin_padding);
 	}
 	#menu, #footer {
 		box-shadow: 0px 0px 2px 2px rgba(200, 200, 200, .4);
@@ -238,8 +258,8 @@ h3 {
 	}
 	#menu-mobile-cortlogo {
 		display: inline-block;
-		height: 1.5em;
-		width: 1.5em;
+		height: 2em;
+		width: 2em;
 		margin-right: var(--default_margin_padding);
 		margin-left: .17em;
 		border-radius: 5px;
