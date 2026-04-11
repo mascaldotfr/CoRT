@@ -164,6 +164,7 @@
 	#wz-events {
 		height: 50vh;
 		margin-top: 1em;
+		font-size: 90%;
 	}
 	#wz-realms-info {
 		min-width: unset;
