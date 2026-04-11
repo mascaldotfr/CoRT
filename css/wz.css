@@ -3,6 +3,8 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-evenly;
+	max-width: 1600px;
+	margin: 0 auto;
 }
 #wz-container h2 {
 	margin: 0;
