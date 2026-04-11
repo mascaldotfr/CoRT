@@ -64,8 +64,23 @@ summary {
 summary::-webkit-details-marker {
 	display: none;
 }
+.stop-keyframes {
+	animation-iteration-count: 1 !important;
+	animation-fill-mode: forwards !important;
+}
 #main-container {
 	flex: 1;
+}
+#main-container .card {
+	animation: maincontainerloading 1.5s ease-in-out infinite;
+}
+@keyframes maincontainerloading {
+	0% {
+		box-shadow: 0 .1em .3em var(--tooltip_background);
+	}
+	100% {
+		box-shadow: none;
+	}
 }
 #temporary-message, .card {
 	background: var(--card_background);
