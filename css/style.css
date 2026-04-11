@@ -30,7 +30,6 @@ body {
 	margin: 0 auto;
 	min-width: 95%;
 	max-width: 1600px;
-	-webkit-max-logical-width: -webkit-fit-content;
 	min-height: 100dvh;
 	display: flex;
 	flex-direction: column;
