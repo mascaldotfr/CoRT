@@ -182,7 +182,7 @@ svg.ct-chart-donut g text.ct-label {
 		gap: 0;
 	}
 	.ws-main-container {
-		width: 90%;
+		width: 100%;
 	}
 }
 @media (max-width: 512px) {
