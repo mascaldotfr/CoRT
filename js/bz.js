@@ -242,6 +242,7 @@ $(document).ready(function() {
 	$("#title").text(_("BZ status"));
 	$("#bz-schedule-title").text(_("Schedule"));
 	$("#bz-hours").text(_("All hours are local"));
+	$("#bz-info-sign").show();
 	$("#bz-info").text(_("The page refreshes itself every minute."));
 
 	// TZ doesn't apply here

@@ -24,6 +24,9 @@
 	display: grid;
 	place-items: center;
 }
+#bz-info-sign {
+	visibility: hidden;
+}
 [data-status="on"] {
 	color: var(--green);
 }
