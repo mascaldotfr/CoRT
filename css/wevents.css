@@ -33,6 +33,9 @@
 	height: 50vh;
 	overflow-y: scroll;
 }
+#we-floppy {
+	visibility: hidden;
+}
 @media (max-width: 799px) {
 	#we-container {
 		width: 100%;

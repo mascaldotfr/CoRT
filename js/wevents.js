@@ -81,6 +81,7 @@ $(document).ready(async function() {
 		" " + _("Last updated:") + " ");
 	$("#we-data-dump").attr("href", api.urls["events_dump"]);
 	$("#we-data-dump").text(_("Download all events data"));
+	$("#we-floppy").show();
 	$("#we-filter-label").text(_("Filter:"));
 	let options = { "Global": [
 				["none", _("None")],
