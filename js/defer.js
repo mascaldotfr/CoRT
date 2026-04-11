@@ -59,11 +59,6 @@ function temporary_message() {
 	selector.html(icon[color] + "&nbsp;" + translated_msg);
 }
 
-// Everything is loaded, disable animation
-const cards = document.querySelectorAll("#main-container .card");
-cards.forEach(el => {
-	el.classList.add("stop-keyframes");
-});
 
 // Put maintenance message (see /api/MAINTENANCE.md)
 const maintenance_delay = 15  * 60 * 1000;
