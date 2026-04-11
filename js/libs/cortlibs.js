@@ -572,10 +572,10 @@ export const __i18n__ = {
 		"es": "Cálculo de armadura",
 		"de": "Rüstungsrechner"
 	},
-	"☰  Menu": {
-		"fr": "☰  Menu",
-		"es": "☰  Menú",
-		"de": "☰  Menü"
+	"Menu": {
+		"fr": "Menu",
+		"es": "Menú",
+		"de": "Menü"
 	},
 	"Timezone:": {
 		"fr": "Fuseau horaire :",
