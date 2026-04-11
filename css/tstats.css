@@ -1,5 +1,5 @@
 .ts-main-container {
-	width: 100%;
+	width: 90%;
 	max-width: 1600px;
 	margin: 0 auto;
 }
@@ -79,6 +79,9 @@
 	}
 	#ts-maingraph .ct-bar {
 		stroke-width: 10px;
+	}
+	.ts-main-container {
+		width: 100%;
 	}
 }
 
