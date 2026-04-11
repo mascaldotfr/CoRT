@@ -250,6 +250,7 @@ h3 {
 	#menu-click:checked ~ ul { display: block; }
 	#menu-links > li {
 		display: block;
+		padding: calc(var(--default_margin_padding) / 2);
 	}
 	#menu-mobile {
 		font-size: 125%;
