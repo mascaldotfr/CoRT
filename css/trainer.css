@@ -42,6 +42,8 @@
 	align-items: center;
 	justify-content: space-evenly;
 	text-align: center;
+	padding: calc(var(--default_margin_padding) / 2);
+	min-height: 1em;
 }
 .t-placeholder-card {
 	height: 4em;
@@ -163,7 +165,7 @@
 }
 @media (min-width: 800px) {
 	.setup {
-		min-height: 3em;
+		min-height: 2em;
 	}
 	#titleinfo {
 		min-height: 2.5em;
