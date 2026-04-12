@@ -6,7 +6,7 @@ let last_fetch_ts = 0;
 const humaniser = new HumaniseEvents();
 
 function resolve_filter() {
-	const storedfilter = localStorage.getItem("wevents_filter");
+	let storedfilter = localStorage.getItem("wevents_filter");
 	if (storedfilter === null) {
 		storedfilter = "none";
 		localStorage.setItem("wevents_filter", "none");
@@ -59,7 +59,9 @@ async function get_data() {
 		const cached = JSON.parse(localStorage.getItem("wevents_api_result"))
 		const now = Date.now();
 		// Refetch at best every minute
-		if (cached !== null && (now - cached["timestamp"] ) <= 60_000) {
+		// XXX If you read this and CoRT is >= 3.8, the undefined check
+		// can be removed, it was for a transition to more meaningful names
+		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"] ) <= 60_000) {
 			data = cached["payload"];
 			last_fetch_ts = cached["timestamp"];
 		}
@@ -125,7 +127,6 @@ $(document).ready(async function() {
 		// I don't want to up major just for that, and it can still have it's use
 		data.shift();
 		const now = new Date(last_fetch_ts);
-		console.log(now)
 		const last_update = now.toLocaleTimeString(undefined,
 				    {hour: "2-digit", minute: "2-digit", second: "2-digit",
 				     timeZone: tz});
