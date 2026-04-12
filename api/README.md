@@ -20,7 +20,6 @@ See the [deploy docs](../deploy/README.md) as well if you want to deploy it.
 Special stuff:
 
 - [put a maintenance message](MAINTENANCE.md)
-- `reset_powers/reset_powers.php` clears site data
 
 ## Rate limits and other rules on official server API
 
