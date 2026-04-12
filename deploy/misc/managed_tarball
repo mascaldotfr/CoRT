@@ -17,11 +17,11 @@ wget -qO- "https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar
 
 echo "===> Prepopulating the API"
 cd CoRT-${V}/api/var
-wget -q https://cort.ovh/api/trainer_saved_setups.txt \
-        https://cort.ovh/api/events.sqlite \
-        https://cort.ovh/api/wstatus.json \
-        https://cort.ovh/api/stats.json \
-        https://cort.ovh/api/events.json
+wget -q https://cort.ovh/api/var/trainer_saved_setups.txt \
+        https://cort.ovh/api/var/events.sqlite \
+        https://cort.ovh/api/var/wstatus.json \
+        https://cort.ovh/api/var/stats.json \
+        https://cort.ovh/api/var/events.json
 touch maintenance.txt
 
 echo "===> Creating tarball"
