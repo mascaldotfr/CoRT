@@ -3,15 +3,15 @@ import {Constants, TranslateForts} from "./wztools/wztools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
 // sync with statistics.json
-let report_days = [7, 30, 90];
+const report_days = [7, 30, 90];
 
 // wztools
-let constants = new Constants();
-let xlator = new TranslateForts();
-let time = new Time();
+const constants = new Constants();
+const xlator = new TranslateForts();
+const time = new Time();
 
-let realm_colors = constants.realm_colors;
-let realms = constants.realm_names;
+const realm_colors = constants["realm_colors"];
+const realms = constants["realm_names"];
 
 let tformatter = null;
 
@@ -26,7 +26,7 @@ function naify(value, failover="0") {
 // convert UTC stats to "local" time for hourly graphs
 function localize_timelines(utclines) {
 	let localizedlines = [];
-	let date = new Date();
+	const date = new Date();
 	for (let realm in utclines) {
 		let localline = [];
 		for (let hour in utclines[realm]) {
@@ -44,11 +44,11 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 	let hours = [];
 	for (let i = 0; i <= 23; i++)
 		hours.push(String(i));
-	let dataset = {
+	const dataset = {
 		labels: hours,
 		series: localize_timelines([ data[realms[0]], data[realms[1]], data[realms[2]] ])
 	};
-	let options = {
+	const options = {
 		fullWidth: true,
 		chartPadding: {left: 0, top: 30, bottom: 0},
 		axisY: {
@@ -78,14 +78,14 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 
 function show_graphs_fortsheld_byfort(data, selector) {
 	// same order as generate.php get_fortsheld()
-	let forts = ["Aggersborg", "Trelleborg", "Imperia",
+	const forts = ["Aggersborg", "Trelleborg", "Imperia",
 		     "Samal", "Menirah", "Shaanarid",
 		     "Herbred", "Algaros", "Eferias"];
-	let dataset = {
+	const dataset = {
 		labels: forts,
 		series: realms.map(f => data[f])
 	};
-	let options = {
+	const options = {
 		chartPadding: {left: 0, top: 30, bottom: 0},
 		seriesBarDistance: 15,
 	};
@@ -101,11 +101,11 @@ function show_graphs_fortsheld_byfort(data, selector) {
 }
 
 function show_graphs_fortsheld_byrealm(data, selector) {
-	let series = realms.map(f => data[f]);
-	let dataset = {
+	const series = realms.map(f => data[f]);
+	const dataset = {
 		series: series
 	};
-	let options = {
+	const options = {
 		donut: true,
 		donutWidth: 60,
 		startAngle: 270,
@@ -130,14 +130,17 @@ async function display_stat(force = false) {
 	let data = null;
 
 	try {
-		const last_fetch = JSON.parse(localStorage.getItem("wstats_api_result"));
+		const cached = JSON.parse(localStorage.getItem("wstats_api_result"));
+		const now = Date.now();
 		// Limit to 2 fetch per minute
-		if (last_fetch !== null && (Date.now() - last_fetch["last_fetch"] ) <= 30_000) {
-			data = last_fetch["payload"];
+		// XXX If you read this and CoRT is >= 3.8, the undefined check
+		// can be removed, it was for a transition to more meaningful names
+		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"]) <= 30_000) {
+			data = cached["payload"];
 		}
 		else {
 			data = await $().getJSON(api.urls["stats"]);
-			const to_store = {"last_fetch": Date.now(), "payload": data};
+			const to_store = {"timestamp": now, "payload": data};
 			localStorage.setItem("wstats_api_result", JSON.stringify(to_store));
 		}
 		$("#ws-info-error").empty();
@@ -147,8 +150,8 @@ async function display_stat(force = false) {
 		return;
 	}
 
-	let infos = data.splice(0, 1)[0];
-	let some_time_ago = time.timestamp_ago(infos["generated"], true);
+	const infos = data.splice(0, 1)[0];
+	const some_time_ago = time.timestamp_ago(infos["generated"], true);
 	$("#ws-last-updated").text(some_time_ago["human"]);
 	if (time.timestamp_now() - infos["generated"] > 3 * 3600) {
 		$("#ws-info-error").html(`<b>Nothing happened since the last 3 hours,
@@ -157,11 +160,11 @@ async function display_stat(force = false) {
 	}
 
 	for (let report = 0; report < data.length; report++) {
-		let days = report_days[report];
+		const days = report_days[report];
 
 		for (let realm in data[report]) {
-			let r = data[report][realm];
-			let rows = [
+			const r = data[report][realm];
+			const rows = [
 				["Forts captured (total)", naify(r["forts"]["total"])],
 				["Forts captured", naify(r["forts"]["captured"])],
 				["Most captured fort",
@@ -175,15 +178,15 @@ async function display_stat(force = false) {
 			];
 			table_factory(rows, `#ws-${days}d-${realm.toLowerCase()}`, realm);
 			if (report == data.length - 1) {
-				let rows = [
+				const rows = [
 					["Invasion", `${naify(time.timestamp_ago(r["invasions"]["last"]["date"], true).human, "N/A")}
 							    (${naify(r["invasions"]["last"]["location"], "N/A")})`],
 					["Gem stolen",
 							`${naify(time.timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}`],
 					["Dragon wish",
 							`${naify(time.timestamp_ago(r["wishes"]["last"], true).human, "N/A")}`]];
-				let now = new Date();
-				let earliest_date = (now.getTime() / 1000) - (days * 3600 * 24);
+				const now = new Date();
+				const earliest_date = (now.getTime() / 1000) - (days * 3600 * 24);
 				if (r["wishes"]["last"] <= earliest_date) // out of bound wish
 					rows[2][1] = `<span class="blink">☠${rows[2][1]}☠</span>`;
 				table_factory(rows, `#ws-last-${realm.toLowerCase()}`, realm);
@@ -214,10 +217,10 @@ $(document).ready(function() {
 	let ilinks = [];
 	ilinks.push({"id": "#ws-last", txt: _("Latest key events")});
 	for (let day of report_days) {
-		let txt = _("Last %s days", day);
+		const txt = _("Last %s days", day);
 		ilinks.push({ "id": `#ws-${day}d-title`, "txt": txt});
 	}
-	let max_report_days = Math.max(...report_days);
+	const max_report_days = Math.max(...report_days);
 	ilinks.push({"id": "#ws-forts-title", "txt":
 		_("Net average of fortifications captured per hour on the last %s days",
 		  max_report_days)});
@@ -242,7 +245,7 @@ $(document).ready(function() {
 
 	$("#ws-index-title").text(_("Index"));
 	for (let link in ilinks) {
-		let l = ilinks[link];
+		const l = ilinks[link];
 		// Add link to each graph / stat title
 		$(l["id"]).html(`<a href="#ws-index-list">${l["txt"]}</a>`);
 		// Add to index card
