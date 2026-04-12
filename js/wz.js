@@ -5,25 +5,25 @@ import {Constants, TranslateForts, HumaniseEvents, Icons} from "./wztools/wztool
 let wz_lastupdate = Math.floor(new Date().getTime() / 1000);
 
 // wztools
-let constants = new Constants();
-let icons = new Icons();
-let xlator = new TranslateForts();
-let humaniser = new HumaniseEvents();
-let realm_colors = constants.realm_colors;
-let wzicons = icons.get_all_icons();
+const constants = new Constants();
+const icons = new Icons();
+const xlator = new TranslateForts();
+const humaniser = new HumaniseEvents();
+const realm_colors = constants.realm_colors;
+const wzicons = icons.get_all_icons();
 
 //cortlibs
 const notify = new MyNotify();
 
 // canvas
 function setup_canvas() {
-	let canvas = document.getElementById("wz-map-map");
-	let dpr = window.devicePixelRatio || 1;
+	const canvas = document.getElementById("wz-map-map");
+	const dpr = window.devicePixelRatio || 1;
 
 	canvas.width = 500 * dpr;
 	canvas.height = 500 * dpr;
 
-	let ctx = canvas.getContext('2d');
+	const ctx = canvas.getContext('2d');
 	// Prepopulate the map with a transparent rectangle Allows the map to
 	// be fully show ASAP with no bounce effect while waiting to draw the
 	// real map overlay
@@ -82,7 +82,7 @@ function dispatch_fort_icon(fort) {
 
 // Create a svg blob for a given original icon filename
 function svg_to_blob(fname) {
-    let xml = wzicons[fname];
+    const xml = wzicons[fname];
     if (!xml) {
         console.warn("Missing icon:", fname);
         return "";
@@ -95,7 +95,7 @@ function display_map(forts) {
 	// Preload all images in parallel using Promises
 	let imagePromises = forts.map(fort => {
 		return new Promise(resolve => {
-			let img = new Image();
+			const img = new Image();
 			img.src = svg_to_blob(dispatch_fort_icon(fort));
 			img.onload = () => resolve(img);
 			img.onerror = () => resolve(null); // Gracefully handle missing icons
@@ -117,7 +117,7 @@ function display_map(forts) {
 
 async function draw_map(images) {
 
-	let dpr = canvas.dpr;
+	const dpr = canvas.dpr;
 	// clear everything
 	canvas.ctx.clearRect(0, 0, canvas.width, canvas.height);
 	// Draw each fort icon and label
@@ -137,28 +137,31 @@ async function display_wz(force=false) {
 
 	try {
 		let last_fetch_ts = 0;
-		const last_fetch = JSON.parse(localStorage.getItem("wz_api_result"));
+		const cached = JSON.parse(localStorage.getItem("wz_api_result"));
+		const now = Date.now();
 		// Limit to 2 fetch per minute
-		if (last_fetch !== null && (Date.now() - last_fetch["last_fetch"] ) < 30_000) {
-			data = last_fetch["payload"];
-			last_fetch_ts = last_fetch["last_fetch"];
+		// XXX If you read this and CoRT is >= 3.8, the undefined check
+		// can be removed, it was for a transition to more meaningful names
+		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"] ) < 30_000) {
+			data = cached["payload"];
+			last_fetch_ts = cached["timestamp"];
 		}
 		else {
 			data = await $().getJSON(api.urls["wstatus"]);
-			const to_store = {"last_fetch": Date.now(), "payload": data};
-			last_fetch_ts = to_store["last_fetch"];
+			const to_store = {"timestamp": now, "payload": data};
+			last_fetch_ts = now;
 			localStorage.setItem("wz_api_result", JSON.stringify(to_store));
 		}
 		$("#wz-info-error").empty();
-		let dt = new Date(last_fetch_ts);
-		let datetime = dt.toLocaleTimeString(undefined,
+		const dt = new Date(last_fetch_ts);
+		const datetime = dt.toLocaleTimeString(undefined,
 			{hour: "2-digit", minute: "2-digit", second: "2-digit"});
 		$("#wz-info-updated").text(datetime);
 		if ("failed" in data) {
 			console.error(data["failed"]);
 			failures = JSON.parse(data["failed"]["debug"]);
-			let whatfailed = Object.keys(failures).join(" ");
-			let checkout = `Check out <a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
+			const whatfailed = Object.keys(failures).join(" ");
+			const checkout = `Check out <a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 				  NGE's page</a>!`;
 			if (data["failed"]["status"] == "fatal") {
 				$("#wz-info-error").html(`<p>
