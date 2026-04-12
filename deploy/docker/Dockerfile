@@ -18,6 +18,8 @@ RUN apt-get update && \
 	    php-cli \
 	    php-curl \
 	    php-fpm \
+	    php-intl \
+	    php-mbstring \
 	    php-sqlite3 \
 	    php-zip \
 	    composer
@@ -57,11 +59,11 @@ RUN if test "$PREPOPULATE" != "yes"; then \
 	; \
 	fi
 RUN if test "$PREPOPULATE" = "yes"; then \
-	wget    https://cort.ovh/api/trainer_saved_setups.txt \
-		https://cort.ovh/api/events.sqlite \
-		https://cort.ovh/api/wstatus.json \
-		https://cort.ovh/api/stats.json \
-		https://cort.ovh/api/events.json \
+	wget    https://cort.ovh/api/var/trainer_saved_setups.txt \
+		https://cort.ovh/api/var/events.sqlite \
+		https://cort.ovh/api/var/wstatus.json \
+		https://cort.ovh/api/var/stats.json \
+		https://cort.ovh/api/var/events.json \
 	; \
 	fi
 
