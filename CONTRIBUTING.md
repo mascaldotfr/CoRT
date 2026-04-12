@@ -6,11 +6,28 @@ If you plan to bring code improvements:
    and is expected to look as intended in the latest stable versions of major
    browsers (Chrome, Firefox, Edge, Safari, and on mobile as well). Keep that
    in mind for the frontend. At least check at https://caniuse.com/ .
-1. Keep things simple; simple code may be slower but given the simplicity of
-   the proposed tools there is no bottleneck, and i don't want them when
-   maintaining.
-2. Keep the style consistent, even if sometimes it's gross like not using dot
-   notation for hashes.
+1. Keep things simple:
+  - Simple code may be slower but given the simplicity of
+    the proposed tools there is no bottleneck, and i don't want them when
+    maintaining
+  - CoRT is vanilla JS, It will stay this way, because that
+    code can work on a 2020 software stack and browser and will very likely
+    work in a 2030 one, unlike frameworks that do breaking changes every year.
+  - A CoRT installation should be easily movable, and should be run simply from
+    its own directory, assuming PHP is working and has the necessary modules.
+    It has even its own bundler for production (see
+    `/deploy/release/create_release.py`) to not depends on ever changing
+    bundlers and stuff.
+  - At this point, you probably already got it, **CoRT is a long term project
+    with no real hype, excepted high resilience.**
+2. Keep the style consistent, even if sometimes it's gross like :
+  - Snakecase (Python made me do this)
+  - Not using dot notation for hashes (also python), excepted for string construction
+  - I come from ES3. That's 1999; as such use of modern `const/let` is known to
+    be flaky around the codebase as CoRT learnt me _modern_ JS, in the field.
+    I'm correcting stuff as I need to change code, but don't touch what's
+    working. I tend to use `const` for really read only objects and `let`
+    otherwise, so anyway I'm not very orthodox.
 3. Optionally use [JSHint](https://jshint.com/). Linux usage:
    ```shell
    cd /tmp
