@@ -66,7 +66,6 @@ All generated files are placed in `/tmp/`:
 - `CoRT-<version>.tar.gz.release_notes.md` → Changelog template ready for GitHub/Codeberg releases
 
 ## ⚠️ Notes & Known Limitations
-- The script assumes a standard web project structure with `html/`, `css/`, `js/`, and `composer.json` at the repository root.
 - Cache busting only targets `.css` and `.js` references. Images, fonts, and other static assets are left unchanged.
 - If a file is referenced via a complex bundler path, absolute URL, or dynamic string concatenation, it will be skipped to prevent accidental corruption.
 

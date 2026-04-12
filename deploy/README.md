@@ -19,3 +19,17 @@ There are several documented ways to install CoRT:
 3. [With API, integrated in an already running server](README.integrated.md) -- intermediate
 4. [With API using Docker, or any new server](README.vps.md) -- advanced, use development version by default
 
+## Releasing and production
+
+In [this document](release/README.md) is detailed how the release and
+production tarballs are created. If one day you need to take over from me,
+read this.
+
+That's quite my room to be honest...
+
+Deployment of the fully optimized production tarball (minified, optimized, with
+CSS fused) for https://cort.ovh is not documented since it's up to anyone
+deploying it. For example I `rsync` the generated tarball with the live
+directory), but you could use a variant of the *integrated* tutorial mentioned
+above.
+
