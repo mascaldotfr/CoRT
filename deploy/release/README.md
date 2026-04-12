@@ -5,7 +5,7 @@ A Python utility for automating the generation of production-ready release tarba
 This script handles asset optimization, content-based cache busting, dependency installation, and packaging in a single, reliable command.
 
 ## 📖 Overview & Origin
-This script is a modern, vibecoded, **Python rewrite** of the original `create_release` shell script. It preserves the original workflow and intent while significantly improving:
+This script is a modern, vibecoded, **Python rewrite** of the original `old.create_release` shell script. It preserves the original workflow and intent while significantly improving:
 - **Reliability:** Robust error handling, proper path resolution, and safe temporary directory management.
 - **Minification Safety:** Advanced regex patterns that correctly handle both quoted and unquoted HTML/JS attributes (common after aggressive minification).
 - **Cache Busting:** Replaced single-version cache busting with **per-file SHA-256 content hashing** for optimal browser caching.
