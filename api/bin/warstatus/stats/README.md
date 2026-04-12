@@ -3,7 +3,7 @@
 This directory includes the necessary code used to generate statistics.
 
 `generate.php` is called by `../warstatus.php`. It add new events in a sqlite3
-database `../../var/events.sqlite`. It generates a small JSON report called
+database `events.sqlite`. It generates a small JSON report called
 `stats.json` and big JSON one `events.json`, containing a dump of the
 events the last 10 days if any change happened since the last run.  The default
 output directory is `../../var` and can be modified in `../warstatus.php`.
@@ -14,7 +14,7 @@ of such files.
 
 ### Dump generator
 
-There is a way to generate a CSV dump with all historical events. You can find
+There is a way to get a CSV dump with all historical events. You can find
 them there:
 
 | Type                   | URL                                                |
@@ -25,6 +25,8 @@ them there:
 The output is in the same format than the warstatus events list, see
 `../warstatus/README.md` for more details. It's refreshed every 24 hours,
 on-demand.
+
+Note that one day, the number of events
 
 ## Database format
 
@@ -49,7 +51,12 @@ especially that the statistics API is [static](https://www.seancdavis.com/posts/
 | Official               | https://cort.ovh/api/var/events.json               |
 | Local                  | https://yourhost/api/var/events.json               |
 
-This is a carbon copy of the warstatus events array. Please see `../warstatus/README.md`.
+This is a carbon copy of the warstatus events array, excepted that the first
+element of the array is the generated time and should be removed before
+exploiting the result if you don't need it (it's no more used in CoRT).
+
+Please see `../warstatus/README.md` for the warstatus event array spec.
+
 
 ### stats.json
 

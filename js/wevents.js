@@ -2,10 +2,11 @@ import {$, _, api} from "./libs/cortlibs.js";
 import {HumaniseEvents} from "./wztools/wztools.js";
 
 let data = null;
-let humaniser = new HumaniseEvents();
+let last_fetch_ts = 0;
+const humaniser = new HumaniseEvents();
 
 function resolve_filter() {
-	let storedfilter = localStorage.getItem("wevents_filter");
+	const storedfilter = localStorage.getItem("wevents_filter");
 	if (storedfilter === null) {
 		storedfilter = "none";
 		localStorage.setItem("wevents_filter", "none");
@@ -14,7 +15,7 @@ function resolve_filter() {
 }
 
 function display_events() {
-	let storedfilter = localStorage.getItem("wevents_filter");
+	const storedfilter = localStorage.getItem("wevents_filter");
 	let filtered = [];
 	if (storedfilter == "none") {
 		filtered = data;
@@ -44,7 +45,7 @@ function display_events() {
 		let name = storedfilter.split(":")[1];
 		filtered = data.filter(i => i["name"].indexOf(name) != -1);
 	}
-	let we_events = $("#we-events");
+	const we_events = $("#we-events");
 	if (filtered.length == 0) {
 		we_events.html(_("No matching event found!"));
 	}
@@ -55,14 +56,17 @@ function display_events() {
 
 async function get_data() {
 	try {
-		const last_fetch = JSON.parse(localStorage.getItem("wevents_api_result"));
+		const cached = JSON.parse(localStorage.getItem("wevents_api_result"))
+		const now = Date.now();
 		// Refetch at best every minute
-		if (last_fetch !== null && (Date.now() - last_fetch["last_fetch"] ) <= 60_000) {
-			data = last_fetch["payload"];
+		if (cached !== null && (now - cached["timestamp"] ) <= 60_000) {
+			data = cached["payload"];
+			last_fetch_ts = cached["timestamp"];
 		}
 		else {
+			last_fetch_ts = now;
 			data = await $().getJSON(api.urls["events"]);
-			const to_store = {"last_fetch": Date.now(), "payload": data};
+			const to_store = {"timestamp": now, "payload": data};
 			localStorage.setItem("wevents_api_result", JSON.stringify(to_store));
 		}
 		$("#we-info-error").empty();
@@ -83,7 +87,7 @@ $(document).ready(async function() {
 	$("#we-data-dump").text(_("Download all events data"));
 	$("#we-floppy").show();
 	$("#we-filter-label").text(_("Filter:"));
-	let options = { "Global": [
+	const options = { "Global": [
 				["none", _("None")],
 				["noforts", _("No forts")],
 				["invas", _("Invasions only")],
@@ -105,22 +109,27 @@ $(document).ready(async function() {
 				["f:Herbred", "Herbred"],
 				["f:Eferias", "Eferias"] ]
 	};
-	let options_html = "";
+	let options_html = [];
 	for (let group in options) {
-		options_html += `<optgroup label="${_(group)}">`;
+		options_html.push(`<optgroup label="${_(group)}">`);
 		for (let o of options[group])
-			options_html += `<option value="${o[0]}">${o[1]}</option>`;
-		options_html += "</optgroup>";
+			options_html.push(`<option value="${o[0]}">${o[1]}</option>`);
+		options_html.push("</optgroup>");
 	}
-	$("#we-filter").append(options_html);
+	$("#we-filter").append(options_html.join(""));
 
 	await get_data();
 	if (data !== null) {
-		let tz = localStorage.getItem("tz");
-		let generated = new Date(data.shift()["generated"] * 1000);
-		generated = generated.toLocaleTimeString(undefined,
-			{hour: "2-digit", minute: "2-digit", timeZone: tz});
-		$("#we-info-updated").text(generated);
+		const tz = localStorage.getItem("tz");
+		// Drop generation time, it was used before but can be quite misleading
+		// I don't want to up major just for that, and it can still have it's use
+		data.shift();
+		const now = new Date(last_fetch_ts);
+		console.log(now)
+		const last_update = now.toLocaleTimeString(undefined,
+				    {hour: "2-digit", minute: "2-digit", second: "2-digit",
+				     timeZone: tz});
+		$("#we-info-updated").text(last_update);
 
 		$("#we-filter").on("change", function () {
 			localStorage.setItem("wevents_filter", $("#we-filter").val());
