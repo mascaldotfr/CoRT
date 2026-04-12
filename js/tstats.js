@@ -12,14 +12,17 @@ function capitalize(string) {
 
 async function download_stats() {
 	try {
-		const last_fetch = JSON.parse(localStorage.getItem("tstats_api_result"));
+		const cached = JSON.parse(localStorage.getItem("tstats_api_result"));
+		const now = Date.now();
 		// Refresh at best every hour (3hrs server side)
-		if (last_fetch !== null && (Date.now() - last_fetch["last_fetch"] ) <= 3_600_000) {
-			stats = last_fetch["payload"];
+		// XXX If you read this and CoRT is >= 3.8, the undefined check
+		// can be removed, it was for a transition to more meaningful names
+		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"] ) <= 3_600_000) {
+			stats = cached["payload"];
 		}
 		else {
 			stats = await $().getJSON(api.urls["trainer_data_stats"]);
-			const to_store = {"last_fetch": Date.now(), "payload": stats};
+			const to_store = {"timestamp": now, "payload": stats};
 			localStorage.setItem("tstats_api_result", JSON.stringify(to_store));
 		}
 	}
