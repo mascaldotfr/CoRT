@@ -50,7 +50,19 @@ function display_events() {
 		we_events.html(_("No matching event found!"));
 	}
 	else {
-		we_events.html(humaniser.humanise_events(filtered, false));
+		we_events.empty();
+		// We have THOUSANDS of DOM nodes to add if no filter is chosen.
+		// We batch the injection and use setTimeout to yield control back
+		// to the browser between chunks. This allows progressive rendering
+		// and keeps the UI responsive; otherwise, everything would be
+		// injected in a single synchronous task, causing a visible freeze.
+		const batch_length = 200;
+		for (let i = 0; i < filtered.length; i += batch_length) {
+			const batch = filtered.slice(i, i + batch_length);
+			setTimeout(function () {
+				we_events.append(humaniser.humanise_events(batch, false));
+			}, 0);
+		}
 	}
 }
 
