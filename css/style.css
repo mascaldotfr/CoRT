@@ -232,7 +232,7 @@ h3 {
 	#menu {
 		line-height: 2em;
 		text-align: left;
-		min-height: 2em;
+		min-height: calc(2em + var(--default_margin_padding));
 		padding: var(--default_margin_padding);
 	}
 	#menu, #footer {
