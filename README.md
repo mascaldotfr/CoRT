@@ -1,6 +1,6 @@
-| :warning: Moving           |
+| :warning: Moved       |
 |:---------------------------|
-| CoRT main codebase is moving to https://codeberg.org/mascal/CoRT |
+| CoRT main codebase has moved to https://codeberg.org/mascal/CoRT |
 
 
 # Champions of Regnum tools
@@ -65,7 +65,8 @@ extra infos about using and deploying CoRT.
 ## Credits
 
 * [Xia](https://github.com/xia) and Edward "[urkle](https://github.com/urkle)"
-  Rudd, who wrote the first Inquisition trainer.
+  Rudd, who wrote the first Inquisition trainer. A lot of early hints for the
+  trainer come from them.
   [Anpu](https://github.com/Anpu) did a thing or two about it as well iirc.
 * [Joshua2504](https://github.com/Joshua2504) and
   [Shaiko](https://github.com/Shaiko35) from https://cor-forum.de/ for keeping
@@ -74,4 +75,18 @@ extra infos about using and deploying CoRT.
   the UI should be done.
 * Halvdan. His own trainer stats page has been a major influence on
   [tstats.html](https://cort.ovh/tstats.html)
-* Regnum Tools, for UI hints about the BZ schedule
+* Regnum Tools, for UI hints about the bosses and BZ UI
+
+## Thanks
+
+*While not having contributed directly to CoRT's code, they helped me getting
+CoRT where it is nowadays. Thanks to them!*
+
+|       WHO          |                         WHAT                                     |
+|------------------- |------------------------------------------------------------------|
+| **Redo**           | Early improvements and UX, German translation improvements       |
+| **Vlata Pikouse**  | Top bug reporter, UX                                             |
+| **manuoderso**     | He just wanted the last gem taken time, you got WZ stats!        |
+| **MAXWELL**        | Lvl 61 in trainer aka Necro Gem                                  |
+| **Lady**           | Bug reporting                                                    |
+| **Ben'Dito**       | Sync the WZ events with realm balance days                       |
