@@ -32,7 +32,7 @@ class ApiURL {
 			"submit_trainer": `${this.base}/bin/collect/submit.php`,
 
 			"trainer_data": `${this.base}/var/trainer_saved_setups.txt`,
-			"trainer_data_stats": `${this.base}/var/trainerstats.json`,
+			"trainer_data_stats": `${this.base}/bin/collect/trainer_stats.php`,
 			"events": `${this.base}/var/events.json`,
 			"stats": `${this.base}/var/stats.json`,
 			"wstatus": `${this.base}/var/wstatus.json`,
