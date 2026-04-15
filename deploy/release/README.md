@@ -41,6 +41,7 @@ Run the script from anywhere within your CoRT Git repository. It will automatica
 
 ```bash
 # Release mode: removes preloads, applies per-file cache busting, packages release
+# This keeps it readable and editable easily
 python3 create_release.py
 
 # cort.ovh mode: enables all optimizations (CSS fusion, minification, GZIP, keeps preloads)
@@ -67,6 +68,8 @@ All generated files are placed in `/tmp/`:
 
 ## ⚠️ Notes & Known Limitations
 - Cache busting only targets `.css` and `.js` references. Images, fonts, and other static assets are left unchanged.
+- CSS fusion is done in alphabetical order, in case a CSS must have the priority over another one, it's recommended to number it (see `css/01_chartist.css`)
+- CSS must be page scoped or it will apply to all pages
 - If a file is referenced via a complex bundler path, absolute URL, or dynamic string concatenation, it will be skipped to prevent accidental corruption.
 
 ## 📜 License
