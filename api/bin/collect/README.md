@@ -26,8 +26,8 @@ Statistics are already generated for use by CoRT and are publicly available at:
 
 | Type                   | URL                                                |
 |------------------------|----------------------------------------------------|
-| Official               | https://cort.ovh/api/var/trainer_data_stats.json   |
-| Local                  | https://yourhost/api/var/trainer_data_stats.json   |
+| Official               | https://cort.ovh/api/var/trainerstats.json         |
+| Local                  | https://yourhost/api/var/trainerstats.json         |
 
 
 This endpoint is not documented, but it's pretty straight forward.
