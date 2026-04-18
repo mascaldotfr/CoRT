@@ -327,11 +327,14 @@ h3 {
         --tooltip_background: #864a4a;
         --menu_buttons_background: #831e1e;
         --foreground: white;
-        --forms: #5c1d1d;
+        --forms: #822d2d;
 	--links: #ffdcc3;
         #t-points {
                 background: var(--menu_background) !important;
         }
+	#t-load {
+		border: 3px solid #ff000088;
+	}
 	#menu-bosses[menu-status="true"] {
 		animation: bossesonIgnis 5s ease-in-out infinite;
 	}
@@ -344,6 +347,7 @@ h3 {
 		box-shadow: 0 .1em .3em #fff;
 	}
 }
+
 :root[data-prefers-colorscheme="Cute Killers"] {
 	--background: pink;
 	--card_background: lavenderblush;
