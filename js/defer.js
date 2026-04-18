@@ -12,6 +12,38 @@ if (currentlang != "en") {
 	descr.attr("content", _(en_descr));
 }
 
+// Theming
+const colorschemechooser = $("#colorschemechooser");
+if (SUPPORT_NESTED) {
+	colorschemechooser.val(localStorage.getItem("colorscheme") || "");
+
+	function apply_scheme(scheme) {
+		const html = $("html");
+		html.removeAttr("data-prefers-colorscheme");
+		html.attr("data-prefers-colorscheme", scheme);
+	}
+
+	function scheme_switch() {
+		const scheme = colorschemechooser.val();
+		localStorage.setItem("colorscheme", scheme);
+		apply_scheme(scheme)
+	}
+
+	colorschemechooser.on("change", scheme_switch);
+	window.addEventListener("storage", (e) => {
+		// Sync other tabs
+		if (e.key === "colorscheme") {
+			const scheme = e.newValue || "";
+			colorschemechooser.val(scheme);
+			apply_scheme(scheme);
+		}
+	});
+}
+else {
+	colorschemechooser.attr("disabled", "");
+	colorschemechooser.attr("title", "Your browser is too old to support themes!");
+}
+
 // Cursors lazy loading
 const mediaQuery = window.matchMedia("(min-width: 800px)");
 if (mediaQuery.matches) {

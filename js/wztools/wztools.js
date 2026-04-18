@@ -157,7 +157,7 @@ export class Icons {
 	get_all_icons() {
 		let realm_colors = {"alsius": "#8CCCF4", "ignis": "#FF4444", "syrtis": "#30d98e"};
 		let wzicons = {
-			"gem_0.png": this.generate_gem("#cccccc66"),
+			"gem_0.png": this.generate_gem("#cccccc33"),
 			"gem_1.png": this.generate_gem(realm_colors["ignis"]),
 			"gem_2.png": this.generate_gem(realm_colors["alsius"]),
 			"gem_3.png": this.generate_gem(realm_colors["syrtis"]),

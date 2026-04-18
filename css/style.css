@@ -15,83 +15,8 @@
 	--ahover: #ccaaff;
 	--default_margin_padding: .5em;
 	--table_padding: .25em .5em;
-	scrollbar-color: var(--menu-buttons_background) var(--tooltip_background);
-}
-
-:root[data-prefers-colorscheme="Hello Cutie"] {
-	--background: pink;
-	--card_background: lavenderblush;
-	--menu_background: #d9c1ff;
-	--tooltip_background: #f5ecff;
-	--menu_buttons_background: #ffd8f6;
-	--foreground: black;
-	--forms: #ffb3e1;
-	--red: red;
-	--blue: #007dcc;
-	--green: green;
-	--purple: purple;
-	--faded: #525252;
-	--links: blue;
-	--ahover: purple;
-	--default_margin_padding: .5em;
-	--table_padding: .25em .5em;
 	scrollbar-color: var(--menu_background) var(--tooltip_background);
-	.wz-forts svg, .wz-gems svg, .wz-relics svg {
-		filter: brightness(.7) saturate(1.5);
-	}
-	#t-trainer .icon[data-status="available"] {
-		filter: brightness(.45);
-	}
-	#t-points {
-		background: #ffdaf9 !important;
-	}
-	#ts-powergraph-graph svg {
-		background: var(--card_background) !important;
-	}
-	#menu-cortlogo-svg {
-		filter: sepia(1) saturate(5) hue-rotate(280deg) brightness(1.15) contrast(1.2);
-	}
-	.tippy-content, .card:not(#wz-map), .menudetails {
-		box-shadow: 0 .1em .3em rgba(0, 0, 0, .9) !important;
-	}
 }
-
-:root[data-prefers-colorscheme="Light"] {
-	--background: #f3f3f3;
-	--card_background: #fff;
-	--menu_background: #c0c0c0;
-	--tooltip_background: #f1f2ff;
-	--menu_buttons_background: #fff;
-	--foreground: black;
-	--forms: #e5e5e5;
-	--red: red;
-	--blue: #007dcc;
-	--green: green;
-	--purple: purple;
-	--faded: #525252;
-	--links: blue;
-	--ahover: purple;
-	--default_margin_padding: .5em;
-	--table_padding: .25em .5em;
-	scrollbar-color: var(--menu_background) var(--tooltip_background);
-
-	.wz-forts svg, .wz-gems svg, .wz-relics svg {
-		filter: brightness(.7) saturate(1.5);
-	}
-	#t-points {
-		background: #f8f8fe !important;
-	}
-	#t-trainer .icon[data-status="available"] {
-		filter: brightness(.45);
-	}
-	#ts-powergraph-graph svg {
-		background: var(--card_background) !important;
-	}
-	.tippy-content, .card:not(#wz-map), .menudetails {
-		box-shadow: 0 .1em .3em rgba(0, 0, 0, .9) !important;
-	}
-}
-
 
 html {
 	scrollbar-gutter: stable;
@@ -201,7 +126,7 @@ summary::-webkit-details-marker {
 	}
 }
 #menu-bz[menu-status="true"] {
-	box-shadow: 0 .1em .3em green;
+	box-shadow: 0 .1em .3em #44ff44;
 }
 .menu-icon {
 	height: 1em;
@@ -244,15 +169,27 @@ summary::-webkit-details-marker {
 #footer {
 	margin-top: 2em;
 }
-#tz {
+#footer-options {
+	display: flex;
+	margin: 0 auto;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	gap: 2em;
+	padding-bottom: var(--default_margin_padding);
+	width: fit-content;
+	background: var(--background);
+}
+#tz, #colorscheme {
 	display: inline-grid;
-	width: 50%;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: 1fr 1fr;
 	align-items: center;
 }
-#tztitle {
-	text-align: right;
+#tztitle, #colorschemetitle {
+	text-align: left;
 	font-weight: bold;
+}
+#tz select, #colorscheme select {
+	min-width: 25ch;
 }
 h1 {
 	text-align: center;
@@ -358,4 +295,121 @@ h3 {
 	}
 }
 
+:root[data-prefers-colorscheme="Syrtis"] {
+        --background: #0f1713;
+        --card_background: #1c2822;
+        --menu_background: #202e27;
+        --tooltip_background: #4a5f52;
+        --menu_buttons_background: #4a5f52;
+        --foreground: white;
+        --forms: #52695b;
+	--links : #b4ffa1;
+	#t-points {
+		background: var(--menu_background) !important;
+	}
+}
 
+:root[data-prefers-colorscheme="Alsius"] {
+        --background: #080f17;
+        --card_background: #132333;
+        --menu_background: #132332;
+        --tooltip_background: #223e54;
+        --menu_buttons_background: #223e54;
+        --foreground: white;
+        --forms: #2d4d66;
+        #t-points {
+                background: var(--menu_background) !important;
+        }
+}
+
+:root[data-prefers-colorscheme="Ignis"] {
+        --background: #0a0202;
+        --card_background: #361d1d;
+        --menu_background: #2e0c0c;
+        --tooltip_background: #4c1e1e;
+        --menu_buttons_background: #831e1e;
+        --foreground: white;
+        --forms: #5c1d1d;
+	--links: #ffdcc3;
+        #t-points {
+                background: var(--menu_background) !important;
+        }
+	#menu-bosses[menu-status="true"] {
+		animation: bossesonIgnis 5s ease-in-out infinite;
+	}
+}
+@keyframes bossesonIgnis {
+	0%, 100% {
+		box-shadow: 0 .1em .3em #f00;
+	}
+	50% {
+		box-shadow: 0 .1em .3em #fff;
+	}
+}
+:root[data-prefers-colorscheme="Cute Killers"] {
+	--background: pink;
+	--card_background: lavenderblush;
+	--menu_background: #d9c1ff;
+	--tooltip_background: #f5ecff;
+	--menu_buttons_background: #ffd8f6;
+	--foreground: black;
+	--forms: #ffb3e1;
+	--red: red;
+	--blue: #007dcc;
+	--green: green;
+	--purple: purple;
+	--faded: #525252;
+	--links: blue;
+	--ahover: purple;
+	.wz-forts svg, .wz-gems svg, .wz-relics svg {
+		filter: brightness(.7) saturate(1.5);
+	}
+	#t-trainer .icon[data-status="available"] {
+		filter: brightness(.45);
+	}
+	#t-points {
+		background: #ffdaf9 !important;
+	}
+	#ts-powergraph-graph svg {
+		background: var(--card_background) !important;
+	}
+	#menu-cortlogo-svg {
+		filter: sepia(1) saturate(5) hue-rotate(280deg) brightness(1.15) contrast(1.2);
+	}
+	.tippy-content, .card:not(#wz-map), .menudetails {
+		box-shadow: 0 .1em .3em rgba(0, 0, 0, .9) !important;
+	}
+}
+
+:root[data-prefers-colorscheme="Light"] {
+	--background: #f3f3f3;
+	--card_background: #fff;
+	--menu_background: #c0c0c0;
+	--tooltip_background: #f1f2ff;
+	--menu_buttons_background: #fff;
+	--foreground: black;
+	--forms: #e5e5e5;
+	--red: red;
+	--blue: #007dcc;
+	--green: green;
+	--purple: purple;
+	--faded: #525252;
+	--links: blue;
+	--ahover: purple;
+
+	.wz-forts svg, .wz-gems svg, .wz-relics svg {
+		filter: brightness(.7) saturate(1.5);
+	}
+	#t-points {
+		background: #f8f8fe !important;
+	}
+	#t-trainer .icon[data-status="available"] {
+		filter: brightness(.45);
+	}
+	#ts-powergraph-graph svg {
+		background: var(--card_background) !important;
+	}
+	.tippy-content, .card:not(#wz-map), .menudetails {
+		box-shadow: 0 .1em .3em rgba(0, 0, 0, .9) !important;
+	}
+}

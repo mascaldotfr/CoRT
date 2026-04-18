@@ -582,6 +582,11 @@ export const __i18n__ = {
 		"es": "Zona horaria:",
 		"de": "Zeitzone:"
 	},
+	"Colorscheme:": {
+		"fr": "Jeu de couleurs :",
+		"es": "Paleta de colores:",
+		"de": "Farbschema:"
+	},
 	"The page refreshes itself every minute.":
 	{
 		"fr": "La page est rafraîchie automatiquement toutes les minutes.",
