@@ -246,7 +246,7 @@ $(document).ready(function() {
 	$("#bz-info").text(_("The page refreshes itself every minute."));
 
 	// TZ doesn't apply here
-	$("#tz").hide();
+	$("#tz").css("display", "none");
 
 	notify.insert_notification_link();
 	const scheduler = new MyScheduler(3, 5, feed_bz);
