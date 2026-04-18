@@ -3,7 +3,7 @@
 	--card_background: #2f2f49;
 	--menu_background: #333349;
 	--tooltip_background: #616179;
-	--menu_buttons_background: #616179;
+	--menu_buttons_background: #525285;
 	--foreground: white;
 	--forms: #5f5f6f;
 	--red: #ffa1a7;
@@ -295,7 +295,7 @@ h3 {
 
 :root[data-prefers-colorscheme="Syrtis"] {
         --background: #0f1713;
-        --card_background: #1c2822;
+        --card_background: #182f24;
         --menu_background: #202e27;
         --tooltip_background: #4a5f52;
         --menu_buttons_background: #4a5f52;
@@ -308,26 +308,26 @@ h3 {
 }
 
 :root[data-prefers-colorscheme="Alsius"] {
-        --background: #080f17;
-        --card_background: #132333;
-        --menu_background: #132332;
-        --tooltip_background: #223e54;
-        --menu_buttons_background: #223e54;
-        --foreground: white;
-        --forms: #2d4d66;
+	--background: #00192e;
+	--card_background: #20324b;
+	--menu_background: #01304a;
+	--tooltip_background: #3d5161;
+	--menu_buttons_background: #26577d;
+	--foreground: white;
+	--forms: #2d4d66;
         #t-points {
                 background: var(--menu_background) !important;
         }
 }
 
 :root[data-prefers-colorscheme="Ignis"] {
-        --background: #0a0202;
-        --card_background: #361d1d;
-        --menu_background: #2e0c0c;
-        --tooltip_background: #864a4a;
-        --menu_buttons_background: #831e1e;
-        --foreground: white;
-        --forms: #822d2d;
+	--background: #0a0202;
+	--card_background: #420505;
+	--menu_background: #3c1414;
+	--tooltip_background: #782929;
+	--menu_buttons_background: #8e0000;
+	--foreground: white;
+	--forms: #822d2d;
 	--links: #ffdcc3;
         #t-points {
                 background: var(--menu_background) !important;
