@@ -87,7 +87,7 @@ const __menu_footer = function() { return `
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260418.215515
+	<p> <!--VERSION-->Version: 20260418.222125
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
@@ -139,9 +139,22 @@ $(document).ready(function() {
 
 		$("#menu-lang-list").append(`
 			<li class="langoption" id="menu-lang-${l}">${__menu_flags[l]}&nbsp;<a href="${lang_href}" hreflang="${l}">${langs[l]}</a>`);
-		$(`#menu-lang-${l}`).on("click", function () {
-			localStorage.setItem("lang", l);
-			window.location.reload();
+		$(`#menu-lang-${l}`).on("click", (e) => {
+			// warn in case you're in a setup...
+			const trainer_dpoints_left = $("#t-dpointsleft").text();
+			const trainer_dpoints_total = $("#t-dpointstotal").text();
+			const in_setup = trainer_dpoints_left !== undefined && trainer_dpoints_left != trainer_dpoints_total;
+			let really_refresh = true;
+			if (in_setup) {
+				let sure = window.confirm("Are you sure you want to reload the page? You may lose your setup!");
+				if (!sure) {
+					e.preventDefault();
+					really_refresh = false;
+				}
+			}
+			if (really_refresh) {
+				localStorage.setItem("lang", l);
+			}
 		});
 		// Add alternate links
 		const link = document.createElement("link");
