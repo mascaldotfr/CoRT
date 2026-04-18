@@ -10,7 +10,10 @@
  }
 #bz-schedule-table tr {
 	margin: .25em;
-	border-bottom: 1px solid #717171;
+	border-bottom: 1px solid var(--faded); /* old < 2023 browser */
+	@supports(background: color-mix(in srgb, white, white)) {
+		border-bottom: 1px solid color-mix(in srgb, var(--foreground), black 55%);
+	}
 }
 #bz-schedule-table tr:last-child {
 	border-bottom: unset;

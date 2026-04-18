@@ -37,7 +37,8 @@
 	min-width: 6em;
 }
 #t-points {
-	background: #1e1e51;
+	background: var(--card_background); /* old browsers */
+	background: color-mix(in srgb, var(--card_background), blue 15%); /* hardcoded */
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -77,7 +78,7 @@
 	height: 48px;
 	border-radius: 3px;
 }
-.icon .skilllvl { background-color: var(--foreground); color: black; border-radius: 4px; }
+.icon .skilllvl { background-color: white; color: black; border-radius: 4px; }
 .icon[data-status="available"] { filter: brightness(.25); }
 .icon[data-status="active"] { filter: brightness(1); }
 .icon[data-status="disabled"] { filter: grayscale(1) brightness(.5); }
@@ -117,7 +118,7 @@
 }
 .tippy-content th {
 	text-align: left;
-	border: 1px solid white;
+	border: 1px solid var(--foreground);
 	padding: var(--table_padding);
 }
 .tippy-content thead > tr > th:first-child {
@@ -126,6 +127,7 @@
 }
 .tippy-content thead {
 	background-color: #212121;
+	color: white; /* hardcoded */
 }
 .tippy-content thead > tr > th, .tippy-content td {
 	text-align: center;
@@ -134,10 +136,10 @@
 	hyphens: auto;
 }
 .tippy-content td {
-	border: 1px solid white;
+	border: 1px solid var(--foreground);
 }
 #t-sharedlink {
-	border: 1px solid white;
+	border: 1px solid var(--foreground);
 	display: none;
 	width: 90%;
 	max-width: 512px;

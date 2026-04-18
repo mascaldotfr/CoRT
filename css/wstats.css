@@ -17,7 +17,7 @@
 	animation: blinking 1.5s infinite;
 }
 @keyframes blinking {
-	50% { color: red; background: black; }
+	50% { color: var(--red); background: var(--background); }
 }
 #ws-info {
 	min-height: 2em;
@@ -84,7 +84,10 @@
  }
 #ws-container-text tr {
 	margin: 0px;
-	border-bottom: 1px solid #717171;
+	border-bottom: 1px solid var(--faded); /* old < 2023 browser */
+	@supports(border-bottom: color-mix(in srgb, white, white)) {
+		border-bottom: 1px solid color-mix(in srgb, var(--foreground), black 55%);
+	}
 }
 #ws-container-text tr:last-child {
 	border-bottom: unset;
@@ -150,7 +153,7 @@
 	margin-left: -.7em;
 }
 svg.ct-chart-donut g text.ct-label {
-	stroke: #000000 !important;
+	stroke: var(--background) !important;
 }
 .ws-chart {
 	height: 15em;
