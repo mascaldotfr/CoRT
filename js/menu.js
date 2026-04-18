@@ -87,7 +87,7 @@ const __menu_footer = function() { return `
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260418.212735
+	<p> <!--VERSION-->Version: 20260418.215515
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 

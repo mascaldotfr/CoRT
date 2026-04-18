@@ -62,21 +62,21 @@
 	padding: var(--table_padding);
 }
 .p0 .icon { background-position: 0px 0px; }
-.p1 .icon { background-position: -48px 0px;  }
-.p2 .icon { background-position: -96px 0px;  }
-.p3 .icon { background-position: -144px 0px;  }
-.p4 .icon { background-position: -192px 0px;  }
-.p5 .icon { background-position: -240px 0px;  }
-.p6 .icon { background-position: -288px 0px;  }
-.p7 .icon { background-position: -336px 0px;  }
-.p8 .icon { background-position: -384px 0px;  }
-.p9 .icon { background-position: -432px 0px;  }
-.p10 .icon { background-position: -480px 0px; }
+.p1 .icon { background-position: -49px 0px;  }
+.p2 .icon { background-position: -97px 0px;  }
+.p3 .icon { background-position: -145px 0px;  }
+.p4 .icon { background-position: -193px 0px;  }
+.p5 .icon { background-position: -241px 0px;  }
+.p6 .icon { background-position: -289px 0px;  }
+.p7 .icon { background-position: -337px 0px;  }
+.p8 .icon { background-position: -385px 0px;  }
+.p9 .icon { background-position: -433px 0px;  }
+.p10 .icon { background-position: -481px 0px; }
 .icon {
 	background-repeat: no-repeat;
-	width: 48px;
-	height: 48px;
-	border-radius: 3px;
+	width: 47px;
+	height: 47px;
+	border-radius: 6px;
 }
 .icon .skilllvl { background-color: white; color: black; border-radius: 4px; }
 .icon[data-status="available"] { filter: brightness(.25); }
@@ -86,6 +86,7 @@
 .skillspinner[data-status="visible"] { visibility: visible; }
 .skillspinner[data-status="hidden"] { visibility: hidden; }
 .minus, .plus { display: block; margin-left: 6px; width: 20px; height: 20px; padding: 2px; }
+.minus:hover, .plus:hover { background: var(--background); }
 .minus { margin-top: 6px; }
 .tippy-content {
 	background-color: var(--tooltip_background);
