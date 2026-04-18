@@ -288,6 +288,7 @@ h3 {
 	.menudetails ul {
 		position: relative;
 		margin-left: 0;
+		background: var(--background);
 	}
 	#menu-lang-list {
 		display: flex;
