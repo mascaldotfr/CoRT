@@ -181,7 +181,7 @@ summary::-webkit-details-marker {
 }
 #tz, #colorscheme {
 	display: inline-grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr auto;
 	align-items: center;
 }
 #tztitle, #colorschemetitle {
@@ -279,11 +279,8 @@ h3 {
 	.menu-btn {
 		display: inline-block;
 	}
-	#tz {
-		width: 100%;
-	}
-	#tztitle {
-		text-align: left;
+	#tz, #colorscheme {
+		grid-template-columns: 1fr 1fr;
 	}
 	.menudetails ul {
 		position: relative;
