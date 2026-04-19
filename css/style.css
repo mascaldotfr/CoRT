@@ -122,14 +122,14 @@ summary::-webkit-details-marker {
 }
 @keyframes bosseson {
 	0%, 100% {
-		box-shadow: 0 0 .5em #ff0000;
+		box-shadow: 0 0 .5em .1em #ff6666;
 	}
 	50% {
-		box-shadow: 0 0 .5em #440000;
+		box-shadow: 0 0 .5em .1em #ff0000;
 	}
 }
 #menu-bz[menu-status="true"] {
-	box-shadow: 0 0 .3em #00ff00;
+	box-shadow: 0 0 .4em .1em #00ff00;
 }
 .menu-icon {
 	height: 1em;
@@ -309,7 +309,7 @@ h3 {
 		background: var(--menu_background) !important;
 	}
 	#menu-bz[menu-status="true"] {
-		box-shadow: 0 0 .4em #44ff44;
+		box-shadow: 0 0 .4em .1em #44ff44;
 	}
 }
 
@@ -348,10 +348,10 @@ h3 {
 }
 @keyframes bossesonIgnis {
 	0%, 100% {
-		box-shadow: 0 .1em .3em #f00;
+		box-shadow: 0 0 .4em .1em #f88;
 	}
 	50% {
-		box-shadow: 0 .1em .3em #fff;
+		box-shadow: 0 0 .4em .1em #fff;
 	}
 }
 
