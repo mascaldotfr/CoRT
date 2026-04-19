@@ -156,7 +156,7 @@
 #t-sharedlink h3 {
 	margin: var(--default_margin_padding);
 	text-align: center;
-	color: white;
+	color: var(--foreground);
 }
 #t-sharedlink-url {
 	width: 100%;
