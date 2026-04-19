@@ -300,10 +300,10 @@ h3 {
 	--background: #14281f;
 	--card_background: #203d31;
 	--menu_background: #2a4a3c;
-	--tooltip_background: #36594a;
-	--menu_buttons_background: #5c8a6e;
+	--tooltip_background: #253525;
+	--menu_buttons_background: #58786a;
 	--foreground: white;
-	--forms: #4f7861;
+	--forms: #4f8061;
 	--links : #b4ffa1;
 	#t-points {
 		background: var(--menu_background) !important;
@@ -328,7 +328,7 @@ h3 {
 
 :root[data-prefers-colorscheme="Ignis"] {
 	--background: #050101;
-	--card_background: #290606;
+	--card_background: #340606;
 	--menu_background: #2a0808;
 	--tooltip_background: #150909;
 	--menu_buttons_background: #852424;
