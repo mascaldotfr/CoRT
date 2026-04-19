@@ -294,10 +294,10 @@ h3 {
 }
 
 :root[data-prefers-colorscheme="Syrtis"] {
-	--background: #14281f;
-	--card_background: #203d31;
-	--menu_background: #2a4a3c;
-	--tooltip_background: #253525;
+	--card_background: #14281f;
+	--background: #203d31;
+	--menu_background: #2a5a3c;
+	--tooltip_background: #254525;
 	--menu_buttons_background: #58786a;
 	--foreground: white;
 	--forms: #4f8061;
@@ -329,7 +329,7 @@ h3 {
 	--foreground: white;
 	--forms: #6e1e1e;
 	--links: #ffdcc3;
-	scrollbar-color: var(--menu_background) var(--forms);
+	scrollbar-color: var(--background) var(--forms);
         #t-points {
                 background: var(--menu_background) !important;
         }
