@@ -187,7 +187,7 @@ document.addEventListener("visibilitychange", () => {
 
 // preloading on idle
 if ("requestIdleCallback" in window) {
-	const prefetch_stale = 10 * 60 * 1000;
+	const prefetch_stale = 60 * 60 * 1000;
 	const now = Date.now();
 	const last_prefetch = parseInt(localStorage.getItem("last_prefetch")) || 0;
 	if (now > last_prefetch + prefetch_stale) {
