@@ -74,8 +74,8 @@ const __menu_github_stuff = function () {
 }
 const __menu_footer = function() { return `
 	<div id="footer-options" class="card">
-		<div id="tz"><div id="tztitle">${_("Timezone:")}&nbsp;</div><select id="tzchooser"></select></div>
-		<div id="colorscheme"><div id="colorschemetitle">${_("Colorscheme:")}&nbsp;</div>
+		<div id="tz"><div id="tztitle">${_("Timezone")}&emsp;</div><select id="tzchooser"></select></div>
+		<div id="colorscheme"><div id="colorschemetitle">${_("Theme")}&emsp;</div>
 			<select id="colorschemechooser">
 				<option value="" default>Dark (Default)</option>
 				<option value="Light">Light</option>
@@ -86,7 +86,7 @@ const __menu_footer = function() { return `
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260419.163814
+	<p> <!--VERSION-->Version: 20260419.182628
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 

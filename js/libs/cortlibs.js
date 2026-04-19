@@ -577,15 +577,15 @@ export const __i18n__ = {
 		"es": "Menú",
 		"de": "Menü"
 	},
-	"Timezone:": {
-		"fr": "Fuseau horaire :",
-		"es": "Zona horaria:",
-		"de": "Zeitzone:"
+	"Timezone": {
+		"fr": "Fuseau horaire",
+		"es": "Zona horaria",
+		"de": "Zeitzone"
 	},
-	"Colorscheme:": {
-		"fr": "Jeu de couleurs :",
-		"es": "Paleta de colores:",
-		"de": "Farbschema:"
+	"Theme": {
+		"fr": "Thème",
+		"es": "Tema",
+		"de": "Farbschema"
 	},
 	"The page refreshes itself every minute.":
 	{
