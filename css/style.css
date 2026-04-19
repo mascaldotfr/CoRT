@@ -356,8 +356,8 @@ h3 {
 	--menu_buttons_background: #ffd8f6;
 	--foreground: black;
 	--forms: #ffb3e1;
-	--red: red;
-	--blue: #007dcc;
+	--red: #da0000;
+	--blue: #0050bb;
 	--green: green;
 	--purple: purple;
 	--faded: #525252;
@@ -384,23 +384,25 @@ h3 {
 }
 
 :root[data-prefers-colorscheme="Light"] {
-	--background: #f3f3f3;
-	--card_background: #fff;
-	--menu_background: #c0c0c0;
-	--tooltip_background: #f1f2ff;
+	--background: ghostwhite;
+	--card_background: floralwhite;
+	--menu_background: antiquewhite;
+	--tooltip_background: lightyellow;
 	--menu_buttons_background: #fff;
 	--foreground: black;
 	--forms: #e5e5e5;
-	--red: red;
-	--blue: #007dcc;
-	--green: green;
+	--red: #cc0000;
+	--blue: #0364a5;
+	--green: #008700;
 	--purple: purple;
 	--faded: #525252;
 	--links: blue;
 	--ahover: purple;
 
+	scrollbar-color: initial;
+
 	.wz-forts svg, .wz-gems svg, .wz-relics svg {
-		filter: brightness(.7) saturate(1.5);
+		filter: brightness(.6) saturate(1.5);
 	}
 	#t-points {
 		background: #f8f8fe !important;
