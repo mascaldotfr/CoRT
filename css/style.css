@@ -351,41 +351,6 @@ h3 {
 	}
 }
 
-:root[data-prefers-colorscheme="Cute Killers"] {
-	--background: pink;
-	--card_background: lavenderblush;
-	--menu_background: #d9c1ff;
-	--tooltip_background: #f5ecff;
-	--menu_buttons_background: #ffd8f6;
-	--foreground: black;
-	--forms: #ffb3e1;
-	--red: #da0000;
-	--blue: #0050bb;
-	--green: green;
-	--purple: purple;
-	--faded: #525252;
-	--links: blue;
-	--ahover: purple;
-	.wz-forts svg, .wz-gems svg, .wz-relics svg {
-		filter: brightness(.7) saturate(1.5);
-	}
-	#t-trainer .icon[data-status="available"] {
-		filter: brightness(.45);
-	}
-	#t-points {
-		background: #ffdaf9 !important;
-	}
-	#ts-powergraph-graph svg {
-		background: var(--card_background) !important;
-	}
-	#menu-cortlogo-svg {
-		filter: sepia(1) saturate(5) hue-rotate(280deg) brightness(1.15) contrast(1.2);
-	}
-	.tippy-content, .card:not(#wz-map), .menudetails {
-		box-shadow: 0 .1em .3em rgba(0, 0, 0, .9) !important;
-	}
-}
-
 :root[data-prefers-colorscheme="Light"] {
 	--background: ghostwhite;
 	--card_background: floralwhite;

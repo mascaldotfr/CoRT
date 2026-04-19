@@ -82,12 +82,11 @@ const __menu_footer = function() { return `
 				<option value="Alsius">Alsius</option>
 				<option value="Ignis">Ignis</option>
 				<option value="Syrtis">Syrtis</option>
-				<option value="Cute Killers">Cute Killers (Light)</option>
 			</select>
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260419.032502
+	<p> <!--VERSION-->Version: 20260419.121112
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
