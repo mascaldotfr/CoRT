@@ -122,14 +122,14 @@ summary::-webkit-details-marker {
 }
 @keyframes bosseson {
 	0%, 100% {
-		box-shadow: 0 .1em .3em red;
+		box-shadow: 0 0 .5em #ff0000;
 	}
 	50% {
-		box-shadow: 0 .1em .3em darkred;
+		box-shadow: 0 0 .5em #440000;
 	}
 }
 #menu-bz[menu-status="true"] {
-	box-shadow: 0 .1em .3em #44ff44;
+	box-shadow: 0 0 .3em #00ff00;
 }
 .menu-icon {
 	height: 1em;
@@ -297,16 +297,19 @@ h3 {
 }
 
 :root[data-prefers-colorscheme="Syrtis"] {
-        --background: #0f1713;
-        --card_background: #182f24;
-        --menu_background: #202e27;
-        --tooltip_background: #303330;
-        --menu_buttons_background: #4a5f52;
-        --foreground: white;
-        --forms: #315d42;
+	--background: #14281f;
+	--card_background: #203d31;
+	--menu_background: #2a4a3c;
+	--tooltip_background: #36594a;
+	--menu_buttons_background: #5c8a6e;
+	--foreground: white;
+	--forms: #4f7861;
 	--links : #b4ffa1;
 	#t-points {
 		background: var(--menu_background) !important;
+	}
+	#menu-bz[menu-status="true"] {
+		box-shadow: 0 0 .4em #44ff44;
 	}
 }
 
@@ -324,14 +327,15 @@ h3 {
 }
 
 :root[data-prefers-colorscheme="Ignis"] {
-	--background: #0a0202;
-	--card_background: #2c0505;
-	--menu_background: #3c1414;
-	--tooltip_background: #403030;
-	--menu_buttons_background: #8e0000;
+	--background: #050101;
+	--card_background: #290606;
+	--menu_background: #2a0808;
+	--tooltip_background: #150909;
+	--menu_buttons_background: #852424;
 	--foreground: white;
-	--forms: #822d2d;
+	--forms: #6e1e1e;
 	--links: #ffdcc3;
+	scrollbar-color: var(--menu_background) var(--forms);
         #t-points {
                 background: var(--menu_background) !important;
         }
