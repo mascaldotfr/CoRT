@@ -118,10 +118,10 @@ summary::-webkit-details-marker {
 	flex-grow: 1;
 }
 #menu-bosses[menu-status="true"] {
-	color: var(--red);
+	border-left: 5px solid var(--red);
 }
 #menu-bz[menu-status="true"] {
-	color: var(--green);
+	border-left: 5px solid var(--green);
 }
 .menu-icon {
 	height: 1em;
@@ -300,9 +300,6 @@ h3 {
 	--links : #b4ffa1;
 	#t-points {
 		background: var(--menu_background) !important;
-	}
-	#menu-bz[menu-status="true"] {
-		color: #60ff6b;
 	}
 }
 
