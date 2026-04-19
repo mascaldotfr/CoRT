@@ -117,6 +117,10 @@ summary::-webkit-details-marker {
 	margin: 0 .2em;
 	flex-grow: 1;
 }
+#menu-bosses, #menu-bz {
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent; /* ensure the text is centered */
+}
 #menu-bosses[menu-status="true"] {
 	border-left: 5px solid var(--red);
 }
