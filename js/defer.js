@@ -159,9 +159,21 @@ async function menu_status() {
 			last_fetch = await $().getJSON(api.urls["sentinel"]);
 			localStorage.setItem(lSkey, JSON.stringify(last_fetch));
 		}
-		$("#menu-bz").attr("menu-status", String(last_fetch["bz"]["bzon"]));
+
+		const bz_selector = $("#menu-bz");
+		const bosses_selector = $("#menu-bosses");
 		const boss_will_spawn = now + boss_delay >= last_fetch["bosses"]["next_boss_ts"] * 1000;
-		$("#menu-bosses").attr("menu-status", String(boss_will_spawn));
+
+		if (last_fetch["bz"]["bzon"])
+			bz_selector.attr("title", "BZ ON!");
+		else
+			bz_selector.attr("title", "");
+		if (boss_will_spawn)
+			bosses_selector.attr("title", "A boss will appear soon!");
+		else
+			bosses_selector.attr("title", "");
+		bz_selector.attr("menu-status", String(last_fetch["bz"]["bzon"]));
+		bosses_selector.attr("menu-status", String(boss_will_spawn));
 
 	}
 	catch(_unused) { console.error(_unused) }
