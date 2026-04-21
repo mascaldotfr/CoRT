@@ -153,6 +153,8 @@ async function display_stat(force = false) {
 	const infos = data.splice(0, 1)[0];
 	const some_time_ago = time.timestamp_ago(infos["generated"], true);
 	$("#ws-last-updated").text(some_time_ago["human"]);
+	// Needed here since it's async
+	$("#ws-info").show();
 	if (time.timestamp_now() - infos["generated"] > 3 * 3600) {
 		$("#ws-info-error").html(`<b>Nothing happened since the last 3 hours,
 			<a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">

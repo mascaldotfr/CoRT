@@ -157,6 +157,8 @@ async function display_wz(force=false) {
 		const datetime = dt.toLocaleTimeString(undefined,
 			{hour: "2-digit", minute: "2-digit", second: "2-digit"});
 		$("#wz-info-updated").text(datetime);
+		// Needed here since it's async
+		$("#wz-info").show();
 		if ("failed" in data) {
 			console.error(data["failed"]);
 			failures = JSON.parse(data["failed"]["debug"]);

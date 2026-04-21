@@ -143,6 +143,7 @@ $(document).ready(async function() {
 				    {hour: "2-digit", minute: "2-digit", second: "2-digit",
 				     timeZone: tz});
 		$("#we-info-updated").text(last_update);
+		$("#we-info").show();
 
 		$("#we-filter").on("change", function () {
 			localStorage.setItem("wevents_filter", $("#we-filter").val());

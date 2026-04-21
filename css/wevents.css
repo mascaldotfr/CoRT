@@ -4,6 +4,7 @@
 }
 #we-info {
 	min-height: 1em;
+	visibility: hidden;
 }
 #we-data-dump {
 	font-style: italic;

@@ -12,6 +12,7 @@
 #wz-info {
 	text-align: center;
 	min-height: 3em;
+	visibility: hidden;
 }
 #wz-map-map {
 	border-radius: 8px;
