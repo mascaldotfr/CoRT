@@ -20,11 +20,9 @@ This page documents the bosses API endpoint, used by CoRT and CoRT-dc.
 
 ### `fake`
 
-**LOCAL ONLY - you need your own API for this**
-
 If a `fake` parameter is provided, then Daen and Evendim will respawn every 30
-minutes, at 15 minutes from each other. TK and server won't be available. It's
-meant for testing and development.
+minutes. TK and server won't be available. It's meant for testing and
+development.
 
 ## Response format
 
