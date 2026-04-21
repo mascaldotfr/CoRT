@@ -29,7 +29,11 @@ That's quite my room to be honest...
 
 Deployment of the fully optimized production tarball (minified, optimized, with
 CSS fused) for https://cort.ovh is not documented since it's up to anyone
-deploying it. For example I `rsync` the generated tarball with the live
-directory), but you could use a variant of the *integrated* tutorial mentioned
-above.
+deploying it. What I do personally is the following:
+
+1. Generate the production tarball
+2. Extract it in a temporary directory
+3. `rsync` that temporary directory with the live directory but excluding the `api/var/` subdirectory
+
+You could use as well a variant of the *integrated* tutorial mentioned above.
 
