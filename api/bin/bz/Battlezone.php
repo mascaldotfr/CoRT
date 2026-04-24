@@ -2,13 +2,13 @@
 
 class Battlezone {
 	function getSchedule() {
-		// BZ beginning and ending hours
+		// BZ beginning and ending time
 		// SUNDAY = 0, SATURDAY = 6 — ALL TIMES ARE UTC
 		$bz_begin = [
 			[13, 18],        // Sunday
 			[3, 13, 20],     // Monday
 			[13, 18],        // Tuesday
-			[12, 20],        // Wednesday
+			[13, 20],        // Wednesday
 			[3, 13, 18],     // Thursday
 			[13, 20],        // Friday
 			[3, 13, 20]      // Saturday
@@ -20,7 +20,7 @@ class Battlezone {
 			[16, 21],        // Tuesday
 			[16, 23],        // Wednesday
 			[6, 16, 21],     // Thursday
-			[16, 23],        // Friday
+			[17, 23],        // Friday
 			[6, 16, 23]      // Saturday
 		];
 
