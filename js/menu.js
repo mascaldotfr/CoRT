@@ -45,7 +45,7 @@ let __menu_content = function () { return `
 			<ul class="menudetails">
 				<li>${__menu_icons["tstats"]}&nbsp;<a href="tstats.html">${_("Trainer statistics")}</a></li>
 				<li>${__menu_icons["quests"]}&nbsp;<a href="quests.html" title="Quest reset times">${_("Quests")}</a>
-				<li>${__menu_icons["sentinel"]}&nbsp;<a href="https://sentinel.cort.ovh" title="All Regnum at a glance" target="_blank">Sentinel</a>
+				<li>${__menu_icons["sentinel"]}&nbsp;<a href="https://regnumsentinel.com" title="All Regnum at a glance" target="_blank">Sentinel</a>
 				<li>${__menu_icons["armor"]}&nbsp;<a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">${_("Armor calculator")}</a>
 				<li>${__menu_icons["tools4regnum"]}&nbsp;<a href="https://tools4regnum.de/" target="_blank" title="The Wiki for Champions of Regnum">Tools4Regnum</a>
 			</ul>
@@ -86,7 +86,7 @@ const __menu_footer = function() { return `
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260421.200727
+	<p> <!--VERSION-->Version: 20260427.163253
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
