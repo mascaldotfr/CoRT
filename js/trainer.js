@@ -431,6 +431,8 @@ class SetupManager {
 	async load_tree() {
 		// Needed when moving from a translatable to non translatable dataset
 		icons.reset_constants()
+		// Need to clean out all unused popup if class changed
+		document.querySelectorAll(".tippy-content").forEach(el => el.remove());
 
 		let class_skills = TrainerConstants.class_type_masks[setup.clas];
 		// adjust code to get base power and discipline points, as well as WM tree location.
