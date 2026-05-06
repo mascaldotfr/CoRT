@@ -86,7 +86,7 @@ const __menu_footer = function() { return `
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260506.022809
+	<p> <!--VERSION-->Version: 20260506.210430
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
@@ -141,8 +141,7 @@ $(document).ready(function() {
 		$(`#menu-lang-${l}`).on("click", (e) => {
 			// warn in case you're in a setup...
 			const trainer_dpoints_left = $("#t-dpointsleft").text();
-			const trainer_dpoints_total = $("#t-dpointstotal").text();
-			const in_setup = trainer_dpoints_left !== undefined && trainer_dpoints_left != trainer_dpoints_total;
+			const in_setup = trainer_dpoints_left !== undefined;
 			localStorage.setItem("lang", l);
 			if (in_setup) {
 				e.preventDefault();
