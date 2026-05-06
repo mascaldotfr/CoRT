@@ -4144,7 +4144,7 @@
           "type":"Activable",
           "cooldown":10,
           "cast":0.5,
-          "gcd":"Very short",
+          "gcd":"Very Short",
           "buffs":{
             "Damage bonus": [ "+5%", "+10%", "+15%", "+20%", "+25%" ]
           },
@@ -4300,7 +4300,7 @@
           "type":"Activable",
           "cooldown":10,
           "cast":0.5,
-          "gcd":"Very short",
+          "gcd":"Very Short",
           "buffs":{
             "Resist damage":[ "+20%", "+25%", "+30%", "+35%", "+40%" ]
           },

@@ -424,6 +424,9 @@ class SetupManager {
 	}
 
 	async load_tree() {
+		// Needed when moving from a translatable to non translatable dataset
+		icons.reset_constants()
+
 		let class_skills = TrainerConstants.class_type_masks[setup.clas];
 		// adjust code to get base power and discipline points, as well as WM tree location.
 		// needed because mages have 8 trees unlike 7 for warriors and archers
@@ -436,13 +439,20 @@ class SetupManager {
 			this.powerpoints = 80;
 		}
 		try {
-			this.trainerdata = await $().getJSON("data/trainer/" + this.trainerdataversion + "/trainerdata.json");
+			this.trainerdata = await $().getJSON("data/trainer/" + this.trainerdataversion + "/trainerdata.json?epoch=1");
 		}
 		catch (error) {
 			// Should never happen as the data is local...
 			console.log(`Unable to fetch trainer data: ${error}`);
 			return;
 		}
+
+		// Check if there are actually translations in the data file (< 1.35.19)
+		if (!this.trainerdata["is_translatable"])
+			lang = "en";
+		else
+			icons.item_translations = this.trainerdata["translatable_constants"];
+
 		let base_skills = TrainerConstants.class_type_masks[setup.clas] & 0xF0;
 		let alltrees = this.trainerdata["class_disciplines"][base_skills];
 		alltrees = alltrees.concat(this.trainerdata["class_disciplines"][class_skills]);
@@ -463,7 +473,7 @@ class SetupManager {
 			let spellpos = 0;
 			let iconsrc = "data/trainer/" + this.trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".webp";
 			trainerhtml.push(`<div treepos="${treepos}" class="t${treepos} card">`);
-			trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, tree, ""));
+			trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, tree, this.trainerdata["disciplines"][tree]["display_name"][lang], ""));
 			this.trainerdata["disciplines"][tree]["spells"].forEach( (spell) => {
 				spellpos++;
 				if (treepos == this.wmrow && spellpos % 2 == 1) {
@@ -471,7 +481,7 @@ class SetupManager {
 					trainerhtml.push(`<div class="p${spellpos}"><div class="icon"></div></div>`);
 				}
 				else {
-					trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, spell["name"], tree));
+					trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, spell["name"]["en"], spell["name"][lang], tree));
 				}
 			});
 			trainerhtml.push("</div>");
@@ -656,6 +666,38 @@ class SetupManager {
 class Icons {
 	constructor() {
 		this.tooltips = [];
+		// Default for non translatable datasets
+		this.base_translations = {
+			"Type:": {"en": "Type:"},
+			"Cast:": {"en": "Cast:"},
+			"Global Cooldown:": {"en": "Global Cooldown:"},
+			"Range:": {"en": "Range:"},
+			"Area:": {"en": "Area:"},
+			"Cooldown:": {"en": "Cooldown:"},
+			"Affected by weapon interval": {"en": "Affected by weapon interval"},
+			"Only blockable at 100%": {"en": "Only blockable at 100%"},
+			"Only resistible at 100%": {"en": "Only resistible at 100%"},
+			"Mana": {"en": "Mana"},
+			"Duration (s)": {"en": "Duration (s)"},
+			"type": {
+				"Constant": { "en": "Constant" },
+				"Passive": { "en": "Passive" },
+				"Direct": { "en": "Direct" }
+			},
+			"gcd": {
+				"Very Short": { "en": "Very Short" },
+				"Short": { "en": "Short" },
+				"Normal": { "en": "Normal" },
+				"Long": { "en": "Long" },
+				"Very Long": { "en": "Very Long" }
+			}
+		};
+		this.item_translations = this.base_translations;
+	}
+
+	reset_constants() {
+		// The object is never reinstanciated, so need a cleanup if the dataset version changed.
+		this.item_translations = this.base_translations;
 	}
 
 	tooltip_factory(content, clean_spellname) {
@@ -699,7 +741,7 @@ class Icons {
 		});
 	}
 
-	factory(spellpos, iconsrc, treepos, spellname, treename) {
+	factory(spellpos, iconsrc, treepos, spellname, spellname_translated, treename) {
 		// discipline points are always > 1, but skill points must be 0 to simplify code later.
 		let skilllvl = spellpos == 0 ? 1 : 0;
 		let clean_spellname = "trainerskill_" + spellname.replace(/[^a-z0-9]/gi, "");
@@ -720,11 +762,11 @@ class Icons {
 		icon.push("</div>");
 
 		if (treename != "") { // skills
-			let spellinfo = setup.trainerdata.disciplines[treename]["spells"].filter(element => element.name == spellname)[0];
+			let spellinfo = setup.trainerdata.disciplines[treename]["spells"].filter(element => element["name"][lang] == spellname)[0];
 			this.tooltip_factory(this.make_spellinfo(spellinfo, spellpos, "icon", iconsrc), clean_spellname);
 		}
 		else { // disciplines
-			this.tooltip_factory(spellname, clean_spellname);
+			this.tooltip_factory(spellname_translated, clean_spellname);
 		}
 		return icon.join("");
 	}
@@ -754,46 +796,48 @@ class Icons {
 		let spellhtml = [` <div class="p${iconposition} descriptionheader">
 				<div class="${iconclass}" style="background-image:url(${iconurl});"></div>
 				<div>
-					<h2>${spellinfo["name"]}</h2>
-					<p class="description"><i>${spellinfo["description"]}</i></p>
+					<h2>${spellinfo["name"][lang]}</h2>
+					<p class="description"><i>${spellinfo["description"][lang]}</i></p>
 				</div>
 			</div>`];
 		let tabularhtml = [];
+		console.log(spellinfo["name"][lang])
 		if ("type" in spellinfo)
-			spellhtml.push(this.itemify("Type:", spellinfo["type"]));
+			spellhtml.push(this.itemify(this.item_translations["Type:"][lang], spellinfo["type"]));
 		if ("cast" in spellinfo)
-			spellhtml.push(this.itemify("Cast:", spellinfo["cast"] + "s"));
+			spellhtml.push(this.itemify(this.item_translations["Cast:"][lang], spellinfo["cast"] + "s"));
 		if ("gcd" in spellinfo)
-			spellhtml.push(this.itemify("Global Cooldown:", spellinfo["gcd"]));
+			spellhtml.push(this.itemify(this.item_translations["Global Cooldown:"][lang],
+				this.item_translations["gcd"][spellinfo["gcd"]][lang]));
 		if ("range" in spellinfo)
-			spellhtml.push(this.itemify("Range:", spellinfo["range"]));
+			spellhtml.push(this.itemify(this.item_translations["Range:"][lang], spellinfo["range"]));
 		if ("area" in spellinfo)
-			spellhtml.push(this.itemify("Area:", spellinfo["area"]));
+			spellhtml.push(this.itemify(this.item_translations["Area:"][lang], spellinfo["area"]));
 		if ("cooldown" in spellinfo)
-			spellhtml.push(this.itemify("Cooldown:", spellinfo["cooldown"] + "s"));
+			spellhtml.push(this.itemify(this.item_translations["Cooldown:"][lang], spellinfo["cooldown"] + "s"));
 		if ("weapon_interval" in spellinfo)
-			spellhtml.push(this.itemify("Affected by weapon interval", "", "purple"));
+			spellhtml.push(this.itemify(this.item_translations["Affected by weapon interval"][lang], "", "purple"));
 		if ("blockable_100" in spellinfo)
-			spellhtml.push(this.itemify("Only blockable at 100%", "", "purple"));
+			spellhtml.push(this.itemify(this.item_translations["Only blockable at 100%"][lang], "", "purple"));
 		if ("resistible_100" in spellinfo)
-			spellhtml.push(this.itemify("Only resistible at 100%", "", "purple"));
+			spellhtml.push(this.itemify(this.item_translations["Only resistible at 100%"][lang], "", "purple"));
 		if ("mana" in spellinfo)
-			tabularhtml.push(this.tablify("Mana", spellinfo["mana"]));
+			tabularhtml.push(this.tablify(this.item_translations["Mana"][lang], spellinfo["mana"]));
 		if ("duration" in spellinfo)
-			tabularhtml.push(this.tablify("Duration (s)", spellinfo["duration"]));
+			tabularhtml.push(this.tablify(this.item_translations["Duration (s)"][lang], spellinfo["duration"]));
 		if ("damage" in spellinfo) {
-			for (let type in spellinfo["damage"]) {
-				tabularhtml.push(this.tablify(`${type} damage`, spellinfo["damage"][type], "red"));
+			for (let type of spellinfo["damage"]) {
+				tabularhtml.push(this.tablify(type[lang], type["value"], "red"));
 			}
 		}
 		if ("debuffs" in spellinfo) {
-			for (let type in spellinfo["debuffs"]) {
-				tabularhtml.push(this.tablify(`${type}`, spellinfo["debuffs"][type], "red"));
+			for (let type of spellinfo["debuffs"]) {
+				tabularhtml.push(this.tablify(type[lang], type["value"], "red"));
 			}
 		}
 		if ("buffs" in spellinfo) {
-			for (let type in spellinfo["buffs"]) {
-				tabularhtml.push(this.tablify(`${type}`, spellinfo["buffs"][type], "blue"));
+			for (let type of spellinfo["buffs"]) {
+				tabularhtml.push(this.tablify(type[lang], type["value"], "blue"));
 			}
 		}
 		if (tabularhtml.length != 0) {
@@ -949,5 +993,7 @@ class SetupCompressor {
 const compressor = new SetupCompressor();
 const datasets = new DatasetsManager();
 const icons = new Icons();
+// Language setup for the trainer only, the rest is dealt by _()
+let lang = localStorage.getItem("lang");
 // Needs to be reinstanciated every time we load a setup
 let setup = new SetupManager();

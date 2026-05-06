@@ -86,7 +86,7 @@ const __menu_footer = function() { return `
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260427.163253
+	<p> <!--VERSION-->Version: 20260506.022641
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
@@ -143,16 +143,10 @@ $(document).ready(function() {
 			const trainer_dpoints_left = $("#t-dpointsleft").text();
 			const trainer_dpoints_total = $("#t-dpointstotal").text();
 			const in_setup = trainer_dpoints_left !== undefined && trainer_dpoints_left != trainer_dpoints_total;
-			let really_refresh = true;
+			localStorage.setItem("lang", l);
 			if (in_setup) {
-				let sure = window.confirm("Are you sure you want to reload the page? You may lose your setup!");
-				if (!sure) {
-					e.preventDefault();
-					really_refresh = false;
-				}
-			}
-			if (really_refresh) {
-				localStorage.setItem("lang", l);
+				e.preventDefault();
+				$("#t-save-bypass-menu").trigger("click");
 			}
 		});
 		// Add alternate links
