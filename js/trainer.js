@@ -106,6 +106,11 @@ $("#t-level").on('change', function() {
 	window.location.assign(setup.save_to_url(false));
 });
 
+// Language change from the menu, don't submit the setup for stats
+$("#t-save-bypass-menu").on ("click", function() {
+	window.location.assign(setup.save_to_url(false));
+});
+
 $("#t-save").on("click", function() {
 	if (setup.trainerdata === null) {
 		window.alert(_(`You need first to load trees by clicking on "%s"!`, _("Load / Reset")));
