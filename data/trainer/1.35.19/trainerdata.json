@@ -3610,11 +3610,12 @@
         },
         {
           "name": {
-            "en": "Dispel magic"
+            "en": "Dispel magic",
+            "es": "Disipar magia"
           },
           "description": {
             "en": "Dispels enemy active effects on the caster or an ally.",
-            "es": "Disipar magia"
+            "es": "Disipa todos los hechizos enemigos de un aliado o en el lanzador (si no elije un objetivo)"
           },
           "mana": [130, 150, 170, 190, 210],
           "type": "Direct",
