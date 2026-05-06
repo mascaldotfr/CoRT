@@ -5207,7 +5207,7 @@
           "cast": 1.5,
           "gcd": "Normal",
           "cooldown": 70,
-          "type": "direct",
+          "type": "Direct",
           "description": {
             "en": "Executes an arc sweeping blow. All of the enemies in the area receive the weapon damage."
           },
