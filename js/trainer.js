@@ -452,8 +452,8 @@ class SetupManager {
 			return;
 		}
 
-		// Check if there are actually translations in the data file (< 1.35.19)
-		if (!this.trainerdata["is_translatable"])
+		// Check if there are actually translations in the data file (< 1.35.19), use english otherwise
+		if (!this.trainerdata["is_translatable"] || lang == "fr" || lang == "de")
 			lang = "en";
 		else
 			icons.item_translations = this.trainerdata["translatable_constants"];
@@ -687,7 +687,9 @@ class Icons {
 			"type": {
 				"Constant": { "en": "Constant" },
 				"Passive": { "en": "Passive" },
-				"Direct": { "en": "Direct" }
+				"Direct": { "en": "Direct" },
+				"Activable": {"en": "Activable"},
+				"Aura": {"en": "Aura"}
 			},
 			"gcd": {
 				"Very Short": { "en": "Very Short" },
@@ -767,7 +769,7 @@ class Icons {
 		icon.push("</div>");
 
 		if (treename != "") { // skills
-			let spellinfo = setup.trainerdata.disciplines[treename]["spells"].filter(element => element["name"][lang] == spellname)[0];
+			let spellinfo = setup.trainerdata.disciplines[treename]["spells"].filter(element => element["name"]["en"] == spellname)[0];
 			this.tooltip_factory(this.make_spellinfo(spellinfo, spellpos, "icon", iconsrc), clean_spellname);
 		}
 		else { // disciplines
@@ -806,9 +808,8 @@ class Icons {
 				</div>
 			</div>`];
 		let tabularhtml = [];
-		console.log(spellinfo["name"][lang])
 		if ("type" in spellinfo)
-			spellhtml.push(this.itemify(this.item_translations["Type:"][lang], spellinfo["type"]));
+			spellhtml.push(this.itemify(this.item_translations["Type:"][lang],this.item_translations["type"][spellinfo["type"]][lang]));
 		if ("cast" in spellinfo)
 			spellhtml.push(this.itemify(this.item_translations["Cast:"][lang], spellinfo["cast"] + "s"));
 		if ("gcd" in spellinfo)
