@@ -757,7 +757,7 @@
           "damage": [
             {
               "en": "Returned damage",
-              "es": "Retormar daño",
+              "es": "Retomar daño",
               "value": ["+20%", "+35%", "+50%", "+75%", "+90%"]
             }
           ]
@@ -967,7 +967,7 @@
           },
           "description": {
             "en": "The archer fires while dodging. Her defenses increase, but her attack effectiveness decreases.",
-            "es": "El arquero dispara mientras esquiva. Su defensa aumenta, pero su efectividad de ataque disminuye. '"
+            "es": "El arquero dispara mientras esquiva. Su defensa aumenta, pero su efectividad de ataque disminuye."
           },
           "mana": [70, 100, 130, 160, 190],
           "type": "Constant",
@@ -1353,7 +1353,7 @@
           },
           "description": {
             "en": "Guided by her instinct and by hints from the environment, the hunter throws a flaming arrow, revealing the position of hidden enemies. It cancels the effects of Camouflage, <s>Camouflage Corpse</s> and Stalker Surroundings active on enemies.",
-"es": "Guiado por suinstinto y los rastros del entorno, el cazador arroja una flecha en llamas, revelando la posición de los enemigos ocultos. interrumpe los efectos de Camuflaje, <s>Camuflar cadaver</s> y Entorno Acechador activos en los enemigos."
+            "es": "Guiado por suinstinto y los rastros del entorno, el cazador arroja una flecha en llamas, revelando la posición de los enemigos ocultos. interrumpe los efectos de Camuflaje, <s>Camuflar cadaver</s> y Entorno Acechador activos en los enemigos."
           },
           "mana": [200, 225, 250, 275, 300],
           "type": "Constant",
@@ -1846,7 +1846,7 @@
           "buffs": [
             {
               "en": "Weapon damage bonus",
-              "es": "Bonificación de daño de arma",
+              "es": "Bonus de daño del arma",
               "value": "+10%"
             }
           ]
@@ -1893,15 +1893,18 @@
     "Arrow Mastery": {
       "class": "Marksman",
       "display_name": {
-        "en": "Arrow Mastery"
+        "en": "Arrow Mastery",
+        "es": "Maestría en flechas"
       },
       "spells": [
         {
           "name": {
-            "en": "Recharged arrows"
+            "en": "Recharged arrows",
+            "es": "Saetas recargadas"
           },
           "description": {
-            "en": "The marksman channels her vital energy into arrows to improve damage. Only the basic attack is affected by this power."
+            "en": "The marksman channels her vital energy into arrows to improve damage. Only the basic attack is affected by this power.",
+            "es": "El tirador canaliza su energía vital en las flechas que dispara aumentando su daño. Sólo mejora el daño causado por el ataque normal.  Cada flecha disparada consume una porción de salud y mana del tirador. (Este poder puede desactivarse)"
           },
           "mana": [40, 55, 70, 85, 100],
           "type": "Activable",
@@ -1911,26 +1914,31 @@
           "debuffs": [
             {
               "en": "Health per arrow",
+              "es": "Salud por flecha",
               "value": [-10, -15, -20, -25, -30]
             },
             {
               "en": "Mana per arrow",
+              "es": "Mana por flecha",
               "value": [-20, -25, -30, -35, -40]
             }
           ],
           "buffs": [
             {
               "en": "Weapon damage bonus",
+              "es": "Bonus de daño del arma",
               "value": ["+20%", "+25%", "+30%", "+35%", "+40%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Winter stroke"
+            "en": "Winter stroke",
+            "es": "Ola invernal"
           },
           "description": {
-            "en": "The marksman throws an ice burst to her opponent, receiving cold damage and remaining frozen."
+            "en": "The marksman throws an ice burst to her opponent, receiving cold damage and remaining frozen.",
+            "es": "El tirador dirige una ráfaga helada a su oponente que recibe daño por frío y es paralizado."
           },
           "mana": [80, 110, 140, 170, 200],
           "type": "Constant",
@@ -1942,22 +1950,26 @@
           "debuffs": [
             {
               "en": "Freeze",
+              "es": "Paralizar",
               "value": true
             }
           ],
           "damage": [
             {
               "en": "Ice damage",
+              "es": "Daño de hielo",
               "value": ["60", "170", "280", "390", "500"]
             }
           ]
         },
         {
           "name": {
-            "en": "Burst of wind"
+            "en": "Burst of wind",
+            "es": "Rafaga de viento"
           },
           "description": {
-            "en": "A burst of wind leaves the opponent dizzy."
+            "en": "A burst of wind leaves the opponent dizzy.",
+            "es": "Una fuerte ráfaga de viento deja mareado al oponente."
           },
           "mana": [130, 160, 190, 220, 250],
           "type": "Constant",
@@ -1969,16 +1981,19 @@
           "debuffs": [
             {
               "en": "Dizzy",
+              "es": "Marear",
               "value": true
             }
           ]
         },
         {
           "name": {
-            "en": "Serpent bite"
+            "en": "Serpent bite",
+            "es": "Mordida de serpiente"
           },
           "description": {
-            "en": "Special arrow that inflicts poison damage."
+            "en": "Special arrow that inflicts poison damage.",
+            "es": "Hecha especial que hace daño por tiempo."
           },
           "mana": [70, 90, 110, 130, 150],
           "type": "Constant",
@@ -1990,20 +2005,24 @@
           "damage": [
             {
               "en": "Piercing damage",
+              "es": "Daño punzante",
               "value": [100, 200, 300, 400, 500]
             },
             {
               "en": "Piercing (per second) damage",
+              "es": "Daño punzante (por segundo)",
               "value": [60, 70, 90, 110, 130]
             }
           ]
         },
         {
           "name": {
-            "en": "Ignus scorch"
+            "en": "Ignus scorch",
+            "es": "Fuego de Ignus"
           },
           "description": {
-            "en": "A flaming arrow burns whoever crosses its path."
+            "en": "A flaming arrow burns whoever crosses its path.",
+            "es": "Una flecha flamígera quema a quien se halle en su trayectoria."
           },
           "mana": [70, 100, 130, 160, 190],
           "type": "Direct",
@@ -2015,22 +2034,26 @@
           "damage": [
             {
               "en": "Fire (instant, 40° arc) damage",
+              "es": "Daño de fuego (instantáneo, arco de 40°)",
               "value": ["80-120", "190-240", "300-360", "410-480", "520-600"]
             }
           ],
           "debuffs": [
             {
               "en": "Movement speed (40° arc)",
+              "es": "Velocidad de movimiento (arco de 40°)",
               "value": ["-10%", "-12%", "-14%", "-18%", "-25%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Ethereal arrow"
+            "en": "Ethereal arrow",
+            "es": "Flecha etérea"
           },
           "description": {
-            "en": "An incorporeal arrow ignores the target's protections."
+            "en": "An incorporeal arrow ignores the target's protections.",
+            "es": "Una flecha incorpórea ignora las protecciones del objetivo."
           },
           "mana": [75, 110, 145, 180, 215],
           "type": "Direct",
@@ -2041,16 +2064,19 @@
           "damage": [
             {
               "en": "Health damage",
+              "es": "Salud",
               "value": [-100, -225, -350, -475, -600]
             }
           ]
         },
         {
           "name": {
-            "en": "Needle blast"
+            "en": "Needle blast",
+            "es": "Explosión de agujas"
           },
           "description": {
-            "en": "The marksman fires an arrow that blasts into tiny pieces, causing slash damage in the area."
+            "en": "The marksman fires an arrow that blasts into tiny pieces, causing slash damage in the area.",
+            "es": "La flecha disparada explota en montones de cristales afilados, causando daño cortante en un área."
           },
           "mana": [250, 275, 300, 325, 350],
           "type": "Direct",
@@ -2061,20 +2087,24 @@
           "damage": [
             {
               "en": "Attack (45° arc) damage",
+              "es": "Daño de ataque (arco de 45°)",
               "value": "+100%"
             },
             {
               "en": "Slashing (45° arc) damage",
+              "es": "Daño cortante (arco de 45°)",
               "value": ["90-120", "180-230", "270-340", "360-450", "450-560"]
             }
           ]
         },
         {
           "name": {
-            "en": "Arcana strike"
+            "en": "Arcana strike",
+            "es": "Proyectil arcano"
           },
           "description": {
-            "en": "An arrow that makes elemental damage."
+            "en": "An arrow that makes elemental damage.",
+            "es": "Hecha que hace daño por los elementos."
           },
           "mana": [200, 235, 270, 305, 340],
           "type": "Direct",
@@ -2085,24 +2115,29 @@
           "damage": [
             {
               "en": "Fire damage",
+              "es": "Daño de fuego",
               "value": ["45", "95", "150", "195", "250"]
             },
             {
               "en": "Ice damage",
+              "es": "Daño de hielo",
               "value": ["45", "95", "150", "195", "250"]
             },
             {
               "en": "Lightning damage",
+              "es": "Daño eléctrico",
               "value": ["45", "95", "150", "195", "250"]
             }
           ]
         },
         {
           "name": {
-            "en": "Fire rain"
+            "en": "Fire rain",
+            "es": "Lluvia de fuego"
           },
           "description": {
-            "en": "The marksman fires an arrow that blows up in the sky and falls as a rain of fire."
+            "en": "The marksman fires an arrow that blows up in the sky and falls as a rain of fire.",
+            "es": "El tirador dispara una flecha que explota en el aire y cae en forma de una lluvia de fuego."
           },
           "mana": [280, 310, 340, 370, 400],
           "type": "Direct",
@@ -2114,20 +2149,24 @@
           "damage": [
             {
               "en": "Attack damage",
+              "es": "Daño de ataque",
               "value": "+100%"
             },
             {
               "en": "Fire damage",
+              "es": "Daño de fuego",
               "value": ["250-300", "300-350", "350-400", "400-450", "500-600"]
             }
           ]
         },
         {
           "name": {
-            "en": "Lightning arrow"
+            "en": "Lightning arrow",
+            "es": "Flecha de rayo"
           },
           "description": {
-            "en": "An arrow that carries electrical damage strikes an objective and all of those that surround it."
+            "en": "An arrow that carries electrical damage strikes an objective and all of those that surround it.",
+            "es": "El tirador dispara una flecha que explota en el aire y cae en forma de una lluvia de fuego."
           },
           "mana": [260, 290, 320, 350, 380],
           "type": "Constant",
@@ -2140,12 +2179,14 @@
           "damage": [
             {
               "en": "Lightning damage",
+              "es": "Daño eléctrico",
               "value": ["150-250", "250-350", "350-450", "450-550", "550-650"]
             }
           ],
           "debuffs": [
             {
               "en": "Movement speed",
+              "es": "Velocidad de movimiento",
               "value": "-15%"
             }
           ]
@@ -2155,15 +2196,18 @@
     "Aiming Mastery": {
       "class": "Marksman",
       "display_name": {
-        "en": "Aiming Mastery"
+        "en": "Aiming Mastery",
+        "es": "Maestro en puntería"
       },
       "spells": [
         {
           "name": {
-            "en": "Dead eye"
+            "en": "Dead eye",
+            "es": "Vista mortal"
           },
           "description": {
-            "en": "The marksman takes her time to choose the right spot, maximizing the damage of her shots."
+            "en": "The marksman takes her time to choose the right spot, maximizing the damage of her shots.",
+            "es": "El tirador se toma su tiempo para elegir el sitio preciso maximizando el daño de sus tiros."
           },
           "mana": [50, 80, 110, 140, 170],
           "type": "Constant",
@@ -2174,22 +2218,26 @@
           "buffs": [
             {
               "en": "Weapon damage bonus",
+              "es": "Bonus de daño del arma",
               "value": ["+10%", "+14%", "+18%", "+24%", "+30%"]
             }
           ],
           "debuffs": [
             {
               "en": "Attack speed",
+              "es": "Velocidad de ataque",
               "value": ["-4%", "-5%", "-6%", "-7%", "-8%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Focus"
+            "en": "Focus",
+            "es": "Enfocar"
           },
           "description": {
-            "en": "The marksman enhances the possibilities of descrying the enemy by moving slower.."
+            "en": "The marksman enhances the possibilities of descrying the enemy by moving slower..",
+            "es": "El tirador mejora sus posibilidades de divisar a su enemigo al moverse más lentamente."
           },
           "mana": [40, 80, 120, 160, 200],
           "type": "Constant",
@@ -2200,12 +2248,14 @@
           "buffs": [
             {
               "en": "Attack Range",
+              "es": "Rango de ataque",
               "value": ["+2%", "+4%", "+6%", "+8%", "+10%"]
             }
           ],
           "debuffs": [
             {
               "en": "Movement speed",
+              "es": "Velocidad de movimiento",
               "value": "-10%"
             }
           ],
@@ -2213,10 +2263,12 @@
         },
         {
           "name": {
-            "en": "Skin piercer"
+            "en": "Skin piercer",
+            "es": "Perforador de piel"
           },
           "description": {
-            "en": "Attack centered in the opponent's skin, considerably reducing their resistances. Works only if the enemy has these resistance raised."
+            "en": "Attack centered in the opponent's skin, considerably reducing their resistances. Works only if the enemy has these resistance raised.",
+            "es": "Ataque centrado en la piel del oponente, reduciendo considerablemente sus resistencias. Funciona sólo si el enemigo tiene estas resistencias aumentadas."
           },
           "mana": [150, 175, 200, 225, 250],
           "type": "Constant",
@@ -2229,37 +2281,44 @@
           "debuffs": [
             {
               "en": "Resistance to Physical and Magical Damage",
+              "es": "Resistir daño físico y màgico",
               "value": ["-10%", "-20%", "-30%", "-40%", "-50%"]
             }
           ],
           "damage": [
             {
               "en": "Piercing (instant) damage",
+              "es": "Daño punzante (instantáneo)",
               "value": [30, 60, 100, 180, 300]
             }
           ]
         },
         {
           "name": {
-            "en": "Foresight"
+            "en": "Foresight",
+            "es": "Previsión"
           },
           "description": {
-            "en": "Increases attack range."
+            "en": "Increases attack range.",
+            "es": "Incrementa el rango de ataque."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Attack range",
+              "es": "Rango de ataque",
               "value": ["10%", "12%", "14%", "17%", "20%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Cyclops curse"
+            "en": "Cyclops curse",
+            "es": "Maldición del cíclope"
           },
           "description": {
-            "en": "Strike oriented to the opponent's eyes."
+            "en": "Strike oriented to the opponent's eyes.",
+            "es": "Tiro orientado a los ojos del oponente."
           },
           "mana": [180, 205, 230, 255, 280],
           "type": "Constant",
@@ -2271,26 +2330,31 @@
           "damage": [
             {
               "en": "Attack damage",
+              "es": "Daño de ataque",
               "value": "+125%"
             }
           ],
           "debuffs": [
             {
               "en": "Critical chance reduction",
+              "es": "Chance de crítico",
               "value": ["-20%", "-30%", "-40%", "-50%", "-75%"]
             },
             {
               "en": "Attack range reduction",
+              "es": "Rango de ataque",
               "value": ["-2%", "-4%", "-7%", "-10%", "-15%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Lethal strike"
+            "en": "Lethal strike",
+            "es": "Ataque letal"
           },
           "description": {
-            "en": "It looks for critical areas in the blank."
+            "en": "It looks for critical areas in the blank.",
+            "es": "Busca áreas vitales en el blanco."
           },
           "mana": [185, 209, 233, 257, 281],
           "type": "Direct",
@@ -2301,24 +2365,29 @@
           "damage": [
             {
               "en": "Attack damage",
+              "es": "Daño de ataque",
               "value": "+100%"
             },
             {
               "en": "(extra) Attack damage",
+              "es": "Daño de ataque (adicional)",
               "value": ["20%-50%", "36%-66%", "50%-82%", "65%-99%", "80%-115%"]
             },
             {
               "en": "(chance) +60% Attack damage",
+              "es": "Daño de ataque +60% (chance)",
               "value": ["20%", "24%", "28%", "32%", "36%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Strategic position"
+            "en": "Strategic position",
+            "es": "Posición estratégica"
           },
           "description": {
-            "en": "The marskman knows how to locate herself in advantagous positions in battle."
+            "en": "The marskman knows how to locate herself in advantagous positions in battle.",
+            "es": "El tirador sabe ubicarse en posiciones ventajosas en batalla."
           },
           "mana": [120, 140, 160, 180, 200],
           "type": "Constant",
@@ -2329,31 +2398,37 @@
           "buffs": [
             {
               "en": "Ranged received damage",
+              "es": "Daño de rango recibido",
               "value": ["-5%", "-7%", "-9%", "-12%", "15%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Trained eye"
+            "en": "Trained eye",
+            "es": "Ojo entrenado"
           },
           "description": {
-            "en": "The marksman improves her impact chances."
+            "en": "The marksman improves her impact chances.",
+            "es": "El tirador mejora la precisión de sus disparos."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Critical hit chance",
+              "es": "Chance de crítico",
               "value": ["+10%", "+30%", "+50%", "+70%", "+100%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Seeking strike"
+            "en": "Seeking strike",
+            "es": "Tiro buscador"
           },
           "description": {
-            "en": "The arrow fired automatically seeks a weakening spot in the target."
+            "en": "The arrow fired automatically seeks a weakening spot in the target.",
+            "es": "La flecha busca automáticamente un punto debilitador en el blanco."
           },
           "mana": [255, 277, 299, 321, 343],
           "type": "Constant",
@@ -2365,16 +2440,19 @@
           "debuffs": [
             {
               "en": "Constitution",
+              "es": "Constitución",
               "value": [-15, -19, -23, -27, -31]
             }
           ]
         },
         {
           "name": {
-            "en": "Hawk's gaze"
+            "en": "Hawk's gaze",
+            "es": "Mirada de halcón"
           },
           "description": {
-            "en": "The marksman can find her opponent and target her easily."
+            "en": "The marksman can find her opponent and target her easily.",
+            "es": "El tirador puede encontrar su blanco y disparar rápidamente."
           },
           "mana": [260, 290, 320, 350, 380],
           "type": "Constant",
@@ -2385,12 +2463,14 @@
           "buffs": [
             {
               "en": "Attack speed",
+              "es": "Velocidad de ataque",
               "value": ["+5%", "+10%", "+15%", "+20%", "+25%"]
             }
           ],
           "debuffs": [
             {
               "en": "Opponent evade chance",
+              "es": "Evasión del oponente",
               "value": ["-10%", "-20%", "-30%", "-40%", "-50%"]
             }
           ]
@@ -2400,7 +2480,8 @@
     "Marksman WM": {
       "class": "Marksman",
       "display_name": {
-        "en": "Marksman WM"
+        "en": "Marksman WM",
+        "es": "Tirador - Maestría en Guerra"
       },
       "spells": [
         {
@@ -2424,15 +2505,18 @@
         },
         {
           "name": {
-            "en": "War Council"
+            "en": "War Council",
+            "es": "Concilio de Guerra"
           },
           "description": {
-            "en": "The Warmaster learns a war language that allows her to communicate with her status in secret."
+            "en": "The Warmaster learns a war language that allows her to communicate with her status in secret.",
+            "es": "El Warmaster aprende un lenguaje de guerra que le permite comunicarse con sus iguales en secreto."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "War chat",
+              "es": "Chat de Guerra",
               "value": true
             }
           ]
@@ -2458,10 +2542,12 @@
         },
         {
           "name": {
-            "en": "Fire Arrow"
+            "en": "Fire Arrow",
+            "es": "Flecha de fuego"
           },
           "description": {
-            "en": "Launches a fire arrow over the ally, melting the ice that prevents movement."
+            "en": "Launches a fire arrow over the ally, melting the ice that prevents movement.",
+            "es": "Lanza una flecha de fuego sobre el aliado, derritiendo el hielo que impide el movimiento."
           },
           "mana": 150,
           "type": "Direct",
@@ -2474,6 +2560,7 @@
           "buffs": [
             {
               "en": "Dispel freeze",
+              "es": "Disipar paralisis",
               "value": true
             }
           ]
@@ -2499,15 +2586,18 @@
         },
         {
           "name": {
-            "en": "Warmaster's Might"
+            "en": "Warmaster's Might",
+            "es": "Maestría de Guerra"
           },
           "description": {
-            "en": "The Warmaster enhances his class main attribute."
+            "en": "The Warmaster enhances his class main attribute.",
+            "es": "El Warmaster mejora su atributo principal de clase."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Class Attribute",
+              "es": "Atributo de clase",
               "value": "+15%"
             }
           ]
@@ -2533,10 +2623,12 @@
         },
         {
           "name": {
-            "en": "Killer Instinct"
+            "en": "Killer Instinct",
+            "es": "Instinto asesino"
           },
           "description": {
-            "en": "The Warmaster ascends upon a state of absolute confidence, successfully hitting almost every shot."
+            "en": "The Warmaster ascends upon a state of absolute confidence, successfully hitting almost every shot.",
+            "es": "El Warmaster asciende a un estado de confianza absoluta, acertando casi todos los disparos."
           },
           "mana": 150,
           "type": "Activable",
@@ -2548,16 +2640,19 @@
           "buffs": [
             {
               "en": "Attack range",
+              "es": "Rango de ataque",
               "value": "+15%"
             }
           ],
           "debuffs": [
             {
               "en": "Opponent evade chance",
+              "es": "Evasión del oponente",
               "value": "-100%"
             },
             {
               "en": "Movement speed",
+              "es": "Velocidad de movimiento",
               "value": "-15%"
             }
           ]
@@ -2583,15 +2678,18 @@
         },
         {
           "name": {
-            "en": "Warmaster Blood"
+            "en": "Warmaster Blood",
+            "es": "Sangre de Warmaster"
           },
           "description": {
-            "en": "The Warmaster athletic capabilities increase due to long years of training."
+            "en": "The Warmaster athletic capabilities increase due to long years of training.",
+            "es": "La capacidad atlética del Warmaster aumenta debido a sus largos años de entrenamiento."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Health",
+              "es": "Salud",
               "value": "+300"
             }
           ]
@@ -2930,7 +3028,7 @@
           },
           "description": {
             "en": "Burns the opponent's mana, causing damage impossible to resist or soak.",
-            "es": "Quema pana del oponente, causánave daño imposible de resistir o absorber."
+            "es": "Quema pana del oponente, causádo daño imposible de resistir o absorber."
           },
           "mana": [70, 100, 130, 160, 190],
           "type": "Constant",
@@ -2965,7 +3063,7 @@
           "buffs": [
             {
               "en": "Mana",
-              "es": "Mana",
+              "es": "Costo",
               "value": ["+150", "+250", "+400", "+550", "+750"]
             }
           ]
@@ -3026,7 +3124,7 @@
           "buffs": [
             {
               "en": "Mana",
-              "es": "Mana",
+              "es": "Costo",
               "value": ["+300", "+450", "+600", "+750", "+900"]
             }
           ],
@@ -3074,7 +3172,7 @@
           "buffs": [
             {
               "en": "Mana",
-              "es": "Mana",
+              "es": "Costo",
               "value": ["+100", "+200", "+300", "+400", "+500"]
             }
           ]
@@ -3098,7 +3196,7 @@
           "buffs": [
             {
               "en": "Mana",
-              "es": "Mana",
+              "es": "Costo",
               "value": ["+5", "+7", "+9", "+12", "+15"]
             }
           ]
@@ -3264,8 +3362,8 @@
           "area": 10,
           "debuffs": [
             {
-              "es": "Velocidad de movimiento",
               "en": "Movement speed",
+              "es": "Velocidad de movimiento",
               "value": ["-10%", "-15%", "-20%", "-25%", "-30%"]
             }
           ],
@@ -3603,7 +3701,7 @@
           "buffs": [
             {
               "en": "Damage bonus",
-              "es": "Daño de ataque (bonus)",
+              "es": "Bonus de daño del arma",
               "value": ["+5%", "+7%", "+9%", "+12%", "+15%"]
             }
           ]
@@ -3790,7 +3888,7 @@
             },
             {
               "en": "Mana",
-              "es": "Mana",
+              "es": "Costo",
               "value": ["-", "+30%", "+30%", "+30%", "+30%"]
             },
             {
@@ -3882,7 +3980,8 @@
             "es": "Salvador"
           },
           "description": {
-            "en": "Heals an ally."
+            "en": "Heals an ally.",
+            "es": "Cura a un aliado."
           },
           "mana": [240, 280, 320, 360, 400],
           "type": "Direct",
@@ -3917,7 +4016,7 @@
           "buffs": [
             {
               "en": "Health (instant)",
-              "es": "Salud (instantaneo)",
+              "es": "Salud (instantáneo)",
               "value": ["+50", "+75", "+100", "+125", "+150"]
             },
             {
@@ -3974,7 +4073,7 @@
             },
             {
               "en": "Revive",
-              "es": "Resucitar",
+              "es": "Revivir",
               "value": true
             },
             {
@@ -4157,7 +4256,7 @@
           "buffs": [
             {
               "en": "Summon",
-              "es": "Invocar",
+              "es": "Invocación",
               "value": ["Tiny Stone Golem", "Small Magma Golem", "Crystal Golem", "Large Fire Golem", "Enormous Metal Golem"]
             }
           ]
@@ -4221,7 +4320,7 @@
           "buffs": [
             {
               "en": "Summon",
-              "es": "Invocar",
+              "es": "Invocación",
               "value": ["Old Lich", "Lich Apprentice", "Lich Necromancer", "Lord Lich", "Lich Shaman"]
             },
             {
@@ -4460,7 +4559,7 @@
           "buffs": [
             {
               "en": "Sanctuary",
-              "es": "Sanctuario",
+              "es": "Santuario",
               "value": true
             }
           ]
@@ -4714,15 +4813,18 @@
     "Arcania": {
       "class": "Warlock",
       "display_name": {
-        "en": "Arcania"
+        "en": "Arcania",
+        "es": "Arcania"
       },
       "spells": [
         {
           "name": {
-            "en": "Stalagmite"
+            "en": "Stalagmite",
+            "es": "Estalagmita"
           },
           "description": {
-            "en": "A sharp rock comes out the earth, below the objective, who receives piercing and ice damage."
+            "en": "A sharp rock comes out the earth, below the objective, who receives piercing and ice damage.",
+            "es": "Un pico de roca afilada sale de la tierra debajo del objetivo, el cual recibe daño pertorador y de hielo."
           },
           "mana": [90, 120, 150, 180, 210],
           "type": "Direct",
@@ -4733,20 +4835,24 @@
           "damage": [
             {
               "en": "Piercing damage",
+              "es": "Daño punzante",
               "value": ["100", "150", "200", "250", "400"]
             },
             {
               "en": "Ice damage",
+              "es": "Daño de hielo",
               "value": ["100", "150", "200", "250", "400"]
             }
           ]
         },
         {
           "name": {
-            "en": "Slow"
+            "en": "Slow",
+            "es": "Lentitud"
           },
           "description": {
-            "en": "Decreases an opponent's movement speed."
+            "en": "Decreases an opponent's movement speed.",
+            "es": "Disminuye la velocidad de movimiento de un oponente."
           },
           "mana": [60, 100, 140, 180, 250],
           "type": "Constant",
@@ -4758,16 +4864,19 @@
           "debuffs": [
             {
               "en": "Movement speed",
+              "es": "Velocidad de movimiento",
               "value": ["-10%", "-12%", "-15%", "-17%", "-20%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Petrify hands"
+            "en": "Petrify hands",
+            "es": "Petrificar manos"
           },
           "description": {
-            "en": "The hands of the opponent become stiff, hindering the attacks."
+            "en": "The hands of the opponent become stiff, hindering the attacks.",
+            "es": "Las manos del oponente se paralizan, dificultando sus ataques."
           },
           "mana": [130, 160, 190, 220, 250],
           "type": "Constant",
@@ -4779,20 +4888,24 @@
           "debuffs": [
             {
               "en": "Critical hit chance",
+              "es": "Chance de crítico",
               "value": ["-15%", "-20%", "-25%", "-30%", "-35%"]
             },
             {
               "en": "Attack speed",
+              "es": "Velocidad de ataque",
               "value": ["-5%", "-10%", "-15%", "-20%", "-25%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Laziness"
+            "en": "Laziness",
+            "es": "Pereza"
           },
           "description": {
-            "en": "The opponent feels tired and unwilling to fight."
+            "en": "The opponent feels tired and unwilling to fight.",
+            "es": "El oponente se siente cansado y no tiene deseos de pelear."
           },
           "mana": [170, 190, 210, 230, 250],
           "type": "Constant",
@@ -4805,20 +4918,24 @@
           "debuffs": [
             {
               "en": "Weapon damage bonus",
+              "es": "Bonus de daño del arma",
               "value": ["-30%", "-40%", "-50%", "-60%", "-70%"]
             },
             {
               "en": "Attack speed",
+              "es": "Velocidad de ataque",
               "value": "-10%"
             }
           ]
         },
         {
           "name": {
-            "en": "Meteor"
+            "en": "Meteor",
+            "es": "Meteorito"
           },
           "description": {
-            "en": "A huge flaming rock strikes the opponent."
+            "en": "A huge flaming rock strikes the opponent.",
+            "es": "Una enorme roca en llamas golpea al oponente."
           },
           "mana": [140, 160, 180, 200, 220],
           "type": "Constant",
@@ -4830,26 +4947,31 @@
           "debuffs": [
             {
               "en": "Dizzy",
+              "es": "Marear",
               "value": true
             }
           ],
           "damage": [
             {
               "en": "Blunt damage",
+              "es": "Daño aplastante",
               "value": ["150-200", "200-250", "250-300", "300-350", "350-400"]
             },
             {
               "en": "Fire damage",
+              "es": "Daño de fuego",
               "value": ["150-200", "200-250", "250-300", "300-350", "350-400"]
             }
           ]
         },
         {
           "name": {
-            "en": "Wind wall"
+            "en": "Wind wall",
+            "es": "Muro de viento"
           },
           "description": {
-            "en": "A wind wall that surrounds the caster improves normal attacks and powers defense."
+            "en": "A wind wall that surrounds the caster improves normal attacks and powers defense.",
+            "es": "Un muro de viento que rodea al invocador mejora significativamente la defensa contra poderes y ataques normales a distancia."
           },
           "mana": [160, 185, 210, 235, 260],
           "type": "Constant",
@@ -4860,16 +4982,19 @@
           "buffs": [
             {
               "en": "Range received damage",
+              "es": "Daño de rango recibido",
               "value": ["-5%", "-10%", "-15%", "-20%", "-25%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Crystal blast"
+            "en": "Crystal blast",
+            "es": "Estallido de cristales"
           },
           "description": {
-            "en": "A blast of sharp crystals damages all the opponents in the area."
+            "en": "A blast of sharp crystals damages all the opponents in the area.",
+            "es": "Una explosión de cristales afilados daña alos oponentes que se hallen en el área."
           },
           "mana": [100, 125, 150, 175, 200],
           "type": "Direct",
@@ -4880,16 +5005,19 @@
           "damage": [
             {
               "en": "Piercing damage",
+              "es": "Daño punzante",
               "value": ["220-255", "350-470", "475-635", "600-800", "850-1150"]
             }
           ]
         },
         {
           "name": {
-            "en": "Fragility"
+            "en": "Fragility",
+            "es": "Fragilidad"
           },
           "description": {
-            "en": "The objective becomes weak, fragile and vulnerable to physical damage."
+            "en": "The objective becomes weak, fragile and vulnerable to physical damage.",
+            "es": "El objetivo se vuelve débil, quebradizo y vulnerable al daño físico."
           },
           "mana": [80, 110, 140, 170, 200],
           "type": "Constant",
@@ -4902,16 +5030,19 @@
           "debuffs": [
             {
               "en": "Resist physical damage",
+              "es": "Resistir daño físico",
               "value": ["-5%", "-15%", "-25%", "-35%", "-50%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Golem fist"
+            "en": "Golem fist",
+            "es": "Puño de golem"
           },
           "description": {
-            "en": "An illusory golem falls from the sky inflicting blunt damage over the target."
+            "en": "An illusory golem falls from the sky inflicting blunt damage over the target.",
+            "es": "La ilusión de un puño de golem cae desde los cielos impactando al objetivo."
           },
           "mana": [130, 180, 225, 280, 320],
           "type": "Direct",
@@ -4922,28 +5053,34 @@
           "damage": [
             {
               "en": "Health damage",
+              "es": "Salud",
               "value": ["-200", "-250", "-300", "-350", "-650"]
             }
           ]
         },
         {
           "name": {
-            "en": "Sultar's Terror"
+            "en": "Sultar's Terror",
+            "es": "Terror de Sultar"
           },
           "description": {
-            "en": "An illusory giant skull provokes fear over its enemies, pertifying and inflicting slashing and piercing damage to them."
+            "en": "An illusory giant skull provokes fear over its enemies, pertifying and inflicting slashing and piercing damage to them.",
+            "es": "La ilusión de una calavera gigante produce terror en sus objetivos dejándolos inmovilizados y causándoles daño cortante y punzante."
           },
           "damage": [
             {
               "en": "Blunt damage",
+              "es": "Daño aplastante",
               "value": ["70-100", "115-160", "160-225", "205-285", "250-350"]
             },
             {
               "en": "Piercing damage",
+              "es": "Daño punzante",
               "value": ["70-100", "115-160", "160-225", "205-285", "250-350"]
             },
             {
-              "en": "Slashing",
+              "en": "Slashing damage",
+              "es": "Daño cortante",
               "value": ["70-100", "115-160", "160-225", "205-285", "250-350"]
             }
           ],
@@ -4958,6 +5095,7 @@
           "debuffs": [
             {
               "en": "Knock down",
+              "es": "Noquear",
               "value": true
             }
           ]
@@ -4967,15 +5105,18 @@
     "Necromancy": {
       "class": "Warlock",
       "display_name": {
-        "en": "Necromancy"
+        "en": "Necromancy",
+        "es": "Nigromancia"
       },
       "spells": [
         {
           "name": {
-            "en": "Vampirism"
+            "en": "Vampirism",
+            "es": "Vampirismo"
           },
           "description": {
-            "en": "The warlock drains health from a target, and adds it to her own reserve. She cannot drain more health than what is required to fully heal or more health than the objective's current points."
+            "en": "The warlock drains health from a target, and adds it to her own reserve. She cannot drain more health than what is required to fully heal or more health than the objective's current points.",
+            "es": "El brujo drena puntos de vida al objetivo, que añade a su propia reserva. No puede drenar más puntos de los que le falta a su propia salud o más de los que tiene el objetivo."
           },
           "mana": [80, 110, 140, 170, 200],
           "type": "Direct",
@@ -4986,16 +5127,19 @@
           "buffs": [
             {
               "en": "Drain health",
+              "es": "Drenar salud",
               "value": ["+90/120", "+180/240", "+270/360", "+360/480", "+450/600"]
             }
           ]
         },
         {
           "name": {
-            "en": "Darkness"
+            "en": "Darkness",
+            "es": "Oscuridad"
           },
           "description": {
-            "en": "The objective cannot be target of positive spells."
+            "en": "The objective cannot be target of positive spells.",
+            "es": "El objetivo no puede ser afectado por conjuros positivos."
           },
           "mana": [160, 180, 200, 220, 240],
           "type": "Constant",
@@ -5007,16 +5151,19 @@
           "debuffs": [
             {
               "en": "Block positive powers",
+              "es": "Bloquear poderes positivos",
               "value": true
             }
           ]
         },
         {
           "name": {
-            "en": "Infuriate"
+            "en": "Infuriate",
+            "es": "Enfurecer"
           },
           "description": {
-            "en": "The warlock makes the target get enraged involuntarily and without noticing."
+            "en": "The warlock makes the target get enraged involuntarily and without noticing.",
+            "es": "El brujo hace que el objetivo entre en furia involuntariamente y sin darse cuenta."
           },
           "mana": [80, 100, 120, 140, 160],
           "type": "Constant",
@@ -5029,35 +5176,42 @@
           "debuffs": [
             {
               "en": "Protection",
+              "es": "Protección",
               "value": ["-30%", "-35%", "-40%", "-45%", "-50%"]
             },
             {
               "en": "Concentration",
+              "es": "Concentración",
               "value": ["-10", "-15", "-20", "-25", "-30"]
             }
           ]
         },
         {
           "name": {
-            "en": "Vitality absorption"
+            "en": "Vitality absorption",
+            "es": "Absorción vital"
           },
           "description": {
-            "en": "The caster transforms a share of the damage dealt to the opponents, while the spell lasts, into health."
+            "en": "The caster transforms a share of the damage dealt to the opponents, while the spell lasts, into health.",
+            "es": "El invocador transforma en salud una parte del daño causado a sus oponentes mientras el conjuro permanezca activo."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Vitality absorption",
+              "es": "Absorción vital",
               "value": ["+2%", "+4%", "+6%", "+8%", "+10%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Sadistic guards"
+            "en": "Sadistic guards",
+            "es": "Guardias sádicos"
           },
           "description": {
-            "en": "The wandering souls controlled by the warlock surround a victim, weakening her defenses."
+            "en": "The wandering souls controlled by the warlock surround a victim, weakening her defenses.",
+            "es": "Las almas dominadas por el brujo rodean a su víctima, haciéndola más   vulnerable a ser controlada."
           },
           "mana": [140, 155, 160, 175, 190],
           "type": "Constant",
@@ -5070,17 +5224,25 @@
           "resistible_100": true,
           "debuffs": [
             {
-              "en": "Resistance to knock down and stun",
+              "en": "Resistance to knock down",
+              "es": "Resistir noqueo",
+              "value": ["-100%", "-100%", "-100%", "-100%", "-100%"]
+            },
+            {
+              "en": "Resistance to stun",
+              "es": "Resistir aturdir",
               "value": ["-100%", "-100%", "-100%", "-100%", "-100%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Sadistic servants"
+            "en": "Sadistic servants",
+            "es": "Sirvientes sádicos"
           },
           "description": {
-            "en": "It calls the earth wandering souls. They attack a realm enemy from whom they drain mana."
+            "en": "It calls the earth wandering souls. They attack a realm enemy from whom they drain mana.",
+            "es": "Llama a las almas que vagan por la tierra. Atacan a un enemigo de reino, al que le drenan maná."
           },
           "type": "Constant",
           "duration": 30,
@@ -5091,16 +5253,19 @@
           "buffs": [
             {
               "en": "Drain mana",
+              "es": "Drenar mana",
               "value": ["+5", "+10", "+15", "+20", "+25"]
             }
           ]
         },
         {
           "name": {
-            "en": "Soulkeeper"
+            "en": "Soulkeeper",
+            "es": "Guardián de almas"
           },
           "description": {
-            "en": "The warlock weakens the target and drains its health, adding it to her own reserve. She cannot drain more health than what is required to fully heal or more health than the objective's current points. Cannot be casted on mobs."
+            "en": "The warlock weakens the target and drains its health, adding it to her own reserve. She cannot drain more health than what is required to fully heal or more health than the objective's current points. Cannot be casted on mobs.",
+            "es": "El brujo debilita al objetivo y le drena salud añadiéndolo a su propia reserva. No puede drenar más puntos de los que le falta a su propia salud o más de los que tiene el objetivo. No puede ser usado en criaturas."
           },
           "mana": [240, 280, 320, 360, 400],
           "type": "Constant",
@@ -5112,22 +5277,26 @@
           "buffs": [
             {
               "en": "Drain health (per second)",
+              "es": "Drenar salud (por segundo)",
               "value": ["+40", "+55", "+70", "+85", "+100"]
             }
           ],
           "debuffs": [
             {
               "en": "Strength",
+              "es": "Fuerza",
               "value": ["-5", "-7", "-9", "-12", "-15"]
             }
           ]
         },
         {
           "name": {
-            "en": "Cremation"
+            "en": "Cremation",
+            "es": "Cremación"
           },
           "description": {
-            "en": "The warlock invokes a powerful spell that incinerates the corpse of an enemy. If the spell is successful, the enemy is sent to the Resurrection Altar"
+            "en": "The warlock invokes a powerful spell that incinerates the corpse of an enemy. If the spell is successful, the enemy is sent to the Resurrection Altar",
+            "es": "El brujo invoca un poderoso conjuro que incinera el cuerpo del enemigo. Si el conjuro es exitoso, el enemigo es enviado al Altar de Resurrección."
           },
           "mana": [200, 225, 250, 275, 300],
           "type": "Constant",
@@ -5141,16 +5310,19 @@
           "buffs": [
             {
               "en": "Cremate corpse (chance)",
+              "es": "Cremar cadaver (chance)",
               "value": ["15%", "40%", "65%", "85%", "100%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Possess summoning"
+            "en": "Possess summoning",
+            "es": "Poseer invocación"
           },
           "description": {
-            "en": "If the spell is not resisted, the warlock has chances of controlling a summoned creature. The creature remains until killed (no duration)."
+            "en": "If the spell is not resisted, the warlock has chances of controlling a summoned creature. The creature remains until killed (no duration).",
+            "es": "Si el conjuro no es resistido el brujo tiene chances de controlar una criatura invocada (Invocación de conjurador). Bajo el comando del brujo la criatura dura hasta ser aniquilada."
           },
           "mana": [300, 325, 350, 375, 400],
           "type": "Direct",
@@ -5160,17 +5332,20 @@
           "range": 20.0,
           "buffs": [
             {
-              "en": "Posess summon (chance)",
+              "en": "Possess summon (chance)",
+              "es": "Poseer invocación (chance)",
               "value": ["40%", "55%", "70%", "85%", "100%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Master of doom"
+            "en": "Master of doom",
+            "es": "Maestro de la destrucción"
           },
           "description": {
-            "en": "A darkness aura surrounds the warlock breaking opponent's will in its area. The enemy has reduced constitution and cannot cast spells."
+            "en": "A darkness aura surrounds the warlock breaking opponent's will in its area. The enemy has reduced constitution and cannot cast spells.",
+            "es": "Un aura de oscuridad rodea al brujo doblegando a todo oponente que se encuentre en sus cercanías. El enemigo reduce su constitución y no puede invocar poderes."
           },
           "mana": [520, 540, 560, 580, 600],
           "type": "Aura",
@@ -5182,10 +5357,12 @@
           "debuffs": [
             {
               "en": "Dizzy (chance)",
+              "es": "Marear (chance)",
               "value": ["20%", "40%", "60%", "80%", "100%"]
             },
             {
               "en": "Constitution",
+              "es": "Constitución",
               "value": ["-10", "-15", "-20", "-25", "-30"]
             }
           ]
@@ -5195,15 +5372,18 @@
     "Elements": {
       "class": "Warlock",
       "display_name": {
-        "en": "Elements"
+        "en": "Elements",
+        "es": "Elementos"
       },
       "spells": [
         {
           "name": {
-            "en": "Fire ball"
+            "en": "Fire ball",
+            "es": "Bola de fuego"
           },
           "description": {
-            "en": "The caster launches a flame sphere that produces damage to all enemies in the impact area."
+            "en": "The caster launches a flame sphere that produces damage to all enemies in the impact area.",
+            "es": "El invocador lanza una estera de llamas que causa daño a todos los enemigos en un área de impacto."
           },
           "mana": [125, 140, 155, 170, 185],
           "type": "Direct",
@@ -5215,16 +5395,19 @@
           "damage": [
             {
               "en": "Fire damage",
+              "es": "Daño de fuego",
               "value": ["110-160", "245-320", "380-480", "515-640", "650-800"]
             }
           ]
         },
         {
           "name": {
-            "en": "Ice blast"
+            "en": "Ice blast",
+            "es": "Explosión de hielo"
           },
           "description": {
-            "en": "The target is struck by an ice blast."
+            "en": "The target is struck by an ice blast.",
+            "es": "El objetivo es golpeado por una explosión de hielo que lo hace moverse más lento por un instante."
           },
           "mana": [125, 140, 155, 170, 185],
           "type": "Constant",
@@ -5236,26 +5419,31 @@
           "damage": [
             {
               "en": "Ice damage",
+              "es": "Daño de hielo",
               "value": ["70-100", "90-120", "100-140", "130-160", "170-200"]
             }
           ],
           "debuffs": [
             {
               "en": "Movement speed",
+              "es": "Velocidad de movimiento",
               "value": ["-5%", "-10%", "-15%", "-25%", "-40%"]
             },
             {
               "en": "Movement speed duration",
+              "es": "Duración de la velocidad de movimiento",
               "value": "2s"
             }
           ]
         },
         {
           "name": {
-            "en": "Lightning"
+            "en": "Lightning",
+            "es": "Relámpago"
           },
           "description": {
-            "en": "An electrical burst hits the target."
+            "en": "An electrical burst hits the target.",
+            "es": "Una ráfaga de electricidad."
           },
           "mana": [125, 140, 155, 170, 185],
           "type": "Constant",
@@ -5267,39 +5455,47 @@
           "damage": [
             {
               "en": "Lightning damage",
+              "es": "Daño eléctrico",
               "value": [80, 120, 160, 200, 240]
             }
           ]
         },
         {
           "name": {
-            "en": "Elemental conjunction"
+            "en": "Elemental conjunction",
+            "es": "Comunión elemental"
           },
           "description": {
-            "en": "The warlock develops natural resistance to elements damage."
+            "en": "The warlock develops natural resistance to elements damage.",
+            "es": "El brujo desarrolla resistencia natural al daño de los elementos."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Resist fire",
+              "es": "Resistir daño de fuego",
               "value": ["+5%", "+7%", "+9%", "+12%", "+15%"]
             },
             {
               "en": "Resist electrical damage",
+              "es": "Resistir rayo",
               "value": ["+5%", "+7%", "+9%", "+12%", "+15%"]
             },
             {
               "en": "Resist cold",
+              "es": "Resistir frío",
               "value": ["+5%", "+7%", "+9%", "+12%", "+15%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Freeze"
+            "en": "Freeze",
+            "es": "Paralizar"
           },
           "description": {
-            "en": "The target becomes frozen. She cannot attack nor be attacked."
+            "en": "The target becomes frozen. She cannot attack nor be attacked.",
+            "es": "El objetivo es congelado. No puede atacar ni ser atacado."
           },
           "mana": [100, 130, 160, 190, 220],
           "type": "Constant",
@@ -5311,16 +5507,19 @@
           "debuffs": [
             {
               "en": "Freeze",
+              "es": "Paralizar",
               "value": true
             }
           ]
         },
         {
           "name": {
-            "en": "Frozen storm"
+            "en": "Frozen storm",
+            "es": "Tormenta helada"
           },
           "description": {
-            "en": "Opponents in the storm area will be damaged and get stunned."
+            "en": "Opponents in the storm area will be damaged and get stunned.",
+            "es": "Los oponentes en el área de la tormenta recibirán daño y serán aturdidos."
           },
           "mana": [180, 210, 240, 270, 300],
           "type": "Constant",
@@ -5333,22 +5532,26 @@
           "damage": [
             {
               "en": "Ice damage",
+              "es": "Daño de hielo",
               "value": [40, 50, 60, 70, 80]
             }
           ],
           "debuffs": [
             {
               "en": "Stun",
+              "es": "Aturdir",
               "value": true
             }
           ]
         },
         {
           "name": {
-            "en": "Element exposure"
+            "en": "Element exposure",
+            "es": "Exposición alos elementos"
           },
           "description": {
-            "en": "The target becomes vulnerable to the elements."
+            "en": "The target becomes vulnerable to the elements.",
+            "es": "El objetivo se vuelve vulnerable a los elementos."
           },
           "mana": [120, 140, 160, 180, 200],
           "type": "Constant",
@@ -5361,28 +5564,34 @@
           "debuffs": [
             {
               "en": "Fire protection",
+              "es": "Protección contra fuego",
               "value": ["-20%", "-25%", "-30%", "-35%", "-40%"]
             },
             {
               "en": "Ice protection",
+              "es": "Protección contra hielo",
               "value": ["-20%", "-25%", "-30%", "-35%", "-40%"]
             },
             {
               "en": "Lightning protection",
+              "es": "Protección contra electricidad",
               "value": ["-20%", "-25%", "-30%", "-35%", "-40%"]
             },
             {
               "en": "Magical damage resistance",
+              "es": "Resistencia al daño mágico",
               "value": ["-10%", "-15%", "-23%", "-34%", "-50%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Magma blast"
+            "en": "Magma blast",
+            "es": "Explosión de magma"
           },
           "description": {
-            "en": "A magma ball strikes the target."
+            "en": "A magma ball strikes the target.",
+            "es": "Una bola de magma impacta en el objetivo."
           },
           "mana": [250, 280, 310, 340, 370],
           "type": "Constant",
@@ -5394,20 +5603,24 @@
           "damage": [
             {
               "en": "Fire (instant) damage",
+              "es": "Daño de fuego (instantáneo)",
               "value": ["200-240", "260-330", "350-430", "450-540", "580-680"]
             },
             {
-              "en": "Fire (per second)",
+              "en": "Fire damage (per second)",
+              "es": "Daño de fuego (instantáneo)",
               "value": [25, 30, 35, 45, 60]
             }
           ]
         },
         {
           "name": {
-            "en": "Twister"
+            "en": "Twister",
+            "es": "Tornado"
           },
           "description": {
-            "en": "An air eddy devours the opponents in the area."
+            "en": "An air eddy devours the opponents in the area.",
+            "es": "Un remolino de aire engulle a los que se hallen en el área."
           },
           "mana": [290, 320, 350, 380, 410],
           "type": "Constant",
@@ -5420,22 +5633,26 @@
           "debuffs": [
             {
               "en": "Immobilize",
+              "es": "Inmovilizar",
               "value": true
             }
           ],
           "damage": [
             {
               "en": "Blunt damage",
+              "es": "Daño aplastante",
               "value": ["20-30", "40-57", "60-85", "80-110", "110-140"]
             }
           ]
         },
         {
           "name": {
-            "en": "Summon lightning"
+            "en": "Summon lightning",
+            "es": "Invocar rayos"
           },
           "description": {
-            "en": "The warlock creates lightning bolts that strike all the opponents in an area."
+            "en": "The warlock creates lightning bolts that strike all the opponents in an area.",
+            "es": "El brujo crea rayos de electricidad que afectan a todos los oponentes en un área."
           },
           "mana": [440, 480, 520, 560, 600],
           "type": "Constant",
@@ -5448,12 +5665,14 @@
           "debuffs": [
             {
               "en": "Strength",
+              "es": "Fuerza",
               "value": "-10%"
             }
           ],
           "damage": [
             {
               "en": "Lightning damage",
+              "es": "Daño eléctrico",
               "value": ["40-80", "70-120", "100-160", "130-200", "160-240"]
             }
           ]
@@ -5463,7 +5682,8 @@
     "Warlock WM": {
       "class": "Warlock",
       "display_name": {
-        "en": "Warlock WM"
+        "en": "Warlock WM",
+        "es": "Brujo - Maestría en Guerra"
       },
       "spells": [
         {
@@ -5487,15 +5707,18 @@
         },
         {
           "name": {
-            "en": "War Council"
+            "en": "War Council",
+            "es": "Concilio de Guerra"
           },
           "description": {
-            "en": "The Warmaster learns a war language that allows her to communicate with her status in secret."
+            "en": "The Warmaster learns a war language that allows her to communicate with her status in secret.",
+            "es": "El Warmaster aprende un lenguaje de guerra que le permite comunicarse con sus iguales en secreto."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "War chat",
+              "es": "Chat de Guerra",
               "value": true
             }
           ]
@@ -5521,10 +5744,12 @@
         },
         {
           "name": {
-            "en": "Offensive Portal"
+            "en": "Offensive Portal",
+            "es": "Portal Offensivo"
           },
           "description": {
-            "en": "Creates a portal that allows teleporting up to 25 allies to one of the available location."
+            "en": "Creates a portal that allows teleporting up to 25 allies to one of the available location.",
+            "es": "Crea un portal que permite teleportar a hasta 25 aliados a una de las locaciones disponibles."
           },
           "mana": 100,
           "type": "Direct",
@@ -5555,19 +5780,23 @@
         },
         {
           "name": {
-            "en": "Warmaster's Might"
+            "en": "Warmaster's Might",
+            "es": "Maestría de Guerra"
           },
           "description": {
-            "en": "Thanks to his/her years of experience the Warmaster can cast any spell faster than others."
+            "en": "Thanks to his/her years of experience the Warmaster can cast any spell faster than others.",
+            "es": "Gracias a su experiencia y largos años de batalla, el Maestro puede invocar los hechizos con mayor velocidad."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Cast speed",
+              "es": "Velocidad de invocación",
               "value": "+15%"
             },
             {
               "en": "Intelligence",
+              "es": "Inteligencia",
               "value": "+5%"
             }
           ]
@@ -5593,10 +5822,12 @@
         },
         {
           "name": {
-            "en": "Mass Pricking Ivy"
+            "en": "Mass Pricking Ivy",
+            "es": "Hiedra espinosa en masa"
           },
           "description": {
-            "en": "A Pricking ivy grows surrounding the Warlock to damage and immobolise near enemies."
+            "en": "A Pricking ivy grows surrounding the Warlock to damage and immobolise near enemies.",
+            "es": "Una hiedra punzante crece alrededor del Brujo para dañar e inmovilizar a los enemigos cercanos."
           },
           "mana": 500,
           "type": "Constant",
@@ -5608,12 +5839,14 @@
           "damage": [
             {
               "en": "Piercing damage",
+              "es": "Daño punzante",
               "value": "+750"
             }
           ],
           "debuffs": [
             {
-              "en": "Immobilise",
+              "en": "Immobilize",
+              "es": "Inmovilizar",
               "value": true
             }
           ]
@@ -5639,15 +5872,18 @@
         },
         {
           "name": {
-            "en": "Warmaster Blood"
+            "en": "Warmaster Blood",
+            "es": "Sangre de Warmaster"
           },
           "description": {
-            "en": "The Warmaster athletic capabilities increase due to long years of training."
+            "en": "The Warmaster athletic capabilities increase due to long years of training.",
+            "es": "La capacidad atlética del Warmaster aumenta debido a sus largos años de entrenamiento."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Health",
+              "es": "Salud",
               "value": "+550"
             }
           ]
@@ -5951,11 +6187,11 @@
         {
           "name": {
             "en": "Forceful blow",
-            "es":"Impacto vigoroso"
+            "es": "Impacto vigoroso"
           },
           "description": {
             "en": "A strong blow causes additional damage.",
-            "es": "Un fuerte golpe causa daño adicional. "
+            "es": "Un fuerte golpe causa daño adicional."
           },
           "mana": [40, 65, 90, 110, 130],
           "type": "Direct",
@@ -5979,7 +6215,7 @@
         {
           "name": {
             "en": "Brutal impacts",
-            "es": "Impactos brutales "
+            "es": "Impactos brutales"
           },
           "description": {
             "en": "Improves blunt damage while active.",
@@ -6006,7 +6242,7 @@
           },
           "description": {
             "en": "A blow to the ribs takes the air of the opponent lungs, he can't move.",
-            "es": "Un golpe alas costillas saca el aire de los pulmones del oponente, que no puede moverse. "
+            "es": "Un golpe alas costillas saca el aire de los pulmones del oponente, que no puede moverse."
           },
           "mana": [90, 100, 110, 120, 130],
           "type": "Constant",
@@ -6067,7 +6303,7 @@
           "debuffs": [
             {
               "en": "Constitution",
-              "es": "Constitución ",
+              "es": "Constitución",
               "value": ["-5", "-10", "-15", "-20", "-25"]
             }
           ],
@@ -6144,7 +6380,7 @@
           },
           "description": {
             "en": "The warrior is resistant to piercing damage.",
-            "es": "El guerrero tiene resistencia al daño perforador. "
+            "es": "El guerrero tiene resistencia al daño perforador."
           },
           "type": "Passive",
           "buffs": [
@@ -6365,7 +6601,7 @@
           "debuffs": [
             {
               "en": "Convert mana to damage",
-              "es": "Convertir maná en daño",
+              "es": "Convertir Mana en daño",
               "value": ["100", "150", "200", "250", "350"]
             }
           ]
@@ -6635,7 +6871,7 @@
           },
           "description": {
             "en": "Resists next crowd control effect",
-            "es": "Tras un momento de concentración, el guerrero tiene más conciencia de cuáles son sus puntos débiles y puede resistir el próximo intento de control."
+            "es": "Mejora la evasión del arquero permitiendo evadir el próximo intento de control."
           },
           "mana": [100, 120, 140, 160, 180],
           "type": "Constant",
@@ -6797,15 +7033,18 @@
     "Warcries": {
       "class": "Barbarian",
       "display_name": {
-        "en": "Warcries"
+        "en": "Warcries",
+        "es": "Gritos de guerra"
       },
       "spells": [
         {
           "name": {
-            "en": "Colossus"
+            "en": "Colossus",
+            "es": "Coloso"
           },
           "description": {
-            "en": "The barbarian is possessed by a rage she cannot control. She wins strength at the expense of health"
+            "en": "The barbarian is possessed by a rage she cannot control. She wins strength at the expense of health",
+            "es": "El bárbaro es poseído por una ira que no puede controlar. Gana fuerza a costo de su energía."
           },
           "mana": [50, 80, 110, 130, 150],
           "type": "Constant",
@@ -6816,22 +7055,26 @@
           "buffs": [
             {
               "en": "Strength",
+              "es": "Fuerza",
               "value": ["+10%", "+20%", "+30%", "+40%", "+50%"]
             }
           ],
           "debuffs": [
             {
               "en": "Health",
+              "es": "Salud",
               "value": "-10%"
             }
           ]
         },
         {
           "name": {
-            "en": "Frenzy"
+            "en": "Frenzy",
+            "es": "Frenesí"
           },
           "description": {
-            "en": "The barbarian becomes frenzied, ignoring the real amount of damage she receives."
+            "en": "The barbarian becomes frenzied, ignoring the real amount of damage she receives.",
+            "es": "El bárbaro entra en un estado de frenesí, en el que no es consciente del daño físico que recibe."
           },
           "mana": [65, 80, 95, 110, 125],
           "type": "Constant",
@@ -6842,16 +7085,19 @@
           "buffs": [
             {
               "en": "Resist physical damage",
+              "es": "Resistir daño físico",
               "value": ["+5%", "+8", "+12%", "+16%", "+20%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Off with their heads!!"
+            "en": "Off with their heads!!",
+            "es": "¡¡Corten sus cabezas!!"
           },
           "description": {
-            "en": "Gives damage bonus to any ally."
+            "en": "Gives damage bonus to any ally.",
+            "es": "Otorga una bonificación de daño a sus aliados."
           },
           "mana": [100, 115, 130, 145, 160],
           "type": "Constant",
@@ -6863,16 +7109,19 @@
           "buffs": [
             {
               "en": "Damage Bonus",
+              "es": "Bonus de daño del arma",
               "value": ["+5%", "+7%", "+9%", "+12%", "+15%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Thirst for blood"
+            "en": "Thirst for blood",
+            "es": "Sed de sangre"
           },
           "description": {
-            "en": "The barbarian channels all her fury. Normal attacks receive a damage bonus that increments on every successful impact. Power wears off by duration and also when inflicting 5 successful blows. Evaded and blocked attacks are not counted toward power expiration."
+            "en": "The barbarian channels all her fury. Normal attacks receive a damage bonus that increments on every successful impact. Power wears off by duration and also when inflicting 5 successful blows. Evaded and blocked attacks are not counted toward power expiration.",
+            "es": "El bárbaro descarga toda su furia. Sus ataques normales ganan una bonificación que se incrementa por cada impacto exitoso que produce. Se agota al completar su duración o al realizar 5 ataques exitosos. Ataques evadidos o bloqueados no reducen el conteo."
           },
           "mana": [80, 120, 160, 200, 240],
           "type": "Constant",
@@ -6883,24 +7132,29 @@
           "buffs": [
             {
               "en": "Attack Speed",
+              "es": "Velocidad de ataque",
               "value": ["+5%", "+6%", "+7%", "+8%", "+10%"]
             },
             {
               "en": "Damage per impact (two handed weapon only)",
+              "es": "Daño acumulable por ataque exitoso (armas a dos manos)",
               "value": ["+10", "+20", "+30", "+40", "+50"]
             },
             {
               "en": "Attack speed bonus (dual handed weapons only)",
+              "es": "Daño acumulable por ataque exitoso (armas duales)",
               "value": ["+5%", "+7%", "+9%", "+11%", "+15%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Challenging Roar"
+            "en": "Challenging Roar",
+            "es": "Rugido desafiante"
           },
           "description": {
-            "en": "The barbarian gains confidence in frightening the opponent and improves her attacks."
+            "en": "The barbarian gains confidence in frightening the opponent and improves her attacks.",
+            "es": "Al amedrentar a sus oponentes, el bárbaro necesita menos tiempo para planear sus ataques. En nivel 5, resiste el próximo intento de control."
           },
           "mana": [65, 80, 95, 110, 125],
           "type": "Constant",
@@ -6911,20 +7165,24 @@
           "buffs": [
             {
               "en": "Casting speed",
+              "es": "Velocidad de invocación",
               "value": ["+10%", "+15%", "+20%", "+25%", "+30%"]
             },
             {
               "en": "Resist next crowd control effect",
+              "es": "Resistir el siguiente efecto de control de masas",
               "value": ["-", "-", "-", "-", "yes"]
             }
           ]
         },
         {
           "name": {
-            "en": "Deafening roar"
+            "en": "Deafening roar",
+            "es": "Bramido ensordecedor"
           },
           "description": {
-            "en": "A powerful roar affects everyone who crosses its path"
+            "en": "A powerful roar affects everyone who crosses its path",
+            "es": "Un poderoso bramido aturde a todos los que se interponen en su camino."
           },
           "mana": [100, 130, 160, 190, 220],
           "type": "Constant",
@@ -6936,16 +7194,19 @@
           "debuffs": [
             {
               "en": "Stun",
+              "es": "Aturdir",
               "value": true
             }
           ]
         },
         {
           "name": {
-            "en": "Berserk"
+            "en": "Berserk",
+            "es": "Berserk"
           },
           "description": {
-            "en": "Raging state in which the barbarian is not aware of anything but what she destroys."
+            "en": "Raging state in which the barbarian is not aware of anything but what she destroys.",
+            "es": "El bárbaro centra su energía en destruír todo a su paso."
           },
           "mana": [100, 130, 160, 180, 200],
           "type": "Constant",
@@ -6956,41 +7217,49 @@
           "buffs": [
             {
               "en": "Damage Bonus",
+              "es": "Bonus de daño del arma",
               "value": ["+20%", "+28%", "+36%", "+42%", "+50%"]
             },
             {
               "en": "Attack Speed bonus (dual handed weapons only)",
+              "es": "Bonus de daño del arma (armas duales)",
               "value": ["-", "-", "-", "-", "+10%"]
             }
           ],
           "debuffs": [
             {
               "en": "Evade chance",
+              "es": "Evasión",
               "value": "-100%"
             }
           ]
         },
         {
           "name": {
-            "en": "Overwhelming strength"
+            "en": "Overwhelming strength",
+            "es": "Fuerza sobrecogedora"
           },
           "description": {
-            "en": "The barbarian gets a damage bonus on all attacks."
+            "en": "The barbarian gets a damage bonus on all attacks.",
+            "es": "El bárbaro mejora el daño en todos sus ataques."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Damage Bonus",
+              "es": "Bonus de daño del arma",
               "value": ["+5%", "+7%", "+9%", "+12%", "+15%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Spring"
+            "en": "Spring",
+            "es": "Retorno"
           },
           "description": {
-            "en": "Allows the barbarian to quickly get closer to the enemy."
+            "en": "Allows the barbarian to quickly get closer to the enemy.",
+            "es": "Permite al bárbaro acercarse rápidamente a su objetivo."
           },
           "mana": [100, 120, 140, 160, 180],
           "type": "Constant",
@@ -7001,20 +7270,24 @@
           "buffs": [
             {
               "en": "Movement speed",
+              "es": "Velocidad de movimiento",
               "value": ["+10%", "+15%", "+20%", "+25%", "+30%"]
             },
             {
               "en": "Range received damage",
+              "es": "Daño de rango recibido",
               "value": ["-15%", "-15%", "-15%", "-30%", "-30%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Unstoppable Madness"
+            "en": "Unstoppable Madness",
+            "es": "Desquiciamiento"
           },
           "description": {
-            "en": "The barbarian enters a madness state in which he is almost immune to crowd control attempts."
+            "en": "The barbarian enters a madness state in which he is almost immune to crowd control attempts.",
+            "es": "El bárbaro entra en un estado de locura en el que es casi inmune alos intentos de control."
           },
           "mana": [220, 240, 260, 300, 340],
           "type": "Constant",
@@ -7025,26 +7298,32 @@
           "buffs": [
             {
               "en": "Resist immobilize",
+              "es": "Resistir inmovilizar",
               "value": ["+75%", "+80%", "+85%", "+90%", "+100%"]
             },
             {
               "en": "Resist knock",
+              "es": "Resistir noqueo",
               "value": ["+75%", "+80%", "+85%", "+90%", "+100%"]
             },
             {
               "en": "Resist freeze",
+              "es": "Resistir paralisis",
               "value": ["+75%", "+80%", "+85%", "+90%", "+100%"]
             },
             {
               "en": "Resist stun",
+              "es": "Resistir aturdir",
               "value": ["+75%", "+80%", "+85%", "+90%", "+100%"]
             },
             {
               "en": "Resist dizzy",
+              "es": "Resistir mareo",
               "value": ["+75%", "+80%", "+85%", "+90%", "+100%"]
             },
             {
               "en": "Resist cannot attack",
+              "es": "Resistir 'no puede atacar'",
               "value": ["+75%", "+80%", "+85%", "+90%", "+100%"]
             }
           ]
@@ -7054,15 +7333,18 @@
     "Two Handed Mastery": {
       "class": "Barbarian",
       "display_name": {
-        "en": "Two Handed Mastery"
+        "en": "Two Handed Mastery",
+        "es": "Armas a dos manos"
       },
       "spells": [
         {
           "name": {
-            "en": "Threat"
+            "en": "Threat",
+            "es": "Amenaza"
           },
           "description": {
-            "en": "Anyone near the barbarian will be intimidated and the critical hits they receive will be stronger."
+            "en": "Anyone near the barbarian will be intimidated and the critical hits they receive will be stronger.",
+            "es": "Todo quien esté cerca del bárbaro  seráintimidado y los golpes críticos que reciban serán más fuertes"
           },
           "mana": [100, 120, 140, 160, 180],
           "type": "Constant",
@@ -7073,16 +7355,19 @@
           "buffs": [
             {
               "en": "Critical damage",
+              "es": "Daño crítico",
               "value": ["+10%", "+13%", "+16%", "+20%", "+30%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Spiritual blow"
+            "en": "Spiritual blow",
+            "es": "Golpe espiritual"
           },
           "description": {
-            "en": "The Barbarian extends an attack beyond her normal distance."
+            "en": "The Barbarian extends an attack beyond her normal distance.",
+            "es": "El bárbaro extiende un golpe a mayor distancia."
           },
           "mana": [80, 110, 140, 170, 200],
           "type": "Constant",
@@ -7095,22 +7380,26 @@
           "buffs": [
             {
               "en": "Attack damage",
+              "es": "Daño de ataque",
               "value": ["+40%", "+55%", "+70%", "+85%", "+100%"]
             }
           ],
           "debuffs": [
             {
               "en": "Concentration",
+              "es": "Concentración",
               "value": ["-15%", "-20%", "-25%", "-30%", "-35%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Rend"
+            "en": "Rend",
+            "es": "Despedazar"
           },
           "description": {
-            "en": "Tears away the target's flesh. The opponent keeps on bleeding."
+            "en": "Tears away the target's flesh. The opponent keeps on bleeding.",
+            "es": "Arranca la came del objetivo. El / oponente continúa sangrando."
           },
           "mana": [120, 150, 180, 210, 240],
           "type": "Direct",
@@ -7122,22 +7411,26 @@
           "debuffs": [
             {
               "en": "Mana",
+              "es": "Costo",
               "value": ["-20%", "-25%", "-30%", "-35%", "-40%"]
             }
           ],
           "damage": [
             {
               "en": "Attack damage",
+              "es": "Daño de ataque",
               "value": "+100%"
             }
           ]
         },
         {
           "name": {
-            "en": "Beast attack"
+            "en": "Beast attack",
+            "es": "Ataque bestial"
           },
           "description": {
-            "en": "A strike made with might deals a great amount of damage and shocks the opponent"
+            "en": "A strike made with might deals a great amount of damage and shocks the opponent",
+            "es": "Un ataque hecho con extrema fuerza hace grandes cantidades de daño y aturde al oponente."
           },
           "mana": [160, 190, 220, 250, 280],
           "type": "Constant",
@@ -7150,22 +7443,26 @@
           "debuffs": [
             {
               "en": "Dizzy (chance 50%)",
+              "es": "Marear (chance 50%)",
               "value": true
             }
           ],
           "damage": [
             {
               "en": "Attack damage",
+              "es": "Daño de ataque",
               "value": ["+40/50%", "+65/75%", "+90/100%", "+115/125%", "140/150%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Howl"
+            "en": "Howl",
+            "es": "Alarido"
           },
           "description": {
-            "en": "The barbarian screams, insults and howls. His opponents can't concentrate enough to use their powers."
+            "en": "The barbarian screams, insults and howls. His opponents can't concentrate enough to use their powers.",
+            "es": "El bárbaro grita, aúlla e insulta. Sus oponentes no se pueden concentrar para lanzar poderes."
           },
           "mana": [150, 180, 210, 240, 270],
           "type": "Constant",
@@ -7177,16 +7474,19 @@
           "debuffs": [
             {
               "en": "Dizzy",
+              "es": "Marear",
               "value": true
             }
           ]
         },
         {
           "name": {
-            "en": "Expansive wave"
+            "en": "Expansive wave",
+            "es": "Onda expansiva"
           },
           "description": {
-            "en": "An energy wave is created with the weapon. It makes blunt damage to all opponents in an arc area."
+            "en": "An energy wave is created with the weapon. It makes blunt damage to all opponents in an arc area.",
+            "es": "Se crea una onda de energía con el arma, que hace daño aplastante a todos los enemigos en un arco."
           },
           "mana": [200, 240, 280, 320, 360],
           "type": "Direct",
@@ -7197,20 +7497,24 @@
           "damage": [
             {
               "en": "Blunt damage",
+              "es": "Daño aplastante",
               "value": ["80-100", "130-160", "180-210", "230-260", "280-310"]
             },
             {
               "en": "Attack damage",
+              "es": "Daño de ataque",
               "value": ["+20%", "+40%", "+60%", "+80%", "+100%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Destabilize"
+            "en": "Destabilize",
+            "es": "Desestabilizador"
           },
           "description": {
-            "en": "The barbarian reduces opponent evade chances by destabilizing her"
+            "en": "The barbarian reduces opponent evade chances by destabilizing her",
+            "es": "El bárbaro desestabiliza al oponente | reduciendo sus posibilidades de evadir."
           },
           "mana": [65, 80, 95, 110, 125],
           "type": "Constant",
@@ -7223,22 +7527,26 @@
           "debuffs": [
             {
               "en": "Evade Chance",
+              "es": "Evasión",
               "value": ["-10%", "-20%", "-30%", "-40%", "-50%"]
             }
           ],
           "damage": [
             {
               "en": "Attack damage",
+              "es": "Daño de ataque",
               "value": "+100%"
             }
           ]
         },
         {
           "name": {
-            "en": "Fulminating"
+            "en": "Fulminating",
+            "es": "Fulminante"
           },
           "description": {
-            "en": "The barbarian raises his damage significantly for a very short period of time."
+            "en": "The barbarian raises his damage significantly for a very short period of time.",
+            "es": "El bárbaro aumenta su daño significativamente por un periodo muy corto de tiempo."
           },
           "mana": [160, 180, 200, 220, 240],
           "type": "Constant",
@@ -7249,41 +7557,49 @@
           "buffs": [
             {
               "en": "Damage bonus",
+              "es": "Bonus de daño del arma",
               "value": ["+10%", "+20%", "+30%", "+40%", "+50%"]
             }
           ],
           "debuffs": [
             {
               "en": "Cannot cast area spells",
+              "es": "No puede invocar poderes de área",
               "value": true
             }
           ]
         },
         {
           "name": {
-            "en": "Hands of Steel"
+            "en": "Hands of Steel",
+            "es": "Manos de Acero"
           },
           "description": {
-            "en": "Increase range and damage"
+            "en": "Increase range and damage",
+            "es": "Bonus de daño del arma y Rango de ataque"
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Attack Range",
+              "es": "Rango de ataque",
               "value": ["+5%", "+10%", "+15%", "+20%", "+25%"]
             },
             {
               "en": "Damage Bonus",
+              "es": "Bonus de daño del arma",
               "value": ["+10%", "+13%", "+16%", "+20%", "+30%"]
             }
           ]
         },
         {
           "name": {
-            "en": "Rage of the earth"
+            "en": "Rage of the earth",
+            "es": "Furia de la tierra"
           },
           "description": {
-            "en": "A mighty blow on the earth provokes a tremor. Opponents in its path are damaged and knocked down"
+            "en": "A mighty blow on the earth provokes a tremor. Opponents in its path are damaged and knocked down",
+            "es": "Un fuerte golpe en la tierra que provoca un temblor. Los oponentes en su camino son dañados y arrojados al suelo."
           },
           "mana": [190, 230, 270, 310, 350],
           "type": "Constant",
@@ -7295,12 +7611,14 @@
           "debuffs": [
             {
               "en": "Knock down",
+              "es": "Noquear",
               "value": true
             }
           ],
           "damage": [
             {
               "en": "(60° arc) Weapon damage",
+              "es": "Daño de ataque (arco de 60°)",
               "value": ["100%", "105%", "110%", "115%", "125%"]
             }
           ]
@@ -7310,7 +7628,8 @@
     "Barbarian WM": {
       "class": "Barbarian",
       "display_name": {
-        "en": "Barbarian WM"
+        "en": "Barbarian WM",
+        "es": "Barbaro - Maestría en Guerra"
       },
       "spells": [
         {
@@ -7334,15 +7653,18 @@
         },
         {
           "name": {
-            "en": "War Council"
+            "en": "War Council",
+            "es": "Concilio de Guerra"
           },
           "description": {
-            "en": "The Warmaster learns a war language that allows her to communicate with her status in secret."
+            "en": "The Warmaster learns a war language that allows her to communicate with her status in secret.",
+            "es": "El Warmaster aprende un lenguaje de guerra que le permite comunicarse con sus iguales en secreto."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "War chat",
+              "es": "Chat de Guerra",
               "value": true
             }
           ]
@@ -7368,10 +7690,12 @@
         },
         {
           "name": {
-            "en": "Warmaster Beacon"
+            "en": "Warmaster Beacon",
+            "es": "Bandera de Warmaster"
           },
           "description": {
-            "en": "Places a beacon on the ground. Allies interacting with it will receive Warmaster's Defensive Blessing, which raises the maximum health."
+            "en": "Places a beacon on the ground. Allies interacting with it will receive Warmaster's Defensive Blessing, which raises the maximum health.",
+            "es": "Coloca una bandera en el suelo. Los aliados que interactúen con ella recibirán la Bendición Defensiva del Warmaster, que aumenta la salud máxima."
           },
           "mana": 150,
           "type": "Direct",
@@ -7382,6 +7706,7 @@
           "buffs": [
             {
               "en": "Health for allies",
+              "es": "Salud para aliados",
               "value": "+2000"
             }
           ]
@@ -7407,15 +7732,18 @@
         },
         {
           "name": {
-            "en": "Warmaster's Might"
+            "en": "Warmaster's Might",
+            "es": "Maestría de Guerra"
           },
           "description": {
-            "en": "The Warmaster enhances his class main attribute."
+            "en": "The Warmaster enhances his class main attribute.",
+            "es": "El Warmaster mejora su atributo principal de clase."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Class Attribute",
+              "es": "Atributo de clase",
               "value": "+15%"
             }
           ]
@@ -7441,10 +7769,12 @@
         },
         {
           "name": {
-            "en": "Heroic Shout"
+            "en": "Heroic Shout",
+            "es": "Grito Heroico"
           },
           "description": {
-            "en": "A powerful shout intimidates all near-by opponents, reducing their movement speed."
+            "en": "A powerful shout intimidates all near-by opponents, reducing their movement speed.",
+            "es": "Un grito poderoso intimida a todos los oponentes cercanos, reduciendo su velocidad de movimiento."
           },
           "mana": 150,
           "type": "Constant",
@@ -7456,6 +7786,7 @@
           "buffs": [
             {
               "en": "Movement speed",
+              "es": "Velocidad de movimiento",
               "value": "-25%"
             }
           ]
@@ -7481,15 +7812,18 @@
         },
         {
           "name": {
-            "en": "Warmaster Blood"
+            "en": "Warmaster Blood",
+            "es": "Sangre de Warmaster"
           },
           "description": {
-            "en": "The Warmaster athletic capabilities increase due to long years of training."
+            "en": "The Warmaster athletic capabilities increase due to long years of training.",
+            "es": "La capacidad atlética del Warmaster aumenta debido a sus largos años de entrenamiento."
           },
           "type": "Passive",
           "buffs": [
             {
               "en": "Health",
+              "es": "Salud",
               "value": "+300"
             }
           ]
@@ -7636,7 +7970,7 @@
           "buffs": [
             {
               "en": "Damage bonus",
-              "es": "Bonus de daño",
+              "es": "Bonus de daño del arma",
               "value": ["+5%", "+10%", "+15%", "+20%", "+25%"]
             }
           ],
@@ -7681,7 +8015,7 @@
             },
             {
               "en": "Resist knock",
-              "es": "Resistir noqued",
+              "es": "Resistir noqueo",
               "value": ["+25%", "+35%", "+45%", "+55%", "+65%"]
             },
             {
@@ -7931,7 +8265,7 @@
           },
           "description": {
             "en": "The knight focuses his mind in minimizing the damage from enemies. The power can be deactivated.",
-            "es": "El caballero enfoca su mente en minimizar el daño de los enemigos. (Puede ser desactivado)"
+            "es": "El caballero enfoca su mente en minimizar el daño de los enemigos. Puede ser desactivado."
           },
           "type": "Activable",
           "cooldown": 10,
