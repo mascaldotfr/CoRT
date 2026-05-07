@@ -455,7 +455,9 @@ class SetupManager {
 		}
 
 		// Check if there are actually translations in the data file (< 1.35.19), use english otherwise
-		if (!this.trainerdata["is_translatable"] || lang == "fr" || lang == "de")
+		if (!this.trainerdata["is_translatable"])
+			lang = "en";
+		else if (!this.trainerdata["accept_languages"].includes(lang))
 			lang = "en";
 		else
 			icons.item_translations = this.trainerdata["translatable_constants"];
