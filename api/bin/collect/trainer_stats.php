@@ -108,7 +108,9 @@ foreach ($versions as $version) {
 }
 
 // Time to compute things
-foreach ($data as $line) {
+
+// We reverse so we got new translations first
+foreach (array_reverse($data) as $line) {
 	$line = trim($line);
 	if ($line === '') continue;
 	$setup = explode(" ", $line);
@@ -159,21 +161,26 @@ foreach ($data as $line) {
 			$points = (int)$points_char;
 
 			$currspell = $spell["name"];
-			$currspell_id = array_search($currspell, $api_dict["skill_names"]);
+			$currspell_id = array_search($currspell["en"],
+				array_column($api_dict["skill_names"], "en"));
 			if ($currspell_id === false) {
+				$currspell_id = count($api_dict["skill_names"]);
+				foreach ($currspell as $lang => $translation) {
+					if (!isset($api_dict["skill_names"][$currspell_id][$lang]))
+						$api_dict["skill_names"][$currspell_id][$lang] = $translation;
+				}
 				array_push($api_dict["skill_names"], $currspell);
-				$currspell_id = count($api_dict["skill_names"]) - 1;
 			}
 
 			if (substr($tree, -2) === "WM") {
-				if (str_starts_with($currspell, "undefined"))
+				if (str_starts_with($currspell["en"], "undefined"))
 					continue;  // skip unused WM slots
 				// Determine if the power is available
 				if ($counter * 2 - 1 <= $disc_points)
 					$points = 5;
 			}
 
-			if (!isset($api_dict[$version][$clas][$currspell_id]))
+		if (!isset($api_dict[$version][$clas][$currspell_id]))
 				$api_dict[$version][$clas][$currspell_id] = [
 					"f" => [0, 0, 0, 0, 0, 0]
 				];

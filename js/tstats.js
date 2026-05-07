@@ -5,6 +5,7 @@ var valid_trainerdatasets = TrainerConstants.datasets;
 // remove 1.33.2 and 1.33.3, setup collection wasn't a thing back then
 valid_trainerdatasets.splice(0,2);
 var stats = {};
+var lang = "en";
 
 function capitalize(string) {
 	return string[0].toUpperCase() + string.slice(1);
@@ -47,7 +48,10 @@ function draw_maingraph() {
 	for (let power of labels)
 		series.push(stats[f["version"]][f["class"]][power]["p"]);
 	let dataset = {
-		labels: labels.map(p => `${stats["skill_names"][p]} (${stats[f["version"]][f["class"]][p]["p"]}%)`),
+		labels: labels.map(p => {
+			const name = stats["skill_names"][p][lang] || stats["skill_names"][p]["en"];
+			return `${name} (${stats[f["version"]][f["class"]][p]["p"]}%)`;
+		}),
 		series:	[series]
 	};
 	let options = {
@@ -61,7 +65,12 @@ function draw_maingraph() {
 function draw_powergraph() {
 	let f = get_filters();
 	const power = f["power"];
-	const power_id = stats["skill_names"].indexOf(power);
+	// Translation for a skill name is available
+	let power_id = stats["skill_names"].findIndex((skill) => skill[lang] === power);
+	// Default to english when it isn't
+	if (power_id === -1 && lang !== "en")
+		power_id = stats["skill_names"].findIndex((skill) => skill["en"] === power);
+
 	let labels = [];
 	for (let label of [0, 1, 2, 3, 4, 5]) {
 		try {
@@ -91,7 +100,7 @@ function refresh_powers() {
 	let powerlist = stats[f["version"]][f["class"]];
 	let options = [];
 	for (let p of Object.keys(powerlist)) {
-		const skill_name = stats["skill_names"][p];
+		const skill_name = stats["skill_names"][p][lang] || stats["skill_names"][p]["en"];
 		options.push(`<option value="${skill_name}">${skill_name}</option>`);
 	}
 	$("#ts-power").html(options.sort().join());
@@ -126,6 +135,7 @@ $(document).ready(async function() {
 	for (let clas of TrainerConstants.classes)
 		$("#ts-class").append(`<option value="${clas}">${_(capitalize(clas))}</option>`);
 
+	lang = localStorage.getItem("lang");
 	await download_stats();
 	redraw_all();
 
