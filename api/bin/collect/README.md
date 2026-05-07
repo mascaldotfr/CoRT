@@ -66,10 +66,6 @@ A simple python exploit code can be found at [exploit.py](exploit.py) in this
 directory. It is supposedly simple enough to understand. See also
 [trainer_stats.php](trainer_stats.php) for the API code.
 
-### Javascript
-
-Pre-API [tstats.js](https://github.com/mascaldotfr/CoRT/blob/154b8cf8aea81fe9b3dc2c9a44c3fdc6b5fa2741/js/tstats.js).
-
 ### BUGS
 
 This is the oldest CoRT API, and it's not much to say.
