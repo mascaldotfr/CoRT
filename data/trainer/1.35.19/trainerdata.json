@@ -620,7 +620,7 @@
           },
           "description": {
             "en": "The arrow tears away the opponent's flesh.",
-            "es": "La flecha arranca la came del oponente.",
+            "es": "La flecha arranca la carne del oponente.",
             "de": "Die tödliche Fieilspitze reilst dem Gegner das Fleisch von den Knochen."
           },
           "mana": [150, 175, 200, 225, 250],
@@ -941,7 +941,7 @@
           "description": {
             "en": "The archer is adept to maneuver and feint while fighting.",
             "es": "El arquero es adepto a maniobrar y sus perfeccionados movimientos evitan al oponente encontrar puntos débiles.",
-            "de": "Der Bogenschütze ist ein Meister darin, | Manöver und Finten während des  Kampfes auszuführen, um die Schwächen seines Gegners zu finden."
+            "de": "Der Bogenschütze ist ein Meister darin, Manöver und Finten während des  Kampfes auszuführen, um die Schwächen seines Gegners zu finden."
           },
           "mana": [70, 100, 130, 160, 190],
           "type": "Constant",
@@ -1421,7 +1421,7 @@
           "description": {
             "en": "The hunter is adept at moving through hostile environments.",
             "es": "El cazador es adepto a moverse por ambientes hostiles.",
-            "de": "Der Jäger ist ein Meister darin, sich | durch feindliche Umgebungen zu bewegen."
+            "de": "Der Jäger ist ein Meister darin, sich durch feindliche Umgebungen zu bewegen."
           },
           "type": "Passive",
           "buffs": [
@@ -1442,7 +1442,7 @@
           "description": {
             "en": "The hunter merges with the surroundings. While the effect is active, the hunter causes an extra damage in his first attack.\n\nThe hunter loses control of his pet when launching this power.",
             "es": "El cazador se mimetiza con el entorno. Mientras el efecto permanezca activo, el cazador obtiene una bonificación de daño en su primer ataque.\n\nEl cazador pierde control sobre su mascota al lanzar este poder.",
-            "de": "Der Jäger schließt einen Pakt mit der Natur, um sein Haustier ins Leben zurückzuholen.\n-Wird der Jäger angegriffen, so bricht die Wiederbelebung des Haustieres ab.\n-Um diesen Zauberspruch nutzen zu können, muss ein angemessenes Maß an der Fertigkeit des Zähmen vorhanden sein."
+            "de": "Der Jäger schließt einen Pakt mit der Natur, um sein Haustier ins Leben zurückzuholen.\n\n-Wird der Jäger angegriffen, so bricht die Wiederbelebung des Haustieres ab.\n\n-Um diesen Zauberspruch nutzen zu können, muss ein angemessenes Maß an der Fertigkeit des Zähmen vorhanden sein."
           },
           "mana": [300, 325, 350, 375, 400],
           "type": "Constant",
@@ -1543,7 +1543,7 @@
           "description": {
             "en": "Guided by her instinct and by hints from the environment, the hunter throws a flaming arrow, revealing the position of hidden enemies. It cancels the effects of Camouflage, <s>Camouflage Corpse</s> and Stalker Surroundings active on enemies.",
             "es": "Guiado por suinstinto y los rastros del entorno, el cazador arroja una flecha en llamas, revelando la posición de los enemigos ocultos. interrumpe los efectos de Camuflaje, <s>Camuflar cadaver</s> y Entorno Acechador activos en los enemigos.",
-            "de": "Durch seinen Spürsinn erkennt der Jäger versteckte Gegner und deckt deren Tarnung mit einem brennenden Pfeil auf.\\n\\nHebt die Effekte von Tarnungen und Stalkerumgebungen der Gegner in Reichweite auf."
+            "de": "Durch seinen Spürsinn erkennt der Jäger versteckte Gegner und deckt deren Tarnung mit einem brennenden Pfeil auf.\n\nHebt die Effekte von Tarnungen und Stalkerumgebungen der Gegner in Reichweite auf."
           },
           "mana": [200, 225, 250, 275, 300],
           "type": "Constant",
@@ -2155,8 +2155,8 @@
           },
           "description": {
             "en": "The marksman channels her vital energy into arrows to improve damage. Only the basic attack is affected by this power.",
-            "es": "El tirador canaliza su energía vital en las flechas que dispara aumentando su daño. Sólo mejora el daño causado por el ataque normal.  Cada flecha disparada consume una porción de salud y mana del tirador. (Este poder puede desactivarse)",
-            "de": "Der Schütze bündelt seine Lebensenergie in Pfeile, um den Schaden zu erhöhen. Nur der Grundschaden wird durch den Zauber erhöht.  Jeder Schuss kostet einen Teil des Lebens und der Mana  (Kann deaktiviert werden)"
+            "es": "El tirador canaliza su energía vital en las flechas que dispara aumentando su daño. Sólo mejora el daño causado por el ataque normal. Cada flecha disparada consume una porción de salud y mana del tirador. (Este poder puede desactivarse)",
+            "de": "Der Schütze bündelt seine Lebensenergie in Pfeile, um den Schaden zu erhöhen. Nur der Grundschaden wird durch den Zauber erhöht. Jeder Schuss kostet einen Teil des Lebens und der Mana  (Kann deaktiviert werden)"
           },
           "mana": [40, 55, 70, 85, 100],
           "type": "Activable",
@@ -3121,7 +3121,7 @@
           "description": {
             "en": "A burst of fire flows through the conjurer's hands, burning those in range.",
             "es": "Una llamarada brota de las manos del conjurador, quemando alos que se hallan en el rango.",
-            "de": "| Eine Feuersbrunst fließt durch die Hände des Zauberers und verbrennt alle in Reichweite."
+            "de": "Eine Feuersbrunst fließt durch die Hände des Zauberers und verbrennt alle in Reichweite."
           },
           "mana": [75, 90, 105, 120, 135],
           "type": "Direct",
@@ -3147,7 +3147,7 @@
           "description": {
             "en": "A mental expansive wave hits the objectives in the area.",
             "es": "Una onda expansiva mental golpea alos objetivos en el área.",
-            "de": "Eine seelische expansive Welle | trifft das Angriffsziel im jeweiligen Gebiet."
+            "de": "Eine seelische expansive Welle trifft das Angriffsziel im jeweiligen Gebiet."
           },
           "mana": [90, 105, 120, 135, 150],
           "type": "Constant",
@@ -3292,7 +3292,7 @@
           "description": {
             "en": "The mage can manipulate temporal instances. Any opponent nearby remains static in time.",
             "es": "El mago puede manipular instancias temporales. El tiempo pasa muy lento para todos sus oponentes cercanos.",
-            "de": "Der Magier ist imstande, die Zeit zu manipulieren. ‚ Die Zeit vergeht langsamer für jeden in der Nähe befindlichen Gegner."
+            "de": "Der Magier ist imstande, die Zeit zu manipulieren. Die Zeit vergeht langsamer für jeden in der Nähe befindlichen Gegner."
           },
           "mana": [230, 260, 290, 320, 350],
           "type": "Constant",
@@ -3331,7 +3331,7 @@
           "description": {
             "en": "A fog illusion devours the target, making her believe she is cut and torn.",
             "es": "La ilusión de una masa de niebla engulle al objetivo, haciéndole creer que es cortado y desgarrada.",
-            "de": "Ein imaginärer Nebel verschlingt das Ziel und verursacht bei ihm Illusionen von Schmerz undLeid."
+            "de": "Ein imaginärer Nebel verschlingt das Ziel und verursacht bei ihm Illusionen von Schmerz und Leid."
           },
           "mana": [340, 380, 420, 460, 500],
           "type": "Constant",
@@ -3473,7 +3473,7 @@
           "description": {
             "en": "The wizard is naturally intelligent and gifted.",
             "es": "El mago es naturalmente inteligente y ágil de pensamiento.",
-            "de": "Der Magier ist von Natur aus ‚ intelligent und begabt."
+            "de": "Der Magier ist von Natur aus‚ intelligent und begabt."
           },
           "type": "Passive",
           "buffs": [
@@ -4668,8 +4668,8 @@
           },
           "description": {
             "en": "The conjurer magically bonds to its summoning. Part of the received damage is redirected to it. (10% each spell level)",
-            "es": "El conjurador genera un lazo con su criatura invocada. Parte del daño que recibe es redirigido a ésta.  (10% por nivel del conjuro)",
-            "de": "Der Beschwörer bindet sich magisch an seine Beschwörung,. Teile des erhaltenen Schaden werden an diese umgeleitet. (10% jedem Spell Level)"
+            "es": "El conjurador genera un lazo con su criatura invocada. Parte del daño que recibe es redirigido a ésta. (10% por nivel del conjuro)",
+            "de": "Der Beschwörer bindet sich magisch an seine Beschwörung. Teile des erhaltenen Schaden werden an diese umgeleitet. (10% jedem Spell Level)"
           },
           "mana": [40, 55, 70, 85, 100],
           "type": "Constant",
@@ -5576,7 +5576,7 @@
           "description": {
             "en": "A huge flaming rock strikes the opponent.",
             "es": "Una enorme roca en llamas golpea al oponente.",
-            "de": "Ein riesiger, brennender Felsen ‚ trifft den Gegner."
+            "de": "Ein riesiger, brennender Felsen‚ trifft den Gegner."
           },
           "mana": [140, 160, 180, 200, 220],
           "type": "Constant",
@@ -5643,7 +5643,7 @@
           "description": {
             "en": "A blast of sharp crystals damages all the opponents in the area.",
             "es": "Una explosión de cristales afilados daña alos oponentes que se hallen en el área.",
-            "de": "Eine Explosion scharfer Kristalle, die | allen Gegnern in der Umgebung Schaden zufügt."
+            "de": "Eine Explosion scharfer Kristalle, die allen Gegnern in der Umgebung Schaden zufügt."
           },
           "mana": [100, 125, 150, 175, 200],
           "type": "Direct",
@@ -5888,7 +5888,7 @@
           },
           "description": {
             "en": "The wandering souls controlled by the warlock surround a victim, weakening her defenses.",
-            "es": "Las almas dominadas por el brujo rodean a su víctima, haciéndola más   vulnerable a ser controlada.",
+            "es": "Las almas dominadas por el brujo rodean a su víctima, haciéndola más vulnerable a ser controlada.",
             "de": "Die vom Hexenmeister dominierten herumschwirrenden Geister umgeben das Opfer und machen es anfälliger, kontrolliert zu werden."
           },
           "mana": [140, 155, 160, 175, 190],
@@ -6750,7 +6750,7 @@
           "description": {
             "en": "Enhanced agility and superior physical condition allows the warrior to be more effective while wielding a weapon, making each cut caused to the enemy take less effort and save energy in each attack",
             "es": "Una mejorada agilidad y superior estado físico le permiten al guerrero ser más efectivo al blandir su arma, mejorando los cortes que hace en su enemigo y con menos esfuerzo, recuperando mana en cada golpe.",
-            "de": "Eine verbesserte Beweglichkeit und in überlegener körperlicher \"ustand ermöglichen es dem rrieger, seine Waffe effektiver zu chlagen, die Schnitte, die er an ‚einem Feind macht, zu verbessern ind mit weniger Aufwand Mana bei edem Schlag zu gewinnen."
+            "de": "Eine verbesserte Beweglichkeit und in überlegener körperlicher zustand ermöglichen es dem Krieger, seine Waffe effektiver zu schlagen, die Schnitte, die er an einem Feind macht, zu verbessern ind mit weniger Aufwand Mana bei edem Schlag zu gewinnen."
           },
           "buffs": [
             {
@@ -7517,7 +7517,7 @@
           },
           "description": {
             "en": "Distracting attack that allows the interruption of power casting.",
-            "es": "Ataque de distracción directo a la cabeza que afecta ala concentración del oponente.",
+            "es": "Ataque de distracción directo a la cabeza que afecta a la concentración del oponente.",
             "de": "Ablenkende Attacke, die den Kraftfluss unterbricht."
           },
           "mana": [120, 150, 180, 210, 250],
@@ -7885,7 +7885,7 @@
           "description": {
             "en": "Strike to the opponent's leg that hinders her mobility.",
             "es": "Golpe a la piema del oponente, que queda con dificultades para moverse.",
-            "de": "Ein Schlag auf das Bein des | Gegners, der seine Beweglichkeit einschränkt."
+            "de": "Ein Schlag auf das Bein des Gegners, der seine Beweglichkeit einschränkt."
           },
           "mana": [200, 220, 240, 260, 280],
           "type": "Constant",
@@ -8047,7 +8047,7 @@
           "description": {
             "en": "The barbarian channels all her fury. Normal attacks receive a damage bonus that increments on every successful impact. Power wears off by duration and also when inflicting 5 successful blows. Evaded and blocked attacks are not counted toward power expiration.",
             "es": "El bárbaro descarga toda su furia. Sus ataques normales ganan una bonificación que se incrementa por cada impacto exitoso que produce. Se agota al completar su duración o al realizar 5 ataques exitosos. Ataques evadidos o bloqueados no reducen el conteo.",
-            "de": "Mehrere Attacken werden schnell auf das gleiche Ziel angewandt. Die Kraft des Barbars lässtnachs5 erfolgreichen Schlägen nach."
+            "de": "Mehrere Attacken werden schnell auf das gleiche Ziel angewandt. Die Kraft des Barbars lässt nach 5 erfolgreichen Schlägen nach."
           },
           "mana": [80, 120, 160, 200, 240],
           "type": "Constant",
@@ -8083,9 +8083,9 @@
             "de": "Herausforderndes Gebrüll"
           },
           "description": {
-            "en": "The barbarian gains confidence in frightening the opponent and improves her attacks.",
+            "en": "The barbarian gains confidence in frightening the opponent and improves her attacks. At level 5, she resists the enxt crowd control effect.",
             "es": "Al amedrentar a sus oponentes, el bárbaro necesita menos tiempo para planear sus ataques. En nivel 5, resiste el próximo intento de control.",
-            "de": "Der Barbar gewinnt an Zuversicht, den Feind einzuschüchtern und braucht weniger Zeit, um seine Attacken durchzuführen. Inlevels widersteht es dem nächsten Kontrollversuch."
+            "de": "Der Barbar gewinnt an Zuversicht, den Feind einzuschüchtern und braucht weniger Zeit, um seine Attacken durchzuführen. Ab Level 5 widersteht es dem nächsten Kontrollversuch."
           },
           "mana": [65, 80, 95, 110, 125],
           "type": "Constant",
@@ -8302,8 +8302,8 @@
           },
           "description": {
             "en": "Anyone near the barbarian will be intimidated and the critical hits they receive will be stronger.",
-            "es": "Todo quien esté cerca del bárbaro será intimidado y los golpes críticos que reciban serán más fuertes",
-            "de": "Jeder in der Nähe des Barbaren wird eingeschüchtert und die kritischen Treffer, die er erhält, werden stärker sein"
+            "es": "Todo quien esté cerca del bárbaro será intimidado y los golpes críticos que reciban serán más fuertes.",
+            "de": "Jeder in der Nähe des Barbaren wird eingeschüchtert und die kritischen Treffer, die er erhält, werden stärker sein."
           },
           "mana": [100, 120, 140, 160, 180],
           "type": "Constant",
@@ -8364,7 +8364,7 @@
           },
           "description": {
             "en": "Tears away the target's flesh. The opponent keeps on bleeding.",
-            "es": "Arranca la came del objetivo. El / oponente continúa sangrando.",
+            "es": "Arranca la carne del objetivo. El oponente continúa sangrando.",
             "de": "Der Barbar dehnt die normale Distanz seiner Attacke aus."
           },
           "mana": [120, 150, 180, 210, 240],
@@ -8494,7 +8494,7 @@
           },
           "description": {
             "en": "The barbarian reduces opponent evade chances by destabilizing her",
-            "es": "El bárbaro desestabiliza al oponente | reduciendo sus posibilidades de evadir.",
+            "es": "El bárbaro desestabiliza al oponente reduciendo sus posibilidades de evadir.",
             "de": "Der Barbar reduziert die Ausweichchancen des Gegners indem er ihn destabilisiert."
           },
           "mana": [65, 80, 95, 110, 125],
@@ -8892,7 +8892,7 @@
           "description": {
             "en": "Makes the monster angry, increasing her aggressiveness towards the knight and reducing its protection drastically. A pet or summoning under the effect of this spell will stop obeying its master. The creature will become wild until the effect wears off. Dispel magic may return control to its owner.",
             "es": "Hace enojar al monstruo, incrementando su agresividad hacia el caballero y disminuyendo su protección significativamente. Una mascota o invocación bajo el efecto de esta habilidad dejarán de obedecer a su dueño y se tomará salvaje hasta terminar su duración. Apaciguar o Disipar magia retoman el control a su dueño.",
-            "de": "Macht ein Monster aggressiv, sodass es seine Verteidigung vernachlässigt.  Ein Haustier oder eine Beschwörung wird die Befehle seinesjihres Meisters ignorieren, bis der Effekt des Hohns nachlässt oder die Fähigkeit verbannt wird."
+            "de": "Macht ein Monster aggressiv, sodass es seine Verteidigung vernachlässigt. Ein Haustier oder eine Beschwörung wird die Befehle seinesjihres Meisters ignorieren, bis der Effekt des Hohns nachlässt oder die Fähigkeit verbannt wird."
           },
           "mana": [50, 65, 80, 95, 110],
           "type": "Constant",
@@ -9202,7 +9202,7 @@
             "de": "Blocken"
           },
           "description": {
-            "en": "The knight earns 100% of blocking chances.",
+            "en": "The knight earns 150% of blocking chances.",
             "es": "El caballero gana 150% de bloqueo.",
             "de": "Der Ritter erhöht seine Chance Angriffe und Zaubersprüche zu blocken um 150%."
           },
@@ -9338,7 +9338,7 @@
           "description": {
             "en": "The knight focuses his mind in minimizing the damage from enemies. The power can be deactivated.",
             "es": "El caballero enfoca su mente en minimizar el daño de los enemigos. Puede ser desactivado.",
-            "de": "Der Ritter konzentriert sich auf seine Abwehr, um den gegnerischen Schaden zu minimieren.  Diese Fähigkeit kann aktiviert sowie deaktiviert werden."
+            "de": "Der Ritter konzentriert sich auf seine Abwehr, um den gegnerischen Schaden zu minimieren. Diese Fähigkeit kann aktiviert sowie deaktiviert werden."
           },
           "type": "Activable",
           "cooldown": 10,
@@ -9457,7 +9457,7 @@
           "description": {
             "en": "The knight grants a protection aura against magical damage to the allies in the area.",
             "es": "El caballero otorga un aura de protección contra los daños mágicos alos aliados.",
-            "de": "Der Ritter bleibt standhaft und | verringert die Chance, umgestoßen zu werden."
+            "de": "Der Ritter bleibt standhaft und verringert die Chance, umgestoßen zu werden."
           },
           "mana": [200, 225, 250, 275, 300],
           "type": "Constant",
