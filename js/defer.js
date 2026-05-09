@@ -201,7 +201,7 @@ if ("requestIdleCallback" in window) {
 			"bz.html", "js/bz.js",
 			"tstats.html", "js/tstats.js",
 			"./", "js/trainer.js", "js/libs/floating-ui-tooltip.js",
-			`data/trainer/${TrainerConstants.datasets[TrainerConstants.datasets.length - 1]}/trainerdata.json`
+			`data/trainer/${TrainerConstants.datasets[TrainerConstants.datasets.length - 1]}/trainerdata.json?epoch=1`
 		];
 		requestIdleCallback(() => {
 			urls.forEach(url => {
