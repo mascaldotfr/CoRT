@@ -117,6 +117,10 @@ $("#t-save").on("click", function() {
 		return;
 	}
 
+	// Force upgrade the setup to the newest version if it's an old version
+	if (setup.trainerdataversion != datasets.newest_dataset)
+		 setup.trainerdataversion = datasets.trainerdatasets.slice(-1);
+
 	let saved_url = setup.save_to_url();
 	if (saved_url == null)
 		return;
@@ -886,12 +890,16 @@ class DatasetsManager {
 		$("#betaversion").remove();
 		if (setup.trainerdataversion != this.newest_dataset)
 			$("#t-old-version").append(`<div id="oldversion" class="card center">
-					<p class="red"><b>
+					<p class="red bold">
 					${_("This setup is being made with an older version (%s) of CoR, and may be out of date.",
 						setup.trainerdataversion)}<p>
 					<p><a href="#" id="upgrade-setup">${_("Click here")}</a>
 					${_("to upgrade this setup's discipline and power points to the latest version (%s).",
-						this.newest_dataset)}</p>
+						this.newest_dataset)}&nbsp;
+					</p>
+					<p class="bold">
+					${_("If you share a setup with that version it will be automatically upgraded!")}
+					</p>
 					</div>
 					`);
 		if (this.is_beta)

@@ -800,6 +800,12 @@ export const __i18n__ = {
 		"es": "Esta configuración se creó con una versión anterior de CoR (%s) y puede estar desactualizada.",
 		"de": "Diese Konfiguration wurde mit einer alten Version von CoR (%s) erstellt und ist möglicherweise veraltet."
 	},
+	"If you share a setup with that version it will be automatically upgraded!":
+	{
+		"fr": "Si vous partagez une configuration avec cette version, elle sera automatiquement mise à jour !",
+		"de": "Wenn Sie ein Setup mit dieser Version teilen, wird es automatisch aktualisiert!",
+		"es": "¡Si compartes una configuración con esa versión, se actualizará automáticamente!"
+	},
 	"This is the beta trainer for versions on Amun. Things can change quickly.":
 	{
 		"fr": "Ceci est l'entraîneur en beta pour les versions sur Amun. Les choses peuvent changer rapidement.",
