@@ -741,7 +741,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": [100, 225, 350, 475, 600]
             }
           ]
@@ -1347,7 +1347,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": [50, 90, 120, 160, 200]
             }
           ],
@@ -1470,7 +1470,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": [50, 80, 120, 170, 250]
             }
           ]
@@ -1869,7 +1869,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": [175, 280, 410, 555, 750]
             },
             {
@@ -2270,7 +2270,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": [100, 200, 300, 400, 500]
             },
             {
@@ -3195,7 +3195,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": ["100-200", "225-325", "350-450", "475-575", "600-700"]
             }
           ]
@@ -5462,7 +5462,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden)",
               "value": ["100", "150", "200", "250", "400"]
             },
             {
@@ -5655,7 +5655,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": ["220-255", "350-470", "475-635", "600-800", "850-1150"]
             }
           ]
@@ -5735,7 +5735,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": ["70-100", "115-160", "160-225", "205-285", "250-350"]
             },
             {
@@ -6591,7 +6591,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": "+750"
             }
           ],
@@ -6703,7 +6703,7 @@
           },
           "mana": [60, 80, 100, 120, 140],
           "duration": 90,
-          "damage": [
+          "buffs": [
             {
               "en": "Slashing damage",
               "es": "Daño cortante",
@@ -7332,7 +7332,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": ["40", "70", "110", "140", "175"]
             }
           ]
@@ -7358,7 +7358,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": ["+15", "+30", "+45", "+60", "+75"]
             }
           ]
@@ -7394,7 +7394,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": ["90-110", "140-160", "200-220", "265-285", "340-360"]
             }
           ]
@@ -7415,7 +7415,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": ["+2%", "+4%", "+6%", "+8%", "+10%"]
             },
             {
@@ -7504,7 +7504,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": ["80-100", "100-120", "120-150", "150-190", "190-220"]
             }
           ]
@@ -7593,7 +7593,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": [120, 140, 160, 180, 200]
             },
             {
@@ -7633,7 +7633,7 @@
             {
               "en": "Piercing damage",
               "es": "Daño punzante",
-              "de": "Durchbohr-Schaden (75°-Winkel)",
+              "de": "Durchbohr-Schaden",
               "value": ["50", "100", "150", "200", "250"]
             }
           ],
@@ -9318,7 +9318,7 @@
             {
               "en": "Stop on move",
               "es": "Chance de bloqueo absoluto",
-              "de": "Bei einer Bewegung abbrechen.",
+              "de": "Bei einer Bewegung abbrechen",
               "value": true
             },
             {
