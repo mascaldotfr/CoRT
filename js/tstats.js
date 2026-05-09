@@ -120,9 +120,6 @@ function redraw_version() {
 $(document).ready(async function() {
 	document.title = _("Trainer statistics") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Trainer statistics"));
-	$("#ts-oldstats-text").html(_("For stats on older versions of Regnum <a id='ts-oldstats-link'>check this site</a>."));
-	$("#ts-oldstats-link").attr("href", "https://poludnica.shinyapps.io/configs/");
-	$("#ts-oldstats-link").attr("target", "_blank");
 
 	$("#ts-version-label").text(_("Version:"));
 	$("#ts-class-label").text(_("Class:"));
