@@ -193,19 +193,18 @@ if ("requestIdleCallback" in window) {
 	if (now > last_prefetch + prefetch_stale) {
 		localStorage.setItem("last_prefetch", now);
 		const urls = [
-			"bosses.html", "js/bosses.js",
-			"wz.html", "js/wz.js", "js/wztools/wztools.js",
-			"data/warstatus/base_map.png",
-			"wevents.html", "js/wevents.js",
-			"wstats.html", "js/wstats.js", "js/libs/chartist.js",
-			"bz.html", "js/bz.js",
-			"tstats.html", "js/tstats.js",
-			"./", "js/trainer.js", "js/libs/floating-ui-tooltip.js",
+			"js/bosses.js",
+			"js/wz.js", "js/wztools/wztools.js", "data/warstatus/base_map.png",
+			"js/wevents.js",
+			"js/wstats.js", "js/libs/chartist.js",
+			"js/bz.js",
+			"js/tstats.js",
+			"js/libs/floating-ui-tooltip.js",
 			`data/trainer/${TrainerConstants.datasets[TrainerConstants.datasets.length - 1]}/trainerdata.json?epoch=1`
 		];
 		requestIdleCallback(() => {
 			urls.forEach(url => {
-				fetch(url, { cache: "default" }).catch(() => {});
+				fetch(url, { cache: "default", priority: "low" }).catch(() => {});
 			});
 		});
 	}
