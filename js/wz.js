@@ -140,9 +140,7 @@ async function display_wz(force=false) {
 		const cached = JSON.parse(localStorage.getItem("wz_api_result"));
 		const now = Date.now();
 		// Limit to 2 fetch per minute
-		// XXX If you read this and CoRT is >= 3.8, the undefined check
-		// can be removed, it was for a transition to more meaningful names
-		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"] ) < 30_000) {
+		if (cached !== null && (now - cached["timestamp"] ) < 30_000) {
 			data = cached["payload"];
 			last_fetch_ts = cached["timestamp"];
 		}
@@ -165,19 +163,29 @@ async function display_wz(force=false) {
 			const whatfailed = Object.keys(failures).join(" ");
 			const checkout = `Check out <a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 				  NGE's page</a>!`;
+
+			$("#wz-map").addClass("wz-data-stale");
+			$("#wz-realms-info").addClass("wz-data-stale");
+			$("#wz-events").addClass("wz-data-stale");
+
 			if (data["failed"]["status"] == "fatal") {
 				$("#wz-info-error").html(`<p>
 				  Fetching the data from NGE's site totally failed and may have errors!
 				  ${checkout}</p>`);
-				return;
 			}
 			if (data["failed"]["status"] == "partial") {
 				$("#wz-info-error").html(`<p>
 				  Fetching the data (${whatfailed}) from NGE's site partially failed. ${checkout}</p>`);
 			}
 		}
+		else {
+			$("#wz-map").removeClass("wz-data-stale");
+			$("#wz-realms-info").removeClass("wz-data-stale");
+			$("#wz-events").removeClass("wz-data-stale");
+		}
 	}
 	catch (error) {
+		$("#wz-info").show();
 		$("#wz-info-error").html(`<p><b>Failed to get the warstatus:</b> <code>${error}</code></p>`);
 		return;
 	}

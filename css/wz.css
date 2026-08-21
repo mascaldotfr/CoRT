@@ -84,6 +84,12 @@
 	display: block;
 }
 
+.wz-data-stale {
+	filter: grayscale(75%);
+	transition: filter 1s ease;
+}
+
+
 @media (min-width: 1549px) {
 	#wz-container {
 		gap: 3em 1em;
