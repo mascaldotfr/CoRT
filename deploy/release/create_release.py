@@ -3,12 +3,10 @@
 """
 Script for generating release tarballs and template release notes.
 Meant for CoRT release candidates and stable releases.
-
 Usage:
-  python3 create_release.py          # Default: remove preloads, cache-bust, package
-  python3 create_release.py --mascal # Apply all optimizations (keep preloads, fuse CSS, minify, gzip, cache-bust)
+python3 create_release.py          # Default: remove preloads, cache-bust, package
+python3 create_release.py --mascal # Apply all optimizations (keep preloads, fuse CSS, minify, gzip, cache-bust)
 """
-
 import argparse
 import gzip
 import hashlib
@@ -20,11 +18,9 @@ import sys
 import tempfile
 from pathlib import Path
 
-
 def check_command(cmd: str) -> bool:
     """Check if a command is available in PATH."""
     return shutil.which(cmd) is not None
-
 
 def run_command(cmd: list[str], cwd: Path | None = None, check: bool = True) -> subprocess.CompletedProcess:
     """Run a shell command and return the result."""
@@ -36,27 +32,25 @@ def run_command(cmd: list[str], cwd: Path | None = None, check: bool = True) -> 
         text=True
     )
 
-
 def get_git_tags() -> tuple[str, str]:
     """Get the latest tag and the previous stable tag (x.y.z format)."""
     result = run_command(["git", "tag", "--sort=-creatordate"])
     all_tags = [t for t in result.stdout.strip().split("\n") if t]
-    
     if not all_tags:
         return "v0.0.0", "v0.0.0"
     
     latest_tag = all_tags[0]
-    stable_tags = [t for t in all_tags if re.match(r"^\d+\.\d+\.\d+$", t)]
     
+    # Find previous stable tag
+    stable_tags = [t for t in all_tags if re.match(r"^\d+\.\d+\.\d+$", t)]
     if len(stable_tags) >= 2:
         previous_tag = stable_tags[1]
     elif stable_tags:
         previous_tag = stable_tags[0]
     else:
         previous_tag = all_tags[1] if len(all_tags) > 1 else all_tags[0]
-    
+        
     return latest_tag, previous_tag
-
 
 def copy_git_files(source: Path, target: Path) -> None:
     """Copy all git-tracked files to target directory preserving structure."""
@@ -69,7 +63,6 @@ def copy_git_files(source: Path, target: Path) -> None:
         dst_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src_path, dst_path)
 
-
 def remove_preload_statements(target: Path) -> None:
     """Remove all <link rel="preload"> statements from HTML files."""
     for html_file in target.rglob("*.html"):
@@ -77,6 +70,28 @@ def remove_preload_statements(target: Path) -> None:
         content = re.sub(r'<link rel="preload"[^>]*>\s*', '', content)
         html_file.write_text(content, encoding="utf-8")
 
+def inject_api_preloads(target: Path) -> None:
+    """Inject strategic API preloads into specific HTML files to reduce RTT."""
+    preloads = {
+        "bosses.html": '<link rel="preload" href="api/bin/bosses/bosses.php" as="fetch" crossorigin="anonymous">',
+        "bz.html": '<link rel="preload" href="api/bin/bz/bz.php" as="fetch" crossorigin="anonymous">',
+        "wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" crossorigin="anonymous">',
+        "wevents.html": '<link rel="preload" href="api/var/events.json" as="fetch" crossorigin="anonymous">',
+        "wstats.html": '<link rel="preload" href="api/var/stats.json" as="fetch" crossorigin="anonymous">',
+    }
+    
+    for filename, preload_tag in preloads.items():
+        html_file = target / filename
+        if html_file.exists():
+            content = html_file.read_text(encoding="utf-8")
+            # Insert after the last existing stylesheet or modulepreload to keep head organized
+            # We look for the last </link> or <script> in head before closing </head>
+            match = re.search(r'(</head>)', content)
+            if match:
+                # Insert before </head>
+                new_content = content[:match.start()] + f"\n{preload_tag}\n" + content[match.start():]
+                html_file.write_text(new_content, encoding="utf-8")
+                print(f"===> Injected API preload into {filename}")
 
 def fuse_css_files(target: Path) -> None:
     """Fuse all CSS files into a single css/style.css."""
@@ -91,12 +106,13 @@ def fuse_css_files(target: Path) -> None:
     for css_file in other_css:
         combined += f"\n/* {css_file.name} */\n"
         combined += css_file.read_text(encoding="utf-8")
-    
+        
     for css_file in css_dir.glob("*.css"):
         css_file.unlink()
-    
+        
     main_css.write_text(combined, encoding="utf-8")
     
+    # Update HTML references to point only to style.css
     for html_file in target.rglob("*.html"):
         content = html_file.read_text(encoding="utf-8")
         def filter_stylesheet(match: re.Match) -> str:
@@ -104,9 +120,9 @@ def fuse_css_files(target: Path) -> None:
             if 'href="css/style.css"' in tag or "href='css/style.css'" in tag or "href=css/style.css" in tag:
                 return tag
             return ""
+            
         content = re.sub(r'<link[^>]*rel="stylesheet"[^>]*>', filter_stylesheet, content, flags=re.IGNORECASE)
         html_file.write_text(content, encoding="utf-8")
-
 
 def update_version_in_menu(target: Path, version: str) -> None:
     """Update the version comment in js/menu.js."""
@@ -119,7 +135,6 @@ def update_version_in_menu(target: Path, version: str) -> None:
             content
         )
         menu_file.write_text(content, encoding="utf-8")
-
 
 def apply_per_file_cache_busting(target: Path) -> None:
     """Compute per-file content hashes and update references in HTML/JS."""
@@ -142,10 +157,10 @@ def apply_per_file_cache_busting(target: Path) -> None:
     js_pattern = re.compile(
         r'(?P<quote>["\'])(?P<path>[^"\']+\.(?:js|mjs))(?:\?[^"\']*)?(?P=quote)'
     )
-
+    
     updated_html = 0
     updated_js = 0
-
+    
     # 2. Update HTML references
     for html_file in target.rglob("*.html"):
         content = html_file.read_text(encoding="utf-8")
@@ -160,16 +175,16 @@ def apply_per_file_cache_busting(target: Path) -> None:
                 rel = resolved.relative_to(target_resolved).as_posix()
             except ValueError:
                 return match.group(0)
-            
+                
             if rel in asset_hashes:
                 return f'{attr}={quote}{path}?{asset_hashes[rel]}{quote}'
             return match.group(0)
-
+            
         new_content = html_pattern.sub(replace_html, content)
         if new_content != content:
             updated_html += 1
             html_file.write_text(new_content, encoding="utf-8")
-
+            
     # 3. Update JS references (imports, dynamic imports, require)
     for js_file in target.rglob("*.js"):
         content = js_file.read_text(encoding="utf-8")
@@ -183,16 +198,16 @@ def apply_per_file_cache_busting(target: Path) -> None:
                 rel = resolved.relative_to(target_resolved).as_posix()
             except ValueError:
                 return match.group(0)
-            
+                
             if rel in asset_hashes:
                 return f"{quote}{path}?{asset_hashes[rel]}{quote}"
             return match.group(0)
-
+            
         new_content = js_pattern.sub(replace_js, content)
         if new_content != content:
             updated_js += 1
             js_file.write_text(new_content, encoding="utf-8")
-
+            
     print(f"===> Per-file cache busting applied: {updated_html} HTML, {updated_js} JS files updated.")
 
 def apply_cache_busting_to_defer_prefetch(target: Path, asset_hashes: dict[str, str]) -> None:
@@ -203,22 +218,23 @@ def apply_cache_busting_to_defer_prefetch(target: Path, asset_hashes: dict[str, 
     defer_file = target / "js" / "defer.js"
     if not defer_file.exists():
         return
-
+        
     target_resolved = target.resolve()
     defer_dir = defer_file.parent.resolve()
+    
     content = defer_file.read_text(encoding="utf-8")
     modified = False
-
+    
     def replace_js_url(match: re.Match) -> str:
         nonlocal modified
         quote = match.group(1)
         path = match.group(2)  # e.g. "js/bosses.js" or "./utils.js"
-
+        
         # 1. Try direct lookup first (for root-relative paths like "js/bosses.js")
         if path in asset_hashes:
             modified = True
             return f"{quote}{path}?{asset_hashes[path]}{quote}"
-
+            
         # 2. Try resolving relative to defer.js location (for "./utils.js" style)
         try:
             abs_path = (defer_dir / path).resolve()
@@ -228,16 +244,16 @@ def apply_cache_busting_to_defer_prefetch(target: Path, asset_hashes: dict[str, 
                 return f"{quote}{path}?{asset_hashes[rel_to_target]}{quote}"
         except ValueError:
             pass  # Path outside build root, skip
-
+            
         return match.group(0)
-
+        
     # Match quoted strings ending in .js (handles "file.js" and 'file.js')
     new_content = re.sub(
         r'(["\'])([^"\']+?\.js)\1',
         replace_js_url,
         content
     )
-
+    
     if modified:
         defer_file.write_text(new_content, encoding="utf-8")
         print("===> Cache busting applied to .js URLs in js/defer.js")
@@ -247,7 +263,7 @@ def minify_files(target: Path) -> None:
     if not check_command("minify"):
         print("ERROR: minify not found, please install it!")
         sys.exit(1)
-    
+        
     print("Minifying assets (may be slow)")
     extensions = ["*.css", "*.js", "*.html", "*.json"]
     for ext in extensions:
@@ -256,7 +272,6 @@ def minify_files(target: Path) -> None:
                 run_command(["minify", "-q", "-i", str(file)], check=False)
             except Exception:
                 continue
-
 
 def gzip_files(target: Path) -> None:
     """Create .gz precompressed files for HTML, CSS, JS, and JSON."""
@@ -286,31 +301,23 @@ def create_tarball(source: Path, version: str, output_path: Path) -> None:
     ]
     run_command(tar_cmd, cwd=source)
 
-
 def generate_release_notes(output_path: Path, version: str, previous_version: str) -> Path:
     """Generate the release notes template file."""
     notes_path = Path(str(output_path) + ".release_notes.md")
-    
     content = f"""## Main highlights
-
 ### Next release
-
 No schedule.
 
 ## About
-
 See  https://codeberg.org/mascal/CoRT/src/branch/main/deploy to deploy it
 
 To setup CoRT on managed webhosting or integrating it on your own server, use **CoRT-{version}.tar.gz** instead of the source code.
 
 ### Changelog
-
-
 **Full Changelog**: https://codeberg.org/mascal/CoRT/compare/{previous_version}...{version}
 """
     notes_path.write_text(content, encoding="utf-8")
     return notes_path
-
 
 def parse_arguments() -> argparse.Namespace:
     """Parse command-line arguments."""
@@ -324,7 +331,6 @@ def parse_arguments() -> argparse.Namespace:
     )
     return parser.parse_args()
 
-
 def main() -> None:
     """Main entry point."""
     args = parse_arguments()
@@ -332,7 +338,7 @@ def main() -> None:
     if not check_command("composer"):
         print("ERROR: COMPOSER not found, install php-composer!!!")
         sys.exit(1)
-    
+
     # Configuration based on --mascal flag
     if args.mascal:
         print("===> Applying all cort.ovh optims!")
@@ -340,11 +346,13 @@ def main() -> None:
         one_css = True
         do_minify = True
         do_gzip = True
+        do_api_preloads = True
     else:
         keep_preload = False
         one_css = False
         do_minify = False
         do_gzip = False
+        do_api_preloads = False
 
     try:
         result = run_command(["git", "rev-parse", "--show-toplevel"])
@@ -352,7 +360,7 @@ def main() -> None:
     except subprocess.CalledProcessError:
         print("ERROR: Not in a git repository!")
         sys.exit(1)
-    
+        
     version, previous_version = get_git_tags()
     print(f"===> Found version {version}. Previous one was {previous_version}.")
     
@@ -369,7 +377,11 @@ def main() -> None:
         if not keep_preload:
             print("Removing preloading statements")
             remove_preload_statements(target)
-        
+            
+        if do_api_preloads:
+            print("Injecting strategic API preloads")
+            inject_api_preloads(target)
+            
         if one_css:
             print("Fusing all CSS files")
             fuse_css_files(target)
@@ -388,17 +400,16 @@ def main() -> None:
         # Gzip AFTER all transformations
         if do_gzip:
             gzip_files(target)
-        
+            
         tarball_path = Path("/tmp") / f"CoRT-{version}.tar.gz"
         create_tarball(target, version, tarball_path)
         
         print("Generating release note template...")
         notes_path = generate_release_notes(tarball_path, version, previous_version)
-    
-    print("===> Cleaning up")
-    print(f"===> Tarball generated at {tarball_path}")
-    print(f"===> Template release notes generated at {notes_path}")
-
+        
+        print("===> Cleaning up")
+        print(f"===> Tarball generated at {tarball_path}")
+        print(f"===> Template release notes generated at {notes_path}")
 
 if __name__ == "__main__":
     main()
