@@ -81,10 +81,10 @@ class Calendar {
 
 	create_link(title, start, end, filename = "event.ics" ) {
 		const ics = this.generate_ics(title, start, end);
-		const encoded = encodeURIComponent(ics.trim().replace(/\r\n|\r/g, '\n'));
-		const href = `text/calendar;charset=utf-8,${encoded}`;
 		const safe_filename = filename.endsWith('.ics') ? filename : `${filename}.ics`;
-		return {"href": "data:" + href, filename: safe_filename};
+		const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+		const url = URL.createObjectURL(blob);
+		return {"href": url, filename: safe_filename};
 	}
 }
 
