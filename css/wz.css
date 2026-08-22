@@ -48,11 +48,12 @@
 }
 .wz-realm-header {
 	display: grid;
+	grid-template-columns: 7.5em 1fr;
 	grid-template-areas:
-		"realm forts"
-		"gems forts"
-		"relics forts";
-	gap: 0 2em;
+	"realm  forts"
+	"gems  forts"
+	"relics  forts";
+	gap: 0 1em;
 	min-height: 4.5em;
 	align-items: center;
 	font-size: 150%;
@@ -64,21 +65,26 @@
 }
 .wz-gems {
 	grid-area: gems;
-	text-align: right;
-	min-width: max-content;
 	display: flex;
 	justify-content: flex-end;
+	gap: 0.25em;
 }
 .wz-relics {
 	grid-area: relics;
-	text-align: right;
 	display: flex;
 	justify-content: flex-end;
+	gap: 0.25em;
 }
 .wz-forts {
 	grid-area: forts;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	height: 100%;
+	padding-left: 1em;
 	font-size: initial;
 	font-weight: initial;
+
 }
 .wz-forts span[id^="wz-forts-"] {
 	display: block;
@@ -124,6 +130,9 @@
 }
 
 @media (min-width: 512px) and  (max-width: 1549px) {
+	.wz-realm-header {
+		min-height: 3em;
+	}
 	#wz-realms-info {
 		zoom: 90%;
 	}
@@ -144,9 +153,6 @@
 	#wz-container {
 		gap: 0;
 		justify-content: space-around;
-	}
-	.wz-forts, .wz-realm-header {
-		gap: .5em;
 	}
 }
 
@@ -179,12 +185,23 @@
 		width: 100%;
 	}
 	#wz-alsius, #wz-ignis, #wz-syrtis {
-		min-height: 7.5em;
+		min-height: 6.5em;
 	}
 	#wz-alsius, #wz-ignis {
 		margin-bottom: 1em;
 	}
-	.wz-forts, .wz-realm-header {
-		gap: .5em;
+	.wz-realm-header {
+		grid-template-columns: 6em 1fr;
+		grid-template-areas:
+		"realm forts"
+		"gems forts"
+		"relics forts";
+		gap: calc(var(--default_margin_padding)  / 2);
+	}
+	[id^="wz-forts-"] {
+		font-size: 95%;
+	}
+	.wz-gems, .wz-relics {
+		gap: 0;
 	}
 }
