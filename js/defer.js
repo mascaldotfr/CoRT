@@ -193,6 +193,7 @@ if ("requestIdleCallback" in window) {
 	if (now > last_prefetch + prefetch_stale) {
 		localStorage.setItem("last_prefetch", now);
 		const urls = [
+			"js/trainer.js",
 			"js/bosses.js",
 			"js/wz.js", "js/wztools/wztools.js", "data/warstatus/base_map.png",
 			"js/wevents.js",
