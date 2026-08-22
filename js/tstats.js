@@ -1,7 +1,8 @@
-import {$, _, TrainerConstants, api} from "./libs/cortlibs.js";
+import {$, _, TrainerConstants, api, UITools} from "./libs/cortlibs.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
 var valid_trainerdatasets = TrainerConstants.datasets;
+const uitools = new UITools();
 // remove 1.33.2 and 1.33.3, setup collection wasn't a thing back then
 valid_trainerdatasets.splice(0,2);
 var stats = {};
@@ -16,9 +17,7 @@ async function download_stats() {
 		const cached = JSON.parse(localStorage.getItem("tstats_api_result"));
 		const now = Date.now();
 		// Refresh at best every hour (3hrs server side)
-		// XXX If you read this and CoRT is >= 3.8, the undefined check
-		// can be removed, it was for a transition to more meaningful names
-		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"] ) <= 3_600_000) {
+		if (cached !== null && (now - cached["timestamp"] ) <= 3_600_000) {
 			stats = cached["payload"];
 		}
 		else {
@@ -28,8 +27,7 @@ async function download_stats() {
 		}
 	}
 	catch(err) {
-		$("#ts-maingraph").html(`Failed to make the stats: <code>${err}</code> (check console)`);
-		$("#ts-maingraph").addClass("red", "bold");
+		$("#ts-error-info").html(`Failed to make the stats: <code>${err}</code> (check console)`);
 	}
 }
 
@@ -135,6 +133,7 @@ $(document).ready(async function() {
 	lang = localStorage.getItem("lang");
 	await download_stats();
 	redraw_all();
+	uitools.unskeleton();
 
 	$("#ts-version").on("change", redraw_version);
 	$("#ts-class").on("change", redraw_all);

@@ -1,4 +1,4 @@
-import {$, _, api, MyNotify, MyScheduler, Time} from "./libs/cortlibs.js";
+import {$, _, api, MyNotify, MyScheduler, Time, UITools} from "./libs/cortlibs.js";
 
 // formatters
 let lang = localStorage.getItem("lang");
@@ -6,6 +6,7 @@ let time = new Time();
 
 // cortlibs
 const notify = new MyNotify();
+const uitools = new UITools();
 
 // API data
 let data = null;
@@ -235,6 +236,7 @@ async function feed_bz() {
 		}
 		$(`#bz-sch${day}`).append(daily_schedule.join(""));
 	}
+	uitools.unskeleton();
 }
 
 $(document).ready(function() {

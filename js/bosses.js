@@ -1,4 +1,6 @@
-import {$, _, api, MyNotify, MyScheduler, Time} from "./libs/cortlibs.js";
+import {$, _, api, MyNotify, MyScheduler, Time, UITools} from "./libs/cortlibs.js";
+
+const uitools = new UITools();
 
 class Calendar {
 	// A very simple calendar module generating .ics files.
@@ -209,8 +211,9 @@ async function refresh_display() {
 	// reorder the boss divs
 	for (let boss in bosses_ordered) {
 		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
-		$(`#boss-${bosses_ordered[boss]}`).show();
 	}
+	if (bosses_ordered.length > 0) // if there was no error during fetch then
+		uitools.unskeleton();
 }
 
 $(document).ready(function() {

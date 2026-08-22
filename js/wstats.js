@@ -1,4 +1,4 @@
-import {$, _, api, MyScheduler, Time} from "./libs/cortlibs.js";
+import {$, _, api, MyScheduler, Time, UITools} from "./libs/cortlibs.js";
 import {Constants, TranslateForts} from "./wztools/wztools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
@@ -9,6 +9,9 @@ const report_days = [7, 30, 90];
 const constants = new Constants();
 const xlator = new TranslateForts();
 const time = new Time();
+
+// cortlibs
+const uitools = new UITools();
 
 const realm_colors = constants["realm_colors"];
 const realms = constants["realm_names"];
@@ -147,6 +150,7 @@ async function display_stat(force = false) {
 	}
 	catch (error) {
 		$("#ws-info-error").html(`<b>Failed to get statistics:</b> <code>${error}</code>`);
+		$("#ws-info-error").show();
 		return;
 	}
 
@@ -203,6 +207,8 @@ async function display_stat(force = false) {
 	show_graphs_fortsheld_byfort(infos["fortsheld"]["count"], "#ws-fortsheld-count-chart");
 	show_graphs_fortsheld_byfort(infos["fortsheld"]["average"], "#ws-fortsheld-avg-chart");
 	show_graphs_fortsheld_byrealm(infos["fortsheld"]["total"], "#ws-fortsheld-total-chart");
+
+	uitools.unskeleton()
 }
 
 $(document).ready(function() {

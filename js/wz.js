@@ -1,4 +1,4 @@
-import {$, _, api, MyNotify, MyScheduler} from "./libs/cortlibs.js";
+import {$, _, api, MyNotify, MyScheduler, UITools} from "./libs/cortlibs.js";
 import {Constants, TranslateForts, HumaniseEvents, Icons} from "./wztools/wztools.js";
 
 // Unix timestamp of the last update
@@ -14,6 +14,7 @@ const wzicons = icons.get_all_icons();
 
 //cortlibs
 const notify = new MyNotify();
+const uitools = new UITools();
 
 // canvas
 function setup_canvas() {
@@ -128,7 +129,6 @@ async function draw_map(images) {
 			canvas.ctx.fillText(`(${i + 1})`, pos[2] * dpr, pos[3] * dpr);
 		}
 	}
-
 }
 
 async function display_wz(force=false) {
@@ -241,6 +241,8 @@ async function display_wz(force=false) {
 	wz_lastupdate = Math.floor(new Date().getTime() / 1000);
 	if (events_list[1].length > 0)
 		notify.emit(_("WZ status"), events_list[1], "wz");
+
+	uitools.unskeleton();
 }
 
 

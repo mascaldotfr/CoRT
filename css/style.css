@@ -295,6 +295,35 @@ h3 {
 .nodeco { text-decoration: none; }
 .small { font-size: 90% }
 
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--card_background) 25%,
+        color-mix(in srgb, var(--card_background), var(--foreground) 8%) 50%,
+        var(--card_background) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 5s infinite ease-in-out;
+    color: transparent !important;
+    border: 1px solid color-mix(in srgb, var(--card_background), var(--foreground) 5%);
+    pointer-events: none;
+    border-radius: 4px;
+}
+
+/* Cache le contenu interne sans cacher la taille de l'élément */
+.skeleton * {
+    visibility: hidden;
+}
+
 @media (min-width: 800px) and (max-width: 1200px) {
 	#menu-links {
 		padding-bottom: var(--default_margin_padding);

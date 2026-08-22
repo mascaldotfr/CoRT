@@ -1,8 +1,10 @@
-import {$, _, api} from "./libs/cortlibs.js";
+import {$, _, api, UITools} from "./libs/cortlibs.js";
 import {HumaniseEvents} from "./wztools/wztools.js";
 
 let data = null;
 let last_fetch_ts = 0;
+
+const uitools = new UITools();
 const humaniser = new HumaniseEvents();
 
 function resolve_filter() {
@@ -48,6 +50,7 @@ function display_events() {
 	const we_events = $("#we-events");
 	if (filtered.length == 0) {
 		we_events.html(_("No matching event found!"));
+		uitools.unskeleton();
 	}
 	else {
 		we_events.empty();
@@ -62,6 +65,8 @@ function display_events() {
 			setTimeout(function () {
 				we_events.append(humaniser.humanise_events(batch, false));
 			}, 0);
+			if (i == 0)
+				uitools.unskeleton();
 		}
 	}
 }
@@ -71,9 +76,7 @@ async function get_data() {
 		const cached = JSON.parse(localStorage.getItem("wevents_api_result"))
 		const now = Date.now();
 		// Refetch at best every minute
-		// XXX If you read this and CoRT is >= 3.8, the undefined check
-		// can be removed, it was for a transition to more meaningful names
-		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"] ) <= 60_000) {
+		if (cached !== null && (now - cached["timestamp"]) <= 60_000) {
 			data = cached["payload"];
 			last_fetch_ts = cached["timestamp"];
 		}
@@ -84,9 +87,11 @@ async function get_data() {
 			localStorage.setItem("wevents_api_result", JSON.stringify(to_store));
 		}
 		$("#we-info-error").empty();
+		$("#we-info-error").hide();
 	}
 	catch (error) {
 		$("#we-info-error").html(`<b>Failed to get the events:</b> <code>${error}</code>`);
+		$("#we-info-error").show();
 		return;
 	}
 }

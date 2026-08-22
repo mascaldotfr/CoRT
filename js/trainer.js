@@ -1,4 +1,4 @@
-import {$, _, api, TrainerConstants} from "./libs/cortlibs.js";
+import {$, _, api, TrainerConstants, UITools} from "./libs/cortlibs.js";
 import { computePosition as fu_computePosition, offset as fu_offset, flip as fu_flip, shift as fu_shift } from "./libs/floating-ui-tooltip.js";
 
 // Classes are instanciated at the end
@@ -540,6 +540,8 @@ class SetupManager {
 			}
 		}, 1);
 
+		const uitools = new UITools();
+		uitools.unskeleton();
 	}
 
 
