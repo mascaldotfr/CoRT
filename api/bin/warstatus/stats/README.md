@@ -12,22 +12,6 @@ On top of the generated files, pre compressed gzip files are generated. Please
 see you web server documentation if you don't know how to activate the serving
 of such files.
 
-### Dump generator
-
-There is a way to get a CSV dump with all historical events. You can find
-them there:
-
-| Type                   | URL                                                |
-|------------------------|----------------------------------------------------|
-| Official               | https://cort.ovh/api/var/events_dump.csv           |
-| Local                  | https://yourhost/api/var/events_dump.csv           |
-
-The output is in the same format than the warstatus events list, see
-`../warstatus/README.md` for more details. It's refreshed every 24 hours,
-on-demand.
-
-Note that one day, the number of events
-
 ## Database format
 
 This is a carbon copy of the warstatus events array. Please see
@@ -137,6 +121,23 @@ for example.
  [...90 days report, same format...]
 ]
 ```
+### Dump generator
+
+There is a way to get a CSV dump with all historical events. You can find
+them there:
+
+| Type                   | URL                                                |
+|------------------------|----------------------------------------------------|
+| Official               | https://cort.ovh/api/bin/warstatus/stats/dump_generator.php          |
+| Local                  | https://yourhost/api/bin/warstatus/stats/dump_generator.php           |
+
+The output is in the same format than the warstatus events list, see
+`../warstatus/README.md` for more details. It's refreshed every 24 hours,
+on-demand.
+
+Note that one day, the number of events will be too high to be fit in excel,
+you'll need to use a real database.
+
 
 ## BUGS
 
