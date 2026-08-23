@@ -62,7 +62,7 @@ const __menu_footer = function() { return `
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260822.215048
+	<p> <!--VERSION-->Version: 20260823.131417
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
@@ -104,13 +104,14 @@ $(document).ready(function() {
 
 	// generate languages list
 	// jshint -W083
-	const path = window.location.pathname;
-	const pagename = path.endsWith("/") ? "" : path.split("/").pop();
+	const current_url = new URL(window.location.href);
+	current_url.searchParams.delete("lang");
+	const self_url = current_url.toString();
 	for (let l in langs) {
 		// Hide current language
 		if (l == currentlang)
 			continue;
-		let lang_href = `${pagename}?lang=${l}`;
+		let lang_href = `${self_url}?lang=${l}`;
 
 		$("#menu-lang-list").append(`
 			<li class="langoption" id="menu-lang-${l}" data-lang="${l}"><a href="${lang_href}" hreflang="${l}">${langs[l]}</a>`);
@@ -128,7 +129,7 @@ $(document).ready(function() {
 		const link = document.createElement("link");
 		link.rel = "alternate";
 		link.hreflang = l;
-		link.href = window.location + `?lang=${l}`;
+		link.href = `${self_url}?lang=${l}`;
 		document.head.appendChild(link);
 	}
 
