@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="preload" href="css/style.css" as="style" fetchpriority="high">
+		<link rel="modulepreload" href="js/libs/cortlibs.js" fetchpriority="high">
 		<script>
 			const SUPPORT_NESTED = CSS.supports('selector(&)');
 			const SAVED_THEME = localStorage.getItem("colorscheme") || "";
@@ -14,9 +16,7 @@
 		<meta name="keywords" content="regnumsentinel champions regnum online trainer entrenador epicos bosses war guerra status">
 		<meta name="description" content="Champions of Regnum trainer, war status, bosses respawn and bz countdowns">
 		<title>CoRT - Champions of Regnum Trainer</title>
-		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/trainer.css">
-		<link rel="modulepreload" href="js/libs/cortlibs.js" fetchpriority="high">
 		<script type="module" src="js/libs/cortlibs.js"></script>
 		<script type="module" src="js/menu.js"></script>
 		<script type="module" src="js/trainer.js"></script>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="preload" href="css/style.css" as="style" fetchpriority="high">
+		<link rel="modulepreload" href="js/libs/cortlibs.js" fetchpriority="high">
 		<script>
 			const SUPPORT_NESTED = CSS.supports('selector(&)');
 			const SAVED_THEME = localStorage.getItem("colorscheme") || "";
