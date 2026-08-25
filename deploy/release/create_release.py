@@ -18,6 +18,9 @@ import sys
 import tempfile
 from pathlib import Path
 
+# Change this if you want all optims on your own site
+cort_dot_ovh = "https://cort.ovh"
+
 def check_command(cmd: str) -> bool:
     """Check if a command is available in PATH."""
     return shutil.which(cmd) is not None
@@ -92,6 +95,30 @@ def inject_api_preloads(target: Path) -> None:
                 new_content = content[:match.start()] + f"\n{preload_tag}\n" + content[match.start():]
                 html_file.write_text(new_content, encoding="utf-8")
                 print(f"===> Injected API preload into {filename}")
+
+def inject_og_image(target: Path) -> None:
+    """Injects the canonical og:image meta tag into all HTML files."""
+    og_meta = f"""<meta property="og:image" content="{cort_dot_ovh}/favicon_512.png">"""
+    
+    for html_file in target.rglob("*.html"):
+        content = html_file.read_text(encoding="utf-8")
+        
+        # 1. Clean up any existing og:image tag to avoid duplicates
+        content = re.sub(r'\s*<meta property="og:image"[^>]*>', '', content)
+        
+        # 2. Insert the tag neatly after the meta charset, or fallback to after <head>
+        if '<meta charset="utf-8">' in content:
+            content = content.replace(
+                '<meta charset="utf-8">', 
+                f'<meta charset="utf-8">\n\t\t{og_meta}'
+            )
+        elif '<head>' in content:
+            content = content.replace(
+                '<head>', 
+                f'<head>\n\t\t{og_meta}'
+            )
+            
+        html_file.write_text(content, encoding="utf-8")
 
 def fuse_css_files(target: Path) -> None:
     """Fuse all CSS files into a single css/style.css."""
@@ -373,6 +400,9 @@ def main() -> None:
         
         print("===> Applying source code transformations")
         os.chdir(target)
+
+        print("Injecting canonical og:image meta tag")
+        inject_og_image(target)
         
         if not keep_preload:
             print("Removing preloading statements")
