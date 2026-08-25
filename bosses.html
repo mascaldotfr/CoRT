@@ -6,6 +6,9 @@
 		<script>
 			const SUPPORT_NESTED = CSS.supports('selector(&)');
 			const SAVED_THEME = localStorage.getItem("colorscheme") || "";
+			// Use default dark background to reduce FOUC if opened through another site
+			if (SAVED_THEME !== "Light")
+				document.documentElement.style.background = "#11152d";
 			if (SUPPORT_NESTED && SAVED_THEME != "")
 				document.documentElement.setAttribute("data-prefers-colorscheme", SAVED_THEME);
 			// All the rest is in js/defer.js
