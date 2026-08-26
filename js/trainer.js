@@ -479,6 +479,7 @@ class SetupManager {
 			link.as = "image";
 			link.type = "image/webp";
 			link.href = iconsrc;
+			link.fetchPriority = "high";
 			document.head.appendChild(link);
 		});
 		alltrees.forEach( (tree) => {
