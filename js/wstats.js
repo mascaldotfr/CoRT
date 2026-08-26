@@ -208,7 +208,8 @@ async function display_stat(force = false) {
 	show_graphs_fortsheld_byfort(infos["fortsheld"]["average"], "#ws-fortsheld-avg-chart");
 	show_graphs_fortsheld_byrealm(infos["fortsheld"]["total"], "#ws-fortsheld-total-chart");
 
-	uitools.unskeleton()
+	uitools.unskeleton();
+	uitools.defer();
 }
 
 $(document).ready(function() {
@@ -263,7 +264,5 @@ $(document).ready(function() {
 	display_stat(true);
 	const scheduler = new MyScheduler(10, 15, display_stat);
 	scheduler.start_scheduling();
-
-	import("./defer.js");
 });
 

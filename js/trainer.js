@@ -58,7 +58,6 @@ $(document).ready(function() {
 	else {
 		$("#t-load").trigger("click");
 	}
-	import("./defer.js");
 });
 
 $("#t-load").on("click", function() {
@@ -543,6 +542,7 @@ class SetupManager {
 
 		const uitools = new UITools();
 		uitools.unskeleton();
+		uitools.defer();
 	}
 
 

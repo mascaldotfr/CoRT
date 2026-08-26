@@ -1,4 +1,4 @@
-import {$, _, Time} from "./libs/cortlibs.js";
+import {$, _, Time, UITools} from "./libs/cortlibs.js";
 
 let time = new Time();
 let df = null;
@@ -54,6 +54,7 @@ $(document).ready(function() {
 		$(`#quests-${elem}`).show();
 
 	setInterval(display, 60 * 1000);
-	import("./defer.js");
+	const uitools = new UITools();
+	uitools.defer();
 });
 

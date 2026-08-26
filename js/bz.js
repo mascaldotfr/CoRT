@@ -237,6 +237,7 @@ async function feed_bz() {
 		$(`#bz-sch${day}`).append(daily_schedule.join(""));
 	}
 	uitools.unskeleton();
+	uitools.defer();
 }
 
 $(document).ready(function() {
@@ -254,6 +255,5 @@ $(document).ready(function() {
 	const scheduler = new MyScheduler(3, 5, feed_bz);
 	feed_bz();
 	scheduler.start_scheduling();
-	import("./defer.js");
 });
 

@@ -243,6 +243,7 @@ async function display_wz(force=false) {
 		notify.emit(_("WZ status"), events_list[1], "wz");
 
 	uitools.unskeleton();
+	uitools.defer();
 }
 
 
@@ -258,6 +259,4 @@ $(document).ready(function() {
 	display_wz(true);
 	const scheduler = new MyScheduler(10, 15, display_wz);
 	scheduler.start_scheduling();
-
-	import("./defer.js");
 });

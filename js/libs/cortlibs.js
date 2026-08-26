@@ -193,6 +193,9 @@ export class UITools {
 		document.querySelectorAll(".skeleton").forEach(el => el.classList.remove("skeleton"));
 		void document.body.offsetHeight;
 	}
+	defer() {
+		import("../defer.js");
+	}
 }
 
 

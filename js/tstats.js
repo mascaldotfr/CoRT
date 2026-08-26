@@ -134,11 +134,11 @@ $(document).ready(async function() {
 	await download_stats();
 	redraw_all();
 	uitools.unskeleton();
+	uitools.defer();
 
 	$("#ts-version").on("change", redraw_version);
 	$("#ts-class").on("change", redraw_all);
 	$("#ts-power").on("change", draw_powergraph);
 
-	import("./defer.js");
 });
 

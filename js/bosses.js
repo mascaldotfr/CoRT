@@ -212,8 +212,10 @@ async function refresh_display() {
 	for (let boss in bosses_ordered) {
 		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
 	}
-	if (bosses_ordered.length > 0) // if there was no error during fetch then
+	if (bosses_ordered.length > 0) { // if there was no error during fetch then
 		uitools.unskeleton();
+		uitools.defer();
+	}
 }
 
 $(document).ready(function() {
@@ -229,5 +231,4 @@ $(document).ready(function() {
 	refresh_display(true);
 	const scheduler = new MyScheduler(3, 5, refresh_display);
 	scheduler.start_scheduling();
-	import("./defer.js");
 });

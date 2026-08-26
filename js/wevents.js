@@ -65,8 +65,10 @@ function display_events() {
 			setTimeout(function () {
 				we_events.append(humaniser.humanise_events(batch, false));
 			}, 0);
-			if (i == 0)
+			if (i == 0) {
 				uitools.unskeleton();
+				uitools.defer();
+			}
 		}
 	}
 }
@@ -159,5 +161,4 @@ $(document).ready(async function() {
 		display_events();
 	}
 
-	import("./defer.js");
 });
