@@ -187,6 +187,7 @@ async function display_wz(force=false) {
 	catch (error) {
 		$("#wz-info").show();
 		$("#wz-info-error").html(`<p><b>Failed to get the warstatus:</b> <code>${error}</code></p>`);
+		uitools.defer();
 		return;
 	}
 

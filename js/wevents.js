@@ -94,6 +94,7 @@ async function get_data() {
 	catch (error) {
 		$("#we-info-error").html(`<b>Failed to get the events:</b> <code>${error}</code>`);
 		$("#we-info-error").show();
+		uitools.defer();
 		return;
 	}
 }

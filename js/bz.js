@@ -171,6 +171,7 @@ async function get_data() {
 	}
 	catch (error) {
 		$("#bz-error").text("Failed to get the BZ status: " + error);
+		uitools.defer();
 		return;
 	}
 }

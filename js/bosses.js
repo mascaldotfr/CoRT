@@ -154,6 +154,7 @@ async function get_next_respawns() {
 	}
 	catch (error) {
 		$("#boss-error").text("Failed to get the next bosses spawns: " + error)
+		uitools.defer();
 		return;
 	}
 }

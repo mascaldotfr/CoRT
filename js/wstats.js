@@ -151,6 +151,7 @@ async function display_stat(force = false) {
 	catch (error) {
 		$("#ws-info-error").html(`<b>Failed to get statistics:</b> <code>${error}</code>`);
 		$("#ws-info-error").show();
+		uitools.defer();
 		return;
 	}
 
