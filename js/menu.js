@@ -2,8 +2,6 @@
 // elsewhere, since this file is always executed
 import {$, _, __i18n__, api, myTz} from "./libs/cortlibs.js";
 
-// Remove the huge __menu_icons object entirely
-
 let __menu_content = function () { return `
 	<input type="checkbox" id="menu-click">
 	<label for="menu-click" class="menu-btn" id="menu-mobile"><span id="menu-mobile-cortlogo" class="menu-icon-cortlogo"></span><span class="bold">${_("Menu")}</span></label>
@@ -62,7 +60,7 @@ const __menu_footer = function() { return `
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260826.162110
+	<p> <!--VERSION-->Version: 20260826.185851
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
