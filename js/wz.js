@@ -159,7 +159,15 @@ async function display_wz(force=false) {
 		$("#wz-info").show();
 		if ("failed" in data) {
 			console.error(data["failed"]);
-			failures = JSON.parse(data["failed"]["debug"]);
+			try {
+				failures = JSON.parse(data["failed"]["debug"]);
+				if (typeof failures !== 'object' || failures === null) {
+					failures = {};
+				}
+			} catch (parseError) {
+				console.error("Failed to parse failures debug info:", parseError);
+				failures = {};
+			}
 			const whatfailed = Object.keys(failures).join(" ");
 			const checkout = `Check out <a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 				  NGE's page</a>!`;
