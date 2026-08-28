@@ -443,9 +443,9 @@ h3 {
 
 :root[data-prefers-colorscheme="Light"] {
 	--background: #FAF9F6;
-	--card_background: antiquewhite;
-	--menu_background: antiquewhite;
-	--tooltip_background: #ebe7e1;
+	--card_background: white;
+	--menu_background: #fffbf1;
+	--tooltip_background: #fef6eb;
 	--menu_buttons_background: #fff;
 	--foreground: black;
 	--forms: #e5e5e5;
@@ -478,9 +478,9 @@ h3 {
 		background: var(--card_background) !important;
 	}
 	.tippy-content, .menudetails {
-		box-shadow: 0 .1em .3em rgba(0, 0, 0, .9) !important;
+		box-shadow: 0 .1em .2em rgba(0, 0, 0, .9) !important;
 	}
 	.card {
-		border: 1px solid #E5E7EB;
+		border: 2px solid #E5E7EB;
 	}
 }
