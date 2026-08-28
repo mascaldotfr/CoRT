@@ -91,7 +91,7 @@
 }
 
 .wz-data-stale {
-	filter: grayscale(75%);
+	filter: grayscale(85%);
 	transition: filter 1s ease;
 }
 
