@@ -442,19 +442,19 @@ h3 {
 }
 
 :root[data-prefers-colorscheme="Light"] {
-	--background: ghostwhite;
-	--card_background: floralwhite;
+	--background: #FAF9F6;
+	--card_background: antiquewhite;
 	--menu_background: antiquewhite;
-	--tooltip_background: lightyellow;
+	--tooltip_background: #ebe7e1;
 	--menu_buttons_background: #fff;
 	--foreground: black;
 	--forms: #e5e5e5;
 	--red: #cc0000;
-	--blue: #0364a5;
+	--blue: #004cbb;
 	--green: #008700;
 	--purple: purple;
 	--faded: #525252;
-	--links: blue;
+	--links: var(--blue);
 	--ahover: purple;
 
 	scrollbar-color: initial;
@@ -469,7 +469,7 @@ h3 {
 		filter: brightness(.6) saturate(1.5);
 	}
 	#t-points {
-		background: #f8f8fe !important;
+		background: var(--card_background) !important;
 	}
 	#t-trainer .icon[data-status="available"] {
 		filter: brightness(.45);
@@ -477,7 +477,10 @@ h3 {
 	#ts-powergraph-graph svg {
 		background: var(--card_background) !important;
 	}
-	.tippy-content, .card:not(#wz-map), .menudetails {
+	.tippy-content, .menudetails {
 		box-shadow: 0 .1em .3em rgba(0, 0, 0, .9) !important;
+	}
+	.card {
+		border: 1px solid #E5E7EB;
 	}
 }
