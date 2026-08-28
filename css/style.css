@@ -484,3 +484,31 @@ h3 {
 		border: 2px solid #E5E7EB;
 	}
 }
+
+:root[data-prefers-colorscheme="OLED"] {
+	--background: #000000;
+	--card_background: #000000;
+	--menu_background: #111111;
+	--tooltip_background: #1a1a1a;
+	--menu_buttons_background: #222222;
+	--foreground: #ffffff;
+	--forms: #333333;
+	--red: #ff3333;
+	--blue: #00bfff;
+	--green: #39ff14;
+	--purple: #d94dff;
+	--faded: #aaaaaa;
+	--links: #66ccff;
+	--ahover: #ffffff;
+	scrollbar-color: var(--menu_background) var(--forms);
+	#t-points {
+		background: var(--menu_background) !important;
+		border: 1px solid #333333;
+	}
+	.card {
+		border: 1px solid #333333;
+	}
+	#wz-map {
+		border: none;
+	}
+}

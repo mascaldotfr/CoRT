@@ -53,6 +53,7 @@ const __menu_footer = function() { return `
 			<select id="colorschemechooser">
 				<option value="" default>Dark (Default)</option>
 				<option value="Light">Light</option>
+				<option value="OLED">OLED (Black)</option>
 				<option value="Alsius">Alsius</option>
 				<option value="Ignis">Ignis</option>
 				<option value="Syrtis">Syrtis</option>
@@ -60,7 +61,7 @@ const __menu_footer = function() { return `
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260828.202909
+	<p> <!--VERSION-->Version: 20260828.225906
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
