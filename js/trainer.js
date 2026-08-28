@@ -924,42 +924,88 @@ class DatasetsManager {
 
 }
 
-class SetupCompressor {
 
+
+class SetupCompressor {
 	constructor() {
+		// Lookup table to map characters to pairs of skill levels [x, y]
 		this.lookup = {};
+
+		// The 66 URL-safe characters used for encoding.
+		// This set avoids characters that need percent-encoding in URLs.
 		this.b66chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
+
 		let i = 0;
+		// Generate the lookup table by iterating through all possible pairs of skill levels (0-5)
 		for (let x = 0; x < 6; x++) {
 			for (let y = 0; y < 6; y++) {
+				// Map the current character to the pair [x, y]
 				this.lookup[this.b66chars[i]] = [x, y];
-				if (x != y)
+
+				// If x and y are different, we also map a "mirror" character to the reversed pair [y, x].
+				// This allows us to store any pair of digits using a single character by utilizing
+				// two halves of the character set (indices 0-30 and 31-61).
+				if (x != y) {
 					this.lookup[this.b66chars[i + 31]] = [y, x];
+				}
 				i++;
 			}
 		}
 	}
 
+	/**
+	 * Compresses a version index into two Base66 characters (Version 2 format).
+	 * Since there are more than 66 versions (up to ~3600), we use a base-60 approach
+	 * where the first char is the multiplier and the second is the remainder.
+	 * Max capacity: 66 * 66 = 4356 versions.
+	 */
 	compress_version1(version) {
 		let multiplier = Math.floor(version / 60);
 		let remainder = version % 60;
 		return this.b66chars[multiplier] + this.b66chars[remainder];
-
 	}
 
+	/**
+	 * Compresses the full setup string into a short URL-safe string.
+	 * Format: Version(1 or 2 chars) + Class(1 char) + Level(1 char) + Trees...
+	 * Each Tree: Discipline(1 char) + 10 Skills(5 chars, 2 skills per char)
+	 */
 	compress(setup_string) {
 		let output = "";
+		// Split the internal setup string into its components
 		setup_string = setup_string.split("+");
+
+		// 1. Encode Version Index
+		// Finds the index of the version name in the datasets list.
+		// In Version 2 (?t=), this uses compress_version1 to generate 2 characters.
+		// In Version 1 (?s=), this would typically just be one character, but the code
+		// currently defaults to the 2-char logic for the 'compress' method called by save_to_url.
 		output += this.compress_version1(datasets.trainerdatasets.indexOf(setup_string.shift()));
+
+		// 2. Encode Class (1 character)
+		// Maps the class name (e.g., 'warrior') to its index in TrainerConstants
 		output += this.b66chars[TrainerConstants.classes.indexOf(setup_string.shift())];
+
+		// 3. Encode Level (1 character)
+		// Directly maps the level integer (1-61) to a character
 		output += this.b66chars[parseInt(setup_string.shift())]; // level
+
+		// 4. Encode Trees (Discipline and Skills)
 		for (let i = 0; i < setup_string.length; i++) {
-			if (i % 2 == 0) { // discipline points
+			if (i % 2 == 0) {
+				// Even indices represent Discipline Levels
 				output += this.b66chars[parseInt(setup_string[i])];
 			}
-			else { // power points
+			else {
+				// Odd indices represent Skill Levels (a string of 10 digits, e.g., "0010005100")
+				// We process them in pairs to save space (10 digits -> 5 characters)
 				for (let pos = 0; pos < 10; pos += 2) {
+					// Extract a pair of skill levels (e.g., "00", "10", "51")
 					let searchfor = Array.from(setup_string[i].slice(pos, pos+2));
+
+					// Search the lookup table for the character that represents this pair.
+					// Note: This iterates over object keys. The order depends on insertion order
+					// in the constructor.
 					for (let combi in this.lookup) {
 						if (this.lookup[combi].toString() == searchfor) {
 							output += combi;
@@ -972,43 +1018,66 @@ class SetupCompressor {
 		return output;
 	}
 
+	/**
+	 * Decompresses the first two characters of the string back into a version name.
+	 * Used for Version 2 (?t=) setups.
+	 */
 	decompress_version1(string) {
+		// Reverse the base-60 logic: (first_char_index * 60) + second_char_index
 		let version_index = 60 * this.b66chars.indexOf(string[0]);
 		version_index += this.b66chars.indexOf(string[1]);
 		return datasets.trainerdatasets[version_index];
 	}
 
+	/**
+	 * Decompresses the full URL string back into the internal setup format.
+	 * Handles both Version 1 (?s=) and Version 2 (?t=) based on global state.
+	 */
 	decompress(string) {
 		let setup_string = "";
 		let offset = 0;
+		// Handle two different URL formats based on global state set during URL parsing
 		if (setup.skillset_urlformat == 0) {
+			// Format 0 (?s=): Version is 1 character (older or smaller dataset list)
 			setup_string += datasets.trainerdatasets[this.b66chars.indexOf(string[0])] + "+";
 		}
 		else if (setup.skillset_urlformat == 1) {
+			// Format 1 (?t=): Version is 2 characters (newer/larger dataset list, up to ~3600 versions)
 			setup_string += this.decompress_version1(string.slice(0,2)) + "+";
-			offset = 1;
+			offset = 1; // Adjust offset because we consumed an extra char for the version
 		}
+
+		// Decode Class and Level
 		setup_string += TrainerConstants.classes[this.b66chars.indexOf(string[offset + 1])] + "+";
 		setup_string += this.b66chars.indexOf(string[offset + 2]) + "+"; // level
+
+		// Remove the header part of the string to focus on the trees
 		string = string.substring(offset + 3);
+		// Process each tree (6 characters per tree: 1 for discipline, 5 for skills)
 		for (let pos = 0; pos <= string.length -1; pos += 6) {
 			let disc = Array.from(string.slice(pos,pos+6));
-			// discipline points
+			// Decode Discipline Level (first character of the chunk)
+
 			setup_string += this.b66chars.indexOf(disc.shift()) + "+";
-			// skill points
+
+			// Decode Skill Levels (remaining 5 characters represent 10 skills)
 			for (let skills of disc) {
+				// Use the lookup table to get the [x, y] pair and join them into a string
 				setup_string += this.lookup[skills].join("");
 			}
 			setup_string += "+";
 		}
+
+		// Remove the trailing "+"
 		setup_string = setup_string.substring(0, setup_string.length - 1);
+
+		// Validate the structure: Mages have 8 trees (19 fields), others have 7 (17 fields)
 		let setup_string_length = setup_string.split("+").length;
-		// Check if setup_string looks valid (19 fields for mages, 17 for the others)
 		if (setup_string_length != 17 && setup_string_length != 19)
 			return null;
+
 		return setup_string;
 	}
-
 }
 
 const compressor = new SetupCompressor();
