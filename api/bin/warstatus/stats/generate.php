@@ -251,63 +251,79 @@ class Reporter {
 	}
 
 	public function get_fortsheld() {
+		// Initialize arrays for the 9 specific forts tracked in the game
 		$forts_held = [
 			"Aggersborg" => [], "Trelleborg" => [], "Imperia" => [],
 			"Samal" => [], "Menirah" => [], "Shaanarid" => [],
 			"Herbred" => [], "Algaros" => [], "Eferias" => []
 		];
+
+		// Aggregated statistics for each realm across all forts
 		$total_forts = ["Alsius" => 0, "Ignis" => 0, "Syrtis" => 0];
 		$average_forts = ["Alsius" => [], "Ignis" => [], "Syrtis" => []];
 		$count_forts = ["Alsius" => [], "Ignis" => [], "Syrtis" => []];
 
 		foreach (array_keys($forts_held) as $fort) {
-			// Prepopulate for the 1st run
+			// Prepopulate data structure for each realm within this fort.
+			// This is essential for the first run or if a realm hasn't held
+			// this fort recently, ensuring the JSON output remains consistent.
 			foreach (["Alsius", "Ignis", "Syrtis"] as $realm) {
 				$forts_held[$fort][$realm] = ["time" => 0, "count" => 0];
 			}
 
-			// We get all events for a given fort
-			// Ironically it's more efficient to do 12 queries than a single one and let PHP
-			// split things
+			// Define possible names for the fort in the database (e.g., "Fort X" or "X Castle")
 			$search_names = ["Fort $fort", "$fort Castle"];
+
+			// Build the SQL WHERE clause dynamically for the fort names
 			$name_clause = implode(" OR name = ", array_map(fn($n) => "'$n'", $search_names));
+
+			// Fetch all events for this fort, ordered chronologically to calculate durations
 			$sql = "SELECT date, owner, location
 				FROM reportforts
 				WHERE name = $name_clause
 				ORDER BY date ASC;";
+
 			$result = $this->sql->query($sql);
 			$events = [];
 			while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 				$events[] = $row;
 			}
 
-			// For every event at this fort, find the next one, compute
-			// the duration between each events and add it to the
-			// realm's occupation time
+			// Calculate duration of ownership by comparing consecutive events
 			for ($i = 0; $i < count($events) - 1; $i++) {
 				$ev = $events[$i];
 				$nextev = $events[$i + 1];
+
+				// Time difference in minutes between this event and the next one
 				$timediff = ($nextev["date"] - $ev["date"]) / 60;
 				$whoheld = $ev["owner"];
+
+				// Accumulate total minutes held and number of holding periods
 				$forts_held[$fort][$whoheld]["time"] += $timediff;
 				$forts_held[$fort][$whoheld]["count"]++;
+
+				// Store the physical location of the fort (home realm)
 				$forts_held[$fort][$whoheld]["location"] = $ev["location"];
 			}
 
+			// Aggregate results into realm-wide statistics
 			foreach (["Alsius", "Ignis", "Syrtis"] as $realm) {
-				// compute the average holding time
+				// Calculate average holding time per period for this realm at this fort
 				if ($forts_held[$fort][$realm]["count"] != 0) {
 					$average = intval($forts_held[$fort][$realm]["time"] / $forts_held[$fort][$realm]["count"]);
 					$forts_held[$fort][$realm]["average"] = $average;
-				}
-				else {
-					// ensure the first run is ok
+				} else {
+					// Ensure the first run is ok by defaulting to 0 if no data exists
 					$forts_held[$fort][$realm]["average"] = 0;
 				}
-				// add total and average occupation time to the statistics
+
+				// Add this fort's average to the realm's list of averages
 				$average_forts[$realm][] = $forts_held[$fort][$realm]["average"];
+
+				// Add total hours held to the realm's total
 				$total_forts[$realm] += intval($forts_held[$fort][$realm]["time"] / 60);
-				// compute the fort capture count
+
+				// Count captures: only count if the owner is different from the fort's home location
 				$count = 0;
 				if (isset($forts_held[$fort][$realm]["location"]) &&
 					$realm !== $forts_held[$fort][$realm]["location"]) {
