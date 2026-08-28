@@ -178,7 +178,7 @@ async function display_wz(force=false) {
 
 			if (data["failed"]["status"] == "fatal") {
 				$("#wz-info-error").html(`<p>
-				  Fetching the data from NGE's site totally failed and may have errors!
+				  Fetching the data from NGE's site totally failed and may have errors or outdated data!
 				  ${checkout}</p>`);
 			}
 			if (data["failed"]["status"] == "partial") {
