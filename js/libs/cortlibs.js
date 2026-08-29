@@ -8,7 +8,6 @@ class ApiURL {
 		this.base = "";
 		this.cdn_base = "";
 		this.frontsite = "";
-		this.useless = "debugging stuff...";
 		// Use 127.0.0.1 for real local testing
 		let official = ["localhost", "cort.ovh", "beta.cort.ovh"];
 

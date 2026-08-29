@@ -404,7 +404,7 @@ h3 {
 	padding: 0;
 }
 .wztools-events-list li {
-	list-style: none;
+	list-style-type: none;
 }
 
 :root[data-prefers-colorscheme="Syrtis"] {
