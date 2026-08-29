@@ -52,16 +52,28 @@ export class HumaniseEvents {
 						captured_notify = `${captured} [${anevent["location"]}]`;
 				}
 				let target = `<span class="${location_color} bold">${captured}</span>`;
+				let emoji = "";
 				let action;
 				let action_notify;
+				if (anevent["type"] == "gem")
+					emoji = "&#x1F48E;";
 				if (anevent["location"] == anevent["owner"]) {
-					action = _("has recovered %s", target);
-					if (notify > 0)
-						action_notify = _("has recovered %s", captured_notify);
+					if (anevent["type"] == "fort" && anevent["name"].startsWith("Great Wall of")) {
+						action = _("has been reconquered");
+						emoji = "&#128330;&#65039;"
+						if (notify > 0)
+							action_notify = _("has been reconquered");
+					}
+					else {
+						action = _("has recovered %s", target);
+						if (notify > 0)
+							action_notify = _("has recovered %s", captured_notify);
+					}
 				}
 				else {
 					if (anevent["type"] == "fort" && anevent["name"].startsWith("Great Wall of")) {
 						action = _("has invaded %s", target);
+						emoji = "&#129413;"
 						if (notify > 0)
 							action_notify = _("has invaded %s", captured_notify);
 					}
@@ -71,7 +83,7 @@ export class HumaniseEvents {
 							action_notify = _("has captured %s", captured_notify);
 					}
 				}
-				events_html.push(`<span class="${owner_color} bold">${anevent["owner"]}</span> ${action}`);
+				events_html.push(`${emoji}<span class="${owner_color} bold">${anevent["owner"]}</span> ${action}`);
 				if (notify > 0 && anevent["date"] >= notify)
 					events_notify.push(`${anevent["owner"]} ${action_notify}`);
 			}
@@ -92,7 +104,7 @@ export class HumaniseEvents {
 			}
 			else if (anevent["type"] == "wish") {
 				let sentence = _("%s made a dragon wish!", anevent["location"]);
-				events_html.push(`<span class="${location_color} bold red">${sentence}</span>`);
+				events_html.push(`<span class="${location_color} bold red">&#128009;${sentence}</span>`);
 				if (notify > 0 && anevent["date"] >= notify)
 					events_notify.push(sentence);
 			}

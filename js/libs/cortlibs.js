@@ -904,6 +904,11 @@ export const __i18n__ = {
 		"es": "ha invadido %s",
 		"de": "hat %s invadiert"
 	},
+	"has been reconquered": {
+		"fr": "a été reconquis",
+		"es": "ha sido reconquistado",
+		"de": "wurde zurückerobert"
+	},
 	"More events": {
 		"fr": "Plus d'événements",
 		"es": "Más eventos",
