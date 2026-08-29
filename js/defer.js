@@ -50,8 +50,8 @@ if (mediaQuery.matches) {
 	const loadCursors = () => {
 		const style = document.createElement("style");
 		style.textContent = `
-			html, body, label, button { cursor: url("data/cursor/normal.webp"), default; }
-			label, select, button, textarea, a:hover, a:active { cursor: url("data/cursor/links.webp"), default; }
+			html, body, label, button { cursor: url("data/cursor/normal.1.webp"), default; }
+			label, select, button, textarea, a:hover, a:active { cursor: url("data/cursor/links.1.webp"), default; }
 		`;
 		document.head.appendChild(style);
 		document.removeEventListener("mousemove", loadCursors);
@@ -195,7 +195,7 @@ if ("requestIdleCallback" in window) {
 		const urls = [
 			"js/trainer.js",
 			"js/bosses.js",
-			"js/wz.js", "js/wztools/wztools.js", "data/warstatus/base_map.png",
+			"js/wz.js", "js/wztools/wztools.js", "data/warstatus/base_map.1.png",
 			"js/wevents.js",
 			"js/wstats.js", "js/libs/chartist.js",
 			"js/bz.js",
