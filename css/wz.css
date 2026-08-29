@@ -187,6 +187,7 @@
 	}
 	#wz-alsius, #wz-ignis, #wz-syrtis {
 		min-height: 6.5em;
+		display: grid;
 	}
 	#wz-alsius, #wz-ignis {
 		margin-bottom: 1em;
