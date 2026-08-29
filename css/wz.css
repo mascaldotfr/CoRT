@@ -193,19 +193,23 @@
 		margin-bottom: 1em;
 	}
 	.wz-realm-header {
-		grid-template-columns: 6em 1fr;
+		grid-template-columns: 1fr 1fr;
 		grid-template-areas:
 		"realm forts"
 		"gems forts"
 		"relics forts";
-		gap: calc(var(--default_margin_padding)  / 2);
+		gap: calc(var(--default_margin_padding) / 2);
 		justify-items: center;
-		justify-self: center;
+		justify-content: center;
+		align-items: center;
 	}
 	[id^="wz-forts-"] {
 		font-size: 95%;
 	}
 	.wz-gems, .wz-relics {
 		gap: 0;
+		justify-content: center;
+		display: flex;
+		flex-wrap: wrap;
 	}
 }
