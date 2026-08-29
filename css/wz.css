@@ -95,7 +95,7 @@
 }
 
 
-@media (min-width: 1400px) {
+@media (min-width: 1450px) {
 	#wz-container {
 		gap: 3em 1em;
 	}
@@ -126,7 +126,7 @@
 	}
 }
 
-@media (min-width: 512px) and  (max-width: 1400px) {
+@media (min-width: 512px) and  (max-width: 1450px) {
 	.wz-realm-header {
 		min-height: 3em;
 	}
