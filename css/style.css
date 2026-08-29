@@ -403,7 +403,7 @@ h3 {
 	margin: 0;
 	padding: 0;
 }
-.wztools-events-list {
+.wztools-events-list li {
 	list-style: none;
 }
 
