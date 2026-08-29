@@ -171,6 +171,9 @@ def apply_per_file_cache_busting(target: Path) -> None:
     # 1. Compute SHA256 hashes for all CSS/JS files
     for ext in ["*.css", "*.js"]:
         for file in target.rglob(ext):
+            # EXCEPTION: Skip sw.js to avoid breaking service worker registration/update logic
+            if file.name == "sw.js":
+                continue
             rel = file.relative_to(target).as_posix()
             asset_hashes[rel] = hashlib.sha256(file.read_bytes()).hexdigest()[:8]
 
