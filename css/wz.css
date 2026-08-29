@@ -198,6 +198,8 @@
 		"gems forts"
 		"relics forts";
 		gap: calc(var(--default_margin_padding)  / 2);
+		justify-items: center;
+		justify-self: center;
 	}
 	[id^="wz-forts-"] {
 		font-size: 95%;
