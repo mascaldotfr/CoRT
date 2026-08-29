@@ -164,17 +164,15 @@ def update_version_in_menu(target: Path, version: str) -> None:
         menu_file.write_text(content, encoding="utf-8")
 
 def apply_per_file_cache_busting(target: Path) -> None:
-    """Compute per-file content hashes and update references in HTML/JS."""
+    """Compute per-file content hashes, rename files, and update references in HTML/JS."""
     target_resolved = target.resolve()
     asset_hashes: dict[str, str] = {}
-    
+
     # 1. Compute SHA256 hashes for all CSS/JS files
     for ext in ["*.css", "*.js"]:
         for file in target.rglob(ext):
             rel = file.relative_to(target).as_posix()
             asset_hashes[rel] = hashlib.sha256(file.read_bytes()).hexdigest()[:8]
-
-    apply_cache_busting_to_defer_prefetch(target, asset_hashes)
 
     # Patterns for HTML src/href attributes and JS import/require strings
     html_pattern = re.compile(
@@ -184,15 +182,15 @@ def apply_per_file_cache_busting(target: Path) -> None:
     js_pattern = re.compile(
         r'(?P<quote>["\'])(?P<path>[^"\']+\.(?:js|mjs))(?:\?[^"\']*)?(?P=quote)'
     )
-    
+
     updated_html = 0
     updated_js = 0
-    
+
     # 2. Update HTML references
     for html_file in target.rglob("*.html"):
         content = html_file.read_text(encoding="utf-8")
         html_dir = html_file.parent
-        
+
         def replace_html(match: re.Match) -> str:
             attr = match.group(1)
             quote = match.group('quote')
@@ -202,21 +200,28 @@ def apply_per_file_cache_busting(target: Path) -> None:
                 rel = resolved.relative_to(target_resolved).as_posix()
             except ValueError:
                 return match.group(0)
-                
-            if rel in asset_hashes:
-                return f'{attr}={quote}{path}?{asset_hashes[rel]}{quote}'
-            return match.group(0)
             
+            if rel in asset_hashes:
+                hash_val = asset_hashes[rel]
+                dir_name = os.path.dirname(path)
+                old_name = os.path.basename(path)
+                name, ext = os.path.splitext(old_name)
+                new_name = f"{name}.{hash_val}{ext}"
+                # Preserve relative path prefixes like ./ or ../
+                new_path = os.path.join(dir_name, new_name).replace(os.sep, '/')
+                return f'{attr}={quote}{new_path}{quote}'
+            return match.group(0)
+
         new_content = html_pattern.sub(replace_html, content)
         if new_content != content:
             updated_html += 1
             html_file.write_text(new_content, encoding="utf-8")
-            
+
     # 3. Update JS references (imports, dynamic imports, require)
     for js_file in target.rglob("*.js"):
         content = js_file.read_text(encoding="utf-8")
         js_dir = js_file.parent
-        
+
         def replace_js(match: re.Match) -> str:
             quote = match.group('quote')
             path = match.group('path')
@@ -225,65 +230,84 @@ def apply_per_file_cache_busting(target: Path) -> None:
                 rel = resolved.relative_to(target_resolved).as_posix()
             except ValueError:
                 return match.group(0)
-                
-            if rel in asset_hashes:
-                return f"{quote}{path}?{asset_hashes[rel]}{quote}"
-            return match.group(0)
             
+            if rel in asset_hashes:
+                hash_val = asset_hashes[rel]
+                dir_name = os.path.dirname(path)
+                old_name = os.path.basename(path)
+                name, ext = os.path.splitext(old_name)
+                new_name = f"{name}.{hash_val}{ext}"
+                new_path = os.path.join(dir_name, new_name).replace(os.sep, '/')
+                return f"{quote}{new_path}{quote}"
+            return match.group(0)
+
         new_content = js_pattern.sub(replace_js, content)
         if new_content != content:
             updated_js += 1
             js_file.write_text(new_content, encoding="utf-8")
-            
-    print(f"===> Per-file cache busting applied: {updated_html} HTML, {updated_js} JS files updated.")
 
-def apply_cache_busting_to_defer_prefetch(target: Path, asset_hashes: dict[str, str]) -> None:
-    """
-    Add cache-busting hashes to .js URLs in js/defer.js prefetch array.
-    Handles both root-relative paths ("js/file.js") and defer-relative paths ("./file.js").
-    """
+    # 4. Update defer.js prefetch URLs
     defer_file = target / "js" / "defer.js"
-    if not defer_file.exists():
-        return
-        
-    target_resolved = target.resolve()
-    defer_dir = defer_file.parent.resolve()
-    
-    content = defer_file.read_text(encoding="utf-8")
-    modified = False
-    
-    def replace_js_url(match: re.Match) -> str:
-        nonlocal modified
-        quote = match.group(1)
-        path = match.group(2)  # e.g. "js/bosses.js" or "./utils.js"
-        
-        # 1. Try direct lookup first (for root-relative paths like "js/bosses.js")
-        if path in asset_hashes:
-            modified = True
-            return f"{quote}{path}?{asset_hashes[path]}{quote}"
+    if defer_file.exists():
+        content = defer_file.read_text(encoding="utf-8")
+        defer_dir = defer_file.parent.resolve()
+        modified = False
+
+        def replace_js_url(match: re.Match) -> str:
+            nonlocal modified
+            quote = match.group(1)
+            path = match.group(2)
             
-        # 2. Try resolving relative to defer.js location (for "./utils.js" style)
-        try:
-            abs_path = (defer_dir / path).resolve()
-            rel_to_target = abs_path.relative_to(target_resolved).as_posix()
-            if rel_to_target in asset_hashes:
+            # Try direct lookup (for root-relative paths like "js/bosses.js")
+            if path in asset_hashes:
                 modified = True
-                return f"{quote}{path}?{asset_hashes[rel_to_target]}{quote}"
-        except ValueError:
-            pass  # Path outside build root, skip
+                hash_val = asset_hashes[path]
+                dir_name = os.path.dirname(path)
+                old_name = os.path.basename(path)
+                name, ext = os.path.splitext(old_name)
+                new_name = f"{name}.{hash_val}{ext}"
+                new_path = os.path.join(dir_name, new_name).replace(os.sep, '/')
+                return f"{quote}{new_path}{quote}"
             
-        return match.group(0)
-        
-    # Match quoted strings ending in .js (handles "file.js" and 'file.js')
-    new_content = re.sub(
-        r'(["\'])([^"\']+?\.js)\1',
-        replace_js_url,
-        content
-    )
-    
-    if modified:
-        defer_file.write_text(new_content, encoding="utf-8")
-        print("===> Cache busting applied to .js URLs in js/defer.js")
+            # Try resolving relative to defer.js location (for "./utils.js" style)
+            try:
+                abs_path = (defer_dir / path).resolve()
+                rel_to_target = abs_path.relative_to(target_resolved).as_posix()
+                if rel_to_target in asset_hashes:
+                    modified = True
+                    hash_val = asset_hashes[rel_to_target]
+                    dir_name = os.path.dirname(path)
+                    old_name = os.path.basename(path)
+                    name, ext = os.path.splitext(old_name)
+                    new_name = f"{name}.{hash_val}{ext}"
+                    new_path = os.path.join(dir_name, new_name).replace(os.sep, '/')
+                    return f"{quote}{new_path}{quote}"
+            except ValueError:
+                pass
+            
+            return match.group(0)
+
+        new_content = re.sub(
+            r'(["\'])([^"\']+?\.js)\1',
+            replace_js_url,
+            content
+        )
+        if modified:
+            defer_file.write_text(new_content, encoding="utf-8")
+
+    # 5. Rename files on disk
+    for rel, hash_val in asset_hashes.items():
+        old_path = target / rel
+        if old_path.exists():
+            dir_name = os.path.dirname(rel)
+            old_name = os.path.basename(rel)
+            name, ext = os.path.splitext(old_name)
+            new_name = f"{name}.{hash_val}{ext}"
+            new_rel = os.path.join(dir_name, new_name).replace(os.sep, '/')
+            new_path = target / new_rel
+            old_path.rename(new_path)
+
+    print(f"===> Per-file cache busting applied (renamed): {updated_html} HTML, {updated_js} JS files updated.")
 
 def minify_files(target: Path) -> None:
     """Minify CSS, JS, HTML, and JSON files using the minify command."""
