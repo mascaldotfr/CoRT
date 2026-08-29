@@ -20,9 +20,9 @@ export class HumaniseEvents {
 		});
 
 		// wztools
-		let translator = new TranslateForts();
-		let constants = new Constants();
-		let realm_colors = constants.realm_colors;
+		const cleaner = new CleanForts();
+		const constants = new Constants();
+		const realm_colors = constants.realm_colors;
 
 		let events_html = [];
 		let events_notify = [];
@@ -35,11 +35,11 @@ export class HumaniseEvents {
 			let captured = anevent["name"];
 			let captured_notify = anevent["name"];
 			let dt_color = anevent["type"] == "wish" ? location_color: "";
-			events_html.push(`<span class="${dt_color} bold">${datetime}</span>&nbsp;`);
+			events_html.push(`<li><span class="${dt_color} bold small faded">${datetime}</span>&nbsp;`);
 			if (anevent["type"] == "fort" || anevent["type"] == "gem") {
 				let location_color = realm_colors[anevent["location"]];
 				if (anevent["type"] == "fort") {
-					captured = translator.translate_fort(captured, has_id);
+					captured = cleaner.clean_fort(captured, has_id);
 					if (has_id === true) {
 						captured = captured.substring(0, captured.lastIndexOf(" "));
 						if (notify > 0)
@@ -60,11 +60,18 @@ export class HumaniseEvents {
 						action_notify = _("has recovered %s", captured_notify);
 				}
 				else {
-					action = _("has captured %s", target);
-					if (notify > 0)
-						action_notify = _("has captured %s", captured_notify);
+					if (anevent["type"] == "fort" && anevent["name"].startsWith("Great Wall of")) {
+						action = _("has invaded %s", target);
+						if (notify > 0)
+							action_notify = _("has invaded %s", captured_notify);
+					}
+					else {
+						action = _("has captured %s", target);
+						if (notify > 0)
+							action_notify = _("has captured %s", captured_notify);
+					}
 				}
-				events_html.push(`<span class="${owner_color} bold">${anevent["owner"]}</span> ${action}.`);
+				events_html.push(`<span class="${owner_color} bold">${anevent["owner"]}</span> ${action}`);
 				if (notify > 0 && anevent["date"] >= notify)
 					events_notify.push(`${anevent["owner"]} ${action_notify}`);
 			}
@@ -73,23 +80,22 @@ export class HumaniseEvents {
 				let relic = `<span class="${location_color} bold">${_("%s's relic", captured)}</span>`;
 				let relic_notify = `${_("%s's relic", captured)}`;
 				if (anevent["location"] == "altar") {
-					events_html.push(`${relic} ${_("is back.")}`);
+					events_html.push(`${relic} ${_("is back")}`);
 					if (notify > 0 && anevent["date"] >= notify)
-						events_notify.push(`${relic_notify} ${_("is back.")}`);
+						events_notify.push(`${relic_notify} ${_("is back")}`);
 				}
 				else {
-					events_html.push(`${relic} ${_("is in transit.")}`);
+					events_html.push(`${relic} ${_("is in transit")}`);
 					if (notify > 0 && anevent["date"] >= notify)
-						events_notify.push(`${relic_notify} ${_("is in transit.")}`);
+						events_notify.push(`${relic_notify} ${_("is in transit")}`);
 				}
 			}
 			else if (anevent["type"] == "wish") {
 				let sentence = _("%s made a dragon wish!", anevent["location"]);
-				events_html.push(`<span class="${location_color} bold">${sentence}</span>`);
+				events_html.push(`<span class="${location_color} bold red">${sentence}</span>`);
 				if (notify > 0 && anevent["date"] >= notify)
 					events_notify.push(sentence);
 			}
-			events_html.push("<br>");
 		}
 		if (notify > 0) {
 			// Don't display more than the 9 newest events for any notification
@@ -100,29 +106,34 @@ export class HumaniseEvents {
 	}
 }
 
-
-export class TranslateForts {
-	// Create translatable strings according to english order of words
-	// id is the (x) thing at the end of each fortification,
-	translate_fort(fort, has_id=true) {
+export class CleanForts {
+	clean_fort(fort, has_id=true) {
 		let words = fort.split(" ");
 		let fort_id;
 		let fort_name;
-		let fort_type;
+
 		if (has_id === true)
 			fort_id = words.pop();
+
 		if (words[1] == "Castle") {
 			fort_name = words.shift();
-			fort_type = "%s " + words.join(" ");
+		}
+		else if (words[0] == "Fort") {
+			fort_name = words.pop();
+		}
+		else if (words[0] == "Great" && words[1] == "Wall") {
+			fort_name = words.pop();
 		}
 		else {
 			fort_name = words.pop();
-			fort_type = words.join(" ") + " %s";
 		}
-		let translated = _(fort_type, fort_name);
+
+		let cleaned = fort_name;
+
 		if (fort_id !== undefined)
-			translated += ` ${fort_id}`;
-		return translated;
+			cleaned += ` ${fort_id}`;
+
+		return cleaned;
 	}
 }
 

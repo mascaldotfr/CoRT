@@ -10,7 +10,7 @@
 	--blue: #9ccdf9;
 	--green: #7de384;
 	--purple: #bd93ff;
-	--faded: #ccc;
+	--faded: #ddd;
 	--links: lightblue;
 	--ahover: #ccaaff;
 	--default_margin_padding: .5em;
@@ -284,11 +284,12 @@ h3 {
 	color: white;
 }
 
+/* Beware, for the colors, order matters */
+.faded { color: var(--faded); }
 .red { color: var(--red); }
 .blue { color: var(--blue); }
 .green { color: var(--green); }
 .purple { color: var(--purple); }
-.faded { color: var(--faded); }
 .center { text-align:center; }
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
@@ -394,6 +395,13 @@ h3 {
 /* Global Tippy stuff */
 .tippy-content {
 	border: 2px solid var(--foreground);
+}
+
+/* Global WZ events list show */
+.wztools-events-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 
 :root[data-prefers-colorscheme="Syrtis"] {

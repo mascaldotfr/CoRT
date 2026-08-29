@@ -1,5 +1,5 @@
 import {$, _, api, MyScheduler, Time, UITools} from "./libs/cortlibs.js";
-import {Constants, TranslateForts} from "./wztools/wztools.js";
+import {Constants, CleanForts} from "./wztools/wztools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
 // sync with statistics.json
@@ -7,7 +7,7 @@ const report_days = [7, 30, 90];
 
 // wztools
 const constants = new Constants();
-const xlator = new TranslateForts();
+const cleaner = new CleanForts();
 const time = new Time();
 
 // cortlibs
@@ -175,7 +175,7 @@ async function display_stat(force = false) {
 				["Forts captured (total)", naify(r["forts"]["total"])],
 				["Forts captured", naify(r["forts"]["captured"])],
 				["Most captured fort",
-					`${xlator.translate_fort(r["forts"]["most_captured"]["name"], false)}
+					`${cleaner.clean_fort(r["forts"]["most_captured"]["name"], false)}
 					    (${naify(r["forts"]["most_captured"]["count"], "N/A")})`],
 				["Forts recovered", naify(r["forts"]["recovered"])],
 				["Has invaded", naify(r["invasions"]["count"])],

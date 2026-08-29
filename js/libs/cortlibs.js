@@ -879,21 +879,6 @@ export const __i18n__ = {
 		"es": "¡Enlace copiado!",
 		"de": "Link kopiert!"
 	},
-	"Fort %s": {
-		"fr": "Fort %s",
-		"es": "Fuerte %s",
-		"de": "Fort %s"
-	},
-	"%s Castle": {
-		"fr": "Château %s",
-		"es": "Castillo %s",
-		"de": "Schloss %s"
-	},
-	"Great Wall of %s": {
-		"fr": "Grande Muraille de %s",
-		"es": "Gran Muralla de %s",
-		"de": "Große Mauer von %s"
-	},
 	"The page will update itself every minute.": {
 		"fr": "La page sera rafraîchie toutes les minutes.",
 		"es": "La página se actualizará cada minuto.",
@@ -914,20 +899,25 @@ export const __i18n__ = {
 		"es": "ha recuperado %s",
 		"de": "hat %s zurückerobert"
 	},
+	"has invaded %s": {
+		"fr": "a envahi %s",
+		"es": "ha invadido %s",
+		"de": "hat %s invadiert"
+	},
 	"More events": {
 		"fr": "Plus d'événements",
 		"es": "Más eventos",
 		"de": "Weitere Events"
 	},
-	"is back.": {
-		"fr": "est de retour.",
-		"es": "ha retornado.",
-		"de": "ist zurück."
+	"is back": {
+		"fr": "est de retour",
+		"es": "ha retornado",
+		"de": "ist zurück"
 	},
-	"is in transit.": {
-		"fr": "est en transit.",
-		"es": "está en tránsito.",
-		"de": "ist unterwegs."
+	"is in transit": {
+		"fr": "est en transit",
+		"es": "está en tránsito",
+		"de": "ist unterwegs"
 	},
 	"%s's relic": {
 		"fr": "Relique de %s",
