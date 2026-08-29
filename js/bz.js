@@ -1,7 +1,7 @@
 import {$, _, api, MyNotify, MyScheduler, Time, UITools} from "./libs/cortlibs.js";
 
 // formatters
-let lang = localStorage.getItem("lang");
+let lang = null;
 let time = new Time();
 
 // cortlibs
@@ -242,6 +242,7 @@ async function feed_bz() {
 }
 
 $(document).ready(function() {
+	lang = localStorage.getItem("lang");
 	document.title = _("BZ status") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("BZ status"));
 	$("#bz-schedule-title").text(_("Schedule"));
