@@ -403,6 +403,9 @@ h3 {
 	margin: 0;
 	padding: 0;
 }
+.wztools-events-list {
+	list-style: none;
+}
 
 :root[data-prefers-colorscheme="Syrtis"] {
 	--card_background: #14281f;
