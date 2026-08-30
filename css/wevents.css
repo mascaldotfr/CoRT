@@ -33,6 +33,9 @@
 #we-events {
 	height: 50vh;
 	overflow-y: scroll;
+	/* reinstate default margin padding for card who are overriden by wztools-events-list */
+	margin: var(--default_margin_padding);
+	padding: var(--default_margin_padding);
 }
 #we-floppy {
 	visibility: hidden;
