@@ -303,7 +303,7 @@ export class MyNotify {
 		if (!this.swsupport || Notification.permission !== "default")
 			return;
 		$("#title").append(`
-			<a href="#" id="ask-notifications" class="nodeco" title="Notifications">&nbsp;🔔</a>
+		    <a href="#" id="ask-notifications" class="nodeco" title="Notifications"><span class="notif-badge">&#128276;</span></a>
 		`);
 		$("#ask-notifications").on("click", function () {
 			$("#ask-notifications").remove();

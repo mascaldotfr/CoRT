@@ -284,6 +284,17 @@ h3 {
 	color: white;
 }
 
+.notif-badge {
+	display: inline-block;
+	text-transform: uppercase;
+	background: var(--tooltip_background);
+	border-radius: 4px;
+	font-size: 50%;
+	vertical-align: super;
+	padding: 6px ;
+	margin-left:-4px;
+}
+
 /* Beware, for the colors, order matters */
 .faded { color: var(--faded); }
 .red { color: var(--red); }
