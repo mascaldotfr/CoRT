@@ -195,7 +195,7 @@ if ("requestIdleCallback" in window) {
 		const urls = [
 			"js/trainer.js",
 			"js/bosses.js",
-			"js/wz.js", "js/wztools/wztools.js", "data/warstatus/base_map.1.png",
+			"js/wz.js", "js/wztools/wztools.js", "data/warstatus/base_map.2.png",
 			"js/wevents.js",
 			"js/wstats.js", "js/libs/chartist.js",
 			"js/bz.js",

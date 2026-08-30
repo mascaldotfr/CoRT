@@ -21,7 +21,7 @@
 	image-rendering: auto; /* Chrome */
 	image-rendering: smooth; /* FF-only */
 	image-rendering: optimizeQuality; /* FF + Safari, deprecated */
-	background-image: url("../data/warstatus/base_map.1.png");
+	background-image: url("../data/warstatus/base_map.2.png");
 	background-size: cover;
 }
 .wz-icon {
