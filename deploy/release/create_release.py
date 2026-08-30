@@ -151,17 +151,29 @@ def fuse_css_files(target: Path) -> None:
         content = re.sub(r'<link[^>]*rel="stylesheet"[^>]*>', filter_stylesheet, content, flags=re.IGNORECASE)
         html_file.write_text(content, encoding="utf-8")
 
-def update_version_in_menu(target: Path, version: str) -> None:
-    """Update the version comment in js/menu.js."""
-    menu_file = target / "js" / "menu.js"
-    if menu_file.exists():
-        content = menu_file.read_text(encoding="utf-8")
-        content = re.sub(
-            r'(<!--VERSION-->Version: ).+',
-            rf'\g<1>{version}',
-            content
-        )
-        menu_file.write_text(content, encoding="utf-8")
+def inject_version_meta(target: Path, version: str) -> None:
+    """Inject the build version as a meta tag in all HTML files."""
+    meta_tag = f'<meta name="cort-version" content="{version}">'
+    
+    for html_file in target.rglob("*.html"):
+        content = html_file.read_text(encoding="utf-8")
+        
+        # Clean up any existing tag to avoid duplicates on re-runs
+        content = re.sub(r'\s*<meta name="cort-version"[^>]*>', '', content)
+        
+        # Inject neatly after the charset meta tag
+        if '<meta charset="utf-8">' in content:
+            content = content.replace(
+                '<meta charset="utf-8">',
+                f'<meta charset="utf-8">\n\t\t{meta_tag}'
+            )
+        elif '<head>' in content:
+            content = content.replace(
+                '<head>',
+                f'<head>\n\t\t{meta_tag}'
+            )
+            
+        html_file.write_text(content, encoding="utf-8")
 
 def apply_per_file_cache_busting(target: Path) -> None:
     """Compute per-file content hashes, rename files, and update references in HTML/JS."""
@@ -443,9 +455,10 @@ def main() -> None:
             print("Fusing all CSS files")
             fuse_css_files(target)
             
-        print("Updating version string")
-        update_version_in_menu(target, version)
-        
+
+        print("Injecting version meta tag")
+        inject_version_meta(target, version)
+
         # Minify BEFORE cache busting so hashes match delivered content
         if do_minify:
             minify_files(target)

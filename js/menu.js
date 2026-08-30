@@ -46,7 +46,10 @@ const __menu_github_stuff = function () {
 	return _("CoRT is a free and open source website, feel free to check out its %s, and %s. See also the %s!",
 		 src, bugs, dc)
 }
-const __menu_footer = function() { return `
+const __menu_footer = function() {
+	const cort_version = document.querySelector('meta[name="cort-version"]')?.getAttribute("content") || "devel";
+
+	return `
 	<div id="footer-options" class="card">
 		<div id="tz"><div id="tztitle">${_("Timezone")}&emsp;</div><select id="tzchooser"></select></div>
 		<div id="colorscheme"><div id="colorschemetitle">${_("Theme")}&emsp;</div>
@@ -61,7 +64,7 @@ const __menu_footer = function() { return `
 		</div>
 	</div>
 	<p class="italic">${__menu_github_stuff()}
-	<p> <!--VERSION-->Version: 20260830.134058
+	<p>Version: ${cort_version}
 	(<a href="#" id="reset_powers" title="Clear all CoRT cached data. Use this in case of errors.">/reset_powers</a>)
 `; };
 
