@@ -131,6 +131,20 @@ async function draw_map(images) {
 	}
 }
 
+function switch_stale(stale) {
+	// This is for total failures
+	if (stale === false) {
+		$("#wz-map").removeClass("wz-data-stale");
+		$("#wz-realms-info").removeClass("wz-data-stale");
+		$("#wz-events").removeClass("wz-data-stale");
+	}
+	else {
+		$("#wz-map").addClass("wz-data-stale");
+		$("#wz-realms-info").addClass("wz-data-stale");
+		$("#wz-events").addClass("wz-data-stale");
+	}
+}
+
 async function display_wz(force=false) {
 	let data = null;
 	let failures = {};
@@ -172,24 +186,20 @@ async function display_wz(force=false) {
 			const checkout = `Check out <a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 				  NGE's page</a>!`;
 
-			$("#wz-map").addClass("wz-data-stale");
-			$("#wz-realms-info").addClass("wz-data-stale");
-			$("#wz-events").addClass("wz-data-stale");
-
 			if (data["failed"]["status"] == "fatal") {
 				$("#wz-info-error").html(`<p>
 				  Fetching the data from NGE's site totally failed and may have errors or outdated data!
 				  ${checkout}</p>`);
+				switch_stale(true);
 			}
 			if (data["failed"]["status"] == "partial") {
 				$("#wz-info-error").html(`<p>
-				  Fetching the data (${whatfailed}) from NGE's site partially failed. ${checkout}</p>`);
+				  Fetching the data for (${whatfailed}) failed. Last known infos are shown. ${checkout}</p>`);
+				switch_stale(false);
 			}
 		}
 		else {
-			$("#wz-map").removeClass("wz-data-stale");
-			$("#wz-realms-info").removeClass("wz-data-stale");
-			$("#wz-events").removeClass("wz-data-stale");
+			switch_stale(false);
 		}
 	}
 	catch (error) {
@@ -207,12 +217,15 @@ async function display_wz(force=false) {
 	display_map(data["forts"]);
 
 	// Middle part
-
-	if (!("gems" in failures)) {
-		for (let i = 0; i < data["gems"].length; i++) {
-			const gem = data["gems"][i];
-			$(`#wz-gems-${i}`).html(wzicons[gem]);
-		}
+	for (let i = 0; i < data["gems"].length; i++) {
+		const gem = data["gems"][i];
+		const selector = $(`#wz-gems-${i}`);
+		if (wzicons[gem] !== undefined)
+			selector.html(wzicons[gem]);
+		if (!("gems" in failures))
+			selector.removeClass("wz-data-stale");
+		else
+			selector.addClass("wz-data-stale");
 	}
 
 	for (let i = 0; i < data["forts"].length; i++) {
@@ -226,16 +239,18 @@ async function display_wz(force=false) {
 		const realm_lc = realm.toLowerCase();
 		$(`#wz-${realm_lc}-name`).text(realm);
 		// XXX Currently relics fail if gems fail
-		if (!("gems" in failures)) {
-			let i = 0;
-			for (let relic in data["relics"][realm]) {
-				const url = data["relics"][realm][relic];
-				if (url !== null) {
-					$(`#wz-relics-${realm_lc}-${i}`).html(wzicons[url]);
-					$(`#wz-relics-${realm_lc}-${i}`).attr("title", relic);
-				}
-				i++;
-			}
+		let i = 0;
+		for (let relic in data["relics"][realm]) {
+			const url = data["relics"][realm][relic];
+			const selector = $(`#wz-relics-${realm_lc}-${i}`);
+			selector.attr("title", relic);
+			if (url !== null)
+				selector.html(wzicons[url]);
+			if (!("gems" in failures))
+				selector.removeClass("wz-data-stale");
+			else
+				selector.addClass("wz-data-stale");
+			i++;
 		}
 	}
 
