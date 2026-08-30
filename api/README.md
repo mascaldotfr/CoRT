@@ -30,4 +30,9 @@ Special stuff:
 
 Endpoints are actually static and actualized minutely/hourly or more as needed,
 it's useless to hammer them more than minutely. I totally assume and accept
-long polling over websockets.
+short polling over websockets.
+
+The limits are generous; you shouldn't meet them if you are using responsibly.
+
+**Note that some endpoints like the dump generator (updated daily anyway) and
+events.sqlite have a stronger rate limiting (5 downloads per hour).**
