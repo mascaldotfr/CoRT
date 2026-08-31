@@ -127,8 +127,6 @@
 	#wz-alsius, #wz-ignis, #wz-syrtis {
 		min-height: 5.5em;
 	}
-	.wz-forts {
-	}
 }
 
 @media (min-width: 512px) and  (max-width: 1450px) {
@@ -140,7 +138,7 @@
 		/* XXX hide some margin issue leaving 4 px left at the bottom */
 		background-color: unset;
 	}
-	#wz-map-map {
+	#wz-map-map, #wz-map {
 		width: 350px;
 		height: 350px;
 	}
@@ -153,20 +151,22 @@
 	}
 }
 
-@media (min-width: 512px) and (max-width: 1250px) {
+@media (min-width: 512px) and (max-width: 1279px) {
 	#wz-realms-info {
 		width: fit-content;
-		zoom: 90%;
 		min-width: 16em;
 	}
-	#wz-map-map {
-		zoom: 90%;
+	.wz-realm-header {
+		gap: 0;
 	}
-	#wz-events {
-		zoom: 90%;
+	#wz-map-map, #wz-map {
+		width: 250px;
+		height: 250px;
+		align-self: center;
 	}
-
-
+	#wz-realms-info {
+		font-size: 90%;
+	}
 }
 
 @media(max-width: 512px) {
