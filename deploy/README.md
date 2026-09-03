@@ -14,10 +14,11 @@ seen at https://codeberg.org/mascal/CoRT/releases
 
 There are several documented ways to install CoRT:
 
-1. [Without API](README.noapi.md) -- not recommended, very easy but not very performing
-2. [With API, on managed webhosting](README.managed.md) -- easy
-3. [With API, integrated in an already running server](README.integrated.md) -- intermediate
-4. [With API using Docker, or any new server](README.vps.md) -- advanced, use development version by default
+*Installing witout API is no more supported, but the trainer will still be available*
+
+1. [With API, on managed webhosting](README.managed.md) -- easy
+2. [With API, integrated in an already running server](README.integrated.md) -- intermediate
+3. [With API using Docker, or any new server](README.vps.md) -- advanced, use development version by default
 
 ## Releasing and production
 

@@ -8,8 +8,7 @@ class ApiURL {
 		this.base = "";
 		this.cdn_base = "";
 		this.frontsite = "";
-		// Use 127.0.0.1 for real local testing
-		let official = ["localhost", "cort.ovh", "beta.cort.ovh"];
+		let official = ["cort.ovh"];
 
 		// Define base_urls
 		if (official.includes(window.location.hostname)) {
