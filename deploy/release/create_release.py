@@ -74,27 +74,39 @@ def remove_preload_statements(target: Path) -> None:
         html_file.write_text(content, encoding="utf-8")
 
 def inject_api_preloads(target: Path) -> None:
-    """Inject strategic API preloads into specific HTML files to reduce RTT."""
+    """Inject strategic API preloads into specific HTML files to reduce RTT.
+
+    Preloads are only injected when the corresponding localStorage cache
+    is not already populated, avoiding unnecessary network requests.
+    Skipped on Apple devices due to known browser quirks with fetch preloads.
+    """
     preloads = {
-        "bosses.html": '<link rel="preload" href="api/bin/bosses/bosses.php" as="fetch" crossorigin="anonymous">',
-        "bz.html": '<link rel="preload" href="api/bin/bz/bz.php" as="fetch" crossorigin="anonymous">',
-        "wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" crossorigin="anonymous">',
-        "wevents.html": '<link rel="preload" href="api/var/events.json" as="fetch" crossorigin="anonymous">',
-        "wstats.html": '<link rel="preload" href="api/var/stats.json" as="fetch" crossorigin="anonymous">',
+        "bosses.html": ("api/bin/bosses/bosses.php", "bosses_api_result_v2"),
+        "bz.html": ("api/bin/bz/bz.php", "bz_api_result_v2"),
+        "wz.html": ("api/var/wstatus.json", "wz_api_result"),
+        "wevents.html": ("api/var/events.json", "wevents_api_result"),
+        "wstats.html": ("api/var/stats.json", "wstats_api_result"),
     }
-    
-    for filename, preload_tag in preloads.items():
+
+    for filename, (api_url, ls_key) in preloads.items():
         html_file = target / filename
-        if html_file.exists():
-            content = html_file.read_text(encoding="utf-8")
-            # Insert after the last existing stylesheet or modulepreload to keep head organized
-            # We look for the last </link> or <script> in head before closing </head>
-            match = re.search(r'(</head>)', content)
-            if match:
-                # Insert before </head>
-                new_content = content[:match.start()] + f"\n{preload_tag}\n" + content[match.start():]
-                html_file.write_text(new_content, encoding="utf-8")
-                print(f"===> Injected API preload into {filename}")
+        if not html_file.exists():
+            continue
+
+        content = html_file.read_text(encoding="utf-8")
+
+        # The regex checks for Mac (macOS), iPhone, iPad, and iPod (iOS)
+        script_tag = (
+            f'<script>if(!/Mac|iPhone|iPad|iPod/.test(navigator.userAgent)'
+            f'&&!localStorage.getItem("{ls_key}"))'
+            f'{{const l=document.createElement("link");'
+            f'l.rel="preload";l.href="{api_url}";'
+            f'l.as="fetch";l.crossOrigin="anonymous";'
+            f'document.head.appendChild(l);}}</script>'
+        )
+
+        content = content.replace("</head>", f"{script_tag}\n</head>", 1)
+        html_file.write_text(content, encoding="utf-8")
 
 def inject_og_image(target: Path) -> None:
     """Injects the canonical og:image meta tag into all HTML files."""
