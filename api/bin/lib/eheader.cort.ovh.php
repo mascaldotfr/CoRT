@@ -48,7 +48,7 @@ function eheader_cors($allow = null) {
 // used for direct consumption of the API, permissive this time, change
 // `$allow` value to EH_FRONTSITE (or an array of allowed origins) if you
 // don't want your API be fetched by others.
-function eheader_api($mime_type, $allow = "*") {
+function eheader_api($mime_type, $allow = null) {
 	valid_mime_or_die($mime_type);
 	eheader_cors($allow);
 	header("Content-Type: " . EH_MIME_TYPES[$mime_type]);
