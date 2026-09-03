@@ -16,6 +16,15 @@ $output_file = "../../var/trainerstats.json";
 // Check if output file exists and is less than 3 hours old
 // Redirect to the cached page if that's the case
 if (filesize($output_file) != 0 && file_exists($output_file) && (time() - filemtime($output_file)) < 3 * 3600) {
+	$last_modified = filemtime($output_file);
+	header("Last-Modified: " . gmdate("D, d M Y H:i:s", $last_modified) . " GMT");
+
+	$if_modified_since = $_SERVER["HTTP_IF_MODIFIED_SINCE"] ?? null;
+	if ($if_modified_since && strtotime($if_modified_since) >= $last_modified) {
+		http_response_code(304);
+		exit();
+	}
+
 	readfile($output_file);
 	exit();
 }
