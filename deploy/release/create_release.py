@@ -471,6 +471,16 @@ def main() -> None:
         print("Injecting version meta tag")
         inject_version_meta(target, version)
 
+		# Replace eheader.php with eheader.cort.ovh.php
+        src_cortovh = Path("api/bin/lib/eheader.cort.ovh.php")
+        dst_header = Path("api/bin/lib/eheader.php")
+
+        if src_cortovh.exists():
+            print("===> Replacing eheader.php with eheader.cort.ovh.php")
+            shutil.copy2(src_cortovh, dst_header)
+        else:
+            print("WARNING: api/bin/lib/eheader.cort.ovh.php not found. CORS will remain open (*).")
+
         # Minify BEFORE cache busting so hashes match delivered content
         if do_minify:
             minify_files(target)

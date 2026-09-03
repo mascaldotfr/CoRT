@@ -16,6 +16,7 @@ This script is a modern, vibecoded, **Python rewrite** of the original `old.crea
 - 🧹 Optional removal of `<link rel="preload">` statements
 - 📦 CSS fusion into a single `css/style.css`
 - 🔐 **Per-file cache busting** using SHA-256 hashes (computed *after* transformations)
+- 🔐 **CORS hardening** (`--mascal` only)
 - 🗜️ Asset minification (HTML, CSS, JS, JSON)
 - 📦 GZIP precompression (`.file.gz` generation)
 - 🐘 Automatic `composer install` for PHP dependencies
@@ -44,7 +45,7 @@ Run the script from anywhere within your CoRT Git repository. It will automatica
 # This keeps it readable and editable easily
 python3 create_release.py
 
-# cort.ovh mode: enables all optimizations (CSS fusion, minification, GZIP, keeps preloads)
+# cort.ovh mode: enables all optimizations (CSS fusion, minification, GZIP, keeps preloads, add restricitve CORS)
 python3 create_release.py --mascal
 ```
 
