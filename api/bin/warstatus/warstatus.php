@@ -36,7 +36,15 @@ function main() {
 	global $outfile, $stats_db_file, $stats_outfile, $stats_outfile_events, $base_url, $debug_mode;
 
 	try {
-		$context = stream_context_create(['http' => ['timeout' => 10]]);
+		$context = stream_context_create([
+			'http' => [
+				'timeout' => 10
+			],
+			'ssl' => [
+				'verify_peer' => false,
+				'verify_peer_name' => false
+			]
+		]);
 		$upstream_html = file_get_contents($base_url . "/index.php?l=1&sec=3", false, $context);
 		if ($upstream_html === false) {
 			throw new Exception("file_get_contents failed");
