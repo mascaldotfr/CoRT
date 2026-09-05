@@ -24,12 +24,12 @@ const assetsToCopy = [
 
 // static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
 const static_preloads = {
-	"index.html": '<link rel="preload" href="data/trainer/1.35.19/trainerdata.json?epoch=1" as="fetch" />',
-	"bosses.html": '<link rel="preload" href="api/bin/bosses/bosses.php" as="fetch" />',
-	"bz.html": '<link rel="preload" href="api/bin/bz/bz.php" as="fetch" />',
-	"wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" />',
-	"wevents.html": '<link rel="preload" href="api/var/events.json" as="fetch" />',
-	"wstats.html": '<link rel="preload" href="api/var/stats.json" as="fetch" />'
+	"index.html": '<link rel="preload" href="data/trainer/1.35.19/trainerdata.json?epoch=1" as="fetch" crossorigin="anonymous" />',
+	"bosses.html": '<link rel="preload" href="api/bin/bosses/bosses.php" as="fetch" crossorigin="anonymous" />',
+	"bz.html": '<link rel="preload" href="api/bin/bz/bz.php" as="fetch" crossorigin="anonymous" />',
+	"wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" crossorigin="anonymous" />',
+	"wevents.html": '<link rel="preload" href="api/var/events.json" as="fetch" crossorigin="anonymous" />',
+	"wstats.html": '<link rel="preload" href="api/var/stats.json" as="fetch" crossorigin="anonymous" />'
 };
 
 // --- GET GIT VERSION ---
