@@ -31,6 +31,11 @@ const api_preloads = {
 	"wstats.html": { url: "api/var/stats.json", key: "wstats_api_result" }
 };
 
+// static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
+const static_preloads = {
+	"index.html": '<link rel="preload" href="data/trainer/1.35.19/trainerdata.json?epoch=1" as="fetch" />'
+}
+
 
 // --- GET GIT VERSION ---
 function getGitVersion() {
@@ -194,13 +199,28 @@ function injectApiPreloadsPlugin() {
 					`document.head.appendChild(l);}</script>`
 				);
 
-				content = content.replace('</head>', `${scriptTag}\n</head>`);
+				content = content.replace('<head>', `<head>${scriptTag}`);
 
 				fs.writeFileSync(htmlFile, content, 'utf8');
 				console.log(`Injected API preload into ${filename}`);
 			}
 		}
 	};
+}
+
+// --- SIMPLE <HEAD> injection ---
+function injectCustomHead(filename, contentToInsert) {
+    return {
+        name: `inject-custom-preload-${filename}`,
+        apply: 'build',
+        transformIndexHtml(html, ctx) {
+            // Si le fichier HTML en cours de traitement correspond, on injecte
+            if (ctx.filename.endsWith(filename)) {
+                return html.replace('<head>', `<head>${contentToInsert}`);
+            }
+            return html;
+        }
+    };
 }
 
 
@@ -214,6 +234,7 @@ export default defineConfig({
 		minifyHtmlPlugin(),
 		copyStaticAssets(),
 		injectApiPreloadsPlugin(),
+		injectCustomHead("index.html", static_preloads["index.html"]),
 		gzipPlugin()
 	],
 	build: {
