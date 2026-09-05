@@ -22,6 +22,14 @@ const assetsToCopy = [
 	'favicon.png', 'favicon.svg', 'favicon_512.png'
 ];
 
+// API preloads
+const api_preloads = {
+	"bosses.html": { url: "api/bin/bosses/bosses.php", key: "bosses_api_result_v2" },
+	"bz.html": { url: "api/bin/bz/bz.php", key: "bz_api_result_v2" },
+	"wz.html": { url: "api/var/wstatus.json", key: "wz_api_result" },
+	"wevents.html": { url: "api/var/events.json", key: "wevents_api_result" },
+	"wstats.html": { url: "api/var/stats.json", key: "wstats_api_result" }
+};
 
 
 // --- GET GIT VERSION ---
@@ -118,47 +126,81 @@ function copyStaticAssets() {
 
 // --- PLUGIN FOR GZIP PRE-COMPRESSION ---
 function gzipPlugin() {
-    return {
-        name: 'gzip-compression',
-        apply: 'build',
-        closeBundle() {
-            const extensions = ['.html', '.js', '.css', '.json'];
-            const outDir = resolve(__dirname, 'dist');
-            const skipDirs = ['api']; // Directories to exclude from compression
+	return {
+		name: 'gzip-compression',
+		apply: 'build',
+		closeBundle() {
+			const extensions = ['.html', '.js', '.css', '.json'];
+			const outDir = resolve(__dirname, 'dist');
+			const skipDirs = ['api']; // Directories to exclude from compression
 
-            const gzipRecursive = (dir) => {
-                const files = fs.readdirSync(dir);
-                for (const file of files) {
-                    const fullPath = resolve(dir, file);
-                    const stats = fs.statSync(fullPath);
+			const gzipRecursive = (dir) => {
+				const files = fs.readdirSync(dir);
+				for (const file of files) {
+					const fullPath = resolve(dir, file);
+					const stats = fs.statSync(fullPath);
 
-                    if (stats.isDirectory()) {
-                        // Skip excluded directories
-                        if (skipDirs.includes(file)) {
-                            console.log(`Skipping directory: ${file}`);
-                            continue;
-                        }
-                        gzipRecursive(fullPath);
-                    }
-                    // Compress if the extension matches and it's not already a .gz file
-                    else if (extensions.some(ext => file.endsWith(ext)) && !file.endsWith('.gz')) {
-                        const content = fs.readFileSync(fullPath);
-                        // Maximum compression (level 9)
-                        const compressed = gzipSync(content, { level: 9 });
-                        fs.writeFileSync(`${fullPath}.gz`, compressed);
+					if (stats.isDirectory()) {
+						// Skip excluded directories
+						if (skipDirs.includes(file)) {
+							console.log(`Skipping directory: ${file}`);
+							continue;
+						}
+						gzipRecursive(fullPath);
+					}
+					// Compress if the extension matches and it's not already a .gz file
+					else if (extensions.some(ext => file.endsWith(ext)) && !file.endsWith('.gz')) {
+						const content = fs.readFileSync(fullPath);
+						// Maximum compression (level 9)
+						const compressed = gzipSync(content, { level: 9 });
+						fs.writeFileSync(`${fullPath}.gz`, compressed);
 
-                        console.log(`Gzipped: ${file}.gz`);
-                    }
-                }
-            };
+						console.log(`Gzipped: ${file}.gz`);
+					}
+				}
+			};
 
-            if (fs.existsSync(outDir)) {
-                console.log('\nCompressing assets with gzip (level 9)...');
-                gzipRecursive(outDir);
-                console.log('Compression done\n');
-            }
-        }
-    };
+			if (fs.existsSync(outDir)) {
+				console.log('\nCompressing assets with gzip (level 9)...');
+				gzipRecursive(outDir);
+				console.log('Compression done\n');
+			}
+		}
+	};
+}
+
+// --- PLUGIN FOR INJECTING API PRELOADS ---
+function injectApiPreloadsPlugin() {
+	return {
+		name: 'inject-api-preloads',
+		apply: 'build',
+		closeBundle() {
+			const outDir = resolve(__dirname, 'dist');
+
+			for (const [filename, { url, key }] of Object.entries(api_preloads)) {
+				const htmlFile = resolve(outDir, filename);
+
+				// Skip if the HTML file doesn't exist
+				if (!fs.existsSync(htmlFile)) continue;
+
+				let content = fs.readFileSync(htmlFile, 'utf8');
+
+				const scriptTag = (
+					`<script>if(!/Mac|iPhone|iPad|iPod/.test(navigator.userAgent)` +
+					`&&!localStorage.getItem("${key}"))` +
+					`{const l=document.createElement("link");` +
+					`l.rel="preload";l.href="${url}";` +
+					`l.as="fetch";l.crossOrigin="anonymous";` +
+					`document.head.appendChild(l);}</script>`
+				);
+
+				content = content.replace('</head>', `${scriptTag}\n</head>`);
+
+				fs.writeFileSync(htmlFile, content, 'utf8');
+				console.log(`Injected API preload into ${filename}`);
+			}
+		}
+	};
 }
 
 
@@ -171,6 +213,7 @@ export default defineConfig({
 		injectVersionPlugin(),
 		minifyHtmlPlugin(),
 		copyStaticAssets(),
+		injectApiPreloadsPlugin(),
 		gzipPlugin()
 	],
 	build: {
