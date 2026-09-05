@@ -5,9 +5,7 @@
     "build": "vite build && COMPOSER_VENDOR_DIR=dist/vendor COMPOSER_NO_INTERACTION=1 COMPOSER=../../composer.json composer install --no-dev --optimize-autoloader && cp dist/api/bin/lib/eheader.cort.ovh.php dist/api/bin/lib/eheader.php"
   },
   "devDependencies": {
-    "html-minifier-terser": "^7.2.0",
     "vite": "^5.0.0",
-    "vite-plugin-compression2": "^2.5.3",
-    "vite-plugin-minify": "^3.0.0"
+    "html-minifier-terser": "^7.2.0"
   }
 }
