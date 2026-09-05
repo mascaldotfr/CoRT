@@ -2,7 +2,7 @@
   "name": "CoRT",
   "version": "devel",
   "scripts": {
-    "build": "vite build && COMPOSER_VENDOR_DIR=dist/vendor COMPOSER_NO_INTERACTION=1 COMPOSER=../../composer.json composer install --no-dev --optimize-autoloader"
+    "build": "vite build && COMPOSER_VENDOR_DIR=dist/vendor COMPOSER_NO_INTERACTION=1 COMPOSER=../../composer.json composer install --no-dev --optimize-autoloader && cp dist/api/bin/lib/eheader.cort.ovh.php dist/api/bin/lib/eheader.php"
   },
   "devDependencies": {
     "vite": "^5.0.0",
