@@ -184,29 +184,3 @@ document.addEventListener("visibilitychange", () => {
 	if (!document.hidden)
 		menu_status();
 });
-
-// preloading on idle
-if ("requestIdleCallback" in window) {
-	const prefetch_stale = 60 * 60 * 1000;
-	const now = Date.now();
-	const last_prefetch = parseInt(localStorage.getItem("last_prefetch")) || 0;
-	if (now > last_prefetch + prefetch_stale) {
-		localStorage.setItem("last_prefetch", now);
-		const urls = [
-			"js/trainer.js",
-			"js/bosses.js",
-			"js/wz.js", "js/wztools/wztools.js", "data/warstatus/base_map.2.png",
-			"js/wevents.js",
-			"js/wstats.js", "js/libs/chartist.js",
-			"js/bz.js",
-			"js/tstats.js",
-			"js/libs/floating-ui-tooltip.js",
-			`data/trainer/${TrainerConstants.datasets[TrainerConstants.datasets.length - 1]}/trainerdata.json?epoch=1`
-		];
-		requestIdleCallback(() => {
-			urls.forEach(url => {
-				fetch(url, { cache: "default", priority: "low" }).catch(() => {});
-			});
-		});
-	}
-}

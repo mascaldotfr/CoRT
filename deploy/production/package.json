@@ -1,0 +1,11 @@
+{
+  "name": "CoRT",
+  "version": "devel",
+  "scripts": {
+    "build": "vite build && COMPOSER_VENDOR_DIR=dist/vendor COMPOSER_NO_INTERACTION=1 COMPOSER=../../composer.json composer install --no-dev --optimize-autoloader"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "html-minifier-terser": "^7.2.0"
+  }
+}
