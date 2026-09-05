@@ -22,20 +22,15 @@ const assetsToCopy = [
 	'favicon.png', 'favicon.svg', 'favicon_512.png'
 ];
 
-// API preloads
-const api_preloads = {
-	"bosses.html": { url: "api/bin/bosses/bosses.php", key: "bosses_api_result_v2" },
-	"bz.html": { url: "api/bin/bz/bz.php", key: "bz_api_result_v2" },
-	"wz.html": { url: "api/var/wstatus.json", key: "wz_api_result" },
-	"wevents.html": { url: "api/var/events.json", key: "wevents_api_result" },
-	"wstats.html": { url: "api/var/stats.json", key: "wstats_api_result" }
-};
-
 // static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
 const static_preloads = {
-	"index.html": '<link rel="preload" href="data/trainer/1.35.19/trainerdata.json?epoch=1" as="fetch" />'
-}
-
+	"index.html": '<link rel="preload" href="data/trainer/1.35.19/trainerdata.json?epoch=1" as="fetch" />',
+	"bosses.html": '<link rel="preload" href="api/bin/bosses/bosses.php" as="fetch" />',
+	"bz.html": '<link rel="preload" href="api/bin/bz/bz.php" as="fetch" />',
+	"wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" />',
+	"wevents.html": '<link rel="preload" href="api/var/events.json" as="fetch" />',
+	"wstats.html": '<link rel="preload" href="api/var/stats.json" as="fetch" />'
+};
 
 // --- GET GIT VERSION ---
 function getGitVersion() {
@@ -174,55 +169,19 @@ function gzipPlugin() {
 	};
 }
 
-// --- PLUGIN FOR INJECTING API PRELOADS ---
-function injectApiPreloadsPlugin() {
+function injectCustomHeadPlugin(toinject) {
 	return {
-		name: 'inject-api-preloads',
-		apply: 'build',
-		closeBundle() {
-			const outDir = resolve(__dirname, 'dist');
+		name: 'inject-custom-head',
+		transformIndexHtml(html, ctx) {
+			const currentPage = Object.keys(toinject).find(page => ctx.filename.endsWith(page));
 
-			for (const [filename, { url, key }] of Object.entries(api_preloads)) {
-				const htmlFile = resolve(outDir, filename);
-
-				// Skip if the HTML file doesn't exist
-				if (!fs.existsSync(htmlFile)) continue;
-
-				let content = fs.readFileSync(htmlFile, 'utf8');
-
-				const scriptTag = (
-					`<script>if(!/Mac|iPhone|iPad|iPod/.test(navigator.userAgent)` +
-					`&&!localStorage.getItem("${key}"))` +
-					`{const l=document.createElement("link");` +
-					`l.rel="preload";l.href="${url}";` +
-					`l.as="fetch";l.crossOrigin="anonymous";` +
-					`document.head.appendChild(l);}</script>`
-				);
-
-				content = content.replace('<head>', `<head>${scriptTag}`);
-
-				fs.writeFileSync(htmlFile, content, 'utf8');
-				console.log(`Injected API preload into ${filename}`);
+			if (currentPage && toinject[currentPage]) {
+				return html.replace('<head>', `<head>${toinject[currentPage]}`);
 			}
+			return html;
 		}
 	};
 }
-
-// --- SIMPLE <HEAD> injection ---
-function injectCustomHead(filename, contentToInsert) {
-    return {
-        name: `inject-custom-preload-${filename}`,
-        apply: 'build',
-        transformIndexHtml(html, ctx) {
-            // Si le fichier HTML en cours de traitement correspond, on injecte
-            if (ctx.filename.endsWith(filename)) {
-                return html.replace('<head>', `<head>${contentToInsert}`);
-            }
-            return html;
-        }
-    };
-}
-
 
 // --- VITE CONFIGURATION ---
 export default defineConfig({
@@ -233,8 +192,7 @@ export default defineConfig({
 		injectVersionPlugin(),
 		minifyHtmlPlugin(),
 		copyStaticAssets(),
-		injectApiPreloadsPlugin(),
-		injectCustomHead("index.html", static_preloads["index.html"]),
+		injectCustomHeadPlugin(static_preloads),
 		gzipPlugin()
 	],
 	build: {
