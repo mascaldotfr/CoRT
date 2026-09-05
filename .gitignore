@@ -2,8 +2,15 @@
 api/var/*
 !api/var/README.md
 
+# Dependencies
+*node_modules*
+
+# Vite build output
+*dist/
+.vite*
+
 # Composer modules
-vendor
+*vendor*
 
 # for macOS users
 .DS_Store
