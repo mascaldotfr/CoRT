@@ -6,7 +6,9 @@
 
 const EH_ALLOWED_ORIGINS = [
     "https://cort.ovh",
+    "https://sentinel.cort.ovh",
     "https://regnumsentinel.com",
+    "https://www/regnumsentinel.com",
     "https://cort.go.yo.fr"
 ];
 
