@@ -4,10 +4,11 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'module';
 import { execSync } from 'child_process';
 import { gzipSync } from 'node:zlib';
+import { ViteMinifyPlugin } from 'vite-plugin-minify'
+import { compression } from 'vite-plugin-compression2'
 import fs from 'fs';
 
 const require = createRequire(import.meta.url);
-const { minify } = require('html-minifier-terser');
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Absolute path to your 'CoRT' directory (where source files live)
@@ -39,27 +40,6 @@ function getGitVersion() {
 	} catch (e) {
 		return 'devel+local';
 	}
-}
-
-// --- CUSTOM HTML MINIFICATION PLUGIN ---
-function minifyHtmlPlugin() {
-	return {
-		name: 'minify-html',
-		async transformIndexHtml(html) {
-			try {
-				return await minify(html, {
-					collapseWhitespace: true,
-					removeComments: true,
-					removeAttributeQuotes: true,
-					minifyCSS: true,
-					minifyJS: true,
-				});
-			} catch (err) {
-				console.warn('HTML minification failed:', err);
-				return html;
-			}
-		}
-	};
 }
 
 // --- CUSTOM PLUGIN FOR VERSION INJECTION ---
@@ -124,50 +104,6 @@ function copyStaticAssets() {
 }
 
 
-// --- PLUGIN FOR GZIP PRE-COMPRESSION ---
-function gzipPlugin() {
-	return {
-		name: 'gzip-compression',
-		apply: 'build',
-		closeBundle() {
-			const extensions = ['.html', '.js', '.css', '.json'];
-			const outDir = resolve(__dirname, 'dist');
-			const skipDirs = ['api']; // Directories to exclude from compression
-
-			const gzipRecursive = (dir) => {
-				const files = fs.readdirSync(dir);
-				for (const file of files) {
-					const fullPath = resolve(dir, file);
-					const stats = fs.statSync(fullPath);
-
-					if (stats.isDirectory()) {
-						// Skip excluded directories
-						if (skipDirs.includes(file)) {
-							console.log(`Skipping directory: ${file}`);
-							continue;
-						}
-						gzipRecursive(fullPath);
-					}
-					// Compress if the extension matches and it's not already a .gz file
-					else if (extensions.some(ext => file.endsWith(ext)) && !file.endsWith('.gz')) {
-						const content = fs.readFileSync(fullPath);
-						// Maximum compression (level 9)
-						const compressed = gzipSync(content, { level: 9 });
-						fs.writeFileSync(`${fullPath}.gz`, compressed);
-
-						console.log(`Gzipped: ${file}.gz`);
-					}
-				}
-			};
-
-			if (fs.existsSync(outDir)) {
-				console.log('\nCompressing assets with gzip (level 9)...');
-				gzipRecursive(outDir);
-				console.log('Compression done\n');
-			}
-		}
-	};
-}
 
 function injectCustomHeadPlugin(toinject) {
 	return {
@@ -190,10 +126,10 @@ export default defineConfig({
 	assetsDir: '',
 	plugins: [
 		injectVersionPlugin(),
-		minifyHtmlPlugin(),
 		copyStaticAssets(),
 		injectCustomHeadPlugin(static_preloads),
-		gzipPlugin()
+		ViteMinifyPlugin(),
+		compression({ exclude: [/dist\/api/], algorithms: ['gzip'] })
 	],
 	build: {
 		outDir: outDir,  // Explicitly output to cort.ovh/dist
