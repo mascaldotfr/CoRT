@@ -66,6 +66,13 @@ $(document).ready(function() {
 
 $("#t-load").on("click", function() {
 	$("#t-points").css("display", "flex");
+	$("#t-points").addClass("skeleton");
+	try {
+		// Only possible if you have no setup while loading
+		$("#t-empty-trainer").addClass("skeleton");
+	}
+	catch(_unused) {
+	}
 	if (setup.level != 0)
 		setup = new SetupManager();
 	let level = $("#t-level").val();
@@ -894,8 +901,9 @@ class DatasetsManager {
 		// remove it if the latest dataset is loaded after.
 		$("#oldversion").remove();
 		$("#betaversion").remove();
-		if (setup.trainerdataversion != this.newest_dataset)
-			$("#t-old-version").append(`<div id="oldversion" class="card center">
+		if (setup.trainerdataversion != this.newest_dataset) {
+			const oldv = $("#t-old-version");
+			oldv.append(`<div id="oldversion" class="card center">
 					<p class="red bold">
 					${_("This setup is being made with an older version (%s) of CoR, and may be out of date.",
 						setup.trainerdataversion)}<p>
@@ -908,6 +916,8 @@ class DatasetsManager {
 					</p>
 					</div>
 					`);
+			oldv.css("display", "block");
+		}
 		if (this.is_beta)
 			$("#t-old-version").append(`
 			<div id="betaversion" class="card center">
