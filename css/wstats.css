@@ -20,7 +20,7 @@
 	50% { color: var(--red); background: var(--background); }
 }
 #ws-info {
-	min-height: 2em;
+	min-height: 1em;
 	min-width: 10em;
 	visibility: hidden;
 }
@@ -174,9 +174,6 @@ svg.ct-chart-donut g text.ct-label {
 	}
 	#ws-container .statcard {
 		width: 100%;
-	}
-	#ws-info {
-		min-height: 3em;
 	}
 	#ws-7d > div, #ws-30d > div, #ws-90d > div {
 		min-height: 20em;

@@ -100,6 +100,7 @@ const notify = new MyNotify();
 const calendar = new Calendar();
 // date formatter
 let dformatter = null;
+let tformatter = null;
 
 let next_respawns = null;
 let previous_respawns = null;
@@ -151,6 +152,8 @@ async function get_next_respawns() {
 		previous_respawns = minute_floor(data["prev_spawns"]);
 		nextboss_ts = minute_floor(data["next_boss_ts"]);
 		$("#boss-error").empty();
+		const datetime = tformatter.format(Date.now());
+		$("#bosses-info-updated").text(datetime);
 	}
 	catch (error) {
 		$("#boss-error").text("Failed to get the next bosses spawns: " + error)
@@ -222,10 +225,13 @@ async function refresh_display() {
 $(document).ready(function() {
 	document.title = _("Bosses respawn times") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Bosses respawn times"));
-	$("#boss-info").text(_("The page refreshes itself every minute."));
+	$("#bosses-info-info").text(_("Last updated:"));
 	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
 		hour: 'numeric', minute: 'numeric', timeZone: localStorage.getItem("tz")
+	});
+	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
 	});
 
 	notify.insert_notification_link();

@@ -892,11 +892,6 @@ export const __i18n__ = {
 		"es": "¡Enlace copiado!",
 		"de": "Link kopiert!"
 	},
-	"The page will update itself every minute.": {
-		"fr": "La page sera rafraîchie toutes les minutes.",
-		"es": "La página se actualizará cada minuto.",
-		"de": "Die Seite wird jede Minute aktualisiert."
-	},
 	"Gem": {
 		"fr": "Gemme",
 		"es": "Gema",

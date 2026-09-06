@@ -1,6 +1,9 @@
 import {$, _, api, MyNotify, MyScheduler, UITools} from "./libs/cortlibs.js";
 import {Constants, CleanForts, HumaniseEvents, Icons} from "./wztools/wztools.js";
 
+// formatters
+let tformatter = null;
+
 // Unix timestamp of the last update
 let wz_lastupdate = Math.floor(new Date().getTime() / 1000);
 
@@ -165,9 +168,7 @@ async function display_wz(force=false) {
 			localStorage.setItem("wz_api_result", JSON.stringify(to_store));
 		}
 		$("#wz-info-error").empty();
-		const dt = new Date(last_fetch_ts);
-		const datetime = dt.toLocaleTimeString(undefined,
-			{hour: "2-digit", minute: "2-digit", second: "2-digit"});
+		let datetime = tformatter.format(Date.now());
 		$("#wz-info-updated").text(datetime);
 		// Needed here since it's async
 		$("#wz-info").show();
@@ -275,9 +276,10 @@ async function display_wz(force=false) {
 $(document).ready(function() {
 	document.title = _("WZ status") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("WZ status"));
-	$("#wz-info-info").text(
-		_("The page will update itself every minute.") +
-		" " + _("Last updated:"));
+	$("#wz-info-info").text(_("Last updated:"));
+	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+	});
 	notify.insert_notification_link();
 
 	display_wz(true);

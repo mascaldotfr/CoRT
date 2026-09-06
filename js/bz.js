@@ -3,6 +3,7 @@ import {$, _, api, MyNotify, MyScheduler, Time, UITools} from "./libs/cortlibs.j
 // formatters
 let lang = null;
 let time = new Time();
+let tformatter = null;
 
 // cortlibs
 const notify = new MyNotify();
@@ -168,6 +169,8 @@ async function get_data() {
 			data = last_fetch;
 		}
 		$("#bz-error").empty();
+		const datetime = tformatter.format(Date.now());
+		$("#bz-info-updated").text(datetime);
 	}
 	catch (error) {
 		$("#bz-error").text("Failed to get the BZ status: " + error);
@@ -248,7 +251,10 @@ $(document).ready(function() {
 	$("#bz-schedule-title").text(_("Schedule"));
 	$("#bz-hours").text(_("All hours are local"));
 	$("#bz-info-sign").show();
-	$("#bz-info").text(_("The page refreshes itself every minute."));
+	$("#bz-info-info").text(_("Last updated:"));
+	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+	});
 
 	// TZ doesn't apply here
 	$("#tz").css("display", "none");

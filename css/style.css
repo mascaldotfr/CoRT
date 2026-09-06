@@ -295,6 +295,19 @@ h3 {
 	margin-left:-4px;
 }
 
+.live-badge {
+	display: inline-block;
+	text-transform: uppercase;
+	background: var(--tooltip_background);
+	border-radius: 4px;
+	font-size: 70%;
+	vertical-align: super;
+	padding: 3px ;
+}
+.live-badge::before {
+	content:"LIVE \01F535";
+}
+
 /* Beware, for the colors, order matters */
 .faded { color: var(--faded); }
 .red { color: var(--red); }

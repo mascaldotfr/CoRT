@@ -157,7 +157,7 @@ async function display_stat(force = false) {
 
 	const infos = data.splice(0, 1)[0];
 	const some_time_ago = time.timestamp_ago(infos["generated"], true);
-	$("#ws-last-updated").text(some_time_ago["human"]);
+	$("#ws-info-updated").text(some_time_ago["human"]);
 	// Needed here since it's async
 	$("#ws-info").show();
 	if (time.timestamp_now() - infos["generated"] > 3 * 3600) {
@@ -216,12 +216,9 @@ async function display_stat(force = false) {
 $(document).ready(function() {
 	document.title = _("WZ statistics") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("WZ statistics"));
-	$("#ws-info-info").text(_("The page refreshes itself every minute.") +
-		                " " + _("Last event:"));
-
-	tformatter = new Intl.DateTimeFormat("en-GB", {
-		hour12: false, hour: '2-digit',
-		timeZone: localStorage.getItem("tz")
+	$("#ws-info-info").text(_("Last event:"));
+	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
 	});
 
 	let ilinks = [];
