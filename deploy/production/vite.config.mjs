@@ -22,16 +22,6 @@ const assetsToCopy = [
 	'favicon.png', 'favicon.svg', 'favicon_512.png'
 ];
 
-// static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
-const static_preloads = {
-	"index.html": '<link rel="preload" href="data/trainer/1.35.19/trainerdata.json?epoch=1" as="fetch" crossorigin="anonymous" />',
-	"bosses.html": '<link rel="preload" href="api/bin/bosses/bosses.php" as="fetch" crossorigin="anonymous" />',
-	"bz.html": '<link rel="preload" href="api/bin/bz/bz.php" as="fetch" crossorigin="anonymous" />',
-	"wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" crossorigin="anonymous" />',
-	"wevents.html": '<link rel="preload" href="api/var/events.json" as="fetch" crossorigin="anonymous" />',
-	"wstats.html": '<link rel="preload" href="api/var/stats.json" as="fetch" crossorigin="anonymous" />'
-};
-
 // --- GET GIT VERSION ---
 function getGitVersion() {
 	try {
@@ -40,6 +30,23 @@ function getGitVersion() {
 		return 'devel+local';
 	}
 }
+const globalMeta = `
+	<meta name="cort-version" content="${getGitVersion()}">
+	<meta property="og:image" content="/favicon_512.png">
+	`;
+
+// static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
+const specialMeta = {
+	"index.html": '<link rel="preload" href="data/trainer/1.35.19/trainerdata.json?epoch=1" as="fetch" crossorigin="anonymous" />',
+	"bosses.html": '<link rel="preload" href="api/bin/bosses/bosses.php" as="fetch" crossorigin="anonymous" />',
+	"bz.html": '<link rel="preload" href="api/bin/bz/bz.php" as="fetch" crossorigin="anonymous" />',
+	"wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" crossorigin="anonymous" />',
+	"wevents.html": '<link rel="preload" href="api/var/events.json" as="fetch" crossorigin="anonymous" />',
+	"wstats.html": '<link rel="preload" href="api/var/stats.json" as="fetch" crossorigin="anonymous" />',
+	"tstats.html": '',
+	"quests.html": ''
+};
+
 
 // --- CUSTOM HTML MINIFICATION PLUGIN ---
 function minifyHtmlPlugin() {
@@ -58,20 +65,6 @@ function minifyHtmlPlugin() {
 				console.warn('HTML minification failed:', err);
 				return html;
 			}
-		}
-	};
-}
-
-// --- CUSTOM PLUGIN FOR VERSION INJECTION ---
-function injectVersionPlugin() {
-	const version = getGitVersion();
-	return {
-		name: 'inject-version',
-		transformIndexHtml(html) {
-			return html.replace(
-				new RegExp('<head(\\s[^>]*)?>', 'i'),
-				`<head$1>\n    <meta name="cort-version" content="${version}">`
-			);
 		}
 	};
 }
@@ -176,7 +169,7 @@ function injectCustomHeadPlugin(toinject) {
 			const currentPage = Object.keys(toinject).find(page => ctx.filename.endsWith(page));
 
 			if (currentPage && toinject[currentPage]) {
-				return html.replace('<head>', `<head>${toinject[currentPage]}`);
+				return html.replace('<head>', `<head>${globalMeta}${toinject[currentPage]}`);
 			}
 			return html;
 		}
@@ -189,14 +182,13 @@ export default defineConfig({
 	base: './',
 	assetsDir: '',
 	plugins: [
-		injectVersionPlugin(),
+		injectCustomHeadPlugin(specialMeta),
 		minifyHtmlPlugin(),
 		copyStaticAssets(),
-		injectCustomHeadPlugin(static_preloads),
 		gzipPlugin()
 	],
 	build: {
-		outDir: outDir,  // Explicitly output to cort.ovh/dist
+		outDir: outDir,
 		emptyOutDir: true, // Clean the dist folder before each build
 		commonjsOptions: {
 			transformMixedEsModules: true,
@@ -210,7 +202,6 @@ export default defineConfig({
 				warn(warning);
 			},
 			input: {
-				// Read HTML files from CoRT
 				index: resolve(rootDir, 'index.html'),
 				bosses: resolve(rootDir, 'bosses.html'),
 				bz: resolve(rootDir, 'bz.html'),
