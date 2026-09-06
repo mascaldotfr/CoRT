@@ -52,6 +52,9 @@
 #t-empty-trainer i {
 	color: var(--red);
 }
+#t-empty-trainer-text h3 {
+	text-align: center;
+}
 #t-tips-title {
 	font-style: italic;
 }
