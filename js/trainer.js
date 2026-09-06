@@ -6,10 +6,6 @@ import { computePosition as fu_computePosition, offset as fu_offset, flip as fu_
 $(document).ready(function() {
 	document.title = _("Trainer") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Trainer"));
-	$("#titleinfo").html(
-		_("Hovering your mouse or clicking (on mobile) on a skill icon will show its description.") +
-		"<br>" +
-		_("Selecting an higher character level will upgrade your current setup to that level."));
 	if (datasets.is_beta)
 		$("#title").append(`&nbsp;<span class="red">(AMUN/BETA)</span>`);
 	let html_class_options = [];
@@ -56,12 +52,20 @@ $(document).ready(function() {
 		setup.load_from_url(skillset);
 	}
 	else {
-		$("#t-load").trigger("click");
+		$("#t-points").css("display", "none");
+		$("#t-empty-trainer-title").html(_("Please click on <i>%s</i> to load a setup!", _("Load / Reset")));
+		$("#t-tips-title").text(_("Tips:"));
+		$("#t-tips-hover").text(_("Hovering a skill icon with your mouse, or tapping it on mobile, will show its description."));
+		$("#t-tips-cycle").text(_("If your skill/tree level is 0 and you press '-', I'll try to allocate as many points as possible!"));
+		$("#t-tips-upgrade").text(_("Selecting an higher character level will upgrade your current setup to that level."));
+		$("#t-empty-trainer").css("display", "block");
+		uitools.unskeleton();
+		uitools.defer();
 	}
 });
 
 $("#t-load").on("click", function() {
-	// a setup was already loaded, reinit it
+	$("#t-points").css("display", "flex");
 	if (setup.level != 0)
 		setup = new SetupManager();
 	let level = $("#t-level").val();
@@ -540,7 +544,6 @@ class SetupManager {
 			}
 		}, 1);
 
-		const uitools = new UITools();
 		uitools.unskeleton();
 		uitools.defer();
 	}
@@ -1080,6 +1083,7 @@ class SetupCompressor {
 	}
 }
 
+const uitools = new UITools();
 const compressor = new SetupCompressor();
 const datasets = new DatasetsManager();
 const icons = new Icons();

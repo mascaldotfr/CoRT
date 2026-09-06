@@ -37,7 +37,7 @@ const globalMeta = `
 
 // static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
 const specialMeta = {
-	"index.html": '<link rel="preload" href="data/trainer/1.35.19/trainerdata.json?epoch=1" as="fetch" crossorigin="anonymous" />',
+	"index.html": '',
 	"bosses.html": '<link rel="preload" href="api/bin/bosses/bosses.php" as="fetch" crossorigin="anonymous" />',
 	"bz.html": '<link rel="preload" href="api/bin/bz/bz.php" as="fetch" crossorigin="anonymous" />',
 	"wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" crossorigin="anonymous" />',
@@ -182,9 +182,9 @@ export default defineConfig({
 	base: './',
 	assetsDir: '',
 	plugins: [
+		copyStaticAssets(),
 		injectCustomHeadPlugin(specialMeta),
 		minifyHtmlPlugin(),
-		copyStaticAssets(),
 		gzipPlugin()
 	],
 	build: {

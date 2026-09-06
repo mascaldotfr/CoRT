@@ -120,7 +120,7 @@ $(document).ready(function() {
 		$(`#menu-lang-${l}`).on("click", (e) => {
 			// warn in case you're in a setup...
 			const trainer_dpoints_left = $("#t-dpointsleft").text();
-			const in_setup = trainer_dpoints_left !== undefined;
+			const in_setup = trainer_dpoints_left !== undefined && trainer_dpoints_left.trim() !== '';
 			localStorage.setItem("lang", l);
 			if (in_setup) {
 				e.preventDefault();

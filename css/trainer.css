@@ -46,9 +46,20 @@
 	padding: calc(var(--default_margin_padding) / 2);
 	min-height: 1em;
 }
-.t-placeholder-card {
-	height: 4em;
+#t-empty-trainer {
+	display: none;
 }
+#t-empty-trainer i {
+	color: var(--red);
+}
+#t-tips-title {
+	font-style: italic;
+}
+#t-tips > li {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
 .t1, .t2, .t3, .t4, .t5, .t6, .t7, .t8 {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -170,15 +181,8 @@
 	.setup {
 		min-height: 2em;
 	}
-	#titleinfo {
-		min-height: 2.5em;
-	}
 }
 @media (max-width: 799px) {
-	#titleinfo {
-		min-height: 5em;
-		margin: .25em;
-	}
 	.setup {
 		min-height: 8em;
 		grid-template-areas:

@@ -48,15 +48,13 @@ Copy the beta folder to `data/trainer/1.x.x` according to the new version number
 Update the array containing all available versions in
 `/js/libs/cortlibs.js` with the newest version last.
 
-Modify `index.html` and `js/defer.js` by putting the new versions to preload.
-
 That's it.
 
 #### Structure change
 
 It's unlikely to happen, but if you change the structure of `trainerdata.json`
 in a way that's not compatible with previous versions, you will need to
-increase the `epoch` URL parameter in `js\defer.js`, `index.html` and indeed
+increase the `epoch` URL parameter in `js\defer.js`  and indeed
 `js/trainer.js`.
 
 

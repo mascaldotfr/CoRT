@@ -698,17 +698,31 @@ export const __i18n__ = {
 		"es": "La BZ esta a punto de terminar!",
 		"de": "Die BZ ist kurz vor dem Ende!"
 	},
-	"Hovering your mouse or clicking (on mobile) on a skill icon will show its description.":
-	{
-		"fr": "Passer la souris ou cliquer (sur mobile) sur l'îcone d'un sort montrera sa description.",
-		"es": "Pasar el mouse o hacer clic (en el móvil) en el ícono de un hechizo, se mostrará su descripción.",
-		"de": "Wenn du auf das Symbol eines Zaubers klickst (auf Mobilgeräten) oder mit der Maus darüber fährst, wird dessen Beschreibung angezeigt."
+	"Please click on <i>%s</i> to load a setup!": {
+		"fr": "Veuillez cliquer sur <i>%s</i> pour charger une configuration !",
+		"es": "Haz clic en <i>%s</i> para cargar una configuración.",
+		"de": "Bitte klicke auf <i>%s</i>, um eine Konfiguration zu laden!"
+	},
+	"Tips:": {
+	    "fr": "Astuces :",
+	    "es": "Consejos:",
+	    "de": "Tipps:"
+	},
+	"Hovering a skill icon with your mouse, or tapping it on mobile, will show its description.": {
+		"fr": "Survoler l’icône d’une compétence avec la souris, ou appuyer dessus sur mobile, affichera sa description.",
+		"es": "Pasar el ratón por encima del icono de una habilidad, o tocarlo en el móvil, mostrará su descripción.",
+		"de": "Wenn du mit der Maus über das Symbol einer Fähigkeit fährst oder auf Mobilgeräten darauf tippst, wird die Beschreibung angezeigt."
 	},
 	"Selecting an higher character level will upgrade your current setup to that level.":
 	{
 		"fr": "Selectionner un niveau du personnage supérieur à l'actuel transférera votre configuration à ce niveau.",
 		"es": "Seleccionar un nivel de personaje superior al actual transferirá su configuración a ese nivel.",
 		"de": "Wenn du ein höheres Level als das aktuelle auswählst, wird deine Konfiguration auf dieses Level übertragen."
+	},
+	"If your skill/tree level is 0 and you press '-', I'll try to allocate as many points as possible!": {
+	    "fr": "Si le niveau de votre compétence/arbre est de 0 et que vous appuyez sur « - », j’essaierai d’attribuer autant de points que possible !",
+	    "es": "Si el nivel de tu habilidad/árbol es 0 y pulsas «-», ¡intentaré asignar tantos puntos como sea posible!",
+	    "de": "Wenn das Level deiner Fähigkeit/deines Baums 0 ist und du „-“ drückst, werde ich versuchen, so viele Punkte wie möglich zu vergeben!"
 	},
 	"Necro crystal": {
 		"fr": "Cristal nécromantique",
