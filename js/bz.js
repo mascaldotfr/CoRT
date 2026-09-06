@@ -250,7 +250,6 @@ $(document).ready(function() {
 	$("#title").text(_("BZ status"));
 	$("#bz-schedule-title").text(_("Schedule"));
 	$("#bz-hours").text(_("All hours are local"));
-	$("#bz-info-sign").show();
 	$("#bz-info-info").text(_("Last updated:"));
 	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
@@ -263,5 +262,6 @@ $(document).ready(function() {
 	const scheduler = new MyScheduler(3, 5, feed_bz);
 	feed_bz();
 	scheduler.start_scheduling();
+	$("#bz-info").show();
 });
 
