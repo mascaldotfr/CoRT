@@ -15,9 +15,9 @@ If you plan to bring code improvements:
     work in a 2030 one, unlike frameworks that do breaking changes every year.
   - A CoRT installation should be easily movable, and should be run simply from
     its own directory, assuming PHP is working and has the necessary modules.
-    It has even its own bundler for production (see
-    `/deploy/release/create_release.py`) to not depends on ever changing
-    bundlers and stuff.
+  - While the project now uses Vite for bundling for production, CoRT has a
+    legacy custom production bundler
+    (/deploy/release/legacy/create_release.py), still working to this day.
   - At this point, you probably already got it, **CoRT is a long term project
     with no real hype, excepted high resilience.**
 2. Keep the style consistent, even if sometimes it's gross like :
