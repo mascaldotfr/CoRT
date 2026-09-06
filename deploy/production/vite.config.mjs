@@ -36,15 +36,16 @@ const globalMeta = `
 	`;
 
 // static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
+// If there is none, add an HTML comment, some content is needed to safeguard the build from errors
 const specialMeta = {
-	"index.html": '',
+	"index.html": '<!-- empty -->',
 	"bosses.html": '<link rel="preload" href="api/bin/bosses/bosses.php" as="fetch" crossorigin="anonymous" />',
 	"bz.html": '<link rel="preload" href="api/bin/bz/bz.php" as="fetch" crossorigin="anonymous" />',
 	"wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" crossorigin="anonymous" />',
 	"wevents.html": '<link rel="preload" href="api/var/events.json" as="fetch" crossorigin="anonymous" />',
 	"wstats.html": '<link rel="preload" href="api/var/stats.json" as="fetch" crossorigin="anonymous" />',
-	"tstats.html": '',
-	"quests.html": ''
+	"tstats.html": '<!-- empty -->',
+	"quests.html": '<!-- empty -->'
 };
 
 
@@ -182,8 +183,8 @@ export default defineConfig({
 	base: './',
 	assetsDir: '',
 	plugins: [
-		copyStaticAssets(),
 		injectCustomHeadPlugin(specialMeta),
+		copyStaticAssets(),
 		minifyHtmlPlugin(),
 		gzipPlugin()
 	],
