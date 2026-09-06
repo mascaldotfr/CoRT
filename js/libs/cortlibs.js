@@ -190,7 +190,7 @@ export const $ = (function (selector) {
 export class UITools {
 	unskeleton() {
 		document.querySelectorAll(".skeleton").forEach(el => el.classList.remove("skeleton"));
-		void document.body.offsetHeight;
+		// void document.body.offsetHeight;
 	}
 	defer() {
 		import("../defer.js");

@@ -171,6 +171,8 @@ async function display_wz(force=false) {
 		$("#wz-info-updated").text(datetime);
 		// Needed here since it's async
 		$("#wz-info").show();
+		display_map(data["forts"]);
+
 		if ("failed" in data) {
 			console.error(data["failed"]);
 			try {
@@ -213,8 +215,6 @@ async function display_wz(force=false) {
 	// being asynchronous...
 	if (force instanceof MessageEvent && data["events_log"][0]["date"] < wz_lastupdate)
 		return; // nothing new
-
-	display_map(data["forts"]);
 
 	// Middle part
 	for (let i = 0; i < data["gems"].length; i++) {
