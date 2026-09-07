@@ -16,7 +16,10 @@ const uitools = new UITools();
 const realm_colors = constants["realm_colors"];
 const realms = constants["realm_names"];
 
+// This one is for displaying out of charts
 let tformatter = null;
+// This one is for chartist.js, dont touch this
+let hourformatter = null;
 
 // undefined / null => N/A or 0
 function naify(value, failover="0") {
@@ -35,7 +38,7 @@ function localize_timelines(utclines) {
 		for (let hour in utclines[realm]) {
 			date.setUTCHours(hour, 0, 0, 0);
 			// Number to remove leading zeroes
-			const localhour = Number(tformatter.format(date));
+			const localhour = Number(hourformatter.format(date));
 			localline[localhour] = utclines[realm][hour];
 		}
 		localizedlines.push(localline);
@@ -217,8 +220,17 @@ $(document).ready(function() {
 	document.title = _("WZ statistics") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("WZ statistics"));
 	$("#ws-info-info").text(_("Last event:"));
+
+	// For display
 	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
-		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+		hour: "2-digit", minute: "2-digit", second: "2-digit",
+		hour12: false, timeZone: localStorage.getItem("tz")
+	});
+
+	// For use by chartist
+	hourformatter = new Intl.DateTimeFormat("en-GB", {
+		hour12: false, hour: '2-digit',
+		timeZone: localStorage.getItem("tz")
 	});
 
 	let ilinks = [];
