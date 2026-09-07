@@ -30,9 +30,13 @@ function getGitVersion() {
 		return 'devel+local';
 	}
 }
+
+// General Meta/Head stuff
+// Inject style because FOUC is a Vite thing, vanilla CoRT is ok.
 const globalMeta = `
 	<meta name="cort-version" content="${getGitVersion()}">
 	<meta property="og:image" content="/favicon_512.png">
+	<style>body { background: #11152d }</style>
 	`;
 
 // static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
