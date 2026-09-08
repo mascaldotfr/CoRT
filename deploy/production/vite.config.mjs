@@ -43,8 +43,8 @@ const globalMeta = `
 // If there is none, add an HTML comment, some content is needed to safeguard the build from errors
 const specialMeta = {
 	"index.html": '<!-- empty -->',
-	"bosses.html": '<link rel="preload" href="api/bin/bosses/bosses.php" as="fetch" crossorigin="anonymous" />',
-	"bz.html": '<link rel="preload" href="api/bin/bz/bz.php" as="fetch" crossorigin="anonymous" />',
+	"bosses.html": '<!-- empty -->',
+	"bz.html": '<!-- empty -->',
 	"wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" crossorigin="anonymous" />',
 	"wevents.html": '<link rel="preload" href="api/var/events.json" as="fetch" crossorigin="anonymous" />',
 	"wstats.html": '<link rel="preload" href="api/var/stats.json" as="fetch" crossorigin="anonymous" />',
