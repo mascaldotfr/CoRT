@@ -2,9 +2,9 @@
 require_once(__DIR__ . "/../lib/eheader.php");
 eheader_cors();
 
-function wontsavethis($reason) {
-	header("HTTP/1.0 417 Expectation Failed");
-	error_log("Failed to save: " . $reason);
+function wontsavethis($reason, $code = 417) {
+	echo "Did not save: " . $reason;
+	http_response_code($code);
 	exit(1);
 }
 
@@ -25,14 +25,26 @@ if (!preg_match("/^\d+\.\d+\.\d+$/", $setup_array[0]))
 // class
 if (!preg_match("/^(knight|barbarian|conjurer|warlock|hunter|marksman)$/", 
 	        $setup_array[1]))
-	wontsavethis("invalid class");
-//check loosely if the setup is valid
-for ($i = 2; $i < $setup_array_length; $i++) {
-	// player level: 2, skill level: 1||2, skilltree: 10
-	if (!preg_match("/^(\d{1}|\d{2}|\d{10})$/", $setup_array[$i])) {
-		wontsavethis("number regexp did not match");
-	}
+		wontsavethis("invalid class");
+
+if (intval($setup_array[2]) < 60)
+	wontsavethis("Non level 60 setup", 202);
+
+// Check if the setup has all its points allocated
+
+// define total possible power
+$ppoints60 = 85; // default to archer and warrior
+if (in_array($setup_array[1], ["conjurer", "warlock"]))
+	$ppoints60 = 93;
+
+// Make a grand total of powerpoints
+$allocated_points = 0;
+for ($i = 4; $i < $setup_array_length; $i += 2) {
+	$allocated_points += array_sum(array_map("intval", str_split($setup_array[$i])));
 }
+
+if ($allocated_points < $ppoints60)
+	wontsavethis("not all powerpoints have been used", 202);
 
 chdir(__DIR__);
 
