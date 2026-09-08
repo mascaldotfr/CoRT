@@ -1,23 +1,21 @@
 import {$, _, api, MyNotify, MyScheduler, Time, UITools} from "./libs/cortlibs.js";
+import {BZSchedule} from "./libs/bzschedule.js";
 
 // formatters
+let tformatter = null;
 let lang = null;
 let time = new Time();
-let tformatter = null;
 
 // cortlibs
 const notify = new MyNotify();
 const uitools = new UITools();
 
-// API data
-let data = null;
-
 // notification sent within 10 minutes?
 let notified_10m = false;
+let data = null;
 
 
 function utcScheduleToLocal(schbegin, schend, lang = "en") {
-
 	// get next ocurrence of day index (0=Sun, 6=Sat) as Date()
 	function nextDate(dayIndex) {
 		let now = new Date();
@@ -53,8 +51,8 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 	// Step 2: order days with today first
 	let todayIndex = new Date().getDay();
 	let localOrderedBZs = [
-		    ...localBZs.slice(todayIndex),
-		    ...localBZs.slice(0, todayIndex)
+		...localBZs.slice(todayIndex),
+		...localBZs.slice(0, todayIndex)
 	];
 
 	// Step 2.5
@@ -151,37 +149,20 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 	return [ localOrderedBZs, daynamesOrdered ];
 }
 
-async function get_data() {
+
+function feed_bz() {
 	try {
-		const last_fetch = JSON.parse(localStorage.getItem("bz_api_result_v2"));
-		const now = Date.now() / 1000;
-		let bz_is_no_more_on = true;
-		let bz_just_started = true;
-		if (last_fetch !== null) {
-			bz_is_no_more_on = last_fetch["bzendsat"] != 0 && now > last_fetch["bzendsat"];
-			bz_just_started = now > last_fetch["bzbegin"][0];
-		}
-		if ( last_fetch === null || bz_is_no_more_on || bz_just_started ) {
-			data = await $().getJSON(api.urls["bz"]);
-			localStorage.setItem("bz_api_result_v2", JSON.stringify(data));
-		}
-		else {
-			data = last_fetch;
-		}
+		data = BZSchedule.get();
 		$("#bz-error").empty();
 		const datetime = tformatter.format(Date.now());
 		$("#bz-info-updated").text(datetime);
 	}
 	catch (error) {
 		$("#bz-error").text("Failed to get the BZ status: " + error);
+		console.log(error);
 		uitools.defer();
-		return;
 	}
-}
-
-async function feed_bz() {
-
-	await get_data();
+	if (!data) return;
 
 	let next_bzs_begin = data["bzbegin"];
 	let next_bzs_end = data["bzend"];
@@ -208,7 +189,7 @@ async function feed_bz() {
 		let next_bz_in = time.timestamp_ago(next_bzs_begin[0]);
 		$("#bz-countdown-countdown").text(`${_("Next BZ in")} ${next_bz_in["human"]}`);
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] > 1 &&
-		    notified_10m === false) {
+			notified_10m === false) {
 			notified_10m = true;
 			notify.emit(_("BZ status"), `${_("BZ starting in")} ${next_bz_in["human"]}`, "bz");
 		}
@@ -216,7 +197,6 @@ async function feed_bz() {
 			notified_10m = false;
 			notify.emit(_("BZ status"), _("BZ is about to start!"), "bz");
 		}
-
 	}
 
 	// display schedule
@@ -236,7 +216,6 @@ async function feed_bz() {
 			if (that_bz["highlight"])
 				highlight = bz_on ? 'data-status="on"' : 'data-status="off"';
 			daily_schedule.push(`<td ${highlight} class="clearme">${that_bz["display"]}`);
-
 		}
 		$(`#bz-sch${day}`).append(daily_schedule.join(""));
 	}
@@ -249,19 +228,20 @@ $(document).ready(function() {
 	document.title = _("BZ status") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("BZ status"));
 	$("#bz-schedule-title").text(_("Schedule"));
-	$("#bz-hours").text(_("All hours are local"));
-	$("#bz-info-info").text(_("Last updated:"));
+	$("#bz-local-hours").text(_("All hours are local"));
+
+	notify.insert_notification_link();
 	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
 	});
 
-	// TZ doesn't apply here
-	$("#tz").css("display", "none");
-
-	notify.insert_notification_link();
-	const scheduler = new MyScheduler(3, 5, feed_bz);
+	$("#bz-info-info").text(_("Last updated:"));
 	feed_bz();
+
+	const scheduler = new MyScheduler(1, 2, feed_bz)
 	scheduler.start_scheduling();
+
 	$("#bz-info").show();
+	$("#bz-local-sign").show();
 });
 

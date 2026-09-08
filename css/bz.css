@@ -27,7 +27,7 @@
 	display: grid;
 	place-items: center;
 }
-#bz-info, #bz-info-sign {
+#bz-info, #bz-local-sign {
 	visibility: hidden;
 }
 [data-status="on"] {
