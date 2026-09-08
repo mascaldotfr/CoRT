@@ -1,28 +1,18 @@
-import {$, _, api, MyNotify, MyScheduler, Time, UITools} from "./libs/cortlibs.js";
+import {$, _, MyNotify, MyScheduler, Time, UITools} from "./libs/cortlibs.js";
+import {BossesRespawns} from "./libs/bossesrespawns.js";
 
-const uitools = new UITools();
 
 class Calendar {
 	// A very simple calendar module generating .ics files.
 	// License : MIT
-
-	constructor() {
-		// CSS
-		document.addEventListener("DOMContentLoaded", function () {
-			const style = document.createElement("style");
-			style.textContent = ".addtocalendar { text-decoration: none; }";
-			document.head.appendChild(style);
-		});
-	}
-
-	generate_uid() {
+	static generate_uid() {
 		const ts = Date.now().toString(36);
 		const random = Math.random().toString(36).substring(2, 10);
 		return `${ts}${random}@${window.location.hostname}`;
 	}
 
 	// Format a Unix timestamp (seconds) as iCalendar UTC date-time: YYYYMMDDTHHMMSSZ
-	format_utc_ics_datetime(unix_ts) {
+	static format_utc_ics_datetime(unix_ts) {
 		const date = new Date(parseInt(unix_ts) * 1000); // Convert to milliseconds
 		const y = date.getUTCFullYear();
 		const m = String(date.getUTCMonth() + 1).padStart(2, "0");
@@ -34,7 +24,7 @@ class Calendar {
 	}
 
 	// Escape text for iCalendar
-	escape_text(text) {
+	static escape_text(text) {
 		return String(text)
 			.replace(/\\/g, "\\\\")
 			.replace(/;/g, "\\;")
@@ -48,7 +38,7 @@ class Calendar {
 	 * start — Unix timestamp (seconds)
 	 * end — Unix timestamp (seconds)
 	 */
-	generate_ics(title, start, end) {
+	static generate_ics(title, start, end) {
 		const dt_start = this.format_utc_ics_datetime(start);
 		const dt_end = this.format_utc_ics_datetime(end);
 		const safe_title = "[CoR] " + this.escape_text(title);
@@ -81,7 +71,7 @@ class Calendar {
 		].join("\n");
 	}
 
-	create_link(title, start, end, filename = "event.ics" ) {
+	static create_link(title, start, end, filename = "event.ics" ) {
 		const ics = this.generate_ics(title, start, end);
 		const safe_filename = filename.endsWith('.ics') ? filename : `${filename}.ics`;
 		const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
@@ -90,14 +80,11 @@ class Calendar {
 	}
 }
 
-// wztools
-let time = new Time();
-
 //cortlibs
 const notify = new MyNotify();
+const time = new Time();
+const uitools = new UITools();
 
-// local
-const calendar = new Calendar();
 // date formatter
 let dformatter = null;
 let tformatter = null;
@@ -112,51 +99,18 @@ function unixstamp2human(unixstamp) {
 	return dformatter.format(new Date(unixstamp * 1000));
 }
 
-// Floor to minute any Unix timestamp given for any non-null types
-function minute_floor(v) {
-	if (Array.isArray(v))
-		return v.map(function(ts) {
-			return Math.floor(ts / 60) * 60;
-		});
-
-	if (typeof v === "number")
-		return Math.floor(v / 60) * 60;
-
-	if (typeof v === "object" && v !== null) {
-		let result = {};
-		for (let key in v) {
-			if (v.hasOwnProperty(key) && typeof v[key] === "number")
-				result[key] = Math.floor(v[key] / 60) * 60;
-			else
-				 // keep non-numbers as-is
-				result[key] = v[key];
-		}
-		return result;
-	}
-	throw new TypeError("minute_floor: expected number, array, or plain object");
-}
-
 async function get_next_respawns() {
 	try {
-		let data = null;
-		let last_fetch = JSON.parse(localStorage.getItem("bosses_api_result_v2"));
-		// Fetch only if we're past the next boss respawn
-		if (last_fetch !== null && last_fetch["next_boss_ts"] * 1000 >= Date.now()) {
-			data = last_fetch;
-		}
-		else {
-			data = await $().getJSON(api.urls["bosses"]);
-			localStorage.setItem("bosses_api_result_v2", JSON.stringify(data));
-		}
-		next_respawns = minute_floor(data["next_spawns"]);
-		previous_respawns = minute_floor(data["prev_spawns"]);
-		nextboss_ts = minute_floor(data["next_boss_ts"]);
+		let data = BossesRespawns.get_schedule(4);
+		next_respawns = data["next_spawns"];
+		previous_respawns = data["prev_spawns"];
+		nextboss_ts = data["next_boss_ts"];
 		$("#boss-error").empty();
 		const datetime = tformatter.format(Date.now());
 		$("#bosses-info-updated").text(datetime);
 	}
 	catch (error) {
-		$("#boss-error").text("Failed to get the next bosses spawns: " + error)
+		$("#boss-error").text("Failed to calculate boss spawns: " + error);
 		uitools.defer();
 		return;
 	}
@@ -170,7 +124,7 @@ function display_next_respawn(boss) {
 		const respawn_ts = next_respawns[boss][i];
 		const respawn_datetime = new Date(respawn_ts * 1000);
 		const uc_boss = boss[0].toUpperCase() + boss.slice(1);
-		const cal = calendar.create_link(uc_boss, respawn_ts, respawn_ts + 900,
+		const cal = Calendar.create_link(uc_boss, respawn_ts, respawn_ts + 900,
 			`${uc_boss}_${respawn_datetime.toISOString()}`);
 		$(`#boss-${boss}-nextspawn-${i}`).text(unixstamp2human(respawn_ts));
 		const cal_sel = $(`#boss-${boss}-nextspawn-${i}-calendar`);
@@ -199,7 +153,6 @@ function display_next_respawn(boss) {
 }
 
 async function refresh_display() {
-
 	await get_next_respawns();
 
 	let bosses_unordered = new Map();
@@ -226,17 +179,22 @@ $(document).ready(function() {
 	document.title = _("Bosses respawn times") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Bosses respawn times"));
 	$("#bosses-info-info").text(_("Last updated:"));
+
+	const style = document.createElement("style");
+	style.textContent = ".addtocalendar { text-decoration: none; }";
+	document.head.appendChild(style);
+
 	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
-		hour: 'numeric', minute: 'numeric', timeZone: localStorage.getItem("tz")
+		hour: 'numeric', minute: 'numeric'
 	});
 	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
 	});
 
 	notify.insert_notification_link();
-	refresh_display(true);
-	const scheduler = new MyScheduler(3, 5, refresh_display);
-	scheduler.start_scheduling();
+	refresh_display();
 	$("#boss-info").show();
+	const scheduler = new MyScheduler(0, 1, refresh_display);
+	scheduler.start_scheduling();
 });
