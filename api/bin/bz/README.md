@@ -1,5 +1,8 @@
 # BZ
 
+> [!WARNING]
+> This API will be removed for the next CoRT version
+
 This page documents the BZ API endpoint, used by CoRT and CoRT-dc.
 
 > [!TIP]
