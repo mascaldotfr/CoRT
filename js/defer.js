@@ -2,6 +2,8 @@
 // It's usually called at the end of main JS code
 
 import { $, _, api, TrainerConstants } from "./libs/cortlibs.js";
+import { BossesRespawns } from "./libs/bossesrespawns.js";
+import {BZSchedule} from "./libs/bzschedule.js";
 
 // SEO stuff
 const currentlang = localStorage.getItem("lang");
@@ -143,28 +145,19 @@ setInterval(maintenance, maintenance_delay);
 const status_delay = 1 * 60 * 1000;
 // Warn if bosses respawn within that time frame
 const boss_delay = 30 * 60 * 1000;
-const lSkey = "sentinel_api_result";
 async function menu_status() {
 	try {
 		const now = new Date().getTime();
-		let last_fetch = JSON.parse(localStorage.getItem(lSkey));
-		if (last_fetch !== null) {
-			const bz_is_no_more_on = last_fetch["bz"]["bzon"] && now > last_fetch["bz"]["bzendsat"] * 1000;
-			const bz_just_started = !last_fetch["bz"]["bzon"] && now > last_fetch["bz"]["bzbegin"][0] * 1000;
-			const boss_has_spawned = now > last_fetch["bosses"]["next_boss_ts"] * 1000;
-			if (bz_is_no_more_on || bz_just_started || boss_has_spawned)
-				last_fetch = null;
-		}
-		if (last_fetch === null) {
-			last_fetch = await $().getJSON(api.urls["sentinel"]);
-			localStorage.setItem(lSkey, JSON.stringify(last_fetch));
-		}
 
 		const bz_selector = $("#menu-bz");
 		const bosses_selector = $("#menu-bosses");
-		const boss_will_spawn = now + boss_delay >= last_fetch["bosses"]["next_boss_ts"] * 1000;
 
-		if (last_fetch["bz"]["bzon"])
+		const bz_on = BZSchedule.get()["bzon"];
+
+		const next_boss_ts = BossesRespawns.get_schedule(1)["next_boss_ts"];
+		const boss_will_spawn = now + boss_delay >= next_boss_ts * 1000;
+
+		if (bz_on)
 			bz_selector.attr("title", "BZ ON!");
 		else
 			bz_selector.attr("title", "");
@@ -172,7 +165,8 @@ async function menu_status() {
 			bosses_selector.attr("title", "A boss will appear soon!");
 		else
 			bosses_selector.attr("title", "");
-		bz_selector.attr("menu-status", String(last_fetch["bz"]["bzon"]));
+
+		bz_selector.attr("menu-status", String(bz_on));
 		bosses_selector.attr("menu-status", String(boss_will_spawn));
 
 	}
