@@ -63,7 +63,7 @@ increase the `epoch` URL parameter in `js\defer.js`  and indeed
 It's very important to check out bosses respawns at least every 3 months, as
 the respawn time is slowly drifting in the future.
 
-Updating the bosses requires to change `api/bin/bosses/BossesCalculator.php`
+Updating the bosses requires to change `js/libs/bossesrespawns.js`
 with a Unix timestamp corresponding to the observated boss respawn.
 
 If you run MacOS or Linux, run this in a Terminal while waiting for the boss
@@ -80,5 +80,5 @@ you can't stop the counter.
 ## BZ
 
 Updating the BZ beginning and ending times requires to change
-`api/bin/bz/Battlezone.php` with their respective hours in UTC (currently, the
+`js/libs/bzschedule.js` with their respective hours in UTC (currently, the
 ingame schedule shows UTC hours already), while keeping the ascending order.
