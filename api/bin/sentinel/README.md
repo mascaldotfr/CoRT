@@ -3,8 +3,6 @@
 This API endpoint has been tailor made for
 https://sentinel.cort.ovh
 
-It's also used by `js/defer.js` in CoRT to show live status in menus.
-
 It's an agregation of all other APIs, that have been quickly filtered so we
 keep a small output response.
 
@@ -22,16 +20,6 @@ is a quick schema:
 
 ```
 {
-  "bosses": {
-    "next_boss": "string (e.g., \"thorkul\")",
-    "next_boss_ts": "number (Unix timestamp in seconds)"
-  },
-  "bz": {
-    "bzbegin": ["number (Unix timestamp)", "..."],
-    "bzend": ["number (Unix timestamp)", "..."],
-    "bzon": "boolean (true if Battlefield Zone is active)",
-    "bzendsat": "number (Unix timestamp; 0 if not active)"
-  },
   "wz": {
     "forts": [
       {

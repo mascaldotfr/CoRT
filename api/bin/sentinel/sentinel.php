@@ -5,16 +5,6 @@ const API_ROOT = __DIR__ . "/../..";
 require_once(__DIR__ . "/../lib/eheader.php");
 eheader_api("json");
 
-require_once API_ROOT . "/bin/bosses/BossesRespawns.php";
-require_once API_ROOT . "/bin/bz/Battlezone.php";
-
-$bosses = new BossesRespawns();
-$bosses_respawns = $bosses->getSchedule(1);
-$bosses_respawns = array_intersect_key($bosses_respawns, array_flip(["next_boss", "next_boss_ts"]));
-
-$bz = new Battlezone();
-$bz_schedule = $bz->getSchedule();
-
 $wz = json_decode(file_get_contents(API_ROOT . "/var/wstatus.json"), true);
 $wz = array_intersect_key($wz, array_flip(["forts", "gems"]));
 
@@ -25,8 +15,6 @@ $stats = $stats[count($stats) - 1];
 $stats = array_map(fn($realm) => array_intersect_key($realm, array_flip(["gems", "wishes"])), $stats);
 
 $output = json_encode([
-	"bosses" 	=> $bosses_respawns,
-	"bz" 		=> $bz_schedule,
 	"wz"		=> $wz,
 	"stats"		=> $stats
 ]);
