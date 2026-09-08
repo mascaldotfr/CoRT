@@ -53,6 +53,7 @@ export class BZSchedule {
 		let day_offset = 0;
 
 		// Ensure there will be BZs for 2 days when announcing the last BZ of the day
+		// (due to the fact it's shared with CoRT-dc)
 		const last_bz_hour = bz_schedule.schbegin[current_day][bz_schedule.schbegin[current_day].length - 1];
 		if (current_hour >= last_bz_hour) {
 			let day_after_tomorrow = tomorrow === 6 ? 0 : tomorrow + 1;
