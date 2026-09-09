@@ -53,8 +53,19 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 fclose($fp);
 
-$gz_file = $out_history . '.gz';
-$gz_fp = gzopen($gz_file, 'wb2');
+
+// Fetch a third (!) copy
 $csv_content = file_get_contents($out_history);
-gzwrite($gz_fp, $csv_content);
-gzclose($gz_fp);
+
+// Create gzip compressed version
+$gz = gzopen($out_history . ".gz", "w9");
+gzwrite($gz, $csv_content);
+gzclose($gz);
+
+// If zstd extension is available, create zstd compressed version of the original data
+if (function_exists("zstd_compress")) {
+	$zstd_data = zstd_compress($csv_content, 19);
+	file_put_contents($out_history . ".zst", $zstd_data);
+}
+
+?>
