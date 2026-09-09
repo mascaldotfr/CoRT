@@ -301,13 +301,13 @@ function writer($data, $fname) {
 	file_put_contents($fname, $data);
 
 	// Create gzip compressed version
-	$gz = gzopen($fname . ".gz", "w2");
+	$gz = gzopen($fname . ".gz", "w9");
 	gzwrite($gz, $data);
 	gzclose($gz);
 
 	// If zstd extension is available, create zstd compressed version of the original data
 	if (function_exists("zstd_compress")) {
-		$zstd_data = zstd_compress($data);
+		$zstd_data = zstd_compress($data, 15);
 		file_put_contents($fname . ".zst", $zstd_data);
 	}
 }

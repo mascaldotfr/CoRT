@@ -209,13 +209,13 @@ echo $api_json;
 file_put_contents($fname, $api_json);
 
 // Create gzip compressed version
-$gz = gzopen($fname . ".gz", "w2");
+$gz = gzopen($fname . ".gz", "w9");
 gzwrite($gz, $api_json);
 gzclose($gz);
 
 // If zstd extension is available, create zstd compressed version of the original data
 if (function_exists('zstd_compress')) {
-	$zstd_data = zstd_compress($api_json);
+	$zstd_data = zstd_compress($api_json, 15);
 	file_put_contents($fname . ".zst", $zstd_data);
 }
 
