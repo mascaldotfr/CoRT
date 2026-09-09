@@ -220,16 +220,14 @@ export default defineConfig({
 				wstats: resolve(rootDir, 'wstats.html'),
 			},
 			output: {
-				manualChunks(id) {
-					if (
-						// This trick bundles all base + defer.js dependencies into one js file
-						// that anyways is needed everywhere
-						id.includes('bosses') ||
-						id.includes('bz')
-
-					) {
-						return 'core'
-					}
+				manualChunks: {
+					// Make a single core library will all that is needed on every page
+					core: [
+						'../../js/libs/bossesrespawns.js',
+						'../../js/libs/bzschedule.js',
+						'../../js/libs/cortlibs.js',
+						'../../js/menu.js',
+					]
 				},
 				entryFileNames: 'js/[name]-[hash].js',
 				chunkFileNames: 'js/chunks/[name]-[hash].js',
