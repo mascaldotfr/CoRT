@@ -130,26 +130,6 @@ foreach (array_reverse($data) as $line) {
 	// skip the few versions when setup collection wasn't a thing
 	if (!in_array($version, $versions, true))
 		continue;
-	// skip empty setups, non lvl 60, and incomplete ones
-	if ($level < $constants["maxlevel"])
-		continue;
-	else
-		$level = $constants["maxlevel"]; // lvl 61 is raptor gem
-
-	// at least if all powerpoints are used ...
-	$checksum = 0; // total power points used
-	for ($i = 1; $i < count($setup); $i += 2) {
-		// sum of all powerpoints used for all skill in the current tree
-		$ppsum = array_sum(array_map('intval', str_split($setup[$i])));
-		$checksum += $ppsum;
-	}
-	// see trainer.js (determine if mage or the rest when it comes to pp)
-	$powerpoints = "32";
-	if (($constants["class_type_masks"][$clas] & 0xF0) != 32)
-		$powerpoints = "80";
-	$ppoints = $trainer_data[$version]["points"]["power"][$powerpoints][$level - 1];
-	if ($checksum != $ppoints)
-		continue; // incomplete
 
 	$base_skills = strval($constants["class_type_masks"][$clas] & 0xF0);
 	$class_skills = strval($constants["class_type_masks"][$clas]);
