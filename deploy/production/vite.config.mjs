@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'module';
 import { execSync } from 'child_process';
 import { gzipSync } from 'node:zlib';
+import { compress as zstdCompress } from '@mongodb-js/zstd';
 import fs from 'fs';
 
 const require = createRequire(import.meta.url);
@@ -122,50 +123,60 @@ function copyStaticAssets() {
 }
 
 
-// --- PLUGIN FOR GZIP PRE-COMPRESSION ---
-function gzipPlugin() {
+function compressionPlugin() {
 	return {
-		name: 'gzip-compression',
+		name: 'gzip-zstd-compression',
 		apply: 'build',
-		closeBundle() {
+		async closeBundle() {
 			const extensions = ['.html', '.js', '.css', '.json'];
 			const outDir = resolve(__dirname, 'dist');
-			const skipDirs = ['api']; // Directories to exclude from compression
+			const skipDirs = ['api'];
 
-			const gzipRecursive = (dir) => {
+			const compressRecursive = async (dir) => {
 				const files = fs.readdirSync(dir);
 				for (const file of files) {
 					const fullPath = resolve(dir, file);
 					const stats = fs.statSync(fullPath);
 
 					if (stats.isDirectory()) {
-						// Skip excluded directories
 						if (skipDirs.includes(file)) {
 							console.log(`Skipping directory: ${file}`);
 							continue;
 						}
-						gzipRecursive(fullPath);
-					}
-					// Compress if the extension matches and it's not already a .gz file
-					else if (extensions.some(ext => file.endsWith(ext)) && !file.endsWith('.gz')) {
+						await compressRecursive(fullPath);
+					} else if (
+						extensions.some((ext) => file.endsWith(ext)) &&
+						!file.endsWith('.gz') &&
+						!file.endsWith('.zst')
+					) {
 						const content = fs.readFileSync(fullPath);
-						// Maximum compression (level 9)
-						const compressed = gzipSync(content, { level: 9 });
-						fs.writeFileSync(`${fullPath}.gz`, compressed);
 
+						// Gzip (level 9)
+						const gzipCompressed = gzipSync(content, { level: 9 });
+						fs.writeFileSync(`${fullPath}.gz`, gzipCompressed);
 						console.log(`Gzipped: ${file}.gz`);
+
+						// Zstd (level 19)
+						try {
+							const zstdCompressed = await zstdCompress(content, 19);
+							fs.writeFileSync(`${fullPath}.zst`, zstdCompressed);
+							console.log(`Zstd compressed: ${file}.zst`);
+						} catch (e) {
+							console.error(`Failed to zstd compress ${file}: ${e.message}`);
+						}
 					}
 				}
 			};
 
 			if (fs.existsSync(outDir)) {
-				console.log('\nCompressing assets with gzip (level 9)...');
-				gzipRecursive(outDir);
+				console.log('\nCompressing assets with gzip (level 9) and zstd (level 19)...');
+				await compressRecursive(outDir);
 				console.log('Compression done\n');
 			}
-		}
+		},
 	};
 }
+
 
 function injectCustomHeadPlugin(toinject) {
 	return {
@@ -190,7 +201,7 @@ export default defineConfig({
 		injectCustomHeadPlugin(specialMeta),
 		copyStaticAssets(),
 		minifyHtmlPlugin(),
-		gzipPlugin()
+		compressionPlugin()
 	],
 	build: {
 		outDir: outDir,

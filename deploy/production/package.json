@@ -6,6 +6,7 @@
     "clean": "rm -rf dist node_modules"
   },
   "devDependencies": {
+    "@mongodb-js/zstd": "^7.0.0",
     "html-minifier-terser": "^7.2.0",
     "vite": "^5.0.0"
   }
