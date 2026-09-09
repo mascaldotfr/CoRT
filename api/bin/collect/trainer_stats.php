@@ -205,10 +205,19 @@ file_put_contents($output_file, $api_json);
 // Meanwhile output the same json so we don't redirect
 echo $api_json;
 
-// Write gzipped version
-$gzFile = $output_file . '.gz';
-$gz = gzopen($gzFile, 'w2');
+// Write uncompressed file
+file_put_contents($fname, $api_json);
+
+// Create gzip compressed version
+$gz = gzopen($fname . ".gz", "w2");
 gzwrite($gz, $api_json);
 gzclose($gz);
+
+// If zstd extension is available, create zstd compressed version of the original data
+if (function_exists('zstd_compress')) {
+	$zstd_data = zstd_compress($api_json);
+	file_put_contents($fname . ".zst", $zstd_data);
+}
+
 
 ?>

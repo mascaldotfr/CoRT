@@ -297,10 +297,19 @@ function main() {
 }
 
 function writer($data, $fname) {
+	// Write uncompressed file
 	file_put_contents($fname, $data);
+
+	// Create gzip compressed version
 	$gz = gzopen($fname . ".gz", "w2");
 	gzwrite($gz, $data);
 	gzclose($gz);
+
+	// If zstd extension is available, create zstd compressed version of the original data
+	if (function_exists("zstd_compress")) {
+		$zstd_data = zstd_compress($data);
+		file_put_contents($fname . ".zst", $zstd_data);
+	}
 }
 
 try {
