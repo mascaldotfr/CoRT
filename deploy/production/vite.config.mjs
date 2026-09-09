@@ -195,6 +195,7 @@ export default defineConfig({
 	build: {
 		outDir: outDir,
 		emptyOutDir: true, // Clean the dist folder before each build
+		cssCodeSplit: false,
 		commonjsOptions: {
 			transformMixedEsModules: true,
 			include: ["/js/libs/", "/node_modules/"]
@@ -219,6 +220,17 @@ export default defineConfig({
 				wstats: resolve(rootDir, 'wstats.html'),
 			},
 			output: {
+				manualChunks(id) {
+					if (
+						// This trick bundles all base + defer.js dependencies into one js file
+						// that anyways is needed everywhere
+						id.includes('bosses') ||
+						id.includes('bz')
+
+					) {
+						return 'core'
+					}
+				},
 				entryFileNames: 'js/[name]-[hash].js',
 				chunkFileNames: 'js/chunks/[name]-[hash].js',
 				assetFileNames: (assetInfo) => {
