@@ -196,6 +196,9 @@ export default defineConfig({
 		outDir: outDir,
 		emptyOutDir: true, // Clean the dist folder before each build
 		cssCodeSplit: false,
+		modulePreload: {
+			polyfill: false
+		},
 		commonjsOptions: {
 			transformMixedEsModules: true,
 			include: ["/js/libs/", "/node_modules/"]
