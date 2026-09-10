@@ -3,6 +3,8 @@ require_once(__DIR__ . "/../lib/eheader.php");
 require_once(__DIR__ . "/../lib/multiwriter.php");
 eheader_cors();
 
+ignore_user_abort(true);
+
 function wontsavethis($reason, $code = 417) {
 	echo "Did not save: " . $reason;
 	http_response_code($code);
