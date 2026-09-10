@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/../lib/eheader.php");
+require_once(__DIR__ . "/../lib/multiwriter.php");
 eheader_api("json");
 
 chdir(__DIR__);
@@ -13,7 +14,7 @@ $trainer_data = [];
 // output directory and base filename (a .gz will be added for the compressed version)
 $output_file = "../../var/trainerstats.json";
 // Set this to true to force output
-$debug  = false;
+$debug  = true;
 // END of setup
 
 // Check if output file exists and is less than 3 hours old
@@ -209,17 +210,6 @@ file_put_contents($output_file, $api_json);
 echo $api_json;
 
 // Write uncompressed file
-file_put_contents($output_file, $api_json);
-
-// Create gzip compressed version
-$gz = gzopen($output_file . ".gz", "w9");
-gzwrite($gz, $api_json);
-gzclose($gz);
-
-// If zstd extension is available, create zstd compressed version of the original data
-if (function_exists('zstd_compress')) {
-	$zstd_data = zstd_compress($api_json, 15);
-	file_put_contents($output_file . ".zst", $zstd_data);
-}
+MultiWriter::write($output_file, $api_json);
 
 ?>
