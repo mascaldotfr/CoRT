@@ -1,4 +1,5 @@
 <?php
+
 require_once(__DIR__ . "/../lib/eheader.php");
 eheader_api("json");
 
@@ -11,11 +12,13 @@ $trainer_datadir = "../../../data/trainer";
 $trainer_data = [];
 // output directory and base filename (a .gz will be added for the compressed version)
 $output_file = "../../var/trainerstats.json";
+// Set this to true to force output
+$debug  = false;
 // END of setup
 
 // Check if output file exists and is less than 3 hours old
 // Redirect to the cached page if that's the case
-if (filesize($output_file) != 0 && file_exists($output_file) && (time() - filemtime($output_file)) < 3 * 3600) {
+if ($debug == false && filesize($output_file) != 0 && file_exists($output_file) && (time() - filemtime($output_file)) < 3 * 3600) {
 	$last_modified = filemtime($output_file);
 	header("Last-Modified: " . gmdate("D, d M Y H:i:s", $last_modified) . " GMT");
 
@@ -57,7 +60,7 @@ if (file_exists($output_file)) {
 	$prev_json_content = file_get_contents($output_file);
 	$api_dict = json_decode($prev_json_content, true);
 	$lineno = $api_dict["lineno"] ?? 0;
-	if ($lineno != 0 && $lineno == count($data)) {
+	if ($lineno != 0 && $lineno == count($data) && $debug == false) {
 		readfile($output_file);
 		exit(); // Quit if there is no new setup
 	}
@@ -206,18 +209,17 @@ file_put_contents($output_file, $api_json);
 echo $api_json;
 
 // Write uncompressed file
-file_put_contents($fname, $api_json);
+file_put_contents($output_file, $api_json);
 
 // Create gzip compressed version
-$gz = gzopen($fname . ".gz", "w9");
+$gz = gzopen($output_file . ".gz", "w9");
 gzwrite($gz, $api_json);
 gzclose($gz);
 
 // If zstd extension is available, create zstd compressed version of the original data
 if (function_exists('zstd_compress')) {
 	$zstd_data = zstd_compress($api_json, 15);
-	file_put_contents($fname . ".zst", $zstd_data);
+	file_put_contents($output_file . ".zst", $zstd_data);
 }
-
 
 ?>
