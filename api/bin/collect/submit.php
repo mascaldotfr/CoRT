@@ -54,5 +54,11 @@ chdir(__DIR__);
 $line = implode(" ", $setup_array) . "\n";
 
 MultiWriter::append("../../var/trainer_saved_setups.txt", $line);
+
+// update trainer stats
+(function() {
+	    require_once(__DIR__ . "/trainer_stats.php");
+})();
+
 ?>
 
