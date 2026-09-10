@@ -24,7 +24,7 @@ class MultiWriter
 		gzclose($gz);
 
 		if (function_exists("zstd_compress")) {
-			$zstd_data = zstd_compress($data, 19);
+			$zstd_data = zstd_compress($data, 15);
 			file_put_contents($name . ".zst", $zstd_data);
 		}
 	}
@@ -39,9 +39,12 @@ class MultiWriter
 		gzwrite($gz, $data);
 		gzclose($gz);
 
+		// Appending on zstd make filesize bigger than it should, so we
+		// slurp the full original file and recompress everything
 		if (function_exists("zstd_compress")) {
-			$zstd_data = zstd_compress($data, 19);
-			file_put_contents($path . ".zst", $zstd_data, FILE_APPEND | LOCK_EX);
+			$data = file_get_contents($path);
+			$zstd_data = zstd_compress($data, 15);
+			file_put_contents($path . ".zst", $zstd_data, LOCK_EX);
 		}
 	}
 }
