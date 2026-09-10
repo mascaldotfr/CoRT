@@ -7,6 +7,7 @@ if (php_sapi_name() !== 'cli') {
 }
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../lib/multiwriter.php';
 
 use PHPHtmlParser\Dom;
 
@@ -287,29 +288,13 @@ function main() {
 
 	$status["generated"] = strval($timestamp);
 
-	writer(json_encode($status), $outfile);
+	MultiWriter::write($outfile, json_encode($status));
 
 	// Generate stats
 	require_once 'stats/generate.php';
 	[$st, $ev] = statistics($status["events_log"], $stats_db_file, $debug_mode);
-	writer($st, $stats_outfile);
-	writer($ev, $stats_outfile_events);
-}
-
-function writer($data, $fname) {
-	// Write uncompressed file
-	file_put_contents($fname, $data);
-
-	// Create gzip compressed version
-	$gz = gzopen($fname . ".gz", "w9");
-	gzwrite($gz, $data);
-	gzclose($gz);
-
-	// If zstd extension is available, create zstd compressed version of the original data
-	if (function_exists("zstd_compress")) {
-		$zstd_data = zstd_compress($data, 15);
-		file_put_contents($fname . ".zst", $zstd_data);
-	}
+	MultiWriter::write($stats_outfile, $st);
+	MultiWriter::write($stats_outfile_events, $ev);
 }
 
 try {
@@ -328,6 +313,6 @@ try {
 		}
 	}
 	$old_status["failed"] = ["status" => "fatal", "debug" => json_encode($err->getMessage())];
-	writer(json_encode($old_status), $outfile);
+	MultiWriter::write($outfile, json_encode($status));
 }
 ?>
