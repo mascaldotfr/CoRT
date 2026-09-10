@@ -1,8 +1,12 @@
 <?php
 
+if (php_sapi_name() !== 'cli' && realpath($_SERVER['SCRIPT_FILENAME']) === realpath(__FILE__)) {
+	http_response_code(403);
+	exit('Direct access not allowed');
+}
+
 require_once(__DIR__ . "/../lib/eheader.php");
 require_once(__DIR__ . "/../lib/multiwriter.php");
-eheader_api("json");
 
 chdir(__DIR__);
 
@@ -13,25 +17,8 @@ $trainer_datadir = "../../../data/trainer";
 $trainer_data = [];
 // output directory and base filename (a .gz will be added for the compressed version)
 $output_file = "../../var/trainerstats.json";
-// Set this to true to force output
-$debug  = true;
 // END of setup
 
-// Check if output file exists and is less than 3 hours old
-// Redirect to the cached page if that's the case
-if ($debug == false && filesize($output_file) != 0 && file_exists($output_file) && (time() - filemtime($output_file)) < 3 * 3600) {
-	$last_modified = filemtime($output_file);
-	header("Last-Modified: " . gmdate("D, d M Y H:i:s", $last_modified) . " GMT");
-
-	$if_modified_since = $_SERVER["HTTP_IF_MODIFIED_SINCE"] ?? null;
-	if ($if_modified_since && strtotime($if_modified_since) >= $last_modified) {
-		http_response_code(304);
-		exit();
-	}
-
-	readfile($output_file);
-	exit();
-}
 
 // Ensure completion if client close the connection
 ignore_user_abort(true);
@@ -61,7 +48,7 @@ if (file_exists($output_file)) {
 	$prev_json_content = file_get_contents($output_file);
 	$api_dict = json_decode($prev_json_content, true);
 	$lineno = $api_dict["lineno"] ?? 0;
-	if ($lineno != 0 && $lineno == count($data) && $debug == false) {
+	if ($lineno != 0 && $lineno == count($data)) {
 		readfile($output_file);
 		exit(); // Quit if there is no new setup
 	}
