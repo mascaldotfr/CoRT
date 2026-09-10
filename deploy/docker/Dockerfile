@@ -22,6 +22,7 @@ RUN apt-get update && \
 	    php-mbstring \
 	    php-sqlite3 \
 	    php-zip \
+	    php-zstd \
 	    composer
 
 # Copy caddyfile
@@ -51,10 +52,13 @@ WORKDIR /var/www/html/CoRT/api/var
 RUN if test "$PREPOPULATE" != "yes"; then \
 	touch -d "1 week ago" 	trainer_saved_setups.txt \
 				trainer_saved_setups.txt.gz \
+				trainer_saved_setups.txt.zst \
 				trainerstats.json \
 				trainerstats.json.gz \
+				trainerstats.json.zst  \
 				events_dump.csv \
 				events_dump.csv.gz \
+				events_dump.csv.zst \
 				maintenance.txt \
 	; \
 	fi
