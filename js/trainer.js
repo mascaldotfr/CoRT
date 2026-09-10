@@ -252,19 +252,36 @@ function discipline_change(discipline) {
 	let current_level = parseInt(discipline_level.getAttribute("data-value"));
 	let wanted_level = change_direction == "plus" ? current_level + 2 : current_level - 2;
 	if (wanted_level < TrainerConstants.mindlevel) {
-		// Try to set up the max discipline level
-		let max_avail_dlvl = 0;
+		// Try to set up the max discipline level possible given character level AND remaining points
 		change_direction = "plus";
 		const levels = setup.trainerdata["required"]["level"];
+		let max_avail_dlvl = 0;
 		for (let i = 0; i < levels.length; i++) {
 			if (levels[i] <= setup.level && levels[i] > max_avail_dlvl) {
 				max_avail_dlvl = levels[i];
 			}
 		}
-		wanted_level = Math.floor(max_avail_dlvl / 2 + 1);
+
+		let test_level = Math.floor(max_avail_dlvl / 2 + 1);
 		// round to odd discipline value
-		if (wanted_level % 2 == 0)
-			wanted_level--;
+		if (test_level % 2 == 0) {
+			test_level--;
+		}
+
+		// Step down until we find the highest level we can afford with the remaining discipline points
+		while (test_level >= TrainerConstants.mindlevel) {
+			let points_needed = setup.trainerdata["required"]["points"][test_level - 1] - setup.trainerdata["required"]["points"][current_level - 1];
+			if (points_needed <= setup.dpointsleft) {
+				wanted_level = test_level;
+				break;
+			}
+			test_level -= 2; // Step down by 2 to maintain odd discipline levels (1, 3, 5, etc.)
+		}
+
+		// Fallback to minimum level if somehow nothing is affordable (shouldn't happen as current_level is always affordable)
+		if (wanted_level < TrainerConstants.mindlevel) {
+			wanted_level = TrainerConstants.mindlevel;
+		}
 	}
 	if (wanted_level > TrainerConstants.maxdlevel || wanted_level < TrainerConstants.mindlevel) {
 		console.log("bad discipline level", wanted_level);
