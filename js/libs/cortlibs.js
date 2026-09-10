@@ -331,11 +331,15 @@ export class MyScheduler {
 		this.callback = callback;
 
 		let callback_running = false;
-		window.addEventListener("visibilitychange", function(event) {
+		window.addEventListener("visibilitychange", async () => {
 			if (!document.hidden && !callback_running) {
-				callback_running = true;
-				callback();
-				callback_running = false;
+				try {
+					callback_running = true;
+					await callback();
+				}
+				finally {
+					callback_running = false;
+				}
 			}
 		});
 
