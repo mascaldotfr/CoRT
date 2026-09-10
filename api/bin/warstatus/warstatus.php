@@ -315,4 +315,10 @@ try {
 	$old_status["failed"] = ["status" => "fatal", "debug" => json_encode($err->getMessage())];
 	MultiWriter::write($outfile, json_encode($status));
 }
+
+(function($debug_mode) {
+	// daily event dump
+	if (date("H:i") === "04:32" || $debug_mode === true)
+		require_once __DIR__ . '/stats/dump_generator.php';
+})($debug_mode);
 ?>
