@@ -128,12 +128,11 @@ them there:
 
 | Type                   | URL                                                |
 |------------------------|----------------------------------------------------|
-| Official               | https://cort.ovh/api/bin/warstatus/stats/dump_generator.php          |
-| Local                  | https://yourhost/api/bin/warstatus/stats/dump_generator.php           |
+| Official               | https://cort.ovh/api/var/events_dump.csv           |
+| Local                  | https://yourhost/api/var/events_dump.csv           |
 
 The output is in the same format than the warstatus events list, see
-`../warstatus/README.md` for more details. It's refreshed every 24 hours,
-on-demand.
+`../warstatus/README.md` for more details.
 
 Note that one day, the number of events will be too high to be fit in excel,
 you'll need to use a real database.
