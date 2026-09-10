@@ -485,7 +485,7 @@ class SetupManager {
 			this.powerpoints = 80;
 		}
 		try {
-			this.trainerdata = await $().getJSON("data/trainer/" + this.trainerdataversion + "/trainerdata.json?epoch=1");
+			this.trainerdata = await $().getJSON("data/trainer/" + this.trainerdataversion + "/trainerdata.json");
 		}
 		catch (error) {
 			// Should never happen as the data is local...
