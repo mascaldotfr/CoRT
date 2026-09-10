@@ -202,8 +202,16 @@ function power_change(power) {
 	if (discipline_level == 1)
 		maxslvl++;
 	if (wanted_level < TrainerConstants.minplevel) {
-		wanted_level = maxslvl; // Loop from -1 to maxslvl
-		diffpoints = 0 - maxslvl;
+		// Cycle power points when pressing '-' and power level is 0
+		if (setup.ppointsleft < maxslvl) {
+			// Still have points, but not enough to get max allowed level
+			wanted_level = setup.ppointsleft;
+			diffpoints = 0 - wanted_level;
+		}
+		else {
+			wanted_level = maxslvl;
+			diffpoints = 0 - maxslvl;
+		}
 	}
 	else {
 		diffpoints = change_direction == "plus" ? -1 : 1;
