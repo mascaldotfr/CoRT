@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/../lib/eheader.php");
+require_once(__DIR__ . "/../lib/multiwriter.php");
 eheader_cors();
 
 function wontsavethis($reason, $code = 417) {
@@ -50,9 +51,6 @@ chdir(__DIR__);
 
 $line = implode(" ", $setup_array) . "\n";
 
-file_put_contents("../../var/trainer_saved_setups.txt", $line, FILE_APPEND | LOCK_EX);
-$gz = gzopen("../../var/trainer_saved_setups.txt.gz", "a");
-gzwrite($gz, $line);
-gzclose($gz);
+MultiWriter::append("../../var/trainer_saved_setups.txt", $line);
 ?>
 
