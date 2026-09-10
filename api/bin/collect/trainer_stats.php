@@ -191,10 +191,6 @@ foreach ($versions as $version) {
 
 // Time to write our stats!
 $api_json = json_encode($api_dict);
-file_put_contents($output_file, $api_json);
-
-// Meanwhile output the same json so we don't redirect
-echo $api_json;
 
 // Write uncompressed file
 MultiWriter::write($output_file, $api_json);
