@@ -30,11 +30,11 @@ class ApiURL {
 		this.urls = {
 			"submit_trainer": `${this.base}/bin/collect/submit.php`,
 
-			"trainer_data_stats": `${this.base}/bin/collect/trainer_stats.php`,
+			"trainer_data_stats": `${this.base}/var/trainerstats.json`,
 			"events": `${this.base}/var/events.json`,
 			"stats": `${this.base}/var/stats.json`,
 			"wstatus": `${this.base}/var/wstatus.json`,
-			"events_dump": `${this.base}/bin/warstatus/stats/dump_generator.php`,
+			"events_dump": `${this.base}/var/events_dump.csv`,
 			"maintenance": `${this.base}/var/maintenance.txt`,
 		};
 	}
