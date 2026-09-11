@@ -33,6 +33,17 @@ function filename($url) {
 	return end($parts);
 }
 
+// Ensure the events dump will be generated, replaces exit()
+function exit_defer($code = 0) {
+	global $debug_mode;
+	(function($debug_mode) {
+		// daily event dump
+		if (date("H:i") === "04:32" || $debug_mode === true)
+			require_once __DIR__ . '/stats/dump_generator.php';
+	})($debug_mode);
+	exit($code);
+}
+
 function main() {
 	global $outfile, $stats_db_file, $stats_outfile, $stats_outfile_events, $base_url, $debug_mode;
 
@@ -52,7 +63,7 @@ function main() {
 		}
 	} catch (Exception $e) {
 		eprint("Failed to fetch the page ! " . $e->getMessage() . "\n" . $e->getTraceAsString());
-		exit(1);
+		exit_defer(1);
 	}
 
 	$failure = [];
@@ -147,7 +158,7 @@ function main() {
 			$status["failed"] = ["status" => "fatal", "debug" => json_encode($failure)];
 			writer(json_encode($status), $outfile);
 			if (!$debug_mode) {
-				exit(1);
+				exit_defer(1);
 			}
 		} elseif (!isset($failure["forts"])) {
 			// At least display forts, as they're mostly always available
@@ -263,7 +274,7 @@ function main() {
 	// Bail out if nothing changed
 	if (!$status["relics_changed"] && !$status["map_changed"]
 		&& !$status["gems_changed"] && !$debug_mode) {
-		exit(0);
+		exit_defer(0);
 	}
 	// Bail out if 12 or more events are recorded at the same time (post
 	// failure recovery that leads to malformed status on official page)
@@ -271,7 +282,7 @@ function main() {
 		(count($events_log) - count($old_status["events_log"] ?? [])) >= 12) {
 		eprint("Messed up upstream HTML or server reboot, write nothing");
 		if (!$debug_mode) {
-			exit(1);
+			exit_defer(1);
 		}
 	}
 
@@ -295,6 +306,8 @@ function main() {
 	[$st, $ev] = statistics($status["events_log"], $stats_db_file, $debug_mode);
 	MultiWriter::write($stats_outfile, $st);
 	MultiWriter::write($stats_outfile_events, $ev);
+
+	exit_defer(0);
 }
 
 try {
@@ -309,16 +322,12 @@ try {
 		// Don't rewrite every minute to allow caching if the error is still
 		// the same
 		if (isset($old_status["failed"]) && $old_status["failed"]["debug"] == json_encode($err->getMessage())) {
-			exit(1);
+			exit_defer(1);
 		}
 	}
 	$old_status["failed"] = ["status" => "fatal", "debug" => json_encode($err->getMessage())];
 	MultiWriter::write($outfile, json_encode($status));
+	exit_defer(1);
 }
 
-(function($debug_mode) {
-	// daily event dump
-	if (date("H:i") === "04:32" || $debug_mode === true)
-		require_once __DIR__ . '/stats/dump_generator.php';
-})($debug_mode);
 ?>
