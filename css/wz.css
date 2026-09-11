@@ -16,17 +16,18 @@
 	visibility: hidden;
 }
 #wz-map {
+	display:flex;
+	align-items: center;
 	image-rendering: auto; /* Chrome */
 	image-rendering: smooth; /* FF-only */
 	image-rendering: optimizeQuality; /* FF + Safari, deprecated */
-	background-image: url("../data/warstatus/base_map.2.png");
-	background-size: cover;
 }
 #wz-map-map {
-	display: flex;
 	border-radius: 8px;
 	padding: 0;
 	margin: 0;
+	background-image: url("../data/warstatus/base_map.2.png");
+	background-size: cover;
 }
 .wz-icon {
 	padding: 0;
@@ -41,15 +42,10 @@
 }
 #wz-events {
 	overflow-y: scroll;
-	display: flex;
-	flex-direction: column;
-	align-self: stretch;
-	justify-content: space-between;
 }
 #wz-realms-info {
 	display: flex;
 	flex-direction: column;
-	align-self: stretch;
 	justify-content: space-between;
 }
 #wz-events-eventslist {
@@ -63,10 +59,10 @@
 	"gems  forts"
 	"relics  forts";
 	gap: 0 1em;
-	min-height: 4.5em;
 	align-items: center;
 	font-size: 150%;
 	font-weight: bold;
+	min-height: 5em;
 }
 .wz-realmname {
 	grid-area: realm;
@@ -110,22 +106,22 @@
 		gap: 3em 1em;
 	}
 	#wz-map-map {
-		height: 500px;
 		width: 500px;
+		height: 500px;
 	}
 	#wz-events {
 		height: 500px;
-		width: 30em;
+		width: 26em;
 	}
 	#wz-realms-info {
-		min-height: 20em;
-		min-width: 20em;
+		min-width: 24em;
 	}
 	#wz-alsius, #wz-ignis {
 		margin-bottom: 3em;
 	}
 	#wz-alsius, #wz-ignis, #wz-syrtis {
-		min-height: 5.5em;
+		min-height: 5em;
+		min-width: 16em;
 	}
 }
 
@@ -133,17 +129,16 @@
 	.wz-realm-header {
 		min-height: 3em;
 	}
-	#wz-map {
-		padding: 0px;
-		/* XXX hide some margin issue leaving 4 px left at the bottom */
-		background-color: unset;
-	}
 	#wz-map-map, #wz-map {
 		width: 350px;
 		height: 350px;
 	}
 	#wz-events {
 		height: 350px;
+		min-width: 26em;
+	}
+	#wz-realms-info {
+		min-width: 24em;
 	}
 	#wz-container {
 		gap: 0;
@@ -151,13 +146,12 @@
 	}
 }
 
-@media (min-width: 512px) and (max-width: 1279px) {
-	#wz-realms-info {
-		width: fit-content;
-		min-width: 16em;
-	}
+@media (min-width: 512px) and (max-width: 1200px) {
 	.wz-realm-header {
 		gap: 0;
+	}
+	#wz-alsius, #wz-ignis, #wz-syrtis {
+		min-height: 5.5em;
 	}
 	#wz-map-map, #wz-map {
 		width: 250px;
@@ -167,16 +161,20 @@
 	#wz-realms-info {
 		font-size: 90%;
 	}
+	#wz-events {
+		min-width: 22em;
+	}
 }
 
 @media(max-width: 512px) {
 	#wz-map {
 		text-align: center;
-		width: 100%;
 		margin-bottom: 1em;
+		width: 100%;
 	}
 	#wz-map-map {
 		width: 100%;
+		min-height: calc(100dvw - 4 * var(--default_margin_padding));
 	}
 	#wz-events {
 		height: 50vh;
