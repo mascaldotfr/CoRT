@@ -93,7 +93,7 @@ summary::-webkit-details-marker {
 #menu, #footer {
 	text-align: center;
 	background-color: var(--menu_background);
-	min-height: 3.2em;
+	min-height: 3.5em;
 }
 #menu {
 	/* override .card */
@@ -111,6 +111,7 @@ summary::-webkit-details-marker {
 	/* disable inheritance from menuitem */
 	background: unset;
 	box-shadow: unset;
+	padding: .2em 0 0 0;
 }
 #footer {
 	min-height: 7.5em;
@@ -348,7 +349,8 @@ h3 {
     visibility: hidden;
 }
 
-@media (min-width: 800px) and (max-width: 1200px) {
+@media (min-width: 800px) and (max-width: 1000px) {
+	/* ensure the manu has a correct padding on 2 lines */
 	#menu-links {
 		padding-bottom: var(--default_margin_padding);
 	}
