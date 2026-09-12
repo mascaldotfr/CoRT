@@ -75,19 +75,7 @@ function display_events() {
 
 async function get_data() {
 	try {
-		const cached = JSON.parse(localStorage.getItem("wevents_api_result"))
-		const now = Date.now();
-		// Refetch at best every minute
-		if (cached !== null && (now - cached["timestamp"]) <= 60_000) {
-			data = cached["payload"];
-			last_fetch_ts = cached["timestamp"];
-		}
-		else {
-			last_fetch_ts = now;
-			data = await $().getJSON(api.urls["events"]);
-			const to_store = {"timestamp": now, "payload": data};
-			localStorage.setItem("wevents_api_result", JSON.stringify(to_store));
-		}
+		data = await $().getJSON(api.urls["events"]);
 		$("#we-info-error").empty();
 		$("#we-info-error").hide();
 	}

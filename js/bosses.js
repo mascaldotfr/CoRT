@@ -195,6 +195,6 @@ $(document).ready(function() {
 	notify.insert_notification_link();
 	refresh_display();
 	$("#boss-info").show();
-	const scheduler = new MyScheduler(0, 1, refresh_display);
+	const scheduler = new MyScheduler(refresh_display, 60_000);
 	scheduler.start_scheduling();
 });

@@ -238,8 +238,8 @@ $(document).ready(function() {
 	$("#bz-info-info").text(_("Last updated:"));
 	feed_bz();
 
-	const scheduler = new MyScheduler(1, 2, feed_bz)
-	scheduler.start_scheduling();
+	const scheduler = new MyScheduler(feed_bz, 60_000)
+	scheduler.start_scheduling_defer();
 
 	$("#bz-info").show();
 	$("#bz-local-sign").show();
