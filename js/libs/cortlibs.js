@@ -13,8 +13,9 @@ class ApiURL {
 		// Define base_urls
 		if (official.includes(window.location.hostname)) {
 			this.frontsite = "https://cort.ovh";
-			// For submitting setups only
 			this.base = "https://cort.ovh/api";
+			// For submitting setups only, due to CDN usage
+			this.trainer_base = "https://api.cort.ovh";
 		}
 		else {
 			// If you keep everything under the same directory and
@@ -23,12 +24,13 @@ class ApiURL {
 			const base_path = path.substring(0, path.lastIndexOf('/') + 1);
 			const base_url = window.location.origin + base_path;
 			this.base = base_url + "api";
+			this.trainer_base = this.base;
 			this.frontsite = window.location.origin;
 		}
 
 
 		this.urls = {
-			"submit_trainer": `${this.base}/bin/collect/submit.php`,
+			"submit_trainer": `${this.trainer_base}/bin/collect/submit.php`,
 
 			"trainer_data_stats": `${this.base}/var/trainerstats.json`,
 			"events": `${this.base}/var/events.json`,
