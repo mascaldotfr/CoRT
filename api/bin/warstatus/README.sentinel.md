@@ -1,17 +1,17 @@
 # SENTINEL API
 
 This API endpoint has been tailor made for
-https://sentinel.cort.ovh
+https://rengumsentinel.com
 
-It's an agregation of all other APIs, that have been quickly filtered so we
+It's an agregation of all other WZ APIs, that have been quickly filtered so we
 keep a small output response.
 
 ## URL
 
 | Type                   | URL                                                |
 |------------------------|----------------------------------------------------|
-| Official               | https://cort.ovh/api/bin/sentinel/sentinel.php     |
-| Local                  | https://yourhost/api/bin/sentinel/sentinel.php     |
+| Official               | https://cort.ovh/api/var/sentinel.json             |
+| Local                  | https://yourhost/api/var/sentinel.json             |
 
 ## Response format
 
@@ -52,3 +52,4 @@ is a quick schema:
   }
 }
 ```
+

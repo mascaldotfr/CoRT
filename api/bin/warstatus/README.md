@@ -29,7 +29,7 @@ to have the official warstatus page opened with devtools on.
 
 > [!TIP]
 > It's useless to fetch it more than minutely. A fresh result is granted minutely
-> every :10 seconds.
+> at every :10 seconds.
 
 
 ```
@@ -80,6 +80,7 @@ to have the official warstatus page opened with devtools on.
 ### Javascript
 
 * See `../js/wz.js`
+* See Sentinel (https://codeberg.org/mascal/sentinel/)
 
 ### Python
 
