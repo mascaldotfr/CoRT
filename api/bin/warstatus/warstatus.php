@@ -18,6 +18,7 @@ $outfile = "../../var/wstatus.json";
 $stats_db_file = "../../var/events.sqlite";
 $stats_outfile = "../../var/stats.json";
 $stats_outfile_events = "../../var/events.json";
+$sentinel_outfile = "../../var/sentinel.json";
 $base_url = "https://www.championsofregnum.com/";
 // Use True to allow unconditional successful runtime for debugging
 // It propagates to statistics() as well
@@ -45,7 +46,7 @@ function exit_defer($code = 0) {
 }
 
 function main() {
-	global $outfile, $stats_db_file, $stats_outfile, $stats_outfile_events, $base_url, $debug_mode;
+	global $outfile, $stats_db_file, $stats_outfile, $sentinel_outfile, $stats_outfile_events, $base_url, $debug_mode;
 
 	try {
 		$context = stream_context_create([
@@ -306,6 +307,17 @@ function main() {
 	[$st, $ev] = statistics($status["events_log"], $stats_db_file, $debug_mode);
 	MultiWriter::write($stats_outfile, $st);
 	MultiWriter::write($stats_outfile_events, $ev);
+
+	// Generate sentinel infos
+	$s_wz = array_intersect_key($status, array_flip(["forts", "gems"]));
+	$s_wz = array_intersect_key($s_wz, array_flip(["forts", "gems"]));
+	// Get only the max N days part
+	$wstats = json_decode($st, true);
+	$s_stats = $wstats[count($wstats) - 1];
+	# And filter so we have only gems and wishes
+	$s_stats = array_map(fn($realm) => array_intersect_key($realm, array_flip(["gems", "wishes"])), $s_stats);
+	$sentinel = json_encode([ "wz"	=> $s_wz, "stats" => $s_stats ]);
+	MultiWriter::write($sentinel_outfile, $sentinel);
 
 	exit_defer(0);
 }
