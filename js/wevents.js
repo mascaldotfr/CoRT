@@ -134,7 +134,7 @@ $(document).ready(async function() {
 		// Drop generation time, it was used before but can be quite misleading
 		// I don't want to up major just for that, and it can still have it's use
 		data.shift();
-		const now = new Date(last_fetch_ts);
+		const now = new Date();
 		const last_update = now.toLocaleTimeString(undefined,
 				    {hour: "2-digit", minute: "2-digit", second: "2-digit",
 				     timeZone: tz});
