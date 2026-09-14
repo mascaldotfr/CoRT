@@ -1,5 +1,6 @@
-/* XXX MyNotify : a simple javacript notification system */
+import {$} from "./lamaiquery.js";
 
+/* XXX MyNotify : a simple javacript notification system */
 
 export class MyNotify {
        constructor() {
