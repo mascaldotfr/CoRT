@@ -206,7 +206,7 @@ export default defineConfig({
 	build: {
 		outDir: outDir,
 		emptyOutDir: true, // Clean the dist folder before each build
-		cssCodeSplit: false,
+		cssCodeSplit: true,
 		modulePreload: {
 			polyfill: false
 		},
@@ -235,12 +235,39 @@ export default defineConfig({
 			},
 			output: {
 				manualChunks: {
-					// Make a single core library will all that is needed on every page
 					core: [
+						'../../js/libs/i18n.js',
+						'../../js/libs/lamaiquery.js',
+						'../../js/libs/api.js',
+						'../../js/libs/uitools.js',
+						'../../js/menu.js',
+					],
+					defer_libs: [
 						'../../js/libs/bossesrespawns.js',
 						'../../js/libs/bzschedule.js',
-						'../../js/libs/cortlibs.js',
-						'../../js/menu.js',
+					],
+					other_libs: [
+						'../../js/wztools/wztools.js',
+						'../../js/trainertools/trainertools.js'
+					],
+					// Force split between base and icons
+					css_icons: [
+							'../../css/icons.css',
+					],
+					base_css: [
+							'../../css/style.css',
+					],
+					// Non vital css files
+					other_css: [
+							'../../css/01_chartist.css',
+							'../../css/bosses.css',
+							'../../css/bz.css',
+							'../../css/quests.css',
+							'../../css/trainer.css',
+							'../../css/tstats.css',
+							'../../css/wevents.css',
+							'../../css/wstats.css',
+							'../../css/wz.css'
 					]
 				},
 				entryFileNames: 'js/[name]-[hash].js',

@@ -1,4 +1,9 @@
-import {$, _, MyNotify, MyScheduler, Time, UITools} from "./libs/cortlibs.js";
+import {$} from "./libs/lamaiquery.js"
+import {_} from "./libs/i18n.js";
+import {UITools} from "./libs/uitools.js";
+import {MyScheduler} from "./libs/myscheduler.js";
+import {MyNotify} from "./libs/mynotify.js";
+import {Time} from "./libs/time.js";
 import {BossesRespawns} from "./libs/bossesrespawns.js";
 
 

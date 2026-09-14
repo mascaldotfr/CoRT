@@ -1,6 +1,9 @@
 // On top of the menu, this files contains some globals not really fitting
 // elsewhere, since this file is always executed
-import {$, _, __i18n__, api, myTz} from "./libs/cortlibs.js";
+import {myTz} from "./libs/mytz.js";
+import {$} from "./libs/lamaiquery.js"
+import {api} from "./libs/api.js";
+import {_, __i18n__} from "./libs/i18n.js";
 
 let __menu_content = function () { return `
 	<input type="checkbox" id="menu-click">

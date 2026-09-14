@@ -1,4 +1,7 @@
-import {$, _, Time, UITools} from "./libs/cortlibs.js";
+import {UITools} from "./libs/uitools.js";
+import {$} from "./libs/lamaiquery.js"
+import {_} from "./libs/i18n.js";
+import {Time} from "./libs/time.js";
 
 let time = new Time();
 let df = null;

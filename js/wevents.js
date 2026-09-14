@@ -1,4 +1,7 @@
-import {$, _, api, UITools} from "./libs/cortlibs.js";
+import {UITools} from "./libs/uitools.js";
+import {$} from "./libs/lamaiquery.js"
+import {api} from "./libs/api.js";
+import {_} from "./libs/i18n.js";
 import {HumaniseEvents} from "./wztools/wztools.js";
 
 let data = null;

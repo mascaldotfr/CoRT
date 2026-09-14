@@ -1,4 +1,8 @@
-import {$, _, api, TrainerConstants, UITools} from "./libs/cortlibs.js";
+import {UITools} from "./libs/uitools.js";
+import {$} from "./libs/lamaiquery.js"
+import {api} from "./libs/api.js";
+import {_} from "./libs/i18n.js";
+import {TrainerConstants} from "./trainertools/trainertools.js";
 import { computePosition as fu_computePosition, offset as fu_offset, flip as fu_flip, shift as fu_shift } from "./libs/floating-ui-tooltip.js";
 
 // Classes are instanciated at the end

@@ -1,4 +1,8 @@
-import {$, _, TrainerConstants, api, UITools} from "./libs/cortlibs.js";
+import {UITools} from "./libs/uitools.js";
+import {$} from "./libs/lamaiquery.js"
+import {api} from "./libs/api.js";
+import {_} from "./libs/i18n.js";
+import {TrainerConstants} from "./trainertools/trainertools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
 var valid_trainerdatasets = TrainerConstants.datasets;

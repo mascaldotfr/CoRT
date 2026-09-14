@@ -1,4 +1,9 @@
-import {$, _, api, MyNotify, MyScheduler, UITools} from "./libs/cortlibs.js";
+import {UITools} from "./libs/uitools.js";
+import {$} from "./libs/lamaiquery.js"
+import {api} from "./libs/api.js";
+import {_} from "./libs/i18n.js";
+import {MyNotify} from "./libs/mynotify.js";
+import {MyScheduler} from "./libs/myscheduler.js";
 import {Constants, CleanForts, HumaniseEvents, Icons} from "./wztools/wztools.js";
 
 // formatters

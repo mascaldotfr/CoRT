@@ -1,4 +1,4 @@
-import {_} from "../../js/libs/cortlibs.js";
+import {_} from "../../js/libs/i18n.js";
 
 export function Constants() {
 	this.realm_colors = { "Alsius": "blue", "Ignis": "red", "Syrtis": "green" };

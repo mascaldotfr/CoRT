@@ -1,8 +1,10 @@
 // Non critical core JS stuff should be put here when applicable
 // It's usually called at the end of main JS code
 
-import { $, _, api, TrainerConstants } from "./libs/cortlibs.js";
-import { BossesRespawns } from "./libs/bossesrespawns.js";
+import {$} from "./libs/lamaiquery.js"
+import {_} from "./libs/i18n.js";
+import {api} from "./libs/api.js";
+import {BossesRespawns} from "./libs/bossesrespawns.js";
 import {BZSchedule} from "./libs/bzschedule.js";
 
 // SEO stuff
