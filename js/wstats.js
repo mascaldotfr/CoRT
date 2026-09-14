@@ -136,7 +136,19 @@ async function display_stat(force = false) {
 	let data = null;
 
 	try {
-		data = await $().getJSON(api.urls["stats"]);
+		const cached = JSON.parse(localStorage.getItem("wstats_api_result"));
+		const now = Date.now();
+		// Limit to 2 fetch per minute
+		// XXX If you read this and CoRT is >= 3.8, the undefined check
+		// can be removed, it was for a transition to more meaningful names
+		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"]) <= 30_000) {
+			data = cached["payload"];
+		}
+		else {
+			data = await $().getJSON(api.urls["stats"]);
+			const to_store = {"timestamp": now, "payload": data};
+			localStorage.setItem("wstats_api_result", JSON.stringify(to_store));
+		}
 		$("#ws-info-error").empty();
 	}
 	catch (error) {
@@ -260,7 +272,7 @@ $(document).ready(function() {
 	}
 
 	display_stat(true);
-	const scheduler = new MyScheduler(display_stat, 60_000);
+	const scheduler = new MyScheduler(10, 15, display_stat);
 	scheduler.start_scheduling();
 });
 

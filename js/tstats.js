@@ -14,7 +14,17 @@ function capitalize(string) {
 
 async function download_stats() {
 	try {
-		stats = await $().getJSON(api.urls["trainer_data_stats"]);
+		const cached = JSON.parse(localStorage.getItem("tstats_api_result"));
+		const now = Date.now();
+		// Refresh at best every hour (3hrs server side)
+		if (cached !== null && (now - cached["timestamp"] ) <= 3_600_000) {
+			stats = cached["payload"];
+		}
+		else {
+			stats = await $().getJSON(api.urls["trainer_data_stats"]);
+			const to_store = {"timestamp": now, "payload": stats};
+			localStorage.setItem("tstats_api_result", JSON.stringify(to_store));
+		}
 	}
 	catch(err) {
 		$("#ts-error-info").html(`Failed to make the stats: <code>${err}</code> (check console)`);

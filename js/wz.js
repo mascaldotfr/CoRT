@@ -153,7 +153,20 @@ async function display_wz(force=false) {
 	let failures = {};
 
 	try {
-		data = await $().getJSON(api.urls["wstatus"]);
+		let last_fetch_ts = 0;
+		const cached = JSON.parse(localStorage.getItem("wz_api_result"));
+		const now = Date.now();
+		// Limit to 2 fetch per minute
+		if (cached !== null && (now - cached["timestamp"] ) < 30_000) {
+			data = cached["payload"];
+			last_fetch_ts = cached["timestamp"];
+		}
+		else {
+			data = await $().getJSON(api.urls["wstatus"]);
+			const to_store = {"timestamp": now, "payload": data};
+			last_fetch_ts = now;
+			localStorage.setItem("wz_api_result", JSON.stringify(to_store));
+		}
 		$("#wz-info-error").empty();
 		let datetime = tformatter.format(Date.now());
 		$("#wz-info-updated").text(datetime);
@@ -270,6 +283,6 @@ $(document).ready(function() {
 	notify.insert_notification_link();
 
 	display_wz(true);
-	const scheduler = new MyScheduler(display_wz, 60_000);
+	const scheduler = new MyScheduler(10, 15, display_wz);
 	scheduler.start_scheduling();
 });

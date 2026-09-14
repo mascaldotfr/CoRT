@@ -324,11 +324,12 @@ export class MyNotify {
 	}
 }
 
+
 // XXX Schedule minutely things. See WZ/BZ/BOSSES for usage
-// Runs inside a Web Worker to avoid main thread throttling when the tab is put to sleep
+// It's on main thread, so there may be some temporary drift if the tab is put
+// to sleep
 export class MyScheduler {
-	constructor(callback, delay) {
-		this.delay = delay;
+	constructor(start, end, callback) {
 		this.callback = callback;
 
 		let callback_running = false;
@@ -346,12 +347,27 @@ export class MyScheduler {
 
 		const worker_code = `
 			let timer = null;
-			onmessage = () => {
-				if (timer) clearInterval(timer);
-				timer = setInterval(() => {
-					postMessage("tick");
-				}, ${delay});
-			};
+			function when_to_respawn() {
+				const now = new Date();
+				const jitter = Math.floor(Math.random() * (${end} - ${start} + 1));
+				const target_second = ${start} + jitter;
+
+				const next = new Date(now);
+				next.setMilliseconds(0);
+				next.setSeconds(target_second);
+				if (next <= now)
+					next.setMinutes(next.getMinutes() + 1);
+				return next.getTime() - now.getTime();
+			}
+			function tick() {
+				postMessage("tick");
+				schedule();
+			}
+			function schedule() {
+				const delay = when_to_respawn();
+				timer = setTimeout(tick, delay);
+			}
+			onmessage = schedule;
 		`;
 		const blob = new Blob([worker_code], { type: "application/javascript" });
 		this.worker = new Worker(URL.createObjectURL(blob));
@@ -365,12 +381,7 @@ export class MyScheduler {
 		else
 			this.worker.postMessage("start");
 	}
-	// Defer to the start of the next minute (BZ)
-	start_scheduling_defer() {
-		const sleep_for = 60000 - (Date.now() % 60000);
-		//console.log("gotta sleep for", sleep_for, "ms");
-		setTimeout(() => this.start_scheduling(), sleep_for);
-	}
+
 }
 
 // XXX Time
