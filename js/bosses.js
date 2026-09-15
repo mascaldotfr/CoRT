@@ -88,7 +88,6 @@ class Calendar {
 //cortlibs
 const notify = new MyNotify();
 const time = new Time();
-const uitools = new UITools();
 
 // date formatter
 let dformatter = null;
@@ -116,7 +115,7 @@ async function get_next_respawns() {
 	}
 	catch (error) {
 		$("#boss-error").text("Failed to calculate boss spawns: " + error);
-		uitools.defer();
+		UITools.defer();
 		return;
 	}
 }
@@ -175,8 +174,8 @@ async function refresh_display() {
 		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
 	}
 	if (bosses_ordered.length > 0) { // if there was no error during fetch then
-		uitools.unskeleton();
-		uitools.defer();
+		UITools.unskeleton();
+		UITools.defer();
 	}
 }
 

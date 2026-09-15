@@ -57,7 +57,6 @@ $(document).ready(function() {
 		$(`#quests-${elem}`).show();
 
 	setInterval(display, 60 * 1000);
-	const uitools = new UITools();
-	uitools.defer();
+	UITools.defer();
 });
 

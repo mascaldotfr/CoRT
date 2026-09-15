@@ -14,7 +14,6 @@ let time = new Time();
 
 // cortlibs
 const notify = new MyNotify();
-const uitools = new UITools();
 
 // notification sent within 10 minutes?
 let notified_10m = false;
@@ -166,7 +165,7 @@ function feed_bz() {
 	catch (error) {
 		$("#bz-error").text("Failed to get the BZ status: " + error);
 		console.log(error);
-		uitools.defer();
+		UITools.defer();
 	}
 	if (!data) return;
 
@@ -225,8 +224,8 @@ function feed_bz() {
 		}
 		$(`#bz-sch${day}`).append(daily_schedule.join(""));
 	}
-	uitools.unskeleton();
-	uitools.defer();
+	UITools.unskeleton();
+	UITools.defer();
 }
 
 $(document).ready(function() {

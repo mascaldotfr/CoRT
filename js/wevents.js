@@ -7,7 +7,6 @@ import {HumaniseEvents} from "./wztools/wztools.js";
 let data = null;
 let last_fetch_ts = 0;
 
-const uitools = new UITools();
 const humaniser = new HumaniseEvents();
 
 function resolve_filter() {
@@ -53,7 +52,7 @@ function display_events() {
 	const we_events = $("#we-events");
 	if (filtered.length == 0) {
 		we_events.html(_("No matching event found!"));
-		uitools.unskeleton();
+		UITools.unskeleton();
 	}
 	else {
 		we_events.empty();
@@ -69,8 +68,8 @@ function display_events() {
 				we_events.append(humaniser.humanise_events(batch, false));
 			}, 0);
 			if (i == 0) {
-				uitools.unskeleton();
-				uitools.defer();
+				UITools.unskeleton();
+				UITools.defer();
 			}
 		}
 	}
@@ -97,7 +96,7 @@ async function get_data() {
 	catch (error) {
 		$("#we-info-error").html(`<b>Failed to get the events:</b> <code>${error}</code>`);
 		$("#we-info-error").show();
-		uitools.defer();
+		UITools.defer();
 		return;
 	}
 }

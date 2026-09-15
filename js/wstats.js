@@ -15,9 +15,6 @@ const constants = new Constants();
 const cleaner = new CleanForts();
 const time = new Time();
 
-// cortlibs
-const uitools = new UITools();
-
 const realm_colors = constants["realm_colors"];
 const realms = constants["realm_names"];
 
@@ -159,7 +156,7 @@ async function display_stat(force = false) {
 	catch (error) {
 		$("#ws-info-error").html(`<b>Failed to get statistics:</b> <code>${error}</code>`);
 		$("#ws-info-error").show();
-		uitools.defer();
+		UITools.defer();
 		return;
 	}
 
@@ -217,8 +214,8 @@ async function display_stat(force = false) {
 	show_graphs_fortsheld_byfort(infos["fortsheld"]["average"], "#ws-fortsheld-avg-chart");
 	show_graphs_fortsheld_byrealm(infos["fortsheld"]["total"], "#ws-fortsheld-total-chart");
 
-	uitools.unskeleton();
-	uitools.defer();
+	UITools.unskeleton();
+	UITools.defer();
 }
 
 $(document).ready(function() {

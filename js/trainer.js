@@ -63,8 +63,8 @@ $(document).ready(function() {
 		$("#t-tips-cycle").text(_("If your skill/tree level is 0 and you press '-', I'll try to allocate as many points as possible!"));
 		$("#t-tips-upgrade").text(_("Selecting an higher character level will upgrade your current setup to that level."));
 		$("#t-empty-trainer").css("display", "block");
-		uitools.unskeleton();
-		uitools.defer();
+		UITools.unskeleton();
+		UITools.defer();
 	}
 });
 
@@ -580,8 +580,8 @@ class SetupManager {
 			}
 		}, 1);
 
-		uitools.unskeleton();
-		uitools.defer();
+		UITools.unskeleton();
+		UITools.defer();
 	}
 
 
@@ -1122,7 +1122,6 @@ class SetupCompressor {
 	}
 }
 
-const uitools = new UITools();
 const compressor = new SetupCompressor();
 const datasets = new DatasetsManager();
 const icons = new Icons();

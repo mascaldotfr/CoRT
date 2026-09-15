@@ -6,7 +6,6 @@ import {TrainerConstants} from "./trainertools/trainertools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
 var valid_trainerdatasets = TrainerConstants.datasets;
-const uitools = new UITools();
 // remove 1.33.2 and 1.33.3, setup collection wasn't a thing back then
 valid_trainerdatasets.splice(0,2);
 var stats = {};
@@ -137,8 +136,8 @@ $(document).ready(async function() {
 	lang = localStorage.getItem("lang");
 	await download_stats();
 	redraw_all();
-	uitools.unskeleton();
-	uitools.defer();
+	UITools.unskeleton();
+	UITools.defer();
 
 	$("#ts-version").on("change", redraw_version);
 	$("#ts-class").on("change", redraw_all);

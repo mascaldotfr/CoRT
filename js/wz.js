@@ -22,7 +22,6 @@ const wzicons = icons.get_all_icons();
 
 //cortlibs
 const notify = new MyNotify();
-const uitools = new UITools();
 
 // canvas
 function setup_canvas() {
@@ -213,7 +212,7 @@ async function display_wz(force=false) {
 	catch (error) {
 		$("#wz-info").show();
 		$("#wz-info-error").html(`<p><b>Failed to get the warstatus:</b> <code>${error}</code></p>`);
-		uitools.defer();
+		UITools.defer();
 		return;
 	}
 
@@ -272,8 +271,8 @@ async function display_wz(force=false) {
 	if (events_list[1].length > 0)
 		notify.emit(_("WZ status"), events_list[1], "wz");
 
-	uitools.unskeleton();
-	uitools.defer();
+	UITools.unskeleton();
+	UITools.defer();
 }
 
 
