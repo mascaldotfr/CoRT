@@ -223,7 +223,7 @@ async function display_wz(force=false) {
 	// XXX force is overwritten by the web worker as a message event due to
 	// being asynchronous...
 	if (force instanceof MessageEvent && data["events_log"][0]["date"] < wz_lastupdate)
-		return; // nothing new
+		return; // nothing new don't change nothing
 
 	// Middle part
 	for (let i = 0; i < data["gems"].length; i++) {
