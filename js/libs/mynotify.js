@@ -24,7 +24,7 @@ export class MyNotify {
                if (!this.swsupport || Notification.permission !== "default")
                        return;
                $("#title").append(`
-                   <a href="#" id="asknotifications" class="nodeco" title="Notifications"><span class="notifbadge">&#128276;</span></a>
+                   <a href="#" id="asknotifications" class="nodeco" title="Notifications"><span class="notif-badge">&#128276;</span></a>
                `);
                $("#asknotifications").on("click", function () {
                        $("#asknotifications").remove();
