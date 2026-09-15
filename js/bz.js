@@ -156,6 +156,9 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 
 
 function feed_bz() {
+	if (UITools.is_inactive())
+		return;
+
 	try {
 		data = BZSchedule.get();
 		$("#bz-error").empty();

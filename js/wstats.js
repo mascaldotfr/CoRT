@@ -135,6 +135,9 @@ function table_factory(rows, selector, realm) {
 
 async function display_stat(force = false) {
 
+	if (UITools.is_inactive())
+		return;
+
 	let data = null;
 
 	try {

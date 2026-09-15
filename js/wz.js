@@ -153,6 +153,10 @@ function switch_stale(stale) {
 }
 
 async function display_wz(force=false) {
+
+	if (UITools.is_inactive())
+		return;
+
 	let data = null;
 	let failures = {};
 

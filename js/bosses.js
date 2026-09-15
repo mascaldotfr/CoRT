@@ -104,6 +104,9 @@ function unixstamp2human(unixstamp) {
 }
 
 async function get_next_respawns() {
+	if (UITools.is_inactive())
+		return;
+
 	try {
 		let data = BossesRespawns.get_schedule(4);
 		next_respawns = data["next_spawns"];
