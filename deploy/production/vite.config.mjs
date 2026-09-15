@@ -207,6 +207,7 @@ export default defineConfig({
 		outDir: outDir,
 		emptyOutDir: true, // Clean the dist folder before each build
 		cssCodeSplit: true,
+		assetsInlineLimit: 0, // Don't inline bosses pictures
 		modulePreload: {
 			polyfill: false
 		},
