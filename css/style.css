@@ -283,8 +283,7 @@ h3 {
 	background: var(--tooltip_background);
 	border-radius: 4px;
 	font-size: 70%;
-	vertical-align: super;
-	padding: 3px ;
+	padding: 4px ;
 }
 .live-badge::before {
 	content:"LIVE \01F535";
