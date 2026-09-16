@@ -338,7 +338,7 @@ try {
 		}
 	}
 	$old_status["failed"] = ["status" => "fatal", "debug" => json_encode($err->getMessage())];
-	MultiWriter::write($outfile, json_encode($status));
+	MultiWriter::write($outfile, json_encode($old_status));
 	exit_defer(1);
 }
 
