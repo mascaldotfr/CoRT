@@ -86,7 +86,7 @@ class Calendar {
 }
 
 //cortlibs
-const notify = new MyNotify();
+const notify = new MyNotify("notify_bosses");
 const time = new Time();
 
 // date formatter

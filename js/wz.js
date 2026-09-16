@@ -21,7 +21,7 @@ const realm_colors = constants.realm_colors;
 const wzicons = icons.get_all_icons();
 
 //cortlibs
-const notify = new MyNotify();
+const notify = new MyNotify("notify_wz");
 
 // canvas
 function setup_canvas() {

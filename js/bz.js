@@ -13,7 +13,7 @@ let lang = null;
 let time = new Time();
 
 // cortlibs
-const notify = new MyNotify();
+const notify = new MyNotify("notify_bz");
 
 // notification sent within 10 minutes?
 let notified_10m = false;
