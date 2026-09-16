@@ -82,6 +82,10 @@ function main() {
 	$dom = new Dom();
 	$dom->loadStr($upstream_html);
 
+	// No HTML at all, bail out
+	if (count($dom->find('*')) === 0)
+               throw new UnexpectedValueException("Parsed DOM is empty, upstream HTML likely broken :\n" . $upstream_html);
+
 	$headers = $dom->find('.war-status-realm');
 	$i = 0;
 	foreach ($headers as $realm) {
