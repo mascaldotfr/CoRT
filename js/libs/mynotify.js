@@ -23,7 +23,7 @@ export class MyNotify {
        insert_notification_link() {
                if (!this.swsupport || Notification.permission !== "default")
                        return;
-               $("#title").append(`
+               $("#notif-zone").append(`
                    <a href="#" id="asknotifications" class="nodeco" title="Notifications"><span class="notif-badge">&#128276;</span></a>
                `);
                $("#asknotifications").on("click", function () {

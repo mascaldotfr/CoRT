@@ -246,6 +246,7 @@ li[data-lang="fr"]::before, span[data-lang="fr"]::before { background-image: var
 h1 {
 	text-align: center;
 	font-size: 2rem;
+	margin-bottom: 0;
 }
 h3 {
 	padding-top: 0;
@@ -267,26 +268,34 @@ h3 {
 }
 
 .notif-badge {
-	display: inline-block;
-	text-transform: uppercase;
-	background: var(--tooltip_background);
-	border-radius: 4px;
-	font-size: 50%;
-	vertical-align: super;
-	padding: 6px ;
-	margin-left:-4px;
+	background: var(--forms);
+	padding: 4px 8px;
+	margin-left: .3em;
 }
 
 .live-badge {
-	display: inline-block;
+	white-space: nowrap;
+	font-size: 85%;
 	text-transform: uppercase;
-	background: var(--tooltip_background);
-	border-radius: 4px;
-	font-size: 70%;
-	padding: 4px ;
+	vertical-align: middle;
+	margin-bottom: 2em;
+	margin-top: .5em;
+	opacity: .8;
 }
-.live-badge::before {
-	content:"LIVE \01F535";
+.live-badge-label::before {
+	content:"LIVE";
+	font-weight: bold;
+}
+.live-badge-label {
+	padding: 4px 8px;
+	background: color-mix(in srgb, var(--tooltip_background), var(--blue));
+}
+.live-badge-label.loading {
+	background: color-mix(in srgb, var(--tooltip_background), var(--red));
+}
+.live-badge-value {
+	padding: 4px 8px;
+	background: var(--forms);
 }
 
 /* Beware, for the colors, order matters */
@@ -499,6 +508,9 @@ h3 {
 	}
 	.card {
 		border: 2px solid #E5E7EB;
+	}
+	.live-badge-label {
+		color: var(--background);
 	}
 }
 

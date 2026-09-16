@@ -21,8 +21,8 @@
 }
 #ws-info {
 	min-height: 1em;
-	min-width: 10em;
 	visibility: hidden;
+	text-align: center;
 }
 #ws-container-text .ws-card {
 	display: flex;

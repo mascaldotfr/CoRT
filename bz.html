@@ -7,7 +7,7 @@
 			const SAVED_THEME = localStorage.getItem("colorscheme") || "";
 			if (SUPPORT_NESTED && SAVED_THEME != "")
 				document.documentElement.setAttribute("data-prefers-colorscheme", SAVED_THEME);
-			// All the rest is in js/defer.js
+		// All the rest is in js/defer.js
 		</script>
 		<meta charset="utf-8">
 		<title>Champions of Regnum Battle Zone / BZ status</title>
@@ -27,9 +27,13 @@
 		<nav id="menu" class="card">&nbsp;</nav>
 		<main id="main-container" class="bz-main-container">
 			<h1 id="title">&nbsp;</h1>
-			<p id="bz-info" class="center">
-				<span class="live-badge"></span>
-				<span id="bz-info-info">&nbsp;</span>&nbsp;<span id="bz-info-updated">&nbsp;</span>
+			<p id="bz-info" class="center live-badge">
+				<span class="live-badge-label"></span>
+				<span class="live-badge-value">
+					<span id="bz-info-info">&nbsp;</span>
+					<span id="bz-info-updated">&nbsp;</span>
+				</span>
+				<span id="notif-zone"></span>
 			</p>
 			<div id="bz-error" class="center red bold"></div>
 			<article id="bz-countdown" class="card skeleton">
