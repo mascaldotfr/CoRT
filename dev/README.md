@@ -12,7 +12,7 @@ from the CoRT production server (`cort.ovh`).
 
 It is designed to populate the `api/var/` directory in a local development
 environment. It also ensures these endpoints work when you aren't using a host
-configured to use the "official API" (see `js/libs/cortlibs.js`).
+configured to use the "official API" (see `js/libs/api.js`).
 
 The generated local API allows you to work on frontend tuning, or testing new
 backend code, at your heat content.

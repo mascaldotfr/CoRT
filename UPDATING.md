@@ -46,7 +46,7 @@ is the **heavily recommended method**.
 Copy the beta folder to `data/trainer/1.x.x` according to the new version number.
 
 Update the array containing all available versions in
-`/js/libs/cortlibs.js` with the newest version last.
+`/js/trainertools/trainertools.js` with the newest version last.
 
 That's it.
 

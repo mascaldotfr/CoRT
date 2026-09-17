@@ -7,7 +7,7 @@ is invalid, then a HTTP 417 code is returned.
 
 This is fully anonymized and only triggerred when using
 https://cort.ovh, unless you do the appropriate changes in the
-source code (`./submit.php` and `/js/libs/cortlibs.js`)
+source code (`./submit.php` and `/js/libs/api.js`)
 
 ### Dataset
 
