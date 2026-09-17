@@ -104,9 +104,8 @@ async function get_data() {
 $(document).ready(async function() {
 	document.title = _("WZ events") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("WZ events"));
-	$("#we-info-info").text(
-		_("All events over the last 10 days.") +
-		" " + _("Last updated:") + " ");
+	$(".live-badge-label").text(_("Last 10 days"));
+	$("#we-info-info").text(_("Last updated:"));
 	$("#we-data-dump").attr("href", api.urls["events_dump"]);
 	$("#we-data-dump").text(_("Download all events data"));
 	$("#we-floppy").show();

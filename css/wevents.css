@@ -1,10 +1,16 @@
 #we-container {
-	margin: 0 auto;
+	margin: 2em auto;
 	width: 35em;
 }
 #we-info {
 	min-height: 1em;
 	visibility: hidden;
+}
+#we-info .live-badge-label {
+	font-weight: bold;
+}
+#we-info .live-badge-label::before {
+	content: ''; /* disable live badge */
 }
 #we-data-dump {
 	font-style: italic;
