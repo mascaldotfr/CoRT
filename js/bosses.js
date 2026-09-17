@@ -85,7 +85,6 @@ class Calendar {
 	}
 }
 
-//cortlibs
 const notify = new MyNotify("notify_bosses");
 const time = new Time();
 
@@ -104,7 +103,7 @@ function unixstamp2human(unixstamp) {
 }
 
 async function get_next_respawns() {
-	if (UITools.is_inactive())
+	if (document.hidden && !notify.can_emit())
 		return;
 
 	try {

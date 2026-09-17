@@ -12,7 +12,6 @@ let tformatter = null;
 let lang = null;
 let time = new Time();
 
-// cortlibs
 const notify = new MyNotify("notify_bz");
 
 // notification sent within 10 minutes?
@@ -156,7 +155,7 @@ function utcScheduleToLocal(schbegin, schend, lang = "en") {
 
 
 function feed_bz() {
-	if (UITools.is_inactive())
+	if (document.hidden && !notify.can_emit())
 		return;
 
 	try {

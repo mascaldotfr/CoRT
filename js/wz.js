@@ -20,7 +20,6 @@ const humaniser = new HumaniseEvents();
 const realm_colors = constants.realm_colors;
 const wzicons = icons.get_all_icons();
 
-//cortlibs
 const notify = new MyNotify("notify_wz");
 
 // canvas
@@ -154,7 +153,7 @@ function switch_stale(stale) {
 
 async function display_wz(force=false) {
 
-	if (UITools.is_inactive())
+	if (document.hidden && !notify.can_emit())
 		return;
 
 	let data = null;
