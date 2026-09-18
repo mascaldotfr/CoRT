@@ -1,0 +1,29 @@
+.tabs-nav {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 1fr;
+	align-items: center;
+	gap: 1em;
+}
+.tabs-title {
+	display: inline-block;
+	font-weight: bold;
+	text-align: center;
+}
+.tab-btn {
+	cursor: pointer;
+	background: none;
+	border: none;
+	border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+	font-weight: bold;
+}
+
+.tab-content {
+	display: none;
+}
+.tab-content.active {
+	display: block;
+}
