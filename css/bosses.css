@@ -31,6 +31,24 @@
 	margin: 0 0 0 -1.5em;
 	text-align: center;
 }
+
+#boss-tl-table {
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+#boss-tl-table tr:not(:last-child) {
+	border-bottom: 1px solid #888;
+}
+#boss-tl-table td {
+	padding: .25em;
+}
+.tabs-nav {
+	background: var(--tooltip_background);
+}
+.tab-btn.active {
+	background: var(--forms);
+	text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
 @media (max-width:512px) {
 	#boss-list img {
 		width: 64px;
@@ -41,4 +59,3 @@
 		margin: 0 0 0 -4em;
 	}
 }
-

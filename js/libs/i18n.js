@@ -87,6 +87,21 @@ export const __i18n__ = {
 		"es": "Horarios de reaparición de los epicos",
 		"de": "Boss-Respawn-Zeiten"
 	},
+	"View:": {
+		"fr": "Vue :",
+		"es": "Vista:",
+		"de": "Ansicht:"
+	},
+	"Per boss": {
+		"fr": "Par boss",
+		"es": "Por jefe",
+		"de": "Pro Boss"
+	},
+	"Chronologic": {
+		"fr": "Chronologique",
+		"es": "Cronológico",
+		"de": "Chronologisch"
+	},
 	"BZ status": {
 		"fr": "Battlezone",
 		"es": "Battlezone",

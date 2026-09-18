@@ -5,6 +5,7 @@ import {MyScheduler} from "./libs/myscheduler.js";
 import {MyNotify} from "./libs/mynotify.js";
 import {Time} from "./libs/time.js";
 import {BossesRespawns} from "./libs/bossesrespawns.js";
+import {Tabs} from "./libs/tabs.js";
 
 
 class Calendar {
@@ -98,6 +99,15 @@ let nextboss_ts = 0;
 let notified_10m = false;
 let last_notification_ts = 0;
 
+
+// Bosses URL location for timeline view
+const boss_images = {
+	"daen": "data/bosses/daen.1.webp",
+	"evendim": "data/bosses/evendim.1.webp",
+	"thorkul": "data/bosses/thorkul.1.webp",
+	"server": "data/bosses/server.1.webp"
+};
+
 function unixstamp2human(unixstamp) {
 	return dformatter.format(new Date(unixstamp * 1000));
 }
@@ -122,6 +132,7 @@ async function get_next_respawns() {
 	}
 }
 
+// Per boss -- this also notifies
 function display_next_respawn(boss) {
 	$(`#boss-${boss}-lastspawn`).text(`${_("Last respawn")}: ${unixstamp2human(previous_respawns[boss])}`);
 	let next_respawn_in = time.timestamp_ago(next_respawns[boss][0], false, true);
@@ -137,6 +148,8 @@ function display_next_respawn(boss) {
 		cal_sel.attr("href", cal["href"]);
 		cal_sel.attr("download", cal["filename"]);
 	}
+
+	// Notifications
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
 		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] > 1 &&
@@ -158,9 +171,47 @@ function display_next_respawn(boss) {
 	}
 }
 
+function display_timeline() {
+	let all_respawns = [];
+	let server_count = 0;
+
+	for (let boss in next_respawns) {
+		const uc_boss = boss[0].toUpperCase() + boss.slice(1);
+		next_respawns[boss].forEach((ts) => {
+			// We don't need more than 2 bosses (weekly vs 69h)
+			if (boss === "server" && server_count >= 1) return;
+			let dt = new Date(ts * 1000);
+			all_respawns.push({
+				img: boss_images[boss],
+				name: uc_boss,
+				ts: ts,
+				cal: Calendar.create_link(uc_boss, ts, ts + 900,
+				     `${uc_boss}_${dt.toISOString()}`)
+			});
+			if (boss === "server") server_count++;
+		});
+	}
+
+	// Sort by ascending time
+	all_respawns.sort((a, b) => a.ts - b.ts);
+
+	let rows = [];
+	for (let spawn of all_respawns) {
+		let dt = new Date(spawn["ts"] * 1000);
+		rows.push(`<tr>
+			<td><img src="${spawn.img}" title="${spawn.name}" style="height: 3ex">
+			<td class="center">${dformatter.format(dt)}
+			<td><a href="${spawn.cal.href}" download="${spawn.cal.filename}"
+				class="addtocalendar" title="Add to Calendar">&#128197;</a>
+			</tr>`);
+	}
+	return rows.join("");
+}
+
 async function refresh_display() {
 	await get_next_respawns();
 
+	// Per boss
 	let bosses_unordered = new Map();
 	for (let boss in next_respawns) {
 		display_next_respawn(boss);
@@ -175,6 +226,11 @@ async function refresh_display() {
 	for (let boss in bosses_ordered) {
 		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
 	}
+
+	// Timeline
+	$("#boss-tl-table").html(display_timeline());
+
+	// Finally
 	if (bosses_ordered.length > 0) { // if there was no error during fetch then
 		UITools.unskeleton();
 		UITools.defer();
@@ -185,16 +241,22 @@ $(document).ready(function() {
 	document.title = _("Bosses respawn times") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Bosses respawn times"));
 	$("#bosses-info-info").text(_("Last updated:"));
+	$("#boss-per-boss-tab").text(_("Per boss"));
+	$("#boss-tl-tab").text(_("Chronologic"));
+	$("#tabs-title").text(_("View:"));
+	Tabs.wire();
 
 	const style = document.createElement("style");
 	style.textContent = ".addtocalendar { text-decoration: none; }";
 	document.head.appendChild(style);
 
 	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		timeZone: localStorage.getItem("tz"),
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
-		hour: 'numeric', minute: 'numeric'
+		hour: 'numeric', minute: 'numeric',
 	});
 	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		timeZone: localStorage.getItem("tz"),
 		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
 	});
 
