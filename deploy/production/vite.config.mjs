@@ -275,6 +275,12 @@ export default defineConfig({
 				entryFileNames: 'js/[name]-[hash].js',
 				chunkFileNames: 'js/chunks/[name]-[hash].js',
 				assetFileNames: (assetInfo) => {
+					const imageExtensions = ['.png', '.webp', '.ico'];
+					const hasImageExtension = assetInfo.name && imageExtensions.some(ext => assetInfo.name.endsWith(ext));
+					if (hasImageExtension && assetInfo.originalFileName) {
+						// We hash manually images, avoiding confliict when images are injected through HTML _and_ JS
+						return assetInfo.originalFileName;
+					}
 					if (assetInfo.name && assetInfo.name.endsWith('.css')) {
 						return 'css/[name]-[hash][extname]';
 					}
