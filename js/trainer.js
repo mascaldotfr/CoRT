@@ -1,5 +1,5 @@
 import {UITools} from "./libs/uitools.js";
-import {$} from "./libs/lamaiquery.js"
+import {$} from "./libs/lamaiquery.js";
 import {api} from "./libs/api.js";
 import {_} from "./libs/i18n.js";
 import {TrainerConstants} from "./trainertools/trainertools.js";
@@ -40,7 +40,7 @@ $(document).ready(function() {
 		const path = window.location.pathname;
 		const dirname = path.endsWith("/") ? path : path.substring(0, path.lastIndexOf("/"));
 		window.location.pathname = dirname + "/";
-		return
+		return;
 	}
 	// search for a given trainer dataset in url, and skillset then
 	// set the version accordingly. See also manage_versions.
@@ -473,7 +473,7 @@ class SetupManager {
 
 	async load_tree() {
 		// Needed when moving from a translatable to non translatable dataset
-		icons.reset_constants()
+		icons.reset_constants();
 		// Need to clean out all unused popup if class changed
 		document.querySelectorAll(".tippy-content").forEach(el => el.remove());
 

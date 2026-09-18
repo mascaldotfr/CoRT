@@ -1,5 +1,5 @@
 import {UITools} from "./libs/uitools.js";
-import {$} from "./libs/lamaiquery.js"
+import {$} from "./libs/lamaiquery.js";
 import {api} from "./libs/api.js";
 import {_} from "./libs/i18n.js";
 import {MyNotify} from "./libs/mynotify.js";
@@ -164,7 +164,7 @@ async function display_wz(force=false) {
 		const cached = JSON.parse(localStorage.getItem("wz_api_result"));
 		const now = Date.now();
 		// Limit to 2 fetch per minute
-		if (cached !== null && (now - cached["timestamp"] ) < 30_000) {
+		if (cached !== null && (now - cached["timestamp"]) < 30000) {
 			data = cached["payload"];
 			last_fetch_ts = cached["timestamp"];
 		}

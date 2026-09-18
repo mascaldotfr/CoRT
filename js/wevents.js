@@ -1,5 +1,5 @@
 import {UITools} from "./libs/uitools.js";
-import {$} from "./libs/lamaiquery.js"
+import {$} from "./libs/lamaiquery.js";
 import {api} from "./libs/api.js";
 import {_} from "./libs/i18n.js";
 import {HumaniseEvents} from "./wztools/wztools.js";
@@ -77,10 +77,10 @@ function display_events() {
 
 async function get_data() {
 	try {
-		const cached = JSON.parse(localStorage.getItem("wevents_api_result"))
+		const cached = JSON.parse(localStorage.getItem("wevents_api_result"));
 		const now = Date.now();
 		// Refetch at best every minute
-		if (cached !== null && (now - cached["timestamp"]) <= 60_000) {
+		if (cached !== null && (now - cached["timestamp"]) <= 60000) {
 			data = cached["payload"];
 			last_fetch_ts = cached["timestamp"];
 		}

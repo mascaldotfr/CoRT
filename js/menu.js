@@ -1,7 +1,7 @@
 // On top of the menu, this files contains some globals not really fitting
 // elsewhere, since this file is always executed
 import {myTz} from "./libs/mytz.js";
-import {$} from "./libs/lamaiquery.js"
+import {$} from "./libs/lamaiquery.js";
 import {api} from "./libs/api.js";
 import {_, __i18n__} from "./libs/i18n.js";
 
@@ -47,8 +47,8 @@ const __menu_github_stuff = function () {
 	const dc = `<a href="https://discord.cort.ovh" target="_blank">
 			${_("Discord server")}</a>`;
 	return _("CoRT is a free and open source website, feel free to check out its %s, and %s. See also the %s!",
-		 src, bugs, dc)
-}
+		 src, bugs, dc);
+};
 const __menu_footer = function() {
 	const cort_version = document.querySelector('meta[name="cort-version"]')?.getAttribute("content") || "devel";
 
@@ -138,7 +138,7 @@ $(document).ready(function() {
 		document.head.appendChild(link);
 	}
 
-	const tz = new myTz()
+	const tz = new myTz();
 	tz.create_tz_list("#tzchooser");
 
 

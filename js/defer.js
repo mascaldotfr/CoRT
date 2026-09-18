@@ -1,7 +1,7 @@
 // Non critical core JS stuff should be put here when applicable
 // It's usually called at the end of main JS code
 
-import {$} from "./libs/lamaiquery.js"
+import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
 import {api} from "./libs/api.js";
 import {BossesRespawns} from "./libs/bossesrespawns.js";
@@ -21,17 +21,17 @@ const colorschemechooser = $("#colorschemechooser");
 if (SUPPORT_NESTED) {
 	colorschemechooser.val(localStorage.getItem("colorscheme") || "");
 
-	function apply_scheme(scheme) {
+	const apply_scheme = (scheme) => {
 		const html = $("html");
 		html.removeAttr("data-prefers-colorscheme");
 		html.attr("data-prefers-colorscheme", scheme);
-	}
+	};
 
-	function scheme_switch() {
+	const scheme_switch = () => {
 		const scheme = colorschemechooser.val();
 		localStorage.setItem("colorscheme", scheme);
-		apply_scheme(scheme)
-	}
+		apply_scheme(scheme);
+	};
 
 	colorschemechooser.on("change", scheme_switch);
 	window.addEventListener("storage", (e) => {
@@ -91,7 +91,7 @@ function temporary_message() {
 	const lang = localStorage.getItem("lang");
 	const translated_msg = selector.attr("data-" + lang);
 	// blue = info, red = warning, green = ok
-	const icon = {"blue": "&#8505;&#65039;", "green": "&#9989;", "red": "&#9888;&#65039;"}
+	const icon = {"blue": "&#8505;&#65039;", "green": "&#9989;", "red": "&#9888;&#65039;"};
 	selector.html(icon[color] + "&nbsp;" + translated_msg);
 }
 
@@ -137,7 +137,7 @@ async function maintenance() {
 	finally {
 		temporary_message();
 	}
-};
+}
 maintenance();
 setInterval(maintenance, maintenance_delay);
 
@@ -172,7 +172,7 @@ async function menu_status() {
 		bosses_selector.attr("menu-status", String(boss_will_spawn));
 
 	}
-	catch(_unused) { console.error(_unused) }
+	catch(_unused) { console.error(_unused); }
 }
 menu_status();
 setInterval(menu_status, status_delay);

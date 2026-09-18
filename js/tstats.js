@@ -1,5 +1,5 @@
 import {UITools} from "./libs/uitools.js";
-import {$} from "./libs/lamaiquery.js"
+import {$} from "./libs/lamaiquery.js";
 import {api} from "./libs/api.js";
 import {_} from "./libs/i18n.js";
 import {TrainerConstants} from "./trainertools/trainertools.js";
@@ -20,7 +20,7 @@ async function download_stats() {
 		const cached = JSON.parse(localStorage.getItem("tstats_api_result"));
 		const now = Date.now();
 		// Refresh at best every hour (3hrs server side)
-		if (cached !== null && (now - cached["timestamp"] ) <= 3_600_000) {
+		if (cached !== null && (now - cached["timestamp"] ) <= 3600000) {
 			stats = cached["payload"];
 		}
 		else {

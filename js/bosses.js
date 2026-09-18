@@ -1,4 +1,4 @@
-import {$} from "./libs/lamaiquery.js"
+import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
 import {UITools} from "./libs/uitools.js";
 import {MyScheduler} from "./libs/myscheduler.js";
@@ -177,6 +177,7 @@ function display_timeline() {
 
 	for (let boss in next_respawns) {
 		const uc_boss = boss[0].toUpperCase() + boss.slice(1);
+		// jshint -W083
 		next_respawns[boss].forEach((ts) => {
 			// We don't need more than 2 bosses (weekly vs 69h)
 			if (boss === "server" && server_count >= 1) return;
@@ -190,6 +191,7 @@ function display_timeline() {
 			});
 			if (boss === "server") server_count++;
 		});
+		// jshint +W083
 	}
 
 	// Sort by ascending time

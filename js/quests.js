@@ -1,5 +1,5 @@
 import {UITools} from "./libs/uitools.js";
-import {$} from "./libs/lamaiquery.js"
+import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
 import {Time} from "./libs/time.js";
 
@@ -42,7 +42,7 @@ $(document).ready(function() {
 		hour: '2-digit',
 		minute: '2-digit',
 		hour12: false
-	})
+	});
 	document.title = _("Quests Countdowns") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Quests Countdowns"));
 	$("#quests-tickets-title").text(_("Tickets Delivery"));

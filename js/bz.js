@@ -1,5 +1,5 @@
 import {UITools} from "./libs/uitools.js";
-import {$} from "./libs/lamaiquery.js"
+import {$} from "./libs/lamaiquery.js";
 import {api} from "./libs/api.js";
 import {_} from "./libs/i18n.js";
 import {MyScheduler} from "./libs/myscheduler.js";
@@ -245,7 +245,7 @@ $(document).ready(function() {
 	$("#bz-info-info").text(_("Last updated:"));
 	feed_bz();
 
-	const scheduler = new MyScheduler(1, 2, feed_bz)
+	const scheduler = new MyScheduler(1, 2, feed_bz);
 	scheduler.start_scheduling();
 
 	$("#bz-info").show();

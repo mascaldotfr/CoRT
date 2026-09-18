@@ -1,5 +1,5 @@
 import {UITools} from "./libs/uitools.js";
-import {$} from "./libs/lamaiquery.js"
+import {$} from "./libs/lamaiquery.js";
 import {api} from "./libs/api.js";
 import {_} from "./libs/i18n.js";
 import {MyScheduler} from "./libs/myscheduler.js";
@@ -146,7 +146,7 @@ async function display_stat(force = false) {
 		// Limit to 2 fetch per minute
 		// XXX If you read this and CoRT is >= 3.8, the undefined check
 		// can be removed, it was for a transition to more meaningful names
-		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"]) <= 30_000) {
+		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"]) <= 30000) {
 			data = cached["payload"];
 		}
 		else {
