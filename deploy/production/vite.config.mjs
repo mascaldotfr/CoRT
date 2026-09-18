@@ -258,9 +258,10 @@ export default defineConfig({
 					base_css: [
 							'../../css/style.css',
 					],
-					// Non vital css files
+					// Non vital css files, libs one first
 					other_css: [
 							'../../css/01_chartist.css',
+							'../../css/tabs.css',
 							'../../css/bosses.css',
 							'../../css/bz.css',
 							'../../css/quests.css',
