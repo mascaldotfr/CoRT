@@ -185,7 +185,7 @@ function injectCustomHeadPlugin(toinject) {
 			const currentPage = Object.keys(toinject).find(page => ctx.filename.endsWith(page));
 
 			if (currentPage && toinject[currentPage]) {
-				return html.replace('<head>', `<head>${globalMeta}${toinject[currentPage]}`);
+				return html.replace('</head>', `${globalMeta}${toinject[currentPage]}</head>`);
 			}
 			return html;
 		}
