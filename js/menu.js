@@ -139,7 +139,13 @@ $(document).ready(function() {
 	}
 
 	const tz = new myTz();
-	tz.create_tz_list("#tzchooser");
+	const saved_tz = localStorage.getItem("tz");
+	$("#tzchooser").on("focus", () => {
+		tz.create_tz_list("#tzchooser");
+	});
+	const local_tz = saved_tz === null ? tz.get_system_tz() : saved_tz;
+	localStorage.setItem("tz", local_tz);
+	$("#tzchooser").html(`<option value="${local_tz}">${local_tz}</option>`);
 
 
 });
