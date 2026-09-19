@@ -652,9 +652,11 @@ class SetupManager {
 	}
 
 	save_to_url(shared=true, beta2live=false) {
+		// Don't mutate the current instance for so few...
+		let effective_level = this.level;
 		if (this.has_necro_gem)
-			this.level += 1;
-		let setup = this.trainerdataversion + "+" + this.clas + "+" + this.level + "+";
+			effective_level += 1;
+		let setup = this.trainerdataversion + "+" + this.clas + "+" + effective_level + "+";
 		let dpoints = 0;
 		let ppoints = 0;
 		// WM row is always the latest one
