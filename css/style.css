@@ -15,7 +15,7 @@
 	--ahover: #ccaaff;
 	--default_margin_padding: .5em;
 	--table_padding: .25em .5em;
-	scrollbar-color: var(--menu_background) var(--forms);
+	scrollbar-color: var(--forms) var(--tooltip_background);
 }
 
 html {
@@ -530,7 +530,7 @@ h3 {
 	--faded: #aaaaaa;
 	--links: #66ccff;
 	--ahover: #ffffff;
-	scrollbar-color: var(--menu_background) var(--forms);
+	scrollbar-color: var(--links) var(--tooltip_background);
 	#t-points {
 		background: var(--menu_background) !important;
 		border: 1px solid #333333;
