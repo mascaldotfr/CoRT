@@ -252,6 +252,9 @@ $(document).ready(function() {
 	style.textContent = ".addtocalendar { text-decoration: none; }";
 	document.head.appendChild(style);
 
+	const lang = localStorage.getItem("lang") || navigator.language || "en-GB";
+	const tz = localStorage.getItem("tz") || Intl.DateTimeFormat().resolvedOptions().timeZone;
+
 	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 		timeZone: localStorage.getItem("tz"),
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
