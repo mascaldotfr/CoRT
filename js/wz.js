@@ -22,6 +22,8 @@ const wzicons = icons.get_all_icons();
 
 const notify = new MyNotify("notify_wz");
 
+let icons_cache = {};
+
 // canvas
 function setup_canvas() {
 	const canvas = document.getElementById("wz-map-map");
@@ -89,24 +91,28 @@ function dispatch_fort_icon(fort) {
 
 // Create a svg blob for a given original icon filename
 function svg_to_blob(fname) {
-    const xml = wzicons[fname];
-    if (!xml) {
-        console.warn("Missing icon:", fname);
-        return "";
-    }
-    // Properly encode UTF-8 characters for btoa
-    return "data:image/svg+xml;charset=UTF-8;base64," + btoa(unescape(encodeURIComponent(xml)));
+	const xml = wzicons[fname];
+	if (!xml) {
+		console.warn("Missing icon:", fname);
+		return "";
+	}
+	// Properly encode UTF-8 characters for btoa
+	return "data:image/svg+xml;charset=UTF-8;base64," + btoa(unescape(encodeURIComponent(xml)));
 }
 
 function display_map(forts) {
 	// Preload all images in parallel using Promises
 	let imagePromises = forts.map(fort => {
-		return new Promise(resolve => {
-			const img = new Image();
-			img.src = svg_to_blob(dispatch_fort_icon(fort));
-			img.onload = () => resolve(img);
-			img.onerror = () => resolve(null); // Gracefully handle missing icons
-		});
+		const cache_key = fort["icon"] + dispatch_fort_icon(fort);
+		if (!icons_cache[cache_key]) {
+			icons_cache[cache_key] = new Promise(resolve => {
+				const img = new Image();
+				img.src = svg_to_blob(dispatch_fort_icon(fort));
+				img.onload = () => resolve(img);
+				img.onerror = () => resolve(null); // Gracefully handle missing icons
+			});
+		}
+		return icons_cache[cache_key];
 	});
 
 	// Wait for all images to load
