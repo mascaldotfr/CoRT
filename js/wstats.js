@@ -225,6 +225,8 @@ async function display_stat(force = false) {
 		}
 	}
 
+	UITools.unskeleton();
+
 	show_graphs_hourly(infos["activity"], "#ws-forts-chart");
 	show_graphs_hourly(infos["invasions"], "#ws-invasions-chart", false);
 	show_graphs_hourly(infos["gems"], "#ws-gems-chart");
@@ -233,7 +235,6 @@ async function display_stat(force = false) {
 	show_graphs_fortsheld_byfort(infos["fortsheld"]["average"], "#ws-fortsheld-avg-chart");
 	show_graphs_fortsheld_byrealm(infos["fortsheld"]["total"], "#ws-fortsheld-total-chart");
 
-	UITools.unskeleton();
 	UITools.defer();
 }
 
@@ -241,18 +242,6 @@ $(document).ready(function() {
 	document.title = _("WZ statistics") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("WZ statistics"));
 	$("#ws-info-info").text(_("Last event:"));
-
-	// For display
-	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
-		hour: "2-digit", minute: "2-digit", second: "2-digit",
-		hour12: false, timeZone: localStorage.getItem("tz")
-	});
-
-	// For use by chartist
-	hourformatter = new Intl.DateTimeFormat("en-GB", {
-		hour12: false, hour: '2-digit',
-		timeZone: localStorage.getItem("tz")
-	});
 
 	let ilinks = [];
 	ilinks.push({"id": "#ws-last", txt: _("Latest key events")});
@@ -291,6 +280,18 @@ $(document).ready(function() {
 		// Add to index card
 		$("#ws-index-list").append(`<li><a href="${l["id"]}">${l["txt"]}</a></li>`);
 	}
+
+	// For display
+	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+		hour: "2-digit", minute: "2-digit", second: "2-digit",
+		hour12: false, timeZone: localStorage.getItem("tz")
+	});
+
+	// For use by chartist
+	hourformatter = new Intl.DateTimeFormat("en-GB", {
+		hour12: false, hour: '2-digit',
+		timeZone: localStorage.getItem("tz")
+	});
 
 	display_stat(true);
 	const scheduler = new MyScheduler(10, 15, display_stat);

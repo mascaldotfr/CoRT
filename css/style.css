@@ -96,6 +96,7 @@ summary::-webkit-details-marker {
 }
 #footer {
 	min-height: 7.5em;
+	contain: layout style;
 }
 #menu-click, #menu-mobile {
 	display: none;
