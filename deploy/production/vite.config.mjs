@@ -37,7 +37,6 @@ function getGitVersion() {
 const globalMeta = `
 	<meta name="cort-version" content="${getGitVersion()}">
 	<meta property="og:image" content="/favicon_512.png">
-	<style>body { background: #11152d }</style>
 	`;
 
 // static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
