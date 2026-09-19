@@ -126,10 +126,14 @@ $("#t-save-bypass-menu").on ("click", function() {
 });
 
 $("body").on("keydown", function(event) {
-	// Allow pressing Echap to close shared setup links
+	// Allow pressing Escape to close shared setup links
 	if  (event.key === "Escape" || event.keyCode === 27) {
 		event.preventDefault();
-		window.location.href = $("#t-sharedlink-url").val();
+		// Check if we're displaying the share dialog...
+		const selector = "#t-sharedlink-url";
+		const element = document.querySelector(selector);
+		if (element && (element.offsetWidth > 0 || element.offsetHeight > 0))
+			window.location.href = $("#t-sharedlink-url").val();
 	}
 });
 $("#t-save").on("click", function() {
