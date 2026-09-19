@@ -125,6 +125,13 @@ $("#t-save-bypass-menu").on ("click", function() {
 	window.location.assign(setup.save_to_url(false));
 });
 
+$("body").on("keydown", function(event) {
+	// Allow pressing Echap to close shared setup links
+	if  (event.key === "Escape" || event.keyCode === 27) {
+		event.preventDefault();
+		window.location.href = $("#t-sharedlink-url").val();
+	}
+});
 $("#t-save").on("click", function() {
 	if (setup.trainerdata === null) {
 		window.alert(_(`You need first to load trees by clicking on "%s"!`, _("Load / Reset")));
@@ -144,14 +151,6 @@ $("#t-save").on("click", function() {
 	$("#t-sharedlink-copy").text(_("Copy link"));
 	$("#t-sharedlink-close").text(_("Close") + " (Esc)");
 	$("#t-sharedlink-url").val(saved_url);
-
-	// allow pressing echap
-	$("body").on("keydown", function(event) {
-		if (event.key === "Escape" || event.keyCode === 27) {
-			event.preventDefault();
-			window.location.href = $("#t-sharedlink-url").val();
-		}
-	});
 
 	// disable the trainer
 	$("#main-container").css("pointer-events", "none");
