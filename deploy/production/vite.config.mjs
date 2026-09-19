@@ -43,7 +43,7 @@ const globalMeta = `
 // static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
 // If there is none, add an HTML comment, some content is needed to safeguard the build from errors
 const specialMeta = {
-	"index.html": '<!-- empty -->',
+	"index.html": '<link rel="preload" href="data/trainer/1.35.19/trainerdata.json" as="fetch" crossorigin fetchpriority="low">',
 	"bosses.html": '<!-- empty -->',
 	"bz.html": '<!-- empty -->',
 	"wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" crossorigin="anonymous" />',
