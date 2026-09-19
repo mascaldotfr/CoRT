@@ -84,6 +84,14 @@ class Calendar {
 		const url = URL.createObjectURL(blob);
 		return {"href": url, filename: safe_filename};
 	}
+
+	static delete_all_links() {
+		// Free all the page link blobs, to free some memory
+		const links = document.querySelectorAll('a[href^="blob:"]');
+		links.forEach(link => {
+			URL.revokeObjectURL(link.href);
+		});
+	}
 }
 
 const notify = new MyNotify("notify_bosses");
@@ -212,8 +220,9 @@ function display_timeline() {
 
 async function refresh_display() {
 	await get_next_respawns();
+	Calendar.delete_all_links();
 
-	// Per boss
+	// XXX Per boss
 	let bosses_unordered = new Map();
 	for (let boss in next_respawns) {
 		display_next_respawn(boss);
@@ -229,10 +238,10 @@ async function refresh_display() {
 		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
 	}
 
-	// Timeline
+	// XXX Timeline
 	$("#boss-tl-table").html(display_timeline());
 
-	// Finally
+	// XXX Finally
 	if (bosses_ordered.length > 0) { // if there was no error during fetch then
 		UITools.unskeleton();
 		UITools.defer();
