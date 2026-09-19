@@ -42,6 +42,8 @@
 	/* reinstate default margin padding for card who are overriden by wztools-events-list */
 	margin: var(--default_margin_padding);
 	padding: var(--default_margin_padding);
+	content-visibility: auto;
+	contain-intrinsic-size: auto 2rem;
 }
 #we-floppy {
 	visibility: hidden;
