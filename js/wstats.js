@@ -22,6 +22,7 @@ const realms = constants["realm_names"];
 let tformatter = null;
 // This one is for chartist.js, dont touch this
 let hourformatter = null;
+let cached_graphs = {};
 
 // undefined / null => N/A or 0
 function naify(value, failover="0") {
@@ -81,7 +82,12 @@ function show_graphs_hourly(data, selector, onlyinteger=true) {
 				}
 			}]
 		];
-	new Chartist.LineChart(selector, dataset, options, responsive);
+	if (!(selector in cached_graphs)) {
+		cached_graphs[selector] = new Chartist.LineChart(selector, dataset, options, responsive);
+	}
+	else {
+		cached_graphs[selector].update(dataset, options, responsive);
+	}
 }
 
 function show_graphs_fortsheld_byfort(data, selector) {
@@ -105,7 +111,12 @@ function show_graphs_fortsheld_byfort(data, selector) {
 				axisX: { labelInterpolationFnc: v => v.slice(0,3) }
 			}]
 		];
-	new Chartist.BarChart(selector, dataset, options, responsive);
+	if (!(selector in cached_graphs)) {
+		cached_graphs[selector] = new Chartist.BarChart(selector, dataset, options, responsive);
+	}
+	else {
+		cached_graphs[selector].update(dataset, options, responsive);
+	}
 }
 
 function show_graphs_fortsheld_byrealm(data, selector) {
@@ -119,7 +130,12 @@ function show_graphs_fortsheld_byrealm(data, selector) {
 		startAngle: 270,
 		showLabel: true
 	};
-	new Chartist.PieChart(selector, dataset, options);
+	if (!(selector in cached_graphs)) {
+		cached_graphs[selector] = new Chartist.PieChart(selector, dataset, options);
+	}
+	else {
+		cached_graphs[selector].update(dataset, options);
+	}
 }
 
 function table_factory(rows, selector, realm) {
