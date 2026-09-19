@@ -474,8 +474,6 @@ class SetupManager {
 	async load_tree() {
 		// Needed when moving from a translatable to non translatable dataset
 		icons.reset_constants();
-		// Need to clean out all unused popup if class changed
-		document.querySelectorAll(".tippy-content").forEach(el => el.remove());
 
 		let class_skills = TrainerConstants.class_type_masks[setup.clas];
 		// adjust code to get base power and discipline points, as well as WM tree location.
@@ -750,6 +748,7 @@ class Icons {
 			}
 		};
 		this.item_translations = this.base_translations;
+		this.global_tooltip = document.getElementById("global-tooltip");
 	}
 
 	reset_constants() {
@@ -762,14 +761,8 @@ class Icons {
 			const ref = document.getElementById(clean_spellname);
 			if (!ref) return;
 
-			const tip = document.createElement("div");
-			tip.className = "tippy-content";
-			tip.innerHTML = content;
-			tip.style.display = "none";
-			document.body.appendChild(tip);
-
 			const update = () => {
-				fu_computePosition(ref, tip, {
+				fu_computePosition(ref, this.global_tooltip, {
 					placement: "bottom",
 					middleware: [
 						fu_offset(8),
@@ -777,8 +770,8 @@ class Icons {
 						fu_shift({ padding: 5 })
 					]
 				}).then(({ x, y }) => {
-					tip.style.left = `${x}px`;
-					tip.style.top = `${y}px`;
+					this.global_tooltip.style.left = `${x}px`;
+					this.global_tooltip.style.top = `${y}px`;
 				});
 			};
 
@@ -786,14 +779,15 @@ class Icons {
 
 			ref.addEventListener("mouseenter", () => {
 				show_timer = setTimeout(() => {
+				this.global_tooltip.innerHTML = content;
 					update();
-					tip.style.display = "block";
+				this.global_tooltip.style.display = "block";
 				}, 200);
 			});
 
 			ref.addEventListener("mouseleave", () => {
+				this.global_tooltip.style.display = "none";
 				clearTimeout(show_timer);
-				tip.style.display = "none";
 			});
 		});
 	}
