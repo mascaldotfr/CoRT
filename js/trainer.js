@@ -554,7 +554,11 @@ class SetupManager {
 			for (let i = 1; i <= setup.wmrow; i++)
 				update_tree(i);
 		}
-		// need to add this trigger **once** the trainer UI is generated
+		// We remove all event listeners from the previous setup by recreating #t-trainer's DOM
+		const t_trainer = document.getElementById("t-trainer");
+		const t_trainer_new = t_trainer.cloneNode(true);
+		t_trainer.parentNode.replaceChild(t_trainer_new, t_trainer);
+		// ... and need to add this new one matching all +/- buttons
 		$("#t-trainer").on("click", function(e) {
 			const target = e.target;
 			if (target.classList.contains("plus") || target.classList.contains("minus")) {
