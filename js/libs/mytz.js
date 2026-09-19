@@ -72,6 +72,7 @@ export class myTz {
 		this.display_tz_list(selector, options.join(""), storedtz);
 
 		localStorage.setItem("tzlisthtml", options);
+		options = null; // free memory!
 	}
 
 }
