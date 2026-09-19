@@ -559,15 +559,17 @@ class SetupManager {
 				update_tree(i);
 		}
 		// need to add this trigger **once** the trainer UI is generated
-		$(".plus, .minus").on("click", function() {
-			if (this.parentNode.parentNode.className == "p0") {
-				discipline_change(this);
-			}
-			else {
-				power_change(this);
+		$("#t-trainer").on("click", function(e) {
+			const target = e.target;
+			if (target.classList.contains("plus") || target.classList.contains("minus")) {
+				const ancestor = target.parentNode.parentNode;
+				if (ancestor.classList.contains("p0")) {
+					discipline_change(target);
+				} else {
+					power_change(target);
+				}
 			}
 		});
-
 		this.input_from_url();
 
 		// Trick to defer toolstips binding, allowing
