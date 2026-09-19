@@ -173,7 +173,7 @@ $("#t-sharedlink-copy").on("click", function() {
 		navigator.clipboard.writeText($("#t-sharedlink-url").val())
 			.then(() => {
 				$("#t-sharedlink-copy").text(_("Link copied!"));
-				let timer = setInterval(() => {
+				let timer = setTimeout(() => {
 					$("#t-sharedlink-copy").text(_("Copy link"));
 					clearInterval(timer);
 					}, 3000);
