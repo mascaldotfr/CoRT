@@ -510,14 +510,11 @@ class SetupManager {
 		let treepos = 0;
 		alltrees.forEach( (tree) => {
 			// preload skill bars
-			let iconsrc = "data/trainer/" + this.trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".webp";
-			const link = document.createElement("link");
-			link.rel = "preload";
-			link.as = "image";
-			link.type = "image/webp";
-			link.href = iconsrc;
-			link.fetchPriority = "high";
-			document.head.appendChild(link);
+			alltrees.forEach((tree) => {
+				let iconsrc = "data/trainer/" + this.trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".webp";
+				const img = new Image();
+				img.src = iconsrc;
+			});
 		});
 		alltrees.forEach( (tree) => {
 			treepos++;
