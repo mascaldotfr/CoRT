@@ -7,7 +7,7 @@ import {HumaniseEvents} from "./wztools/wztools.js";
 let data = null;
 let last_fetch_ts = 0;
 
-const humaniser = new HumaniseEvents();
+let humaniser = null; // need instanciation when the timezone is defined
 
 function resolve_filter() {
 	let storedfilter = localStorage.getItem("wevents_filter");
@@ -142,6 +142,8 @@ $(document).ready(async function() {
 	$("#we-filter").append(options_html.join(""));
 
 	await get_data();
+	humaniser = new HumaniseEvents();
+
 	if (data !== null) {
 		const tz = localStorage.getItem("tz");
 		// Drop generation time, it was used before but can be quite misleading

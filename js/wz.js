@@ -13,7 +13,7 @@ let tformatter = null;
 let wz_lastupdate = Math.floor(new Date().getTime() / 1000);
 
 // wztools
-const humaniser = new HumaniseEvents();
+let humaniser = null; // need instanciation when the timezone is defined
 const realm_colors = Constants.realm_colors;
 const wzicons = Icons.get_all_icons();
 
@@ -292,6 +292,7 @@ $(document).ready(function() {
 	});
 	notify.insert_notification_link();
 
+	humaniser = new HumaniseEvents();
 	display_wz(true);
 	const scheduler = new MyScheduler(10, 15, display_wz);
 	scheduler.start_scheduling();
