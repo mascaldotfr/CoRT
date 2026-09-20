@@ -95,7 +95,6 @@ class Calendar {
 }
 
 const notify = new MyNotify("notify_bosses");
-const time = new Time();
 
 // date formatter
 let dformatter = null;
@@ -143,7 +142,7 @@ async function get_next_respawns() {
 // Per boss -- this also notifies
 function display_next_respawn(boss) {
 	$(`#boss-${boss}-lastspawn`).text(`${_("Last respawn")}: ${unixstamp2human(previous_respawns[boss])}`);
-	let next_respawn_in = time.timestamp_ago(next_respawns[boss][0], false, true);
+	let next_respawn_in = Time.timestamp_ago(next_respawns[boss][0], false, true);
 	$(`#boss-${boss}-nextspawn`).text(`${_("Next respawn in")} ${next_respawn_in.human}`);
 	for (let i = 0; i < next_respawns[boss].length; i++) {
 		const respawn_ts = next_respawns[boss][i];

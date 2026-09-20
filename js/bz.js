@@ -10,7 +10,6 @@ import {BZSchedule} from "./libs/bzschedule.js";
 // formatters
 let tformatter = null;
 let lang = null;
-let time = new Time();
 
 const notify = new MyNotify("notify_bz");
 
@@ -176,7 +175,7 @@ function feed_bz() {
 	let bz_on = data["bzon"];
 
 	if (bz_on) {
-		let bz_ends_at = time.timestamp_ago(data["bzendsat"]);
+		let bz_ends_at = Time.timestamp_ago(data["bzendsat"]);
 		$("#bz-countdown-status").text(_("ON"));
 		$("#bz-countdown-status").attr("data-status", "on");
 		$("#bz-countdown-countdown").text(`${_("Ends in")} ${bz_ends_at["human"]}`);
@@ -193,7 +192,7 @@ function feed_bz() {
 	else {
 		$("#bz-countdown-status").text(_("OFF"));
 		$("#bz-countdown-status").attr("data-status", "off");
-		let next_bz_in = time.timestamp_ago(next_bzs_begin[0]);
+		let next_bz_in = Time.timestamp_ago(next_bzs_begin[0]);
 		$("#bz-countdown-countdown").text(`${_("Next BZ in")} ${next_bz_in["human"]}`);
 		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] > 1 &&
 			notified_10m === false) {

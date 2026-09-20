@@ -1,11 +1,11 @@
 import {_} from "./i18n.js";
 export class Time {
 	// Return the current time as a Unix timestamp
-	timestamp_now() {
+	static timestamp_now() {
 		return Math.floor(new Date().getTime() / 1000);
 	}
 	// Same as timestamp_now, but floor to the minute start
-	timestamp_floor() {
+	static timestamp_floor() {
 		return Math.floor(this.timestamp_now() / 60) * 60;
 	}
 	// Take a unix timestamp as entry, and humanise the time left until that
@@ -13,7 +13,7 @@ export class Time {
 	// if floor is set to true, the timestamp will use the minute timestamp
 	// Return an associate arrays with the individual time markers, and a
 	// humanised/localised version of it.
-	timestamp_ago(ts, passed=false, floor=false) {
+	static timestamp_ago(ts, passed=false, floor=false) {
 		let _in = {};
 		let time_diff = 0;
 		if (ts === null)

@@ -3,7 +3,6 @@ import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
 import {Time} from "./libs/time.js";
 
-let time = new Time();
 let df = null;
 
 // compute next event for a given type (either ticket or wm)
@@ -26,7 +25,7 @@ function display() {
 	for (let evtype of ["tickets", "wm"]) {
 		const next_ev = next_event(evtype);
 		const next_ev_ts = next_ev.getTime() / 1000;
-		const next_ev_in = time.timestamp_ago(next_ev_ts)["human"];
+		const next_ev_in = Time.timestamp_ago(next_ev_ts)["human"];
 		$(`#quests-${evtype}-countdown`).text(next_ev_in);
 		$(`#quests-${evtype}-time`).text(df.format(next_ev));
 	}

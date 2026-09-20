@@ -10,9 +10,6 @@ import {__chartist_responsive} from "./libs/chartist.js";
 // sync with statistics.json
 const report_days = [7, 30, 90];
 
-// wztools
-const time = new Time();
-
 const realm_colors = Constants["realm_colors"];
 const realms = Constants["realm_names"];
 
@@ -178,11 +175,11 @@ async function display_stat(force = false) {
 	}
 
 	const infos = data.splice(0, 1)[0];
-	const some_time_ago = time.timestamp_ago(infos["generated"], true);
+	const some_time_ago = Time.timestamp_ago(infos["generated"], true);
 	$("#ws-info-updated").text(some_time_ago["human"]);
 	// Needed here since it's async
 	$("#ws-info").show();
-	if (time.timestamp_now() - infos["generated"] > 3 * 3600) {
+	if (Time.timestamp_now() - infos["generated"] > 3 * 3600) {
 		$("#ws-info-error").html(`<b>Nothing happened since the last 3 hours,
 			<a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
 			NGE's page</a> is probably not working.</b>`);
@@ -208,12 +205,12 @@ async function display_stat(force = false) {
 			table_factory(rows, `#ws-${days}d-${realm.toLowerCase()}`, realm);
 			if (report == data.length - 1) {
 				const rows = [
-					["Invasion", `${naify(time.timestamp_ago(r["invasions"]["last"]["date"], true).human, "N/A")}
+					["Invasion", `${naify(Time.timestamp_ago(r["invasions"]["last"]["date"], true).human, "N/A")}
 							    (${naify(r["invasions"]["last"]["location"], "N/A")})`],
 					["Gem stolen",
-							`${naify(time.timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}`],
+							`${naify(Time.timestamp_ago(r["gems"]["stolen"]["last"], true).human, "N/A")}`],
 					["Dragon wish",
-							`${naify(time.timestamp_ago(r["wishes"]["last"], true).human, "N/A")}`]];
+							`${naify(Time.timestamp_ago(r["wishes"]["last"], true).human, "N/A")}`]];
 				const now = new Date();
 				const earliest_date = (now.getTime() / 1000) - (days * 3600 * 24);
 				if (r["wishes"]["last"] <= earliest_date) // out of bound wish
