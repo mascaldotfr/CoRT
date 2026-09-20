@@ -1059,6 +1059,7 @@ class SetupCompressor {
 					// Search the lookup table for the character that represents this pair.
 					// Note: This iterates over object keys. The order depends on insertion order
 					// in the constructor.
+					// XXX It's O(N) but given the small size of the payload, it's OK.
 					for (let combi in this.lookup) {
 						if (this.lookup[combi].toString() == searchfor) {
 							output += combi;
