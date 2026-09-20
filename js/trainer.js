@@ -522,7 +522,10 @@ class SetupManager {
 			let spellpos = 0;
 			let iconsrc = "data/trainer/" + this.trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".webp";
 			trainerhtml.push(`<div treepos="${treepos}" class="t${treepos} card">`);
-			trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, tree, this.trainerdata["disciplines"][tree]["display_name"][lang], ""));
+
+			// 1. Discipline header (no spell object)
+			trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, tree));
+
 			this.trainerdata["disciplines"][tree]["spells"].forEach( (spell) => {
 				spellpos++;
 				if (treepos == this.wmrow && spellpos % 2 == 1) {
@@ -530,7 +533,8 @@ class SetupManager {
 					trainerhtml.push(`<div class="p${spellpos}"><div class="icon"></div></div>`);
 				}
 				else {
-					trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, spell["name"]["en"], spell["name"][lang], tree));
+					// 2. Skill (pass the spell object directly)
+					trainerhtml.push(icons.factory(spellpos, iconsrc, treepos, tree, spell));
 				}
 			});
 			trainerhtml.push("</div>");
@@ -791,33 +795,47 @@ class Icons {
 		});
 	}
 
-	factory(spellpos, iconsrc, treepos, spellname, spellname_translated, treename) {
+	factory(spellpos, iconsrc, treepos, treename, spell = null) {
 		// discipline points are always > 1, but skill points must be 0 to simplify code later.
 		let skilllvl = spellpos == 0 ? 1 : 0;
-		let clean_spellname = "trainerskill_" + spellname.replace(/[^a-z0-9]/gi, "");
+
+		let clean_spellname, tooltip_content;
+
+		if (spell !== null) {
+			// --- SKILL ---
+			let spellname_en = spell["name"]["en"];
+			clean_spellname = "trainerskill_" + spellname_en.replace(/[^a-z0-9]/gi, "");
+			tooltip_content = this.make_spellinfo(spell, spellpos, "icon", iconsrc);
+		}
+		else {
+			// --- DISCIPLINE HEADER ---
+			clean_spellname = "trainerskill_" + treename.replace(/[^a-z0-9]/gi, "");
+			tooltip_content = setup.trainerdata["disciplines"][treename]["display_name"][lang];
+		}
+
 		let icon = [ ` 	<div class="p${spellpos}">
-					<div class="icon" style="background-image:url(${iconsrc});"
-					     id="${clean_spellname}" data-value="${skilllvl}">
-			`];
+				<div class="icon" style="background-image:url(${iconsrc});"
+				id="${clean_spellname}" data-value="${skilllvl}">
+				`];
+
 		// WM tree; don't show skill points
 		if (treepos != setup.wmrow || (treepos == setup.wmrow && spellpos == 0))
 			icon.push(`<span class="skilllvl">${skilllvl}</span>`);
+
 		icon.push("</div>");
+
 		// WM tree has no skill points, we don't generate + and - buttons
 		if (treepos != setup.wmrow || (treepos == setup.wmrow && spellpos == 0 && setup.level == 60)) {
 			icon.push(` <div class="skillspinner">
-						<button class="plus">+</button><button class="minus">-</button>
-					</div>`);
+				<button class="plus">+</button><button class="minus">-</button>
+				</div>`);
 		}
+
 		icon.push("</div>");
 
-		if (treename != "") { // skills
-			let spellinfo = setup.trainerdata.disciplines[treename]["spells"].filter(element => element["name"]["en"] == spellname)[0];
-			this.tooltip_factory(this.make_spellinfo(spellinfo, spellpos, "icon", iconsrc), clean_spellname);
-		}
-		else { // disciplines
-			this.tooltip_factory(spellname_translated, clean_spellname);
-		}
+		// Bind the tooltip (works for both skills and disciplines now)
+		this.tooltip_factory(tooltip_content, clean_spellname);
+
 		return icon.join("");
 	}
 
