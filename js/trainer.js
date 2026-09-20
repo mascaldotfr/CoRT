@@ -125,15 +125,16 @@ $("#t-save-bypass-menu").on ("click", function() {
 	window.location.assign(setup.save_to_url(false));
 });
 
-$("body").on("keydown", function(event) {
-	// Allow pressing Escape to close shared setup links
-	if  (event.key === "Escape" || event.keyCode === 27) {
-		event.preventDefault();
-		// Check if we're displaying the share dialog...
-		const selector = "#t-sharedlink-url";
-		const element = document.querySelector(selector);
-		if (element && (element.offsetWidth > 0 || element.offsetHeight > 0))
-			window.location.href = $("#t-sharedlink-url").val();
+const dialog = document.getElementById("t-sharedlink");
+const has_dialog_support = typeof dialog.showModal === "function";
+if (has_dialog_support) {
+	dialog.addEventListener("close", function() {
+		window.location.href = $("#t-sharedlink-url").val();
+	});
+}
+$("#t-sharedlink-close").on("click", function() {
+	if (dialog && typeof dialog.close === "function") {
+		dialog.close();
 	}
 });
 $("#t-save").on("click", function() {
@@ -150,18 +151,18 @@ $("#t-save").on("click", function() {
 	if (saved_url == null)
 		return;
 
-	// populate the fake modal
-	$("#t-sharedlink h3").text(_("Here is the link to your setup:"));
-	$("#t-sharedlink-copy").text(_("Copy link"));
-	$("#t-sharedlink-close").text(_("Close") + " (Esc)");
-	$("#t-sharedlink-url").val(saved_url);
-
-	// disable the trainer
-	$("#main-container").css("pointer-events", "none");
-	$("#main-container").css("filter", "blur(8px)");
-	// show our fake modal
-	$("#t-sharedlink").prependTo("#main-container");
-	$("#t-sharedlink").css("display", "block");
+	if (dialog && typeof dialog.showModal === "function") {
+		$("#t-sharedlink h3").text(_("Here is the link to your setup:"));
+		$("#t-sharedlink-copy").text(_("Copy link"));
+		$("#t-sharedlink-close").text(_("Close") + " (Esc)");
+		$("#t-sharedlink-url").val(saved_url);
+		dialog.showModal();
+	}
+	else {
+		// Fallback for older browsers
+		window.prompt(_("Here is the link to your setup:"), saved_url);
+		window.location.href = saved_url;
+	}
 });
 
 $("#t-sharedlink-close").on("click", function() {
