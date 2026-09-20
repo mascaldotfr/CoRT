@@ -7,7 +7,8 @@ export class MyNotify {
 		const pathname = window.location.pathname;
 		// Drop extension so it works in case of try_path /xx -> /xx.html
 		this.keyname = 'notify_' + pathname.split('/').pop().replace(/.[^/.]+$/, "");
-		this.swsupport = ("Notification" in window && "serviceWorker" in navigator);
+		const is_mobile = /Mobi/i.test(navigator.userAgent);
+		this.swsupport = ("Notification" in window && "serviceWorker" in navigator && !is_mobile);
 
 		if (localStorage.getItem(this.keyname) === null)
 			localStorage.setItem(this.keyname, 'disabled');
