@@ -153,6 +153,7 @@ summary::-webkit-details-marker {
 	background: var(--background);
 	border: 1px solid var(--foreground);
 	box-shadow: none;
+	z-index: 9999;
 }
 .menudetails li, .menudetails ul {
 	list-style-type: none;
