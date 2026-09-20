@@ -3,7 +3,7 @@ import {$} from "./libs/lamaiquery.js";
 import {_} from "./libs/i18n.js";
 import {Time} from "./libs/time.js";
 
-let df = null;
+let dformatter = null;
 
 // compute next event for a given type (either ticket or wm)
 function next_event(type) {
@@ -27,12 +27,12 @@ function display() {
 		const next_ev_ts = next_ev.getTime() / 1000;
 		const next_ev_in = Time.timestamp_ago(next_ev_ts)["human"];
 		$(`#quests-${evtype}-countdown`).text(next_ev_in);
-		$(`#quests-${evtype}-time`).text(df.format(next_ev));
+		$(`#quests-${evtype}-time`).text(dformatter.format(next_ev));
 	}
 }
 
 $(document).ready(function() {
-	df = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
 		timeZone: localStorage.getItem("tz"),
 		weekday: 'short',
 		day: 'numeric',
