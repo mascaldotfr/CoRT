@@ -187,7 +187,7 @@ function display_timeline() {
 		// jshint -W083
 		next_respawns[boss].forEach((ts) => {
 			// We don't need more than 2 bosses (weekly vs 69h)
-			if (boss === "server" && server_count >= 1) return;
+			if (boss === "server" && server_count >= 2) return;
 			let dt = new Date(ts * 1000);
 			all_respawns.push({
 				img: boss_images[boss],
