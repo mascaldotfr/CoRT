@@ -511,13 +511,11 @@ class SetupManager {
 		alltrees = alltrees.concat(this.trainerdata["class_disciplines"][class_skills]);
 		let trainerhtml = [];
 		let treepos = 0;
+		// preload skill bars
 		alltrees.forEach( (tree) => {
-			// preload skill bars
-			alltrees.forEach((tree) => {
-				let iconsrc = "data/trainer/" + this.trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".webp";
-				const img = new Image();
-				img.src = iconsrc;
-			});
+			let iconsrc = "data/trainer/" + this.trainerdataversion + "/icons/" + tree.replace(/ /g, "") + ".webp";
+			const img = new Image();
+			img.src = iconsrc;
 		});
 		alltrees.forEach( (tree) => {
 			treepos++;
