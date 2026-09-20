@@ -11,12 +11,10 @@ import {__chartist_responsive} from "./libs/chartist.js";
 const report_days = [7, 30, 90];
 
 // wztools
-const constants = new Constants();
-const cleaner = new CleanForts();
 const time = new Time();
 
-const realm_colors = constants["realm_colors"];
-const realms = constants["realm_names"];
+const realm_colors = Constants["realm_colors"];
+const realms = Constants["realm_names"];
 
 // This one is for displaying out of charts
 let tformatter = null;
@@ -199,7 +197,7 @@ async function display_stat(force = false) {
 				["Forts captured (total)", naify(r["forts"]["total"])],
 				["Forts captured", naify(r["forts"]["captured"])],
 				["Most captured fort",
-					`${cleaner.clean_fort(r["forts"]["most_captured"]["name"], false)}
+					`${CleanForts.clean(r["forts"]["most_captured"]["name"], false)}
 					    (${naify(r["forts"]["most_captured"]["count"], "N/A")})`],
 				["Forts recovered", naify(r["forts"]["recovered"])],
 				["Has invaded", naify(r["invasions"]["count"])],

@@ -13,12 +13,9 @@ let tformatter = null;
 let wz_lastupdate = Math.floor(new Date().getTime() / 1000);
 
 // wztools
-const constants = new Constants();
-const icons = new Icons();
-const cleaner = new CleanForts();
 const humaniser = new HumaniseEvents();
-const realm_colors = constants.realm_colors;
-const wzicons = icons.get_all_icons();
+const realm_colors = Constants.realm_colors;
+const wzicons = Icons.get_all_icons();
 
 const notify = new MyNotify("notify_wz");
 
@@ -245,7 +242,7 @@ async function display_wz(force=false) {
 	for (let i = 0; i < data["forts"].length; i++) {
 		const fort = data["forts"][i];
 		const icon = wzicons[dispatch_fort_icon(fort)];
-		const name = cleaner.clean_fort(fort["name"]);
+		const name = CleanForts.clean(fort["name"]);
 		$(`#wz-forts-${i}`).html(`${icon} ${name}`);
 	}
 
