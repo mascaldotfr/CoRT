@@ -540,11 +540,6 @@ class SetupManager {
 			});
 			trainerhtml.push("</div>");
 		});
-		// disable all animation
-		$("#t-trainer").css("animation", "none");
-		// "reset" changes due to animation by causing a reflow
-		const _unused = document.getElementById("t-trainer").offsetHeight;
-		$("#t-trainer").css("animation", "1s fadein");
 		$("#t-trainer").html(trainerhtml.join(""));
 
 		this.dpointstotal = this.trainerdata["points"]["discipline"][this.powerpoints][this.level - 1];
