@@ -64,8 +64,8 @@ $(document).ready(function() {
 		$("#t-tips-upgrade").text(_("Selecting an higher character level will upgrade your current setup to that level."));
 		$("#t-empty-trainer").css("display", "block");
 		UITools.unskeleton();
-		UITools.defer();
 	}
+	UITools.defer();
 });
 
 $("#t-load").on("click", function() {
@@ -583,7 +583,6 @@ class SetupManager {
 		}, 1);
 
 		UITools.unskeleton();
-		UITools.defer();
 	}
 
 
