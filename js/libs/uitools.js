@@ -6,6 +6,7 @@ export class UITools {
 		// void document.body.offsetHeight;
 	}
 	static defer() {
-		import("../defer.js");
+		// Defer until next paint
+		setTimeout( () => { import("../defer.js"); }, 0 );
 	}
 }
