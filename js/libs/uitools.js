@@ -2,11 +2,15 @@
 
 export class UITools {
 	static unskeleton() {
-		document.querySelectorAll(".skeleton").forEach(el => el.classList.remove("skeleton"));
-		// void document.body.offsetHeight;
+		requestAnimationFrame(() => {
+			document.querySelectorAll(".skeleton").forEach(el => el.classList.remove("skeleton"));
+		});
 	}
 	static defer() {
-		// Defer until next paint
-		setTimeout( () => { import("../defer.js"); }, 0 );
+		const payload = () => { import("../defer.js") };
+		if ("requestIdleCallback" in window)
+			requestIdleCallback(() => {requestIdleCallback(payload)});
+		else
+			setTimeout(payload, 50);
 	}
 }
