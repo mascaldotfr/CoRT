@@ -70,7 +70,7 @@ function setup_canvas() {
 }
 const canvas = setup_canvas();
 
-// Use local versions of images because NGE's site is slow
+// Use local versions of images because the official website is slow
 function rebase_img(url) {
 	return "data/warstatus/" + url;
 }
@@ -197,11 +197,11 @@ async function display_wz(force=false) {
 			}
 			const whatfailed = Object.keys(failures).join(" ");
 			const checkout = `Check out <a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
-				  NGE's page</a>!`;
+				  the official page</a>!`;
 
 			if (data["failed"]["status"] == "fatal") {
 				$("#wz-info-error").html(`<p>
-				  Fetching the data from NGE's site totally failed and may have errors or outdated data!
+				  Fetching the data from the official site totally failed and may have errors or outdated data!
 				  ${checkout}</p>`);
 				switch_stale(true);
 			}

@@ -182,7 +182,7 @@ async function display_stat(force = false) {
 	if (Time.timestamp_now() - infos["generated"] > 3 * 3600) {
 		$("#ws-info-error").html(`<b>Nothing happened since the last 3 hours,
 			<a href="https://www.championsofregnum.com/index.php?l=1&sec=3" target="_blank">
-			NGE's page</a> is probably not working.</b>`);
+			the official page</a> is probably not working.</b>`);
 	}
 
 	for (let report = 0; report < data.length; report++) {

@@ -1,7 +1,7 @@
 # WARSTATUS
 
 There is no such things as a public API for the war status, so that part has to
-be run server side for CoRT, due to NGE not allowing cross origin request
+be run server side for CoRT, due to the official site not allowing cross origin request
 ([CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)).
 
 `warstatus.php` fetches the official war status page and dump the gems/forts
@@ -70,7 +70,7 @@ to have the official warstatus page opened with devtools on.
     gems_changed: "same as map_changed, but for gems",
     relics_changed: "same as map_changed, but for relics",
     "generated": "Unix timestamp representing the date and time when the response has been generated",
-    "failed": "If present, NGE's site is probably in bad shape because the data integrity is wrong
+    "failed": "If present, the official site is probably in bad shape because the data integrity is wrong
                This contains the debug infos."
 }
 ```

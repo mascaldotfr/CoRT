@@ -155,7 +155,7 @@ function main() {
 		}
 	}
 
-	// Fetching the data from NGE's website failed in a way or another. Bail out.
+	// Fetching the data from the official website failed in a way or another. Bail out.
 	if (count($failure) != 0) {
 		eprint("Parsing failure: " . json_encode($failure));
 		if (isset($failure["forts"]) && isset($failure["gems"])) {
@@ -217,7 +217,7 @@ function main() {
 		}
 		$i++;
 	}
-	// Fetching the gem info from NGE's web site failed, keep the old one
+	// Fetching the gem info from the official website failed, keep the old one
 	if (isset($failure["gems"]) && isset($old_status["gems"])) {
 		$status["gems"] = $old_status["gems"];
 	}
@@ -270,7 +270,7 @@ function main() {
 			}
 		}
 	}
-	// Fetching the relics info from NGE's web site failed, keep the old one
+	// Fetching the relics info from the official web site failed, keep the old one
 	// Currently if gems fail, so do the relics
 	if (isset($failure["gems"]) && isset($old_status["relics"])) {
 		$status["relics"] = $old_status["relics"];
@@ -329,7 +329,7 @@ function main() {
 try {
 	main();
 } catch (Exception $err) {
-	// NGE's site totally not available
+	// Official site totally not available
 	eprint($err->getMessage() . "\n" . $err->getTraceAsString());
 	// Keep old status to help recovery later
 	$old_status = [];

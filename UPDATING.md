@@ -3,7 +3,7 @@
 
 ## TRAINER
 
-Upgrade cycle when balance changes are released by NGE. Note that doing the
+Upgrade cycle when balance changes are released by RG. Note that doing the
 change will require you to know how to operate a webserver to test, and doing
 some minor changes in the source code. While not complicated, you still need to
 know these basics.
