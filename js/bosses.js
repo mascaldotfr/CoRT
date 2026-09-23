@@ -108,11 +108,13 @@ let last_notification_ts = 0;
 
 
 // Bosses URL location for timeline view
+// Use this format for relative URLs, because vite will transfor the HTML one
+// to something similar (avoids double caching at least on Firefox)
 const boss_images = {
-	"daen": "data/bosses/daen.1.webp",
-	"evendim": "data/bosses/evendim.1.webp",
-	"thorkul": "data/bosses/thorkul.1.webp",
-	"server": "data/bosses/server.1.webp"
+	"daen": "./data/bosses/daen.1.webp",
+	"evendim": "./data/bosses/evendim.1.webp",
+	"thorkul": "./data/bosses/thorkul.1.webp",
+	"server": "./data/bosses/server.1.webp"
 };
 
 function unixstamp2human(unixstamp) {
