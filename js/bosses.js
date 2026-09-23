@@ -119,12 +119,12 @@ function unixstamp2human(unixstamp) {
 	return dformatter.format(new Date(unixstamp * 1000));
 }
 
-async function get_next_respawns() {
+function get_next_respawns(spawns = 4) {
 	if (document.hidden && !notify.can_emit())
 		return;
 
 	try {
-		let data = BossesRespawns.get_schedule(4);
+		let data = BossesRespawns.get_schedule(spawns);
 		next_respawns = data["next_spawns"];
 		previous_respawns = data["prev_spawns"];
 		nextboss_ts = data["next_boss_ts"];
@@ -217,11 +217,11 @@ function display_timeline() {
 	return rows.join("");
 }
 
-async function refresh_display() {
-	await get_next_respawns();
+function refresh_display() {
 	Calendar.delete_all_links();
 
 	// XXX Per boss
+	get_next_respawns();
 	let bosses_unordered = new Map();
 	for (let boss in next_respawns) {
 		display_next_respawn(boss);
@@ -238,6 +238,7 @@ async function refresh_display() {
 	}
 
 	// XXX Timeline
+	get_next_respawns(5);
 	$("#boss-tl-table").html(display_timeline());
 
 	// XXX Finally
