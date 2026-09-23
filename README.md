@@ -50,8 +50,8 @@ extra infos about using and deploying CoRT.
 
 ### External assets
 
-   The discipline/skill icons are the work of Nimble Giant
-   Entertainement, and are used as fair use.
+   The discipline/skill icons and map are the work or derivative work of
+   [Regnum Games](https://regnum.games/), and are used as fair use.
 
    [Chartist](https://github.com/chartist-js/chartist) is dual licensed under
    MIT/WTFPL licenses terms.
