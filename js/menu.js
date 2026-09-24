@@ -121,9 +121,10 @@ $(document).ready(function() {
 		$("#menu-lang-list").append(`
 			<li class="langoption" id="menu-lang-${l}" data-lang="${l}"><a href="${lang_href}" hreflang="${l}">${langs[l]}</a>`);
 		$(`#menu-lang-${l}`).on("click", (e) => {
-			// warn in case you're in a setup...
-			const trainer_dpoints_left = $("#t-dpointsleft").text();
-			const in_setup = trainer_dpoints_left !== undefined && trainer_dpoints_left.trim() !== '';
+			// Allow to change language in the middle of a trainer setup
+			const el = document.getElementById("t-dpointsleft");
+			const trainer_dpoints_left = el?.textContent?.trim() || "";
+			const in_setup = trainer_dpoints_left !== "";
 			localStorage.setItem("lang", l);
 			if (in_setup) {
 				e.preventDefault();
