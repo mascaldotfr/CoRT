@@ -281,13 +281,13 @@ $(document).ready(function() {
 	const lang = localStorage.getItem("lang") || navigator.language || "en-GB";
 	const tz = localStorage.getItem("tz") || Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
-		timeZone: localStorage.getItem("tz"),
+	dformatter = new Intl.DateTimeFormat(lang, {
+		timeZone: tz,
 		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
 		hour: 'numeric', minute: 'numeric',
 	});
-	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
-		timeZone: localStorage.getItem("tz"),
+	tformatter = new Intl.DateTimeFormat(lang, {
+		timeZone: tz,
 		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
 	});
 
