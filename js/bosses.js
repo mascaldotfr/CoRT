@@ -235,7 +235,7 @@ function refresh_display() {
 	get_next_respawns(4);
 	let bosses_unordered = new Map();
 	let notifications = [];
-	for (let boss in next_respawns) {
+	for (let boss of Object.keys(next_respawns)) {
 		let notif = display_next_respawn(boss);
 		if (notif)
 			notifications.push(notif);
