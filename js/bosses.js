@@ -160,22 +160,22 @@ function display_next_respawn(boss) {
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
 	let last_ts = last_notification_ts.get(boss) || 0;
 
+
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
 		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] > 1) {
 			if (!notified_10m.has(boss)) {
-				notify.emit(_("Bosses"), `${bossname}: ${_("Next respawn in")} ${next_respawn_in["minutes"]}${_("m")}`, "bosses");
-
 				last_notification_ts.set(boss, Date.now());
 				notified_10m.add(boss);
+				return `${bossname}: ${_("Next respawn in")} ${next_respawn_in["minutes"]}${_("m")}`;
 			}
 		}
 		else if (next_respawn_in["minutes"] <= 1) {
 			const now = Date.now();
 			if (now > last_ts + 60000) {
-				notify.emit(_("Bosses"), `${bossname} ${_("should appear very soon!")}`, "bosses");
 				last_notification_ts.set(boss, now);
 			}
 			notified_10m.delete(boss);
+			return `${bossname} ${_("should appear very soon!")}`;
 		}
 	}
 	else {
@@ -183,6 +183,7 @@ function display_next_respawn(boss) {
 		notified_10m.delete(boss);
 		last_notification_ts.delete(boss);
 	}
+	return null;
 }
 
 function display_timeline() {
@@ -233,8 +234,11 @@ function refresh_display() {
 	// XXX Per boss
 	get_next_respawns(4);
 	let bosses_unordered = new Map();
+	let notifications = [];
 	for (let boss in next_respawns) {
-		display_next_respawn(boss);
+		let notif = display_next_respawn(boss);
+		if (notif)
+			notifications.push(notif);
 		// fetch all next respawns
 		bosses_unordered.set(boss, next_respawns[boss][0]);
 	}
@@ -246,6 +250,9 @@ function refresh_display() {
 	for (let boss in bosses_ordered) {
 		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
 	}
+	if (notifications.length > 0)
+		notify.emit(_("Bosses"), notifications.join("\n"), "bosses");
+
 
 	// XXX Timeline
 	get_next_respawns(5);
