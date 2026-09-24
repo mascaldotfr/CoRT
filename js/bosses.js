@@ -178,6 +178,11 @@ function display_next_respawn(boss) {
 			notified_10m.delete(boss);
 		}
 	}
+	else {
+		// Nothing to notify for that boss, ensure it's the case whatever happens
+		notified_10m.delete(boss);
+		last_notification_ts.delete(boss);
+	}
 }
 
 function display_timeline() {
