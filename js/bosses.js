@@ -169,13 +169,13 @@ function display_next_respawn(boss) {
 				return `${bossname}: ${_("Next respawn in")} ${next_respawn_in["minutes"]}${_("m")}`;
 			}
 		}
-		else if (next_respawn_in["minutes"] <= 1) {
+		else if (next_respawn_in["minutes"] == 1) {
 			const now = Date.now();
 			if (now > last_ts + 60000) {
 				last_notification_ts.set(boss, now);
+				notified_10m.delete(boss);
+				return `${bossname} ${_("should appear very soon!")}`;
 			}
-			notified_10m.delete(boss);
-			return `${bossname} ${_("should appear very soon!")}`;
 		}
 	}
 	else {
