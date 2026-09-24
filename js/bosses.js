@@ -103,8 +103,8 @@ let tformatter = null;
 let next_respawns = null;
 let previous_respawns = null;
 let nextboss_ts = 0;
-let notified_10m = false;
-let last_notification_ts = 0;
+let notified_10m = new Set();
+let last_notification_ts = new Map();
 
 
 // Bosses URL location for timeline view
@@ -122,8 +122,6 @@ function unixstamp2human(unixstamp) {
 }
 
 function get_next_respawns(spawns = 4) {
-	if (document.hidden && !notify.can_emit())
-		return;
 
 	try {
 		let data = BossesRespawns.get_schedule(spawns);
@@ -160,22 +158,24 @@ function display_next_respawn(boss) {
 
 	// Notifications
 	let bossname = boss.charAt(0).toUpperCase() + boss.slice(1);
+	let last_ts = last_notification_ts.get(boss) || 0;
+
 	if (next_respawn_in["days"] == 0 && next_respawn_in["hours"] == 0) {
-		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] > 1 &&
-		    notified_10m === false) {
-			notify.emit(_("Bosses"), `${bossname}: ${_("Next respawn in")} ` +
-				 `${next_respawn_in["minutes"]}${_("m")}`, "bosses");
-			last_notification_ts = Date.now();
-			notified_10m = true;
-		}
-		else if (next_respawn_in["minutes"] == 1) {
-			// Avoid notification spam on focus during the last minute
-			const now = Date.now();
-			if (now > last_notification_ts + 60000) {
-				notify.emit(_("Bosses"),`${bossname} ${_("should appear very soon!")}`, "bosses");
-				last_notification_ts = now;
+		if (next_respawn_in["minutes"] <= 10 && next_respawn_in["minutes"] > 1) {
+			if (!notified_10m.has(boss)) {
+				notify.emit(_("Bosses"), `${bossname}: ${_("Next respawn in")} ${next_respawn_in["minutes"]}${_("m")}`, "bosses");
+
+				last_notification_ts.set(boss, Date.now());
+				notified_10m.add(boss);
 			}
-			notified_10m = false;
+		}
+		else if (next_respawn_in["minutes"] <= 1) {
+			const now = Date.now();
+			if (now > last_ts + 60000) {
+				notify.emit(_("Bosses"), `${bossname} ${_("should appear very soon!")}`, "bosses");
+				last_notification_ts.set(boss, now);
+			}
+			notified_10m.delete(boss);
 		}
 	}
 }
@@ -220,10 +220,13 @@ function display_timeline() {
 }
 
 function refresh_display() {
+	if (document.hidden && !notify.can_emit())
+		return;
+
 	Calendar.delete_all_links();
 
 	// XXX Per boss
-	get_next_respawns();
+	get_next_respawns(4);
 	let bosses_unordered = new Map();
 	for (let boss in next_respawns) {
 		display_next_respawn(boss);
