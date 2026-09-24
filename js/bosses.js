@@ -74,7 +74,7 @@ class Calendar {
 			"END:VALARM",
 			"END:VEVENT",
 			"END:VCALENDAR"
-		].join("\n");
+		].join("\r\n");
 	}
 
 	static create_link(title, start, end, filename = "event.ics" ) {
