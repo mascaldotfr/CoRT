@@ -166,9 +166,11 @@ function feed_bz() {
 	catch (error) {
 		$("#bz-error").text("Failed to get the BZ status: " + error);
 		console.log(error);
-		UITools.defer();
 	}
-	if (!data) return;
+	if (!data) {
+		UITools.defer();
+		return;
+	}
 
 	let next_bzs_begin = data["bzbegin"];
 	let next_bzs_end = data["bzend"];
@@ -194,14 +196,21 @@ function feed_bz() {
 		$("#bz-countdown-status").attr("data-status", "off");
 		let next_bz_in = Time.timestamp_ago(next_bzs_begin[0]);
 		$("#bz-countdown-countdown").text(`${_("Next BZ in")} ${next_bz_in["human"]}`);
-		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] > 1 &&
-			notified_10m === false) {
-			notified_10m = true;
-			notify.emit(_("BZ status"), `${_("BZ starting in")} ${next_bz_in["human"]}`, "bz");
+		const in_10m_window = next_bz_in["hours"] == 0 && next_bz_in["minutes"] <= 10 && next_bz_in["minutes"] > 1;
+		const in_1m_window = next_bz_in["hours"] == 0 && next_bz_in["minutes"] == 1;
+		if (in_10m_window) {
+			if (!notified_10m) {
+				notified_10m = true;
+				notify.emit(_("BZ status"), `${_("BZ starting in")} ${next_bz_in["human"]}`, "bz");
+			}
 		}
-		if (next_bz_in["hours"] == 0 && next_bz_in["minutes"] == 1) {
+		else if (in_1m_window) {
 			notified_10m = false;
 			notify.emit(_("BZ status"), _("BZ is about to start!"), "bz");
+		}
+		else {
+			// outside both windows: re-arm the 10-minute notification
+			notified_10m = false;
 		}
 	}
 
