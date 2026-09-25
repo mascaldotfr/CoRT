@@ -22,13 +22,33 @@ $setup_array_length = count($setup_array);
 // move. Length is 19 fields for mages, 17 for other classes.
 if ($setup_array_length != 17 && $setup_array_length != 19)
 	wontsavethis("bad length");
-// version
-if (!preg_match("/^\d+\.\d+\.\d+$/", $setup_array[0]))
+// Every field is validated strictly: the setup line is written as is to a
+// public file parsed by trainer_stats.php, so any stray character (like a
+// newline) would inject extra lines and break the stats generation.
+// The "D" modifier matters: without it "$" also matches before a trailing "\n".
+
+// version: must exist as a trainer dataset directory
+if (!preg_match("/^\d+\.\d+\.\d+$/D", $setup_array[0]) ||
+    !is_dir(__DIR__ . "/../../../data/trainer/" . $setup_array[0]))
 	wontsavethis("bad version");
 // class
-if (!preg_match("/^(knight|barbarian|conjurer|warlock|hunter|marksman)$/", 
+if (!preg_match("/^(knight|barbarian|conjurer|warlock|hunter|marksman)$/D",
 	        $setup_array[1]))
 		wontsavethis("invalid class");
+// mages have 8 trees (19 fields), other classes 7 trees (17 fields)
+$is_mage = in_array($setup_array[1], ["conjurer", "warlock"], true);
+if ($setup_array_length != ($is_mage ? 19 : 17))
+	wontsavethis("bad length for this class");
+// level
+if (!preg_match("/^\d{1,2}$/D", $setup_array[2]))
+	wontsavethis("bad level");
+// trees: discipline level followed by 10 skills levels (0 to 5)
+for ($i = 3; $i < $setup_array_length; $i += 2) {
+	if (!preg_match("/^\d{1,2}$/D", $setup_array[$i]))
+		wontsavethis("bad discipline level");
+	if (!preg_match("/^[0-5]{10}$/D", $setup_array[$i + 1]))
+		wontsavethis("bad skills levels");
+}
 
 if (intval($setup_array[2]) < 60)
 	wontsavethis("Non level 60 setup", 202);
