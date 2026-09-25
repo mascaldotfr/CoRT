@@ -73,6 +73,16 @@ chdir(__DIR__);
 
 $line = implode(" ", $setup_array) . "\n";
 
+// Serialize concurrent submissions: trainer_stats.php reads the setups count
+// and rewrites trainerstats.json, so two requests running at the same time
+// would overwrite each other's stats. The lock is released when the script
+// ends, even if trainer_stats.php calls exit().
+// We lock this very script (read-only is enough for flock), so there is no
+// lock file to create in api/var, where www-data may only write existing files.
+$lock = fopen(__FILE__, "r");
+if ($lock === false || !flock($lock, LOCK_EX))
+	error_log("submit.php: could not lock, proceeding unlocked");
+
 MultiWriter::append("../../var/trainer_saved_setups.txt", $line);
 
 // update trainer stats
