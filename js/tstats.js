@@ -5,9 +5,8 @@ import {_} from "./libs/i18n.js";
 import {TrainerConstants} from "./trainertools/trainertools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
-var valid_trainerdatasets = TrainerConstants.datasets;
 // remove 1.33.2 and 1.33.3, setup collection wasn't a thing back then
-valid_trainerdatasets.splice(0,2);
+var valid_trainerdatasets = TrainerConstants.datasets.slice(2).reverse()
 var stats = {};
 var lang = "en";
 
@@ -28,9 +27,11 @@ async function download_stats() {
 			const to_store = {"timestamp": now, "payload": stats};
 			localStorage.setItem("tstats_api_result", JSON.stringify(to_store));
 		}
+		return true;
 	}
 	catch(err) {
 		$("#ts-error-info").html(`Failed to make the stats: <code>${err}</code> (check console)`);
+		return false;
 	}
 }
 
@@ -42,16 +43,17 @@ function get_filters() {
 
 function draw_maingraph() {
 	let f = get_filters();
-	let labels = Object.keys(stats[f["version"]][f["class"]]);
+	let class_infos = stats[f["version"]][f["class"]];
+	let labels = Object.keys(class_infos);
 	// sort skills by usage
-	labels.sort((a, b) => stats[f["version"]][f["class"]][a]["p"] - stats[f["version"]][f["class"]][b]["p"]);
+	labels.sort((a, b) => class_infos[a]["p"] - class_infos[b]["p"]);
 	let series = [];
 	for (let power of labels)
-		series.push(stats[f["version"]][f["class"]][power]["p"]);
+		series.push(class_infos[power]["p"]);
 	let dataset = {
 		labels: labels.map(p => {
 			const name = stats["skill_names"][p][lang] || stats["skill_names"][p]["en"];
-			return `${name} (${stats[f["version"]][f["class"]][p]["p"]}%)`;
+			return `${name} (${class_infos[p]["p"]}%)`;
 		}),
 		series:	[series]
 	};
@@ -104,7 +106,7 @@ function refresh_powers() {
 		const skill_name = stats["skill_names"][p][lang] || stats["skill_names"][p]["en"];
 		options.push(`<option value="${skill_name}">${skill_name}</option>`);
 	}
-	$("#ts-power").html(options.sort().join());
+	$("#ts-power").html(options.sort().join(""));
 }
 
 function redraw_all() {
@@ -114,6 +116,7 @@ function redraw_all() {
 }
 
 function redraw_version() {
+	refresh_powers();
 	draw_maingraph();
 	draw_powergraph();
 }
@@ -128,14 +131,15 @@ $(document).ready(async function() {
 	$("#ts-center-title").text(_("Percentual use"));
 	$("#ts-powergraph-x").text(_("Skill level (frequency)"));
 
-	for (let version of valid_trainerdatasets.reverse())
+	for (let version of valid_trainerdatasets)
 		$("#ts-version").append(`<option value="${version}">${version}</option>`);
 	for (let clas of TrainerConstants.classes)
 		$("#ts-class").append(`<option value="${clas}">${_(capitalize(clas))}</option>`);
 
 	lang = localStorage.getItem("lang");
-	await download_stats();
-	redraw_all();
+	const stats_are_ok = await download_stats();
+	if (stats_are_ok)
+		redraw_all();
 	UITools.unskeleton();
 	UITools.defer();
 
