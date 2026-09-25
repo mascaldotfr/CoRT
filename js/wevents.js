@@ -9,6 +9,8 @@ let last_fetch_ts = 0;
 
 let humaniser = null; // need instanciation when the timezone is defined
 
+let render_gen = 0; // ensure unique filter display
+
 function resolve_filter() {
 	let storedfilter = localStorage.getItem("wevents_filter");
 	if (storedfilter === null) {
@@ -50,6 +52,10 @@ function display_events() {
 		filtered = data.filter(i => i["name"].indexOf(name) != -1);
 	}
 	const we_events = $("#we-events");
+	// Ensure we're batching for the good filter, in case a slow
+	// device user manage to change the filter while it's still
+	// rendering
+	const gen = ++render_gen;
 	if (filtered.length == 0) {
 		we_events.html(_("No matching event found!"));
 		UITools.unskeleton();
@@ -61,17 +67,17 @@ function display_events() {
 		// to the browser between chunks. This allows progressive rendering
 		// and keeps the UI responsive; otherwise, everything would be
 		// injected in a single synchronous task, causing a visible freeze.
-		const batch_length = 200;
+		const batch_length = 100;
 		for (let i = 0; i < filtered.length; i += batch_length) {
 			const batch = filtered.slice(i, i + batch_length);
-			setTimeout(function () {
+			setTimeout(() => {
+				if (gen !== render_gen)
+					return;
 				we_events.append(humaniser.humanise_events(batch, false));
 			}, 0);
-			if (i == 0) {
-				UITools.unskeleton();
-				UITools.defer();
-			}
 		}
+		UITools.unskeleton();
+		UITools.defer();
 	}
 }
 
