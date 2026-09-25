@@ -11,6 +11,9 @@ import {Tabs} from "./libs/tabs.js";
 class Calendar {
 	// A very simple calendar module generating .ics files.
 	// License : MIT
+
+	static blobs = [];
+
 	static generate_uid() {
 		const ts = Date.now().toString(36);
 		const random = Math.random().toString(36).substring(2, 10);
@@ -82,17 +85,22 @@ class Calendar {
 		const safe_filename = filename.endsWith('.ics') ? filename : `${filename}.ics`;
 		const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
 		const url = URL.createObjectURL(blob);
+		this.blobs.push(url);
 		return {"href": url, filename: safe_filename};
 	}
 
 	static delete_all_links() {
 		// Free all the page link blobs, to free some memory
-		const links = document.querySelectorAll('a[href^="blob:"]');
-		links.forEach(link => {
-			URL.revokeObjectURL(link.href);
+		this.blobs.forEach(url => {
+			URL.revokeObjectURL(url);
 		});
+		this.blobs = [];
 	}
 }
+
+
+const PER_BOSS_SPAWNS = 4;
+const TIMELINE_SPAWNS = 5;
 
 const notify = new MyNotify("notify_bosses");
 
@@ -131,11 +139,12 @@ function get_next_respawns(spawns = 4) {
 		$("#boss-error").empty();
 		const datetime = tformatter.format(Date.now());
 		$("#bosses-info-updated").text(datetime);
+		return true;
 	}
 	catch (error) {
 		$("#boss-error").text("Failed to calculate boss spawns: " + error);
 		UITools.defer();
-		return;
+		return false;
 	}
 }
 
@@ -144,7 +153,7 @@ function display_next_respawn(boss) {
 	$(`#boss-${boss}-lastspawn`).text(`${_("Last respawn")}: ${unixstamp2human(previous_respawns[boss])}`);
 	let next_respawn_in = Time.timestamp_ago(next_respawns[boss][0], false, true);
 	$(`#boss-${boss}-nextspawn`).text(`${_("Next respawn in")} ${next_respawn_in.human}`);
-	for (let i = 0; i < next_respawns[boss].length; i++) {
+	for (let i = 0; i < PER_BOSS_SPAWNS; i++) {
 		const respawn_ts = next_respawns[boss][i];
 		const respawn_datetime = new Date(respawn_ts * 1000);
 		const uc_boss = boss[0].toUpperCase() + boss.slice(1);
@@ -228,11 +237,12 @@ function display_timeline() {
 function refresh_display() {
 	if (document.hidden && !notify.can_emit())
 		return;
+	if (!get_next_respawns(TIMELINE_SPAWNS))
+		return;
 
 	Calendar.delete_all_links();
 
 	// XXX Per boss
-	get_next_respawns(4);
 	let bosses_unordered = new Map();
 	let notifications = [];
 	for (let boss of Object.keys(next_respawns)) {
@@ -255,7 +265,6 @@ function refresh_display() {
 
 
 	// XXX Timeline
-	get_next_respawns(5);
 	$("#boss-tl-table").html(display_timeline());
 
 	// XXX Finally
