@@ -145,7 +145,7 @@ $("#t-save").on("click", function() {
 
 	// Force upgrade the setup to the newest version if it's an old version
 	if (setup.trainerdataversion != datasets.newest_dataset)
-		 setup.trainerdataversion = datasets.trainerdatasets.slice(-1);
+		 setup.trainerdataversion = datasets.trainerdatasets[datasets.trainerdatasets.length - 1];
 
 	let saved_url = setup.save_to_url();
 	if (saved_url == null)
@@ -641,12 +641,12 @@ class SetupManager {
 	}
 
 	upgrade_to_newest_version() {
-		this.trainerdataversion = datasets.trainerdatasets.slice(-1);
+		this.trainerdataversion = datasets.trainerdatasets[datasets.trainerdatasets.length - 1];
 		window.location.assign(this.save_to_url(false));
 	}
 
 	convert_beta_to_live() {
-		this.trainerdataversion = datasets.live_datasets.slice(-1);
+		this.trainerdataversion = datasets.live_datasets[datasets.live_datasets.length - 1];
 		// Reassign live datasets for the setup compressor
 		datasets.trainerdatasets = datasets.live_datasets;
 		window.location.assign(this.save_to_url(false, true));
@@ -923,7 +923,7 @@ class DatasetsManager {
 			this.live_datasets = this.trainerdatasets;
 			this.trainerdatasets = ["beta"];
 		}
-		this.newest_dataset = this.trainerdatasets.slice(-1);
+		this.newest_dataset = this.trainerdatasets[this.trainerdatasets.length - 1];
 	}
 
 	manage_versions() {
