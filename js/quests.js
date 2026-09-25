@@ -32,8 +32,10 @@ function display() {
 }
 
 $(document).ready(function() {
-	dformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
-		timeZone: localStorage.getItem("tz"),
+	const lang = localStorage.getItem("lang") || navigator.language || "en-GB";
+	const tz = localStorage.getItem("tz") || Intl.DateTimeFormat().resolvedOptions().timeZone;
+	dformatter = new Intl.DateTimeFormat(lang, {
+		timeZone: tz,
 		weekday: 'short',
 		day: 'numeric',
 		month: 'numeric',

@@ -8,7 +8,7 @@ export const Constants = {
 export class HumaniseEvents {
 	constructor() {
 		// Instantiate heavy formatters and helpers ONCE per page load
-		let tz = localStorage.getItem("tz");
+		let tz = localStorage.getItem("tz") || Intl.DateTimeFormat().resolvedOptions().timeZone;
 		this.dformatter = new Intl.DateTimeFormat(undefined, {
 			month: 'numeric', day: 'numeric',
 			hour: '2-digit', minute: '2-digit', timeZone: tz,
