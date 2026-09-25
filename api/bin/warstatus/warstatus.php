@@ -161,7 +161,7 @@ function main() {
 		if (isset($failure["forts"]) && isset($failure["gems"])) {
 			$status = $old_status;
 			$status["failed"] = ["status" => "fatal", "debug" => json_encode($failure)];
-			writer(json_encode($status), $outfile);
+			MultiWriter::write($outfile, json_encode($status));
 			if (!$debug_mode) {
 				exit_defer(1);
 			}
@@ -328,7 +328,7 @@ function main() {
 
 try {
 	main();
-} catch (Exception $err) {
+} catch (Throwable $err) {
 	// Official site totally not available
 	eprint($err->getMessage() . "\n" . $err->getTraceAsString());
 	// Keep old status to help recovery later
