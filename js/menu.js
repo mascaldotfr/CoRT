@@ -2,7 +2,6 @@
 // elsewhere, since this file is always executed
 import {myTz} from "./libs/mytz.js";
 import {$} from "./libs/lamaiquery.js";
-import {api} from "./libs/api.js";
 import {_, __i18n__} from "./libs/i18n.js";
 
 let __menu_content = function () { return `
