@@ -239,14 +239,15 @@ function feed_bz() {
 }
 
 $(document).ready(function() {
-	lang = localStorage.getItem("lang");
 	document.title = _("BZ status") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("BZ status"));
 	$("#bz-schedule-title").text(_("Schedule"));
 	$("#bz-local-hours").text(_("All hours are local"));
 
 	notify.insert_notification_link();
-	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+
+	lang = localStorage.getItem("lang") || "en-GB";
+	tformatter = new Intl.DateTimeFormat(lang, {
 		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
 	});
 
