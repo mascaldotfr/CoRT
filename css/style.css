@@ -192,6 +192,7 @@ li[data-lang="en"]::before, span[data-lang="en"]::before { background-image: var
 li[data-lang="de"]::before, span[data-lang="de"]::before { background-image: var(--lang-flag-de); }
 li[data-lang="es"]::before, span[data-lang="es"]::before { background-image: var(--lang-flag-es); }
 li[data-lang="fr"]::before, span[data-lang="fr"]::before { background-image: var(--lang-flag-fr); }
+li[data-lang="pt"]::before, span[data-lang="pt"]::before { background-image: var(--lang-flag-pt); }
 
 .menu-icon-trainer, .menu-icon-wz, .menu-icon-bosses,
 .menu-icon-bz, .menu-icon-wevents, .menu-icon-wstats, .menu-icon-tstats,

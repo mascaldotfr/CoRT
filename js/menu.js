@@ -76,7 +76,8 @@ $(document).ready(function() {
 		"en": "EN",
 		"de": "DE",
 		"es": "ES",
-		"fr": "FR"
+		"fr": "FR",
+		"pt": "PT"
 	};
 
 	let currentlang = "en";
