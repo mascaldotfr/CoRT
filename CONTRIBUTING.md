@@ -1,41 +1,28 @@
 # Contributing
 
+**CoRT is a long-term project: no hype, just high resilience.**
+
 If you plan to bring code improvements:
 
 0. The site should be *usable* despite obvious visual glitches with [Firefox 78](#why-using-firefox-78-as-a-baseline),
    and is expected to look as intended in the latest stable versions of major
-   browsers (Chrome, Firefox, Edge, Safari, and on mobile as well). Keep that
-   in mind for the frontend. At least check at https://caniuse.com/ .
+   browsers (Desktop/Mobile). Keep that in mind for the frontend.
 1. Keep things simple:
-  - Simple code may be slower but given the simplicity of
-    the proposed tools there is no bottleneck, and i don't want them when
-    maintaining
-  - CoRT is vanilla JS, It will stay this way, because that
-    code can work on a 2020 software stack and browser and will very likely
-    work in a 2030 one, unlike frameworks that do breaking changes every year.
-  - A CoRT installation should be easily movable, and should be run simply from
-    its own directory, assuming PHP is working and has the necessary modules.
-  - While the project now uses Vite for bundling for production, CoRT has a
-    legacy custom production bundler
-    (/deploy/release/legacy/create_release.py), still working to this day.
-  - At this point, you probably already got it, **CoRT is a long term project
-    with no real hype, excepted high resilience.**
+  - Simple code may be slower, but given the simplicity of the tools, there is
+    no bottleneck. I prioritize maintainability over micro-optimizations.
+  - CoRT is vanilla JS, and will stay that way. What worked in 2022 when the
+    project started will probably still work in 2032, unlike ever-changing
+    frameworks.
+  - A CoRT installation should be easily movable and run simply from its own
+    directory, assuming PHP is working and has the necessary modules.
+  - CoRT uses Vite (v5, chosen for its stability and baseline support) only for
+    production builds. No build step is required for development or local
+    deployment.
 2. Keep the style consistent, even if sometimes it's gross like :
   - Snakecase (Python made me do this)
-  - Not using dot notation for hashes (also python), excepted for string construction
+  - Not using dot notation for hashes (also python), except for string construction
   - I come from ES3. That's 1999; as such use of modern `const/let` is known to
-    be flaky around the codebase as CoRT learnt me _modern_ JS, in the field.
-    I'm correcting stuff as I need to change code, but don't touch what's
-    working. I tend to use `const` for really read only objects and `let`
-    otherwise, so anyway I'm not very orthodox.
-3. Optionally use [JSHint](https://jshint.com/). Linux usage:
-   ```shell
-   cd /tmp
-   npm install jshint
-   cd node_modules/jshint
-   echo '{ "esversion": 11, "sub": true }' > jshintrc
-   ./bin/jshint -c jshintrc /where/is/CoRT/js/*.js
-   ```
+    be flaky around the codebase as CoRT taught me _modern_ JS, in the field.
 
 ### Why using Firefox 78 as a baseline
 
@@ -53,5 +40,3 @@ in a virtual machine to test.
 
 Note that this requirement will change over time, for example if TLS technology
 changes and makes this version unable to connect to https sites.
-
-

@@ -16,10 +16,12 @@ source software. It grew up since then to surpass regnumsentinel, there are now
 countdown pages for bosses and BZ, live WZ status, various statistics and
 more...
 
-The trainer just requires a webserver serving static files to run, everything
-is run client side. All the rest depends on an API server though.
+The Trainer, BZ, and Bosses pages are fully client-side, so they're super easy
+to set up—just: drop the latest release tarball into your web server's root
+directory. For everything else, you'll need an API server running in the
+background.
 
-Deploying CoRT (with or without the API) is explained [there](deploy/README.md)
+Deploying CoRT with its API is explained [there](deploy/README.md)
 
 There is also a [wiki](https://codeberg.org/mascal/CoRT/wiki) containing
 extra infos about using and deploying CoRT.
@@ -72,10 +74,11 @@ extra infos about using and deploying CoRT.
   [Shaiko](https://github.com/Shaiko35) from https://cor-forum.de/ for keeping
   the spell database updated before I took over
 * Slartibartfast, the regnumsentinel.com creator, site that gave me big hints about
-  the UI should be done.
+  how the UI should be done, and that I reproduced almost 1:1.
 * Halvdan. His own trainer stats page has been a major influence on
   [tstats.html](https://cort.ovh/tstats.html)
-* Regnum Tools, for UI hints about the bosses and BZ UI
+* [Regnum Tools](https://play.google.com/store/apps/details?id=de.portugall.regnumtools),
+  for UI hints about the bosses and BZ UI
 
 ## Thanks
 
@@ -84,8 +87,8 @@ CoRT where it is nowadays. Thanks to them!*
 
 |       WHO          |                         WHAT                                     |
 |------------------- |------------------------------------------------------------------|
-| **Redo**           | Early improvements and UX, German translation improvements       |
-| **Vlata Pikouse**  | Top bug reporter, UX                                             |
+| **Redo**           | Early improvements and UX, German translation improvements. CoRT would be more rough without him ;)  |
+| **Vlata Pikouse**  | Top bug reporter, UX improvements                                |
 | **manuoderso**     | He just wanted the last gem taken time, you got WZ stats!        |
 | **MAXWELL**        | Lvl 61 in trainer aka Necro Gem                                  |
 | **Lady**           | Bug reporting                                                    |
