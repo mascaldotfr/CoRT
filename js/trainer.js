@@ -42,6 +42,9 @@ $(document).ready(function() {
 		window.location.pathname = dirname + "/";
 		return;
 	}
+
+	// Language setup for the trainer only, the rest is dealt by _()
+	lang = localStorage.getItem("lang");
 	// search for a given trainer dataset in url, and skillset then
 	// set the version accordingly. See also manage_versions.
 	let urlsearch = new URLSearchParams(window.location.search);
@@ -1141,11 +1144,12 @@ class SetupCompressor {
 	}
 }
 
+// Language setup for the trainer only, the rest is dealt by _()
+// Definitely set up in document.ready(), it's too early here.
+let lang = "en";
 const compressor = new SetupCompressor();
 const datasets = new DatasetsManager();
 const icons = new Icons();
-// Language setup for the trainer only, the rest is dealt by _()
-let lang = localStorage.getItem("lang");
 // Needs to be reinstanciated every time we load a setup
 let setup = new SetupManager();
 let warning_timeout = null;
