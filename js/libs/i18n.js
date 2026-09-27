@@ -490,6 +490,42 @@ export const __i18n__ = {
 		"de": "Link kopiert!",
 		"pt": "O link foi copiado!"
 	},
+	"Not enough power points!": {
+		"fr": "Pas assez de points de pouvoir !",
+		"es": "¡No hay suficientes puntos de poder!",
+		"de": "Nicht genügend Kraftpunkte!",
+		"pt": "Pontos de poder insuficientes!"
+	},
+	"Not enough discipline points!": {
+		"fr": "Pas assez de points de discipline !",
+		"es": "¡No hay suficientes puntos de disciplina!",
+		"de": "Nicht genügend Disziplinpunkte!",
+		"pt": "Pontos de disciplina insuficientes!"
+	},
+	"Not enough discipline points in this tree!": {
+		"fr": "Pas assez de points de discipline dans cet arbre !",
+		"es": "¡No hay suficientes puntos de disciplina en este árbol!",
+		"de": "Nicht genügend Disziplinpunkte in diesem Baum!",
+		"pt": "Pontos de disciplina insuficientes nesta árvore!"
+	},
+	"Invalid discipline level!": {
+		"fr": "Niveau de discipline incorrect !",
+		"es": "¡Nivel de disciplina incorrecto!",
+		"de": "Ungültiges Disziplinlevel!",
+		"pt": "Nível de disciplina inválido!"
+	},
+        "Invalid power level!": {
+                "fr": "Niveau de pouvoir invalide !",
+                "es": "¡Nivel de poder inválido!",
+                "de": "Ungültiges Kraftlevel!",
+                "pt": "Nível de poder inválido!"
+        },
+	"Player level is too low": {
+		"fr": "Le niveau du joueur est trop bas",
+		"es": "El nivel del jugador es demasiado bajo",
+		"de": "Spielerlevel ist zu niedrig",
+		"pt": "O nível do jogador é muito baixo"
+	},
 	"Gem": {
 		"fr": "Gemme",
 		"es": "Gema",

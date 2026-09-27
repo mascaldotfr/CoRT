@@ -68,6 +68,18 @@ $(document).ready(function() {
 	UITools.defer();
 });
 
+function display_warning(text) {
+	const warning = $("#t-warning");
+	if (warning_timeout)
+		clearTimeout(warning_timeout);
+	warning.css("display", "initial");
+	warning.text(text);
+	warning.show();
+	warning_timeout = setTimeout( () => {
+		warning.css("display", "none");
+	}, 1000);
+}
+
 $("#t-load").on("click", function() {
 	$("#t-points").css("display", "flex");
 	$("#t-points").addClass("skeleton");
@@ -225,17 +237,17 @@ function power_change(power) {
 		diffpoints = change_direction == "plus" ? -1 : 1;
 	}
 	if (wanted_level > TrainerConstants.maxplevel || wanted_level < TrainerConstants.minplevel) {
-		console.log("bad power level", wanted_level);
+		display_warning(_("Invalid power level!"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
 	if (setup.ppointsleft < wanted_level - skill_level) {
-		console.log("not enough power points");
+		display_warning(_("Not enough power points!"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
 	if (wanted_level > maxslvl) {
-		console.log("not enough discipline points");
+		display_warning(_("Not enough discipline points in this tree!"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
@@ -292,12 +304,12 @@ function discipline_change(discipline) {
 		}
 	}
 	if (wanted_level > TrainerConstants.maxdlevel || wanted_level < TrainerConstants.mindlevel) {
-		console.log("bad discipline level", wanted_level);
+		display_warning(_("Invalid discipline level!"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
 	if (setup.trainerdata["required"]["level"][wanted_level- 1] > setup.level) {
-		console.log("player level is too low");
+		display_warning(_("Player level is too low"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
@@ -307,7 +319,7 @@ function discipline_change(discipline) {
 		setup.trainerdata["required"]["points"][current_level - 1] - setup.trainerdata["required"]["points"][wanted_level - 1];
 	if (	change_direction == "plus" &&
 		setup.dpointsleft + discipline_points_balance < 0 ) {
-		console.log("not enough discipline points");
+		display_warning(_("Not enough discipline points!"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
@@ -1136,3 +1148,4 @@ const icons = new Icons();
 let lang = localStorage.getItem("lang");
 // Needs to be reinstanciated every time we load a setup
 let setup = new SetupManager();
+let warning_timeout = null;
