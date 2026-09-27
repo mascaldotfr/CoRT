@@ -503,7 +503,7 @@ class SetupManager {
 			this.powerpoints = 80;
 		}
 		try {
-			this.trainerdata = await $().getJSON("data/trainer/" + this.trainerdataversion + "/trainerdata.json");
+			this.trainerdata = await $().getJSON("data/trainer/" + this.trainerdataversion + "/trainerdata.json?epoch=2");
 		}
 		catch (error) {
 			// Should never happen as the data is local...
