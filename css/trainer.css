@@ -180,7 +180,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	height: 2em;
+	height: fit-content;
 	padding: var(--default_margin_padding);
 	box-sizing: border-box;
 	width: 100%;
