@@ -776,13 +776,17 @@ class Icons {
 
 			const update = () => {
 				fu_computePosition(ref, this.global_tooltip, {
-					placement: "bottom",
+					placement: "top",
 					middleware: [
 						fu_offset(8),
 						fu_flip(),
-						fu_shift({ padding: 5 })
+						fu_shift({ padding: 0 })
 					]
 				}).then(({ x, y }) => {
+					// Ensure the tooltip won't start from
+					// negative y offsets aka out of screen,
+					// try with sultar's devouring mass
+					if (y < 0) y = 0;
 					this.global_tooltip.style.left = `${x}px`;
 					this.global_tooltip.style.top = `${y}px`;
 				});
