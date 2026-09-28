@@ -442,6 +442,8 @@ class SetupManager {
 		this.trainerdata = null;
 		// Version of Regnum used by this setup
 		this.trainerdataversion = null;
+		// URL parameter for the setup
+		this.url_parameter = "t";
 	}
 
 	bad_shared_link() {
@@ -463,6 +465,17 @@ class SetupManager {
 		setTimeout(() => window.location.replace(window.location.origin + window.location.pathname), 10000);
 	}
 
+	// Generate clean URLs for setup, removing all parameters and using
+	// only the setup as parameter
+	url_generator(base_url, value) {
+		if (base_url === null)
+			base_url = window.location.origin + window.location.pathname;
+		const url = new URL(base_url);
+		console.log(url.toString())
+		url.searchParams.set(this.url_parameter, value);
+		return url.toString();
+	}
+
 	// load_tree() being async, you need the tree to be loaded
 	// in order to click stuff so this is before loading the tree ...
 	async load_from_url(skillset) {
@@ -472,8 +485,9 @@ class SetupManager {
 			let lz = await import("./libs/lz-string.min.js");
 			proposed_setup = lz.LZString.decompressFromEncodedURIComponent(skillset);
 			proposed_setup = setup.trainerdataversion + "+" + proposed_setup;
-			window.location.assign(window.location.origin + window.location.pathname +
-					       "?t=" + compressor.compress(proposed_setup));
+			window.location.assign(this.url_generator(
+				null, compressor.compress(proposed_setup))
+			);
 
 		}
 		this.saved_setup = compressor.decompress(skillset, setup);
@@ -713,8 +727,7 @@ class SetupManager {
 		if (window.location.origin == "https://mascaldotfr.github.io")
 			url_path = "https://cort.ovh/";
 
-		const target_url = url_path + "?t=" + compressor.compress(setup);
-		return target_url;
+		return this.url_generator(url_path, compressor.compress(setup));
 	}
 
 	async collect_setup(setupstring) {
@@ -955,8 +968,8 @@ class DatasetsManager {
 		// remove it if the latest dataset is loaded after.
 		$("#oldversion").remove();
 		$("#betaversion").remove();
+		const oldv = $("#t-old-version");
 		if (setup.trainerdataversion != this.newest_dataset) {
-			const oldv = $("#t-old-version");
 			oldv.append(`<div id="oldversion" class="card center">
 					<p class="red bold">
 					${_("This setup is being made with an older version (%s) of CoR, and may be out of date.",
@@ -972,7 +985,7 @@ class DatasetsManager {
 					`);
 			oldv.css("display", "block");
 		}
-		if (this.is_beta)
+		if (this.is_beta) {
 			$("#t-old-version").append(`
 			<div id="betaversion" class="card center">
 			<p class="red"><b>
@@ -983,7 +996,9 @@ class DatasetsManager {
 			${_("Instead you should click here to convert your setup to the latest live version.")}
 			</a></b></p>
 			</div>
-		`);
+			`);
+			oldv.css("display", "block");
+		}
 		// needs to be here because these divs are dynamic
 		$("#beta-to-live").on("click", () => setup.convert_beta_to_live());
 		$("#upgrade-setup").on("click", () => setup.upgrade_to_newest_version());
