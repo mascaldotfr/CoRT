@@ -471,7 +471,6 @@ class SetupManager {
 		if (base_url === null)
 			base_url = window.location.origin + window.location.pathname;
 		const url = new URL(base_url);
-		console.log(url.toString())
 		url.searchParams.set(this.url_parameter, value);
 		return url.toString();
 	}
