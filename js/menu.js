@@ -110,16 +110,15 @@ $(document).ready(function() {
 	// generate languages list
 	// jshint -W083
 	const current_url = new URL(window.location.href);
-	current_url.searchParams.delete("lang");
-	const self_url = current_url.toString();
 	for (let l in langs) {
 		// Hide current language
+		current_url.searchParams.set("lang", l);
+		const lang_url = current_url.toString();
 		if (l == currentlang)
 			continue;
-		let lang_href = `${self_url}?lang=${l}`;
 
 		$("#menu-lang-list").append(`
-			<li class="langoption" id="menu-lang-${l}" data-lang="${l}"><a href="${lang_href}" hreflang="${l}">${langs[l]}</a>`);
+			<li class="langoption" id="menu-lang-${l}" data-lang="${l}"><a href="${lang_url}" hreflang="${l}">${langs[l]}</a>`);
 		$(`#menu-lang-${l}`).on("click", (e) => {
 			// Allow to change language in the middle of a trainer setup
 			const el = document.getElementById("t-dpointsleft");
@@ -135,7 +134,7 @@ $(document).ready(function() {
 		const link = document.createElement("link");
 		link.rel = "alternate";
 		link.hreflang = l;
-		link.href = `${self_url}?lang=${l}`;
+		link.href = lang_url;
 		document.head.appendChild(link);
 	}
 
@@ -147,6 +146,4 @@ $(document).ready(function() {
 	const local_tz = saved_tz === null ? tz.get_system_tz() : saved_tz;
 	localStorage.setItem("tz", local_tz);
 	$("#tzchooser").html(`<option value="${local_tz}">${local_tz}</option>`);
-
-
 });
