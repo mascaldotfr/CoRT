@@ -17,7 +17,7 @@ countdown pages for bosses and BZ, live WZ status, various statistics and
 more...
 
 The Trainer, BZ, and Bosses pages are fully client-side, so they're super easy
-to set up—just: drop the latest release tarball into your web server's root
+to set up. Just extract the latest release tarball into your web server's root
 directory. For everything else, you'll need an API server running in the
 background.
 
