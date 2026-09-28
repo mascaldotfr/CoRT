@@ -8,21 +8,23 @@ If you plan to bring code improvements:
    and is expected to look as intended in the latest stable versions of major
    browsers (Desktop/Mobile). Keep that in mind for the frontend.
 1. Keep things simple:
-  - Simple code may be slower, but given the simplicity of the tools, there is
-    no bottleneck. I prioritize maintainability over micro-optimizations.
-  - CoRT is vanilla JS, and will stay that way. What worked in 2022 when the
-    project started will probably still work in 2032, unlike ever-changing
-    frameworks.
-  - A CoRT installation should be easily movable and run simply from its own
-    directory, assuming PHP is working and has the necessary modules.
-  - CoRT uses Vite (v5, chosen for its stability and baseline support) only for
-    production builds. No build step is required for development or local
-    deployment.
+    - Simple code may be slower, but given the simplicity of the tools, there
+      is no bottleneck. I prioritize maintainability over micro-optimizations.
+    - CoRT is vanilla JS, and will stay that way. What worked in 2022 when the
+      project started will probably still work in 2032, unlike ever-changing
+      frameworks.
+    - A CoRT installation should be easily movable and run simply from its own
+      directory, assuming PHP is working and has the necessary modules.
+    - CoRT uses Vite (v5, chosen for its stability and baseline support) only
+      for production builds. No build step is required for development or local
+      deployment.
 2. Keep the style consistent, even if sometimes it's gross like :
-  - Snakecase (Python made me do this)
-  - Not using dot notation for hashes (also python), except for string construction
-  - I come from ES3. That's 1999; as such use of modern `const/let` is known to
-    be flaky around the codebase as CoRT taught me _modern_ JS, in the field.
+    - Snakecase (Python made me do this)
+    - Not using dot notation for hashes (also python), except for string
+      construction
+    - I come from ES3. That's 1999; as such use of modern `const/let` is known
+      to be flaky around the codebase as CoRT taught me _modern_ JS, in the
+      field.
 
 ### Why using Firefox 78 as a baseline
 
