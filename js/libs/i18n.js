@@ -578,7 +578,7 @@ export const __i18n__ = {
 		"fr": "Relique de %s",
 		"es": "Reliquia de %s",
 		"de": "%s' Relikt",
-		"pt": "%s' reliquia"
+		"pt": "Relíquia de %s"
 	},
 	"%s made a dragon wish!": {
 		"fr": "%s a fait un voeu du dragon !",
