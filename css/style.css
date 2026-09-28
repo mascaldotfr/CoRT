@@ -1,6 +1,6 @@
 :root {
-	--background: #11152d;
-	--card_background: #2f2f49;
+	--background: #0B1020;
+	--card_background: #242640;
 	--menu_background: #333349;
 	--tooltip_background: #414149;
 	--menu_buttons_background: #616179;
@@ -45,9 +45,8 @@ li {
 select, button, textarea {
 	background-color: var(--forms);
 	color: var(--foreground);
-	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
 	border-radius: 5px;
-	border: 0px;
+	border: 0;
 }
 select, button {
 	padding: var(--default_margin_padding);
@@ -145,7 +144,6 @@ summary::-webkit-details-marker {
 	display: block;
 	padding: var(--default_margin_padding);
 	border-radius: 5px;
-	box-shadow: 0 .1em .3em rgba(0, 0, 0, .9);
 }
 .menudetails ul {
 	margin-top: .75em;
@@ -161,10 +159,10 @@ summary::-webkit-details-marker {
 	margin-left: -.5em;
 	text-align: left;
 }
-.menuitem > a:hover {
+.menuitem > a:hover, #menu-links details:hover {
 	background: var(--card_background);
 	color: var(--ahover);
-	box-shadow: 0 .1em .3em rgba(200, 200, 200, .9);
+	outline: 1px solid var(--foreground);
 }
 .menu-icon-cortlogo {
 	height: 3em;
@@ -363,9 +361,6 @@ h3 {
 		min-height: calc(2em + var(--default_margin_padding));
 		padding: var(--default_margin_padding);
 	}
-	#menu, #footer {
-		box-shadow: 0px 0px 2px 2px rgba(200, 200, 200, .4);
-	}
 	#menu-desktop-cortlogo {
 		display: none;
 	}
@@ -429,7 +424,7 @@ h3 {
 	--card_background: #14281f;
 	--background: #203d31;
 	--menu_background: #2a5a3c;
-	--tooltip_background: #254525;
+	--tooltip_background: #333d33;
 	--menu_buttons_background: #58786a;
 	--foreground: white;
 	--forms: #4f8061;
@@ -506,11 +501,15 @@ h3 {
 	#ts-powergraph-graph svg {
 		background: var(--card_background) !important;
 	}
-	.tippy-content, .menudetails {
+	.tippy-content {
 		box-shadow: 0 .1em .2em rgba(0, 0, 0, .9) !important;
 	}
-	.card {
+	.card, .menudetails, .menuitem {
 		border: 2px solid #E5E7EB;
+		border-radius: 5px;
+	}
+	.menu-desktop.menuitem {
+		border: 0px;
 	}
 	.live-badge-label {
 		color: var(--background);

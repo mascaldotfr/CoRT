@@ -41,7 +41,7 @@
 }
 #t-points {
 	background: var(--card_background); /* old browsers */
-	background: color-mix(in srgb, var(--card_background), blue 15%); /* hardcoded */
+	background: color-mix(in srgb, var(--card_background), black 15%); /* hardcoded */
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;

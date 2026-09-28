@@ -45,9 +45,12 @@
 .tabs-nav {
 	background: var(--tooltip_background);
 }
+.tab-btn:not(.active) {
+	background: var(--card_background);
+}
 .tab-btn.active {
 	background: var(--forms);
-	text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+	text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 @media (max-width:512px) {
 	#boss-list img {
