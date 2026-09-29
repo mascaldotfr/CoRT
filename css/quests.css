@@ -9,6 +9,10 @@
 #quests-wm, #quests-xym, #quests-tickets {
 	visibility: hidden;
 }
+.quests-icon {
+	height: 1.5em;
+	vertical-align: bottom;
+}
 @media (max-width: 799px) {
 	#main-container {
 		width: 100%;
