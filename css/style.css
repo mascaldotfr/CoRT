@@ -72,12 +72,15 @@ summary::-webkit-details-marker {
 }
 #menu, #footer {
 	text-align: center;
-	background-color: var(--menu_background);
 	min-height: 3.5em;
+}
+#footer {
+	background: color-mix(in srgb, var(--background) 40%, var(--menu_background) 60%);
 }
 #menu {
 	/* override .card */
 	padding: 0 var(--default_margin_padding);
+	background-color: var(--menu_background);
 }
 #menu-cortlogo-svg {
 	border-radius: 5px;
@@ -441,6 +444,9 @@ h3 {
 	#t-points {
 		background: var(--menu_background) !important;
 	}
+	.menudetails, .menuitem a {
+		background: var(--card_background);
+	}
 }
 
 :root[data-prefers-colorscheme="Alsius"] {
@@ -522,6 +528,9 @@ h3 {
 	}
 	.live-badge-label {
 		color: var(--background);
+	}
+	.wztools-icon {
+		filter: hue-rotate(343deg) contrast(.5);
 	}
 }
 
