@@ -42,6 +42,7 @@
 }
 #wz-events {
 	overflow-y: scroll;
+	line-height: 1.5em;
 }
 #wz-realms-info {
 	display: flex;
@@ -94,10 +95,14 @@
 .wz-forts span[id^="wz-forts-"] {
 	display: block;
 }
-
 .wz-data-stale {
 	filter: grayscale(85%);
 	transition: filter 1s ease;
+}
+.wztools-icon {
+	height: 1.5em;
+	vertical-align: middle;
+	margin-right: 4px;
 }
 
 

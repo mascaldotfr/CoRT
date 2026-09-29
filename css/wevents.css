@@ -44,9 +44,15 @@
 	padding: var(--default_margin_padding);
 	content-visibility: auto;
 	contain-intrinsic-size: auto 2rem;
+	line-height: 1.5em;
 }
 #we-floppy {
 	visibility: hidden;
+}
+.wztools-icon {
+	height: 1.5em;
+	vertical-align: middle;
+	margin-right: 4px;
 }
 @media (max-width: 799px) {
 	#we-container {
