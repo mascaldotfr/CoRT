@@ -19,11 +19,11 @@ let __menu_content = function () { return `
 		<details class="menudetails">
 			<summary><span class="menu-icon-more"></span> ${_("More Tools...")}</summary>
 			<ul class="menudetails">
-				<li><span class="menu-icon-tstats"></span>&nbsp;<a href="tstats.html">${_("Trainer statistics")}</a></li>
-				<li><span class="menu-icon-quests"></span>&nbsp;<a href="quests.html" title="Quest reset times">${_("Quests")}</a>
-				<li><span class="menu-icon-sentinel"></span>&nbsp;<a href="https://regnumsentinel.com" title="All Regnum at a glance" target="_blank">Sentinel</a>
-				<li><span class="menu-icon-armor"></span>&nbsp;<a href="https://poludnica.shinyapps.io/rcalc/" target="_blank">${_("Armor calculator")}</a>
-				<li><span class="menu-icon-tools4regnum"></span>&nbsp;<a href="https://tools4regnum.de/?utm_source=CoRT" target="_blank" title="Game assets in your browser">Tools4Regnum</a>
+				<li><a href="tstats.html"><span class="menu-icon-tstats"></span>&nbsp;${_("Trainer statistics")}</a></li>
+				<li><a href="quests.html" title="Quest reset times"><span class="menu-icon-quests"></span>&nbsp;${_("Quests")}</a>
+				<li><a href="https://regnumsentinel.com" title="All Regnum at a glance" target="_blank"><span class="menu-icon-sentinel"></span>&nbsp;Sentinel</a>
+				<li><a href="https://poludnica.shinyapps.io/rcalc/" target="_blank"><span class="menu-icon-armor"></span>&nbsp;${_("Armor calculator")}</a>
+				<li><a href="https://tools4regnum.de/?utm_source=CoRT" target="_blank" title="Game assets in your browser"><span class="menu-icon-tools4regnum"></span>&nbsp;Tools4Regnum</a>
 			</ul>
 		</details>
 		</li>
@@ -118,7 +118,7 @@ $(document).ready(function() {
 			continue;
 
 		$("#menu-lang-list").append(`
-			<li class="langoption" id="menu-lang-${l}" data-lang="${l}"><a href="${lang_url}" hreflang="${l}">${langs[l]}</a>`);
+			<li class="langoption" id="menu-lang-${l}"><a href="${lang_url}" hreflang="${l}" data-lang="${l}">${langs[l]}</a>`);
 		$(`#menu-lang-${l}`).on("click", (e) => {
 			// Allow to change language in the middle of a trainer setup
 			const el = document.getElementById("t-dpointsleft");

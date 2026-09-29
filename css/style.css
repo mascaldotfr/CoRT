@@ -3,7 +3,7 @@
 	--card_background: #242640;
 	--menu_background: #333349;
 	--tooltip_background: #414149;
-	--menu_buttons_background: #616179;
+	--menu_buttons_background: #161637;
 	--foreground: white;
 	--forms: #5f5f6f;
 	--red: #ffa1a7;
@@ -159,6 +159,9 @@ summary::-webkit-details-marker {
 	margin-left: -.5em;
 	text-align: left;
 }
+.menudetails a {
+	text-decoration: none;
+}
 .menuitem > a:hover, #menu-links details:hover {
 	background: var(--card_background);
 	color: var(--ahover);
@@ -176,21 +179,27 @@ summary::-webkit-details-marker {
 	background-position: center;
 }
 
-span[data-lang]::before, li[data-lang]::before {
+span[data-lang]::before, a[data-lang]::before {
 	content: "";
 	display: inline-block;
-	width: 1.7em;
-	height: 1.7em;
+	width: 1.5em;
+	height: 1.5em;
 	margin-right: 0.5em;
 	vertical-align: middle;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
-li[data-lang="en"]::before, span[data-lang="en"]::before { background-image: var(--lang-flag-en); }
-li[data-lang="de"]::before, span[data-lang="de"]::before { background-image: var(--lang-flag-de); }
-li[data-lang="es"]::before, span[data-lang="es"]::before { background-image: var(--lang-flag-es); }
-li[data-lang="fr"]::before, span[data-lang="fr"]::before { background-image: var(--lang-flag-fr); }
-li[data-lang="pt"]::before, span[data-lang="pt"]::before { background-image: var(--lang-flag-pt); }
+a[data-lang] {
+	text-decoration: none;
+}
+a[data-lang], span[data-lang] {
+	font-size: 110%;
+}
+a[data-lang="en"]::before, span[data-lang="en"]::before { background-image: var(--lang-flag-en); }
+a[data-lang="de"]::before, span[data-lang="de"]::before { background-image: var(--lang-flag-de); }
+a[data-lang="es"]::before, span[data-lang="es"]::before { background-image: var(--lang-flag-es); }
+a[data-lang="fr"]::before, span[data-lang="fr"]::before { background-image: var(--lang-flag-fr); }
+a[data-lang="pt"]::before, span[data-lang="pt"]::before { background-image: var(--lang-flag-pt); }
 
 .menu-icon-trainer, .menu-icon-wz, .menu-icon-bosses,
 .menu-icon-bz, .menu-icon-wevents, .menu-icon-wstats, .menu-icon-tstats,
