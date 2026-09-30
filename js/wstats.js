@@ -155,9 +155,7 @@ async function display_stat(force = false) {
 		const cached = JSON.parse(localStorage.getItem("wstats_api_result"));
 		const now = Date.now();
 		// Limit to 2 fetch per minute
-		// XXX If you read this and CoRT is >= 3.8, the undefined check
-		// can be removed, it was for a transition to more meaningful names
-		if (cached !== null && cached["timestamp"] !== undefined && (now - cached["timestamp"]) <= 30000) {
+		if (cached !== null && (now - cached["timestamp"]) <= 30000) {
 			data = cached["payload"];
 		}
 		else {
