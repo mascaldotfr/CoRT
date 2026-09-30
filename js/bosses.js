@@ -289,12 +289,22 @@ $(document).ready(function() {
 
 	const lang = localStorage.getItem("lang") || navigator.language || "en-GB";
 	const tz = localStorage.getItem("tz") || Intl.DateTimeFormat().resolvedOptions().timeZone;
+	const mobile = /Mobi/i.test(navigator.userAgent);
 
-	dformatter = new Intl.DateTimeFormat(lang, {
-		timeZone: tz,
-		hour12: false, weekday: 'long', month: 'long', day: 'numeric',
-		hour: 'numeric', minute: 'numeric',
-	});
+	if (!mobile) {
+		dformatter = new Intl.DateTimeFormat(lang, {
+			timeZone: tz,
+			hour12: false, weekday: 'long', month: 'long', day: 'numeric',
+			hour: 'numeric', minute: 'numeric',
+		});
+	}
+	else {
+		dformatter = new Intl.DateTimeFormat(lang, {
+			timeZone: tz,
+			hour12: false, weekday: 'long', month: 'numeric', day: 'numeric',
+			hour: 'numeric', minute: 'numeric',
+		});
+	}
 	tformatter = new Intl.DateTimeFormat(lang, {
 		timeZone: tz,
 		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
