@@ -106,7 +106,7 @@
 }
 
 
-@media (min-width: 1450px) {
+@media (min-width: 1400px) {
 	#wz-container {
 		gap: 3em 1em;
 	}
@@ -130,13 +130,13 @@
 	}
 }
 
-@media (min-width: 512px) and  (max-width: 1450px) {
+@media (min-width: 512px) and  (max-width: 1399px) {
 	.wz-realm-header {
 		min-height: 3em;
 	}
 	#wz-map-map, #wz-map {
-		width: 350px;
 		height: 350px;
+		width: 350px;
 	}
 	#wz-events {
 		height: 350px;
@@ -151,7 +151,13 @@
 	}
 }
 
-@media (min-width: 512px) and (max-width: 1200px) {
+@media (min-width: 1000px) and (max-width: 1150px) {
+	#menu {
+		min-height: 6.5em;
+	}
+}
+
+@media (min-width: 513px) and (max-width: 1200px) {
 	.wz-realm-header {
 		gap: 0;
 	}
@@ -159,15 +165,20 @@
 		min-height: 5.5em;
 	}
 	#wz-map-map, #wz-map {
-		width: 250px;
-		height: 250px;
+		width: 350px;
+		height: 350px;
 		align-self: center;
 	}
 	#wz-realms-info {
-		font-size: 90%;
+		font-size: 80%;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		order: 2;
 	}
 	#wz-events {
 		min-width: 22em;
+		order: 1;
 	}
 }
 
