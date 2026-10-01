@@ -6,9 +6,9 @@ import {TrainerConstants} from "./trainertools/trainertools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
 // remove 1.33.2 and 1.33.3, setup collection wasn't a thing back then
-var valid_trainerdatasets = TrainerConstants.datasets.slice(2).reverse()
-var stats = {};
-var lang = "en";
+const valid_trainerdatasets = TrainerConstants.datasets.slice(2).reverse()
+let stats = {};
+let lang = "en";
 
 function capitalize(string) {
 	return string[0].toUpperCase() + string.slice(1);
@@ -42,22 +42,22 @@ function get_filters() {
 }
 
 function draw_maingraph() {
-	let f = get_filters();
-	let class_infos = stats[f["version"]][f["class"]];
-	let labels = Object.keys(class_infos);
+	const f = get_filters();
+	const class_infos = stats[f["version"]][f["class"]];
+	const labels = Object.keys(class_infos);
 	// sort skills by usage
 	labels.sort((a, b) => class_infos[a]["p"] - class_infos[b]["p"]);
 	let series = [];
 	for (let power of labels)
 		series.push(class_infos[power]["p"]);
-	let dataset = {
+	const dataset = {
 		labels: labels.map(p => {
 			const name = stats["skill_names"][p][lang] || stats["skill_names"][p]["en"];
 			return `${name} (${class_infos[p]["p"]}%)`;
 		}),
 		series:	[series]
 	};
-	let options = {
+	const options = {
 		horizontalBars: true,
 		axisY: { offset: 200 },
 		axisX: { showLabel: false }
@@ -85,11 +85,11 @@ function draw_powergraph() {
 			return;
 		}
 	}
-	let dataset = {
+	const dataset = {
 		labels: labels,
 		series:	[stats[f["version"]][f["class"]][power_id]["f"]]
 	};
-	let options = {
+	const options = {
 		chartPadding: {left: 0, top: 30, bottom: 0},
 		seriesBarDistance: 15,
 		axisY: { onlyInteger: true }
@@ -99,8 +99,8 @@ function draw_powergraph() {
 }
 
 function refresh_powers() {
-	let f = get_filters();
-	let powerlist = stats[f["version"]][f["class"]];
+	const f = get_filters();
+	const powerlist = stats[f["version"]][f["class"]];
 	let options = [];
 	for (let p of Object.keys(powerlist)) {
 		const skill_name = stats["skill_names"][p][lang] || stats["skill_names"][p]["en"];
