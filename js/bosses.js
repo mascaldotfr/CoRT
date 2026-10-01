@@ -257,8 +257,8 @@ function refresh_display() {
 	// need only the bosses names
 	bosses_ordered = [...bosses_ordered.keys()];
 	// reorder the boss divs
-	for (let boss in bosses_ordered) {
-		$(`#boss-${bosses_ordered[boss]}`).appendTo("#boss-list");
+	for (const boss of bosses_ordered) {
+		$(`#boss-${boss}`).appendTo("#boss-list");
 	}
 	if (notifications.length > 0)
 		notify.emit(_("Bosses"), notifications.join("\n"), "bosses");
@@ -294,15 +294,15 @@ $(document).ready(function() {
 	if (!mobile) {
 		dformatter = new Intl.DateTimeFormat(lang, {
 			timeZone: tz,
-			hour12: false, weekday: 'long', month: 'long', day: 'numeric',
-			hour: 'numeric', minute: 'numeric',
+			hour12: false, weekday: "long", month: "long", day: "numeric",
+			hour: "numeric", minute: "numeric",
 		});
 	}
 	else {
 		dformatter = new Intl.DateTimeFormat(lang, {
 			timeZone: tz,
-			hour12: false, weekday: 'long', month: 'numeric', day: 'numeric',
-			hour: 'numeric', minute: 'numeric',
+			hour12: false, weekday: "long", month: "numeric", day: "numeric",
+			hour: "numeric", minute: "numeric",
 		});
 	}
 	tformatter = new Intl.DateTimeFormat(lang, {
