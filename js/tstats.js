@@ -130,7 +130,7 @@ $(document).ready(async function() {
 	for (let clas of TrainerConstants.classes)
 		$("#ts-class").append(`<option value="${clas}">${_(capitalize(clas))}</option>`);
 
-	lang = localStorage.getItem("lang");
+	lang = localStorage.getItem("lang") || "en";
 	const stats_are_ok = await download_stats();
 	if (stats_are_ok)
 		redraw_all();
