@@ -94,8 +94,8 @@ $("#t-load").on("click", function() {
 	}
 	if (setup.level != 0)
 		setup = new SetupManager();
-	let level = $("#t-level").val();
-	let clas = $("#t-class").val();
+	const level = parseInt($("#t-level").val(), 10);
+	const clas = $("#t-class").val();
 	if ( (level >= TrainerConstants.minlevel && level <= TrainerConstants.maxlevel) ) {
 		setup.level = level;
 		setup.extrappoints = 0;
