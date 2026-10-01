@@ -480,11 +480,11 @@ class SetupManager {
 			// Old LZstring URL, redirect to new url format
 			let lz = await import("./libs/lz-string.min.js");
 			proposed_setup = lz.LZString.decompressFromEncodedURIComponent(skillset);
-			proposed_setup = setup.trainerdataversion + "+" + proposed_setup;
+			proposed_setup = this.trainerdataversion + "+" + proposed_setup;
 			window.location.assign(this.url_generator(
 				null, compressor.compress(proposed_setup))
 			);
-
+			return;
 		}
 		try {
 			this.saved_setup = compressor.decompress(skillset, setup);
