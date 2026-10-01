@@ -486,7 +486,12 @@ class SetupManager {
 			);
 
 		}
-		this.saved_setup = compressor.decompress(skillset, setup);
+		try {
+			this.saved_setup = compressor.decompress(skillset, setup);
+		}
+		catch (_unused) {
+			this.saved_setup = null;
+		}
 		if (this.saved_setup == null) {
 			this.bad_shared_link();
 			return;
