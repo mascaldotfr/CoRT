@@ -94,8 +94,7 @@ function svg_to_blob(fname) {
 		console.warn("Missing icon:", fname);
 		return "";
 	}
-	// Properly encode UTF-8 characters for btoa
-	return "data:image/svg+xml;charset=UTF-8;base64," + btoa(unescape(encodeURIComponent(xml)));
+	return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(xml);
 }
 
 function display_map(forts) {
