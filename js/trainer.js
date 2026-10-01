@@ -192,7 +192,6 @@ $("#t-sharedlink-copy").on("click", function() {
 				$("#t-sharedlink-copy").text(_("Link copied!"));
 				let timer = setTimeout(() => {
 					$("#t-sharedlink-copy").text(_("Copy link"));
-					clearInterval(timer);
 					}, 3000);
 			})
 			.catch((error) => {
