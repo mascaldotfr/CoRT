@@ -100,7 +100,7 @@ function svg_to_blob(fname) {
 function display_map(forts) {
 	// Preload all images in parallel using Promises
 	let imagePromises = forts.map(fort => {
-		const cache_key = fort["icon"] + dispatch_fort_icon(fort);
+		const cache_key = dispatch_fort_icon(fort);
 		if (!icons_cache[cache_key]) {
 			icons_cache[cache_key] = new Promise(resolve => {
 				const img = new Image();
