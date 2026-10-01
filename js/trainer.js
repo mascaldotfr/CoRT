@@ -151,6 +151,7 @@ $("#t-sharedlink-close").on("click", function() {
 	if (dialog && typeof dialog.close === "function") {
 		dialog.close();
 	}
+       window.location.href = $("#t-sharedlink-url").val();
 });
 $("#t-save").on("click", function() {
 	if (setup.trainerdata === null) {
@@ -178,10 +179,6 @@ $("#t-save").on("click", function() {
 		window.prompt(_("Here is the link to your setup:"), saved_url);
 		window.location.href = saved_url;
 	}
-});
-
-$("#t-sharedlink-close").on("click", function() {
-       window.location.href = $("#t-sharedlink-url").val();
 });
 
 $("#t-sharedlink-copy").on("click", function() {
