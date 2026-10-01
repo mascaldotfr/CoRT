@@ -125,8 +125,7 @@ function display_map(forts) {
 		});
 }
 
-async function draw_map(images) {
-
+function draw_map(images) {
 	const dpr = canvas.dpr;
 	// clear everything
 	canvas.ctx.clearRect(0, 0, canvas.width, canvas.height);
