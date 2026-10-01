@@ -115,12 +115,6 @@ function redraw_all() {
 	draw_powergraph();
 }
 
-function redraw_version() {
-	refresh_powers();
-	draw_maingraph();
-	draw_powergraph();
-}
-
 $(document).ready(async function() {
 	document.title = _("Trainer statistics") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("Trainer statistics"));
@@ -143,7 +137,7 @@ $(document).ready(async function() {
 	UITools.unskeleton();
 	UITools.defer();
 
-	$("#ts-version").on("change", redraw_version);
+	$("#ts-version").on("change", redraw_all);
 	$("#ts-class").on("change", redraw_all);
 	$("#ts-power").on("change", draw_powergraph);
 
