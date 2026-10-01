@@ -33,6 +33,7 @@ function setup_canvas() {
 	// Prepopulate the map with a transparent rectangle Allows the map to
 	// be fully show ASAP with no bounce effect while waiting to draw the
 	// real map overlay
+	ctx.strokeStyle = "transparent";
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
 	// Text style
