@@ -163,18 +163,15 @@ async function display_wz(force=false) {
 	let failures = {};
 
 	try {
-		let last_fetch_ts = 0;
 		const cached = JSON.parse(localStorage.getItem("wz_api_result"));
 		const now = Date.now();
 		// Limit to 2 fetch per minute
 		if (cached !== null && (now - cached["timestamp"]) < 30000) {
 			data = cached["payload"];
-			last_fetch_ts = cached["timestamp"];
 		}
 		else {
 			data = await $().getJSON(api.urls["wstatus"]);
 			const to_store = {"timestamp": now, "payload": data};
-			last_fetch_ts = now;
 			localStorage.setItem("wz_api_result", JSON.stringify(to_store));
 		}
 		$("#wz-info-error").empty();
