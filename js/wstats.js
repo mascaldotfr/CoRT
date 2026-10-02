@@ -152,17 +152,7 @@ async function display_stat(force = false) {
 	let data = null;
 
 	try {
-		const cached = JSON.parse(localStorage.getItem("wstats_api_result"));
-		const now = Date.now();
-		// Limit to 2 fetch per minute
-		if (cached !== null && (now - cached["timestamp"]) <= 30000) {
-			data = cached["payload"];
-		}
-		else {
-			data = await $().getJSON(api.urls["stats"]);
-			const to_store = {"timestamp": now, "payload": data};
-			localStorage.setItem("wstats_api_result", JSON.stringify(to_store));
-		}
+		data = await $().getJSON(api.urls["stats"]);
 		$("#ws-info-error").empty();
 	}
 	catch (error) {

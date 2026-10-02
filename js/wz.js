@@ -162,17 +162,7 @@ async function display_wz(force=false) {
 	let failures = {};
 
 	try {
-		const cached = JSON.parse(localStorage.getItem("wz_api_result"));
-		const now = Date.now();
-		// Limit to 2 fetch per minute
-		if (cached !== null && (now - cached["timestamp"]) < 30000) {
-			data = cached["payload"];
-		}
-		else {
-			data = await $().getJSON(api.urls["wstatus"]);
-			const to_store = {"timestamp": now, "payload": data};
-			localStorage.setItem("wz_api_result", JSON.stringify(to_store));
-		}
+		data = await $().getJSON(api.urls["wstatus"]);
 		$("#wz-info-error").empty();
 		let datetime = tformatter.format(Date.now());
 		$("#wz-info-updated").text(datetime);
