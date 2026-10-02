@@ -8,7 +8,7 @@ export class MyScheduler {
 			if (callback_running && !force) return;
 			callback_running = true;
 			try {
-				await this.callback();
+				await setTimeout(this.callback, 0);
 			}
 			finally {
 				callback_running = false;
@@ -27,6 +27,11 @@ export class MyScheduler {
 		// Update on backward/forward navigation
 		window.addEventListener("pageshow", (e) => {
 			if (e.persisted) run_callback(true);
+		});
+
+
+		window.addEventListener("online", () => {
+			run_callback(true);
 		});
 
 		const worker_code = `

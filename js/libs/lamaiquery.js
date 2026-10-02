@@ -66,14 +66,18 @@ export const $ = (function (selector) {
 			return reply;
 		},
 		getJSON: async function(url) {
-			const reply = await fetch(url)
-					    .then(reply => {
-						    if (!reply.ok && reply.status !== 304) {
-							    throw new Error ("API query failed with HTTP code " + reply.status);
-						    }
-						    return reply.json()
-					    })
-					    .catch(error => { throw(error); });
+			// Bypass the cache when the calling page has been discarded
+			const final_url = new URL(url, location.href);
+			if (document.wasDiscarded)
+				final_url.searchParams.set("epoch", Date.now());
+			const reply = await fetch(final_url)
+				.then(reply => {
+					if (!reply.ok && reply.status !== 304) {
+						throw new Error ("API query failed with HTTP code " + reply.status);
+					}
+					return reply.json()
+				})
+				.catch(error => { throw(error); });
 			return reply;
 		},
 		hide: function() {
