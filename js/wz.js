@@ -153,7 +153,7 @@ function switch_stale(stale) {
 	}
 }
 
-async function display_wz(force=false) {
+async function display_wz() {
 
 	if (document.hidden && !notify.can_emit())
 		return;
@@ -207,11 +207,6 @@ async function display_wz(force=false) {
 		UITools.defer();
 		return;
 	}
-
-	// XXX force is overwritten by the web worker as a message event due to
-	// being asynchronous...
-	if (force instanceof MessageEvent && data["events_log"][0]["date"] < wz_lastupdate)
-		return; // nothing new don't change nothing
 
 	// Middle part
 	for (let i = 0; i < data["gems"].length; i++) {
@@ -279,7 +274,7 @@ $(document).ready(function() {
 	notify.insert_notification_link();
 
 	humaniser = new HumaniseEvents();
-	display_wz(true);
+	display_wz();
 	const scheduler = new MyScheduler(10, 15, display_wz);
 	scheduler.start_scheduling();
 });
