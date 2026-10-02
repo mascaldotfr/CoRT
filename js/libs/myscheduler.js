@@ -4,16 +4,28 @@ export class MyScheduler {
 		this.callback = callback;
 
 		let callback_running = false;
-		window.addEventListener("visibilitychange", async () => {
-			if (!document.hidden && !callback_running) {
-				try {
-					callback_running = true;
-					await callback();
-				}
-				finally {
-					callback_running = false;
-				}
+		const run_callback = async () => {
+			if (callback_running) return;
+			callback_running = true;
+			try {
+				await this.callback();
+			} finally {
+				callback_running = false;
 			}
+		};
+
+		window.addEventListener("visibilitychange", () => {
+			if (!document.hidden) run_callback();
+		});
+
+		// Browser getting outside of freeze (Lifecycle API)
+		document.addEventListener("resume", () => {
+			run_callback();
+		});
+
+		// Update on backward/forward navigation
+		window.addEventListener("pageshow", (e) => {
+			if (e.persisted) run_callback();
 		});
 
 		const worker_code = `
