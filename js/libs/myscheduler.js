@@ -19,21 +19,6 @@ export class MyScheduler {
 			if (!document.hidden) run_callback(true);
 		});
 
-		// Browser getting outside of freeze (Lifecycle API)
-		document.addEventListener("resume", () => {
-			run_callback(true);
-		});
-
-		// Update on backward/forward navigation
-		window.addEventListener("pageshow", (e) => {
-			if (e.persisted) run_callback(true);
-		});
-
-
-		window.addEventListener("online", () => {
-			run_callback(true);
-		});
-
 		const worker_code = `
 			let timer = null;
 			function when_to_respawn() {
