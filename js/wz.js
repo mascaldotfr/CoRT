@@ -268,9 +268,12 @@ $(document).ready(function() {
 	document.title = _("WZ status") + _(" - CoRT - Champions of Regnum tools");
 	$("#title").text(_("WZ status"));
 	$("#wz-info-info").text(_("Last updated:"));
-	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+
+	const uctx = UITools.get_user_context();
+	tformatter = new Intl.DateTimeFormat(uctx.lang, {
 		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
 	});
+
 	notify.insert_notification_link();
 
 	humaniser = new HumaniseEvents();

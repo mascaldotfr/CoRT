@@ -287,26 +287,24 @@ $(document).ready(function() {
 	style.textContent = ".addtocalendar { text-decoration: none; }";
 	document.head.appendChild(style);
 
-	const lang = localStorage.getItem("lang") || navigator.language || "en-GB";
-	const tz = localStorage.getItem("tz") || Intl.DateTimeFormat().resolvedOptions().timeZone;
-	const mobile = /Mobi/i.test(navigator.userAgent);
+	const uctx = UITools.get_user_context();
 
-	if (!mobile) {
-		dformatter = new Intl.DateTimeFormat(lang, {
-			timeZone: tz,
+	if (!uctx.mobile) {
+		dformatter = new Intl.DateTimeFormat(uctx.lang, {
+			timeZone: uctx.tz,
 			hour12: false, weekday: "long", month: "long", day: "numeric",
 			hour: "numeric", minute: "numeric",
 		});
 	}
 	else {
-		dformatter = new Intl.DateTimeFormat(lang, {
-			timeZone: tz,
+		dformatter = new Intl.DateTimeFormat(uctx.lang, {
+			timeZone: uctx.tz,
 			hour12: false, weekday: "long", month: "numeric", day: "numeric",
 			hour: "numeric", minute: "numeric",
 		});
 	}
-	tformatter = new Intl.DateTimeFormat(lang, {
-		timeZone: tz,
+	tformatter = new Intl.DateTimeFormat(uctx.lang, {
+		timeZone: uctx.tz,
 		hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
 	});
 

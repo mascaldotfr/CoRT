@@ -120,7 +120,9 @@ $(document).ready(async function() {
 	for (let clas of TrainerConstants.classes)
 		$("#ts-class").append(`<option value="${clas}">${_(capitalize(clas))}</option>`);
 
-	lang = localStorage.getItem("lang") || "en";
+	const uctx = UITools.get_user_context();
+	lang = uctx.lang;
+
 	const stats_are_ok = await download_stats();
 	if (stats_are_ok)
 		redraw_all();

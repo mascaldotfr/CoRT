@@ -264,16 +264,18 @@ $(document).ready(function() {
 		$("#ws-index-list").append(`<li><a href="${l["id"]}">${l["txt"]}</a></li>`);
 	}
 
+	const uctx = UITools.get_user_context();
+
 	// For display
-	tformatter = new Intl.DateTimeFormat(localStorage.getItem("lang"), {
+	tformatter = new Intl.DateTimeFormat(uctx.lang, {
 		hour: "2-digit", minute: "2-digit", second: "2-digit",
-		hour12: false, timeZone: localStorage.getItem("tz")
+		hour12: false, timeZone: uctx.tz
 	});
 
 	// For use by chartist
 	hourformatter = new Intl.DateTimeFormat("en-GB", {
 		hour12: false, hour: '2-digit',
-		timeZone: localStorage.getItem("tz")
+		timeZone: uctx.tz
 	});
 
 	display_stat(true);

@@ -32,10 +32,9 @@ function display() {
 }
 
 $(document).ready(function() {
-	const lang = localStorage.getItem("lang") || navigator.language || "en-GB";
-	const tz = localStorage.getItem("tz") || Intl.DateTimeFormat().resolvedOptions().timeZone;
-	dformatter = new Intl.DateTimeFormat(lang, {
-		timeZone: tz,
+	const uctx = UITools.get_user_context();
+	dformatter = new Intl.DateTimeFormat(uctx.lang, {
+		timeZone: uctx.tz,
 		weekday: 'short',
 		day: 'numeric',
 		month: 'numeric',
