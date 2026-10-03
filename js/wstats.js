@@ -13,8 +13,6 @@ const report_days = [7, 30, 90];
 const realm_colors = Constants["realm_colors"];
 const realms = Constants["realm_names"];
 
-// This one is for displaying out of charts
-let tformatter = null;
 // This one is for chartist.js, dont touch this
 let hourformatter = null;
 let cached_graphs = {};
@@ -266,15 +264,9 @@ $(document).ready(function() {
 
 	const uctx = UITools.get_user_context();
 
-	// For display
-	tformatter = new Intl.DateTimeFormat(uctx.lang, {
-		hour: "2-digit", minute: "2-digit", second: "2-digit",
-		hour12: false, timeZone: uctx.tz
-	});
-
 	// For use by chartist
 	hourformatter = new Intl.DateTimeFormat("en-GB", {
-		hour12: false, hour: '2-digit',
+		hour12: false, hour: "2-digit",
 		timeZone: uctx.tz
 	});
 
