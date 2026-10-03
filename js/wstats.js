@@ -144,7 +144,7 @@ function table_factory(rows, selector, realm) {
 	$(selector).html(table.join(""));
 }
 
-async function display_stat(force = false) {
+async function display_stat() {
 
 	if (document.hidden)
 		return;
@@ -280,4 +280,3 @@ $(document).ready(function() {
 	const scheduler = new MyScheduler(10, 15, display_stat);
 	scheduler.start_scheduling();
 });
-
