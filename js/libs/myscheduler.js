@@ -2,6 +2,7 @@
 export class MyScheduler {
 	constructor(start, end, callback) {
 		this.callback = callback;
+		const jitter = Math.floor(Math.random() * (end - start + 1));
 
 		let callback_running = false;
 		const run_callback = async () => {
@@ -23,8 +24,7 @@ export class MyScheduler {
 			let timer = null;
 			function when_to_respawn() {
 				const now = new Date();
-				const jitter = Math.floor(Math.random() * (${end} - ${start} + 1));
-				const target_second = ${start} + jitter;
+				const target_second = ${start} + ${jitter};
 
 				const next = new Date(now);
 				next.setMilliseconds(0);
