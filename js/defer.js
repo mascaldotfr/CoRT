@@ -97,7 +97,7 @@ function temporary_message() {
 
 
 // Put maintenance message (see /api/MAINTENANCE.md)
-const maintenance_delay = 15  * 60 * 1000;
+const maintenance_delay = 60  * 60 * 1000;
 async function maintenance() {
 	const ts = Date.now();
 	const last_check = parseInt(localStorage.getItem("maint_last_check")) || 0;
