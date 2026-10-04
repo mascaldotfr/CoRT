@@ -4,11 +4,11 @@ export class MyScheduler {
 		this.callback = callback;
 
 		let callback_running = false;
-		const run_callback = async (force=false) => {
-			if (callback_running && !force) return;
+		const run_callback = async () => {
+			if (callback_running) return;
 			callback_running = true;
 			try {
-				await setTimeout(this.callback, 0);
+				await this.callback();
 			}
 			finally {
 				callback_running = false;
@@ -16,7 +16,7 @@ export class MyScheduler {
 		};
 
 		window.addEventListener("visibilitychange", () => {
-			if (!document.hidden) run_callback(true);
+			if (!document.hidden) run_callback();
 		});
 
 		const worker_code = `
