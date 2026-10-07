@@ -242,24 +242,22 @@ export default defineConfig({
 						'../../js/libs/uitools.js',
 						'../../js/menu.js',
 					],
-					defer_libs: [
-						'../../js/libs/bossesrespawns.js',
-						'../../js/libs/bzschedule.js',
-					],
 					other_libs: [
 						'../../js/wztools/wztools.js',
-						'../../js/trainertools/trainertools.js'
+						'../../js/trainertools/trainertools.js',
+						'../../js/libs/mynotify.js',
+						'../../js/libs/time.js',
+						'../../js/libs/myscheduler.js',
+						'../../js/libs/bossesrespawns.js',
+						'../../js/libs/bzschedule.js'
 					],
 					// Force split between base and icons
 					css_icons: [
 							'../../css/icons.css',
 					],
 					base_css: [
-							'../../css/style.css',
-					],
-					// Non vital css files, libs one first
-					other_css: [
 							'../../css/01_chartist.css',
+							'../../css/style.css',
 							'../../css/tabs.css',
 							'../../css/bosses.css',
 							'../../css/bz.css',
