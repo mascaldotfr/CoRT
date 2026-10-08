@@ -41,13 +41,14 @@ const globalMeta = `
 
 // static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
 // If there is none, add an HTML comment, some content is needed to safeguard the build from errors
+// XXX cort.ovh uses special headers for that and don't need that
 const specialMeta = {
-	"index.html": '<link rel="preload" href="data/trainer/1.35.19/trainerdata.json?epoch=2" as="fetch" crossorigin fetchpriority="low">',
+	"index.html": '<!-- empty -->',
 	"bosses.html": '<!-- empty -->',
 	"bz.html": '<!-- empty -->',
-	"wz.html": '<link rel="preload" href="api/var/wstatus.json" as="fetch" crossorigin="anonymous" />',
-	"wevents.html": '<link rel="preload" href="api/var/events.json" as="fetch" crossorigin="anonymous" />',
-	"wstats.html": '<link rel="preload" href="api/var/stats.json" as="fetch" crossorigin="anonymous" />',
+	"wz.html": '<!-- empty -->',
+	"wevents.html": '<!-- empty -->',
+	"wstats.html": '<!-- empty -->',
 	"tstats.html": '<!-- empty -->',
 	"quests.html": '<!-- empty -->'
 };
