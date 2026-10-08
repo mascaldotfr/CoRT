@@ -297,7 +297,13 @@ $(document).ready(function() {
 		});
 	}
 	else {
-		dformatter = new Intl.DateTimeFormat(uctx.lang, {
+		// If "en" lang is used, it defaults to the US format. Use
+		// "en-GB" instead, most people with "en" language are not
+		// americans and may be confused by mm/dd. Don't use undefined
+		// like WZ events, it's mixing language otherwise and seems
+		// weird (wevents and wz have no weekday, so they can go away with it).
+		const shortdate_lang = uctx.lang === "en" ? "en-GB" : uctx.lang;
+		dformatter = new Intl.DateTimeFormat(shortdate_lang, {
 			timeZone: uctx.tz,
 			hour12: false, weekday: "long", month: "numeric", day: "numeric",
 			hour: "numeric", minute: "numeric",
