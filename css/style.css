@@ -48,6 +48,10 @@ select, button, textarea {
 	border-radius: 5px;
 	border: 0;
 }
+select:hover, button:hover, textarea:hover {
+	background: var(--tooltip_background);
+	transition: background-color 0.3s ease;
+}
 select, button {
 	padding: var(--default_margin_padding);
 }
@@ -169,6 +173,7 @@ summary::-webkit-details-marker {
 	background: var(--card_background);
 	color: var(--ahover);
 	outline: 1px solid var(--foreground);
+	transition: outline-color 1.5s ease-out;
 }
 .menu-icon-cortlogo {
 	height: 3em;
