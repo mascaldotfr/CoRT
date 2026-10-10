@@ -240,7 +240,7 @@ function power_change(power) {
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
-	if (setup.ppointsleft < wanted_level - skill_level) {
+	if (setup.ppointsleft < wanted_level - skill_level || wanted_level === 0) {
 		if (setup.automated_clicks === false) display_warning(_("Not enough power points!"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
