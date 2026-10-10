@@ -236,18 +236,18 @@ function power_change(power) {
 		diffpoints = change_direction == "plus" ? -1 : 1;
 	}
 	if (wanted_level > TrainerConstants.maxplevel || wanted_level < TrainerConstants.minplevel) {
-		display_warning(_("Invalid power level!"));
+		if (setup.automated_clicks === false) display_warning(_("Invalid power level!"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
 	if (setup.ppointsleft < wanted_level - skill_level) {
-		display_warning(_("Not enough power points!"));
+		if (setup.automated_clicks === false) display_warning(_("Not enough power points!"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
 	if (wanted_level > maxslvl) {
-		display_warning(_("Not enough discipline points in this tree!"));
-		if (setup.automated_clicks == true) setup.bad_shared_link();
+		if (setup.automated_clicks === false) display_warning(_("Not enough discipline points in this tree!"));
+		if (setup.automated_clicks === true) setup.bad_shared_link();
 		return;
 	}
 	// valid, change it
@@ -303,12 +303,12 @@ function discipline_change(discipline) {
 		}
 	}
 	if (wanted_level > TrainerConstants.maxdlevel || wanted_level < TrainerConstants.mindlevel) {
-		display_warning(_("Invalid discipline level!"));
+		if (setup.automated_clicks === false) display_warning(_("Invalid discipline level!"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
 	if (setup.trainerdata["required"]["level"][wanted_level- 1] > setup.level) {
-		display_warning(_("Player level is too low"));
+		if (setup.automated_clicks === false) display_warning(_("Player level is too low"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
@@ -318,7 +318,7 @@ function discipline_change(discipline) {
 		setup.trainerdata["required"]["points"][current_level - 1] - setup.trainerdata["required"]["points"][wanted_level - 1];
 	if (	change_direction == "plus" &&
 		setup.dpointsleft + discipline_points_balance < 0 ) {
-		display_warning(_("Not enough discipline points!"));
+		if (setup.automated_clicks === false) display_warning(_("Not enough discipline points!"));
 		if (setup.automated_clicks == true) setup.bad_shared_link();
 		return;
 	}
@@ -1118,7 +1118,7 @@ class SetupCompressor {
 	 */
 	decompress(string) {
 		let setup_string = "";
-		let offset = 0;
+		let offset = 0; // current field position
 		// Handle two different URL formats based on global state set during URL parsing
 		if (setup.skillset_urlformat == 0) {
 			// Format 0 (?s=): Version is 1 character (older or smaller dataset list)
@@ -1131,8 +1131,14 @@ class SetupCompressor {
 		}
 
 		// Decode Class and Level
-		setup_string += TrainerConstants.classes[this.b66chars.indexOf(string[offset + 1])] + "+";
-		setup_string += this.b66chars.indexOf(string[offset + 2]) + "+"; // level
+		const current_class = TrainerConstants.classes[this.b66chars.indexOf(string[offset + 1])];
+		const current_level =  this.b66chars.indexOf(string[offset + 2]);
+		if (current_class === undefined || current_level === undefined)
+			return null;
+		if (current_level < TrainerConstants.minlevel || current_level > TrainerConstants.maxlevel + 1)
+			return null; // Necro gem is 61 hence the +1
+		setup_string += current_class + "+";
+		setup_string += current_level + "+"; // level
 
 		// Remove the header part of the string to focus on the trees
 		string = string.substring(offset + 3);
@@ -1141,12 +1147,25 @@ class SetupCompressor {
 			let disc = Array.from(string.slice(pos,pos+6));
 			// Decode Discipline Level (first character of the chunk)
 
-			setup_string += this.b66chars.indexOf(disc.shift()) + "+";
+			const discipline_level = disc.shift();
+			if (discipline_level < TrainerConstants.mindlevel || discipline_level > TrainerConstants.mindlevel)
+				return;
+			setup_string += this.b66chars.indexOf(discipline_level) + "+";
 
 			// Decode Skill Levels (remaining 5 characters represent 10 skills)
+			if (disc.length !== 5)
+				return; // each tree has 5 characters, bailout if it's not the case
 			for (let skills of disc) {
 				// Use the lookup table to get the [x, y] pair and join them into a string
-				setup_string += this.lookup[skills].join("");
+				const skills_decomp = this.lookup[skills];
+				// Bail out if skill level is too low or high
+				if (skills_decomp.some(val =>
+						val > TrainerConstants.maxplevel ||
+						val < TrainerConstants.minplevel)) {
+					return null;
+				}
+
+				setup_string += skills_decomp.join("");
 			}
 			setup_string += "+";
 		}
