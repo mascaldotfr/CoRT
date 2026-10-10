@@ -13,7 +13,7 @@ class ApiURL {
 		// Define base_urls
 		if (official.includes(window.location.hostname)) {
 			this.frontsite = "https://cort.ovh";
-			this.base = "https://api.cort.ovh";
+			this.base = "https://cort.ovh/api";
 			// For submitting setups only, due to CDN usage
 			this.trainer_base = "https://api.cort.ovh";
 		}
