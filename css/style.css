@@ -308,8 +308,12 @@ h3 {
 	padding: 4px 8px;
 	background: color-mix(in srgb, var(--tooltip_background), var(--blue));
 }
-.live-badge-label.loading {
-	background: color-mix(in srgb, var(--tooltip_background), var(--red));
+.live-badge-label.fire {
+	animation: fire 1.5s alternate ease;
+}
+@keyframes fire {
+	from { background: #800; }
+	to   { background: color-mix(in srgb, var(--tooltip_background), var(--blue)); }
 }
 .live-badge-value {
 	padding: 4px 8px;

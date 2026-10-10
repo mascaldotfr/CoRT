@@ -131,6 +131,7 @@ function unixstamp2human(unixstamp) {
 
 function get_next_respawns(spawns = 4) {
 
+	UITools.live_on_fire(true);
 	try {
 		let data = BossesRespawns.get_schedule(spawns);
 		next_respawns = data["next_spawns"];
@@ -145,6 +146,9 @@ function get_next_respawns(spawns = 4) {
 		$("#boss-error").text("Failed to calculate boss spawns: " + error);
 		UITools.defer();
 		return false;
+	}
+	finally {
+		UITools.live_on_fire(false);
 	}
 }
 

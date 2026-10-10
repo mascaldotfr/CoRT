@@ -162,6 +162,7 @@ async function display_wz() {
 	let failures = {};
 
 	try {
+		UITools.live_on_fire(true);
 		data = await $().getJSON(api.urls["wstatus"]);
 		$("#wz-info-error").empty();
 		let datetime = tformatter.format(Date.now());
@@ -204,6 +205,7 @@ async function display_wz() {
 	catch (error) {
 		$("#wz-info").show();
 		$("#wz-info-error").html(`<p><b>Failed to get the warstatus:</b> <code>${error}</code></p>`);
+		UITools.live_on_fire(false);
 		UITools.defer();
 		return;
 	}
@@ -259,6 +261,7 @@ async function display_wz() {
 		notify.emit(_("WZ status"), events_list[1], "wz");
 
 	UITools.unskeleton();
+	UITools.live_on_fire(false);
 	UITools.defer();
 }
 

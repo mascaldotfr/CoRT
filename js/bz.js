@@ -157,6 +157,7 @@ function feed_bz() {
 	if (document.hidden && !notify.can_emit())
 		return;
 
+	UITools.live_on_fire(true);
 	try {
 		data = BZSchedule.get();
 		$("#bz-error").empty();
@@ -166,6 +167,9 @@ function feed_bz() {
 	catch (error) {
 		$("#bz-error").text("Failed to get the BZ status: " + error);
 		console.log(error);
+	}
+	finally {
+		UITools.live_on_fire(false);
 	}
 	if (!data) {
 		UITools.defer();

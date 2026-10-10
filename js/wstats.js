@@ -147,6 +147,7 @@ async function display_stat() {
 	if (document.hidden)
 		return;
 
+	UITools.live_on_fire(true);
 	let data = null;
 
 	try {
@@ -158,6 +159,9 @@ async function display_stat() {
 		$("#ws-info-error").show();
 		UITools.defer();
 		return;
+	}
+	finally {
+		UITools.live_on_fire(false);
 	}
 
 	const infos = data.splice(0, 1)[0];
