@@ -15,6 +15,7 @@
 	--ahover: #ccaaff;
 	--default_margin_padding: .5em;
 	--table_padding: .25em .5em;
+	--ui_transition: .6s ease;
 	scrollbar-color: var(--forms) var(--tooltip_background);
 }
 
@@ -50,7 +51,7 @@ select, button, textarea {
 }
 select:hover, button:hover, textarea:hover {
 	background: var(--tooltip_background);
-	transition: background-color 0.3s ease;
+	transition: background-color var(--ui_transition);
 }
 select, button {
 	padding: var(--default_margin_padding);

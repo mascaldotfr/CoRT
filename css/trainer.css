@@ -169,7 +169,8 @@
 	color: var(--foreground);
 }
 #t-sharedlink-url {
-	width: 100%;
+	width: -webkit-fill-available; /* old browsers, Firefox */
+	width: stretch;
 	margin: var(--default_margin_padding) 0;
 }
 #t-sharedlink-buttons {
@@ -177,22 +178,28 @@
 	font-weight: bold;
 	display: flex;
 	gap: 1em;
+	margin-top: .5em;
+	margin-bottom: .5em;
 }
 #t-sharedlink-buttons > * {
 	  flex: 1 1 0px;
 }
-#t-sharedlink-share {
-	background: #28a745;
-	color: white;
-}
-#t-sharedlink-copy {
-	background: #007bff;
-	color: white;
-}
+#t-sharedlink-share,
+#t-sharedlink-copy,
 #t-sharedlink-close {
-	background: #dc3545;
-	color: white;
+	color: #ffffff;
+	font-weight: 600;
+	transition: background var(--ui_transition);
 }
+
+#t-sharedlink-share { background: #198754; }
+#t-sharedlink-copy  { background: #0b5ed7; }
+#t-sharedlink-close { background: #b02a37; }
+
+#t-sharedlink-share:hover { background: #146c43; }
+#t-sharedlink-copy:hover  { background: #0a4fb3; }
+#t-sharedlink-close:hover { background: #8f2230; }
+
 #t-warning {
 	position: fixed;
 	top: 0;
