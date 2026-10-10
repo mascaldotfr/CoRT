@@ -175,6 +175,23 @@
 #t-sharedlink-buttons {
 	text-align: right;
 	font-weight: bold;
+	display: flex;
+	gap: 1em;
+}
+#t-sharedlink-buttons > * {
+	  flex: 1 1 0px;
+}
+#t-sharedlink-share {
+	background: #28a745;
+	color: white;
+}
+#t-sharedlink-copy {
+	background: #007bff;
+	color: white;
+}
+#t-sharedlink-close {
+	background: #dc3545;
+	color: white;
 }
 #t-warning {
 	position: fixed;

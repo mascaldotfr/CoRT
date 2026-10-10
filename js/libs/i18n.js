@@ -484,6 +484,12 @@ export const __i18n__ = {
 		"de": "Schließen",
 		"pt": "Fechar"
 	},
+	"Share": {
+		"fr": "Partager",
+		"es": "Compartir",
+		"de": "Teilen",
+		"pt": "Compartilhar"
+	},
 	"Link copied!": {
 		"fr": "Lien copié !",
 		"es": "¡Enlace copiado!",

@@ -142,10 +142,16 @@ $("#t-save-bypass-menu").on ("click", function() {
 
 const dialog = document.getElementById("t-sharedlink");
 const has_dialog_support = typeof dialog.showModal === "function";
+const has_share_support = navigator.share;
 if (has_dialog_support) {
 	dialog.addEventListener("close", function() {
 		window.location.href = $("#t-sharedlink-url").val();
 	});
+	// Allow share dialog on mobile devices
+	if (has_share_support) {
+		$("#t-sharedlink-share").css("display", "inline-block");
+		$("#t-sharedlink-share").text(_("Share"));
+	}
 }
 $("#t-sharedlink-close").on("click", function() {
 	if (dialog && typeof dialog.close === "function") {
@@ -200,6 +206,21 @@ $("#t-sharedlink-copy").on("click", function() {
 	}
 	catch (error) {
 		failure_message(error);
+	}
+});
+
+$("#t-sharedlink-share").on("click", async function() {
+	// This button only appears if has_share_support is true, that's why
+	// there is no guard.
+	try {
+		const title_var = setup.clas.toUpperCase() + ", level " + setup.level + " setup :";
+		await navigator.share({
+			title: title_var,
+			text: title_var,
+			url: $("#t-sharedlink-url").val()
+		});
+	}
+	catch (_unused) {
 	}
 });
 
