@@ -148,6 +148,8 @@ const status_delay = 1 * 60 * 1000;
 // Warn if bosses respawn within that time frame
 const boss_delay = 30 * 60 * 1000;
 async function menu_status() {
+	if (document.hidden)
+		return;
 	try {
 		const now = new Date().getTime();
 
@@ -176,7 +178,4 @@ async function menu_status() {
 }
 menu_status();
 setInterval(menu_status, status_delay);
-document.addEventListener("visibilitychange", () => {
-	if (!document.hidden)
-		menu_status();
-});
+document.addEventListener("visibilitychange", menu_status);
