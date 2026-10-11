@@ -37,21 +37,7 @@ function getGitVersion() {
 const globalMeta = `
 	<meta name="cort-version" content="${getGitVersion()}">
 	<meta property="og:image" content="/favicon_512.png">
-	<script type="speculationrules">
-		{
-		  "prefetch": [
-		    {
-		      "source": "list",
-		      "urls": [
-			"api/var/wstatus.json",
-			"api/var/events.json",
-			"api/var/stats.json"
-		      ]
-		    }
-		  ]
-		}
-	</script>
-`;
+	`;
 
 // static preloads that can't be put in HTML because otherwise Vite rename them and it's useless
 // If there is none, add an HTML comment, some content is needed to safeguard the build from errors
