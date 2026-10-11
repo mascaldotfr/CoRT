@@ -180,25 +180,3 @@ document.addEventListener("visibilitychange", () => {
 	if (!document.hidden)
 		menu_status();
 });
-
-// Prefetch API data, only for cort.ovh, with 1 minute debounce
-function api_warm_up() {
-	if (api.frontsite === "https://cort.ovh") {
-		const last = Number(localStorage.getItem("last_api_fetch")) ?? 0;
-		const now = Date.now();
-		const prefetch = [
-			"api/var/wstatus.json",
-			"api/var/events.json",
-			"api/var/stats.json"
-		];
-
-		if (now >= last + 60 * 1000) {
-			localStorage.setItem("last_api_fetch", now);
-			for (let url of prefetch) {
-				$().getJSON(url);
-			}
-		}
-	}
-}
-api_warm_up();
-setInterval(api_warm_up, 60 * 1000);
