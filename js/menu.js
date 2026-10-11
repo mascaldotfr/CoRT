@@ -19,11 +19,13 @@ let __menu_content = function () { return `
 		<details class="menudetails">
 			<summary><span class="menu-icon-more"></span> ${_("More Tools...")}</summary>
 			<ul class="menudetails">
+				<li class="italic bold">CoRT</li>
 				<li><a href="tstats.html"><span class="menu-icon-tstats"></span>&nbsp;${_("Trainer statistics")}</a></li>
 				<li><a href="quests.html" title="Quest reset times"><span class="menu-icon-quests"></span>&nbsp;${_("Quests")}</a>
-				<li><a href="https://regnumsentinel.com" title="All Regnum at a glance" target="_blank"><span class="menu-icon-sentinel"></span>&nbsp;Sentinel</a>
-				<li><a href="https://poludnica.shinyapps.io/rcalc/" target="_blank"><span class="menu-icon-armor"></span>&nbsp;${_("Armor calculator")}</a>
-				<li><a href="https://tools4regnum.de/?utm_source=CoRT" target="_blank" title="Game assets in your browser"><span class="menu-icon-tools4regnum"></span>&nbsp;Tools4Regnum</a>
+				<li class="italic bold">${_("External links")}</li>
+				<li title="All Regnum at a glance - By mascal"><a href="https://regnumsentinel.com" target="_blank"><span class="menu-icon-sentinel"></span>&nbsp;Sentinel</a>
+				<li title="Armor and damage calculators - By Halvdan"><a href="https://poludnica.shinyapps.io/rcalc/" target="_blank"><span class="menu-icon-armor"></span>&nbsp;${_("Armor calculator")}</a>
+				<li title="Game assets in your browser - By Joshua2504"><a href="https://tools4regnum.de/?utm_source=CoRT" target="_blank"><span class="menu-icon-tools4regnum"></span>&nbsp;Tools4Regnum</a>
 			</ul>
 		</details>
 		</li>

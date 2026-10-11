@@ -163,6 +163,12 @@ export const __i18n__ = {
 		"de": "Mehr Werkzeuge...",
 		"pt": "Mais ferramentas ..."
 	},
+	"External links": {
+		"fr": "Liens externes",
+		"de": "Externe Links",
+		"es": "Enlaces externos",
+		"pt": "Links externos"
+	},
 	"Armor calculator": {
 		"fr": "Calcul d'armure",
 		"es": "Cálculo de armadura",
