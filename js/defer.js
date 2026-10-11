@@ -100,7 +100,7 @@ function temporary_message() {
 const maintenance_delay = 60  * 60 * 1000;
 async function maintenance() {
 	const ts = Date.now();
-	const last_check = parseInt(localStorage.getItem("maint_last_check")) || 0;
+	const last_check = Number(localStorage.getItem("maint_last_check")) || 0;
 	let msg = localStorage.getItem("maint_msg") || "";
 	$("#temporary-message").remove();
 	try {
@@ -180,3 +180,21 @@ document.addEventListener("visibilitychange", () => {
 	if (!document.hidden)
 		menu_status();
 });
+
+// Prefetch API data, only for cort.ovh, with 1 minute debounce
+if (api.frontsite === "https://cort.ovh") {
+	const last = Number(localStorage.getItem("last_api_fetch")) ?? 0;
+	const now = Date.now();
+	const prefetch = [
+		"api/var/wstatus.json",
+		"api/var/events.json",
+		"api/var/stats.json"
+	];
+
+	if (now > last + 60 * 1000) {
+		localStorage.setItem("last_api_fetch", now);
+		for (let url of prefetch) {
+			$().getJSON(url);
+		}
+	}
+}
