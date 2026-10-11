@@ -182,19 +182,23 @@ document.addEventListener("visibilitychange", () => {
 });
 
 // Prefetch API data, only for cort.ovh, with 1 minute debounce
-if (api.frontsite === "https://cort.ovh") {
-	const last = Number(localStorage.getItem("last_api_fetch")) ?? 0;
-	const now = Date.now();
-	const prefetch = [
-		"api/var/wstatus.json",
-		"api/var/events.json",
-		"api/var/stats.json"
-	];
+function api_warm_up() {
+	if (api.frontsite === "https://cort.ovh") {
+		const last = Number(localStorage.getItem("last_api_fetch")) ?? 0;
+		const now = Date.now();
+		const prefetch = [
+			"api/var/wstatus.json",
+			"api/var/events.json",
+			"api/var/stats.json"
+		];
 
-	if (now > last + 60 * 1000) {
-		localStorage.setItem("last_api_fetch", now);
-		for (let url of prefetch) {
-			$().getJSON(url);
+		if (now >= last + 60 * 1000) {
+			localStorage.setItem("last_api_fetch", now);
+			for (let url of prefetch) {
+				$().getJSON(url);
+			}
 		}
 	}
 }
+api_warm_up();
+setInterval(api_warm_up, 60 * 1000);
