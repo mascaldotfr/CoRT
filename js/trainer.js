@@ -243,6 +243,11 @@ function power_change(power) {
 		maxslvl++;
 	if (wanted_level < TrainerConstants.minplevel) {
 		// Cycle power points when pressing '-' and power level is 0
+		if (setup.ppointsleft === 0) {
+			if (setup.automated_clicks === false) display_warning(_("Not enough power points!"));
+			if (setup.automated_clicks === true) setup.bad_shared_link();
+			return;
+		}
 		if (setup.ppointsleft < maxslvl) {
 			// Still have points, but not enough to get max allowed level
 			wanted_level = setup.ppointsleft;
