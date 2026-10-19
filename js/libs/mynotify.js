@@ -95,7 +95,30 @@ export class MyNotify {
 		}
 	}
 
-	emit(title, text, tag) {
+	unique_id(s) {
+		// It's a "unique" identifier based on notification
+		// text because all notifications text have virtually no id
+		// Use the fast and good enough djb2 algo
+		let h = 5381;
+		for (let i = 0; i < s.length; i++)
+			h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+		return String(h);
+	}
+
+	emit(title, text, tag="global") {
+		const permission_granted = Notification.permission === "granted";
+		if (!(this.swsupport && permission_granted && this.can_emit()))
+			return; // We can't notify
+
+		// debounce notifications if the last text was strictly similar
+		const key = "notify_" + tag + "_last";
+		const last_uid = localStorage.getItem(key) ?? "";
+		const new_uid = this.unique_id(text);
+		if (last_uid === new_uid)
+			return;
+		else
+			localStorage.setItem(key, new_uid);
+
 		const options = {
 			icon: "favicon.png",
 			body: text,
@@ -104,10 +127,8 @@ export class MyNotify {
 			vibrate: [100, 50, 100]
 		};
 
-		if (this.swsupport && Notification.permission === "granted" && localStorage.getItem(this.keyname) === 'enabled') {
-			navigator.serviceWorker.ready.then( reg => {
-				reg.showNotification(title, options);
-			});
-		}
+		navigator.serviceWorker.ready.then( reg => {
+			reg.showNotification(title, options);
+		});
 	}
 }
