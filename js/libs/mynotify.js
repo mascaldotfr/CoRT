@@ -30,6 +30,13 @@ export class MyNotify {
 
 		// Render the initial state on page load
 		this.insert_notification_link();
+
+		// Sync notification icon display across duplicated tabs
+		window.addEventListener("storage", (e) => {
+			// e.key === null means localStorage.clear()
+			if (e.key === this.keyname || e.key === null)
+				this.insert_notification_link();
+		});
 	}
 
 	can_emit() {
