@@ -1,11 +1,13 @@
 import {UITools} from "./libs/uitools.js";
 import {$} from "./libs/lamaiquery.js";
-import {api} from "./libs/api.js";
+import {api, apiCache} from "./libs/api.js";
 import {_} from "./libs/i18n.js";
 import {HumaniseEvents} from "./wztools/wztools.js";
 
 let data = null;
 let last_fetch_ts = 0;
+
+const apicache = new apiCache("api_wevents", 30 * 1000);
 
 let humaniser = null; // need instanciation when the timezone is defined
 
@@ -83,7 +85,11 @@ function display_events() {
 
 async function get_data() {
 	try {
-		data = await $().getJSON(api.urls["events"]);
+		data = apicache.read();
+		if (data === null) {
+			data = await $().getJSON(api.urls["events"]);
+			apicache.write(data);
+		}
 		$("#we-info-error").empty();
 		$("#we-info-error").hide();
 	}

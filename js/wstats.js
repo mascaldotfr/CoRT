@@ -1,6 +1,6 @@
 import {UITools} from "./libs/uitools.js";
 import {$} from "./libs/lamaiquery.js";
-import {api} from "./libs/api.js";
+import {api, apiCache} from "./libs/api.js";
 import {_} from "./libs/i18n.js";
 import {MyScheduler} from "./libs/myscheduler.js";
 import {Time} from "./libs/time.js";
@@ -9,6 +9,8 @@ import {__chartist_responsive} from "./libs/chartist.js";
 
 // sync with statistics.json
 const report_days = [7, 30, 90];
+
+const apicache = new apiCache("api_wstats", 30 * 1000);
 
 const realm_colors = Constants["realm_colors"];
 const realms = Constants["realm_names"];
@@ -151,7 +153,11 @@ async function display_stat() {
 	let data = null;
 
 	try {
-		data = await $().getJSON(api.urls["stats"]);
+		data = apicache.read();
+		if (data === null) {
+			data = await $().getJSON(api.urls["stats"]);
+			apicache.write(data);
+		}
 		$("#ws-info-error").empty();
 	}
 	catch (error) {

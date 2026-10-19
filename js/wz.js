@@ -1,6 +1,6 @@
 import {UITools} from "./libs/uitools.js";
 import {$} from "./libs/lamaiquery.js";
-import {api} from "./libs/api.js";
+import {api, apiCache} from "./libs/api.js";
 import {_} from "./libs/i18n.js";
 import {MyNotify} from "./libs/mynotify.js";
 import {MyScheduler} from "./libs/myscheduler.js";
@@ -17,9 +17,12 @@ let humaniser = null; // need instanciation when the timezone is defined
 const realm_colors = Constants.realm_colors;
 const wzicons = Icons.get_all_icons();
 
+const apicache = new apiCache("api_wz", 30 * 1000);
+
 const notify = new MyNotify("notify_wz");
 
 let icons_cache = {};
+
 
 // canvas
 function setup_canvas() {
@@ -163,7 +166,11 @@ async function display_wz() {
 
 	try {
 		UITools.live_on_fire(true);
-		data = await $().getJSON(api.urls["wstatus"]);
+		data = apicache.read();
+		if (data === null) {
+			data = await $().getJSON(api.urls["wstatus"]);
+			apicache.write(data);
+		}
 		$("#wz-info-error").empty();
 		let datetime = tformatter.format(Date.now());
 		$("#wz-info-updated").text(datetime);

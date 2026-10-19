@@ -42,3 +42,24 @@ class ApiURL {
 	}
 }
 export const api = new ApiURL();
+
+export class apiCache {
+	// Shared localStorage cache across tabs: read() returns the data if it's less than
+	// `ttl` ms old, otherwise null (missing, stale or corrupted). write() stores it
+	// with its timestamp, so every tab judges freshness the same way.
+	constructor(skey, ttl) {
+		this.skey = skey;
+		this.ttl = ttl;
+	}
+	read() {
+		try {
+			const c = JSON.parse(localStorage.getItem(this.skey));
+			if (c && Date.now() - c.ts < this.ttl)
+				return c.data;
+		} catch(_unused) {}
+		return null;
+	}
+	write(data) {
+		localStorage.setItem(this.skey, JSON.stringify({ ts: Date.now(), data }));
+	}
+}

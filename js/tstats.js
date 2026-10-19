@@ -1,13 +1,14 @@
 import {UITools} from "./libs/uitools.js";
 import {$} from "./libs/lamaiquery.js";
-import {api} from "./libs/api.js";
+import {api, apiCache} from "./libs/api.js";
 import {_} from "./libs/i18n.js";
 import {TrainerConstants} from "./trainertools/trainertools.js";
 import {__chartist_responsive} from "./libs/chartist.js";
 
 // remove 1.33.2 and 1.33.3, setup collection wasn't a thing back then
 const valid_trainerdatasets = TrainerConstants.datasets.slice(2).reverse()
-let stats = {};
+const apicache = new apiCache("api_tstats", 10 * 60 * 1000);
+let stats = null;
 let lang = "en";
 
 function capitalize(string) {
@@ -16,7 +17,11 @@ function capitalize(string) {
 
 async function download_stats() {
 	try {
-		stats = await $().getJSON(api.urls["trainer_data_stats"]);
+		stats = apicache.read();
+		if (stats === null) {
+			stats = await $().getJSON(api.urls["trainer_data_stats"]);
+			apicache.write(stats);
+		}
 		return true;
 	}
 	catch(err) {
