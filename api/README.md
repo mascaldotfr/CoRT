@@ -8,6 +8,14 @@ The whole API is written in PHP.
 
 See the [deploy docs](../deploy/README.md) as well if you want to deploy it.
 
+## Static API vs event-driven API (SSE)
+
+This README covers the *static* API.
+
+If you need an event driven access to the API for the WZ endpoints, checkout
+the [SSE README](SSE.md). Note that it only exists at https://cort.ovh, third
+party installations of CoRT doesn't have this.
+
 ## READMEs list
 
 - [setups collector and trainer stats](bin/collect/README.md)
@@ -26,16 +34,15 @@ Special stuff:
 > **TL;DR:** This API is made for CoRT internal use only. Individual users are
 > *tolerated* if they behave.
 >
-> If you're going public, you must deploy your own API, the source code is
-> right here. Don't thank me later for the independence, not being a single
-> point of failure for the whole Regnum community is a good one already <3
+> If you're going public, deploy your own API, the source code is right here.
+> Don't thank me later for the independence, not being a single point of
+> failure for the whole Regnum community is a good one already <3
 
 ### Polling
 
 The data behind these endpoints is static and only refreshes every
 minute or hour. Hammering them faster than that achieves nothing. Short polling
-is perfectly fine; WebSockets/SSE are overkill and unnecessary for CoRT usage
-itself (no one use notifications).
+is perfectly fine.
 
 ### Infrastructure Restrictions
 
