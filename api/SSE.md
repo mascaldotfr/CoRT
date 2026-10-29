@@ -17,11 +17,19 @@ channels, so API fetches aren't much repeated.
 
 - Open to everyone, within the limits below.
 - **6 concurrent connections per IP**, shared across all covered endpoints.
-  (One production + one test connection for each endpoint)
+  (that gives you one production + one test connection for each endpoint)
 - Opening more connections than that, whether in parallel or by reconnecting
   in a tight loop, gets your IP refused until excess connections close.
-- The same infrastructure restrictions as the rest of the API apply (CDN and
-  serverless providers blocked, standard CORS rules).
+
+## Infrastructure Restrictions
+
+Requests from known CDN or serverless providers (Vercel, Cloudflare,
+AWS, etc.) are blocked outright, alongside standard CORS restrictions. If you
+encounter CORS errors or flat-out rejections, that is expected behavior, not a
+bug.
+
+Given the site's low traffic, I'll see you if you try to evade it, and so will my
+WAF and checking agent.
 
 
 ## SSE URLs
@@ -60,6 +68,10 @@ es.onmessage = (e) => {
   console.log('Data received:', e.data);
 };
 ```
+
+It's too long to put the code here and Codeberg is very strict about it, but
+it's a fairly low effort for any AI to write a relay for this, if you want to
+stream it to your users.
 
 ## curl example
 
