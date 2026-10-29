@@ -32,13 +32,7 @@ cd /tmp
 # Download and extract stuff
 wget -qO- https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar.gz | tar xvz
 
-# Prepopulate with official API stuff
 cd CoRT-${V}/api/var
-wget    https://cort.ovh/api/var/trainer_saved_setups.txt \
-        https://cort.ovh/api/var/events.sqlite \
-        https://cort.ovh/api/var/wstatus.json \
-        https://cort.ovh/api/var/stats.json \
-        https://cort.ovh/api/var/events.json
 touch maintenance.txt
 
 sudo mv /tmp/CoRT-${V} /var/www/html/CoRT

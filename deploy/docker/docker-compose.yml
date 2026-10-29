@@ -2,8 +2,6 @@ services:
   cort:
     build:
       context: .
-      args:
-        PREPOPULATE: "${PREPOPULATE:-yes}"
     ports:
       - target: 80
         published: ${PORT:-2810}

@@ -35,9 +35,6 @@ discord server (#cort-updates channel).
 
 ## Preparing CoRT
 
-We will prepopulate CoRT with the "official" server data, so you don't need to
-wait for days before getting some meaningful data.
-
 Run these commands, or alternatively checkout the [automated
 script](misc/managed_tarball).
 
@@ -54,13 +51,7 @@ cd /tmp
 # Download and extract stuff
 wget -qO- https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar.gz | tar xvz
 
-# Prepopulate with official API stuff
 cd CoRT-${V}/api/var
-wget    https://cort.ovh/api/var/trainer_saved_setups.txt \
-        https://cort.ovh/api/var/events.sqlite \
-        https://cort.ovh/api/var/wstatus.json \
-        https://cort.ovh/api/var/stats.json \
-        https://cort.ovh/api/var/events.json
 touch maintenance.txt
 
 # Create a tarball to upload to our webhoster, it's gonna be faster.
@@ -116,24 +107,9 @@ Invest some time to read
 https://codeberg.org/mascal/CoRT/wiki/CoRT-versioning to see wether it's
 worth to upgrade, especially if your lazy.
 
-There are 2 ways:
+### Use your own API data on upgrade
 
-### 1. Reusing the official CoRT API data on upgrade
-
-It's pretty straightforward:
-
-1. Prepare again a CoRT prepopulated tarball
-2. Upload it to your hosting provider in the web root directory
-3. Put your cronjob on monthly
-4. Delete the old CoRT directory
-5. Extract the `CoRT.tar.gz` tarball. You're done.
-6. Don't forget to put your cronjob back to minutely!
-
-### 2. Use your own API data on upgrade
-
-It's actually not a bad thing because you're self sufficient.
-
-1. Get a CoRT tarball, don't prepopulate
+1. Get a CoRT tarball
 2. Make a backup of the current `/CoRT/api/var` with your hoster file manager outside of `/CoRT`
 3. Upload it to your hosting provider in the web root directory
 4. Put your cronjob on monthly

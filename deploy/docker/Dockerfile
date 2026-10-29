@@ -2,9 +2,6 @@ FROM debian:trixie
 
 # User running PHP and owning CoRT
 ENV PHP_USER="www-data"
-# If set to any other value than yes, don't prepopulate from official API
-# server
-ARG PREPOPULATE="yes"
 
 RUN apt-get update && \
 	    apt-get install -y --no-install-recommends \
@@ -49,33 +46,10 @@ RUN sudo -u $PHP_USER composer install
 # API pre configuration starting ...
 WORKDIR /var/www/html/CoRT/api/var
 
-RUN if test "$PREPOPULATE" != "yes"; then \
-	touch -d "1 week ago" 	trainer_saved_setups.txt \
-				trainer_saved_setups.txt.gz \
-				trainer_saved_setups.txt.zst \
-				trainerstats.json \
-				trainerstats.json.gz \
-				trainerstats.json.zst  \
-				events_dump.csv \
-				events_dump.csv.gz \
-				events_dump.csv.zst \
-				maintenance.txt \
-	; \
-	fi
-RUN if test "$PREPOPULATE" = "yes"; then \
-	wget    https://cort.ovh/api/var/trainer_saved_setups.txt \
-		https://cort.ovh/api/var/events.sqlite \
-		https://cort.ovh/api/var/wstatus.json \
-		https://cort.ovh/api/var/stats.json \
-		https://cort.ovh/api/var/events.json \
-	; \
-	fi
-
 # API post configuration; you're better off running everything as www-data,
 # it's easier
 RUN touch maintenance.txt
 RUN chown -R $PHP_USER:$PHP_USER /var/www/html/CoRT
-
 
 # Copy cron job script
 COPY cort-cron /etc/cron.d/cort-cron

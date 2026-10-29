@@ -14,18 +14,15 @@ starting anything. You may want to follow [the *integrated* README](README.integ
 - WZ stats will require a few days to even starting to be meaningful
 - WZ full events logs are refreshed only after 24h if you made the mistake to
   not wait for the WZ status to be active and clicked the link!
-- Trainer stats will require at least a full lvl 60 setup per class for the
-  latest game version, and is refreshed only every 3 hours
-
-It's recommended to prepopulate with existing official API data. Read further
-about that.
+- Trainer stats will require at least a full lvl 60 knight for the latest game
+  version to be usable
 
 ## Docker example (to be used for non Docker install too)
 
 > [!CAUTION]
-> This example docker configuration is not recommended in production, but
-> explains how to setup CoRT. It doesn't update itself automatically with new
-> changes made to CoRT.
+> This example docker configuration is not recommended in production (I'm not a
+> docker expert), but explains how to setup CoRT. It doesn't update itself
+> automatically with new changes made to CoRT.
 
 I have set up a basic docker container with everything needed in the `docker`
 directory :
@@ -37,15 +34,6 @@ directory :
 - the necessary crontab magic
 
 Once set up, you can access it at http://127.0.0.1:2810/CoRT
-
-### API Prepopulation
-
-By default, the docker image prepopulates itself with data from the official
-API. If that behaviour isn't wanted, use instead:
-
-```shell
-PREPOPULATE=no docker compose up --build
-```
 
 ## Git stuff
 

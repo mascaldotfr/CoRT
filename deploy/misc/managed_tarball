@@ -15,13 +15,7 @@ echo "===> Getting the tarball release"
 cd /tmp
 wget -qO- "https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar.gz" | tar xz
 
-echo "===> Prepopulating the API"
 cd CoRT-${V}/api/var
-wget -q https://cort.ovh/api/var/trainer_saved_setups.txt \
-        https://cort.ovh/api/var/events.sqlite \
-        https://cort.ovh/api/var/wstatus.json \
-        https://cort.ovh/api/var/stats.json \
-        https://cort.ovh/api/var/events.json
 touch maintenance.txt
 
 echo "===> Creating tarball"
