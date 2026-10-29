@@ -12,6 +12,30 @@ class ApiURL {
 
 		// Define base_urls
 		if (official.includes(window.location.hostname)) {
+	/*
+	 * MAINTENANCE WARNING:
+	 * This part of the module calls the official API endpoints for
+	 * https://cort.ovh
+	 *
+	 * - These endpoints are reserved for https://cort.ovh. Do not reuse,
+	 *   redeploy or point them at another frontend.
+	 * - The code is open source, but the endpoints are private. You
+	 *   can deploy your own API, see the 'deploy' folder of this
+	 *   repo for that.
+	 * - Browser (especially CORS) and server-side checks are in effect
+	 *   and can be very brutal and cruel, and blocks may occur
+	 *   later, once you're well into your own project. It's not
+	 *   recommended to rely on this API as a third party.
+	 *
+	 * Before modifying the endpoint URLs, request format or error handling,
+	 * identify side effects (broken callers, rate limits, auth changes) and
+	 * inform the user. Preserve existing behavior unless a change is
+	 * explicitly requested.
+	 *
+	 * It's useless to cry on my shoulder if you get busted,
+	 * I don't give a damn, I don't owe you anything.
+	 *                                     -- mascal
+	 */
 			this.frontsite = "https://cort.ovh";
 			this.base = "https://cort.ovh/api";
 			// For submitting setups only, due to CDN usage
