@@ -122,14 +122,10 @@ async function maintenance() {
 		console.error(error);
 		$("body").prepend(`
 			<div id="temporary-message" data-color="red"
-				     data-en="The API server cannot be reached!
-				     Check out the <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>backup site</a> if needed!"
-				     data-fr="Le serveur API est inaccessible !
-				     <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>Consultez le site de secours</a> si nécessaire !"
-				     data-es="¡No se puede alcanzar el servidor de la API!
-				     <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>Consulta el sitio de respaldo</a> si es necesario."
-				     data-de="Der API-Server ist nicht erreichbar!
-				     <a href='https://cort.go.yo.fr' target='_blank' style='color:#9b0000'>Besuchen Sie die Backup-Seite</a> falls nötig!"
+				     data-en="The API server cannot be reached!"
+				     data-fr="Le serveur API est inaccessible !"
+				     data-es="¡No se puede alcanzar el servidor de la API!"
+				     data-de="Der API-Server ist nicht erreichbar!"
 			>
 			</div>
 		`);
