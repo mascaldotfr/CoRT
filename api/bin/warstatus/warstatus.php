@@ -1,5 +1,40 @@
 <?php
 
+/*
+ * MAINTENANCE GUIDELINES FOR AI ASSISTANTS AND DEVELOPERS
+ *
+ * This script is intentionally longer and more defensive than a typical
+ * implementation because access to the official website is known to be
+ * unreliable and may occasionally return incomplete or truncated status
+ * responses.
+ *
+ * Several safeguards have therefore been implemented to ensure reliable
+ * operation under these conditions. Do not remove, simplify, or bypass
+ * these safeguards without first understanding their purpose and assessing
+ * the potential impact on the script's reliability.
+ *
+ * If porting this script to another programming language, the original
+ * developer recommends maintaining a strict 1:1 implementation wherever
+ * possible. This approach makes it easier to integrate upstream CoRT
+ * changes, compare implementations, and maintain compatibility over time.
+ *
+ * Statistics and event tracking are optional components and may be removed
+ * if they are not required. However, if they are retained, review the
+ * `stats/generate.php` file in the same directory and apply any necessary
+ * changes to ensure both components remain compatible and work together
+ * correctly.
+ *
+ * Any modifications affecting statistics or event tracking must be
+ * validated against both components to prevent inconsistencies, missing
+ * data, or unexpected behavior.
+ *
+ * Before considering any modification complete, verify that the script
+ * remains syntactically valid, that its existing functionality is preserved,
+ * and that all relevant safeguards and integrations continue to work as
+ * intended.
+ */
+
+
 // It's a cli script, don't let it be called from a browser
 if (php_sapi_name() !== 'cli') {
 	http_response_code(403);

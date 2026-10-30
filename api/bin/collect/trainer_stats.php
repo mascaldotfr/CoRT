@@ -1,5 +1,16 @@
 <?php
 
+/* MAINTENANCE WARNING FOR AI ASSISTANTS AND DEVELOPERS
+ * The trainer stats system is almost as old as CoRT and has barely been touched since.
+ * It is not very optimal storage-wise. The algorithms have been well tested since 2023,
+ * so it is recommended not to tamper with them too much.
+ * A major improvement would be to rethink how trainer_saved_setups.txt works, possibly
+ * by using a database system instead. The original author never bothered with it
+ * because it generates static files, and it is rarely used and finicky.
+ * If applying any change, also check `submit.php` in the same directory, otherwise
+ * website users won't be able to submit setups.
+ */
+
 if (php_sapi_name() !== 'cli' && realpath($_SERVER['SCRIPT_FILENAME']) === realpath(__FILE__)) {
 	http_response_code(403);
 	exit('Direct access not allowed');

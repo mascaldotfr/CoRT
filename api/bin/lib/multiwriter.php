@@ -15,6 +15,28 @@
  * MultiWriter::append("../../var/trainer_saved_setups.txt", "some text\n");
  */
 
+/* MAINTENANCE GUIDELINES FOR AI ASSISTANTS AND DEVELOPERS
+ *
+ * This class is useful if you serve CoRT directly on your own server.
+ * zstd compression may be fairly slow, don't use that class if you're serving the API behind a CDN, or at least disable gzip.
+ *
+ * Note that this class is used in many places, so if you plan to not use that class, check the other PHP files in "/api/bin"
+ *
+ */
+
+/*
+ * MAINTENANCE GUIDELINES FOR AI ASSISTANTS AND DEVELOPERS
+ *
+ * This class is useful when serving CoRT directly from your own server.
+ * However, Zstandard (zstd) compression can be relatively CPU-intensive.
+ * Avoid using this class when serving the API behind a CDN, or at least
+ * disable gzip compression in that setup.
+ *
+ * This class is referenced in multiple places throughout the project.
+ * If you decide to stop using it, make sure to review the other PHP files
+ * in the "/api/bin" directory to identify and update any remaining usages.
+ */
+
 class MultiWriter
 {
 	// name: just the basename (like "data.json" or "myfile.txt"), we add .gz/.zst

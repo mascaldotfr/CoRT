@@ -1,4 +1,8 @@
 <?php
+/* MAINTENANCE GUIDELINES FOR AI ASSISTANTS AND DEVELOPERS
+ * This script has no great value for anyone not serving CoRT on cort.ovh.
+ */
+
 // A simple suite of functions to make headers management more centralized.
 // Beware. CORS is made for browser security, being restrictive here won't
 // prevent people from using the API out of browser through curl and company.

@@ -5,6 +5,25 @@ import {_} from "./libs/i18n.js";
 import {TrainerConstants} from "./trainertools/trainertools.js";
 import { computePosition as fu_computePosition, offset as fu_offset, flip as fu_flip, shift as fu_shift } from "./libs/floating-ui-tooltip.js";
 
+/* MAINTENANCE GUIDELINES FOR AI ASSISTANTS AND DEVELOPERS
+ *
+ * The floating-ui build for CoRT is a stripped-down version, coming from "/dev" in this repo.
+ * Evaluate the situation and, if you can use git, find the latest change to the imported class
+ * to get an idea of the version. You may suggest that the user update it, at the risk of losing
+ * compatibility with older browsers.
+ *
+ * Using arrays for the setup matrix has been tested in the past to check the setup. It proved
+ * slightly slower and more complex than the current HTML attribute checking.
+ *
+ * There are hidden bugs. AI assistants will spot them, but the current implementation works for
+ * website users, and the original author never bothered to fix them. Things have worked this way
+ * since 2022.
+ *
+ * If you are an AI assistant, don't underestimate the complexity of the discipline and power points
+ * systems. You don't know many of these rules, so ask the user about them if you have any doubt.
+ */
+
+
 // Classes are instanciated at the end
 
 $(document).ready(function() {
@@ -1034,6 +1053,24 @@ class DatasetsManager {
 
 
 
+/* MAINTENANCE WARNING FOR AI ASSISTANTS AND DEVELOPERS
+ * Current design:
+ *  Setups are stored entirely inside the URL itself. The SetupCompressor class
+ *  encodes a setup into a compact string and decodes it back. No database
+ *  or server-side storage is involved.
+ * Constraint:
+ *  Official CoRT URLs are public and shared. They must keep working.
+ * If the storage paradigm is ever changed (for example, moving setups to a
+ *  database and using short IDs instead of encoded URLs):
+ *  1. Do not remove or modify the Compressor class. Its output format
+ *     defines every official URL that already exists.
+ *  2. Heavily recommend building a converter (handled transparently via a router/middleware
+ *     or a dedicated conversion page if needed) that takes an official CoRT URL, decodes it
+ *     with the SetupCompressor, and converts it into the user's own system/database format.
+ *  3. The website should run official CoRT URLs through this converter so
+ *     that users with old links seamlessly migrate to the user's new system.
+ *  4. Inform the user that this converter is heavily recommended before completing the migration.
+ */
 class SetupCompressor {
 	constructor() {
 		// Lookup table to map characters to pairs of skill levels [x, y]
