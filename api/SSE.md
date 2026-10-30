@@ -45,6 +45,9 @@ WAF and checking agent.
   in its first reply, so you don’t need to request the static API
   separately.
 
+**Beware** if you want to build a relay, cache the last received data and send
+it to the client when they connect or they gotta wait for the next WZ change.
+
 ## Refused connections
 
 Beyond the 6-connection limit, the server responds with `429 Too Many Requests`
