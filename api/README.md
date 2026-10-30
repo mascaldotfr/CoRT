@@ -10,14 +10,14 @@ See the [deploy docs](../deploy/README.md) as well if you want to deploy it.
 
 ## Static API vs event-driven API (SSE)
 
-This README covers the *static* API, which is the one https://cort.ovh uses and
+This README covers the *static* API, which is the one https://cort.ovh uses
 <b><u>and is private, heavily guarded</u></b>. This one is really good on a CDN
 because you can easily replicate the API data around the world since it's just
 files.
 
 If you need an event driven access to the API for the WZ endpoints, checkout
-the [SSE README](SSE.md). Note that it only exists at https://cort.ovh, third
-party installations of CoRT doesn't have this.
+the [SSE README](SSE.md), **which is public**. Note that it only exists at
+https://cort.ovh, third party installations of CoRT doesn't have this.
 
 ## READMEs list
 
@@ -34,7 +34,7 @@ Special stuff:
 
 > [!WARNING]
 >
-> **TL;DR:** This API is made for CoRT internal use only. It's documented for
+> **TL;DR:** This API is made for CoRT's internal use only. It's documented for
 > use on your own server.
 >
 > If you're going public, deploy your own API, the source code is right here.
