@@ -54,19 +54,32 @@ progressively rather than reconnecting immediately.
 ## Quick nodejs example
 
 ```js
-// npm install eventsource reconnecting-eventsource
+// npm install eventsource
 
-const EventSourcePolyfill = require('eventsource').EventSource;
-const ReconnectingEventSource = require('reconnecting-eventsource').default;
+const EventSource = require('eventsource').EventSource;
 
-const es = new ReconnectingEventSource('https://api.cort.ovh/sse/wstatus.json', {
-  eventSourceClass: EventSourcePolyfill,
-  max_retry_time: 5000
-});
+const SSE_URL = 'https://api.cort.ovh/sse/wstatus.json';
+const RECONNECT_DELAY_MS = 5000;
 
-es.onmessage = (e) => {
-  console.log('Data received:', e.data);
-};
+function connect() {
+  const es = new EventSource(SSE_URL);
+
+  es.onopen = () => {
+    console.log('Connection opened');
+  };
+
+  es.onmessage = (e) => {
+    console.log('Data received:', e.data);
+  };
+
+  es.onerror = (err) => {
+    console.error('Connection error, reconnecting in', RECONNECT_DELAY_MS, 'ms');
+    es.close();
+    setTimeout(connect, RECONNECT_DELAY_MS);
+  };
+}
+
+connect();
 ```
 
 It's too long to put the code here and Codeberg is very strict about it, but
