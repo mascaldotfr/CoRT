@@ -49,8 +49,8 @@ by the WAF and the checking agent.
 
 - Response format is identical to the static API, as a reminder, you can find
   the response formats here :
-    - [warstatus](../bin/warstatus/README.md)
-    - [warzone stats and events](../bin/warstatus/stats/README.md)
+    - [warstatus](bin/warstatus/README.md)
+    - [warzone stats and events](bin/warstatus/stats/README.md)
 
 - On connection, the server sends the API data in its first reply, so you
   don't need to call the static API separately.
