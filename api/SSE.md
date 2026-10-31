@@ -12,8 +12,9 @@ rarely repeated, and the CDN is faster than the server outside Europe.
 ## Rules
 
 - Open to everyone, within the limits below.
-- **6 concurrent connections per IP**, shared across all covered endpoints
-  (one production + one test connection per endpoint).
+- **6 concurrent connections per IP**, shared across all covered endpoints (one
+  production + one test connection per endpoint). IPv6 addresses are rate
+  limited per /64 prefix, IPv4 per address.
 - **10 connections (or attempts) per minute**.
 - Exceeding these limits, whether in parallel or by reconnecting in a tight
   loop, blocks your IP until the excess connections close. Repeated abuse
