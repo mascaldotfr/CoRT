@@ -11,11 +11,14 @@ example.com.
 
 ## Webhoster requirements
 
-- Minutely cron jobs, it's needed for WZ things. You just need one cron job.
-- Providing access to PHP 8+, with the following modules: sqlite3, pdo,
+- *Minutely cron jobs*, it's needed for WZ things. You just need one cron job.
+  An alternative would be to tweak the CLI code to avoid HTTP 403 errors in
+  `api/bin/warstatus/warstatus.php` and using a third party service that call
+  the script (see https://cron-job.org/en/ for example).
+- Providing access to *PHP 8+*, with the following modules: sqlite3, pdo,
   pdo\_sqlite, gzip; they're all pretty standard.
 - Server specs or hosting plan don't really matter, as memory and CPU usage is
-  very low.
+  very low. CoRT started on a VPS with only 512MB of ram and 2GB of disk.
 
 ### No need for composer!
 
@@ -35,8 +38,10 @@ discord server (#cort-updates channel).
 
 ## Preparing CoRT
 
-Run these commands, or alternatively checkout the [automated
-script](misc/managed_tarball).
+Run these commands or alternatively:
+
+- checkout the [automated script](misc/managed_tarball)
+- grab manually the latest **versioned** release and go to the next step
 
 ```shell
 # Set this to the latest version
@@ -75,7 +80,8 @@ needed to serve the frontend and API.
 There is more than a way to do it, so let's just assume your hoster has a file manager.
 
 Just upload the tarball and extract it in the web root directory of you website
-(most often in the `public_html` directory).
+(most often in the `public_html` directory). If you didn't use the script,
+create an empty file named `maintenance.txt` in `CoRT/api/var`.
 
 You can now visit https://example.com/CoRT/ and check out if everything is all
 right.
@@ -105,7 +111,7 @@ You have now your full stack CoRT, congrats!
 
 Invest some time to read
 https://codeberg.org/mascal/CoRT/wiki/CoRT-versioning to see wether it's
-worth to upgrade, especially if your lazy.
+worth to upgrade, especially if you're lazy.
 
 ### Use your own API data on upgrade
 
