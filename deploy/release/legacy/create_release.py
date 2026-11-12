@@ -387,12 +387,12 @@ def generate_release_notes(output_path: Path, version: str, previous_version: st
 No schedule.
 
 ## About
-See  https://codeberg.org/mascal/CoRT/src/branch/main/deploy to deploy it
+See  https://codeberg.org/cort-regnum/CoRT/src/branch/main/deploy to deploy it
 
 To setup CoRT on managed webhosting or integrating it on your own server, use **CoRT-{version}.tar.gz** instead of the source code.
 
 ### Changelog
-**Full Changelog**: https://codeberg.org/mascal/CoRT/compare/{previous_version}...{version}
+**Full Changelog**: https://codeberg.org/cort-regnum/CoRT/compare/{previous_version}...{version}
 """
     notes_path.write_text(content, encoding="utf-8")
     return notes_path

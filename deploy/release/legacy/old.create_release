@@ -132,14 +132,14 @@ No schedule.
 
 ## About
 
-See  https://codeberg.org/mascal/CoRT/src/branch/main/deploy to deploy it
+See  https://codeberg.org/cort-regnum/CoRT/src/branch/main/deploy to deploy it
 
 To setup CoRT on managed webhosting or integrating it on your own server, use **CoRT-${TAG}.tar.gz** instead of the source code.
 
 ### Changelog
 
 
-**Full Changelog**: https://codeberg.org/mascal/CoRT/compare/${PREVIOUS_TAG}...${TAG}
+**Full Changelog**: https://codeberg.org/cort-regnum/CoRT/compare/${PREVIOUS_TAG}...${TAG}
 EOF
 
 echo "===> Cleaning up"

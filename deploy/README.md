@@ -11,7 +11,7 @@ it's not detailed due to the added complexity.
 
 Also we're using the `3.2.0` release through the doc for *managed*,
 *integrated* and *noapi* setups, so you'll need to adapt to the latest release
-seen at https://codeberg.org/mascal/CoRT/releases
+seen at https://codeberg.org/cort-regnum/CoRT/releases
 
 ## Index
 

@@ -30,7 +30,7 @@ V=3.2.0
 cd /tmp
 
 # Download and extract stuff
-wget -qO- https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar.gz | tar xvz
+wget -qO- https://codeberg.org/cort-regnum/CoRT/releases/download/${V}/CoRT-${V}.tar.gz | tar xvz
 
 cd CoRT-${V}/api/var
 touch maintenance.txt

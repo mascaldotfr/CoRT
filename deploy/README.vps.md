@@ -46,7 +46,7 @@ As such, keep the `main` branch for upstream updates, and adapt them in your
 ### Initial setup
 
 ```shell
-git clone https://codeberg.org/mascal/CoRT.git
+git clone https://codeberg.org/cort-regnum/CoRT.git
 cd CoRT
 # Create a local branch (this is where your changes go)
 git checkout -b local

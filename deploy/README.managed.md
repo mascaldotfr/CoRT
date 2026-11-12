@@ -29,11 +29,11 @@ been expurged.
 
 ## Get the latest release version
 
-Check out https://codeberg.org/mascal/CoRT/releases and take note of the
+Check out https://codeberg.org/cort-regnum/CoRT/releases and take note of the
 version tag.
 
 You can follow up releases with this ATOM feed:
-https://codeberg.org/mascal/CoRT.rss, or just check out CoRT's
+https://codeberg.org/cort-regnum/CoRT.rss, or just check out CoRT's
 discord server (#cort-updates channel).
 
 ## Preparing CoRT
@@ -54,7 +54,7 @@ V=3.2.0
 cd /tmp
 
 # Download and extract stuff
-wget -qO- https://codeberg.org/mascal/CoRT/releases/download/${V}/CoRT-${V}.tar.gz | tar xvz
+wget -qO- https://codeberg.org/cort-regnum/CoRT/releases/download/${V}/CoRT-${V}.tar.gz | tar xvz
 
 cd CoRT-${V}/api/var
 touch maintenance.txt
@@ -110,7 +110,7 @@ You have now your full stack CoRT, congrats!
 ## Updating CoRT
 
 Invest some time to read
-https://codeberg.org/mascal/CoRT/wiki/CoRT-versioning to see wether it's
+https://codeberg.org/cort-regnum/CoRT/wiki/CoRT-versioning to see wether it's
 worth to upgrade, especially if you're lazy.
 
 ### Use your own API data on upgrade

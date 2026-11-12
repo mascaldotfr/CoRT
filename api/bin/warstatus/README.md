@@ -80,7 +80,7 @@ to have the official warstatus page opened with devtools on.
 ### Javascript
 
 * See `../js/wz.js`
-* See Sentinel (https://codeberg.org/mascal/sentinel/)
+* See Sentinel (https://codeberg.org/cort-regnum/sentinel/)
 
 ### Python
 

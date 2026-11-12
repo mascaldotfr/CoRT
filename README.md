@@ -1,6 +1,6 @@
 | :warning: Moved       |
 |:---------------------------|
-| CoRT main codebase has moved to https://codeberg.org/mascal/CoRT |
+| CoRT main codebase has moved to https://codeberg.org/cort-regnum/CoRT |
 
 
 # Champions of Regnum tools
@@ -23,7 +23,7 @@ background.
 
 Deploying CoRT with its API is explained [there](deploy/README.md)
 
-There is also a [wiki](https://codeberg.org/mascal/CoRT/wiki) containing
+There is also a [wiki](https://codeberg.org/cort-regnum/CoRT/wiki) containing
 extra infos about using and deploying CoRT.
 
 ## Known issues

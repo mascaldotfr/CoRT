@@ -35,7 +35,7 @@ with or without black border).
 
 **It's not recommended to re-edit the images from the older version**, due to the
 quality loss it implies. Lossless icons for all skills are available in the
-[CoRT Icons pack](https://codeberg.org/mascal/CoRT-icons).
+[CoRT Icons pack](https://codeberg.org/cort-regnum/CoRT-icons).
 
 That pack also includes a python script to automatically refresh skills icons from
 your edited `trainerdata.json`. Its usage is explained in the pack's README, and

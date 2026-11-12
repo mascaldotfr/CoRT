@@ -41,9 +41,9 @@ const __menu_github_stuff = function () {
 	const official = ["cort.ovh", "cort.go.yo.fr"];
 	if (!official.includes(window.location.host))
 		return ""; // Not official!
-	const src = `<a href="https://codeberg.org/mascal/CoRT" target="_blank">
+	const src = `<a href="https://codeberg.org/cort-regnum/CoRT" target="_blank">
 			${_("source code")}</a>`;
-	const bugs = `<a href="https://codeberg.org/mascal/CoRT/wiki/Bug-reports" target="_blank">
+	const bugs = `<a href="https://codeberg.org/cort-regnum/CoRT/wiki/Bug-reports" target="_blank">
 			${_("report bugs")}</a>`;
 	const dc = `<a href="https://discord.cort.ovh" target="_blank">
 			${_("Discord server")}</a>`;
